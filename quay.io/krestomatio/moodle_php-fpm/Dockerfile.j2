@@ -10,7 +10,7 @@ FROM php:{{ version }} AS build
 # https://docs.moodle.org/35/en/PHP
 RUN apt-get update && \
     apt-get install -y --no-install-recommends libxml2-dev zlib1g-dev libpng-dev \
-        libfreetype6-dev libjpeg62-turbo-dev libicu-dev libpspell-dev libpq-dev libldap2-dev libxslt-dev && \
+        libfreetype6-dev libjpeg62-turbo-dev libicu-dev libpq-dev libldap2-dev libxslt-dev && \
     docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ \
         --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ && \
     docker-php-ext-install gd && \
@@ -20,7 +20,7 @@ RUN apt-get update && \
     docker-php-ext-install ldap && \
     # Already installed: curl iconv mbstring openssl tokenizer
     # ctype simplexml spl pcre dom xml json
-    docker-php-ext-install soap zip intl pspell pgsql xsl && \
+    docker-php-ext-install soap zip intl pgsql xsl && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-install opcache && \
     docker-php-source delete && \
@@ -75,8 +75,6 @@ COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libpng16.so.16 /usr/lib/
 COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libjpeg.so.62 /usr/lib/x86_64-linux-gnu/libjpeg.so.62
 COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libfreetype.so.6 /usr/lib/x86_64-linux-gnu/libfreetype.so.6
 COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libpq.so.5 /usr/lib/x86_64-linux-gnu/libpq.so.5
-COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libaspell.so.15 /usr/lib/x86_64-linux-gnu/libaspell.so.15
-COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libpspell.so.15 /usr/lib/x86_64-linux-gnu/libpspell.so.15
 COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libexslt.so.0 /usr/lib/x86_64-linux-gnu/libexslt.so.0
 COPY --from=build --chown=0:0 /usr/lib/x86_64-linux-gnu/libxslt.so.1 /usr/lib/x86_64-linux-gnu/libxslt.so.1
 

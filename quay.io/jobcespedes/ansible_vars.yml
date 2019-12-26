@@ -2,7 +2,7 @@ quay_path: quay.io
 docker_ansible_path: "{{ quay_path }}/jobcespedes"
 dockerfile_builder_image_pull: true
 dockerfile_builder_image_push: true
-containers_to_build:
+dockerfile_builder_images:
   # ansible docker containers
   - "{{ docker_ansible_path }}/docker-centos7-ansible"
   - "{{ docker_ansible_path }}/docker-ubuntu1604-ansible"

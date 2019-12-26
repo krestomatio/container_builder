@@ -5,4 +5,4 @@
         dockerfile_builder_image: "{{ item }}"
       include_role:
         name: dockerfile_builder
-      loop: "{{ containers_to_build }}"
+      loop: "{{ dockerfile_builder_images }}"

@@ -14,3 +14,4 @@ https://github.com/docker-library/httpd
 # TODO: defined SO binaries require by Moodle
 # foreground php.fpm y otras conf iniciales como log https://github.com/https://github.com/docker-library/php/blob/master/7.2/buster/fpm/Dockerfile
 # default user 1001 or apache?
+# TODO: timezone in minimal

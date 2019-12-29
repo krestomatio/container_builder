@@ -1,5 +1,5 @@
 # Ansible managed
-FROM registry.access.redhat.com/ubi8/ubi
+FROM registry.access.redhat.com/ubi8/ubi-minimal
 
 ENV PHP_VERSION="7.2" \
     PHP_VER_SHORT="72" \
@@ -29,20 +29,20 @@ LABEL org.opencontainers.image.title="${TITLE}" \
       io.openshift.tags="builder,apache,apache${APACHE_VER_SHORT},apache-${APACHE_VER_SHORT},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT},${NAME}" \
       maintainer="${IMAGE_AUTHORS}"
 
-ENV YUM_OPTS="--disableplugin=subscription-manager -y" \
-  # php-curl included in php-common
-  # php-zip as php-pecl-zip
-  # php-xsl as php-xml
-  INSTALL_PKGS="httpd php-fpm php-cli php-gd php-intl php-ldap \
-                php-opcache php-pgsql php-soap php-xmlrpc  \
-                php-xml php-pecl-zip php-mbstring"
+# php-curl included in php-common
+# php-zip as php-pecl-zip
+# php-xsl as php-xml
+ENV INSTALL_PKGS="httpd php-fpm php-cli php-gd php-intl php-ldap \
+                  php-opcache php-pgsql php-soap php-xmlrpc  \
+                  php-xml php-pecl-zip php-mbstring"
 
 # Install php dependencies
-RUN yum ${YUM_OPTS} module enable php:$PHP_VERSION && \
-    yum ${YUM_OPTS} install --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    yum ${YUM_OPTS} distro-sync tzdata && yum ${YUM_OPTS} reinstall tzdata && \
+# `mkdir -p /run/user/$(id -u)` for
+# https://github.com/rpm-software-management/microdnf/issues/50
+RUN mkdir -p /run/user/$(id -u) && \
+    microdnf --setopt=tsflags=nodocs -y install $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
-    yum ${YUM_OPTS} clean all
+    microdnf clean all
 
 ENV PHP_SYSCONF_PATH=/etc \
     PHP_HTTPD_CONF_FILE=php.conf \

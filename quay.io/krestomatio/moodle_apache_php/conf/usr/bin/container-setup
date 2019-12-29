@@ -2,10 +2,7 @@
 
 set -e
 
-# Disabled subscription-manager
-sed -i "s@^enabled.*@enabled=0@" /etc/yum/pluginconf.d/subscription-manager.conf
-
-# default USER in root group
+# default ${CUSER} in ${CGROUP} group
 usermod -a -G ${CGROUP} ${CUSER}
 
 # In order to drop the root user, we have to make some directories world

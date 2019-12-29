@@ -28,6 +28,7 @@ sed -i \
     -e "s@^Group.*@Group ${CGROUP}@" \
     -e "s@^DocumentRoot.*@DocumentRoot \"${HTTPD_PUBLIC_PATH}\"@" \
     -e "s@^<Directory \"/var/www/html\"@<Directory \"${HTTPD_PUBLIC_PATH}\"@" \
-    -e "s@^ErrorLog \"logs/error_log\"@ErrorLog \"|/usr/bin/cat\"@" \
-    -e "s@CustomLog \"logs/access_log\"@CustomLog \"|/usr/bin/cat\"@" \
+    -re 's@^(\s*CustomLog)\s+\S+@\1 /proc/self/fd/1@g' \
+    -re 's@^(\s*ErrorLog)\s+\S+@\1 /proc/self/fd/2@g' \
+    -re 's@^(\s*TransferLog)\s+\S+@\1 /proc/self/fd/1@g' \
     ${HTTPD_MAIN_CONF_PATH}/httpd.conf

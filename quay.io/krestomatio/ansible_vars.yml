@@ -1,7 +1,7 @@
 moodle_php_version: '7.2'
 moodle_apache_version: '2.4'
 moodle_version: '3.5'
-image_from: "registry.access.redhat.com/ubi8/ubi"
+image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
 image_authors: 'Job Céspedes Ortiz <jobcespedes@gmail.com>'
 image_timezone: America/Costa_Rica
 

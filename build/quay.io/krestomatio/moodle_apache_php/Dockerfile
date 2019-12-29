@@ -36,11 +36,16 @@ ENV INSTALL_PKGS="httpd php-fpm php-cli php-gd php-intl php-ldap \
                   php-opcache php-pgsql php-soap php-xmlrpc  \
                   php-xml php-pecl-zip php-mbstring"
 
+# Update
+# Reconfig timezone
 # Install php dependencies
 # `mkdir -p /run/user/$(id -u)` for
 # https://github.com/rpm-software-management/microdnf/issues/50
-RUN mkdir -p /run/user/$(id -u) && \
-    microdnf --setopt=tsflags=nodocs -y install $INSTALL_PKGS && \
+RUN microdnf update -y && \
+	rpm -e --nodeps tzdata && \
+    mkdir -p /run/user/$(id -u) && \
+    microdnf --setopt=tsflags=nodocs -y install tzdata \
+    $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     microdnf clean all
 

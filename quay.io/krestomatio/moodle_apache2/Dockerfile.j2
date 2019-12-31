@@ -19,6 +19,7 @@ LABEL org.opencontainers.image.title="${TITLE}" \
       org.opencontainers.image.authors="${AUTHORS}" \
       org.opencontainers.image.description="${DESCRIPTION}" \
       org.opencontainers.image.version="${MOODLE_VERSION}" \
+      name="${NAME}" \
       summary="${SUMMARY}" \
       description="${DESCRIPTION}" \
       io.k8s.description="${DESCRIPTION}" \
@@ -49,6 +50,8 @@ RUN httpd-setup
 WORKDIR ${HTTPD_PUBLIC_PATH}
 
 USER ${CUSER_ID}
+
+STOPSIGNAL SIGWINCH
 
 EXPOSE ${HTTPD_PORT}
 

@@ -1,4 +1,5 @@
 #!/bin/bash -e
+# description: base config for httpd
 
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under

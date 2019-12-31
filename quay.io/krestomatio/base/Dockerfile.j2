@@ -35,8 +35,4 @@ COPY conf/usr/bin/* /usr/bin/
 
 RUN container-setup
 
-WORKDIR ${HOME}
-
-USER ${CUSER_ID}
-
 ENTRYPOINT ["container-entrypoint"]

@@ -2,8 +2,7 @@
 FROM {{ image_from }}
 
 ENV IMAGE_AUTHORS="{{ image_authors }}" \
-    PKGS_MGM="{{ pkgs_mgm }}" \
-    TZ="{{ image_timezone }}"
+    PKGS_MGM="{{ pkgs_mgm }}"
 
 ENV NAME=base \
     SUMMARY="UBI based image" \

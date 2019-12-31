@@ -1,0 +1,31 @@
+#!/bin/bash -e
+# description: reconfig timezone
+# param: list of pkgs separated by space
+
+reinstal_tzdata(){
+    echo "Reinstalling tzdata"
+    # update
+    ${PKGS_MGM} update
+    # remove
+    rpm -e --nodeps tzdata > /dev/null 2>&1
+    # reinstall
+    ${PKGS_MGM} install tzdata
+    # clean
+    ${PKGS_MGM} clean all
+}
+
+if ! [ -z ${@+x} ]; then
+    reinstal_tzdata
+    # leave only $@
+    echo "leaving only specific timezones"
+    rm -rf /tmp/zoneinfo
+    cp -rp /usr/share/zoneinfo/ /tmp/zoneinfo/
+    rm -rf /usr/share/zoneinfo/*
+    for tz in "$@"; do
+        mkdir -p $(dirname /usr/share/zoneinfo/${tz})
+        mv /tmp/zoneinfo/${tz} /usr/share/zoneinfo/${tz}
+    done
+    rm -rf /tmp/zoneinfo
+else
+    reinstal_tzdata
+fi

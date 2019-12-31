@@ -1,0 +1,17 @@
+#!/bin/bash -e
+# description: script for installing packages
+# param: list of pkgs separated by space
+
+# install packages
+if ! [ -z ${@+x} ]; then
+    # update
+    ${PKGS_MGM} update
+    # install
+    ${PKGS_MGM} install ${@}
+    # verify
+    rpm -V ${@}
+    # clean
+    ${PKGS_MGM} clean all
+else
+    echo "No parameter for packages to install"
+fi

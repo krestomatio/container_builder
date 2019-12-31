@@ -1,0 +1,42 @@
+# {{ ansible_managed  }}
+FROM {{ image_from }}
+
+ENV IMAGE_AUTHORS="{{ image_authors }}" \
+    PKGS_MGM="{{ pkgs_mgm }}" \
+    TZ="{{ image_timezone }}"
+
+ENV NAME=base \
+    SUMMARY="UBI based image" \
+    DESCRIPTION="UBI based for building other images" \
+    TITLE="UBI based image"
+
+LABEL org.opencontainers.image.title="${TITLE}" \
+      org.opencontainers.image.authors="${AUTHORS}" \
+      org.opencontainers.image.description="${DESCRIPTION}" \
+      name="${NAME}" \
+      summary="${SUMMARY}" \
+      description="${DESCRIPTION}" \
+      io.k8s.description="${DESCRIPTION}" \
+      io.k8s.display-name="${TITLE}" \
+      io.openshift.tags="${NAME}" \
+      maintainer="${IMAGE_AUTHORS}"
+
+ENV CUSER=default \
+    CUSER_ID="1001" \
+    CUSER_GECOS="Default Application User" \
+    HOME="/opt/default" \
+    CGROUP=root \
+    CGROUP_ID="0"
+
+# https://github.com/rpm-software-management/microdnf/issues/50
+RUN mkdir -p /run/user/$(id -u)
+
+COPY conf/usr/bin/* /usr/bin/
+
+RUN container-setup
+
+WORKDIR ${HOME}
+
+USER ${CUSER_ID}
+
+ENTRYPOINT ["container-entrypoint"]

@@ -1,0 +1,11 @@
+#!/bin/bash -e
+# description: base config for container
+
+# custom user
+cuser-set
+
+# specific timezones
+timezone-set ${TZ}
+
+# permissions
+rpm-file-permissions

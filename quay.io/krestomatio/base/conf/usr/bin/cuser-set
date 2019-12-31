@@ -1,0 +1,16 @@
+#!/bin/bash -e
+# description: config custom user and group
+
+if ! id -u ${CUSER_ID} > /dev/null 2>&1; then
+    if command -v useradd > /dev/null 2>&1; then
+        useradd -u ${CUSER_ID} -r -g ${CGROUP_ID} -d ${HOME} \
+            -s /sbin/nologin -c "${CUSER_GECOS}" ${CUSER}
+        chown -R ${CUSER_ID}:${CGROUP_ID} ${HOME}
+    else
+        echo "No custom user added. 'useradd' command not found"
+    fi
+else
+    # ${CUSER} should be in ${CGROUP} group
+    usermod -a -G ${CGROUP} ${CUSER}
+    echo "${CUSER} added to group {CGROUP}"
+fi

@@ -1,19 +1,21 @@
+image_base: "{{ docker_ansible_path }}/base"
+# Common
 moodle_php_version: '7.2'
 moodle_apache_version: '2.4'
 moodle_version: '3.5'
-image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
 image_authors: 'Job Céspedes Ortiz <jobcespedes@gmail.com>'
 image_timezone: America/Costa_Rica
 pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
-
 quay_path: quay.io
 docker_ansible_path: "{{ quay_path }}/krestomatio"
-dockerfile_builder_image_pull: true
+image_pull: false
 # dockerfile_builder_image_push: true
 dockerfile_builder_images:
   # moodle
-  - "{{ docker_ansible_path }}/base"
-#  - "{{ docker_ansible_path }}/moodle_apache_php"
+  - image: "{{ docker_ansible_path }}/base"
+    image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
+    image_pull: true
+  - image: "{{ docker_ansible_path }}/moodle_apache2"
 #  - "{{ docker_ansible_path }}/moodle_postgres"
 #  - "{{ docker_ansible_path }}/moodle_apache2"
 #  - "{{ docker_ansible_path }}/moodle_php-fpm"

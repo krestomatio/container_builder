@@ -1,36 +1,57 @@
 # {{ ansible_managed  }}
-FROM webdevops/apache:debian-9
+FROM {{ image_from }}
 
-LABEL \
-  org.opencontainers.image.title="Apache2 for Moodle" \
-  org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-  org.opencontainers.image.description="This debian9 based docker image runs apache2 for moodle usage"
+ENV APACHE_VERSION="{{ moodle_apache_version }}" \
+    APACHE_VER_SHORT="{{ moodle_apache_version | replace('.','') }}" \
+    MOODLE_VERSION="{{ moodle_version }}" \
+    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+    IMAGE_AUTHORS="{{ image_authors }}" \
+    TZ="{{ image_timezone }}"
 
-ARG PHP_SOCKET=php-fpm:9000
-ARG DOCUMENT_ROOT=/var/www/html
-ARG ALIAS_DOMAIN=*.vm
-ARG MY_TZ=America/Costa_Rica
+ENV NAME=apache${APACHE_VER_SHORT}_moodle${MOODLE_VER_SHORT} \
+    SUMMARY="Apache2 $APACHE_VERSION for Moodle" \
+    DESCRIPTION="This UBI based docker image runs \
+    Apache APACHE_VERSION for Moodle" \
+    TITLE="Apache APACHE_VERSION for Moodle" \
+    HTTPD_PORT="8080"
 
-ENV WEB_PHP_SOCKET=$PHP_SOCKET
-ENV WEB_DOCUMENT_ROOT=$DOCUMENT_ROOT
-ENV WEB_ALIAS_DOMAIN=$ALIAS_DOMAIN
-ENV WEB_MY_TZ=$MY_TZ
+LABEL org.opencontainers.image.title="${TITLE}" \
+      org.opencontainers.image.authors="${AUTHORS}" \
+      org.opencontainers.image.description="${DESCRIPTION}" \
+      org.opencontainers.image.version="${MOODLE_VERSION}" \
+      summary="${SUMMARY}" \
+      description="${DESCRIPTION}" \
+      io.k8s.description="${DESCRIPTION}" \
+      io.k8s.display-name="${TITLE}" \
+      io.openshift.expose-services="${HTTPD_PORT}:http" \
+      io.openshift.tags="apache,apache${APACHE_VER_SHORT},apache-${APACHE_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT},${NAME}" \
+      maintainer="${IMAGE_AUTHORS}"
 
-# Config
-RUN rm -rf /etc/apache2/mods-enabled/* && \
-    # Webdevops \
-    a2enmod actions proxy proxy_fcgi mpm_event ssl && \
-    # Moodle \
-    a2enmod actions alias authz_host autoindex cache cgid deflate dir expires headers mime rewrite
+ENV CUSER=apache \
+    CUSER_ID="48" \
+    CMD="httpd -D FOREGROUND"
 
-# TZ
-RUN echo "${WEB_MY_TZ}" > /etc/timezone && \
-    dpkg-reconfigure -f noninteractive tzdata
+ENV HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
+    HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
+    HTTPD_MODULES_CONF_D_PATH=/etc/httpd/conf.modules.d \
+    HTTPD_VAR_RUN=/run/httpd \
+    HTTPD_PUBLIC_PATH=/var/www/html \
+    HTTPD_DATA_ORIG_PATH=/var/www \
+    HTTPD_LOG_PATH=/var/log/httpd \
+    HTTPD_VAR_PATH=/var
 
-WORKDIR $WEB_DOCUMENT_ROOT
+COPY conf/usr/bin/* /usr/bin/
 
-EXPOSE 80
+RUN container-setup
+RUN install-pkgs httpd
+RUN httpd-setup
 
-ENTRYPOINT ["/opt/docker/bin/entrypoint.sh"]
+WORKDIR ${HTTPD_PUBLIC_PATH}
 
-CMD ["supervisord"]
+USER ${CUSER_ID}
+
+EXPOSE ${HTTPD_PORT}
+
+ENTRYPOINT ["container-entrypoint"]
+
+CMD $CMD

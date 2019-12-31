@@ -16,7 +16,7 @@ dockerfile_builder_images:
     image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
     image_pull: true
   - image: "{{ docker_ansible_path }}/moodle_apache2"
+  - image: "{{ docker_ansible_path }}/moodle_apache_php"
 #  - "{{ docker_ansible_path }}/moodle_postgres"
 #  - "{{ docker_ansible_path }}/moodle_apache2"
-#  - "{{ docker_ansible_path }}/moodle_php-fpm"
 #  - "{{ docker_ansible_path }}/moodle_cron"

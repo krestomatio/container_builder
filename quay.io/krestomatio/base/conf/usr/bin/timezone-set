@@ -23,7 +23,7 @@ if ! [ -z ${@+x} ]; then
     rm -rf /usr/share/zoneinfo/*
     for tz in "$@"; do
         mkdir -p $(dirname /usr/share/zoneinfo/${tz})
-        mv /tmp/zoneinfo/${tz} /usr/share/zoneinfo/${tz}
+        cp -rp /tmp/zoneinfo/${tz} /usr/share/zoneinfo/${tz}
     done
     rm -rf /tmp/zoneinfo
 else

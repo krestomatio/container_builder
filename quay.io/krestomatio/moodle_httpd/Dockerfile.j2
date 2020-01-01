@@ -7,11 +7,11 @@ ENV IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
     MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
-ENV NAME=moodle${MOODLE_VER_SHORT}_php-fpm${PHP_VER_SHORT} \
-    SUMMARY="PHP $PHP_VERSION for Moodle" \
+ENV NAME="moodle_httpd" \
+    SUMMARY="Apache2 ${APACHE_VERSION} for Moodle" \
     DESCRIPTION="This UBI minimal based container image runs \
-    PHP ${PHP_VERSION} for Moodle" \
-    TITLE="PHP ${PHP_VERSION} for Moodle"
+    Apache ${APACHE_VERSION} for Moodle" \
+    TITLE="Apache ${APACHE_VERSION} for Moodle"
 
 LABEL org.opencontainers.image.title="${TITLE}" \
       org.opencontainers.image.description="${DESCRIPTION}" \
@@ -22,18 +22,8 @@ LABEL org.opencontainers.image.title="${TITLE}" \
       description="${DESCRIPTION}" \
       io.k8s.description="${DESCRIPTION}" \
       io.k8s.display-name="${TITLE}" \
-      io.openshift.tags="${NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}"
-
-# php-curl included in php-common
-# php-zip as php-pecl-zip
-# php-xsl as php-xml
-# php-fpm php-cli php-opcache already installed in base image
-ENV INSTALL_PKGS="php-gd php-intl php-ldap \
-                  php-pgsql php-soap php-xmlrpc  \
-                  php-xml php-pecl-zip php-mbstring"
+      io.openshift.tags="${NAME},apache,apache${APACHE_VER_SHORT},apache-${APACHE_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}"
 
 USER 0
-COPY conf/usr/bin/* /usr/bin/
 RUN container-setup
-RUN install-pkgs ${INSTALL_PKGS}
 USER $CUSER

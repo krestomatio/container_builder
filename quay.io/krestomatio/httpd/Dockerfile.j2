@@ -1,31 +1,31 @@
 # {{ ansible_managed  }}
-FROM {{ image_from }}
+FROM {{ dockerfile_builder_image_from }}
 
-ENV APACHE_VERSION="{{ moodle_apache_version }}" \
-    APACHE_VER_SHORT="{{ moodle_apache_version | replace('.','') }}" \
-    MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
-    IMAGE_AUTHORS="{{ image_authors }}" \
-    TZ="{{ image_timezone }}"
+ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
+    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
+    APACHE_VERSION="{{ apache_version }}" \
+    APACHE_VER_SHORT="{{ apache_version | replace('.','') }}"
 
-ENV NAME=apache${APACHE_VER_SHORT}_moodle${MOODLE_VER_SHORT} \
-    SUMMARY="Apache2 $APACHE_VERSION for Moodle" \
-    DESCRIPTION="This UBI based docker image runs \
-    Apache APACHE_VERSION for Moodle" \
-    TITLE="Apache APACHE_VERSION for Moodle" \
+ENV NAME=httpd \
+    SUMMARY="Apache2 $APACHE_VERSION" \
+    DESCRIPTION="This UBI minimal based container image runs \
+    Apache ${APACHE_VERSION}" \
+    TITLE="Apache ${APACHE_VERSION}" \
     HTTPD_PORT="8080"
 
 LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.authors="${AUTHORS}" \
+      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
       org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.version="${MOODLE_VERSION}" \
+      org.opencontainers.image.version="${IMAGE_VERSION}" \
+      org.opencontainers.image.created="${IMAGE_CREATED}" \
       name="${NAME}" \
       summary="${SUMMARY}" \
       description="${DESCRIPTION}" \
       io.k8s.description="${DESCRIPTION}" \
       io.k8s.display-name="${TITLE}" \
       io.openshift.expose-services="${HTTPD_PORT}:http" \
-      io.openshift.tags="apache,apache${APACHE_VER_SHORT},apache-${APACHE_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT},${NAME}" \
+      io.openshift.tags="${NAME},apache,apache-${APACHE_VER_SHORT},apache${APACHE_VER_SHORT}" \
       maintainer="${IMAGE_AUTHORS}"
 
 ENV CUSER=apache \

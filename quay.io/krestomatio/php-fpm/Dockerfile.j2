@@ -1,0 +1,63 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
+    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
+    PHP_VERSION="{{ php_version }}" \
+    PHP_VER_SHORT="{{ php_version | replace('.','') }}"
+
+ENV NAME=php-fpm \
+    SUMMARY="PHP ${PHP_VERSION}" \
+    DESCRIPTION="This UBI minimal based container image runs \
+    PHP ${PHP_VERSION}" \
+    TITLE="PHP ${PHP_VERSION}" \
+    PHP_FPM_PORT="9000"
+
+LABEL org.opencontainers.image.title="${TITLE}" \
+      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
+      org.opencontainers.image.description="${DESCRIPTION}" \
+      org.opencontainers.image.version="${IMAGE_VERSION}" \
+      org.opencontainers.image.created="${IMAGE_CREATED}" \
+      name="${NAME}" \
+      summary="${SUMMARY}" \
+      description="${DESCRIPTION}" \
+      io.k8s.description="${DESCRIPTION}" \
+      io.k8s.display-name="${TITLE}" \
+      io.openshift.expose-services="${PHP_FPM_PORT}:php-fpm" \
+      io.openshift.tags="${NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}" \
+      maintainer="${IMAGE_AUTHORS}"
+
+ENV CUSER=apache \
+    CUSER_ID="48" \
+    CMD="php-fpm"
+
+ENV PHP_RUN=/run/php-fpm \
+    PHP_CONF_DIR=/etc/php.d \
+    PHP_CONF_FILE=/etc/php.ini \
+    PHP_SYSCONF_PATH=/etc \
+    PHP_MODULES_DIR=/usr/lib64/php/modules/ \
+    PHP_FPM_CONF_DIR=/etc/php-fpm.d \
+    PHP_FPM_CONF_FILE=/etc/php-fpm.conf \
+    PHP_FPM_POOL_FILE=/etc/php-fpm.d/www.conf \
+    HTTPD_PUBLIC_PATH=/var/www/html
+
+ENV INSTALL_PKGS="php-fpm php-cli php-opcache"
+
+COPY conf/usr/bin/* /usr/bin/
+
+RUN container-setup
+RUN install-pkgs ${INSTALL_PKGS}
+RUN php-fpm-setup
+
+WORKDIR ${HTTPD_PUBLIC_PATH}
+
+USER ${CUSER_ID}
+
+STOPSIGNAL SIGQUIT
+
+EXPOSE ${PHP_FPM_PORT}
+
+ENTRYPOINT ["container-entrypoint"]
+
+CMD $CMD

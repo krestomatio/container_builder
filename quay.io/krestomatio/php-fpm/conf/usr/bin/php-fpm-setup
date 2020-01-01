@@ -1,0 +1,59 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+php_default_conf_file=${PHP_FPM_CONF_DIR}/60-container.conf
+php_extra_conf_file=${PHP_FPM_CONF_DIR}/60-container-extra.conf
+php_daemonize_conf_file=${PHP_FPM_CONF_DIR}/zz-container.conf
+
+mkdir -p ${PHP_RUN}
+chmod -R a+rwx ${PHP_RUN}
+mkdir -p /tmp/sessions
+chmod -R a+rwx /tmp/sessions
+chown -R ${CUSER_ID}:${CGROUP_ID} /tmp/sessions
+chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}
+chmod -R a+rwx ${PHP_SYSCONF_PATH}
+
+# php-fpm default config
+
+## include at the end of file
+sed "/^include/d" ${PHP_FPM_CONF_FILE}
+echo  ${PHP_FPM_CONF_FILE}
+if grep -q "^include" ${PHP_FPM_CONF_FILE}; then
+    sed -i "/^include/d" ${PHP_FPM_CONF_FILE}
+    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_CONF_FILE}
+else
+    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_CONF_FILE}
+fi
+
+cat << EOF > ${php_default_conf_file}
+[global]
+error_log = /proc/self/fd/2
+
+[www]
+; if we send this to /proc/self/fd/1, it never appears
+access.log = /proc/self/fd/2
+
+clear_env = no
+
+; Ensure worker stdout and stderr are sent to the main error log.
+catch_workers_output = yes
+EOF
+
+if [[ $PHP_VER_SHORT -gt 72 ]]; then
+    cat << EOF > ${php_extra_conf_file}
+[global]
+; https://github.com/docker-library/php/pull/725#issuecomment-443540114
+log_limit = 8192
+[www]
+decorate_workers_output = no
+EOF
+fi
+
+cat << EOF > ${php_daemonize_conf_file}
+[global]
+daemonize = no
+[www]
+listen = ${PHP_FPM_PORT}
+listen.owner = ${CUSER}
+listen.group = ${CGROUP}
+EOF

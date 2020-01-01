@@ -1,7 +1,8 @@
 # {{ ansible_managed  }}
-FROM {{ image_from }}
+FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_AUTHORS="{{ image_authors }}" \
+ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
     PKGS_MGM="{{ pkgs_mgm }}"
 
 ENV NAME=base \
@@ -10,14 +11,15 @@ ENV NAME=base \
     TITLE="UBI based image"
 
 LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.authors="${AUTHORS}" \
+      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
       org.opencontainers.image.description="${DESCRIPTION}" \
+      org.opencontainers.image.created="${IMAGE_CREATED}" \
       name="${NAME}" \
       summary="${SUMMARY}" \
       description="${DESCRIPTION}" \
       io.k8s.description="${DESCRIPTION}" \
       io.k8s.display-name="${TITLE}" \
-      io.openshift.tags="${NAME}" \
+      io.openshift.tags="${NAME},ubi" \
       maintainer="${IMAGE_AUTHORS}"
 
 ENV CUSER=default \

@@ -8,8 +8,6 @@ if ! [ -z ${@+x} ]; then
     ${PKGS_MGM} update
     # install
     ${PKGS_MGM} install ${@}
-    # verify
-    rpm -V ${@}
     # clean
     ${PKGS_MGM} clean all
 else

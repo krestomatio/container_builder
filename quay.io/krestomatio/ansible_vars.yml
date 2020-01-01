@@ -1,22 +1,41 @@
-image_base: "{{ docker_ansible_path }}/base"
-# Common
-moodle_php_version: '7.2'
-moodle_apache_version: '2.4'
+# default
+php_version: '7.2'
+apache_version: '2.4'
 moodle_version: '3.5'
-image_authors: 'Job Céspedes Ortiz <jobcespedes@gmail.com>'
-image_timezone: America/Costa_Rica
 pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 quay_path: quay.io
 docker_ansible_path: "{{ quay_path }}/krestomatio"
+
+# default variables that can be set per image
+# in 'dockerfile_builder_images'
+image_base: "{{ docker_ansible_path }}/base"
 image_pull: false
+# image_from:
+# image_version:
+
+# general
 # dockerfile_builder_image_push: true
+dockerfile_builder_image_timezone: America/Costa_Rica
+dockerfile_builder_image_created:
+  "{{ item.image_created | default(ansible_date_time.iso8601) }}"
+dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
 dockerfile_builder_images:
-  # moodle
   - image: "{{ docker_ansible_path }}/base"
     image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
     image_pull: true
-  - image: "{{ docker_ansible_path }}/moodle_apache2"
-  - image: "{{ docker_ansible_path }}/moodle_apache_php"
+  - image: "{{ docker_ansible_path }}/httpd"
+    image_from: "{{ docker_ansible_path }}/base"
+    image_version: "{{ apache_version + '.' + (git_commit|default('0')) }}"
+  - image: "{{ docker_ansible_path }}/php-fpm"
+    image_from: "{{ docker_ansible_path }}/base"
+    image_version: "{{ php_version + '.' +   (git_commit|default('0')) }}"
+  # moodle
+  - image: "{{ docker_ansible_path }}/moodle_httpd"
+    image_from: "{{ docker_ansible_path }}/httpd"
+    image_version: "0.0.1"
+  - image: "{{ docker_ansible_path }}/moodle_php-fpm"
+    image_from: "{{ docker_ansible_path }}/php-fpm"
+    image_version: "0.0.1"
 #  - "{{ docker_ansible_path }}/moodle_postgres"
 #  - "{{ docker_ansible_path }}/moodle_apache2"
 #  - "{{ docker_ansible_path }}/moodle_cron"

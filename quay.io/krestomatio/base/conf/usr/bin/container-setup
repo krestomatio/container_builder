@@ -5,7 +5,13 @@
 cuser-set
 
 # specific timezones
-timezone-set ${TZ}
+if ! [ -z ${TZ+x} ]; then
+    if ! [ -z ${AVAILABLE_TZs+x} ]; then
+        timezone-set ${AVAILABLE_TZs} ${TZ}
+    else
+        timezone-set ${TZ}
+    fi
+fi
 
 # permissions
 rpm-file-permissions

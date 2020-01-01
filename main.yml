@@ -2,9 +2,11 @@
   tasks:
     - name: build containers
       vars:
+        dockerfile_builder_image_from: "{{ item.image_from }}"
         dockerfile_builder_image: "{{ item.image }}"
         dockerfile_builder_image_pull: "{{ item.pull | default(image_pull) }}"
-        image_from: "{{ item.image_from | default(image_base) }}"
+        dockerfile_builder_image_version:
+          "{{ item.image_version | default(false) }}"
       include_role:
         name: dockerfile_builder
       loop: "{{ dockerfile_builder_images }}"

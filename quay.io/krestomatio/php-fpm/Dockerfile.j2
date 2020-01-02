@@ -45,9 +45,16 @@ ENV PHP_RUN=/run/php-fpm \
 ENV INSTALL_PKGS="php-fpm php-cli php-opcache"
 
 COPY conf/usr/bin/* /usr/bin/
+COPY conf/container-entrypoint.d/* ${ENTRYPOINT_SCRIPTS_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${INSTALL_PKGS}
+
+ENV FPM_listen=${PHP_FPM_PORT} \
+    FPM_listen_owner=${CUSER} \
+    FPM_listen_group=${CGROUP} \
+    FPM_listen_allowed_clients="127.0.0.1"
+
 RUN php-fpm-setup
 
 WORKDIR ${HTTPD_PUBLIC_PATH}

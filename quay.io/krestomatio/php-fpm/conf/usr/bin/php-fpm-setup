@@ -17,7 +17,6 @@ chmod -R a+rwx ${PHP_SYSCONF_PATH}
 
 ## include at the end of file
 sed "/^include/d" ${PHP_FPM_CONF_FILE}
-echo  ${PHP_FPM_CONF_FILE}
 if grep -q "^include" ${PHP_FPM_CONF_FILE}; then
     sed -i "/^include/d" ${PHP_FPM_CONF_FILE}
     echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_CONF_FILE}
@@ -49,11 +48,13 @@ decorate_workers_output = no
 EOF
 fi
 
-cat << EOF > ${php_daemonize_conf_file}
+cat << "EOF" > ${php_daemonize_conf_file}
 [global]
 daemonize = no
 [www]
-listen = ${PHP_FPM_PORT}
-listen.owner = ${CUSER}
-listen.group = ${CGROUP}
+listen = ${FPM_listen}
+listen.owner = ${FPM_listen_owner}
+listen.group = ${FPM_listen_group}
 EOF
+
+rpm-file-permissions

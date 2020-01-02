@@ -39,12 +39,20 @@ ENV HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
     HTTPD_PUBLIC_PATH=/var/www/html \
     HTTPD_DATA_ORIG_PATH=/var/www \
     HTTPD_LOG_PATH=/var/log/httpd \
-    HTTPD_VAR_PATH=/var
+    HTTPD_VAR_PATH=/var \
+    PHP_FPM_PORT="9000" \
+    PHP_FPM_HOST="localhost"
 
 COPY conf/usr/bin/* /usr/bin/
 
 RUN container-setup
 RUN install-pkgs httpd
+
+ENV HTTPD_Listen=${HTTPD_PORT} \
+    HTTPD_User=${CUSER} \
+    HTTPD_Group=${CGROUP} \
+    HTTPD_DocumentRoot=${HTTPD_PUBLIC_PATH}
+
 RUN httpd-setup
 
 WORKDIR ${HTTPD_PUBLIC_PATH}

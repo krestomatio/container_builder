@@ -1,6 +1,9 @@
 #!/bin/bash -e
 # description: base config for container
 
+# dir for optional entrypoint scripts
+mkdir -p ${ENTRYPOINT_SCRIPTS_PATH}
+
 # custom user
 cuser-set
 

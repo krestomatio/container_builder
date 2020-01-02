@@ -7,7 +7,7 @@ ENV IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
     MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
-ENV NAME=moodle${MOODLE_VER_SHORT}_php-fpm${PHP_VER_SHORT} \
+ENV NAME=moodle_php-fpm \
     SUMMARY="PHP $PHP_VERSION for Moodle" \
     DESCRIPTION="This UBI minimal based container image runs \
     PHP ${PHP_VERSION} for Moodle" \
@@ -33,7 +33,7 @@ ENV INSTALL_PKGS="php-gd php-intl php-ldap \
                   php-xml php-pecl-zip php-mbstring"
 
 USER 0
-COPY conf/usr/bin/* /usr/bin/
 RUN container-setup
 RUN install-pkgs ${INSTALL_PKGS}
+RUN rpm-file-permissions
 USER $CUSER

@@ -13,12 +13,49 @@ chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}
 
 # httpd default config
 sed -i \
-    -e "s@^Listen 80.*@Listen 8080@" \
-    -e "s@^User.*@User ${CUSER}@" \
-    -e "s@^Group.*@Group ${CGROUP}@" \
-    -e "s@^DocumentRoot.*@DocumentRoot \"${HTTPD_PUBLIC_PATH}\"@" \
-    -e "s@^<Directory \"/var/www/html\"@<Directory \"${HTTPD_PUBLIC_PATH}\"@" \
+    -e 's@^Listen 80.*@Listen ${HTTPD_Listen}@' \
+    -e 's@^User.*@User ${HTTPD_User}@' \
+    -e 's@^Group.*@Group ${HTTPD_Group}@' \
+    -e 's@^DocumentRoot.*@DocumentRoot "${HTTPD_DocumentRoot}"@' \
+    -e 's@^<Directory "/var/www/html"@<Directory "${HTTPD_DocumentRoot}"@' \
     -re 's@^(\s*CustomLog)\s+\S+@\1 /proc/self/fd/1@g' \
     -re 's@^(\s*ErrorLog)\s+\S+@\1 /proc/self/fd/2@g' \
     -re 's@^(\s*TransferLog)\s+\S+@\1 /proc/self/fd/1@g' \
     ${HTTPD_MAIN_CONF_PATH}/httpd.conf
+
+# httpd php-fpm config
+cat << "_EOF" > ${HTTPD_MAIN_CONF_D_PATH}/60-php.conf
+<IfModule !mod_php7.c>
+    <IfModule proxy_fcgi_module>
+        #
+        # The following lines prevent .user.ini files from being viewed by Web clients.
+        #
+        <Files ".user.ini">
+            Require all denied
+        </Files>
+
+        #
+        # Allow php to handle Multiviews
+        #
+        AddType text/html .php
+
+        #
+        # Add index.php to the list of files that will be served as directory
+        # indexes.
+        #
+        DirectoryIndex index.php
+
+        #
+        # Redirect to local php-fpm (no mod_php in default configuration)
+        #
+        # Enable http authorization headers
+        SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
+
+        <FilesMatch \.(php|phar)$>
+            SetHandler "proxy:fcgi://${PHP_FPM_HOST}:${PHP_FPM_PORT}"
+        </FilesMatch>
+    </IfModule>
+</IfModule>
+_EOF
+
+rpm-file-permissions

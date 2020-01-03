@@ -1,16 +1,6 @@
 #!/bin/bash -e
 # description: base config for httpd
 
-# In order to drop the root user, we have to make some directories world
-# writeable as OpenShift default security model is to run the container under
-# random UID.
-
-chmod -R a+rwx ${HTTPD_MAIN_CONF_PATH}
-chmod -R a+rwx ${HTTPD_MAIN_CONF_D_PATH}
-chmod -R a+rwx ${HTTPD_VAR_RUN}
-chmod -R a+rwx ${HTTPD_LOG_PATH}
-chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}
-
 # httpd default config
 sed -i \
     -e 's@^Listen 80.*@Listen ${HTTPD_Listen}@' \
@@ -58,4 +48,4 @@ cat << "_EOF" > ${HTTPD_MAIN_CONF_D_PATH}/60-php.conf
 </IfModule>
 _EOF
 
-rpm-file-permissions
+httpd-permissions-set

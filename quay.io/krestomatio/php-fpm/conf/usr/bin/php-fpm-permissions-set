@@ -1,0 +1,23 @@
+#!/bin/bash -e
+# description: set files/dirs permissions for php-fpm
+# https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#use-uid_create-image
+
+rpm-file-permissions
+
+# In order to drop the root user, we have to make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${PHP_RUN}
+mkdir -p /tmp/sessions
+
+chmod -R a+rwx ${PHP_RUN}
+chmod -R a+rwx /tmp/sessions
+chmod -R a+rwx ${PHP_CONF_FILE}
+chmod -R a+rwx ${PHP_CONF_DIR}
+chmod -R a+rwx ${PHP_FPM_CONF_DIR}
+chmod -R a+rwx ${PHP_FPM_CONF_FILE}
+
+chown -R ${CUSER_ID}:${CGROUP_ID} /tmp/sessions
+chown -R ${CUSER_ID}:${CGROUP_ID} ${PHP_RUN}
+chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}

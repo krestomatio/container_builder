@@ -15,6 +15,5 @@ https://github.com/docker-library/httpd
 # TODO: foreground php.fpm y otras conf iniciales como log https://github.com/https://github.com/docker-library/php/blob/master/7.2/buster/fpm/Dockerfile
 # TODO: default user 1001 or apache?. DONE
 # TODO: timezone in minimal. DONE
-# TODO: timezone in moodle images
-# TODO: permissions of files created other than rpm installed
-# TODO: label and environment created at the end
+# TODO: timezone in moodle images. DONE
+# TODO: permissions of files created other than rpm installed. DONE

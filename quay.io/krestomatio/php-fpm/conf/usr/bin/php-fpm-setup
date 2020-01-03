@@ -5,14 +5,6 @@ php_default_conf_file=${PHP_FPM_CONF_DIR}/60-container.conf
 php_extra_conf_file=${PHP_FPM_CONF_DIR}/60-container-extra.conf
 php_daemonize_conf_file=${PHP_FPM_CONF_DIR}/zz-container.conf
 
-mkdir -p ${PHP_RUN}
-chmod -R a+rwx ${PHP_RUN}
-mkdir -p /tmp/sessions
-chmod -R a+rwx /tmp/sessions
-chown -R ${CUSER_ID}:${CGROUP_ID} /tmp/sessions
-chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}
-chmod -R a+rwx ${PHP_SYSCONF_PATH}
-
 # php-fpm default config
 
 ## include at the end of file
@@ -57,4 +49,4 @@ listen.owner = ${FPM_listen_owner}
 listen.group = ${FPM_listen_group}
 EOF
 
-rpm-file-permissions
+php-fpm-permissions-set

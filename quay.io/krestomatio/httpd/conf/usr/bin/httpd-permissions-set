@@ -1,0 +1,15 @@
+#!/bin/bash -e
+# description: set files/dirs permissions for httpd
+# https://docs.openshift.com/container-platform/4.2/openshift_images/create-images.html#use-uid_create-images
+
+rpm-file-permissions
+
+# In order to drop the root user, we have to make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+chmod -R a+rwx ${HTTPD_MAIN_CONF_PATH}
+chmod -R a+rwx ${HTTPD_MAIN_CONF_D_PATH}
+chmod -R a+rwx ${HTTPD_VAR_RUN}
+chmod -R a+rwx ${HTTPD_LOG_PATH}
+chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}

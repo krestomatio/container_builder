@@ -35,5 +35,5 @@ ENV INSTALL_PKGS="php-gd php-intl php-ldap \
 USER 0
 RUN container-setup
 RUN install-pkgs ${INSTALL_PKGS}
-RUN rpm-file-permissions
+RUN php-fpm-permissions-set
 USER $CUSER

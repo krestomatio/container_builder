@@ -2,7 +2,6 @@
 php_version: '7.2'
 apache_version: '2.4'
 moodle_version: '3.5'
-pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 quay_path: quay.io
 docker_ansible_path: "{{ quay_path }}/krestomatio"
 
@@ -15,6 +14,7 @@ image_pull: false
 
 # general
 # dockerfile_builder_image_push: true
+dockerfile_builder_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 dockerfile_builder_image_timezone: America/Costa_Rica
 dockerfile_builder_image_created:
   "{{ item.image_created | default(ansible_date_time.iso8601) }}"

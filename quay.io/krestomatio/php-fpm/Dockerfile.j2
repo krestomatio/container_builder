@@ -1,70 +1,74 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
-    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
-    PHP_VERSION="{{ php_version }}" \
-    PHP_VER_SHORT="{{ php_version | replace('.','') }}"
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    PHP_version="{{ php_version }}" \
+    PHP_ver_short="{{ php_version | replace('.','') }}"
 
-ENV NAME=php-fpm \
-    SUMMARY="PHP ${PHP_VERSION}" \
-    DESCRIPTION="This UBI minimal based container image runs \
-    PHP ${PHP_VERSION}" \
-    TITLE="PHP ${PHP_VERSION}" \
-    PHP_FPM_PORT="9000"
+# General variables
+ENV IMAGE_name=php-fpm \
+    IMAGE_summary="PHP ${PHP_version}" \
+    IMAGE_description="This UBI minimal based container image runs \
+    PHP ${PHP_version}" \
+    IMAGE_title="PHP ${PHP_version}" \
+    PHP_FPM_port="9000"
 
-LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.version="${IMAGE_VERSION}" \
-      org.opencontainers.image.created="${IMAGE_CREATED}" \
-      name="${NAME}" \
-      summary="${SUMMARY}" \
-      description="${DESCRIPTION}" \
-      io.k8s.description="${DESCRIPTION}" \
-      io.k8s.display-name="${TITLE}" \
-      io.openshift.expose-services="${PHP_FPM_PORT}:php-fpm" \
-      io.openshift.tags="${NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}" \
-      maintainer="${IMAGE_AUTHORS}"
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${PHP_FPM_port}:php-fpm" \
+      io.openshift.tags="${IMAGE_name},php,php${PHP_ver_short},php-${PHP_ver_short}" \
+      maintainer="${IMAGE_authors}"
 
-ENV CUSER=apache \
-    CUSER_ID="48" \
-    CMD="php-fpm"
+# Container variables
+ENV CTR_user=apache \
+    CTR_user_id="48" \
+    CTR_cmd="php-fpm"
 
-ENV PHP_RUN=/run/php-fpm \
-    PHP_CONF_DIR=/etc/php.d \
-    PHP_CONF_FILE=/etc/php.ini \
-    PHP_SYSCONF_PATH=/etc \
-    PHP_MODULES_DIR=/usr/lib64/php/modules/ \
-    PHP_FPM_CONF_DIR=/etc/php-fpm.d \
-    PHP_FPM_CONF_FILE=/etc/php-fpm.conf \
-    PHP_FPM_POOL_FILE=/etc/php-fpm.d/www.conf \
-    HTTPD_PUBLIC_PATH=/var/www/html
+# Component bash variables
+ENV PHP_run=/run/php-fpm \
+    PHP_conf_dir=/etc/php.d \
+    PHP_conf_file=/etc/php.ini \
+    PHP_sysconf_path=/etc \
+    PHP_module_dir=/usr/lib64/php/modules/ \
+    PHP_FPM_conf_dir=/etc/php-fpm.d \
+    PHP_FPM_conf_file=/etc/php-fpm.conf \
+    PHP_FPM_pool_file=/etc/php-fpm.d/www.conf \
+    HTTPD_public_path=/var/www/html
 
-ENV INSTALL_PKGS="php-fpm php-cli php-opcache"
+ENV OS_install_pkgs="php-fpm php-cli php-opcache"
 
 COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${ENTRYPOINT_SCRIPTS_PATH}/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
-RUN install-pkgs ${INSTALL_PKGS}
+RUN install-pkgs ${OS_install_pkgs}
 
-ENV FPM_listen=${PHP_FPM_PORT} \
-    FPM_listen_owner=${CUSER} \
-    FPM_listen_group=${CGROUP} \
-    FPM_listen_allowed_clients="127.0.0.1"
+# Component config variables
+ENV PHP_FPM_listen=${PHP_FPM_port} \
+    PHP_FPM_listen_owner=${CTR_user} \
+    PHP_FPM_listen_group=${CTR_group} \
+    PHP_FPM_listen_allowed_clients="127.0.0.1"
 
 RUN php-fpm-setup
 
-WORKDIR ${HTTPD_PUBLIC_PATH}
+WORKDIR ${HTTPD_public_path}
 
-USER ${CUSER_ID}
+USER ${CTR_user_id}
 
 STOPSIGNAL SIGQUIT
 
-EXPOSE ${PHP_FPM_PORT}
+EXPOSE ${PHP_FPM_port}
 
-ENTRYPOINT ["container-entrypoint"]
-
-CMD $CMD
+CMD ${CTR_cmd}

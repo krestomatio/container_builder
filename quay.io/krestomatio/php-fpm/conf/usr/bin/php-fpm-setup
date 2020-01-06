@@ -1,19 +1,19 @@
 #!/bin/bash -e
 # description: base config for php-fpm
 
-php_default_conf_file=${PHP_FPM_CONF_DIR}/60-container.conf
-php_extra_conf_file=${PHP_FPM_CONF_DIR}/60-container-extra.conf
-php_daemonize_conf_file=${PHP_FPM_CONF_DIR}/zz-container.conf
+php_default_conf_file=${PHP_FPM_conf_dir}/60-container.conf
+php_extra_conf_file=${PHP_FPM_conf_dir}/60-container-extra.conf
+php_daemonize_conf_file=${PHP_FPM_conf_dir}/zz-container.conf
 
 # php-fpm default config
 
 ## include at the end of file
-sed "/^include/d" ${PHP_FPM_CONF_FILE}
-if grep -q "^include" ${PHP_FPM_CONF_FILE}; then
-    sed -i "/^include/d" ${PHP_FPM_CONF_FILE}
-    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_CONF_FILE}
+sed "/^include/d" ${PHP_FPM_conf_file}
+if grep -q "^include" ${PHP_FPM_conf_file}; then
+    sed -i "/^include/d" ${PHP_FPM_conf_file}
+    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_conf_file}
 else
-    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_CONF_FILE}
+    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_conf_file}
 fi
 
 cat << EOF > ${php_default_conf_file}
@@ -30,7 +30,7 @@ clear_env = no
 catch_workers_output = yes
 EOF
 
-if [[ $PHP_VER_SHORT -gt 72 ]]; then
+if [[ $PHP_ver_short -gt 72 ]]; then
     cat << EOF > ${php_extra_conf_file}
 [global]
 ; https://github.com/docker-library/php/pull/725#issuecomment-443540114
@@ -44,9 +44,9 @@ cat << "EOF" > ${php_daemonize_conf_file}
 [global]
 daemonize = no
 [www]
-listen = ${FPM_listen}
-listen.owner = ${FPM_listen_owner}
-listen.group = ${FPM_listen_group}
+listen = ${PHP_FPM_listen}
+listen.owner = ${PHP_FPM_listen_owner}
+listen.group = ${PHP_FPM_listen_group}
 EOF
 
 php-fpm-permissions-set

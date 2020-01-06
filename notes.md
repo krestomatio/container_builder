@@ -17,3 +17,13 @@ https://github.com/docker-library/httpd
 # TODO: timezone in minimal. DONE
 # TODO: timezone in moodle images. DONE
 # TODO: permissions of files created other than rpm installed. DONE
+# TODO: variable name convention for container builds and runs:
+    # layers: general to more specific as best practices suggest.
+    # Variable name convention:
+        # For variables meant to be used inside containers:
+        # COMPONENT_variable_name
+        # UPPERCASE_lowercase
+        # No dots for bash 
+        # 'CTR' prefix for container related config
+        # 'PHP' prefix for php related config
+        # 'HTTPD' prefix for apache2 related config

@@ -1,29 +1,32 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
-    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
-    MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+# General ansible variables
+ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
-ENV NAME="moodle_httpd" \
-    SUMMARY="Apache2 ${APACHE_VERSION} for Moodle" \
-    DESCRIPTION="This UBI minimal based container image runs \
-    Apache ${APACHE_VERSION} for Moodle" \
-    TITLE="Apache ${APACHE_VERSION} for Moodle"
+# General variables
+ENV IMAGE_name="moodle_httpd" \
+    IMAGE_summary="Apache2 ${APACHE_version} for Moodle" \
+    IMAGE_description="This UBI minimal based container image runs \
+    Apache ${APACHE_version} for Moodle" \
+    IMAGE_title="Apache ${APACHE_version} for Moodle"
 
-LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.version="${IMAGE_VERSION}" \
-      org.opencontainers.image.created="${IMAGE_CREATED}" \
-      name="${NAME}" \
-      summary="${SUMMARY}" \
-      description="${DESCRIPTION}" \
-      io.k8s.description="${DESCRIPTION}" \
-      io.k8s.display-name="${TITLE}" \
-      io.openshift.tags="${NAME},apache,apache${APACHE_VER_SHORT},apache-${APACHE_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}"
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},apache,apache${APACHE_ver_short},apache-${APACHE_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
 USER 0
 RUN container-setup
-USER $CUSER
+USER ${CTR_user_id}

@@ -1,16 +1,16 @@
 #!/bin/bash -e
 # description: config custom user and group
 
-if ! id -u ${CUSER_ID} > /dev/null 2>&1; then
+if ! id -u ${CTR_user_id} > /dev/null 2>&1; then
     if command -v useradd > /dev/null 2>&1; then
-        useradd -u ${CUSER_ID} -r -g ${CGROUP_ID} -d ${HOME} \
-            -s /sbin/nologin -c "${CUSER_GECOS}" ${CUSER}
-        chown -R ${CUSER_ID}:${CGROUP_ID} ${HOME}
+        useradd -u ${CTR_user_id} -r -g ${CTR_group_id} -d ${HOME} \
+            -s /sbin/nologin -c "${CTR_user_gecos}" ${CTR_user}
+        chown -R ${CTR_user_id}:${CTR_group_id} ${HOME}
     else
         echo "No custom user added. 'useradd' command not found"
     fi
 else
-    # ${CUSER} should be in ${CGROUP} group
-    usermod -a -G ${CGROUP} ${CUSER}
-    echo "${CUSER} added to group {CGROUP}"
+    # ${CTR_user} should be in ${CTR_group} group
+    usermod -a -G ${CTR_group} ${CTR_user}
+    echo "${CTR_user} added to group {CTR_group}"
 fi

@@ -1,68 +1,70 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
-    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
-    APACHE_VERSION="{{ apache_version }}" \
-    APACHE_VER_SHORT="{{ apache_version | replace('.','') }}"
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    APACHE_version="{{ apache_version }}" \
+    APACHE_ver_short="{{ apache_version | replace('.','') }}"
 
-ENV NAME=httpd \
-    SUMMARY="Apache2 $APACHE_VERSION" \
-    DESCRIPTION="This UBI minimal based container image runs \
-    Apache ${APACHE_VERSION}" \
-    TITLE="Apache ${APACHE_VERSION}" \
-    HTTPD_PORT="8080"
+# General variables
+ENV IMAGE_name=httpd \
+    IMAGE_summary="Apache2 $APACHE_version" \
+    IMAGE_description="This UBI minimal based container image runs \
+    Apache ${APACHE_version}" \
+    IMAGE_title="Apache ${APACHE_version}" \
+    HTTPD_port="8080"
 
-LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.version="${IMAGE_VERSION}" \
-      org.opencontainers.image.created="${IMAGE_CREATED}" \
-      name="${NAME}" \
-      summary="${SUMMARY}" \
-      description="${DESCRIPTION}" \
-      io.k8s.description="${DESCRIPTION}" \
-      io.k8s.display-name="${TITLE}" \
-      io.openshift.expose-services="${HTTPD_PORT}:http" \
-      io.openshift.tags="${NAME},apache,apache-${APACHE_VER_SHORT},apache${APACHE_VER_SHORT}" \
-      maintainer="${IMAGE_AUTHORS}"
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${HTTPD_port}:http" \
+      io.openshift.tags="${IMAGE_name},apache,apache-${APACHE_ver_short},apache${APACHE_ver_short}" \
+      maintainer="${IMAGE_authors}"
 
-ENV CUSER=apache \
-    CUSER_ID="48" \
-    CMD="httpd -D FOREGROUND"
+# Container variables
+ENV CTR_user=apache \
+    CTR_user_id="48" \
+    CTR_cmd="httpd -D FOREGROUND"
 
-ENV HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
-    HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
-    HTTPD_MODULES_CONF_D_PATH=/etc/httpd/conf.modules.d \
-    HTTPD_VAR_RUN=/run/httpd \
-    HTTPD_PUBLIC_PATH=/var/www/html \
-    HTTPD_DATA_ORIG_PATH=/var/www \
-    HTTPD_LOG_PATH=/var/log/httpd \
-    HTTPD_VAR_PATH=/var \
-    PHP_FPM_PORT="9000" \
-    PHP_FPM_HOST="localhost"
+# Component bash variables
+ENV HTTPD_main_conf_path=/etc/httpd/conf \
+    HTTPD_main_conf_d_path=/etc/httpd/conf.d \
+    HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
+    HTTPD_var_run_path=/run/httpd \
+    HTTPD_public_path=/var/www/html \
+    HTTPD_log_path=/var/log/httpd \
+    PHP_FPM_port="9000" \
+    PHP_FPM_host="localhost"
 
 COPY conf/usr/bin/* /usr/bin/
 
 RUN container-setup
 RUN install-pkgs httpd
 
-ENV HTTPD_Listen=${HTTPD_PORT} \
-    HTTPD_User=${CUSER} \
-    HTTPD_Group=${CGROUP} \
-    HTTPD_DocumentRoot=${HTTPD_PUBLIC_PATH}
+# Component config variables
+ENV HTTPD_listen=${HTTPD_port} \
+    HTTPD_user=${CTR_user} \
+    HTTPD_group=${CTR_group} \
+    HTTPD_documentroot=${HTTPD_public_path}
 
 RUN httpd-setup
 
-WORKDIR ${HTTPD_PUBLIC_PATH}
+WORKDIR ${HTTPD_public_path}
 
-USER ${CUSER_ID}
+USER ${CTR_user_id}
 
 STOPSIGNAL SIGWINCH
 
-EXPOSE ${HTTPD_PORT}
+EXPOSE ${HTTPD_port}
 
-ENTRYPOINT ["container-entrypoint"]
-
-CMD $CMD
+CMD ${CTR_cmd}

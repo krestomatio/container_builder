@@ -8,8 +8,8 @@ rpm-file-permissions
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-chmod -R a+rwx ${HTTPD_MAIN_CONF_PATH}
-chmod -R a+rwx ${HTTPD_MAIN_CONF_D_PATH}
-chmod -R a+rwx ${HTTPD_VAR_RUN}
-chmod -R a+rwx ${HTTPD_LOG_PATH}
-chown -R ${CUSER_ID}:${CGROUP_ID} ${HTTPD_PUBLIC_PATH}
+chmod -R a+rwx ${HTTPD_main_conf_path}
+chmod -R a+rwx ${HTTPD_main_conf_d_path}
+chmod -R a+rwx ${HTTPD_var_run_path}
+chmod -R a+rwx ${HTTPD_log_path}
+chown -R ${CTR_user_id}:${CTR_group_id} ${HTTPD_public_path}

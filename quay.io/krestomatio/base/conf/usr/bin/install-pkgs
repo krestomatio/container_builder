@@ -5,11 +5,11 @@
 # install packages
 if ! [ -z ${@+x} ]; then
     # update
-    ${PKGS_MGM} update
+    ${CTR_pkg_mgm} update
     # install
-    ${PKGS_MGM} install ${@}
+    ${CTR_pkg_mgm} install ${@}
     # clean
-    ${PKGS_MGM} clean all
+    ${CTR_pkg_mgm} clean all
 else
     echo "No parameter for packages to install"
 fi

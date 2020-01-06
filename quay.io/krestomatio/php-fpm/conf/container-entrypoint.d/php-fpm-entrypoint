@@ -3,10 +3,10 @@
 
 # listen.allowed_clients with values 'empty' or 'any' does not  work
 # so it is remove in that case
-if [ ${FPM_listen_allowed_clients} != '127.0.0.1' ]; then
-    if [[ -z ${FPM_listen_allowed_clients} || ${FPM_listen_allowed_clients} == 'any' ]]; then
-        sed -i "s@^listen.allowed_clients@; listen.allowed_clients@" ${PHP_FPM_POOL_FILE}
+if [ ${PHP_FPM_listen_allowed_clients} != '127.0.0.1' ]; then
+    if [[ -z ${PHP_FPM_listen_allowed_clients} || ${PHP_FPM_listen_allowed_clients} == 'any' ]]; then
+        sed -i "s@^listen.allowed_clients@; listen.allowed_clients@" ${PHP_FPM_pool_file}
     else
-        sed -i 's@^listen.allowed_clients.*@listen.allowed_clients = ${FPM_listen_allowed_clients}@' ${PHP_FPM_POOL_FILE}
+        sed -i 's@^listen.allowed_clients.*@listen.allowed_clients = ${PHP_FPM_listen_allowed_clients}@' ${PHP_FPM_pool_file}
     fi
 fi

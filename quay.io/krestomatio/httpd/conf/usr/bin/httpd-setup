@@ -3,18 +3,18 @@
 
 # httpd default config
 sed -i \
-    -e 's@^Listen 80.*@Listen ${HTTPD_Listen}@' \
-    -e 's@^User.*@User ${HTTPD_User}@' \
-    -e 's@^Group.*@Group ${HTTPD_Group}@' \
-    -e 's@^DocumentRoot.*@DocumentRoot "${HTTPD_DocumentRoot}"@' \
-    -e 's@^<Directory "/var/www/html"@<Directory "${HTTPD_DocumentRoot}"@' \
+    -e 's@^Listen 80.*@Listen ${HTTPD_listen}@' \
+    -e 's@^User.*@User ${HTTPD_user}@' \
+    -e 's@^Group.*@Group ${HTTPD_group}@' \
+    -e 's@^DocumentRoot.*@DocumentRoot "${HTTPD_documentroot}"@' \
+    -e 's@^<Directory "/var/www/html"@<Directory "${HTTPD_documentroot}"@' \
     -re 's@^(\s*CustomLog)\s+\S+@\1 /proc/self/fd/1@g' \
     -re 's@^(\s*ErrorLog)\s+\S+@\1 /proc/self/fd/2@g' \
     -re 's@^(\s*TransferLog)\s+\S+@\1 /proc/self/fd/1@g' \
-    ${HTTPD_MAIN_CONF_PATH}/httpd.conf
+    ${HTTPD_main_conf_path}/httpd.conf
 
 # httpd php-fpm config
-cat << "_EOF" > ${HTTPD_MAIN_CONF_D_PATH}/60-php.conf
+cat << "_EOF" > ${HTTPD_main_conf_d_path}/60-php.conf
 <IfModule !mod_php7.c>
     <IfModule proxy_fcgi_module>
         #
@@ -42,7 +42,7 @@ cat << "_EOF" > ${HTTPD_MAIN_CONF_D_PATH}/60-php.conf
         SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
 
         <FilesMatch \.(php|phar)$>
-            SetHandler "proxy:fcgi://${PHP_FPM_HOST}:${PHP_FPM_PORT}"
+            SetHandler "proxy:fcgi://${PHP_FPM_host}:${PHP_FPM_port}"
         </FilesMatch>
     </IfModule>
 </IfModule>

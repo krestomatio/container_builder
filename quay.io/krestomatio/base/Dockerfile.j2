@@ -1,34 +1,40 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_AUTHORS="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
-    PKGS_MGM="{{ pkgs_mgm }}"
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    CTR_pkg_mgm="{{ dockerfile_builder_pkgs_mgm }}"
 
-ENV NAME=base \
-    SUMMARY="UBI based image" \
-    DESCRIPTION="UBI based for building other images" \
-    TITLE="UBI based image"
+# General variables
+ENV IMAGE_name=base \
+    IMAGE_summary="UBI based image" \
+    IMAGE_description="UBI based for building other images" \
+    IMAGE_title="UBI based image"
 
-LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.authors="${IMAGE_AUTHORS}" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.created="${IMAGE_CREATED}" \
-      name="${NAME}" \
-      summary="${SUMMARY}" \
-      description="${DESCRIPTION}" \
-      io.k8s.description="${DESCRIPTION}" \
-      io.k8s.display-name="${TITLE}" \
-      io.openshift.tags="${NAME},ubi" \
-      maintainer="${IMAGE_AUTHORS}"
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},ubi" \
+      maintainer="${IMAGE_authors}"
 
-ENV CUSER=default \
-    CUSER_ID="1001" \
-    CUSER_GECOS="Default Application User" \
-    HOME="/opt/default" \
-    CGROUP=root \
-    CGROUP_ID="0" \
-    ENTRYPOINT_SCRIPTS_PATH=/opt/container-entrypoint.d
+# Container variables
+ENV CTR_user=default \
+    CTR_user_id="1001" \
+    CTR_user_gecos="Default Application User" \
+    CTR_group=root \
+    CTR_group_id="0" \
+    CTR_entrypoint_opt_path=/opt/container-entrypoint.d
+
+# Frequent environment variables
+ENV HOME="/opt/${CTR_user}"
 
 # https://github.com/rpm-software-management/microdnf/issues/50
 RUN mkdir -p /run/user/$(id -u)

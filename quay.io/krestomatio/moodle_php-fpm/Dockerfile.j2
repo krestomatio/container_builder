@@ -1,39 +1,42 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-ENV IMAGE_VERSION="{{ dockerfile_builder_image_version }}" \
-    IMAGE_CREATED="{{ dockerfile_builder_image_created }}" \
-    MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+# General ansible variables
+ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
-ENV NAME=moodle_php-fpm \
-    SUMMARY="PHP $PHP_VERSION for Moodle" \
-    DESCRIPTION="This UBI minimal based container image runs \
-    PHP ${PHP_VERSION} for Moodle" \
-    TITLE="PHP ${PHP_VERSION} for Moodle"
+# General variables
+ENV IMAGE_name=moodle_php-fpm \
+    IMAGE_summary="PHP $PHP_version for Moodle" \
+    IMAGE_description="This UBI minimal based container image runs \
+    PHP ${PHP_version} for Moodle" \
+    IMAGE_title="PHP ${PHP_version} for Moodle"
 
-LABEL org.opencontainers.image.title="${TITLE}" \
-      org.opencontainers.image.description="${DESCRIPTION}" \
-      org.opencontainers.image.version="${IMAGE_VERSION}" \
-      org.opencontainers.image.created="${IMAGE_CREATED}" \
-      name="${NAME}" \
-      summary="${SUMMARY}" \
-      description="${DESCRIPTION}" \
-      io.k8s.description="${DESCRIPTION}" \
-      io.k8s.display-name="${TITLE}" \
-      io.openshift.tags="${NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}"
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
 # php-curl included in php-common
 # php-zip as php-pecl-zip
-# php-xsl as php-xml
+# php-xslCMD ${CTR_cmd} as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-ENV INSTALL_PKGS="php-gd php-intl php-ldap \
+ENV OS_install_pkgs="php-gd php-intl php-ldap \
                   php-pgsql php-soap php-xmlrpc  \
                   php-xml php-pecl-zip php-mbstring"
 
 USER 0
 RUN container-setup
-RUN install-pkgs ${INSTALL_PKGS}
+RUN install-pkgs ${OS_install_pkgs}
 RUN php-fpm-permissions-set
-USER $CUSER
+USER ${CTR_user_id}

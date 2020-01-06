@@ -2,7 +2,7 @@
 # description: base config for container
 
 # dir for optional entrypoint scripts
-mkdir -p ${ENTRYPOINT_SCRIPTS_PATH}
+mkdir -p ${CTR_entrypoint_opt_path}
 
 # custom user
 cuser-set

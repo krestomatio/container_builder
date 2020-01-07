@@ -9,15 +9,12 @@ rpm-file-permissions
 # random UID.
 
 mkdir -p ${PHP_run}
-mkdir -p /tmp/sessions
 
 chmod -R a+rwx ${PHP_run}
-chmod -R a+rwx /tmp/sessions
 chmod -R a+rwx ${PHP_conf_file}
 chmod -R a+rwx ${PHP_conf_dir}
 chmod -R a+rwx ${PHP_FPM_conf_dir}
 chmod -R a+rwx ${PHP_FPM_conf_file}
 
-chown -R ${CTR_user_id}:${CTR_group_id} /tmp/sessions
 chown -R ${CTR_user_id}:${CTR_group_id} ${PHP_run}
 chown -R ${CTR_user_id}:${CTR_group_id} ${HTTPD_public_path}

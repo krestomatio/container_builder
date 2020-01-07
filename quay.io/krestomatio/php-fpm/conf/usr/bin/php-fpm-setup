@@ -1,52 +1,24 @@
 #!/bin/bash -e
 # description: base config for php-fpm
 
-php_default_conf_file=${PHP_FPM_conf_dir}/60-container.conf
-php_extra_conf_file=${PHP_FPM_conf_dir}/60-container-extra.conf
-php_daemonize_conf_file=${PHP_FPM_conf_dir}/zz-container.conf
-
 # php-fpm default config
+sed -i \
+    -e 's@^error_log.*@error_log = /proc/self/fd/2@' \
+    -e 's@^daemonize.*@daemonize = no@' \
+    ${PHP_FPM_conf_file}
 
-## include at the end of file
-sed "/^include/d" ${PHP_FPM_conf_file}
-if grep -q "^include" ${PHP_FPM_conf_file}; then
-    sed -i "/^include/d" ${PHP_FPM_conf_file}
-    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_conf_file}
-else
-    echo 'include=/etc/php-fpm.d/*.conf' >> ${PHP_FPM_conf_file}
-fi
+sed -i \
+    -e 's@^user =.*@user = ${PHP_FPM_user}@' \
+    -e 's@^group =.*@group = ${PHP_FPM_group}@' \
+    -e 's@^slowlog =.*@slowlog = /proc/self/fd/1@' \
+    -e 's@^;access.log =.*@access.log = /proc/self/fd/1@' \
+    -e 's@^;clear_env.*@clear_env = no@' \
+    -e 's@^;catch_workers_output.*@catch_workers_output = yes@' \
+    -e 's@^listen =.*@listen = ${PHP_FPM_listen}@' \
+    -e 's@^listen.owner =.*@listen.owner = ${PHP_FPM_listen_owner}@' \
+    -e 's@^listen.group =.*@listen.group = ${PHP_FPM_listen_group}@' \
+    -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = /proc/self/fd/2@' \
+    ${PHP_FPM_pool_file}
 
-cat << EOF > ${php_default_conf_file}
-[global]
-error_log = /proc/self/fd/2
-
-[www]
-; if we send this to /proc/self/fd/1, it never appears
-access.log = /proc/self/fd/2
-
-clear_env = no
-
-; Ensure worker stdout and stderr are sent to the main error log.
-catch_workers_output = yes
-EOF
-
-if [[ $PHP_ver_short -gt 72 ]]; then
-    cat << EOF > ${php_extra_conf_file}
-[global]
-; https://github.com/docker-library/php/pull/725#issuecomment-443540114
-log_limit = 8192
-[www]
-decorate_workers_output = no
-EOF
-fi
-
-cat << "EOF" > ${php_daemonize_conf_file}
-[global]
-daemonize = no
-[www]
-listen = ${PHP_FPM_listen}
-listen.owner = ${PHP_FPM_listen_owner}
-listen.group = ${PHP_FPM_listen_group}
-EOF
-
+# set permissions
 php-fpm-permissions-set

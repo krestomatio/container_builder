@@ -57,6 +57,8 @@ RUN install-pkgs ${OS_install_pkgs}
 
 # Component config variables
 ENV PHP_FPM_listen=${PHP_FPM_port} \
+    PHP_FPM_user=${CTR_user} \
+    PHP_FPM_group=${CTR_group} \
     PHP_FPM_listen_owner=${CTR_user} \
     PHP_FPM_listen_group=${CTR_group} \
     PHP_FPM_listen_allowed_clients="127.0.0.1"

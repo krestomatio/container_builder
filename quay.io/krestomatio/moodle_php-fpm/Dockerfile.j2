@@ -29,11 +29,12 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
 
 # php-curl included in php-common
 # php-zip as php-pecl-zip
-# php-xslCMD ${CTR_cmd} as php-xml
+# php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
 ENV OS_install_pkgs="php-gd php-intl php-ldap \
                   php-pgsql php-soap php-xmlrpc  \
-                  php-xml php-pecl-zip php-mbstring"
+                  php-xml php-pecl-zip php-mbstring \
+                  php-json"
 
 USER 0
 RUN container-setup

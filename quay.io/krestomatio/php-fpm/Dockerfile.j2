@@ -14,7 +14,8 @@ ENV IMAGE_name=php-fpm \
     IMAGE_description="This UBI minimal based container image runs \
     PHP ${PHP_version}" \
     IMAGE_title="PHP ${PHP_version}" \
-    PHP_FPM_port="9000"
+    IMAGE_service_port="9000" \
+    IMAGE_service_name="php-fpm"
 
 # Labels
 LABEL org.opencontainers.image.title="${IMAGE_title}" \
@@ -27,7 +28,7 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       description="${IMAGE_description}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${PHP_FPM_port}:php-fpm" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
       io.openshift.tags="${IMAGE_name},php,php${PHP_ver_short},php-${PHP_ver_short}" \
       maintainer="${IMAGE_authors}"
 
@@ -45,6 +46,7 @@ ENV PHP_run=/run/php-fpm \
     PHP_FPM_conf_dir=/etc/php-fpm.d \
     PHP_FPM_conf_file=/etc/php-fpm.conf \
     PHP_FPM_pool_file=/etc/php-fpm.d/www.conf \
+    PHP_FPM_port=${IMAGE_service_port} \
     HTTPD_public_path=/var/www/html
 
 ENV OS_install_pkgs="php-fpm php-cli php-opcache"
@@ -54,14 +56,6 @@ COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
-
-# Component config variables
-ENV PHP_FPM_listen=${PHP_FPM_port} \
-    PHP_FPM_user=${CTR_user} \
-    PHP_FPM_group=${CTR_group} \
-    PHP_FPM_listen_owner=${CTR_user} \
-    PHP_FPM_listen_group=${CTR_group} \
-    PHP_FPM_listen_allowed_clients="127.0.0.1"
 
 RUN php-fpm-setup
 

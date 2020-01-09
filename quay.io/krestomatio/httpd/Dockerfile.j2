@@ -14,7 +14,8 @@ ENV IMAGE_name=httpd \
     IMAGE_description="This UBI minimal based container image runs \
     Apache ${APACHE_version}" \
     IMAGE_title="Apache ${APACHE_version}" \
-    HTTPD_port="8080"
+    IMAGE_service_port="8080" \
+    IMAGE_service_name="http"
 
 # Labels
 LABEL org.opencontainers.image.title="${IMAGE_title}" \
@@ -27,7 +28,7 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       description="${IMAGE_description}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${HTTPD_port}:http" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
       io.openshift.tags="${IMAGE_name},apache,apache-${APACHE_ver_short},apache${APACHE_ver_short}" \
       maintainer="${IMAGE_authors}"
 
@@ -43,6 +44,7 @@ ENV HTTPD_main_conf_path=/etc/httpd/conf \
     HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
     HTTPD_var_run_path=/run/httpd \
     HTTPD_public_path=/var/www/html \
+    HTTPD_port=${IMAGE_service_port} \
     HTTPD_log_path=/var/log/httpd
 
 COPY conf/usr/bin/* /usr/bin/
@@ -50,12 +52,6 @@ COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs httpd
-
-# Component config variables
-ENV HTTPD_listen=${HTTPD_port} \
-    HTTPD_user=${CTR_user} \
-    HTTPD_group=${CTR_group} \
-    HTTPD_documentroot=${HTTPD_public_path}
 
 RUN httpd-setup
 

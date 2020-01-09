@@ -38,15 +38,15 @@ ENV CTR_user=apache \
 
 # Component bash variables
 ENV HTTPD_main_conf_path=/etc/httpd/conf \
+    HTTPD_main_conf_file=/etc/httpd/conf/httpd.conf \
     HTTPD_main_conf_d_path=/etc/httpd/conf.d \
     HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
     HTTPD_var_run_path=/run/httpd \
     HTTPD_public_path=/var/www/html \
-    HTTPD_log_path=/var/log/httpd \
-    PHP_FPM_port="9000" \
-    PHP_FPM_host="localhost"
+    HTTPD_log_path=/var/log/httpd
 
 COPY conf/usr/bin/* /usr/bin/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs httpd

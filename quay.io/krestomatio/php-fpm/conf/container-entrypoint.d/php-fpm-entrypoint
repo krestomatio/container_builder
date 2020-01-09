@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# description: entrypoint script for php-fpm
+# description: additional entrypoint script for php-fpm
 
 # listen.allowed_clients with values 'empty' or 'any' does not  work
 # so it is remove in that case

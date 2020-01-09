@@ -23,7 +23,8 @@ https://github.com/docker-library/httpd
         # For variables meant to be used inside containers:
         # COMPONENT_variable_name
         # UPPERCASE_lowercase
-        # No dots for bash 
+        # No dots for bash
         # 'CTR' prefix for container related config
         # 'PHP' prefix for php related config
         # 'HTTPD' prefix for apache2 related config
+# TODO: httpd moodle source? and how to deal with directory index html

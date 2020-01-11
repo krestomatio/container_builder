@@ -5,7 +5,7 @@
 mkdir -p ${CTR_entrypoint_opt_path}
 
 # custom user
-cuser-set
+containeruser-create
 
 # specific timezones
 if ! [ -z ${TZ+x} ]; then

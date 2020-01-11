@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# description: config custom user and group
+# description: create container user and group
 
 if ! id -u ${CTR_user_id} > /dev/null 2>&1; then
     if command -v useradd > /dev/null 2>&1; then

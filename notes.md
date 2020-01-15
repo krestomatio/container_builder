@@ -4,6 +4,8 @@ https://github.com/sclorg/s2i-php-container
 https://github.com/docker-library/php
 https://github.com/sclorg/httpd-container
 https://github.com/docker-library/httpd
+https://github.com/sclorg/postgresql-container
+https://github.com/docker-library/postgres
 
 
 
@@ -28,3 +30,4 @@ https://github.com/docker-library/httpd
         # 'PHP' prefix for php related config
         # 'HTTPD' prefix for apache2 related config
 # TODO: httpd moodle source? and how to deal with directory index html
+# TODO: define how origin and registry groups are defined and dir tree

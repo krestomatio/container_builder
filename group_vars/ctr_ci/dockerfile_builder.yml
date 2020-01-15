@@ -1,0 +1,10 @@
+# origin
+origin_name: gitlab.com
+origin_project: jobcespedes/ci
+
+# registry
+registry_name: quay.io
+registry_project: jobcespedes
+
+# builder
+dockerfile_builder_pull: true

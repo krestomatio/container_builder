@@ -1,0 +1,22 @@
+# source dir
+src_dir: src
+src_subdir: "{{ origin_name }}/{{ origin_project }}"
+src_path: "{{ src_dir }}/{{ src_subdir }}/{{ ansible_host }}"
+
+# destination build dir
+dest_dir: build
+dest_subdir: "{{ registry_name }}/{{ registry_project }}"
+dest_path: "{{ dest_dir }}/{{ dest_subdir }}/{{ ansible_host }}"
+
+# origin
+origin_name: example.com
+origin_project: example
+
+# registry
+registry_name: "localhost"
+registry_project: ""
+
+# general vars
+dockerfile_builder_image: "{{ dest_subdir }}/{{ ansible_host }}"
+dockerfile_builder_path: "{{ dest_path }}"
+dockerfile_builder_src: "{{ src_path }}"

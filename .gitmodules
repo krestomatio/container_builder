@@ -1,3 +1,7 @@
 [submodule "roles/dockerfile_builder"]
 	path = roles/dockerfile_builder
 	url = https://github.com/jobcespedes/dockerfile_builder
+[submodule "src/github.com/sclorg/postgresql-container"]
+	path = src/github.com/sclorg/postgresql-container
+	url = https://github.com/sclorg/postgresql-container
+	branch = generated

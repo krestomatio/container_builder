@@ -1,15 +1,13 @@
-# 'ctr_': container
-# 'org_': origin
-# 'reg_': registry
+# Convention for groups: account_project
 
-[ctr_m4s]
+[krestomatio_m4s]
 base
 httpd
 php-fpm
 moodle_php-fpm
 moodle_httpd
 
-[ctr_ci]
+[jobcespedes_ci]
 docker-centos7-ansible
 docker-ubuntu1604-ansible
 docker-ubuntu1604-ansible

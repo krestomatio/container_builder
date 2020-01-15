@@ -31,3 +31,7 @@ https://github.com/docker-library/postgres
         # 'HTTPD' prefix for apache2 related config
 # TODO: httpd moodle source? and how to deal with directory index html
 # TODO: define how origin and registry groups are defined and dir tree
+# TODO: avoid syncing to build when src has Dockerfile with no jinja template
+# TODO: issue with vagrant and podman
+    # fatal: [instance-centos7]: FAILED! => {"changed": false, "msg": "Failed to build image example.com/mycontainer:latest:  cannot clone: Invalid argument\nuser namespaces are not enabled in /proc/sys/user/max_user_namespaces\nError: could not get runtime: cannot re-exec process\n"}
+    # fatal: [instance-ubuntu1804]: FAILED! => {"changed": false, "msg": "Failed to build image example.com/mycontainer:latest:  time=\"2020-01-15T02:58:54Z\" level=error msg=\"cannot find mappings for user vagrant: No subuid ranges found for user \\\"vagrant\\\" in /etc/subuid\"\nError: error creating build container: (image name \"alpine:latest\" is a short name and no search registries are defined in /etc/containers/registries.conf): while pulling \"alpine:latest\" as \"localhost/alpine:latest\": Error initializing source docker://localhost/alpine:latest: pinging docker registry returned: Get https://localhost/v2/: dial tcp [::1]:443: connect: connection refused\n"}

@@ -1,12 +1,15 @@
+# container
+ctr_name: "{{ ansible_host }}"
+
 # source dir
 src_dir: src
 src_subdir: "{{ origin_name }}/{{ origin_project }}"
-src_path: "{{ src_dir }}/{{ src_subdir }}/{{ ansible_host }}"
+src_path: "{{ src_dir }}/{{ src_subdir }}/{{ ctr_name }}"
 
 # destination build dir
 dest_dir: build
 dest_subdir: "{{ registry_name }}/{{ registry_project }}"
-dest_path: "{{ dest_dir }}/{{ dest_subdir }}/{{ ansible_host }}"
+dest_path: "{{ dest_dir }}/{{ dest_subdir }}/{{ ctr_name }}"
 
 # origin
 origin_name: example.com
@@ -17,6 +20,6 @@ registry_name: "localhost"
 registry_project: ""
 
 # general vars
-dockerfile_builder_image: "{{ dest_subdir }}/{{ ansible_host }}"
+dockerfile_builder_image: "{{ dest_subdir }}/{{ ctr_name }}"
 dockerfile_builder_path: "{{ dest_path }}"
 dockerfile_builder_src: "{{ src_path }}"

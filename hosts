@@ -1,0 +1,16 @@
+# 'ctr_': container
+# 'org_': origin
+# 'reg_': registry
+
+[ctr_m4s]
+base
+httpd
+php-fpm
+moodle_php-fpm
+moodle_httpd
+
+[ctr_ci]
+docker-centos7-ansible
+docker-ubuntu1604-ansible
+docker-ubuntu1604-ansible
+docker-debian9-ansible

@@ -1,0 +1,3 @@
+# image
+dockerfile_builder_image_from: "{{ dest_subdir }}/httpd"
+dockerfile_builder_image_version: "0.0.1"

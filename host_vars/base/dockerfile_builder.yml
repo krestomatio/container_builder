@@ -1,0 +1,5 @@
+# options
+dockerfile_builder_pull: true
+
+# image
+dockerfile_builder_image_from: "registry.access.redhat.com/ubi8/ubi-minimal"

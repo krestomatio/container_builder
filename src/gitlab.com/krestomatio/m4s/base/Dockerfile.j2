@@ -4,7 +4,7 @@ FROM {{ dockerfile_builder_image_from }}
 # General ansible variables
 ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
     IMAGE_created="{{ dockerfile_builder_image_created }}" \
-    CTR_pkg_mgm="{{ dockerfile_builder_pkgs_mgm }}"
+    CTR_pkg_mgm="{{ dockerfile_builder_image_pkgs_mgm }}"
 
 # General variables
 ENV IMAGE_name=base \

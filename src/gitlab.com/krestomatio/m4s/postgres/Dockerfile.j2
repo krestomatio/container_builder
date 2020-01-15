@@ -1,0 +1,66 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    POSTGRES_version="{{ postgres_version }}" \
+    POSTGRES_ver_short="{{ postgres_version | replace('.','') }}"
+
+# General variables
+ENV IMAGE_name=postgres \
+    IMAGE_summary="Postgres $POSTGRES_version" \
+    IMAGE_description="This UBI minimal based container image runs \
+    Postgres ${POSTGRES_version}" \
+    IMAGE_title="Postgres ${POSTGRES_version}" \
+    IMAGE_service_port="5432" \
+    IMAGE_service_name="postgres"
+
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+      io.openshift.tags="${IMAGE_name},postgres,postgres-${POSTGRES_ver_short},postgres${POSTGRES_ver_short}" \
+      maintainer="${IMAGE_authors}"
+
+# Container variables
+ENV CTR_user=postgres \
+    CTR_user_id="26" \
+    CTR_cmd="httpd -D FOREGROUND"
+
+# Component bash variables
+ENV POSTGRES_main_conf_path=/etc/httpd/conf \
+    POSTGRES_main_conf_file=/etc/httpd/conf/httpd.conf \
+    POSTGRES_main_conf_d_path=/etc/httpd/conf.d \
+    POSTGRES_modules_conf_d_path=/etc/httpd/conf.modules.d \
+    POSTGRES_var_run_path=/run/httpd \
+    POSTGRES_public_path=/var/www/html \
+    POSTGRES_port=${IMAGE_service_port} \
+    POSTGRES_log_path=/var/log/httpd
+
+ENV OS_install_pkgs="php-fpm php-cli php-opcache"
+
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+
+RUN container-setup
+RUN install-pkgs ${OS_install_pkgs}
+
+RUN postgres-setup
+
+WORKDIR ${POSTGRES_public_path}
+
+USER ${CTR_user_id}
+
+EXPOSE ${POSTGRES_port}
+
+CMD ${CTR_cmd}

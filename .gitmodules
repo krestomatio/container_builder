@@ -5,3 +5,6 @@
 	path = src/github.com/sclorg/postgresql-container
 	url = https://github.com/sclorg/postgresql-container
 	branch = generated
+[submodule "src/github.com/krestomatio/centos8-minimal"]
+	path = src/github.com/krestomatio/centos8-minimal
+	url = https://github.com/krestomatio/centos8-minimal

@@ -1,0 +1,13 @@
+# origin
+origin_name: github.com
+origin_project: jobcespedes
+
+# registry
+registry_name: quay.io
+registry_project: krestomatio
+
+# no template
+dockerfile_builder_template_omit: true
+
+# general vars
+dockerfile_builder_path: "{{ dockerfile_builder_src }}"

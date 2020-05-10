@@ -14,7 +14,8 @@ ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
 # General variables
 ENV IMAGE_name=postgres \
     IMAGE_summary="Postgres $POSTGRES_version" \
-    IMAGE_description="This ${IMAGE_based} based container image runs Postgres ${POSTGRES_version}" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Postgres ${POSTGRES_version}. \
+It follows https://github.com/sclorg/postgresql-container" \
     IMAGE_title="Postgres ${POSTGRES_version}" \
     IMAGE_service_port="5432" \
     IMAGE_service_name="postgres"

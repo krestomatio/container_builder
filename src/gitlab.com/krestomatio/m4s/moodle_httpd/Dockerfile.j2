@@ -11,8 +11,7 @@ ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
 # General variables
 ENV IMAGE_name="moodle_httpd" \
     IMAGE_summary="Apache2 ${HTTPD_version} for Moodle" \
-    IMAGE_description="This UBI minimal based container image runs \
-    Apache ${HTTPD_version} for Moodle" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Apache ${HTTPD_version} for Moodle" \
     IMAGE_title="Apache ${HTTPD_version} for Moodle"
 
 # Labels
@@ -28,5 +27,9 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
 USER 0
+
 RUN container-setup
+
+RUN httpd-setup
+
 USER ${CTR_user_id}

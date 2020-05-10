@@ -20,5 +20,17 @@ sed -i \
     -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = /proc/self/fd/2@' \
     ${PHP_FPM_pool_file}
 
-# set permissions
-php-fpm-permissions-set
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${PHP_run}
+
+fix-permissions -a ${PHP_run} ${PHP_conf_file} ${PHP_conf_dir} ${PHP_FPM_conf_dir} ${PHP_FPM_conf_file}
+fix-permissions -u ${CTR_user_id} ${PHP_run} ${HTTPD_public_path}
+
+# restore rpm permissions
+rpm-file-permissions
+
+# arbitrary user
+# containeruser-arbitrary

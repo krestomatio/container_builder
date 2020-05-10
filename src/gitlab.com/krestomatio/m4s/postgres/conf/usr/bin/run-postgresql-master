@@ -1,0 +1,7 @@
+#!/bin/bash
+# description: run postgres as master for replication
+# From https://github.com/sclorg/postgresql-container
+
+export ENABLE_REPLICATION=true
+
+exec run-postgresql "$@"

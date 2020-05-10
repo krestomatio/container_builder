@@ -1,15 +1,22 @@
 #!/bin/bash -e
 # description: entrypoint script for container
 
-# source or exec other script
+# source other script
 for f in ${CTR_entrypoint_opt_path}/*; do
     if [ -f "$f" ]; then
-        if [ -x "$f" ]; then
-            echo "$0: running $f"
-            "$f"
-        else
+        if [[ ! -x "$f" || "${f##*.}" == "source" ]]; then
             echo "$0: sourcing $f"
             . "$f"
+        fi
+    fi
+done
+
+# exec other script
+for f in ${CTR_entrypoint_opt_path}/*; do
+    if [ -f "$f" ]; then
+        if [[ -x "$f" && "${f##*.}" != "source" ]]; then
+            echo "$0: running $f"
+            "$f"
         fi
     fi
 done

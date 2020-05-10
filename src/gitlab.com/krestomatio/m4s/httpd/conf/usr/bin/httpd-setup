@@ -83,4 +83,15 @@ else
     sed -i 's@SetHandler "proxy.*@SetHandler "${HTTPD_php_sethandler}"@' ${HTTPD_main_conf_d_path}/php.conf
 fi
 
-httpd-permissions-set
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+fix-permissions -a ${HTTPD_main_conf_path} ${HTTPD_main_conf_d_path} ${HTTPD_var_run_path} ${HTTPD_log_path}
+fix-permissions -u ${CTR_user_id} ${HTTPD_public_path}
+
+# restore rpm permissions
+rpm-file-permissions
+
+# # arbitrary user
+# containeruser-arbitrary

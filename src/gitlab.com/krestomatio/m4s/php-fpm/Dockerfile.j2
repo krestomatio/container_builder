@@ -11,8 +11,7 @@ ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
 # General variables
 ENV IMAGE_name=php-fpm \
     IMAGE_summary="PHP ${PHP_version}" \
-    IMAGE_description="This UBI minimal based container image runs \
-    PHP ${PHP_version}" \
+    IMAGE_description="This ${IMAGE_based} based container image runs PHP ${PHP_version}" \
     IMAGE_title="PHP ${PHP_version}" \
     IMAGE_service_port="9000" \
     IMAGE_service_name="php-fpm"
@@ -38,7 +37,7 @@ ENV CTR_user=apache \
     CTR_cmd="php-fpm"
 
 # Component bash variables
-ENV PHP_run=/run/php-fpm \
+ENV PHP_run=/var/run/php-fpm \
     PHP_conf_dir=/etc/php.d \
     PHP_conf_file=/etc/php.ini \
     PHP_sysconf_path=/etc \

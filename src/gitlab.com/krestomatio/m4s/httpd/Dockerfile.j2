@@ -11,8 +11,7 @@ ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
 # General variables
 ENV IMAGE_name=httpd \
     IMAGE_summary="Apache2 $HTTPD_version" \
-    IMAGE_description="This UBI minimal based container image runs \
-    Apache ${HTTPD_version}" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Apache ${HTTPD_version}" \
     IMAGE_title="Apache ${HTTPD_version}" \
     IMAGE_service_port="8080" \
     IMAGE_service_name="http"

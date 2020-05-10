@@ -5,6 +5,7 @@ centos8-minimal
 base
 httpd
 php-fpm
+postgres
 moodle_php-fpm
 moodle_httpd
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 # description: set permission for non-root container
-# from https://raw.githubusercontent.com/sclorg/s2i-base-container/master/core/root/usr/bin/rpm-file-permissions
+# from https://github.com/sclorg/s2i-base-container/
 
 CHECK_DIRS="/ /opt /etc /usr /usr/bin /usr/lib /usr/lib64 /usr/share /usr/libexec"
 

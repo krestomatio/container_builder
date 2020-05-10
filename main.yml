@@ -1,5 +1,15 @@
 - hosts: "{{ ctrs_to_build | default('all') }}"
   connection: local
+  tasks:
+    - name: set created time
+      when: dockerfile_builder_image_created is not defined
+      run_once: true
+      set_fact:
+        dockerfile_builder_image_created: "{{ ansible_date_time.iso8601 }}"
+
+
+- hosts: "{{ ctrs_to_build | default('all') }}"
+  connection: local
   serial: 1
   tasks:
     - name: build containers

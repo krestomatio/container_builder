@@ -18,9 +18,4 @@ moodle_version: '3.5'
 # dockerfile_builder_image_push: true
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 dockerfile_builder_image_timezone: America/Costa_Rica
-dockerfile_builder_image_created:
-  "{{ item.image_created | default(ansible_date_time.iso8601) }}"
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
-
-# options
-dockerfile_builder_pull: true

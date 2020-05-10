@@ -33,10 +33,13 @@ ENV CTR_user=default \
     CTR_user_gecos="Default Application User" \
     CTR_group=root \
     CTR_group_id="0" \
+    CTR_app="/opt/default" \
     CTR_entrypoint_opt_path=/opt/container-entrypoint.d
 
 # Frequent environment variables
-ENV HOME="/opt/${CTR_user}"
+ENV HOME="${CTR_app}"
+
+ENV OS_install_pkgs="findutils gzip glibc-locale-source"
 
 # https://github.com/rpm-software-management/microdnf/issues/50
 RUN mkdir -p /run/user/$(id -u)
@@ -45,5 +48,6 @@ COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
+RUN install-pkgs ${OS_install_pkgs}
 
 ENTRYPOINT ["container-entrypoint"]

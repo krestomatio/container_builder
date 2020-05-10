@@ -5,14 +5,16 @@ FROM {{ dockerfile_builder_image_from }}
 ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
     IMAGE_version="{{ dockerfile_builder_image_version }}" \
     IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    IMAGE_lang="{{ dockerfile_builder_image_lang }}" \
     POSTGRES_version="{{ postgres_version }}" \
-    POSTGRES_ver_short="{{ postgres_version | replace('.','') }}"
+    POSTGRES_ver_short="{{ postgres_version | replace('.','') }}" \
+    POSTGRES_prev_version="{{ postgres_prev_version }}" \
+    TZ="{{ dockerfile_builder_image_timezone }}"
 
 # General variables
 ENV IMAGE_name=postgres \
     IMAGE_summary="Postgres $POSTGRES_version" \
-    IMAGE_description="This UBI minimal based container image runs \
-    Postgres ${POSTGRES_version}" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Postgres ${POSTGRES_version}" \
     IMAGE_title="Postgres ${POSTGRES_version}" \
     IMAGE_service_port="5432" \
     IMAGE_service_name="postgres"
@@ -33,23 +35,27 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       maintainer="${IMAGE_authors}"
 
 # Container variables
-ENV CTR_user=postgres \
+ENV CTR_locale_id=${IMAGE_locale_id} \
+    CTR_user=postgres \
     CTR_user_id="26" \
-    CTR_cmd="httpd -D FOREGROUND"
+    CTR_home=/var/lib/pgsql \
+    CTR_cmd="run-postgresql" \
+    CTR_scripts_path=/usr/share/container-scripts/postgresql
 
 # Component bash variables
-ENV POSTGRES_main_conf_path=/etc/httpd/conf \
-    POSTGRES_main_conf_file=/etc/httpd/conf/httpd.conf \
-    POSTGRES_main_conf_d_path=/etc/httpd/conf.d \
-    POSTGRES_modules_conf_d_path=/etc/httpd/conf.modules.d \
-    POSTGRES_var_run_path=/run/httpd \
-    POSTGRES_public_path=/var/www/html \
-    POSTGRES_port=${IMAGE_service_port} \
-    POSTGRES_log_path=/var/log/httpd
+ENV POSTGRES_port=${IMAGE_service_port} \
+    POSTGRES_run=/var/run/postgresql \
+    POSTGRES_home=${CTR_home} \
+    POSTGRES_data="${CTR_home}/data"
 
-ENV OS_install_pkgs="php-fpm php-cli php-opcache"
+# Frequent environment variables
+ENV HOME="${CTR_home}" \
+    PGUSER="$CTR_user" \
+    LANG="${IMAGE_lang}"
 
-COPY conf/usr/bin/* /usr/bin/
+ENV OS_install_pkgs="postgresql-server postgresql-contrib gettext nss_wrapper"
+
+COPY conf/usr /usr/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
@@ -57,7 +63,7 @@ RUN install-pkgs ${OS_install_pkgs}
 
 RUN postgres-setup
 
-WORKDIR ${POSTGRES_public_path}
+WORKDIR ${CTR_home}
 
 USER ${CTR_user_id}
 

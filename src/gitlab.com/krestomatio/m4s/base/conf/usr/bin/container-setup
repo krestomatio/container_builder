@@ -4,9 +4,6 @@
 # dir for optional entrypoint scripts
 mkdir -p ${CTR_entrypoint_opt_path}
 
-# custom user
-containeruser-create
-
 # specific timezones
 if ! [ -z ${TZ+x} ]; then
     if ! [ -z ${AVAILABLE_TZs+x} ]; then
@@ -16,5 +13,10 @@ if ! [ -z ${TZ+x} ]; then
     fi
 fi
 
-# permissions
-rpm-file-permissions
+# specify lang
+if ! [ -z ${LANG+x} ]; then
+    localedef -f UTF-8 -i "${LANG%.*}" "${LANG}"
+fi
+
+# custom user
+containeruser-create

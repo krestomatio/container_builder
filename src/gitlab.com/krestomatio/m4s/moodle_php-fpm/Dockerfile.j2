@@ -11,8 +11,7 @@ ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
 # General variables
 ENV IMAGE_name=moodle_php-fpm \
     IMAGE_summary="PHP $PHP_version for Moodle" \
-    IMAGE_description="This UBI minimal based container image runs \
-    PHP ${PHP_version} for Moodle" \
+    IMAGE_description="This ${IMAGE_based} based container image runs PHP ${PHP_version} for Moodle" \
     IMAGE_title="PHP ${PHP_version} for Moodle"
 
 # Labels
@@ -37,7 +36,10 @@ ENV OS_install_pkgs="php-gd php-intl php-ldap \
                   php-json"
 
 USER 0
+
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
-RUN php-fpm-permissions-set
+
+RUN php-fpm-setup
+
 USER ${CTR_user_id}

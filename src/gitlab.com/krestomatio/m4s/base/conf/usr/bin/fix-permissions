@@ -42,9 +42,6 @@ while getopts ":u:r" opt; do
 done
 shift $((OPTIND -1))
 
-echo "command $uid $write"
-echo "${@}"
-
 for dir; do
     test -d "$dir" || echo "no such directory '$dir'"
     echo >&2 "fixing permissions on '$dir' directory"

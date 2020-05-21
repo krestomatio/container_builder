@@ -1,6 +1,6 @@
 # origin
 origin_name: gitlab.com
-origin_project: krestomatio/m4s
+origin_project: krestomatio/m4e
 
 # registry
 registry_name: quay.io
@@ -15,7 +15,7 @@ postgres_prev_version: '9.6'
 moodle_version: '3.5'
 
 # builder
-# dockerfile_builder_image_push: true
+# dockerfile_builder_push: true
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 dockerfile_builder_image_timezone: America/Costa_Rica
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>

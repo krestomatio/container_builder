@@ -48,7 +48,7 @@ ENV PHP_run=/var/run/php-fpm \
     PHP_FPM_port=${IMAGE_service_port} \
     HTTPD_public_path=/var/www/html
 
-ENV OS_install_pkgs="php-fpm php-cli php-opcache"
+ENV OS_install_pkgs="php-fpm php-cli php-opcache php-soap"
 
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/

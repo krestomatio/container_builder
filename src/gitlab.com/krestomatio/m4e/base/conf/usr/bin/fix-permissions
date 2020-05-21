@@ -24,7 +24,7 @@ all=
 uid=
 write=w
 
-while getopts ":u:r" opt; do
+while getopts ":u:ra" opt; do
   case ${opt} in
     u )
         uid=$OPTARG

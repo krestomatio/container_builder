@@ -1,7 +1,7 @@
 # Convention for groups: account_project
 centos8-minimal
 
-[krestomatio_m4s]
+[krestomatio_m4e]
 base
 httpd
 php-fpm

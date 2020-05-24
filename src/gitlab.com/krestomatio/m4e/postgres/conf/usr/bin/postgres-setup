@@ -7,7 +7,7 @@
 
 mkdir -p ${POSTGRES_data} ${POSTGRES_app_data}
 
-fix-permissions -u ${CTR_user_id} ${POSTGRES_run} ${POSTGRES_data}
+fix-permissions -u ${CTR_user_id} ${POSTGRES_run} ${POSTGRES_home}
 fix-permissions -r -u ${CTR_user_id} ${POSTGRES_app_data}
 
 # restore rpm permissions

@@ -1,0 +1,67 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    GIT_branch="{{ moodle_git_branch }}" \
+    GIT_commit="{{ moodle_git_commit }}" \
+    GIT_remote="{{ dockerfile_builder_image_git_remote }}" \
+    GIT_chk="{{ dockerfile_builder_image_git_chk }}" \
+    MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}"
+
+# General variables
+ENV IMAGE_name=moodle_app \
+    IMAGE_summary="Moodle app code $MOODLE_version" \
+    IMAGE_description="This ${IMAGE_based} based container image has Moodle code for ${MOODLE_version}" \
+    IMAGE_title="Moodle ${MOODLE_version}"
+
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},moodle,moodle-${MOODLE_ver_short},moodle${MOODLE_version}" \
+      maintainer="${IMAGE_authors}"
+
+# Container variables
+ENV CTR_user=apache \
+    CTR_user_id="48" \
+    CTR_cmd="app-git -s"
+
+# Component bash variables
+ENV GIT_dest="/opt/app/" \
+    APP_dest=/var/www/html
+
+ENV OS_install_pkgs="git rsync"
+
+COPY conf/usr/bin/* /usr/bin/
+
+RUN container-setup
+RUN install-pkgs ${OS_install_pkgs}
+RUN app-setup
+
+USER ${CTR_user_id}
+WORKDIR ${GIT_dest}
+
+# get source code
+RUN git clone --branch "${GIT_branch}" --depth 1 \
+    "${GIT_remote}" "${GIT_dest}"
+
+# verify it has changed
+ADD "${GIT_chk}" /tmp/version.json
+
+# Pull and verify
+RUN app-git -p -v
+
+WORKDIR ${APP_dest}
+
+CMD ${CTR_cmd}

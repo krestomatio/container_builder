@@ -1,0 +1,75 @@
+#!/bin/bash -e
+# description: source code for app using git and rsync
+
+usage() {
+    cat 1>&2 <<"EOF"
+Script to pull and/or sync app code.
+Set environmental variables:
+GIT_branch              branch to pull from
+GIT_commit              commit to verify
+GIT_dest                git destination
+APP_dest                sync destination
+USAGE:
+    app-git [OPTIONS]
+OPTIONS (app git):
+  -p                     pull from "${GIT_branch}" before syncing
+  -v                     veriy git commit matches "${GIT_commit}"
+  -s                     sync code from "${GIT_dest}" to "${APP_dest}"
+
+EXAMPLES:
+    app-git -p -v -s
+EOF
+}
+
+pull=false
+sync=false
+verify=false
+
+while getopts ":pvs" opt; do
+  case ${opt} in
+    p )
+        pull=true
+        ;;
+    v )
+        verify=true
+        ;;
+    s )
+        sync=true
+        ;;
+    \? )
+        usage
+        exit
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if (( $OPTIND == 1 )); then
+   usage
+   exit
+fi
+
+echo "git dir:"
+pushd ${GIT_dest}
+
+# Pull
+if  [ "$pull" != "false" ]; then
+    echo -e "\npulling from branch ${GIT_branch} to '${GIT_dest}'..."
+    git pull origin "${GIT_branch}"
+fi
+
+# Verify commit
+if  [ "$verify" != "false" ]; then
+    echo -e "\nverifying ${GIT_commit}..."
+    git rev-parse --verify HEAD | grep -q "${GIT_commit}"
+fi
+
+# create clean copy, excluding .git* and files in .gitignore
+if  [ "$sync" != "false" ]; then
+    echo -e "\nsyncing to '${APP_dest}'..."
+    rsync -ia --exclude=.git* --filter='dir-merge,- .gitignore' \
+        "${GIT_dest}/" "${APP_dest}"
+fi
+
+echo -e "\nreturning to:"
+popd

@@ -6,6 +6,7 @@ base
 httpd
 php-fpm
 postgres
+moodle_app
 moodle_php-fpm
 moodle_httpd
 

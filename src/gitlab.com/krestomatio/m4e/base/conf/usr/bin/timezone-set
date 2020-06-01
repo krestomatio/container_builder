@@ -1,6 +1,6 @@
 #!/bin/bash -e
 # description: reconfig timezone
-# param: list of pkgs separated by space
+# param: list of timezones separated by space
 
 reinstal_tzdata(){
     echo "Reinstalling tzdata"

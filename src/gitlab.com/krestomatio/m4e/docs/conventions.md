@@ -15,7 +15,7 @@ When setting new variable names, these guidelines are followed:
 Examples for components
 1. '**CTR**': prefix for container related config
 2. '**PHP**': prefix for php related config
-3. '**HTTPD**': prefix for apache2 related config
+3. '**HTTPD**': prefix for apache related config
 Some examples:
 ```
 CTR_user=default

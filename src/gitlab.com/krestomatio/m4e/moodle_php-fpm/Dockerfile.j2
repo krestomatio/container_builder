@@ -6,6 +6,7 @@ ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
     IMAGE_created="{{ dockerfile_builder_image_created }}" \
     MOODLE_version="{{ moodle_version }}" \
     MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
+    MOODLE_commit="{{ moodle_git_commit }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
 # General variables

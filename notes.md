@@ -28,7 +28,7 @@ https://github.com/docker-library/postgres
         # No dots for bash
         # 'CTR' prefix for container related config
         # 'PHP' prefix for php related config
-        # 'HTTPD' prefix for apache2 related config
+        # 'HTTPD' prefix for apache related config
 # TODO: httpd moodle source? and how to deal with directory index html
 # TODO: define how origin and registry groups are defined and dir tree
 # TODO: avoid syncing to build when src has Dockerfile with no jinja template
@@ -36,6 +36,6 @@ https://github.com/docker-library/postgres
     # fatal: [instance-centos7]: FAILED! => {"changed": false, "msg": "Failed to build image example.com/mycontainer:latest:  cannot clone: Invalid argument\nuser namespaces are not enabled in /proc/sys/user/max_user_namespaces\nError: could not get runtime: cannot re-exec process\n"}
     # fatal: [instance-ubuntu1804]: FAILED! => {"changed": false, "msg": "Failed to build image example.com/mycontainer:latest:  time=\"2020-01-15T02:58:54Z\" level=error msg=\"cannot find mappings for user vagrant: No subuid ranges found for user \\\"vagrant\\\" in /etc/subuid\"\nError: error creating build container: (image name \"alpine:latest\" is a short name and no search registries are defined in /etc/containers/registries.conf): while pulling \"alpine:latest\" as \"localhost/alpine:latest\": Error initializing source docker://localhost/alpine:latest: pinging docker registry returned: Get https://localhost/v2/: dial tcp [::1]:443: connect: connection refused\n"}
 * TODO: gracefully stop opencontainers
-  - apache2: sigswitch. DONE
+  - apache: sigswitch. DONE
   - php-fpm: sigquit    there are more recomendation, one approach is pre_stop. DONE
   - postgres: sidecar?

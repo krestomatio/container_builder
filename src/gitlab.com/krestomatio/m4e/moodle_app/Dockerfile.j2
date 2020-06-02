@@ -62,6 +62,9 @@ ADD "${GIT_chk}" /tmp/version.json
 # Pull and verify
 RUN app-git -p -v
 
+# Allow pull for other than root
+RUN fix-permissions -u ${CTR_user_id} ${GIT_dest}/.git
+
 WORKDIR ${APP_dest}
 
 CMD ${CTR_cmd}

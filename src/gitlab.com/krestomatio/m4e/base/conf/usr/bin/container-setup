@@ -18,5 +18,5 @@ if ! [ -z ${LANG+x} ]; then
     localedef -f UTF-8 -i "${LANG%.*}" "${LANG}"
 fi
 
-# custom user
-containeruser-create
+# default user
+# containeruser-create

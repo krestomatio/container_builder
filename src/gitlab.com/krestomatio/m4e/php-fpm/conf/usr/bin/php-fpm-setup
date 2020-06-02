@@ -26,8 +26,7 @@ sed -i \
 
 mkdir -p ${PHP_run}
 
-fix-permissions -a ${PHP_run} ${PHP_conf_file} ${PHP_conf_dir} ${PHP_FPM_conf_dir} ${PHP_FPM_conf_file}
-fix-permissions -u ${CTR_user_id} ${PHP_run} ${HTTPD_public_path}
+fix-permissions -u ${CTR_user_id} ${PHP_run} ${PHP_conf_file} ${PHP_conf_dir} ${PHP_FPM_conf_dir} ${PHP_FPM_conf_file} ${HTTPD_public_path}
 
 # restore rpm permissions
 rpm-file-permissions

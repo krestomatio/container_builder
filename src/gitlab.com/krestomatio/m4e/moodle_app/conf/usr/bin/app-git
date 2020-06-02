@@ -15,18 +15,24 @@ OPTIONS (app git):
   -p                     pull from "${GIT_branch}" before syncing
   -v                     veriy git commit matches "${GIT_commit}"
   -s                     sync code from "${GIT_dest}" to "${APP_dest}"
+  -a                     use rsync archive mode
 
 EXAMPLES:
-    app-git -p -v -s
+    app-git -s
+    app-git -p -v -s -a
 EOF
 }
 
 pull=false
 sync=false
 verify=false
+rsync_options="-icrlD"
 
-while getopts ":pvs" opt; do
+while getopts ":pvsa" opt; do
   case ${opt} in
+    a )
+        rsync_options="-ia"
+        ;;
     p )
         pull=true
         ;;
@@ -67,7 +73,7 @@ fi
 # create clean copy, excluding .git* and files in .gitignore
 if  [ "$sync" != "false" ]; then
     echo -e "\nsyncing to '${APP_dest}'..."
-    rsync -ia --exclude=.git* --filter='dir-merge,- .gitignore' \
+    rsync ${rsync_options} --exclude=.git* --filter='dir-merge,- .gitignore' \
         "${GIT_dest}/" "${APP_dest}"
 fi
 

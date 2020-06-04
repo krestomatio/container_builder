@@ -36,10 +36,7 @@ ENV CTR_user=default \
     CTR_app="/opt/default" \
     CTR_entrypoint_opt_path=/opt/container-entrypoint.d
 
-# Frequent environment variables
-ENV HOME="${CTR_app}"
-
-ENV OS_install_pkgs="findutils gzip glibc-locale-source"
+ENV OS_install_pkgs="findutils gzip platform-python"
 
 # https://github.com/rpm-software-management/microdnf/issues/50
 RUN mkdir -p /run/user/$(id -u)

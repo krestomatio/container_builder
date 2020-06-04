@@ -15,6 +15,7 @@ fi
 
 # specify lang
 if ! [ -z ${LANG+x} ]; then
+    install-pkgs glibc-locale-source
     localedef -f UTF-8 -i "${LANG%.*}" "${LANG}"
 fi
 

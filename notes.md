@@ -39,3 +39,8 @@ https://github.com/docker-library/postgres
   - apache: sigswitch. DONE
   - php-fpm: sigquit    there are more recomendation, one approach is pre_stop. DONE
   - postgres: sidecar?
+* TODO: container path
+  - localcache
+  - autobackups
+* TODO: add notice that also you are agreing with moodle user agreement or add variables
+* TODO: secure php-fpm layer

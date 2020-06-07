@@ -43,4 +43,5 @@ https://github.com/docker-library/postgres
   - localcache
   - autobackups
 * TODO: add notice that also you are agreing with moodle user agreement or add variables
-* TODO: secure php-fpm layer
+* TODO: secure php-fpm layer from access of no auth pods
+* TODO: test if httpd pods only need files other than .php

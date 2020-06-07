@@ -27,6 +27,10 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       io.k8s.display-name="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
+# Component bash variables
+ENV MOODLE_app=${HTTPD_public_path} \
+    MOODLE_data=/var/moodledata
+
 # php-curl included in php-common
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
@@ -38,9 +42,12 @@ ENV OS_install_pkgs="php-gd php-intl php-ldap \
 
 USER 0
 
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/libexec/* /usr/libexec/
+
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
-RUN php-fpm-setup
+RUN moodle-setup
 
 USER ${CTR_user_id}

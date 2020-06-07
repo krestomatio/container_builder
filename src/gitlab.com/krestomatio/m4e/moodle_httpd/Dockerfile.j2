@@ -27,10 +27,20 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       io.k8s.display-name="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
+# Component bash variables
+ENV MOODLE_app=${HTTPD_public_path} \
+    MOODLE_data=/var/moodledata \
+    MOODLE_check_path=/login/index.php \
+    MOODLE_check_code="200" \
+    MOODLE_check_host=localhost
+
 USER 0
+
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/libexec/* /usr/libexec/
 
 RUN container-setup
 
-RUN httpd-setup
+RUN moodle-setup
 
 USER ${CTR_user_id}

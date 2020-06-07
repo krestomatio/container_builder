@@ -4,11 +4,13 @@
 usage() {
     cat 1>&2 <<"EOF"
 Script to pull and/or sync app code.
-Set environmental variables:
+
+ENVIRONMENT VARS:
 GIT_branch              branch to pull from
 GIT_commit              commit to verify
 GIT_dest                git destination
 APP_dest                sync destination
+
 USAGE:
     app-git [OPTIONS]
 OPTIONS (app git):

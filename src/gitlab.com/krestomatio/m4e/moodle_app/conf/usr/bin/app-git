@@ -13,11 +13,13 @@ APP_dest                sync destination
 
 USAGE:
     app-git [OPTIONS]
+
 OPTIONS (app git):
+  -a                     use rsync archive mode
   -p                     pull from "${GIT_branch}" before syncing
   -v                     veriy git commit matches "${GIT_commit}"
   -s                     sync code from "${GIT_dest}" to "${APP_dest}"
-  -a                     use rsync archive mode
+  -e                     sync excluding php and phar extensions
 
 EXAMPLES:
     app-git -s
@@ -29,8 +31,9 @@ pull=false
 sync=false
 verify=false
 rsync_options="-icrlD"
+exclude_php=
 
-while getopts ":pvsa" opt; do
+while getopts ":apvse" opt; do
   case ${opt} in
     a )
         rsync_options="-ia"
@@ -44,6 +47,10 @@ while getopts ":pvsa" opt; do
     s )
         sync=true
         ;;
+    e )
+        exclude_php=(--exclude='*.php' --exclude='*.phar')
+        sync=true
+        ;;
     \? )
         usage
         exit
@@ -53,8 +60,9 @@ done
 shift $((OPTIND -1))
 
 if (( $OPTIND == 1 )); then
-   usage
-   exit
+    echo -e "No option\n"
+    usage
+    exit 1
 fi
 
 echo "git dir:"
@@ -75,8 +83,8 @@ fi
 # create clean copy, excluding .git* and files in .gitignore
 if  [ "$sync" != "false" ]; then
     echo -e "\nsyncing to '${APP_dest}'..."
-    rsync ${rsync_options} --exclude=.git* --filter='dir-merge,- .gitignore' \
-        "${GIT_dest}/" "${APP_dest}"
+    rsync ${rsync_options} "${exclude_php[@]}" --exclude=".git*" \
+        --filter='dir-merge,- .gitignore' "${GIT_dest}/" "${APP_dest}"
 fi
 
 echo -e "\nreturning to:"

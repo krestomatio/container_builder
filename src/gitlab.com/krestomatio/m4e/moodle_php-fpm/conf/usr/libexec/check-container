@@ -41,8 +41,17 @@ check_tcp_port() {
 }
 
 check_config_file() {
-    # check config.php exists
-    test -f ${MOODLE_app}/config.php || echo "$0: CHECK: config.php does not exist"
+    # check config.php exists and its sintax
+    test -f ${MOODLE_app}/config.php
+    if [ $? -ne 0 ]; then
+        echo "$0: CHECK: config.php does not exist"
+        exit 1
+    fi
+    php -l ${MOODLE_app}/config.php
+    if [ $? -ne 0 ]; then
+        echo "$0: CHECK: config.php sintax error"
+        exit 1
+    fi
 }
 
 check_database_installed() {
@@ -86,8 +95,8 @@ check_moodledata() {
     # check moodledata is writable
     TMPFILE=`mktemp -q -p ${MOODLE_data}/`
     if [ $? -ne 0 ]; then
-    	echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
-    	exit 1
+        echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
+        exit 1
     fi
     rm $TMPFILE
 }

@@ -32,8 +32,8 @@ check_moodledata() {
     # check moodledata is writable
     TMPFILE=`mktemp -q -p ${MOODLE_data}/`
     if [ $? -ne 0 ]; then
-    	echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
-    	exit 1
+        echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
+        exit 1
     fi
     rm $TMPFILE
 }
@@ -45,8 +45,8 @@ check_url() {
     curl -s -o /dev/null -w %{http_code} -H "Host: ${MOODLE_check_host}" \
         "${check_url}" | grep -q "${MOODLE_check_code}"
     if [ $? -ne 0 ]; then
-    	echo "$0: CHECK: Did not receive status code: ${MOODLE_check_code}"
-    	exit 1
+        echo "$0: CHECK: Did not receive status code: ${MOODLE_check_code}"
+        exit 1
     fi
 }
 

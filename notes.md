@@ -45,3 +45,9 @@ https://github.com/docker-library/postgres
 * TODO: add notice that also you are agreing with moodle user agreement or add variables
 * TODO: secure php-fpm layer from access of no auth pods
 * TODO: test if httpd pods only need files other than .php
+* TODO: resource defintion (cpu memory) for other pods
+* TODO: add strategy to each pod
+* TODO: postgre should be deployment or replicaset. What happen if deployment is deleted and created. Same uid?
+* TODO: add nodeSelector to pods (variable)
+* TODO: add network policies
+* TODO: agregar o quitar variables: Flexibilidad y muchas variables pueden crear problemas de configuración si se modifican "mid-flight". 

@@ -62,7 +62,7 @@ check_database_installed() {
 define('CLI_SCRIPT', true);
 require('${MOODLE_app}/config.php');
 if (empty(\$CFG->version)) {
-    echo "CHECK: Database is not yet installed.\n";
+    echo "CHECK: Database is not yet installed\n";
     exit(2);
 }
 ?>

@@ -16,7 +16,7 @@ USAGE:
 OPTIONS (check moodle php container):
   -t            check php-fpm tcp port (if not using unix socket)
   -c            check if config.php exists
-  -d            check if moodledata database is installed
+  -d            check if database is installed
   -u            check if upgrade not needed
   -m            check if moodledata is writable
   -l            check liveness (-d -m) (Default)
@@ -57,6 +57,7 @@ check_config_file() {
 check_database_installed() {
     # check database is installed
     # code exit 2 means database scheme not installed
+    set -e
     php <<CODE
 <?php
 define('CLI_SCRIPT', true);
@@ -73,6 +74,7 @@ check_upgrade_not_pending() {
     # it clears cache
     # not intended to run too frequently
     # code exit 2 means upgrade pending
+    set -e
     php <<CODE
 <?php
 if (function_exists('opcache_reset') and !isset(\$_SERVER['REMOTE_ADDR'])) {

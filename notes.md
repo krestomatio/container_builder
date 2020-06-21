@@ -50,4 +50,7 @@ https://github.com/docker-library/postgres
 * TODO: postgre should be deployment or replicaset. What happen if deployment is deleted and created. Same uid?
 * TODO: add nodeSelector to pods (variable)
 * TODO: add network policies
-* TODO: agregar o quitar variables: Flexibilidad y muchas variables pueden crear problemas de configuración si se modifican "mid-flight". 
+* TODO: agregar o quitar variables: Flexibilidad y muchas variables pueden crear problemas de configuración si se modifican "mid-flight".
+* TODO: crear validaciones para crd (structural para evitar campos nuevos)
+* TODO: usar el campo de status del CR para guardar info como instantiated, images, dates
+* TODO: pack code inside moodle containers

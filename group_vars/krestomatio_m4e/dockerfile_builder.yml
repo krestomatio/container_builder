@@ -12,7 +12,7 @@ php_version: '7.2'
 httpd_version: '2.4'
 postgres_version: '10'
 postgres_prev_version: '9.6'
-moodle_version: '3.5'
+moodle_version: '3.9'
 
 # builder
 # dockerfile_builder_push: true
@@ -21,7 +21,7 @@ dockerfile_builder_image_timezone: America/Costa_Rica
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
 
 # moodle
-moodle_git_branch: MOODLE_35_STABLE
+moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
 moodle_git_ref: "{{ lookup('url', dockerfile_builder_image_git_chk) }}"
 moodle_git_commit: "{{ moodle_git_ref.object.sha }}"
 

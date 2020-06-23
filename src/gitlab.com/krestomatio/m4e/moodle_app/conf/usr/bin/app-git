@@ -19,10 +19,13 @@ OPTIONS (app git):
   -p                     pull from "${GIT_branch}" before syncing
   -v                     veriy git commit matches "${GIT_commit}"
   -s                     sync code from "${GIT_dest}" to "${APP_dest}"
-  -e                     sync excluding php and phar extensions
+  -d                     delete files in "${APP_dest}" not present in "${GIT_dest}"
+  -e                     exclude criteria. Ex -e '.git*'
 
 EXAMPLES:
     app-git -s
+    app-git -s -e '.git*'
+    app-git -s -d -e 'config.php' -e '.git*'
     app-git -p -v -s -a
 EOF
 }
@@ -31,9 +34,8 @@ pull=false
 sync=false
 verify=false
 rsync_options="-icrlD"
-exclude_php=
 
-while getopts ":apvse" opt; do
+while getopts ":apvsde:" opt; do
   case ${opt} in
     a )
         rsync_options="-ia"
@@ -47,9 +49,11 @@ while getopts ":apvse" opt; do
     s )
         sync=true
         ;;
+    d )
+        delete=true
+        ;;
     e )
-        exclude_php=(--exclude='*.php' --exclude='*.phar')
-        sync=true
+        exclude_php+=(--exclude="${OPTARG}")
         ;;
     \? )
         usage
@@ -80,10 +84,22 @@ if  [ "$verify" != "false" ]; then
     git rev-parse --verify HEAD | grep -q "${GIT_commit}"
 fi
 
+# add exclude to rsync_options
+if ! [ -z $exclude_php ]; then
+    echo -e "\nadding: '${exclude_php[@]}'..."
+    rsync_options+=" ${exclude_php[@]}"
+fi
+
+# add delete option
+if ! [ -z $delete ]; then
+    echo -e "\nadding delete option..."
+    rsync_options+=" --delete"
+fi
+
 # create clean copy, excluding .git* and files in .gitignore
 if  [ "$sync" != "false" ]; then
     echo -e "\nsyncing to '${APP_dest}'..."
-    rsync ${rsync_options} "${exclude_php[@]}" --exclude=".git*" \
+    rsync ${rsync_options} \
         --filter='dir-merge,- .gitignore' "${GIT_dest}/" "${APP_dest}"
 fi
 

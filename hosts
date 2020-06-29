@@ -4,10 +4,12 @@ centos8-minimal
 [krestomatio_m4e]
 base
 httpd
+nginx
 php-fpm
 postgres
 moodle_app
 moodle_php-fpm
+moodle_nginx
 moodle_httpd
 
 [jobcespedes_ci]

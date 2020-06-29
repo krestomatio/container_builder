@@ -1,0 +1,68 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General ansible variables
+ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
+    IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    NGINX_version="{{ nginx_version }}" \
+    NGINX_ver_short="{{ nginx_version | replace('.','') }}"
+
+# General variables
+ENV IMAGE_name=nginx \
+    IMAGE_summary="Nginx $NGINX_version" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Nginx ${NGINX_version}" \
+    IMAGE_title="Nginx ${NGINX_version}" \
+    IMAGE_service_port="8080" \
+    IMAGE_service_name="http"
+
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="${IMAGE_authors}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+      io.openshift.tags="${IMAGE_name},nginx,nginx-${NGINX_ver_short},nginx${NGINX_ver_short}" \
+      maintainer="${IMAGE_authors}"
+
+# Container variables
+ENV CTR_user=nginx \
+    CTR_user_id="998" \
+    CTR_stopsignal=SIGQUIT
+
+# Component bash variables
+ENV NGINX_sysconf_path=/etc/nginx \
+    NGINX_main_conf_file=/etc/nginx/nginx.conf \
+    NGINX_main_conf_d_path=/etc/nginx/conf.d \
+    NGINX_default_conf_d_path=/etc/nginx/default.d \
+    NGINX_default_conf_root_file="/etc/nginx/default.d/root.conf" \
+    NGINX_default_conf_app_file="/etc/nginx/default.d/app.conf" \
+    NGINX_var_run_path=/var/run \
+    NGINX_lib_path=/var/lib/nginx \
+    NGINX_public_path=/usr/share/nginx/html \
+    NGINX_port=${IMAGE_service_port} \
+    NGINX_log_path=/var/log/nginx
+
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+
+RUN container-setup
+RUN install-pkgs nginx
+
+RUN nginx-setup
+
+WORKDIR ${NGINX_public_path}
+
+USER ${CTR_user_id}
+
+STOPSIGNAL ${CTR_stopsignal}
+
+EXPOSE ${NGINX_port}
+
+CMD ["nginx", "-g", "daemon off;"]

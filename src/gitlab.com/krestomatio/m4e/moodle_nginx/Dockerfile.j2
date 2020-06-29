@@ -1,0 +1,49 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General ansible variables
+ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
+    IMAGE_created="{{ dockerfile_builder_image_created }}" \
+    MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
+    MOODLE_commit="{{ moodle_git_commit }}" \
+    TZ="{{ dockerfile_builder_image_timezone }}"
+
+# General variables
+ENV IMAGE_name="moodle_nginx" \
+    IMAGE_summary="Nginx ${NGINX_version} for Moodle" \
+    IMAGE_description="This ${IMAGE_based} based container image runs Nginx ${NGINX_version} for Moodle" \
+    IMAGE_title="Nginx ${NGINX_version} for Moodle"
+
+# Labels
+LABEL org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="${IMAGE_version}" \
+      org.opencontainers.image.created="${IMAGE_created}" \
+      name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},nginx,nginx${NGINX_ver_short},nginx-${NGINX_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+
+# Component bash variables
+ENV NGINX_public_path=/var/www/html
+
+ENV MOODLE_app=${NGINX_public_path} \
+    MOODLE_data=/var/moodledata \
+    MOODLE_check_path=/login/index.php \
+    MOODLE_check_code="200" \
+    MOODLE_check_host=localhost
+
+USER 0
+
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/libexec/* /usr/libexec/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+
+RUN container-setup
+
+RUN moodle-setup
+
+USER ${CTR_user_id}

@@ -34,13 +34,13 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
 # Container variables
 ENV CTR_user=apache \
     CTR_user_id="48" \
-    CTR_cmd="php-fpm"
+    CTR_cmd="php-fpm" \
+    CTR_stopsignal=SIGQUIT
 
 # Component bash variables
 ENV PHP_run=/var/run/php-fpm \
     PHP_conf_dir=/etc/php.d \
     PHP_conf_file=/etc/php.ini \
-    PHP_sysconf_path=/etc \
     PHP_module_dir=/usr/lib64/php/modules/ \
     PHP_FPM_conf_dir=/etc/php-fpm.d \
     PHP_FPM_conf_file=/etc/php-fpm.conf \
@@ -62,7 +62,7 @@ WORKDIR ${HTTPD_public_path}
 
 USER ${CTR_user_id}
 
-STOPSIGNAL SIGQUIT
+STOPSIGNAL ${CTR_stopsignal}
 
 EXPOSE ${PHP_FPM_port}
 

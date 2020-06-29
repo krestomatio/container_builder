@@ -34,7 +34,8 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
 # Container variables
 ENV CTR_user=apache \
     CTR_user_id="48" \
-    CTR_cmd="httpd -D FOREGROUND"
+    CTR_cmd="httpd -D FOREGROUND" \
+    CTR_stopsignal=SIGWINCH
 
 # Component bash variables
 ENV HTTPD_main_conf_path=/etc/httpd/conf \
@@ -58,7 +59,7 @@ WORKDIR ${HTTPD_public_path}
 
 USER ${CTR_user_id}
 
-STOPSIGNAL SIGWINCH
+STOPSIGNAL ${CTR_stopsignal}
 
 EXPOSE ${HTTPD_port}
 

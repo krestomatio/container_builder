@@ -4,7 +4,7 @@
 usage() {
     set +x
     cat 1>&2 <<EOF
-Script to fix permissions in order to supporting arbitrary user ids.
+Script to fix permissions of a directory (recursive) in order to supporting arbitrary user ids.
 USAGE:
     fix-permissions [OPTIONS] dir1 dir2
 OPTIONS (fix permissions):

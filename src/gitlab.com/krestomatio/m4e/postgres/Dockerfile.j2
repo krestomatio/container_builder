@@ -56,13 +56,15 @@ ENV HOME="${CTR_home}" \
 
 ENV OS_install_pkgs="postgresql-server postgresql-contrib gettext nss_wrapper"
 
+USER 0
+
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
-RUN postgres-setup
+RUN container-setup-postgres
 
 WORKDIR ${CTR_home}
 

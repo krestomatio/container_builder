@@ -41,6 +41,6 @@ COPY conf/usr/libexec/* /usr/libexec/
 
 RUN container-setup
 
-RUN moodle-setup
+RUN container-setup-httpd-moodle
 
 USER ${CTR_user_id}

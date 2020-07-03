@@ -44,6 +44,6 @@ COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 
-RUN moodle-setup
+RUN container-setup-nginx-moodle
 
 USER ${CTR_user_id}

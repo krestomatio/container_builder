@@ -48,6 +48,10 @@ COPY conf/usr/libexec/* /usr/libexec/
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
-RUN moodle-setup
+{% if moodle_php_fpm_copy_code is defined %}
+COPY --from=moodle_app:latest ${MOODLE_app} ${MOODLE_app}
+{% endif %}
+
+RUN container-setup-php-moodle
 
 USER ${CTR_user_id}

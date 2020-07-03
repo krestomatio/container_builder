@@ -50,13 +50,15 @@ ENV PHP_run=/var/run/php-fpm \
 
 ENV OS_install_pkgs="php-fpm php-cli php-opcache php-soap"
 
+USER 0
+
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
-RUN php-fpm-setup
+RUN container-setup-php
 
 WORKDIR ${HTTPD_public_path}
 

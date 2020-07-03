@@ -43,11 +43,13 @@ ENV GIT_dest="/opt/app/" \
 
 ENV OS_install_pkgs="git rsync"
 
+USER 0
+
 COPY conf/usr/bin/* /usr/bin/
 
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
-RUN app-setup
+RUN container-setup-app
 
 USER ${CTR_user_id}
 WORKDIR ${GIT_dest}

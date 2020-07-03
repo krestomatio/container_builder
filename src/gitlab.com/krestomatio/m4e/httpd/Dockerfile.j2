@@ -47,13 +47,15 @@ ENV HTTPD_main_conf_path=/etc/httpd/conf \
     HTTPD_port=${IMAGE_service_port} \
     HTTPD_log_path=/var/log/httpd
 
+USER 0
+
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs httpd
 
-RUN httpd-setup
+RUN container-setup-httpd
 
 WORKDIR ${HTTPD_public_path}
 

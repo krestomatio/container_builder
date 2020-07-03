@@ -49,13 +49,15 @@ ENV NGINX_sysconf_path=/etc/nginx \
     NGINX_port=${IMAGE_service_port} \
     NGINX_log_path=/var/log/nginx
 
+USER 0
+
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 RUN install-pkgs nginx
 
-RUN nginx-setup
+RUN container-setup-nginx
 
 WORKDIR ${NGINX_public_path}
 

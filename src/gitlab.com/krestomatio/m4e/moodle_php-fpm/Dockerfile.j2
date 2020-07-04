@@ -33,7 +33,7 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
 # Component bash variables
-ENV MOODLE_app=${HTTPD_public_path} \
+ENV MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata
 
 # php-curl included in php-common

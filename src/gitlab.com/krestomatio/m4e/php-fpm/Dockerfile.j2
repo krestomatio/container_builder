@@ -46,7 +46,7 @@ ENV PHP_run=/var/run/php-fpm \
     PHP_FPM_conf_file=/etc/php-fpm.conf \
     PHP_FPM_pool_file=/etc/php-fpm.d/www.conf \
     PHP_FPM_port=${IMAGE_service_port} \
-    HTTPD_public_path=/var/www/html
+    APP_dest=/var/www/html
 
 ENV OS_install_pkgs="php-fpm php-cli php-opcache php-soap"
 
@@ -60,7 +60,7 @@ RUN install-pkgs ${OS_install_pkgs}
 
 RUN container-setup-php
 
-WORKDIR ${HTTPD_public_path}
+WORKDIR ${APP_dest}
 
 USER ${CTR_user_id}
 

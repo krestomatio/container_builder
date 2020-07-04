@@ -1,6 +1,14 @@
 # image
 dockerfile_builder_image_from: "{{ dest_subdir }}/moodle_nginx_web"
 dockerfile_builder_image_version: "0.0.1"
+dockerfile_builder_image_name: moodle_nginx_web
+dockerfile_builder_image_summary: "PHP $PHP_version and NGINX ${NGINX_version} for Moodle"
+dockerfile_builder_image_description: "This ${IMAGE_based} based container image runs PHP ${PHP_version} and NGINX ${NGINX_version} for Moodle"
+dockerfile_builder_image_title: "PHP ${PHP_version} and NGINX ${NGINX_version} for Moodle"
+dockerfile_builder_image_oc_tags:
+  "{{ '${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short}'
+  + ',nginx,nginx-${NGINX_ver_short},nginx${NGINX_ver_short}'
+  + ',moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}' }}"
 
 # source dir
 src_path: "{{ src_dir }}/{{ src_subdir }}/moodle_php-fpm"

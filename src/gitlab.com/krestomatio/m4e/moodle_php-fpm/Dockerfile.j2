@@ -12,13 +12,12 @@ ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
     MOODLE_version="{{ moodle_version }}" \
     MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
     MOODLE_commit="{{ moodle_git_commit }}" \
+    IMAGE_name={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
+    IMAGE_summary="{{ dockerfile_builder_image_summary | default('PHP $PHP_version for Moodle') }}" \
+    IMAGE_description="{{ dockerfile_builder_image_description | default('This ${IMAGE_based} based container image runs PHP ${PHP_version} for Moodle') }}" \
+    IMAGE_title="{{ dockerfile_builder_image_title | default('PHP ${PHP_version} for Moodle') }}" \
+    IMAGE_oc_tags="{{ dockerfile_builder_image_oc_tags | default('${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
-
-# General variables
-ENV IMAGE_name=moodle_php-fpm \
-    IMAGE_summary="PHP $PHP_version for Moodle" \
-    IMAGE_description="This ${IMAGE_based} based container image runs PHP ${PHP_version} for Moodle" \
-    IMAGE_title="PHP ${PHP_version} for Moodle"
 
 # Labels
 LABEL org.opencontainers.image.title="${IMAGE_title}" \
@@ -30,7 +29,7 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       description="${IMAGE_description}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+      io.openshift.tags="${IMAGE_oc_tags}"
 
 # Component bash variables
 ENV MOODLE_app=${APP_dest} \
@@ -40,18 +39,16 @@ ENV MOODLE_app=${APP_dest} \
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-ENV OS_install_pkgs="php-gd php-intl php-ldap \
-                  php-pgsql php-soap php-xmlrpc  \
-                  php-xml php-pecl-zip php-mbstring \
-                  php-json"
+ENV MOODLE_install_php_pkgs="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
 
 USER 0
 
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/usr/libexec/* /usr/libexec/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
-RUN install-pkgs ${OS_install_pkgs}
+RUN install-pkgs ${MOODLE_install_php_pkgs}
 
 {% if moodle_app_copy_from is defined %}
 COPY --from=app {{ moodle_code_copy_path | default('/var/www/html') }} {{ moodle_code_copy_dest | default('/var/www/html') }}

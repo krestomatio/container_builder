@@ -18,7 +18,7 @@ moodle_version: '3.9'
 # builder
 # dockerfile_builder_push: true
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
-dockerfile_builder_image_timezone: America/Costa_Rica
+dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
 
 # moodle

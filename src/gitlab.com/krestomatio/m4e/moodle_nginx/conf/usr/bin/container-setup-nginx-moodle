@@ -11,4 +11,4 @@ mkdir -p ${MOODLE_app} ${MOODLE_data}
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-fix-permissions -u ${CTR_user_id} ${MOODLE_app} ${MOODLE_data} ${NGINX_public_path}
+fix-permissions -u ${CTR_user_id} ${MOODLE_app} ${MOODLE_data} ${APP_dest}

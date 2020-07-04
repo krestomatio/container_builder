@@ -43,9 +43,9 @@ ENV HTTPD_main_conf_path=/etc/httpd/conf \
     HTTPD_main_conf_d_path=/etc/httpd/conf.d \
     HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
     HTTPD_var_run_path=/var/run/httpd \
-    HTTPD_public_path=/var/www/html \
     HTTPD_port=${IMAGE_service_port} \
-    HTTPD_log_path=/var/log/httpd
+    HTTPD_log_path=/var/log/httpd \
+    APP_dest=/var/www/html 
 
 USER 0
 
@@ -57,7 +57,7 @@ RUN install-pkgs httpd
 
 RUN container-setup-httpd
 
-WORKDIR ${HTTPD_public_path}
+WORKDIR ${APP_dest}
 
 USER ${CTR_user_id}
 

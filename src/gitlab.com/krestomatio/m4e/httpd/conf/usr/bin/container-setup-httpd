@@ -87,7 +87,7 @@ fi
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-fix-permissions -u ${CTR_user_id} ${HTTPD_main_conf_path} ${HTTPD_main_conf_d_path} ${HTTPD_var_run_path} ${HTTPD_log_path} ${HTTPD_public_path}
+fix-permissions -u ${CTR_user_id} ${HTTPD_main_conf_path} ${HTTPD_main_conf_d_path} ${HTTPD_var_run_path} ${HTTPD_log_path} ${APP_dest}
 
 # restore rpm permissions
 rpm-file-permissions

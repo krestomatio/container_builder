@@ -1,4 +1,9 @@
 # {{ ansible_managed  }}
+{% if moodle_app_copy_from is defined %}
+FROM {{ moodle_app_copy_from }} AS app
+RUN app-git -a -e '.git*'
+
+{% endif %}
 FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
@@ -48,10 +53,10 @@ COPY conf/usr/libexec/* /usr/libexec/
 RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
-{% if moodle_php_fpm_copy_code is defined %}
-COPY --from=moodle_app:latest ${MOODLE_app} ${MOODLE_app}
-{% endif %}
+{% if moodle_app_copy_from is defined %}
+COPY --from=app {{ moodle_code_copy_path | default('/var/www/html') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
 
+{% endif %}
 RUN container-setup-php-moodle
 
 USER ${CTR_user_id}

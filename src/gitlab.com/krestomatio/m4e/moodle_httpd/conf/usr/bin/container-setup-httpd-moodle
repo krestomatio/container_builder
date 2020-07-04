@@ -7,4 +7,4 @@
 
 mkdir -p ${MOODLE_app} ${MOODLE_data}
 
-fix-permissions -u ${MOODLE_app} ${MOODLE_data}
+fix-permissions -u ${CTR_user_id} ${MOODLE_app} ${MOODLE_data}

@@ -1,4 +1,9 @@
 # {{ ansible_managed  }}
+{% if moodle_app_copy_from is defined %}
+FROM {{ moodle_app_copy_from }} AS app
+RUN app-git -a -e '.git*'
+
+{% endif %}
 FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
@@ -44,6 +49,10 @@ COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
 
 RUN container-setup
 
+{% if moodle_app_copy_from is defined %}
+COPY --from={{ moodle_app_copy_from }} ${MOODLE_app} ${MOODLE_app}
+
+{% endif %}
 RUN container-setup-nginx-moodle
 
 USER ${CTR_user_id}

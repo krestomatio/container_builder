@@ -54,4 +54,5 @@ https://github.com/docker-library/postgres
 * TODO: crear validaciones para crd (structural para evitar campos nuevos)
 * TODO: usar el campo de status del CR para guardar info como instantiated, images, dates
 * TODO: pack code inside moodle containers
-* TODO: imagePullPolicy y como controlar versión de Moodle
+* TODO: imagePullPolicy y como controlar versión de Moodle. Imagepolicy de postgres: igual, diferente, crear una imagen de moodle?
+  - Image policy de cronjobs? como asegurar misma versión?

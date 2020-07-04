@@ -4,7 +4,6 @@
 # nginx default config
 sed -i \
     -e "s@__listen__@${NGINX_listen}@" \
-    -e "s@__user__@${NGINX_user}@" \
     -e "s@__server_name__@${NGINX_server_name}@" \
     -e "s@__rootdocument__@${NGINX_documentroot}@" \
     -e "s@__listen_option__@${NGINX_listen_options}@" \

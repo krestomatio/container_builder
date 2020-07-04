@@ -15,7 +15,7 @@ USAGE:
     app-git [OPTIONS]
 
 OPTIONS (app git):
-  -a                     use rsync archive mode
+  -a                     sync and use rsync archive mode
   -p                     pull from "${GIT_branch}" before syncing
   -v                     veriy git commit matches "${GIT_commit}"
   -s                     sync code from "${GIT_dest}" to "${APP_dest}"
@@ -38,6 +38,7 @@ rsync_options="-icrlD"
 while getopts ":apvsde:" opt; do
   case ${opt} in
     a )
+        sync=true
         rsync_options="-ia"
         ;;
     p )
@@ -53,7 +54,7 @@ while getopts ":apvsde:" opt; do
         delete=true
         ;;
     e )
-        exclude_php+=(--exclude="${OPTARG}")
+        exclude+=(--exclude="${OPTARG}")
         ;;
     \? )
         usage
@@ -85,9 +86,9 @@ if  [ "$verify" != "false" ]; then
 fi
 
 # add exclude to rsync_options
-if ! [ -z $exclude_php ]; then
-    echo -e "\nadding: '${exclude_php[@]}'..."
-    rsync_options+=" ${exclude_php[@]}"
+if ! [ -z $exclude ]; then
+    echo -e "\nadding: '${exclude[@]}'..."
+    rsync_options+=" ${exclude[@]}"
 fi
 
 # add delete option

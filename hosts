@@ -6,10 +6,13 @@ base
 httpd
 nginx
 php-fpm
+nginx_php-fpm
 postgres
 moodle_app
-moodle_php-fpm
 moodle_nginx
+moodle_nginx_web
+moodle_php-fpm
+moodle_web
 moodle_httpd
 
 [jobcespedes_ci]

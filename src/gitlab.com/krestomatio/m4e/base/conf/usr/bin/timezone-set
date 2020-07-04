@@ -2,7 +2,7 @@
 # description: reconfig timezone
 # param: list of timezones separated by space
 
-reinstal_tzdata(){
+reinstall_tzdata(){
     echo "Reinstalling tzdata"
     # update
     ${CTR_pkg_mgm} update
@@ -15,7 +15,7 @@ reinstal_tzdata(){
 }
 
 if ! [ -z ${@+x} ]; then
-    reinstal_tzdata
+    reinstall_tzdata
     # leave only $@
     echo "leaving only specific timezones"
     rm -rf /tmp/zoneinfo
@@ -28,5 +28,5 @@ if ! [ -z ${@+x} ]; then
     cp -rp /tmp/zoneinfo/UTC /usr/share/zoneinfo/UTC
     rm -rf /tmp/zoneinfo
 else
-    reinstal_tzdata
+    reinstall_tzdata
 fi

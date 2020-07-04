@@ -60,7 +60,7 @@ ln -sf /dev/stderr ${NGINX_log_path}/error.log
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-fix-permissions -u ${CTR_user_id} ${NGINX_main_conf_file} ${NGINX_main_conf_d_path} ${NGINX_default_conf_d_path} ${NGINX_var_run_path} ${NGINX_lib_path} ${NGINX_log_path} ${NGINX_public_path}
+fix-permissions -u ${CTR_user_id} ${NGINX_main_conf_file} ${NGINX_main_conf_d_path} ${NGINX_default_conf_d_path} ${NGINX_var_run_path} ${NGINX_lib_path} ${NGINX_log_path} ${APP_dest}
 
 chown "${CTR_user}:${CTR_group}" $NGINX_sysconf_path
 chmod g+rwx $NGINX_sysconf_path

@@ -45,9 +45,9 @@ ENV NGINX_sysconf_path=/etc/nginx \
     NGINX_default_conf_app_file="/etc/nginx/default.d/app.conf" \
     NGINX_var_run_path=/var/run \
     NGINX_lib_path=/var/lib/nginx \
-    NGINX_public_path=/usr/share/nginx/html \
     NGINX_port=${IMAGE_service_port} \
-    NGINX_log_path=/var/log/nginx
+    NGINX_log_path=/var/log/nginx \
+    APP_dest=/usr/share/nginx/html
 
 USER 0
 
@@ -59,7 +59,7 @@ RUN install-pkgs nginx
 
 RUN container-setup-nginx
 
-WORKDIR ${NGINX_public_path}
+WORKDIR ${APP_dest}
 
 USER ${CTR_user_id}
 

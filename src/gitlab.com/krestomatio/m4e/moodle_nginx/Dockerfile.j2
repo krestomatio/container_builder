@@ -33,9 +33,9 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},nginx,nginx${NGINX_ver_short},nginx-${NGINX_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
 
 # Component bash variables
-ENV NGINX_public_path=/var/www/html
+ENV APP_dest=/var/www/html
 
-ENV MOODLE_app=${NGINX_public_path} \
+ENV MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata \
     MOODLE_check_path=/login/index.php \
     MOODLE_check_code="200" \

@@ -1,14 +1,14 @@
-- hosts: "{{ ctrs_to_build | default('all') }}"
+- hosts: "{{ ctrs_to_build | default(lookup('env','CTRS_TO_BUILD')) | default('all',true) }}"
   connection: local
   tasks:
     - name: set created time
       when: dockerfile_builder_image_created is not defined
       run_once: true
       set_fact:
-        dockerfile_builder_image_created: "{{ ansible_date_time.iso8601 }}"
+        dockerfile_builder_image_created: "{{ lookup('env','IMAGE_CREATED') | default(ansible_date_time.iso8601,true) }}"
 
 
-- hosts: "{{ ctrs_to_build | default('all') }}"
+- hosts: "{{ ctrs_to_build | default(lookup('env','CTRS_TO_BUILD')) | default('all',true) }}"
   connection: local
   serial: "{{ omit if dockerfile_builder != 'podman' or dockerfile_builder != 'docker' }}"
   tasks:

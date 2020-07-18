@@ -1,9 +1,171 @@
-image: geerlingguy/docker-centos7-ansible
+image: krestomatio/ansible-ci
+
+variables:
+  DOCKER_BUILDKIT: 1
+  DOCKER_DRIVER: overlay2
+  GIT_SUBMODULE_STRATEGY: recursive
+  BUILD_PUSH: 'true'
+  BUILD_CONTAINERS: 'all:!jobcespedes_ci'
+  BUILD_CACHE_FROM: 'true'
+  BUILD_CACHE_FROM_TAGS: $CI_COMMIT_SHA,$CI_COMMIT_BEFORE_SHA
+  BUILD_ROOTFS_CREATOR_IMAGE: 'krestomatio/rootfs-creator'
+  # BUILD_ANSIBLE_DEBUG: -v
+
+cache:
+  key: ${CI_COMMIT_SHA}
+  paths:
+    - build/
 
 stages:
-  - generation
+  - build-platform-lv1
+  - build-platform-lv2
+  - build-platform-lv3
+  - build-platform-lv4
+  - build-app-lv1
+  - build-app-lv2
+  - build-app-lv3
 
-generate-dockerfiles:
-  stage: generation
+.template-build:
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - export IMAGE_CREATED=$(git log -1 --pretty='%ad' --date=format:'%Y-%m-%dT%H:%M:%SZ')
   script:
-    - ansible-playbook -i hosts main.yml -e dockerfile_builder=none
+    - ansible-playbook -i hosts main.yml
+        $(echo ${BUILD_ANSIBLE_DEBUG:-''})
+        -e dockerfile_builder_sync_checksum=true
+        -e registry_name=$CI_REGISTRY
+        -e registry_project=$CI_PROJECT_PATH
+        -e dockerfile_builder_push=$BUILD_PUSH
+        -e dockerfile_builder_tag=$CI_COMMIT_SHA
+        -e dockerfile_builder_image_from_tag=$CI_COMMIT_SHA
+        -e dockerfile_builder_cache_from_tags=$BUILD_CACHE_FROM_TAGS
+        -e rootfs_creator_image=$BUILD_ROOTFS_CREATOR_IMAGE
+
+build-ansible-ci:
+  extends: .template-build
+  stage: build-platform-lv1
+  variables:
+    BUILD_CONTAINERS: 'ansible-ci'
+
+build-jobcespedes-ci:
+  extends: .template-build
+  stage: build-platform-lv1
+  when: manual
+  variables:
+    BUILD_CONTAINERS: 'jobcespedes_ci'
+
+build-rootfs-creator:
+  extends: .template-build
+  stage: build-platform-lv1
+  variables:
+    BUILD_CONTAINERS: 'rootfs-creator'
+
+build-centos8-minimal:
+  extends: .template-build
+  stage: build-platform-lv1
+  variables:
+    BUILD_CONTAINERS: 'centos8-minimal'
+
+build-base:
+  extends: .template-build
+  stage: build-platform-lv2
+  needs:
+    - build-centos8-minimal
+  variables:
+    BUILD_CONTAINERS: 'base'
+
+build-nginx:
+  extends: .template-build
+  stage: build-platform-lv3
+  needs:
+    - build-base
+  variables:
+    BUILD_CONTAINERS: 'nginx'
+
+build-php-fpm:
+  extends: .template-build
+  stage: build-platform-lv3
+  needs:
+    - build-base
+  variables:
+    BUILD_CONTAINERS: 'php-fpm'
+
+build-postgres:
+  extends: .template-build
+  stage: build-platform-lv3
+  needs:
+    - build-base
+  variables:
+    BUILD_CONTAINERS: 'postgres'
+
+build-httpd:
+  extends: .template-build
+  stage: build-platform-lv3
+  needs:
+    - build-base
+  variables:
+    BUILD_CONTAINERS: 'httpd'
+
+build-nginx_php-fpm:
+  extends: .template-build
+  stage: build-platform-lv4
+  needs:
+    - build-php-fpm
+  variables:
+    BUILD_CONTAINERS: 'nginx_php-fpm'
+
+build-moodle_app:
+  extends: .template-build
+  stage: build-app-lv1
+  needs:
+    - build-base
+  variables:
+    BUILD_CONTAINERS: 'moodle_app'
+
+build-moodle_nginx:
+  extends: .template-build
+  stage: build-app-lv2
+  needs:
+    - build-moodle_app
+    - build-nginx
+  variables:
+    BUILD_CONTAINERS: 'moodle_nginx'
+
+build-moodle_nginx_web:
+  extends: .template-build
+  stage: build-app-lv2
+  needs:
+    - build-moodle_app
+    - build-nginx_php-fpm
+  variables:
+    BUILD_CONTAINERS: 'moodle_nginx_web'
+
+build-moodle_php-fpm:
+  extends: .template-build
+  stage: build-app-lv2
+  needs:
+    - build-moodle_app
+    - build-php-fpm
+  variables:
+    BUILD_CONTAINERS: 'moodle_php-fpm'
+
+build-moodle_httpd:
+  extends: .template-build
+  stage: build-app-lv2
+  needs:
+    - build-moodle_app
+    - build-httpd
+  variables:
+    BUILD_CONTAINERS: 'moodle_httpd'
+
+build-moodle_web:
+  extends: .template-build
+  stage: build-app-lv3
+  needs:
+    - build-moodle_app
+    - build-moodle_nginx_web
+  variables:
+    BUILD_CONTAINERS: 'moodle_web'

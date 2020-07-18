@@ -1,5 +1,6 @@
 # Convention for groups: account_project
 [krestomatio_platform]
+ansible-ci
 rootfs-creator
 centos8-minimal
 base

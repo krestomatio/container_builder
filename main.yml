@@ -10,7 +10,7 @@
 
 - hosts: "{{ ctrs_to_build | default('all') }}"
   connection: local
-  serial: 1
+  serial: "{{ omit if dockerfile_builder != 'podman' or dockerfile_builder != 'docker' }}"
   tasks:
     - name: build containers
       import_role:

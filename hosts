@@ -1,19 +1,26 @@
 # Convention for groups: account_project
 centos8-minimal
 
-[krestomatio_m4e]
+[krestomatio_platform]
+rootfs-creator
 base
 httpd
 nginx
 php-fpm
 nginx_php-fpm
 postgres
+
+[krestomatio_m4e]
 moodle_app
 moodle_nginx
 moodle_nginx_web
 moodle_php-fpm
 moodle_web
 moodle_httpd
+
+[krestomatio:children]
+krestomatio_platform
+krestomatio_m4e
 
 [jobcespedes_ci]
 docker-centos7-ansible

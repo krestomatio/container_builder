@@ -1,0 +1,9 @@
+image: geerlingguy/docker-centos7-ansible
+
+stages:
+  - generation
+
+generate-dockerfiles:
+  stage: generation
+  script:
+    - ansible-playbook -i hosts main.yml -e dockerfile_builder=none

@@ -40,7 +40,7 @@ RUN $CTR_apk py-pip openssl ca-certificates && \
     $CTR_pip molecule~=$MOLECULE_version && \
     echo "Installing aditional tools..."  && \
     $CTR_pip pycrypto pywinrm docker && \
-    $CTR_apk rsync sudo sshpass openssh-client skopeo && \
+    $CTR_apk git rsync sudo sshpass openssh-client skopeo && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

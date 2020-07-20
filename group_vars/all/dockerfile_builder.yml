@@ -20,6 +20,7 @@ registry_name: "localhost"
 registry_project: ""
 
 # general vars
+dockerfile_builder: docker
 dockerfile_builder_image: "{{ dest_subdir }}/{{ ctr_name }}"
 dockerfile_builder_path: "{{ dest_path }}"
 dockerfile_builder_src: "{{ src_path }}"

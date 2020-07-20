@@ -10,7 +10,11 @@
 
 - hosts: "{{ ctrs_to_build | default(lookup('env','CTRS_TO_BUILD')) | default('all',true) }}"
   connection: local
-  serial: "{{ omit if dockerfile_builder != 'podman' or dockerfile_builder != 'docker' }}"
+  vars:
+    dockerfile_builders:
+      - podman
+      - docker
+  serial: "{{ omit if dockerfile_builder not in dockerfile_builders else 1 }}"
   tasks:
     - name: prepare artifacts for centos8-minimal
       when: ansible_host == 'centos8-minimal'

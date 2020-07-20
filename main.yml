@@ -12,6 +12,28 @@
   connection: local
   serial: "{{ omit if dockerfile_builder != 'podman' or dockerfile_builder != 'docker' }}"
   tasks:
+    - name: prepare artifacts for centos8-minimal
+      when: ansible_host == 'centos8-minimal'
+      docker_container:
+        name: rootfs-creator
+        image: "{{ dest_subdir }}/rootfs-creator"
+        auto_remove: true
+        privileged: true
+        detach: false
+        cleanup: true
+        env:
+          BUILD_kickstart: centos8-minimal.ks
+          BUILD_rootfs: centos8-minimal.tar.xz
+        volumes:
+          - "{{ playbook_dir }}/{{ src_path }}:/build"
+
+    - name: cache from image name if 'cache_from' is true
+      when:
+        - cache_from | default(lookup('env','BUILD_CACHE_FROM')) | default(false,true)
+        - dockerfile_builder_cache_from is not defined
+      set_fact:
+        dockerfile_builder_cache_from: "{{ dockerfile_builder_image }}"
+
     - name: build containers
       import_role:
         name: dockerfile_builder

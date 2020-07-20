@@ -9,6 +9,8 @@ Script to create roofs with livemedia-creator
 
 ENVIRONMENT VARS:
 CTR_working_dir            working dir for kickstart source and image destination (default current directory)
+BUILD_kickstart            kickstart source file ROOTFS_NAME
+BUILD_rootfs               rootfs output file name
 
 USAGE:
     build-rootfs KICKSTART_FILE ROOTFS_NAME
@@ -18,15 +20,16 @@ EXAMPLES:
 EOF
 }
 
-if [ $# -ne 2 ]
+CTR_working_dir=${CTR_working_dir:-./}
+BUILD_kickstart=${BUILD_kickstart:-$1}
+BUILD_rootfs=${BUILD_rootfs:-$2}
+
+if [ -z ${BUILD_kickstart} ] || [ -z ${BUILD_rootfs} ]
 then
+  echo "Please provide two parameters, kickstart source file and rootfs output file name"
   usage
   exit 1
 fi
-
-CTR_working_dir=${CTR_working_dir:-./}
-BUILD_kickstart=$1
-BUILD_rootfs=$2
 
 # create rootfs
 livemedia-creator --logfile="/tmp/build-rootfs.log" \

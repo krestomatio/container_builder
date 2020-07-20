@@ -1,2 +1,4 @@
 build/
 /debug.yml
+centos8-minimal.tar.xz
+distro-release

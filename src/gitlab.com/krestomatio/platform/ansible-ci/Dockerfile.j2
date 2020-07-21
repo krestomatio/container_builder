@@ -39,7 +39,7 @@ RUN $CTR_apk py-pip openssl ca-certificates && \
     $CTR_pip ansible~=$ANSIBLE_version && \
     $CTR_pip molecule~=$MOLECULE_version && \
     echo "Installing aditional tools..."  && \
-    $CTR_pip yamllint ansible-lint pycrypto pywinrm docker  && \
+    $CTR_pip yamllint ansible-lint pycrypto pywinrm docker git-semver && \
     $CTR_apk git rsync sudo sshpass openssh-client skopeo && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \

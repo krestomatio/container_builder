@@ -4,7 +4,6 @@ FROM {{ dockerfile_builder_image_from }}
 # General ansible variables
 ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
     IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    IMAGE_created="{{ dockerfile_builder_image_created }}" \
     GIT_branch="{{ moodle_git_branch }}" \
     GIT_commit="{{ moodle_git_commit }}" \
     GIT_remote="{{ dockerfile_builder_image_git_remote }}" \
@@ -23,7 +22,6 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.authors="${IMAGE_authors}" \
       org.opencontainers.image.description="${IMAGE_description}" \
       org.opencontainers.image.version="${IMAGE_version}" \
-      org.opencontainers.image.created="${IMAGE_created}" \
       name="${IMAGE_name}" \
       summary="${IMAGE_summary}" \
       description="${IMAGE_description}" \

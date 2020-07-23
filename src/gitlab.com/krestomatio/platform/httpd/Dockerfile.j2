@@ -4,7 +4,6 @@ FROM {{ dockerfile_builder_image_from }}
 # General ansible variables
 ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
     IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    IMAGE_created="{{ dockerfile_builder_image_created }}" \
     HTTPD_version="{{ httpd_version }}" \
     HTTPD_ver_short="{{ httpd_version | replace('.','') }}"
 
@@ -21,7 +20,6 @@ LABEL org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.authors="${IMAGE_authors}" \
       org.opencontainers.image.description="${IMAGE_description}" \
       org.opencontainers.image.version="${IMAGE_version}" \
-      org.opencontainers.image.created="${IMAGE_created}" \
       name="${IMAGE_name}" \
       summary="${IMAGE_summary}" \
       description="${IMAGE_description}" \
@@ -45,7 +43,7 @@ ENV HTTPD_main_conf_path=/etc/httpd/conf \
     HTTPD_var_run_path=/var/run/httpd \
     HTTPD_port=${IMAGE_service_port} \
     HTTPD_log_path=/var/log/httpd \
-    APP_dest=/var/www/html 
+    APP_dest=/var/www/html
 
 USER 0
 

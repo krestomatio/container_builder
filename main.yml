@@ -7,7 +7,6 @@
       set_fact:
         dockerfile_builder_image_created: "{{ lookup('env','IMAGE_CREATED') | default(ansible_date_time.iso8601,true) }}"
 
-
 - hosts: "{{ ctrs_to_build | default(lookup('env','CTRS_TO_BUILD')) | default('all',true) }}"
   connection: local
   vars:

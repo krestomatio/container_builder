@@ -3,7 +3,6 @@ FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
 ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    IMAGE_created="{{ dockerfile_builder_image_created }}" \
     MOODLE_version="{{ moodle_version }}" \
     MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
     MOODLE_commit="{{ moodle_git_commit }}" \
@@ -19,7 +18,6 @@ ENV IMAGE_name="moodle_httpd" \
 LABEL org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.description="${IMAGE_description}" \
       org.opencontainers.image.version="${IMAGE_version}" \
-      org.opencontainers.image.created="${IMAGE_created}" \
       name="${IMAGE_name}" \
       summary="${IMAGE_summary}" \
       description="${IMAGE_description}" \

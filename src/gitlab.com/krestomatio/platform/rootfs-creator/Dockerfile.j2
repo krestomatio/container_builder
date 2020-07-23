@@ -3,7 +3,6 @@ FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
 ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_created="{{ dockerfile_builder_image_created }}" \
     IMAGE_based="{{ dockerfile_builder_image_based }}" \
     IMAGE_ocp_tags="{{ dockerfile_builder_image_ocp_tags }}"
 
@@ -17,7 +16,6 @@ ENV IMAGE_name=rootfs-creator \
 LABEL org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.authors="${IMAGE_authors}" \
       org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.created="${IMAGE_created}" \
       name="${IMAGE_name}" \
       summary="${IMAGE_summary}" \
       description="${IMAGE_description}" \

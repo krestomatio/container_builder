@@ -7,30 +7,18 @@ RUN app-git -a -e '.git*'
 FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
-ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    MOODLE_version="{{ moodle_version }}" \
-    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
-    MOODLE_commit="{{ moodle_git_commit }}" \
-    IMAGE_name={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
+ENV IMAGE_name={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
     IMAGE_summary="{{ dockerfile_builder_image_summary | default('PHP $PHP_version for Moodle') }}" \
-    IMAGE_description="{{ dockerfile_builder_image_description | default('This ${IMAGE_based} based container image runs PHP ${PHP_version} for Moodle') }}" \
+    IMAGE_description="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ${PHP_version} for Moodle') }}" \
     IMAGE_title="{{ dockerfile_builder_image_title | default('PHP ${PHP_version} for Moodle') }}" \
     IMAGE_oc_tags="{{ dockerfile_builder_image_oc_tags | default('${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
-# Labels
-LABEL org.opencontainers.image.title="${IMAGE_title}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="${IMAGE_version}" \
-      name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_oc_tags}"
-
 # Component bash variables
-ENV MOODLE_app=${APP_dest} \
+ENV MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
+    MOODLE_commit="{{ moodle_git_commit }}" \
+    MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata
 
 # php-curl included in php-common
@@ -55,3 +43,15 @@ COPY --from=app {{ moodle_code_copy_path | default('/var/www/html') }} {{ moodle
 RUN container-setup-php-moodle
 
 USER ${CTR_user_id}
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_oc_tags}"

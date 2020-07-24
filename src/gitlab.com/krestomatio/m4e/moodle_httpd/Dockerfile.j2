@@ -1,32 +1,18 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-# General ansible variables
-ENV IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    MOODLE_version="{{ moodle_version }}" \
-    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
-    MOODLE_commit="{{ moodle_git_commit }}" \
-    TZ="{{ dockerfile_builder_image_timezone }}"
-
 # General variables
 ENV IMAGE_name="moodle_httpd" \
-    IMAGE_summary="Apache ${HTTPD_version} for Moodle" \
-    IMAGE_description="This ${IMAGE_based} based container image runs Apache ${HTTPD_version} for Moodle" \
-    IMAGE_title="Apache ${HTTPD_version} for Moodle"
-
-# Labels
-LABEL org.opencontainers.image.title="${IMAGE_title}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="${IMAGE_version}" \
-      name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+    IMAGE_summary="Apache ${HTTPD_version} for Moodle {{ moodle_version }}" \
+    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image runs Apache ${HTTPD_version} for Moodle {{ moodle_version }}" \
+    IMAGE_title="Apache ${HTTPD_version} for Moodle{{ moodle_version }} " \
+    TZ="{{ dockerfile_builder_image_timezone }}"
 
 # Component bash variables
-ENV MOODLE_app=${APP_dest} \
+ENV MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}" \
+    MOODLE_commit="{{ moodle_git_commit }}" \
+    MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata \
     MOODLE_check_path=/login/index.php \
     MOODLE_check_code="200" \
@@ -42,3 +28,15 @@ RUN container-setup
 RUN container-setup-httpd-moodle
 
 USER ${CTR_user_id}
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"

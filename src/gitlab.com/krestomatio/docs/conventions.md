@@ -21,3 +21,6 @@ Some examples:
 CTR_user=default
 PHP_FPM_port=9000
 ```
+
+## Labels
+For labels inside Dockerfiles, place them at the end, as one block

@@ -1,32 +1,15 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-# General ansible variables
-ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_based="{{ dockerfile_builder_image_based }}" \
-    IMAGE_ocp_tags="{{ dockerfile_builder_image_ocp_tags }}" \
-    CTR_pkg_mgm="{{ dockerfile_builder_image_pkgs_mgm }}"
-
 # General variables
 ENV IMAGE_name=base \
-    IMAGE_summary="${IMAGE_based} based image" \
-    IMAGE_description="${IMAGE_based} based for building other images" \
-    IMAGE_title="${IMAGE_based} based image"
-
-# Labels
-LABEL org.opencontainers.image.title="${IMAGE_title}" \
-      org.opencontainers.image.authors="${IMAGE_authors}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},${IMAGE_ocp_tags}" \
-      maintainer="${IMAGE_authors}"
+    IMAGE_summary="{{ dockerfile_builder_image_based }} based image" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based for building other images" \
+    IMAGE_title="{{ dockerfile_builder_image_based }} based image"
 
 # Container variables
-ENV CTR_user=default \
+ENV CTR_pkg_mgm="{{ dockerfile_builder_image_pkgs_mgm }}" \
+    CTR_user=default \
     CTR_user_id="1001" \
     CTR_user_gecos="Default Application User" \
     CTR_group=root \
@@ -46,3 +29,15 @@ RUN container-setup
 RUN install-pkgs ${OS_install_pkgs}
 
 ENTRYPOINT ["container-entrypoint"]
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"

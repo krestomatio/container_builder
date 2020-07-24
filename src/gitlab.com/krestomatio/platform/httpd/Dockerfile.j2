@@ -1,33 +1,13 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-# General ansible variables
-ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    HTTPD_version="{{ httpd_version }}" \
-    HTTPD_ver_short="{{ httpd_version | replace('.','') }}"
-
 # General variables
 ENV IMAGE_name=httpd \
-    IMAGE_summary="Apache $HTTPD_version" \
-    IMAGE_description="This ${IMAGE_based} based container image runs Apache ${HTTPD_version}" \
-    IMAGE_title="Apache ${HTTPD_version}" \
+    IMAGE_summary="Apache {{ httpd_version }}" \
+    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image runs Apache {{ httpd_version }}" \
+    IMAGE_title="Apache {{ httpd_version }}" \
     IMAGE_service_port="8080" \
     IMAGE_service_name="http"
-
-# Labels
-LABEL org.opencontainers.image.title="${IMAGE_title}" \
-      org.opencontainers.image.authors="${IMAGE_authors}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="${IMAGE_version}" \
-      name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
-      io.openshift.tags="${IMAGE_name},apache,apache-${HTTPD_ver_short},apache${HTTPD_ver_short}" \
-      maintainer="${IMAGE_authors}"
 
 # Container variables
 ENV CTR_user=apache \
@@ -36,7 +16,9 @@ ENV CTR_user=apache \
     CTR_stopsignal=SIGWINCH
 
 # Component bash variables
-ENV HTTPD_main_conf_path=/etc/httpd/conf \
+ENV HTTPD_version="{{ httpd_version }}" \
+    HTTPD_ver_short="{{ httpd_version | replace('.','') }}" \
+    HTTPD_main_conf_path=/etc/httpd/conf \
     HTTPD_main_conf_file=/etc/httpd/conf/httpd.conf \
     HTTPD_main_conf_d_path=/etc/httpd/conf.d \
     HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
@@ -64,3 +46,17 @@ STOPSIGNAL ${CTR_stopsignal}
 EXPOSE ${HTTPD_port}
 
 CMD ${CTR_cmd}
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+      io.openshift.tags="${IMAGE_name},apache,apache-${HTTPD_ver_short},apache${HTTPD_ver_short}"

@@ -25,6 +25,7 @@
 
       - name: pull cache image
         ignore_errors: true
+        changed_when: false
         with_items: "{{ dockerfile_builder_cache_from }}"
         docker_image:
           name: "{{ item }}"

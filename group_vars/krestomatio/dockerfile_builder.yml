@@ -9,3 +9,4 @@ registry_project: krestomatio
 # dockerfile_builder_push: true
 dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
+dockerfile_builder_image_based: CentOS 8 minimal

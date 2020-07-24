@@ -6,6 +6,8 @@ variables:
   GIT_SUBMODULE_STRATEGY: recursive
   BUILD_PUSH: 'true'
   BUILD_CONTAINERS: 'all:!jobcespedes_ci'
+  BUILD_TAG: $CI_COMMIT_SHA
+  BUILD_FROM_TAG: $CI_COMMIT_SHA
   BUILD_CACHE_FROM: 'true'
   BUILD_CACHE_FROM_TAGS: $CI_COMMIT_SHA,$CI_COMMIT_BEFORE_SHA
   BUILD_ROOTFS_CREATOR_IMAGE: 'krestomatio/rootfs-creator'
@@ -31,7 +33,6 @@ stages:
     - docker:dind
   before_script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-    - export IMAGE_CREATED=$(git log -1 --pretty='%ad' --date=format:'%Y-%m-%dT%H:%M:%SZ')
   script:
     - ansible-playbook -i hosts main.yml
         $(echo ${BUILD_ANSIBLE_DEBUG:-''})
@@ -39,8 +40,8 @@ stages:
         -e registry_name=$CI_REGISTRY
         -e registry_project=$CI_PROJECT_PATH
         -e dockerfile_builder_push=$BUILD_PUSH
-        -e dockerfile_builder_tag=$CI_COMMIT_SHA
-        -e dockerfile_builder_image_from_tag=$CI_COMMIT_SHA
+        -e dockerfile_builder_tag=$BUILD_TAG
+        -e dockerfile_builder_image_from_tag=$BUILD_FROM_TAG
         -e dockerfile_builder_cache_from_tags=$BUILD_CACHE_FROM_TAGS
         -e rootfs_creator_image=$BUILD_ROOTFS_CREATOR_IMAGE
 

@@ -1,34 +1,13 @@
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
-# General ansible variables
-ENV IMAGE_authors="{{ dockerfile_builder_image_authors }}" \
-    IMAGE_version="{{ dockerfile_builder_image_version }}" \
-    GIT_branch="{{ moodle_git_branch }}" \
-    GIT_commit="{{ moodle_git_commit }}" \
-    GIT_remote="{{ dockerfile_builder_image_git_remote }}" \
-    GIT_chk="{{ dockerfile_builder_image_git_chk }}" \
-    MOODLE_version="{{ moodle_version }}" \
-    MOODLE_ver_short="{{ moodle_version | replace('.','') }}"
-
 # General variables
 ENV IMAGE_name=moodle_app \
     IMAGE_summary="Moodle app code $MOODLE_version" \
-    IMAGE_description="This ${IMAGE_based} based container image has Moodle code for ${MOODLE_version}" \
-    IMAGE_title="Moodle ${MOODLE_version}"
-
-# Labels
-LABEL org.opencontainers.image.title="${IMAGE_title}" \
-      org.opencontainers.image.authors="${IMAGE_authors}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="${IMAGE_version}" \
-      name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},moodle,moodle-${MOODLE_ver_short},moodle${MOODLE_version}" \
-      maintainer="${IMAGE_authors}"
+    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image has Moodle code for ${MOODLE_version}" \
+    IMAGE_title="Moodle ${MOODLE_version}" \
+    MOODLE_version="{{ moodle_version }}" \
+    MOODLE_ver_short="{{ moodle_version | replace('.','') }}"
 
 # Container variables
 ENV CTR_user=apache \
@@ -52,6 +31,12 @@ RUN container-setup-app
 USER ${CTR_user_id}
 WORKDIR ${GIT_dest}
 
+# source variables
+ENV GIT_branch="{{ moodle_git_branch }}" \
+    GIT_commit="{{ moodle_git_commit }}" \
+    GIT_remote="{{ dockerfile_builder_image_git_remote }}" \
+    GIT_chk="{{ dockerfile_builder_image_git_chk }}"
+
 # get source code
 RUN git clone --branch "${GIT_branch}" --depth 1 \
     "${GIT_remote}" "${GIT_dest}"
@@ -68,3 +53,17 @@ RUN fix-permissions -u ${CTR_user_id} ${GIT_dest}/.git
 WORKDIR ${APP_dest}
 
 CMD ${CTR_cmd}
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      org.opencontainers.image.revision="${GIT_commit}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},moodle,moodle-${MOODLE_ver_short},moodle${MOODLE_version}"

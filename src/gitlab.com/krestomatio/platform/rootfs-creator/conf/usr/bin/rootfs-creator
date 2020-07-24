@@ -32,7 +32,7 @@ then
 fi
 
 # create rootfs
-livemedia-creator --logfile="/tmp/build-rootfs.log" \
+livemedia-creator --logfile="/tmp/rootfs-creator.log" \
     --make-tar --ks="${CTR_working_dir}/${BUILD_kickstart}" --no-virt \
     --image-only --image-name="${BUILD_rootfs}"
 
@@ -50,3 +50,6 @@ else
     # save distro release info
     echo "$distro_release" > ${CTR_working_dir}/distro-release
 fi
+
+# save list of packages installed
+jq .[] -r /tmp/dnf.cache/tempfiles.json | awk -F '/' '{print $5}' | sort > ${CTR_working_dir}/pkgs-list

@@ -3,3 +3,4 @@ build/
 centos8-minimal.tar.xz
 distro-release
 pkgs-list
+.notes.md

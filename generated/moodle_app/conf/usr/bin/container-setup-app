@@ -1,0 +1,10 @@
+#!/bin/bash -e
+# description: base config for app
+
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${APP_dest} ${GIT_dest}
+fix-permissions -u ${CTR_user_id} ${APP_dest} ${GIT_dest}

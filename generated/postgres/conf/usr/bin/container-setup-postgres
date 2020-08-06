@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${POSTGRES_data} ${POSTGRES_app_data}
+
+fix-permissions -u ${CTR_user_id} ${POSTGRES_run} ${POSTGRES_home}
+fix-permissions -r -u ${CTR_user_id} ${POSTGRES_app_data}
+
+# restore rpm permissions
+rpm-file-permissions

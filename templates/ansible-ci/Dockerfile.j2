@@ -1,0 +1,46 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_name=ansible-ci \
+    IMAGE_summary="Ansible image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible with tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_title="Ansible CI image based on {{ dockerfile_builder_image_based }}"
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      description="${IMAGE_description}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"
+
+# Container variables
+ENV ANSIBLE_version="{{ image_ansible_version }}" \
+    MOLECULE_version="{{ molecule_version }}" \
+    CTR_apk="apk add --update --no-cache" \
+    CTR_pip="pip install --no-cache --upgrade"
+
+RUN $CTR_apk py-pip openssl ca-certificates && \
+    $CTR_apk --virtual build-dependencies python3-dev \
+        libffi-dev openssl-dev build-base  && \
+    $CTR_pip cffi pip && \
+    $CTR_pip ansible~=$ANSIBLE_version && \
+    $CTR_pip molecule~=$MOLECULE_version && \
+    echo "Installing aditional tools..."  && \
+    $CTR_pip yamllint ansible-lint pycrypto pywinrm docker git-semver commitizen && \
+    $CTR_apk git rsync jq sudo sshpass openssh-client skopeo && \
+    echo "Cleaning..."  && \
+    apk del build-dependencies && \
+    rm -rf /var/cache/apk/* && \
+    rm -rf /tmp/* && \
+    rm -rf ~/.cache && \
+    echo "Minimal ansible config" && \
+    mkdir -p /etc/ansible && \
+    echo 'localhost' > /etc/ansible/hosts
+
+CMD [ "ansible-playbook", "--version" ]

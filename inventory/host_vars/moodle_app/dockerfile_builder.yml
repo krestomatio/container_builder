@@ -1,0 +1,5 @@
+# image
+dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
+  dockerfile_builder_image_from_tag if
+  dockerfile_builder_image_from_tag is defined else '' }}"
+dockerfile_builder_image_version: "0.0.1"

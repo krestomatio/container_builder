@@ -1,0 +1,80 @@
+#! /bin/bash -u
+# description: check moodle httpd container
+
+usage() {
+    cat 1>&2 <<EOF
+Script to check moodle httpd container.
+
+ENVIRONMENT VARS:
+MOODLE_data             moodledata path
+MOODLE_check_path       path from url to check ex. "/index.php"
+MOODLE_check_url        optionally use a complete url instead of path
+MOODLE_check_code       http status code to expect
+MOODLE_check_host       set a host header
+
+USAGE:
+    check-container [OPTIONS]
+
+OPTIONS (check moodle httpd container):
+  -u            check url
+  -m            check if moodledata is writable
+  -l            check liveness (-u)
+  -r            check readiness (-u -m)
+
+EXAMPLES:
+    check-container -u
+    check-container -l
+    check-container -r
+EOF
+}
+
+check_moodledata() {
+    # check moodledata is writable
+    TMPFILE=`mktemp -q -p ${MOODLE_data}/`
+    if [ $? -ne 0 ]; then
+        echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
+        exit 1
+    fi
+    rm $TMPFILE
+}
+
+check_url() {
+    # check url for httpd status code
+    check_url="${MOODLE_check_url:-localhost:${HTTPD_port}${MOODLE_check_path}}"
+
+    curl -s -o /dev/null -w %{http_code} -H "Host: ${MOODLE_check_host}" \
+        "${check_url}" | grep -q "${MOODLE_check_code}"
+    if [ $? -ne 0 ]; then
+        echo "$0: CHECK: Did not receive status code: ${MOODLE_check_code}"
+        exit 1
+    fi
+}
+
+while getopts ":mulr" opt; do
+  case ${opt} in
+    m )
+        check_moodledata
+        ;;
+    u )
+        check_url
+        ;;
+    l )
+        check_moodledata
+        check_url
+        ;;
+    r )
+        check_url
+        ;;
+    \? )
+        usage
+        exit
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if (( $OPTIND == 1 )); then
+    echo -e "No check. Use an option:\n"
+    usage
+    exit
+fi

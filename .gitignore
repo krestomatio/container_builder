@@ -1,6 +1,5 @@
-build/
 /debug.yml
-centos8-minimal.tar.xz
-distro-release
-pkgs-list
+/templates/centos8-minimal/centos8-minimal.tar.xz
+/templates/centos8-minimal/distro-release
+templates/centos8-minimal/pkgs-list
 .notes.md

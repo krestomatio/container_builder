@@ -1,0 +1,11 @@
+# platform vars
+centos_version: '8'
+php_version: '7.2'
+httpd_version: '2.4'
+nginx_version: '1.14'
+postgres_version: '10'
+postgres_prev_version: '9.6'
+
+# builder
+# dockerfile_builder_push: true
+dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y

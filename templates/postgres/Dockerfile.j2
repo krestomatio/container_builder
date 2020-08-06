@@ -1,0 +1,68 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_name=postgres \
+    IMAGE_summary="Postgres {{ postgres_version }}" \
+    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image runs Postgres {{ postgres_version }}. \
+It follows https://github.com/sclorg/postgresql-container" \
+    IMAGE_title="Postgres {{ postgres_version }}" \
+    IMAGE_service_port="5432" \
+    IMAGE_service_name="postgres" \
+    TZ="{{ dockerfile_builder_image_timezone }}"
+
+# Container variables
+ENV CTR_locale_id=${IMAGE_locale_id} \
+    CTR_user=postgres \
+    CTR_user_id="26" \
+    CTR_home=/var/lib/pgsql \
+    CTR_cmd="run-postgresql" \
+    CTR_scripts_path=/usr/share/container-scripts/postgresql
+
+# Component bash variables
+ENV POSTGRES_version="{{ postgres_version }}" \
+    POSTGRES_ver_short="{{ postgres_version | replace('.','') }}" \
+    POSTGRES_prev_version="{{ postgres_prev_version }}" \
+    POSTGRES_port=${IMAGE_service_port} \
+    POSTGRES_run=/var/run/postgresql \
+    POSTGRES_home=${CTR_home} \
+    POSTGRES_data="${CTR_home}/data"
+
+# Frequent environment variables
+ENV HOME="${CTR_home}" \
+    PGUSER="$CTR_user" \
+    LANG="{{ dockerfile_builder_image_lang }}"
+
+ENV OS_install_pkgs="postgresql-server postgresql-contrib gettext nss_wrapper"
+
+USER 0
+
+COPY conf/usr /usr/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+
+RUN container-setup
+RUN install-pkgs ${OS_install_pkgs}
+
+RUN container-setup-postgres
+
+WORKDIR ${CTR_home}
+
+USER ${CTR_user_id}
+
+EXPOSE ${POSTGRES_port}
+
+CMD ${CTR_cmd}
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+      io.openshift.tags="${IMAGE_name},postgres,postgres-${POSTGRES_ver_short},postgres${POSTGRES_ver_short}"

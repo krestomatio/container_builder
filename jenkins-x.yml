@@ -1,0 +1,39 @@
+buildPack: none
+pipelineConfig:
+  pipelines:
+    pullRequest:
+      pipeline:
+        stages:
+        - name: pr-test
+          agent:
+            image: krestomatio/ansible-ci
+          options:
+            containerOptions:
+              securityContext:
+                privileged: true
+          steps:
+          - name: pull-stage-step
+            command: echo
+            args:
+            - ${MYVAR:-$VAR}
+            env:
+            - name: VAR
+              value: PR
+    release:
+      pipeline:
+        stages:
+        - name: release-test
+          agent:
+            image: krestomatio/ansible-ci
+          options:
+            containerOptions:
+              securityContext:
+                privileged: true
+          steps:
+          - name: pull-release-step
+            command: echo
+            args:
+            - ${MYVAR:-$VAR}
+            env:
+            - name: VAR
+              value: RELEASE

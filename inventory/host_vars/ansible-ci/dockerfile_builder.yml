@@ -1,7 +1,7 @@
 # platform vars
 image_ansible_version: '2.9'
 molecule_version: '3.0'
-docker_version: '19'
+docker_version: 'stable'
 
 # options
 dockerfile_builder_pull: true

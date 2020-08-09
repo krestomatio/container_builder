@@ -1,9 +1,7 @@
 FROM scratch
-{% if dockerfile_builder_image_pkgs_checksum is defined %}
 
 # General variables
 ENV IMAGE_rootfs_pkgs_checksum="{{ dockerfile_builder_image_pkgs_checksum }}"
-{% endif %}
 
 ADD centos8-minimal.tar.xz /
 

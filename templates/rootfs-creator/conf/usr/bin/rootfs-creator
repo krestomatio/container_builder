@@ -37,10 +37,10 @@ livemedia-creator --logfile="/tmp/rootfs-creator.log" \
     --image-only --image-name="${BUILD_rootfs}"
 
 # move rootfs to working dir
-mv /var/tmp/${BUILD_rootfs} ${CTR_working_dir}/${BUILD_rootfs}
+cp -rp /var/tmp/${BUILD_rootfs} ${CTR_working_dir}/${BUILD_rootfs}
 
 # extract os-release info
-tar -xvf ${CTR_working_dir}/${BUILD_rootfs} -C /tmp/ --strip-components=3 ./usr/lib/os-release
+tar -xvf /var/tmp/${BUILD_rootfs} -C /tmp/ --strip-components=3 ./usr/lib/os-release
 os_release_id=$(awk -F= '$1=="ID" { print $2 ;}' /tmp/os-release | tr -d '"')
 distro_release=$(grep "${os_release_id}-release-" /tmp/anaconda/packaging.log | grep -o "Verifying:.*" | sed -n 's/Verifying: //p')
 

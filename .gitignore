@@ -1,4 +1,5 @@
 /debug.yml
+/tmp
 /templates/centos8-minimal/centos8-minimal.tar.xz
 /templates/centos8-minimal/distro-release
 templates/centos8-minimal/pkgs-list

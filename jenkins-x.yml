@@ -3,8 +3,19 @@ pipelineConfig:
   pipelines:
     pullRequest:
       pipeline:
+        options:
+          timeout:
+            time: 60
+            unit: minutes
+          containerOptions:
+            volumeMounts:
+            - name: container-storage
+              mountPath: /var/lib/containers
+          volumes:
+          - name: container-storage
+            emptyDir: {}
         stages:
-        - name: pr-test
+        - name: build containers
           agent:
             image: krestomatio/ansible-ci
           options:
@@ -12,28 +23,35 @@ pipelineConfig:
               securityContext:
                 privileged: true
           steps:
-          - name: pull-stage-step
-            command: echo
-            args:
-            - ${MYVAR:-$VAR}
+          - name: build containers
+            command: |
+              # sleep 1400
+              ansible-playbook -i inventory/hosts build.yml \
+                -e registry_name=$REGISTRY_NAME \
+                -e registry_location=$REGISTRY_NAME \
+                -e dockerfile_builder_validate_certs=false \
+                -e registry_project=$REPO_OWNER/$REPO_NAME \
+                -e dockerfile_builder_push=$BUILD_PUSH \
+                -e dockerfile_builder_tags=$VERSION,$PREVIEW_VERSION,$BRANCH_NAME \
+                -e dockerfile_builder_image_from_tag=$VERSION
             env:
-            - name: VAR
-              value: PR
-    release:
-      pipeline:
-        stages:
-        - name: release-test
-          agent:
-            image: krestomatio/ansible-ci
-          options:
-            containerOptions:
-              securityContext:
-                privileged: true
-          steps:
-          - name: pull-release-step
-            command: echo
-            args:
-            - ${MYVAR:-$VAR}
-            env:
-            - name: VAR
-              value: RELEASE
+            - name: DOCKERFILE_BUILDER
+              value: podman
+            - name: BUILD_CONTAINERS
+              value: all
+            - name: CENTOS8_MINIMAL_ARTIFACTS
+              value: 'true'
+            - name: BUILD_PUSH
+              value: 'true'
+            - name: REGISTRY_CONFIG
+              value: 'true'
+            - name: REGISTRY_NAME
+              value: jenkins-x-docker-registry.jx.svc.cluster.local:5000
+            - name: BUILD_CACHE_FROM
+              value: 'true'
+            - name: PLAY_DEBUG
+              value: on_failed
+            - name: PLAY_DIFF
+              value: 'true'
+            - name: VALIDATE_CERTS
+              value: 'false'

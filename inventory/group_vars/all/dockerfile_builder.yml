@@ -2,11 +2,11 @@
 ctr_name: "{{ ansible_host }}"
 
 # containers template dir
-template_dir: templates
+template_dir: templated_contexts
 template_path: "{{ template_dir }}/{{ ctr_name }}"
 
 # containers generated build dir
-generated_dir: generated
+generated_dir: generated_contexts
 generated_path: "{{ generated_dir }}/{{ ctr_name }}"
 
 # registry

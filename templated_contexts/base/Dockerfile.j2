@@ -1,0 +1,40 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_name=base \
+    IMAGE_summary="{{ dockerfile_builder_image_based }} based image" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based for building other images" \
+    IMAGE_title="{{ dockerfile_builder_image_based }} based image"
+
+# Container variables
+ENV CTR_pkg_mgm="{{ dockerfile_builder_image_pkgs_mgm }}" \
+    CTR_user=default \
+    CTR_user_id="1001" \
+    CTR_user_gecos="Default Application User" \
+    CTR_group=root \
+    CTR_group_id="0" \
+    CTR_app="/opt/default" \
+    CTR_entrypoint_opt_path=/opt/container-entrypoint.d
+
+ENV OS_install_pkgs="findutils gzip platform-python"
+
+COPY conf/usr/bin/* /usr/bin/
+COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+
+RUN container-setup
+RUN install-pkgs ${OS_install_pkgs}
+
+ENTRYPOINT ["container-entrypoint"]
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      description="${IMAGE_description}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"

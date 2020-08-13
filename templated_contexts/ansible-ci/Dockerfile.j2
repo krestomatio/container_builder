@@ -1,0 +1,51 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_name=ansible-ci \
+    IMAGE_summary="Ansible image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible with tools like Buildah, Podman, Skopeo and Molecule, for CI" \
+    IMAGE_title="Ansible CI image based on {{ dockerfile_builder_image_based }}"
+
+# Container variables
+ENV ANSIBLE_version="{{ image_ansible_version }}" \
+    MOLECULE_version="{{ molecule_version }}" \
+    CTR_pkg_mgm="dnf install -y" \
+    CTR_pip="pip install --no-cache --upgrade"
+
+RUN echo "Build tools..."  && \
+    $CTR_pkg_mgm python-devel gcc && \
+    echo "Installing pkgs..."  && \
+    $CTR_pip cffi pip && \
+    $CTR_pip ansible~=$ANSIBLE_version && \
+    $CTR_pip molecule~=$MOLECULE_version && \
+    echo "Installing other pip tools..."  && \
+    $CTR_pip yamllint ansible-lint pycrypto git-semver commitizen && \
+    echo "Cleaning..."  && \
+    dnf autoremove -y python-devel gcc && \
+    dnf clean all && \
+    rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
+    echo "Minimal ansible config" && \
+    mkdir -p /etc/ansible && \
+    echo 'localhost' > /etc/ansible/hosts
+
+RUN echo "Installing other tools..."  && \
+    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo \
+    --exclude container-selinux && \
+    echo "Cleaning..." && \
+    dnf clean all && \
+    rm -rf /var/cache /var/log/dnf* /var/log/yum.*
+
+CMD [ "ansible-playbook", "--version" ]
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      description="${IMAGE_description}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"

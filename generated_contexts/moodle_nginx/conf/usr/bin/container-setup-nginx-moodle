@@ -1,0 +1,14 @@
+#!/bin/bash -e
+# description: base config for moodle
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${MOODLE_app} ${MOODLE_data}
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+fix-permissions -u ${CTR_user_id} ${MOODLE_app} ${MOODLE_data} ${APP_dest}

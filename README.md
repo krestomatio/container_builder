@@ -7,5 +7,5 @@ ansible-playbook -i inventory/hosts build.yml
 ```
 ## Directory layout
 * Variables can be changed inside [inventory](inventory) dir
-* Context and dockerfiles templates are inside [templates](templates) dir
-* The generated contexts and dockerfiles are inside [generated](generated) dir
+* Context and dockerfile templates are inside [templated_contexts](templates) dir
+* The generated contexts and dockerfiles are inside [generated_contexts](generated) dir

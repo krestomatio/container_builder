@@ -1,0 +1,35 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+# php-fpm default config
+sed -i \
+    -e 's@^error_log.*@error_log = /proc/self/fd/2@' \
+    -e 's@^daemonize.*@daemonize = no@' \
+    ${PHP_FPM_conf_file}
+
+sed -i \
+    -e 's@^user =.*@user = ${PHP_FPM_user}@' \
+    -e 's@^group =.*@group = ${PHP_FPM_group}@' \
+    -e 's@^slowlog =.*@slowlog = /proc/self/fd/1@' \
+    -e 's@^;access.log =.*@access.log = /proc/self/fd/1@' \
+    -e 's@^;clear_env.*@clear_env = no@' \
+    -e 's@^;catch_workers_output.*@catch_workers_output = yes@' \
+    -e 's@^listen =.*@listen = ${PHP_FPM_listen}@' \
+    -e 's@^listen.owner =.*@listen.owner = ${PHP_FPM_listen_owner}@' \
+    -e 's@^listen.group =.*@listen.group = ${PHP_FPM_listen_group}@' \
+    -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = /proc/self/fd/2@' \
+    ${PHP_FPM_pool_file}
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${PHP_run}
+
+fix-permissions -u ${CTR_user_id} ${PHP_run} ${PHP_conf_file} ${PHP_conf_dir} ${PHP_FPM_conf_dir} ${PHP_FPM_conf_file} ${APP_dest}
+
+# restore rpm permissions
+rpm-file-permissions
+
+# arbitrary user
+# containeruser-arbitrary

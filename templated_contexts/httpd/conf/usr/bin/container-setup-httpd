@@ -1,0 +1,96 @@
+#!/bin/bash -e
+# description: base config for httpd
+
+# httpd default config
+sed -i \
+    -e 's@^Listen 80.*@Listen ${HTTPD_listen}@' \
+    -e 's@^User.*@User ${HTTPD_user}@' \
+    -e 's@^Group.*@Group ${HTTPD_group}@' \
+    -e 's@^DocumentRoot.*@DocumentRoot "${HTTPD_documentroot}"@' \
+    -e 's@^<Directory "/var/www/html"@<Directory "${HTTPD_documentroot}"@' \
+    -re 's@^(\s*CustomLog)\s+\S+@\1 /proc/self/fd/1@g' \
+    -re 's@^(\s*ErrorLog)\s+\S+@\1 /proc/self/fd/2@g' \
+    -re 's@^(\s*TransferLog)\s+\S+@\1 /proc/self/fd/1@g' \
+    ${HTTPD_main_conf_file}
+
+# httpd php-fpm config
+if ! [ -f ${HTTPD_main_conf_d_path}/php.conf ]; then
+    cat << "_EOF" > ${HTTPD_main_conf_d_path}/php.conf
+#
+# The following lines prevent .user.ini files from being viewed by Web clients.
+#
+<Files ".user.ini">
+    Require all denied
+</Files>
+
+#
+# Allow php to handle Multiviews
+#
+AddType text/html .php
+
+#
+# Add index.php to the list of files that will be served as directory
+# indexes.
+#
+DirectoryIndex index.php
+
+#
+# Redirect to local php-fpm (no mod_php in default configuration)
+#
+<IfModule !mod_php5.c>
+  <IfModule !mod_php7.c>
+    # Enable http authorization headers
+    SetEnvIfNoCase ^Authorization$ "(.+)" HTTP_AUTHORIZATION=$1
+
+    <FilesMatch \.(php|phar)$>
+        SetHandler "${HTTPD_php_sethandler}"
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+#
+# mod_php is deprecated as FPM is now used by default with httpd in event mode
+# mod_php is only used when explicitly enabled or httpd switch to prefork mode
+#
+# mod_php options
+#
+<IfModule  mod_php7.c>
+    #
+    # Cause the PHP interpreter to handle files with a .php extension.
+    #
+    <FilesMatch \.(php|phar)$>
+        SetHandler application/x-httpd-php
+    </FilesMatch>
+
+    #
+    # Uncomment the following lines to allow PHP to pretty-print .phps
+    # files as PHP source code:
+    #
+    #<FilesMatch \.phps$>
+    #    SetHandler application/x-httpd-php-source
+    #</FilesMatch>
+
+    #
+    # Apache specific PHP configuration options
+    # those can be override in each configured vhost
+    #
+    php_value soap.wsdl_cache_dir  "/var/lib/php/wsdlcache"
+
+    #php_value opcache.file_cache   "/var/lib/php/opcache"
+</IfModule>
+_EOF
+else
+    sed -i 's@SetHandler "proxy.*@SetHandler "${HTTPD_php_sethandler}"@' ${HTTPD_main_conf_d_path}/php.conf
+fi
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+fix-permissions -u ${CTR_user_id} ${HTTPD_main_conf_path} ${HTTPD_main_conf_d_path} ${HTTPD_var_run_path} ${HTTPD_log_path} ${APP_dest}
+
+# restore rpm permissions
+rpm-file-permissions
+
+# # arbitrary user
+# containeruser-arbitrary

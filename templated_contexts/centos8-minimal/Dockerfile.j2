@@ -1,0 +1,12 @@
+FROM scratch
+
+# General variables
+ENV IMAGE_rootfs_pkgs_checksum="{{ dockerfile_builder_image_pkgs_checksum }}"
+
+ADD centos8-minimal.tar.xz /
+
+# Labels
+LABEL org.opencontainers.image.title="CentOS Minimal Image" \
+      org.opencontainers.image.licenses="GPLv2"
+
+CMD ["/bin/bash"]

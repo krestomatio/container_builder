@@ -44,7 +44,7 @@ libcom_err-1.45.4-3.el8.x86_64.rpm
 libcurl-7.61.1-12.el8.x86_64.rpm
 libdb-5.3.28-37.el8.x86_64.rpm
 libdb-utils-5.3.28-37.el8.x86_64.rpm
-libdnf-0.39.1-5.el8.x86_64.rpm
+libdnf-0.39.1-6.el8_2.x86_64.rpm
 libffi-3.1-21.el8.x86_64.rpm
 libgcc-8.3.1-5.el8.0.2.x86_64.rpm
 libgcrypt-1.8.3-4.el8.x86_64.rpm
@@ -105,7 +105,7 @@ rpm-libs-4.14.2-37.el8.x86_64.rpm
 sed-4.5-1.el8.x86_64.rpm
 setup-2.12.2-5.el8.noarch.rpm
 sqlite-libs-3.26.0-6.el8.x86_64.rpm
-systemd-libs-239-30.el8_2.x86_64.rpm
+systemd-libs-239-31.el8_2.2.x86_64.rpm
 tzdata-2020a-1.el8.noarch.rpm
 xz-libs-5.2.4-3.el8.x86_64.rpm
 zlib-1.2.11-13.el8.x86_64.rpm

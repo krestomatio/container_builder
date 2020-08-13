@@ -1,0 +1,28 @@
+repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
+repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
+build_cache_from_tag_list:
+  - "{{ lookup('env','VERSION') }}"
+  - "{{ lookup('env','PREVIEW_VERSION') }}"
+  - "{{ lookup('env','BRANCH_NAME') }}"
+build_tag_list:
+  - "{{ lookup('env','VERSION') }}"
+  - "{{ lookup('env','PREVIEW_VERSION') }}"
+  - "{{ lookup('env','BRANCH_NAME') }}"
+
+registry_name: "{{ lookup('env','REGISTRY_NAME') | default('gcr.io',true) }}"
+registry_unqualified: "{{ lookup('env','REGISTRY_UNQUALIFIED') | default(registry_name,true) }}"
+registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name,true) }}"
+registry_config: "{{ lookup('env','REGISTRY_CONFIG') | default(true,true) }}"
+registry_conf_dir: "{{ lookup('env','HOME') | default('~/',true) }}/.config/containers/ }}"
+registry_project: "{{ lookup('env','REGISTRY_PROJECT') | default(repo_owner+'/'+repo_name,true) }}"
+
+# dockerfile_builder
+dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('podman',true) }}"
+dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"
+dockerfile_builder_push: "{{ lookup('env','BUILD_PUSH') | default(false,true) }}"
+dockerfile_builder_cache_from_tags: "{{ lookup('env','BUILD_CACHE_FROM_TAGS') | default(build_cache_from_tag_list,true) }}"
+dockerfile_builder_tags: "{{ lookup('env','BUILD_TAGS') | default(build_tag_list,true) }}"
+dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(false,true) }}"
+
+# centos8-minimal
+centos8_minimal_rootfs: "{{ lookup('env','CENTOS8_MINIMAL_ROOTFS') | default(true,true) }}"

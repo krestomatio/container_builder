@@ -1,0 +1,15 @@
+- name: "add image tags"
+  when:
+    - not dockerfile_builder_omit | default(false)
+    - dockerfile_builder_tags is defined and dockerfile_builder_tags
+  block:
+  - name: show tags defined
+    debug:
+      msg: "Tag: {{ tag }} to {{ ansible_host }} will be added"
+
+  - name: adding tags
+    vars:
+      dockerfile_builder_tag: "{{ tag }}"
+    include_role:
+      name: dockerfile_builder
+      tasks_from: "{{ dockerfile_builder }}"

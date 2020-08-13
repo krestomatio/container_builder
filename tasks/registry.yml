@@ -1,0 +1,37 @@
+- name: set registry config
+  run_once: true
+  when:
+    - dockerfile_builder == 'podman'
+    - registry_config | default(false)
+  block:
+  - name: check dir exists
+    file:
+      dest: "{{ registry_conf_dir }}"
+      state: directory
+
+  - name: add config
+    copy:
+      content: |
+        {% if registry_unqualified is defined and registry_unqualified %}
+        unqualified-search-registries = [{{ registry_unqualified }}]
+        {% endif %}
+
+        {% if registry_location is defined and registry_location %}
+        [[registry]]
+        location = "{{ registry_location }}"
+        {% if registry_prefix is defined and registry_prefix %}
+        prefix = "{{ registry_prefix }}"
+        {% endif %}
+        insecure = {{ registry_insecure | default('false') }}
+        blocked = {{ registry_blocked | default('false') }}
+        {% endif %}
+
+        {% if registry_mirror is defined and registry_mirror %}
+        [[registry.mirror]]
+        location = "{{ registry_mirror }}"
+        {% endif %}
+
+        {% if registry_additional is defined and registry_additional %}
+        {{ registry_additional }}
+        {% endif %}
+      dest: "{{ registry_conf_dir }}/registries.conf"

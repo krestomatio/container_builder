@@ -1,7 +1,7 @@
 # image
 dockerfile_builder_image_from: "{{ registry_path }}/moodle_nginx_web{{ ':' +
   dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined else '' }}"
+  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
 dockerfile_builder_image_version: "0.0.1"
 dockerfile_builder_image_name: moodle_nginx_web
 dockerfile_builder_image_summary: "PHP $PHP_version and NGINX ${NGINX_version} for Moodle"
@@ -18,4 +18,4 @@ template_path: "{{ template_dir }}/moodle_php-fpm"
 # other
 moodle_app_copy_from: "{{ registry_path }}/moodle_app{{ ':' +
   dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined else '' }}"
+  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"

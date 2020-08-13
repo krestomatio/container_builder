@@ -1,163 +1,34 @@
-- hosts: "{{ ctrs_to_build | default(lookup('env','BUILD_CONTAINERS')) | default('all',true) }}"
+- hosts: "{{ build_containers | default('all') }}"
   connection: local
-  vars:
-    dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
-    dockerfile_builders:
-      - podman
-      - docker
-    dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(omit,true) }}"
-  serial: "{{ omit if dockerfile_builder not in dockerfile_builders or playbook_serial_omit | default(false) else 1 }}"
-  debugger: "{{ play_debug | default(lookup('env','PLAY_DEBUG')) | default('never',true) }}"
-  diff: "{{ play_diff | default(lookup('env','PLAY_DIFF')) | default(false,true) }}"
+  serial: "{{ omit if build_playbook_no_serial else 1 }}"
+  diff: "{{ build_play_diff | default(false) }}"
+  vars_files: "vars/build.yml"
   tasks:
-    - name: set registry config
-      when:
-        - dockerfile_builder == 'podman'
-        - registry_config | default(lookup('env','REGISTRY_CONFIG')) | default(false,true)
+    - name: include cloud provider vars
       vars:
-        registry_conf_dir: "{{ lookup('env','HOME') | default('~/',true) }}/.config/containers/"
-      block:
-      - name: check dir exists
-        file:
-          dest: "{{ registry_conf_dir }}"
-          state: directory
-
-      - name: add config
-        copy:
-          content: |
-            unqualified-search-registries = [{{ registry_unqualified | default(lookup('env','REGISTRY_UNQUALIFIED')) | default("'registry.fedoraproject.org', 'registry.access.redhat.com', 'registry.centos.org', 'docker.io'",true) }}]
-
-            [[registry]]
-            location = "{{ registry_location | default(lookup('env','REGISTRY_LOCATION')) | default('localhost',true) }}"
-            {% if registry_prefix is defined %}
-            prefix = "{{ registry_prefix | default(lookup('env','REGISTRY_PREFIX')) | default('internal',true) }}"
-            {% endif %}
-            insecure = {{ registry_insecure | default(lookup('env','REGISTRY_INSECURE')) | default('true',true) }}
-            blocked = {{ registry_blocked | default(lookup('env','REGISTRY_BLOCKED')) | default('false',true) }}
-
-            {% if registry_additional is defined %}
-            {{ registry_additional }}
-            {% endif %}
-          dest: "{{ registry_conf_dir }}/registries.conf"
-
-    - name: cache from image name if 'cache_from' is true
+        cloud_provider: "{{ lookup('env','CLOUD_PROVIDER') | default('none',true) }}"
       when:
-        - cache_from | default(lookup('env','BUILD_CACHE_FROM')) | default(false,true)
-      block:
-      - name: set cache from variable
-        with_items: "{{ (dockerfile_builder_cache_from_tags | default(dockerfile_builder_tags) |
-          default(dockerfile_builder_tag) | default('latest')).split(',') }}"
-        set_fact:
-          dockerfile_builder_cache_from:
-            "{{ dockerfile_builder_cache_from | default([]) +
-            [dockerfile_builder_image + ':' + item] }}"
+        - cloud_provider == 'gke'
+      include_vars:
+        dir: "vars/{{ cloud_provider }}/"
+        ignore_unknown_extensions: True
+        extensions:
+          - yml
 
-      - name: set cache build args variables
-        when: dockerfile_builder == 'docker'
-        set_fact:
-          dockerfile_builder_args: "{{  dockerfile_builder_args | default({}) | combine({'BUILDKIT_INLINE_CACHE': 1}) }}"
+    - include_tasks: tasks/registry.yml
 
-      - name: pull cache image using docker
-        ignore_errors: true
-        changed_when: false
-        with_items: "{{ dockerfile_builder_cache_from }}"
-        when: dockerfile_builder == 'docker'
-        docker_image:
-          name: "{{ item }}"
-          source: pull
+    - include_tasks: tasks/cache.yml
 
-      - name: pull cache image using podman
-        ignore_errors: true
-        changed_when: false
-        with_items: "{{ dockerfile_builder_cache_from }}"
-        when: dockerfile_builder == 'podman'
-        podman_image:
-          name: "{{ item }}"
-          validate_certs:
-            "{{ dockerfile_builder_validate_certs | default(omit) }}"
-
-    - when: ansible_host == 'centos8-minimal'
-      vars:
-        ctr_generated_path: "{{ playbook_dir }}/{{ generated_path }}"
-        ctr_template_path: "{{ playbook_dir }}/{{ template_path }}"
-        pkgs_list_old: "{{ ctr_generated_path }}/pkgs-list"
-        pkgs_list_new: "{{ ctr_template_path }}/pkgs-list"
-        centos8_minimal_artifacts: "{{ lookup('env','CENTOS8_MINIMAL_ARTIFACTS') | default(false,true) }}"
-      block:
-      - name: prepare artifacts for centos8-minimal
-        when:
-          - dockerfile_builder == 'docker'
-          - centos8_minimal_artifacts | bool
-        docker_container:
-          name: rootfs-creator
-          image: "{{ rootfs_creator_image | default('krestomatio/rootfs-creator') }}"
-          privileged: true
-          detach: false
-          cleanup: true
-          env:
-            BUILD_kickstart: centos8-minimal.ks
-            BUILD_rootfs: centos8-minimal.tar.xz
-          volumes:
-            - "{{ ctr_template_path }}:/build:z"
-
-      - name: prepare artifacts for centos8-minimal
-        when:
-          - dockerfile_builder == 'podman'
-          - centos8_minimal_artifacts | bool
-        changed_when: false
-        command: "podman run --privileged --rm
-          -v '{{ ctr_template_path }}:/build:z' krestomatio/rootfs-creator
-          centos8-minimal.ks centos8-minimal.tar.xz"
-
-      - name: get old pkgs total checksum
-        stat:
-          path: "{{ pkgs_list_old }}"
-        register: centos_pkgs_file_old
-
-      - name: get new pkgs total checksum
-        stat:
-          path: "{{ pkgs_list_new }}"
-        register: centos_pkgs_file_new
-        failed_when: not centos_pkgs_file_new.stat.exists
-
-      - name: save new pkgs total checksum
-        when:
-          - centos_pkgs_file_new.stat.exists
-        set_fact:
-          dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_new.stat.checksum }}"
-
-      - name: omit src sync when no new pkgs
-        when:
-          - centos_pkgs_file_old.stat.exists
-          - centos_pkgs_file_new.stat.exists
-          - centos_pkgs_file_new.stat.checksum == centos_pkgs_file_old.stat.checksum
-        set_fact:
-          dockerfile_builder_src_omit: true
-
-      - name: omit src sync when no new pkgs list in place
-        when:
-          - not centos_pkgs_file_new.stat.exists
-        set_fact:
-          dockerfile_builder_src_omit: true
+    - include_tasks: tasks/centos8-minimal.yml
 
     - name: build containers
       when: not dockerfile_builder_omit | default(false)
-      import_role:
+      include_role:
         name: dockerfile_builder
 
-    - name: "add tags"
+    - include_tasks: tasks/tags.yml
+      loop: "{{ dockerfile_builder_tags }}"
+      loop_control:
+        loop_var: tag
       when:
-        - not dockerfile_builder_omit | default(false)
-        - dockerfile_builder_tags is defined
-      block:
-      - name: tags defined
-        debug:
-          msg: "Tags: {{ dockerfile_builder_tags }} to {{ ansible_host }}"
-
-      - name: adding tags
-        with_items: "{{ dockerfile_builder_tags.split(',') }}"
-        vars:
-          dockerfile_builder_tag: "{{ item }}"
-        include_role:
-          name: dockerfile_builder
-          tasks_from: "{{ dockerfile_builder }}"
+        - tag is defined and tag

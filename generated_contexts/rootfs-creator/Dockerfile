@@ -1,5 +1,5 @@
 # Ansible managed
-FROM centos:8
+FROM docker.io/centos:8
 
 # General variables
 ENV IMAGE_name=rootfs-creator \

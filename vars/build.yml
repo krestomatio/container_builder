@@ -1,0 +1,4 @@
+# build playbook
+build_containers: "{{ lookup('env','BUILD_CONTAINERS') | default('all',true) }}"
+build_playbook_no_serial: "{{ lookup('env','BUILD_NO_SERIAL') | default(false,true) }}"
+build_play_diff: "{{ lookup('env','PLAY_DIFF') | default(false,true) }}"

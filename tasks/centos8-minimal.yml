@@ -1,0 +1,63 @@
+- when: ansible_host == 'centos8-minimal'
+  vars:
+    ctr_generated_path: "{{ playbook_dir }}/{{ generated_path }}"
+    ctr_template_path: "{{ playbook_dir }}/{{ template_path }}"
+    pkgs_list_old: "{{ ctr_generated_path }}/pkgs-list"
+    pkgs_list_new: "{{ ctr_template_path }}/pkgs-list"
+    centos8_minimal_rootfs: false
+  block:
+  - name: prepare artifacts for centos8-minimal
+    when:
+      - dockerfile_builder == 'docker'
+      - centos8_minimal_rootfs
+    docker_container:
+      name: rootfs-creator
+      image: "{{ rootfs_creator_image | default('krestomatio/rootfs-creator') }}"
+      privileged: true
+      detach: false
+      cleanup: true
+      env:
+        BUILD_kickstart: centos8-minimal.ks
+        BUILD_rootfs: centos8-minimal.tar.xz
+      volumes:
+        - "{{ ctr_template_path }}:/build:z"
+
+  - name: prepare artifacts for centos8-minimal
+    when:
+      - dockerfile_builder == 'podman'
+      - centos8_minimal_rootfs | bool
+    changed_when: false
+    command: "podman run --privileged --rm
+      -v '{{ ctr_template_path }}:/build:z' krestomatio/rootfs-creator
+      centos8-minimal.ks centos8-minimal.tar.xz"
+
+  - name: get old pkgs total checksum
+    stat:
+      path: "{{ pkgs_list_old }}"
+    register: centos_pkgs_file_old
+
+  - name: get new pkgs total checksum
+    stat:
+      path: "{{ pkgs_list_new }}"
+    register: centos_pkgs_file_new
+    failed_when: not centos_pkgs_file_new.stat.exists
+
+  - name: save new pkgs total checksum
+    when:
+      - centos_pkgs_file_new.stat.exists
+    set_fact:
+      dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_new.stat.checksum }}"
+
+  - name: omit src sync when no new pkgs
+    when:
+      - centos_pkgs_file_old.stat.exists
+      - centos_pkgs_file_new.stat.exists
+      - centos_pkgs_file_new.stat.checksum == centos_pkgs_file_old.stat.checksum
+    set_fact:
+      dockerfile_builder_src_omit: true
+
+  - name: omit src sync when no new pkgs list in place
+    when:
+      - not centos_pkgs_file_new.stat.exists
+    set_fact:
+      dockerfile_builder_src_omit: true

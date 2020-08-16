@@ -1,6 +1,12 @@
-/debug.yml
-/tmp
-/templates/centos8-minimal/centos8-minimal.tar.xz
-/templates/centos8-minimal/distro-release
-templates/centos8-minimal/pkgs-list
+# temporary variables files
+vars/**/*tmp_vars.yml
+vars/**/*tmp_vault_vars.yml
+# local files
+debug.yml
+tmp/
+# centos8-artifacts in templated_contexts
+templated_contexts/centos8-minimal/centos8-minimal.tar.xz
+templated_contexts/centos8-minimal/distro-release
+templated_contexts/centos8-minimal/pkgs-list
+# local notes
 .notes.md

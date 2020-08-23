@@ -1,6 +1,9 @@
-[platform]
-ansible-ci
+[ci]
+ansible-docker-ci
+ansible-podman-ci
 rootfs-creator
+
+[platform]
 centos8-minimal
 base
 httpd
@@ -18,8 +21,6 @@ moodle_web
 moodle_httpd
 
 [platform_s1]
-ansible-ci
-rootfs-creator
 centos8-minimal
 
 [platform_s2]

@@ -1,0 +1,41 @@
+- name: set destination image name
+  when:
+    - build_registry_path is defined and build_registry_path
+    - registry_path != build_registry_path
+  set_fact:
+    build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
+
+- name: check if build image exists
+  when: build_image_name is defined
+  command: "{{ dockerfile_builder }} images -q {{ build_image_name }}"
+  changed_when: false
+  register: build_image_name_exist
+
+- name: tag build image
+  when: build_image_name_exist.stdout | default(false) | bool
+  command: "{{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name }}"
+
+- name: add tags to image
+  when:
+    - dockerfile_builder_tags is defined and dockerfile_builder_tags
+  register: tag_image_task
+  ignore_errors: true
+  changed_when: false
+  shell: |
+    tags=( "{{ dockerfile_builder_tags | join('" "')}}" )
+    for tag in "${tags[@]}"
+    do
+      {{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name | default(dockerfile_builder_image) }}:${tag}
+      exit_code=$?
+      if ! [ $exit_code -eq 0 ]
+      then
+        echo "TAG: '${tag}'...not added"
+      else
+        echo "TAG: '${tag}'...added"
+      fi
+    done
+
+- name: show tagging output
+  when: tag_image_task.stdout_lines is defined
+  debug:
+    msg: "{{ tag_image_task.stdout_lines }}"

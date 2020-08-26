@@ -1,39 +1,31 @@
 buildPack: none
 pipelineConfig:
+  env:
+  - name: CLOUD_PROVIDER
+    value: gke
   pipelines:
     pullRequest:
       pipeline:
+        options:
+          timeout:
+            time: 60
+            unit: minutes
         stages:
-        - name: pr-test
+        - name: build
           agent:
-            image: krestomatio/ansible-ci
+            image: krestomatio/ansible-docker-ci
+          env:
+          - name: DOCKER_CONFIG_JSON
+            valueFrom:
+              secretKeyRef:
+                name: jenkins-docker-cfg
+                key: config.json
           options:
             containerOptions:
               securityContext:
                 privileged: true
           steps:
-          - name: pull-stage-step
-            command: echo
-            args:
-            - ${MYVAR:-$VAR}
-            env:
-            - name: VAR
-              value: PR
-    release:
-      pipeline:
-        stages:
-        - name: release-test
-          agent:
-            image: krestomatio/ansible-ci
-          options:
-            containerOptions:
-              securityContext:
-                privileged: true
-          steps:
-          - name: pull-release-step
-            command: echo
-            args:
-            - ${MYVAR:-$VAR}
-            env:
-            - name: VAR
-              value: RELEASE
+          - name: update submodules
+            command: git submodule update --init --recursive
+          - name: build containers
+            command: ansible-playbook -i inventory/hosts build.yml

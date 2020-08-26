@@ -1,0 +1,8 @@
+- name: include cloud provider vars
+  when:
+    - cloud_provider == 'gke'
+  include_vars:
+    dir: "{{ playbook_dir }}/vars/{{ cloud_provider }}/"
+    ignore_unknown_extensions: True
+    extensions:
+      - yml

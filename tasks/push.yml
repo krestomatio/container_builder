@@ -1,0 +1,6 @@
+- name: push image and its tags
+  vars:
+    push_image_name: "{{ build_image_name | default(dockerfile_builder_image) }}"
+  command: "{{ dockerfile_builder }} push {{ push_image_name }}"
+  changed_when: "': Pushed' in push_image_status.stdout"
+  register: push_image_status

@@ -1,34 +1,51 @@
-- hosts: "{{ build_containers | default('all') }}"
+- hosts: "{{ build_play_containers | default('all') }}"
   connection: local
-  serial: "{{ omit if build_playbook_no_serial else 1 }}"
-  diff: "{{ build_play_diff | default(false) }}"
+  diff: "{{ build_play_diff | default(omit) }}"
   vars_files: "vars/build.yml"
+  environment:
+    DOCKER_BUILDKIT: 1
   tasks:
-    - name: include cloud provider vars
-      vars:
-        cloud_provider: "{{ lookup('env','CLOUD_PROVIDER') | default('none',true) }}"
-      when:
-        - cloud_provider == 'gke'
-      include_vars:
-        dir: "vars/{{ cloud_provider }}/"
-        ignore_unknown_extensions: True
-        extensions:
-          - yml
+    - name: load provider related variables
+      include_tasks: tasks/provider-vars.yml
+      when: cloud_provider | default('none') != 'none'
 
-    - include_tasks: tasks/registry.yml
+    - name: check valid builder
+      tags: always
+      assert:
+        that: dockerfile_builder in ['docker','podman']
 
-    - include_tasks: tasks/cache.yml
+    - name: builder related config
+      include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
+      when: builder_config | default(false) | bool
 
-    - include_tasks: tasks/centos8-minimal.yml
+    - name: prepare rootfs for centos8 container
+      include_tasks: tasks/prepare-centos8.yml
+      when: ansible_host == 'centos8-minimal'
 
-    - name: build containers
-      when: not dockerfile_builder_omit | default(false)
-      include_role:
-        name: dockerfile_builder
+    - name: set version related facts
+      include_tasks: tasks/version.yml
 
-    - include_tasks: tasks/tags.yml
-      loop: "{{ dockerfile_builder_tags }}"
+    - name: use build cache
+      include_tasks: tasks/cache.yml
+      when: build_cache | default(false) | bool
+
+    - name: build image
       loop_control:
-        loop_var: tag
-      when:
-        - tag is defined and tag
+        loop_var: build_step
+      loop:
+        - "ci"
+        - "platform_s1"
+        - "platform_s2"
+        - "platform_s3"
+        - "platform_s4"
+        - "app_s1"
+        - "app_s2"
+        - "app_s3"
+      include_tasks: tasks/build.yml
+
+    - name: tag image
+      include_tasks: tasks/tag.yml
+
+    - name: push image
+      include_tasks: tasks/push.yml
+      when: build_push | default(false) | bool

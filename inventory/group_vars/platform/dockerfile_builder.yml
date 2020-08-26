@@ -1,3 +1,6 @@
+# registry
+registry_name: "{{ platform_registry_name }}"
+
 # platform vars
 centos_version: '8'
 php_version: '7.2'

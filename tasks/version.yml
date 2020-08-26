@@ -1,0 +1,47 @@
+- name: append build or sha to full alternative version
+  when:
+    - alternative_version_full is defined
+    - alternative_version_full_add_build | default(false)
+    - build_number is defined
+  set_fact:
+    alternative_version_full: "{{ alternative_version_full
+      + '-' + alternative_version_build | default(build_number) }}"
+
+- name: add alternative version to tags
+  when: alternative_version_full is defined
+  set_fact:
+    dockerfile_builder_tags:
+      "{{ dockerfile_builder_tags | default([]) +
+      [alternative_version_full] }}"
+
+- name: convert version to minor and major tags
+  when:
+    - build_add_minor_major_tags | default(false) | bool
+    - item is defined and item
+    - "'.' in item"
+  with_items: "{{ dockerfile_builder_tags }}"
+  set_fact:
+    build_minor_major_tags: "{{ build_minor_major_tags | default([]) +
+    [item.split('.')[0] + '.' + item.split('.')[1]] +
+    [item.split('.')[0]] }}"
+
+- name: add minor and major tags to build tags
+  when: build_minor_major_tags is defined
+  set_fact:
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags + build_minor_major_tags }}"
+
+- name: convert version to minor and major cache tags
+  when:
+    - build_add_minor_major_cache_tags | default(false) | bool
+    - item is defined and item
+    - "'.' in item"
+  with_items: "{{ build_cache_from_tags }}"
+  set_fact:
+    build_minor_major_cache_tags: "{{ build_minor_major_cache_tags | default([]) +
+    [item.split('.')[0] + '.' + item.split('.')[1]] +
+    [item.split('.')[0]] }}"
+
+- name: add minor and major tags to cache from tags
+  when: build_minor_major_cache_tags is defined
+  set_fact:
+    build_cache_from_tags: "{{ build_cache_from_tags + build_minor_major_cache_tags }}"

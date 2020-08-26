@@ -1,0 +1,4 @@
+- name: build image
+  when: ansible_host in groups[build_step|default('all')]
+  include_role:
+    name: dockerfile_builder

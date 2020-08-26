@@ -1,42 +1,53 @@
-- name: build using cache from images
+- name: set cache image name
   when:
-    - dockerfile_builder_cache_from_tags is defined and dockerfile_builder_cache_from_tags
-    - dockerfile_builder_cache_from is not defined
+    - cache_registry_path is defined and cache_registry_path
+    - registry_path != cache_registry_path
   set_fact:
-    cache_from: true
+    cache_image_name: "{{ cache_registry_path }}/{{ ansible_host }}"
 
-- when:
-    - cache_from | default(false)
-  block:
-  - name: set images and respective tags (if any)
-    when: item is defined and item
-    with_items: "{{ (dockerfile_builder_cache_from_tags |
-      default(dockerfile_builder_tag) | default('latest')) }}"
-    set_fact:
-      dockerfile_builder_cache_from:
-        "{{ dockerfile_builder_cache_from | default([]) +
-        [dockerfile_builder_image + ':' + item] }}"
+- name: set cache images with respective tags (if any)
+  when:
+    - item is defined and item
+  loop: "{{ (build_cache_from_tags |
+    default(dockerfile_builder_tag) | default(['latest'])) }}"
+  set_fact:
+    dockerfile_builder_cache_from:
+      "{{ dockerfile_builder_cache_from | default([]) +
+      [cache_image_name | default(dockerfile_builder_image) +
+      ':' + item] }}"
 
-  - name: set cache build args variables
-    when: dockerfile_builder == 'docker'
-    set_fact:
-      dockerfile_builder_args: "{{  dockerfile_builder_args | default({}) | combine({'BUILDKIT_INLINE_CACHE': 1}) }}"
+- name: set cache build args variables
+  when: dockerfile_builder == 'docker'
+  set_fact:
+    dockerfile_builder_args: "{{  dockerfile_builder_args | default({}) | combine({'BUILDKIT_INLINE_CACHE': 1}) }}"
+    dockerfile_builder_buildkit: '1'
 
-  - name: pull cache image using docker
-    ignore_errors: true
-    changed_when: false
-    with_items: "{{ dockerfile_builder_cache_from }}"
-    when: dockerfile_builder == 'docker'
-    docker_image:
-      name: "{{ item }}"
-      source: pull
+- name: prepull cache from image(s)
+  when:
+    - build_cache_prepull | default(false) | bool
+  register: build_cache_prepull_task
+  ignore_errors: true
+  changed_when: false
+  shell: |
+    images=( "{{ dockerfile_builder_cache_from | join('" "')}}" )
+    for image in "${images[@]}"
+    do
+      prepull=`{{ dockerfile_builder }} pull ${image}`
+      exit_code=$?
+      if ! [ $exit_code -eq 0 ]
+      then
+        echo "${image}...not available"
+      else
+        echo "${image}...available"
+        echo "${prepull}" | grep "^Status"
+    {% if build_cache_first_prepull | default(false) | bool %}
+        echo "Continue after first successfully prepull image..."
+        break
+    {% endif %}
+      fi
+    done
 
-  - name: pull cache image using podman
-    ignore_errors: true
-    changed_when: false
-    with_items: "{{ dockerfile_builder_cache_from }}"
-    when: dockerfile_builder == 'podman'
-    podman_image:
-      name: "{{ item }}"
-      validate_certs:
-        "{{ dockerfile_builder_validate_certs | default(omit) }}"
+- name: show prepull output
+  when: build_cache_prepull_task.stdout_lines is defined
+  debug:
+    msg: "{{ build_cache_prepull_task.stdout_lines }}"

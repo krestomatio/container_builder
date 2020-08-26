@@ -1,5 +1,5 @@
 # Ansible managed
-FROM krestomatio/nginx
+FROM quay.io/krestomatio/nginx
 
 # General variables
 ENV IMAGE_name=php-fpm \

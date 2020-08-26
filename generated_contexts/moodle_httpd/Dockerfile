@@ -1,5 +1,5 @@
 # Ansible managed
-FROM krestomatio/httpd
+FROM quay.io/krestomatio/httpd
 
 # General variables
 ENV IMAGE_name="moodle_httpd" \
@@ -11,7 +11,7 @@ ENV IMAGE_name="moodle_httpd" \
 # Component bash variables
 ENV MOODLE_version="3.9" \
     MOODLE_ver_short="39" \
-    MOODLE_commit="95c4f624c8f8b63a3e60e221aee4c01def2563fd" \
+    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
     MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata \
     MOODLE_check_path=/login/index.php \

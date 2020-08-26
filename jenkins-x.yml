@@ -1,5 +1,8 @@
 buildPack: none
 pipelineConfig:
+  env:
+  - name: CLOUD_PROVIDER
+    value: gke
   pipelines:
     pullRequest:
       pipeline:
@@ -7,20 +10,22 @@ pipelineConfig:
           timeout:
             time: 60
             unit: minutes
-          containerOptions:
-            volumeMounts:
-            - name: container-storage
-              mountPath: /var/lib/containers
-          volumes:
-          - name: container-storage
-            emptyDir: {}
         stages:
-        - name: build containers
+        - name: build
           agent:
-            image: krestomatio/ansible-ci
+            image: krestomatio/ansible-docker-ci
+          env:
+          - name: DOCKER_CONFIG_JSON
+            valueFrom:
+              secretKeyRef:
+                name: jenkins-docker-cfg
+                key: config.json
           options:
             containerOptions:
               securityContext:
                 privileged: true
           steps:
-          - command: ansible-playbook -i inventory/hosts build.yml
+          - name: update submodules
+            command: git submodule update --init --recursive
+          - name: build containers
+            command: ansible-playbook -i inventory/hosts build.yml

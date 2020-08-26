@@ -1,5 +1,5 @@
 # Ansible managed
-FROM krestomatio/base
+FROM quay.io/krestomatio/base
 
 # General variables
 ENV IMAGE_name=moodle_app \
@@ -33,7 +33,7 @@ WORKDIR ${GIT_dest}
 
 # source variables
 ENV GIT_branch="MOODLE_39_STABLE" \
-    GIT_commit="95c4f624c8f8b63a3e60e221aee4c01def2563fd" \
+    GIT_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
     GIT_remote="git://github.com/moodle/moodle" \
     GIT_chk="https://api.github.com/repos/moodle/moodle/git/refs/heads/MOODLE_39_STABLE"
 

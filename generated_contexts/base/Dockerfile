@@ -1,5 +1,5 @@
 # Ansible managed
-FROM krestomatio/centos8-minimal
+FROM quay.io/krestomatio/centos8-minimal
 
 # General variables
 ENV IMAGE_name=base \
@@ -18,9 +18,6 @@ ENV CTR_pkg_mgm="microdnf --setopt=tsflags=nodocs -y" \
     CTR_entrypoint_opt_path=/opt/container-entrypoint.d
 
 ENV OS_install_pkgs="findutils gzip platform-python"
-
-# https://github.com/rpm-software-management/microdnf/issues/50
-RUN mkdir -p /run/user/$(id -u)
 
 COPY conf/usr/bin/* /usr/bin/
 COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/

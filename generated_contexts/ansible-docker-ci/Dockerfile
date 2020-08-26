@@ -1,17 +1,18 @@
 # Ansible managed
-FROM docker:stable
+FROM docker:stable-dind
 
 # General variables
 ENV IMAGE_name=ansible-docker-ci \
-    IMAGE_summary="Ansible image based on Docker stable for Continuous Integration" \
-    IMAGE_description="Docker stable based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
-    IMAGE_title="Ansible CI image based on Docker stable"
+    IMAGE_summary="Ansible image based on Docker stable-dind for Continuous Integration" \
+    IMAGE_description="Docker stable-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_title="Ansible CI image based on Docker stable-dind"
 
 # Container variables
 ENV ANSIBLE_version="2.9" \
     MOLECULE_version="3.0" \
     CTR_apk="apk add --update --no-cache" \
-    CTR_pip="pip install --no-cache --upgrade"
+    CTR_pip="pip install --no-cache --upgrade" \
+    DOCKER_HOST=unix:///var/run/docker.sock
 
 RUN echo "Build tools..."  && \
     $CTR_apk py-pip openssl ca-certificates && \
@@ -32,11 +33,14 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk xz git rsync jq sudo sshpass openssh-client skopeo && \
+    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache
+
+RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
+    ln -svf bash /bin/sh
 
 CMD [ "ansible-playbook", "--version" ]
 
@@ -50,4 +54,4 @@ LABEL name="${IMAGE_name}" \
       org.opencontainers.image.description="${IMAGE_description}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},ansible,ansible2.9,docker,dockerstable"
+      io.openshift.tags="${IMAGE_name},ansible,ansible2.9,docker,dockerstable-dind"

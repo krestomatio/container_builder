@@ -3,7 +3,7 @@ basesystem-11-5.el8.noarch.rpm
 bash-4.4.19-10.el8.x86_64.rpm
 brotli-1.0.6-1.el8.x86_64.rpm
 bzip2-libs-1.0.6-26.el8.x86_64.rpm
-ca-certificates-2019.2.32-80.0.el8_1.noarch.rpm
+ca-certificates-2020.2.41-80.0.el8_2.noarch.rpm
 centos-gpg-keys-8.2-2.2004.0.1.el8.noarch.rpm
 centos-release-8.2-2.2004.0.1.el8.x86_64.rpm
 centos-repos-8.2-2.2004.0.1.el8.x86_64.rpm

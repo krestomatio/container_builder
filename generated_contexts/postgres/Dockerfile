@@ -1,5 +1,5 @@
 # Ansible managed
-FROM krestomatio/base
+FROM quay.io/krestomatio/base
 
 # General variables
 ENV IMAGE_name=postgres \

@@ -1,8 +1,8 @@
 # Ansible managed
-FROM krestomatio/moodle_app AS app
+FROM quay.io/krestomatio/moodle_app AS app
 RUN app-git -a -e '.git*'
 
-FROM krestomatio/moodle_nginx_web
+FROM quay.io/krestomatio/moodle_nginx_web
 
 # General ansible variables
 ENV IMAGE_name=moodle_nginx_web \
@@ -15,7 +15,7 @@ ENV IMAGE_name=moodle_nginx_web \
 # Component bash variables
 ENV MOODLE_version="3.9" \
     MOODLE_ver_short="39" \
-    MOODLE_commit="95c4f624c8f8b63a3e60e221aee4c01def2563fd" \
+    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
     MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata
 

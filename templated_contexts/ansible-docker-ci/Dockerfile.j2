@@ -11,7 +11,8 @@ ENV IMAGE_name=ansible-docker-ci \
 ENV ANSIBLE_version="{{ image_ansible_version }}" \
     MOLECULE_version="{{ molecule_version }}" \
     CTR_apk="apk add --update --no-cache" \
-    CTR_pip="pip install --no-cache --upgrade"
+    CTR_pip="pip install --no-cache --upgrade" \
+    DOCKER_HOST=unix:///var/run/docker.sock
 
 RUN echo "Build tools..."  && \
     $CTR_apk py-pip openssl ca-certificates && \
@@ -32,11 +33,14 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk xz git rsync jq sudo sshpass openssh-client skopeo && \
+    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache
+
+RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
+    ln -svf bash /bin/sh
 
 CMD [ "ansible-playbook", "--version" ]
 

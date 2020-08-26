@@ -1,0 +1,3 @@
+dockerfile_builder_image_from: "quay.io/buildah/{{ buildah_version }}"
+dockerfile_builder_image_based: "Buildah Stable Image"
+dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},buildah,buildah-{{ buildah_version }}"

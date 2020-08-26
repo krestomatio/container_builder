@@ -2,19 +2,25 @@
 ctr_name: "{{ ansible_host }}"
 
 # containers template dir
-template_dir: templates
+template_dir: templated_contexts
 template_path: "{{ template_dir }}/{{ ctr_name }}"
 
 # containers generated build dir
-generated_dir: generated
+generated_dir: generated_contexts
 generated_path: "{{ generated_dir }}/{{ ctr_name }}"
 
 # registry
 registry_name: ""
 registry_project: krestomatio
 registry_path: "{{ registry_name + '/' if registry_name else '' }}{{registry_project}}"
+ci_registry_name: docker.io
+platform_registry_name: quay.io
+m4e_registry_name: quay.io
+cache_registry_name: gcr.io
+build_registry_name: gcr.io
 
 # build vars
+dockerfile_builder: docker
 # dockerfile_builder_push: true
 dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
@@ -22,3 +28,4 @@ dockerfile_builder_image_based: CentOS 8 minimal
 dockerfile_builder_image: "{{ registry_path }}/{{ ctr_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
+dockerfile_builder_sync_checksum: true

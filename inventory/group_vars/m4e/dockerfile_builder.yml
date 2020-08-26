@@ -1,3 +1,6 @@
+# registry
+registry_name: "{{ m4e_registry_name }}"
+
 # platform vars
 moodle_version: '3.9'
 
@@ -10,3 +13,8 @@ dockerfile_builder_image_git_remote: "git://github.com/moodle/moodle"
 dockerfile_builder_image_git_chk:
   "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +
   moodle_git_branch }}"
+moodle_git_source_version_url:
+  "{{ 'https://raw.githubusercontent.com/moodle/moodle/' +
+  moodle_git_branch + '/version.php' }}"
+moodle_git_repo_version_regex: "([0-9]+)\\.([0-9]+)\\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*))?(?:\\+[0-9A-Za-z-]+)?"
+moodle_git_source_version: "{{ lookup('url', moodle_git_source_version_url) | regex_search(moodle_git_repo_version_regex) }}"

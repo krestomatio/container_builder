@@ -1,0 +1,116 @@
+- when:
+    - "ansible_host == 'centos8-minimal'"
+  vars:
+    ctr_generated_path: "{{ playbook_dir }}/{{ generated_path }}"
+    ctr_template_path: "{{ playbook_dir }}/{{ template_path }}"
+    pkgs_list_old: "{{ ctr_generated_path }}/pkgs-list"
+    pkgs_list_new: "{{ ctr_template_path }}/pkgs-list"
+    distro_release_old: "{{ ctr_generated_path }}/distro-release"
+    distro_release_new: "{{ ctr_template_path }}/distro-release"
+  block:
+  - name: get old pkgs total checksum
+    stat:
+      path: "{{ pkgs_list_old }}"
+    register: centos_pkgs_file_old
+
+  - name: save old pkgs total checksum
+    when:
+      - centos_pkgs_file_old.stat is defined
+    set_fact:
+      dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_old.stat.checksum }}"
+
+  - name: save old pkgs total checksum
+    when:
+      - centos_pkgs_file_old.stat is defined
+    set_fact:
+      dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_old.stat.checksum }}"
+
+  - name: get old distro release
+    command: "head -n 1 '{{ distro_release_old }}'"
+    changed_when: false
+    check_mode: no
+    register: centos_distro_release_old
+
+  - name: save old distro release
+    when:
+      - centos_distro_release_old.stdout | default(false,true)
+    set_fact:
+      centos_distro_release: "{{ centos_distro_release_old.stdout_lines | first }}"
+
+  - when: not centos8_omit_rootfs_creation | default(false) | bool
+    vars:
+      rootfs_creator_image: docker.io/krestomatio/rootfs-creator
+    block:
+    - name: prepare artifacts for centos8-minimal
+      when:
+        - dockerfile_builder == 'docker'
+      docker_container:
+        name: rootfs-creator
+        image: "{{ rootfs_creator_image }}"
+        privileged: true
+        detach: false
+        cleanup: true
+        env:
+          BUILD_kickstart: centos8-minimal.ks
+          BUILD_rootfs: centos8-minimal.tar.xz
+        volumes:
+          - "{{ ctr_template_path }}:/build:z"
+
+    - name: prepare artifacts for centos8-minimal
+      when:
+        - dockerfile_builder == 'podman'
+      changed_when: false
+      command: "podman run --privileged --rm
+        -v '{{ ctr_template_path }}:/build:z' {{ rootfs_creator_image }}
+        centos8-minimal.ks centos8-minimal.tar.xz"
+
+    - name: get new pkgs total checksum
+      stat:
+        path: "{{ pkgs_list_new }}"
+      register: centos_pkgs_file_new
+      when: not ansible_check_mode
+      failed_when:
+        - not centos_pkgs_file_new.stat.exists
+
+    - name: save new pkgs total checksum
+      when:
+        - centos_pkgs_file_new.stat is defined
+        - centos_pkgs_file_new.stat.exists
+      set_fact:
+        dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_new.stat.checksum }}"
+
+    - name: get new distro release
+      command: "head -n 1 '{{ distro_release_new }}'"
+      changed_when: false
+      when: not ansible_check_mode
+      register: centos_distro_release_new
+
+    - name: save new distro release
+      when:
+        - centos_distro_release_new.stdout | default(false,true)
+      set_fact:
+        centos_distro_release: "{{ centos_distro_release_new.stdout_lines | first }}"
+
+  - name: set alternative version based on distro-release
+    set_fact:
+      alternative_version_full:
+        "{{ centos_distro_release.split('.')[0].split('-')[2] + '.' + centos_distro_release.split('.')[1].split('-')[0] + '.' +
+        centos_distro_release.split('.')[2] + '-' +
+        dockerfile_builder_image_pkgs_checksum[:6] }}"
+
+  - name: omit src sync when no new pkgs
+    when:
+      - centos_pkgs_file_old.stat is defined
+      - centos_pkgs_file_new.stat is defined
+      - centos_pkgs_file_old.stat.exists
+      - centos_pkgs_file_new.stat.exists
+      - centos_pkgs_file_new.stat.checksum == centos_pkgs_file_old.stat.checksum
+    set_fact:
+      dockerfile_builder_src_omit: true
+
+  - name: omit src sync when no new pkgs list in place
+    when:
+      - centos_pkgs_file_new.stat is not defined or
+        not centos_pkgs_file_new.stat.exists
+    set_fact:
+      dockerfile_builder_src_omit: true

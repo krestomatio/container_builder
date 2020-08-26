@@ -1,0 +1,63 @@
+- name: set config for podman
+  run_once: true
+  when:
+    - dockerfile_builder == 'podman'
+    - builder_config | default(false) | bool
+  block:
+    - name: check config dir exists
+      file:
+        dest: "{{ podman_conf_dir }}"
+        state: directory
+
+    - name: add storage config
+      vars:
+        storage_driver: overlay
+      copy:
+        content: |
+          [storage]
+          driver = "{{ storage_driver }}"
+          # rootless_storage_path = "{{ storage_rootless_storage_path | default(lookup('env','HOME') + '/.local/share/containers/storage') }}"
+          # runroot = "{{ storage_runroot | default('/var/run/containers/storage') }}"
+          graphroot = "{{ storage_graphroot | default('/var/lib/containers/storage') }}"
+
+          {% if storage_additionalimagestores is defined %}
+          additionalimagestores = [
+          "{{ storage_additionalimagestores | default('/var/lib/shared') }}",
+          ]
+          {% endif %}
+
+          {% if storage_options_overlay is defined and storage_options_overlay %}
+          [storage.options.overlay]
+          mount_program = "{{ storage_mount_program | default('/usr/bin/fuse-overlayfs') }}"
+          mountopt = "{{ storage_mountopt | default('nodev,fsync=0') }}"
+          {% endif %}
+        dest: "{{ podman_conf_dir }}/storage.conf"
+        mode: 644
+
+    - name: add registry config
+      copy:
+        content: |
+          {% if registry_unqualified is defined and registry_unqualified %}
+          unqualified-search-registries = [{{ registry_unqualified }}]
+          {% endif %}
+
+          {% if registry_location is defined and registry_location %}
+          [[registry]]
+          location = "{{ registry_location }}"
+          {% if registry_prefix is defined and registry_prefix %}
+          prefix = "{{ registry_prefix }}"
+          {% endif %}
+          insecure = {{ registry_insecure | default('false') }}
+          blocked = {{ registry_blocked | default('false') }}
+          {% endif %}
+
+          {% if registry_mirror is defined and registry_mirror %}
+          [[registry.mirror]]
+          location = "{{ registry_mirror }}"
+          {% endif %}
+
+          {% if registry_additional is defined and registry_additional %}
+          {{ registry_additional }}
+          {% endif %}
+        dest: "{{ podman_conf_dir }}/registries.conf"
+        mode: 644

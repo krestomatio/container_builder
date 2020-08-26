@@ -1,0 +1,32 @@
+- name: set config for docker
+  run_once: true
+  when:
+    - dockerfile_builder == 'docker'
+    - builder_config | default(false) | bool
+  block:
+    - when:
+      - docker_start_daemon | default(false) | bool
+      - not ansible_check_mode
+      block:
+      - name: check dockerd pid
+        command: pidof dockerd
+        changed_when: false
+        ignore_errors: true
+        register: docker_pid_daemon
+
+      - name: start dockerd daemon
+        when: docker_pid_daemon.rc != 0
+        shell: |
+          dockerd-entrypoint.sh &> /dev/null &
+          sleep 4
+
+    - name: create config.json
+      when:
+        - docker_config_json is defined
+        - docker_config_json != 'omit'
+      no_log: true
+      copy:
+        content: |
+          {{ docker_config_json }}
+        dest: "{{ docker_config_json_path | default('~/.docker/config.json') }}"
+        mode: 600

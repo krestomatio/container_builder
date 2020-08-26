@@ -1,0 +1,6 @@
+# build playbook
+build_play_containers: "{{ lookup('env','BUILD_PLAY_CONTAINERS') | default('all:!ci',true) }}"
+build_play_diff: "{{ lookup('env','BUILD_PLAY_DIFF') | default(true,true) }}"
+
+# provider
+cloud_provider: "{{ lookup('env','CLOUD_PROVIDER') | default('none',true) }}"

@@ -2,11 +2,14 @@ buildPack: none
 pipelineConfig:
   env:
   - name: CLOUD_PROVIDER
-    value: gke
+    value: m6e
   pipelines:
     pullRequest:
       pipeline:
         options:
+          containerOptions:
+            securityContext:
+              privileged: true
           timeout:
             time: 60
             unit: minutes
@@ -14,16 +17,6 @@ pipelineConfig:
         - name: build
           agent:
             image: krestomatio/ansible-docker-ci
-          env:
-          - name: DOCKER_CONFIG_JSON
-            valueFrom:
-              secretKeyRef:
-                name: jenkins-docker-cfg
-                key: config.json
-          options:
-            containerOptions:
-              securityContext:
-                privileged: true
           steps:
           - name: update submodules
             command: git submodule update --init --recursive

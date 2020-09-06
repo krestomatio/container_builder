@@ -32,6 +32,7 @@ dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(
 dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
 dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
 dockerfile_builder_image_version: "{{ lookup('env','IMAGE_VERSION') | default(build_version | regex_search('\\d+(\\.\\d+){2,}'),true) }}"
+dockerfile_builder_force_source_on_changed: false
 
 # centos8-minimal
 centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(true,true) }}"

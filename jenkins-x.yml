@@ -22,3 +22,21 @@ pipelineConfig:
             command: git submodule update --init --recursive
           - name: build containers
             command: ansible-playbook -i inventory/hosts build.yml
+    release:
+      pipeline:
+        options:
+          # containerOptions:
+          #   securityContext:
+          #     privileged: true
+          timeout:
+            time: 30
+            unit: minutes
+        stages:
+        - name: build
+          agent:
+            image: krestomatio/ansible-docker-ci
+          steps:
+          # - name: update submodules
+          #   command: git submodule update --init --recursive
+          - name: build containers
+            command: sleep 300 # ansible-playbook -i inventory/hosts build.yml

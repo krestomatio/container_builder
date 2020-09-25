@@ -29,3 +29,4 @@ dockerfile_builder_image: "{{ registry_path }}/{{ ctr_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
+dockerfile_builder_image_version: "0.0.0"

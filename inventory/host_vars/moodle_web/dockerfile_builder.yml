@@ -2,7 +2,6 @@
 dockerfile_builder_image_from: "{{ registry_path }}/moodle_nginx_web{{ ':' +
   dockerfile_builder_image_from_tag if
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
-dockerfile_builder_image_version: "0.0.1"
 dockerfile_builder_image_name: moodle_nginx_web
 dockerfile_builder_image_summary: "PHP $PHP_version and NGINX ${NGINX_version} for Moodle"
 dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_version} and NGINX ${NGINX_version} for Moodle"

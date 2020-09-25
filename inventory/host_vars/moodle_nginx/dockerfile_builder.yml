@@ -2,4 +2,3 @@
 dockerfile_builder_image_from: "{{ registry_path }}/nginx{{ ':' +
   dockerfile_builder_image_from_tag if
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
-dockerfile_builder_image_version: "0.0.1"

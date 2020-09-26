@@ -18,10 +18,12 @@ pipelineConfig:
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          # - name: update submodules
-          #   command: git submodule update --init --recursive
+          - name: fetch tags
+            command: git fetch --tag
+          - name: update submodules
+            command: git submodule update --init --recursive
           - name: build containers
-            command: sleep 300 # ansible-playbook -i inventory/hosts build.yml
+            command: ansible-playbook -i inventory/hosts build.yml
     release:
       pipeline:
         options:
@@ -39,4 +41,4 @@ pipelineConfig:
           # - name: update submodules
           #   command: git submodule update --init --recursive
           - name: build containers
-            command: sleep 300 # ansible-playbook -i inventory/hosts build.yml
+            command: sleep 100 # ansible-playbook -i inventory/hosts build.yml

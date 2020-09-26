@@ -1,47 +1,66 @@
-- name: append build or sha to full alternative version
+- name: get version based on git tag
+  vars:
+    version_next_bump: ''
   when:
-    - alternative_version_full is defined
-    - alternative_version_full_add_build | default(false)
-    - build_number is defined
-  set_fact:
-    alternative_version_full: "{{ alternative_version_full
-      + '-' + alternative_version_build | default(build_number) }}"
+    - version_git_based | default(false)
+  block:
+    - name: set current version
+      when: version_current is not defined
+      set_fact:
+        version_current: "{{ lookup('git_semver', playbook_dir, want='dict' ) }}"
 
-- name: add alternative version to tags
-  when: alternative_version_full is defined
-  set_fact:
-    dockerfile_builder_tags:
-      "{{ dockerfile_builder_tags | default([]) +
-      [alternative_version_full] }}"
+    - name: get next version as dictionary
+      when: version_next is not defined
+      set_fact:
+        version_next:  "{{ lookup('git_semver', playbook_dir, bump=version_next_bump,
+          want='dict') }}"
 
-- name: convert version to minor and major tags
+    - name: set next major version
+      when: version_next_major is not defined
+      set_fact:
+        version_next_major: "{{ version_next.major }}"
+
+    - name: set next minor version
+      when: version_next_minor is not defined
+      set_fact:
+        version_next_minor: "{{ version_next.minor }}"
+
+    - name: set next full version
+      when: version_next_full is not defined
+      set_fact:
+        version_next_full:
+          "{{ version_next.full + ( '' if
+          version_default_suffix is not defined or
+          version_next.prerelease or version_next.build
+          else version_default_suffix )  }}"
+
+- name: set container image next version
   when:
-    - build_add_minor_major_tags | default(false) | bool
-    - item is defined and item
-    - "'.' in item"
-  with_items: "{{ dockerfile_builder_tags }}"
+    dockerfile_builder_image_version is not defined and
+    dockerfile_builder_image_version
   set_fact:
-    build_minor_major_tags: "{{ build_minor_major_tags | default([]) +
-    [item.split('.')[0] + '.' + item.split('.')[1]] +
-    [item.split('.')[0]] }}"
+    dockerfile_builder_image_version: "{{ version_next_full }}"
 
-- name: add minor and major tags to build tags
-  when: build_minor_major_tags is defined
+- name: set container image tag based on next full version
   set_fact:
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags + build_minor_major_tags }}"
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default(['latest'])
+      + [version_next_full] }}"
 
-- name: convert version to minor and major cache tags
-  when:
-    - build_add_minor_major_cache_tags | default(false) | bool
-    - item is defined and item
-    - "'.' in item"
-  with_items: "{{ build_cache_from_tags }}"
+- name: set container image tags based on next major and minor version
+  when: version_include_major_minor_tags | default(false)
   set_fact:
-    build_minor_major_cache_tags: "{{ build_minor_major_cache_tags | default([]) +
-    [item.split('.')[0] + '.' + item.split('.')[1]] +
-    [item.split('.')[0]] }}"
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default(['latest'])
+      + [version_next_major + '.' + version_next_minor]
+      + [version_next_major] }}"
 
-- name: add minor and major tags to cache from tags
-  when: build_minor_major_cache_tags is defined
+- name: set container image cache_from tag based on next full version
   set_fact:
-    build_cache_from_tags: "{{ build_cache_from_tags + build_minor_major_cache_tags }}"
+    dockerfile_builder_cache_from_tags: "{{ dockerfile_builder_cache_from_tags
+      | default(['latest']) + [version_next_full] }}"
+
+- name: set container image cache_from tags based on next major and minor version
+  when: version_include_major_minor_cache_from_tags | default(false)
+  set_fact:
+    dockerfile_builder_cache_from_tags: "{{ dockerfile_builder_cache_from_tags |
+      default(['latest']) + [version_next_major + '.' +
+      version_next_minor] + [version_next_major] }}"

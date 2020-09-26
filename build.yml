@@ -14,6 +14,10 @@
       assert:
         that: dockerfile_builder in ['docker','podman']
 
+    - name: git related config
+      include_tasks: "tasks/git-config.yml"
+      when: git_config_list | default(false) | bool
+
     - name: builder related config
       include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
       when: builder_config | default(false) | bool

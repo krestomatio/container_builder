@@ -1,6 +1,18 @@
-- name: push image and its tags
-  vars:
+- vars:
     push_image_name: "{{ build_image_name | default(dockerfile_builder_image) }}"
-  command: "{{ dockerfile_builder }} push {{ push_image_name }}"
-  changed_when: "': Pushed' in push_image_status.stdout"
-  register: push_image_status
+  block:
+  - name: push image and its tags
+    command: "{{ dockerfile_builder }} push {{ push_image_name }}"
+    changed_when: "': Pushed' in push_image_status.stdout"
+    register: push_image_status
+
+  - name: get push image info
+    docker_image_info:
+      name: "{{ dockerfile_builder_image }}"
+    register: push_image_status
+
+  - name: state image repo digest fact
+    when: not ansible_check_mode
+    set_fact:
+      state_yml_repo_digest: "{{ push_image_status.images[0].RepoDigests |
+        select('match', '^' + push_image_name + '+') | first }}"

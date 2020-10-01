@@ -4,6 +4,6 @@ dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
 
 # other
-version_next_major: "{{ moodle_git_source_version.split('.')[0] }}"
-version_next_minor: "{{ moodle_git_source_version.split('.')[1] }}"
-version_next_full: "{{ moodle_git_source_version + version_default_suffix | default('-' + moodle_git_commit[0:4]) }}"
+version_image_major: "{{ moodle_git_source_version.split('.')[0] }}"
+version_image_minor: "{{ moodle_git_source_version.split('.')[1] }}"
+version_image_full: "{{ moodle_git_source_version + version_default_suffix | default('-' + moodle_git_commit[0:5]) }}"

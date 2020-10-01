@@ -7,15 +7,18 @@
 
 - name: check if build image exists
   when: build_image_name is defined
-  command: "{{ dockerfile_builder }} images -q {{ build_image_name }}"
+  command: "{{ dockerfile_builder }} inspect --type=image {{ build_image_name }}"
   changed_when: false
+  ignore_errors: true
   register: build_image_name_exist
 
 - name: tag build image
-  when: build_image_name_exist.stdout | default(false) | bool
+  when:
+    -  build_image_name_exist.stderr is defined
+    - "'Error: No such image' in build_image_name_exist.stderr"
   command: "{{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name }}"
 
-- name: add tags to image
+- name: add other tags to image
   when:
     - dockerfile_builder_tags is defined and dockerfile_builder_tags
   register: tag_image_task

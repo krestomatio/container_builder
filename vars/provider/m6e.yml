@@ -1,7 +1,6 @@
 repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
 repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
-project_org: "{{ lookup('env','DOCKER_REGISTRY_ORG') | default('',true) }}"
-project_registry_path: "{{ project_org + '/' if project_org }}{{ repo_owner+'/'+repo_name }}"
+project_registry_path: "{{ repo_owner+'/'+repo_name }}"
 build_number: "{{ lookup('env','BUILD_NUMBER') | default(ansible_date_time.epoch,true) }}"
 build_version: "{{ lookup('env','VERSION') | default('',true) }}"
 build_cache: true
@@ -13,8 +12,8 @@ build_add_minor_major_tags: "{{ lookup('env','BUILD_ADD_MINOR_MAJOR_TAGS') | def
 builder_config: "{{ lookup('env','BUILDER_CONFIG') | default(true,true) }}"
 
 # registry
-build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('gcr.io',true) }}"
-cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default('gcr.io',true) }}"
+build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
+cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
 cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_registry_name + '/' + project_registry_path,true) }}"
 build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + project_registry_path,true) }}"
 
@@ -33,12 +32,19 @@ version_default_suffix: "-SNAPSHOT-{{ lookup('env','BRANCH_NAME') |
 version_include_major_minor_tags: false
 version_include_major_minor_cache_from_tags: true
 
+# git
+git_config_list:
+  - name: user.name
+    value: "{{ lookup('env','GIT_AUTHOR_NAME') | default('krestomatio-cibot',true) }}"
+  - name: user.email
+    value: "{{ lookup('env','GIT_AUTHOR_EMAIL') | default('jobcespedes@krestomatio.com',true) }}"
+
 # centos8-minimal
 centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(true,true) }}"
 
 # docker
 docker_start_daemon: true
-docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default('omit',true) }}"
+docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
 
 # podman

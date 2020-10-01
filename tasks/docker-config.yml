@@ -17,13 +17,12 @@
       - name: start dockerd daemon
         when: docker_pid_daemon.rc != 0
         shell: |
-          dockerd-entrypoint.sh &> /dev/null &
+          dockerd-entrypoint.sh &> /tmp/dockerd.log &
           sleep 4
 
     - name: create config.json
       when:
-        - docker_config_json is defined
-        - docker_config_json != 'omit'
+        - docker_config_json is defined and docker_config_json
       no_log: true
       copy:
         content: |

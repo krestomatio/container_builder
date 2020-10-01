@@ -1,0 +1,8 @@
+#
+# Ansible managed
+#
+base_container:
+  build: True
+  tag: "0.0.2-develop"
+  digest: "sha256:f1e3e0f9536d60f7eefcbb7f8152d0648792ca9fd7707efd57f32e6439ee207e"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/base@sha256:f99f71c433e36a755175d90da8455fc39f9bb98af0ef765ab89b0fbeba32e037"

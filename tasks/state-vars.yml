@@ -1,0 +1,28 @@
+- name: check state related vars dir exists
+  when: not ansible_check_mode
+  file:
+    dest: "{{ playbook_dir }}/vars/state"
+    state: directory
+    mode: '0755'
+
+- name: save state related vars
+  when:
+    - save_state_vars | default(true)
+    - state_yml_build is defined and state_yml_build
+    - state_yml_tag is defined and state_yml_tag
+    - state_yml_digest is defined and state_yml_digest
+    - state_yml_repo_digest is defined and state_yml_repo_digest
+    - not ansible_check_mode
+  template:
+    src: state.yml.j2
+    dest: "{{ playbook_dir }}/vars/state/{{ ansible_host }}.yml"
+    mode: '0644'
+
+- name: include state related vars
+  when:
+    - include_state_vars | default(false)
+  include_vars:
+    dir: "{{ playbook_dir }}/vars/state"
+    ignore_unknown_extensions: True
+    extensions:
+      - yml

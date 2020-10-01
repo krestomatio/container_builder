@@ -1,66 +1,58 @@
 - name: get version based on git tag
   vars:
-    version_next_bump: ''
+    version_image_bump: ''
   when:
     - version_git_based | default(false)
   block:
-    - name: set current version
-      when: version_current is not defined
+    - name: set image version
+      when: version_image is not defined
       set_fact:
-        version_current: "{{ lookup('git_semver', playbook_dir, want='dict' ) }}"
-
-    - name: get next version as dictionary
-      when: version_next is not defined
-      set_fact:
-        version_next:  "{{ lookup('git_semver', playbook_dir, bump=version_next_bump,
+        version_image:  "{{ lookup('git_semver', playbook_dir, bump=version_image_bump,
           want='dict') }}"
 
-    - name: set next major version
-      when: version_next_major is not defined
+    - name: set major version
+      when: version_image_major is not defined
       set_fact:
-        version_next_major: "{{ version_next.major }}"
+        version_image_major: "{{ version_image.major }}"
 
-    - name: set next minor version
-      when: version_next_minor is not defined
+    - name: set minor version
+      when: version_image_minor is not defined
       set_fact:
-        version_next_minor: "{{ version_next.minor }}"
+        version_image_minor: "{{ version_image.minor }}"
 
-    - name: set next full version
-      when: version_next_full is not defined
+    - name: set full version
+      when: version_image_full is not defined
       set_fact:
-        version_next_full:
-          "{{ version_next.full + ( '' if
+        version_image_full:
+          "{{ version_image.full + ( '' if
           version_default_suffix is not defined or
-          version_next.prerelease or version_next.build
+          version_image.prerelease or version_image.build
           else version_default_suffix )  }}"
 
-- name: set container image next version
+- name: state image tag
+  set_fact:
+    state_yml_tag: "{{ version_image_full }}"
+
+- name: set container image version
   when:
     dockerfile_builder_image_version is not defined and
     dockerfile_builder_image_version
   set_fact:
-    dockerfile_builder_image_version: "{{ version_next_full }}"
+    dockerfile_builder_image_version: "{{ version_image_full }}"
 
-- name: set container image tag based on next full version
+- name: set container image tag based on full version
   set_fact:
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default(['latest'])
-      + [version_next_full] }}"
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
+      + [version_image_full] }}"
 
-- name: set container image tags based on next major and minor version
+- name: set container image fallback tags based on branch and commit of version tag
+  set_fact:
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
+      + [version_image.commit] + [version_image.branch] }}"
+
+- name: set container image tags based on major and minor version
   when: version_include_major_minor_tags | default(false)
   set_fact:
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default(['latest'])
-      + [version_next_major + '.' + version_next_minor]
-      + [version_next_major] }}"
-
-- name: set container image cache_from tag based on next full version
-  set_fact:
-    dockerfile_builder_cache_from_tags: "{{ dockerfile_builder_cache_from_tags
-      | default(['latest']) + [version_next_full] }}"
-
-- name: set container image cache_from tags based on next major and minor version
-  when: version_include_major_minor_cache_from_tags | default(false)
-  set_fact:
-    dockerfile_builder_cache_from_tags: "{{ dockerfile_builder_cache_from_tags |
-      default(['latest']) + [version_next_major + '.' +
-      version_next_minor] + [version_next_major] }}"
+    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
+      + [version_image_major + '.' + version_image_minor]
+      + [version_image_major] }}"

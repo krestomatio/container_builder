@@ -1,5 +1,5 @@
 - name: git config
-  when: git_config_list is defined
+  when: git_config_list is defined and git_config_list
   loop: "{{ git_config_list }}"
   git_config:
     name: "{{ item.name | default(omit) }}"

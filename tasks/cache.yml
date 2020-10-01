@@ -9,7 +9,7 @@
   when:
     - item is defined and item
   loop: "{{ (dockerfile_builder_cache_from_tags |
-    default(dockerfile_builder_tag) | default(['latest'])) }}"
+    default(dockerfile_builder_tags) | default(['latest'])) }}"
   set_fact:
     dockerfile_builder_cache_from:
       "{{ dockerfile_builder_cache_from | default([]) +

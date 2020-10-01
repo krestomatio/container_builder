@@ -28,7 +28,7 @@
   - name: get old distro release
     command: "head -n 1 '{{ distro_release_old }}'"
     changed_when: false
-    check_mode: no
+    check_mode: false
     register: centos_distro_release_old
 
   - name: save old distro release
@@ -91,9 +91,11 @@
       set_fact:
         centos_distro_release: "{{ centos_distro_release_new.stdout_lines | first }}"
 
-  - name: set alternative version based on distro-release
+  - name: set version based on distro-release
     set_fact:
-      alternative_version_full:
+      version_image_major: "{{ centos_distro_release.split('.')[0].split('-')[2] }}"
+      version_image_minor: "{{ centos_distro_release.split('.')[1].split('-')[0] }}"
+      version_image_full:
         "{{ centos_distro_release.split('.')[0].split('-')[2] + '.' + centos_distro_release.split('.')[1].split('-')[0] + '.' +
         centos_distro_release.split('.')[2] + '-' +
         dockerfile_builder_image_pkgs_checksum[:6] }}"

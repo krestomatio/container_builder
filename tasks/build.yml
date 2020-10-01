@@ -1,4 +1,16 @@
-- name: build image
-  when: ansible_host in groups[build_step|default('all')]
-  include_role:
-    name: dockerfile_builder
+- when: ansible_host in groups[build_step|default('all')]
+  block:
+  - name: build image
+    include_role:
+      name: dockerfile_builder
+
+  - name: get build image info
+    docker_image_info:
+      name: "{{ dockerfile_builder_image }}"
+    register: build_image_status
+
+  - name: state image build fact
+    when: not ansible_check_mode
+    set_fact:
+      state_yml_build: true
+      state_yml_digest: "{{ build_image_status.images[0].Id }}"

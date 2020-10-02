@@ -1,0 +1,10 @@
+- name: git config
+  when: git_config_list is defined and git_config_list
+  loop: "{{ git_config_list }}"
+  git_config:
+    name: "{{ item.name | default(omit) }}"
+    scope: "{{ item.scope | default('local') }}"
+    value: "{{ item.value | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    repo: "{{ item.repo | default(playbook_dir) }}"
+    list_all: "{{ item.list_all | default(omit) }}"

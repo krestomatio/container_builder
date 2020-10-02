@@ -1,6 +1,8 @@
 # temporary variables files
 vars/**/*tmp_vars.yml
 vars/**/*tmp_vault_vars.yml
+# python
+__pycache__
 # local files
 debug.yml
 tmp/

@@ -13,4 +13,4 @@
     when: not ansible_check_mode
     set_fact:
       state_yml_build: true
-      state_yml_digest: "{{ build_image_status.images[0].Id }}"
+      state_yml_id: "{{ build_image_status.images[0].Id }}"

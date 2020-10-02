@@ -1,5 +1,12 @@
 - name: check state related vars dir exists
-  when: not ansible_check_mode
+  stat:
+    path: "{{ playbook_dir }}/vars/state"
+  register: state_vars_dest_check
+
+- name: create state related vars dir
+  when:
+    - not ansible_check_mode
+    - not state_vars_dest_check.stat.exists
   file:
     dest: "{{ playbook_dir }}/vars/state"
     state: directory
@@ -7,10 +14,9 @@
 
 - name: save state related vars
   when:
-    - save_state_vars | default(true)
-    - state_yml_build is defined and state_yml_build
+    - state_vars_save | default(true)
     - state_yml_tag is defined and state_yml_tag
-    - state_yml_digest is defined and state_yml_digest
+    - state_yml_id is defined and state_yml_id
     - state_yml_repo_digest is defined and state_yml_repo_digest
     - not ansible_check_mode
   template:
@@ -20,7 +26,8 @@
 
 - name: include state related vars
   when:
-    - include_state_vars | default(false)
+    - state_vars_load | default(true)
+    - state_vars_dest_check.stat.exists
   include_vars:
     dir: "{{ playbook_dir }}/vars/state"
     ignore_unknown_extensions: True

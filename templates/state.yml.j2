@@ -1,0 +1,12 @@
+{{ ansible_managed | comment }}
+{{ ansible_host }}_container:
+  build: {{ state_yml_build | default('false') | bool  }}
+{% if state_yml_tag %}
+  tag: "{{ state_yml_tag }}"
+{% endif %}
+{% if state_yml_digest %}
+  digest: "{{ state_yml_digest }}"
+{% endif %}
+{% if state_yml_repo_digest %}
+  repo_digest: "{{ state_yml_repo_digest }}"
+{% endif %}

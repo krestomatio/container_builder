@@ -5,14 +5,17 @@
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
-    - name: load provider related variables
+    - name: include provider variables
       include_tasks: tasks/provider-vars.yml
-      when: cloud_provider | default('none') != 'none'
 
     - name: check valid builder
       tags: always
       assert:
         that: dockerfile_builder in ['docker','podman']
+
+    - name: git related config
+      include_tasks: "tasks/git-config.yml"
+      when: git_config_list | default(false) | type_debug == "list"
 
     - name: builder related config
       include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
@@ -49,3 +52,6 @@
     - name: push image
       include_tasks: tasks/push.yml
       when: build_push | default(false) | bool
+
+    - name: save container state
+      include_tasks: tasks/state-vars.yml

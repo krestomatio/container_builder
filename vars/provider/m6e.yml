@@ -7,13 +7,7 @@ build_cache: true
 build_cache_prepull: true
 build_cache_first_prepull: true
 build_push: "{{ lookup('env','BUILD_PUSH') | default(true,true) }}"
-build_cache_from_tag_list:
-  - "{{ build_version }}"
-  - "{{ lookup('env','PREVIEW_VERSION') }}"
-  - latest
 build_add_minor_major_cache_tags: "{{ lookup('env','BUILD_CACHE_ADD_MINOR_MAJOR_TAGS') | default(true,true) }}"
-build_tag_list:
-  - "{{ build_version }}"
 build_add_minor_major_tags: "{{ lookup('env','BUILD_ADD_MINOR_MAJOR_TAGS') | default(false,true) }}"
 builder_config: "{{ lookup('env','BUILDER_CONFIG') | default(true,true) }}"
 
@@ -26,20 +20,31 @@ build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_reg
 # dockerfile_builder
 dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
 dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"
-build_cache_from_tags: "{{ lookup('env','BUILD_CACHE_FROM_TAGS') | default(build_cache_from_tag_list,true) }}"
-dockerfile_builder_tags: "{{ lookup('env','BUILD_TAGS') | default(build_tag_list,true) }}"
 dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(false,true) }}"
 dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
 dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
-dockerfile_builder_image_version: "{{ lookup('env','IMAGE_VERSION') | default(build_version | regex_search('\\d+(\\.\\d+){2,}'),true) }}"
 dockerfile_builder_force_source_on_changed: false
+
+# version
+version_git_based: true
+version_default_suffix: "-SNAPSHOT-{{ lookup('env','BRANCH_NAME') |
+  default('PR1',true) }}-{{ lookup('env','BUILD_ID') | default('1',true) }}"
+version_include_major_minor_tags: false
+version_include_major_minor_cache_from_tags: true
+
+# git
+git_config_list:
+  - name: user.name
+    value: "{{ lookup('env','GIT_AUTHOR_NAME') | default('krestomatio-cibot',true) }}"
+  - name: user.email
+    value: "{{ lookup('env','GIT_AUTHOR_EMAIL') | default('jobcespedes@krestomatio.com',true) }}"
 
 # centos8-minimal
 centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(true,true) }}"
 
 # docker
 docker_start_daemon: true
-docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default('omit',true) }}"
+docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
 
 # podman

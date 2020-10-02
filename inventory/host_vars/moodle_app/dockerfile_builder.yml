@@ -2,8 +2,8 @@
 dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
   dockerfile_builder_image_from_tag if
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
-dockerfile_builder_image_version: "0.0.1"
 
 # other
-alternative_version_full: "{{ moodle_git_source_version }}"
-alternative_version_full_add_build: true
+version_image_major: "{{ moodle_git_source_version.split('.')[0] }}"
+version_image_minor: "{{ moodle_git_source_version.split('.')[1] }}"
+version_image_full: "{{ moodle_git_source_version + version_default_suffix | default('-' + moodle_git_commit[0:5]) }}"

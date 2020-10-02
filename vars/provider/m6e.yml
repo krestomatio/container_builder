@@ -1,8 +1,6 @@
 repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
 repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
 project_registry_path: "{{ repo_owner+'/'+repo_name }}"
-build_number: "{{ lookup('env','BUILD_NUMBER') | default(ansible_date_time.epoch,true) }}"
-build_version: "{{ lookup('env','VERSION') | default('',true) }}"
 build_cache: true
 build_cache_prepull: true
 build_cache_first_prepull: true
@@ -27,10 +25,6 @@ dockerfile_builder_force_source_on_changed: false
 
 # version
 version_git_based: true
-version_default_suffix: "-SNAPSHOT-{{ lookup('env','BRANCH_NAME') |
-  default('PR1',true) }}-{{ lookup('env','BUILD_ID') | default('1',true) }}"
-version_include_major_minor_tags: false
-version_include_major_minor_cache_from_tags: true
 
 # git
 git_config_list:
@@ -53,3 +47,6 @@ storage_graphroot: "{{ lookup('env','STORAGE_CONTAINER_PATH') | default('/worksp
 storage_driver: "{{ lookup('env','STORAGE_DRIVER') | default('overlay',true) }}"
 registry_unqualified: "{{ lookup('env','REGISTRY_UNQUALIFIED') | default(\"'\" + registry_name + \"'\",true) }}"
 registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name,true) }}"
+
+# skopeo
+skopeo_transport: "docker://"

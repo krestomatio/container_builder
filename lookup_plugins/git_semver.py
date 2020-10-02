@@ -117,7 +117,7 @@ class LookupModule(LookupBase):
                         # initialize semantic version if error code 128
                         if e.status == 128 and ('No names' in e.stderr or 'No tags' in e.stderr):
                             # set default initial semver
-                            v = '0.0.0' + '-SNAPSHOT-' + \
+                            v = '0.0.1' + '-SNAPSHOT-' + \
                                 os.getenv('BRANCH_NAME', branch) + \
                                 '-' + os.getenv('BUILD_ID', repo.git.describe('--always'))
                             # set HEAD as rev

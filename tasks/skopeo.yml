@@ -1,0 +1,33 @@
+- vars:
+    skopeo_transport: "docker://"
+    skopeo_copy_src_image: "{{ skopeo_src_transport | default(skopeo_transport) + skopeo_src_image +
+      ( ':' + skopeo_src_image_tag if skopeo_src_image_tag is defined else '') }}"
+    skopeo_copy_dest_image: "{{ skopeo_dest_transport | default(skopeo_transport) + skopeo_dest_image +
+      ( ':' + skopeo_dest_image_tag if skopeo_dest_image_tag is defined else '') }}"
+  block:
+    - name: show source image name
+      debug:
+        msg: "Source: {{ skopeo_copy_src_image }}"
+
+    - name: show destination image name
+      debug:
+        msg: "Destination: {{ skopeo_copy_dest_image }}"
+
+    - name: inspect src image
+      changed_when: false
+      register: skopeo_src_image_inspect
+      command: "skopeo inspect {{ skopeo_copy_src_image }}"
+
+    - name: inspect dest image
+      ignore_errors: true
+      changed_when: false
+      register: skopeo_dest_image_inspect
+      command: "skopeo inspect {{ skopeo_copy_dest_image }}"
+
+    - name: copy src to dest image
+      when:
+        - not ansible_check_mode
+        - skopeo_dest_image_inspect is failed or
+          (skopeo_src_image_inspect.stdout | from_json).Digest !=
+          (skopeo_dest_image_inspect.stdout | from_json).Digest
+      command: "skopeo copy --src-tls-verify={{ skopeo_src_tls_verify | default(true) }} --dest-tls-verify={{ skopeo_dest_tls_verify | default(true)}} {{ skopeo_copy_src_image }} {{ skopeo_copy_dest_image }}"

@@ -1,0 +1,1916 @@
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mcredential-initializer[0m
+{"level":"info","ts":1601608371.0647433,"caller":"creds-init/main.go:44","msg":"Credentials initialized."}
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mworking-dir-initializer[0m
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mplace-tools[0m
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-git-source-krestomatio-container-builder-p-4956c-8lh62[0m
+{"level":"info","ts":1601608385.3054454,"caller":"git/git.go:105","msg":"Successfully cloned https://github.com/krestomatio/container_builder.git @ master in path /workspace/source"}
+{"level":"warn","ts":1601608385.3056517,"caller":"git/git.go:152","msg":"Unexpected error: creating symlink: symlink /tekton/home/.ssh /root/.ssh: file exists"}
+{"level":"info","ts":1601608385.9476464,"caller":"git/git.go:133","msg":"Successfully initialized and updated submodules in path /workspace/source"}
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-setup-builder-home[0m
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-git-merge[0m
+Using SHAs from PULL_REFS=master:990d715f42aec514d50cfb34378f6a85e1b7da9e,3:18b43e29b3b6840aa38579835b6fa172ba873437
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git fetch origin --unshallow 18b43e29b3b6840aa38579835b6fa172ba873437: 990d715f42aec514d50cfb34378f6a85e1b7da9e:
+DEBUG: ran git fetch --unshallow origin 18b43e29b3b6840aa38579835b6fa172ba873437: 990d715f42aec514d50cfb34378f6a85e1b7da9e: in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git branch
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git checkout master
+DEBUG: ran git checkout master in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git reset --hard 990d715f42aec514d50cfb34378f6a85e1b7da9e
+DEBUG: ran git reset --hard 990d715f42aec514d50cfb34378f6a85e1b7da9e in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git clean -fd .
+DEBUG: ran clean --force -d . in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git merge 18b43e29b3b6840aa38579835b6fa172ba873437
+DEBUG: ran git merge 18b43e29b3b6840aa38579835b6fa172ba873437 in 
+DEBUG: LC_ALL=C JX_LOG_LEVEL=error git log --format=%H%x1f%an%x1f%ae%x1f%cn%x1f%ce%x1f%s%n%b%x1e 990d715f42aec514d50cfb34378f6a85e1b7da9e..HEAD
+Merged SHA 18b43e29b3b6840aa38579835b6fa172ba873437 with commit message 'feat: save container state to disk' into base branch master
+Merged SHA cdac10ea10317e64e1c8bcd937162aeab7384167 with commit message 'refactor(version): add functions for git semver using ansible' into base branch master
+Merged SHA 15350e045abb103b871a4d58c5959101900aecc6 with commit message 'refactor: remove image version from ansible host vars' into base branch master
+Merged SHA 5dde5eaa6afc19aac13418c15e1230d1ee71d6c7 with commit message 'ci: omit this pr' into base branch master
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-fetch-tags[0m
+From https://github.com/krestomatio/container_builder
+ * [new branch]      develop        -> origin/develop
+ * [new branch]      gh-pages       -> origin/gh-pages
+ * [new tag]         v0.0.1         -> v0.0.1
+ * [new tag]         v0.0.2         -> v0.0.2
+ * [new tag]         v0.0.2-develop -> v0.0.2-develop
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-update-submodules[0m
+
+Showing logs for build [32mkrestomatio-container-builder-p-4956c-26[0m stage [32mbuild[0m and container [32mstep-build-containers[0m
+
+PLAY [all:!ci] *****************************************************************
+
+TASK [Gathering Facts] *********************************************************
+[WARNING]: Platform linux on host php-fpm is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [php-fpm]
+[WARNING]: Platform linux on host nginx is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [nginx]
+[WARNING]: Platform linux on host httpd is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [httpd]
+[WARNING]: Platform linux on host base is using the discovered Python
+ok: [base]
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+[WARNING]: Platform linux on host centos8-minimal is using the discovered
+Python interpreter at /usr/bin/python3, but future installation of another
+Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/
+reference_appendices/interpreter_discovery.html for more information.
+ok: [centos8-minimal]
+[WARNING]: Platform linux on host postgres is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ok: [postgres]
+ce_appendices/interpreter_discovery.html for more information.
+[WARNING]: Platform linux on host nginx_php-fpm is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [nginx_php-fpm]
+[WARNING]: Platform linux on host moodle_nginx_web is using the discovered
+Python interpreter at /usr/bin/python3, but future installation of another
+Python interpreter could change this. See https://docs.ansible.com/ansible/2.9/
+reference_appendices/interpreter_discovery.html for more information.
+ok: [moodle_nginx_web]
+[WARNING]: Platform linux on host moodle_app is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [moodle_app]
+[WARNING]: Platform linux on host moodle_nginx is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [moodle_nginx]
+ok: [moodle_php-fpm]
+[WARNING]: Platform linux on host moodle_php-fpm is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+[WARNING]: Platform linux on host moodle_web is using the discovered Python
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+ok: [moodle_web]
+[WARNING]: Platform linux on host moodle_httpd is using the discovered Python
+ok: [moodle_httpd]
+interpreter at /usr/bin/python3, but future installation of another Python
+interpreter could change this. See https://docs.ansible.com/ansible/2.9/referen
+ce_appendices/interpreter_discovery.html for more information.
+
+TASK [include provider variables] **********************************************
+included: /workspace/source/tasks/provider-vars.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [include cloud provider vars] *********************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [check valid builder] *****************************************************
+ok: [centos8-minimal] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [base] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [httpd] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [nginx] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [php-fpm] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [nginx_php-fpm] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [postgres] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_app] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_nginx] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_nginx_web] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_php-fpm] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_web] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+ok: [moodle_httpd] => {
+    "changed": false,
+    "msg": "All assertions passed"
+}
+
+TASK [git related config] ******************************************************
+included: /workspace/source/tasks/git-config.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [git config] **************************************************************
+--- before: /usr/bin/git config --includes --local user.name
++++ after: /usr/bin/git config --includes --local user.name
+@@ -1 +1 @@
+-jenkins-x-bot
++*****************
+
+changed: [nginx] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [centos8-minimal] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [php-fpm] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [httpd] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [base] => (item={'name': 'user.name', 'value': '*****************'})
+--- before: /usr/bin/git config --includes --local user.email
++++ after: /usr/bin/git config --includes --local user.email
+@@ -1 +1 @@
+-jenkins-x@googlegroups.com
++jobcespedes@krestomatio.com
+
+changed: [nginx] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [centos8-minimal] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [php-fpm] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [base] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [httpd] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [nginx_php-fpm] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [postgres] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [moodle_app] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [moodle_nginx_web] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [nginx_php-fpm] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_nginx] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [postgres] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_app] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_web] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [moodle_nginx] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_nginx_web] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_php-fpm] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [moodle_httpd] => (item={'name': 'user.name', 'value': '*****************'})
+ok: [moodle_web] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_php-fpm] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+ok: [moodle_httpd] => (item={'name': 'user.email', 'value': 'jobcespedes@krestomatio.com'})
+
+TASK [builder related config] **************************************************
+included: /workspace/source/tasks/docker-config.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [check dockerd pid] *******************************************************
+fatal: [centos8-minimal]: FAILED! => {"changed": false, "cmd": ["pidof", "dockerd"], "delta": "0:00:00.003916", "end": "2020-10-02 03:13:33.453298", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:13:33.449382", "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+...ignoring
+
+TASK [start dockerd daemon] ****************************************************
+changed: [centos8-minimal]
+
+TASK [create config.json] ******************************************************
+skipping: [centos8-minimal]
+
+TASK [prepare rootfs for centos8 container] ************************************
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+included: /workspace/source/tasks/prepare-centos8.yml for centos8-minimal
+
+TASK [get old pkgs total checksum] *********************************************
+ok: [centos8-minimal]
+
+TASK [save old pkgs total checksum] ********************************************
+ok: [centos8-minimal]
+
+TASK [save old pkgs total checksum] ********************************************
+ok: [centos8-minimal]
+
+TASK [get old distro release] **************************************************
+ok: [centos8-minimal]
+
+TASK [save old distro release] *************************************************
+ok: [centos8-minimal]
+
+TASK [prepare artifacts for centos8-minimal] ***********************************
+skipping: [centos8-minimal]
+
+TASK [prepare artifacts for centos8-minimal] ***********************************
+skipping: [centos8-minimal]
+
+TASK [get new pkgs total checksum] *********************************************
+skipping: [centos8-minimal]
+
+TASK [save new pkgs total checksum] ********************************************
+skipping: [centos8-minimal]
+
+TASK [get new distro release] **************************************************
+skipping: [centos8-minimal]
+
+TASK [save new distro release] *************************************************
+skipping: [centos8-minimal]
+
+TASK [set version based on distro-release] *************************************
+ok: [centos8-minimal]
+
+TASK [omit src sync when no new pkgs] ******************************************
+skipping: [centos8-minimal]
+
+TASK [omit src sync when no new pkgs list in place] ****************************
+ok: [centos8-minimal]
+
+TASK [set version related facts] ***********************************************
+included: /workspace/source/tasks/version.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [set image version] *******************************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [nginx_php-fpm]
+ok: [php-fpm]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_nginx_web]
+ok: [moodle_httpd]
+
+TASK [set major version] *******************************************************
+skipping: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+skipping: [moodle_app]
+skipping: [moodle_web]
+
+TASK [set minor version] *******************************************************
+skipping: [centos8-minimal]
+ok: [base]
+ok: [nginx]
+ok: [httpd]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_php-fpm]
+ok: [moodle_nginx_web]
+ok: [moodle_httpd]
+skipping: [moodle_app]
+skipping: [moodle_web]
+
+TASK [set full version] ********************************************************
+skipping: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+skipping: [moodle_app]
+skipping: [moodle_web]
+
+TASK [state image tag] *********************************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+ok: [moodle_app]
+ok: [moodle_web]
+
+TASK [set container image version] *********************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+ok: [moodle_app]
+ok: [moodle_web]
+
+TASK [set container image tag based on full version] ***************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+ok: [moodle_app]
+ok: [moodle_web]
+
+TASK [set container image fallback tags based on branch and commit of version tag] ***
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [set container image tags based on major and minor version] ***************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [use build cache] *********************************************************
+included: /workspace/source/tasks/cache.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [set cache image name] ****************************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [set cache images with respective tags (if any)] **************************
+ok: [centos8-minimal] => (item=8.2.2004-5e29ed)
+ok: [base] => (item=0.0.2-develop)
+ok: [base] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [base] => (item=master)
+ok: [centos8-minimal] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [centos8-minimal] => (item=master)
+ok: [nginx] => (item=0.0.2-develop)
+ok: [httpd] => (item=0.0.2-develop)
+ok: [nginx_php-fpm] => (item=0.0.2-develop)
+ok: [php-fpm] => (item=0.0.2-develop)
+ok: [nginx_php-fpm] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [php-fpm] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [nginx] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [nginx_php-fpm] => (item=master)
+ok: [php-fpm] => (item=master)
+ok: [httpd] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [postgres] => (item=0.0.2-develop)
+ok: [nginx] => (item=master)
+ok: [moodle_app] => (item=3.9.2-SNAPSHOT-PR-3-26)
+ok: [httpd] => (item=master)
+ok: [postgres] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [postgres] => (item=master)
+ok: [moodle_app] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_app] => (item=master)
+ok: [moodle_nginx] => (item=0.0.2-develop)
+ok: [moodle_nginx_web] => (item=0.0.2-develop)
+ok: [moodle_nginx] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_web] => (item=3.9.2-SNAPSHOT-PR-3-26)
+ok: [moodle_nginx] => (item=master)
+ok: [moodle_nginx_web] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_web] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_httpd] => (item=0.0.2-develop)
+ok: [moodle_php-fpm] => (item=0.0.2-develop)
+ok: [moodle_web] => (item=master)
+ok: [moodle_nginx_web] => (item=master)
+ok: [moodle_httpd] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_php-fpm] => (item=990d715f42aec514d50cfb34378f6a85e1b7da9e)
+ok: [moodle_httpd] => (item=master)
+ok: [moodle_php-fpm] => (item=master)
+
+TASK [set cache build args variables] ******************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [prepull cache from image(s)] *********************************************
+ok: [httpd]
+ok: [nginx]
+ok: [centos8-minimal]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [postgres]
+ok: [moodle_nginx]
+ok: [moodle_app]
+ok: [moodle_nginx_web]
+ok: [moodle_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+ok: [base]
+
+TASK [show prepull output] *****************************************************
+ok: [centos8-minimal] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal:8.2.2004-5e29ed...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal:master...not available"
+    ]
+}
+ok: [base] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/base:0.0.2-develop...available",
+        "Status: Downloaded newer image for docker-registry.**.krestomat.io/krestomatio/container_builder/base:0.0.2-develop",
+        "Continue after first successfully prepull image..."
+    ]
+}
+ok: [httpd] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/httpd:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/httpd:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/httpd:master...not available"
+    ]
+}
+ok: [nginx] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx:master...not available"
+    ]
+}
+ok: [php-fpm] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm:master...not available"
+    ]
+}
+ok: [nginx_php-fpm] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm:master...not available"
+    ]
+}
+ok: [postgres] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/postgres:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/postgres:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/postgres:master...not available"
+    ]
+}
+ok: [moodle_app] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app:3.9.2-SNAPSHOT-PR-3-26...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app:master...not available"
+    ]
+}
+ok: [moodle_nginx] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx:master...not available"
+    ]
+}
+ok: [moodle_nginx_web] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web:master...not available"
+    ]
+}
+ok: [moodle_php-fpm] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm:master...not available"
+    ]
+}
+ok: [moodle_web] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web:3.9.2-SNAPSHOT-PR-3-26...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web:master...not available"
+    ]
+}
+ok: [moodle_httpd] => {
+    "msg": [
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd:0.0.2-develop...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd:990d715f42aec514d50cfb34378f6a85e1b7da9e...not available",
+        "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd:master...not available"
+    ]
+}
+
+TASK [build image] *************************************************************
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+included: /workspace/source/tasks/build.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_php-fpm, moodle_nginx_web, moodle_web, moodle_httpd
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [centos8-minimal] => {
+    "msg": "building: quay.io/krestomatio/centos8-minimal"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [centos8-minimal]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+ok: [centos8-minimal]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+skipping: [centos8-minimal]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [centos8-minimal]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [centos8-minimal]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for centos8-minimal
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [centos8-minimal]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [centos8-minimal]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [centos8-minimal]
+
+TASK [dockerfile_builder : podman build] ***************************************
+[WARNING]: noop task does not support when conditional
+skipping: [centos8-minimal]
+
+TASK [get build image info] ****************************************************
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+ok: [centos8-minimal]
+
+TASK [state image build fact] **************************************************
+skipping: [base]
+ok: [centos8-minimal]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [base] => {
+    "msg": "building: quay.io/krestomatio/base"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [base]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+ok: [base]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [base]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [base]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [base]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for base
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [base]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [base]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [base]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [base]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+ok: [base]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+ok: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [nginx_php-fpm]
+skipping: [moodle_nginx]
+skipping: [moodle_app]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [httpd] => {
+    "msg": "building: quay.io/krestomatio/httpd"
+}
+ok: [nginx] => {
+    "msg": "building: quay.io/krestomatio/nginx"
+}
+ok: [php-fpm] => {
+    "msg": "building: quay.io/krestomatio/php-fpm"
+}
+ok: [postgres] => {
+    "msg": "building: quay.io/krestomatio/postgres"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [nginx]
+ok: [httpd]
+ok: [php-fpm]
+ok: [postgres]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+--- before: generated_contexts/nginx/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpho5fhynr/Dockerfile.j2
+@@ -57,7 +57,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="1.14.0" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+
+changed: [nginx]
+--- before: generated_contexts/php-fpm/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp6a66q8hy/Dockerfile.j2
+@@ -58,7 +58,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="7.2.0" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+
+changed: [php-fpm]
+--- before: generated_contexts/httpd/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpgrj6n476/Dockerfile.j2
+@@ -55,7 +55,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="2.4.0" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+
+changed: [httpd]
+--- before: generated_contexts/postgres/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp8jq9dcja/Dockerfile.j2
+@@ -61,7 +61,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="10.0" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+
+changed: [postgres]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [postgres]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for httpd, nginx, php-fpm, postgres
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [httpd]
+changed: [php-fpm]
+changed: [nginx]
+changed: [postgres]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [nginx_php-fpm]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+ok: [postgres]
+ok: [nginx]
+ok: [php-fpm]
+ok: [httpd]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+skipping: [nginx_php-fpm]
+ok: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [nginx_php-fpm] => {
+    "msg": "building: quay.io/krestomatio/nginx_php-fpm"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [nginx_php-fpm]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+--- before: generated_contexts/nginx_php-fpm/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpgbr9yhsi/Dockerfile.j2
+@@ -58,7 +58,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="1.14.0" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
+
+changed: [nginx_php-fpm]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [nginx_php-fpm]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [nginx_php-fpm]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [nginx_php-fpm]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for nginx_php-fpm
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [nginx_php-fpm]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [nginx_php-fpm]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [nginx_php-fpm]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [nginx_php-fpm]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+ok: [nginx_php-fpm]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+ok: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [moodle_app] => {
+    "msg": "building: quay.io/krestomatio/moodle_app"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [moodle_app]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+--- before: generated_contexts/moodle_app/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp0f_vhq69/Dockerfile.j2
+@@ -33,7 +33,7 @@
+ 
+ # source variables
+ ENV GIT_branch="MOODLE_39_STABLE" \
+-    GIT_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    GIT_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     GIT_remote="git://github.com/moodle/moodle" \
+     GIT_chk="https://api.github.com/repos/moodle/moodle/git/refs/heads/MOODLE_39_STABLE"
+ 
+@@ -62,7 +62,7 @@
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="3.9.2-SNAPSHOT-PR-3-26" \
+       org.opencontainers.image.revision="${GIT_commit}" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+
+changed: [moodle_app]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [moodle_app]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [moodle_app]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [moodle_app]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for moodle_app
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [moodle_app]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [moodle_app]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [moodle_app]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [moodle_app]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+skipping: [moodle_web]
+ok: [moodle_app]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+ok: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_web]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [moodle_nginx] => {
+    "msg": "building: quay.io/krestomatio/moodle_nginx"
+}
+ok: [moodle_nginx_web] => {
+    "msg": "building: quay.io/krestomatio/moodle_nginx_web"
+}
+ok: [moodle_php-fpm] => {
+    "msg": "building: quay.io/krestomatio/moodle_php-fpm"
+}
+ok: [moodle_httpd] => {
+    "msg": "building: quay.io/krestomatio/moodle_httpd"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_nginx]
+ok: [moodle_httpd]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+--- before: generated_contexts/moodle_httpd/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmprhbc9mbg/Dockerfile.j2
+@@ -11,7 +11,7 @@
+ # Component bash variables
+ ENV MOODLE_version="3.9" \
+     MOODLE_ver_short="39" \
+-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    MOODLE_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     MOODLE_app=${APP_dest} \
+     MOODLE_data=/var/moodledata \
+     MOODLE_check_path=/login/index.php \
+@@ -36,7 +36,7 @@
+       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+
+changed: [moodle_httpd]
+--- before: generated_contexts/moodle_nginx/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpbsjf2yhq/Dockerfile.j2
+@@ -13,7 +13,7 @@
+ 
+ ENV MOODLE_version="3.9" \
+     MOODLE_ver_short="39" \
+-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    MOODLE_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     MOODLE_app=${APP_dest} \
+     MOODLE_data=/var/moodledata \
+     MOODLE_check_path=/login/index.php \
+@@ -39,7 +39,7 @@
+       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.tags="${IMAGE_name},nginx,nginx${NGINX_ver_short},nginx-${NGINX_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+
+changed: [moodle_nginx]
+--- before: generated_contexts/moodle_php-fpm/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpp2pnj163/Dockerfile.j2
+@@ -12,7 +12,7 @@
+ # Component bash variables
+ ENV MOODLE_version="3.9" \
+     MOODLE_ver_short="39" \
+-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    MOODLE_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     MOODLE_app=${APP_dest} \
+     MOODLE_data=/var/moodledata
+ 
+@@ -42,7 +42,7 @@
+       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.tags="${IMAGE_oc_tags}"
+
+changed: [moodle_php-fpm]
+--- before: generated_contexts/moodle_nginx_web/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmptasnnqji/Dockerfile.j2
+@@ -13,7 +13,7 @@
+ 
+ ENV MOODLE_version="3.9" \
+     MOODLE_ver_short="39" \
+-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    MOODLE_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     MOODLE_app=${APP_dest} \
+     MOODLE_data=/var/moodledata \
+     MOODLE_check_path=/login/index.php \
+@@ -39,7 +39,7 @@
+       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="0.0.2-develop" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.tags="${IMAGE_name},nginx,nginx${NGINX_ver_short},nginx-${NGINX_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"
+
+changed: [moodle_nginx_web]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [moodle_nginx]
+ok: [moodle_php-fpm]
+ok: [moodle_nginx_web]
+ok: [moodle_httpd]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_httpd
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [moodle_httpd]
+changed: [moodle_nginx]
+changed: [moodle_nginx_web]
+changed: [moodle_php-fpm]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+ok: [moodle_nginx_web]
+ok: [moodle_nginx]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [httpd]
+skipping: [base]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+skipping: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [build image] *************************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+
+TASK [dockerfile_builder : debug] **********************************************
+ok: [moodle_web] => {
+    "msg": "building: quay.io/krestomatio/moodle_web"
+}
+
+TASK [dockerfile_builder : check image build directory] ************************
+ok: [moodle_web]
+
+TASK [dockerfile_builder : create Dockerfile] **********************************
+--- before: generated_contexts/moodle_web/Dockerfile
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpn11oub2y/Dockerfile.j2
+@@ -15,7 +15,7 @@
+ # Component bash variables
+ ENV MOODLE_version="3.9" \
+     MOODLE_ver_short="39" \
+-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
++    MOODLE_commit="7c52a273754138a34a45a65f8728439733bbc3ad" \
+     MOODLE_app=${APP_dest} \
+     MOODLE_data=/var/moodledata
+ 
+@@ -47,7 +47,7 @@
+       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+       org.opencontainers.image.title="${IMAGE_title}" \
+       org.opencontainers.image.description="${IMAGE_description}" \
+-      org.opencontainers.image.version="0.0.1" \
++      org.opencontainers.image.version="3.9.2-SNAPSHOT-PR-3-26" \
+       io.k8s.description="${IMAGE_description}" \
+       io.k8s.display-name="${IMAGE_title}" \
+       io.openshift.tags="${IMAGE_oc_tags}"
+
+changed: [moodle_web]
+
+TASK [dockerfile_builder : sync image build directory] *************************
+ok: [moodle_web]
+
+TASK [dockerfile_builder : omit build because there are no changes] ************
+skipping: [moodle_web]
+
+TASK [dockerfile_builder : force build] ****************************************
+skipping: [moodle_web]
+
+TASK [dockerfile_builder : docker build] ***************************************
+included: /workspace/source/roles/dockerfile_builder/tasks/docker.yml for moodle_web
+
+TASK [dockerfile_builder : Log into registry] **********************************
+skipping: [moodle_web]
+
+TASK [dockerfile_builder : build image] ****************************************
+changed: [moodle_web]
+
+TASK [dockerfile_builder : Log out] ********************************************
+skipping: [moodle_web]
+
+TASK [dockerfile_builder : podman build] ***************************************
+skipping: [moodle_web]
+
+TASK [get build image info] ****************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_httpd]
+ok: [moodle_web]
+
+TASK [state image build fact] **************************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [httpd]
+skipping: [nginx]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+ok: [moodle_web]
+skipping: [moodle_httpd]
+
+TASK [tag image] ***************************************************************
+included: /workspace/source/tasks/tag.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [set destination image name] **********************************************
+ok: [centos8-minimal]
+ok: [httpd]
+ok: [base]
+ok: [nginx]
+ok: [php-fpm]
+ok: [postgres]
+ok: [nginx_php-fpm]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [check if build image exists] *********************************************
+fatal: [centos8-minimal]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal"], "delta": "0:00:00.096239", "end": "2020-10-02 03:23:19.005869", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:18.909630", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [httpd]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/httpd"], "delta": "0:00:00.055845", "end": "2020-10-02 03:23:19.112523", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.056678", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/httpd", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/httpd"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [nginx]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx"], "delta": "0:00:00.123031", "end": "2020-10-02 03:23:19.409922", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.286891", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/nginx", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/nginx"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [base]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/base"], "delta": "0:00:00.103180", "end": "2020-10-02 03:23:19.427536", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.324356", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/base", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/base"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [php-fpm]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm"], "delta": "0:00:00.077251", "end": "2020-10-02 03:23:19.525880", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.448629", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [nginx_php-fpm]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm"], "delta": "0:00:00.116352", "end": "2020-10-02 03:23:19.678316", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.561964", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [postgres]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/postgres"], "delta": "0:00:00.082058", "end": "2020-10-02 03:23:19.788724", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.706666", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/postgres", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/postgres"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_app]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app"], "delta": "0:00:00.082086", "end": "2020-10-02 03:23:20.055882", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:19.973796", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_nginx]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx"], "delta": "0:00:00.069868", "end": "2020-10-02 03:23:20.090732", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:20.020864", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_web]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web"], "delta": "0:00:00.067485", "end": "2020-10-02 03:23:20.339573", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:20.272088", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_nginx_web]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web"], "delta": "0:00:00.112875", "end": "2020-10-02 03:23:20.391090", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:20.278215", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_php-fpm]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm"], "delta": "0:00:00.100064", "end": "2020-10-02 03:23:20.378698", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:20.278634", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+fatal: [moodle_httpd]: FAILED! => {"changed": false, "cmd": ["docker", "inspect", "--type=image", "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd"], "delta": "0:00:00.036324", "end": "2020-10-02 03:23:20.593072", "msg": "non-zero return code", "rc": 1, "start": "2020-10-02 03:23:20.556748", "stderr": "Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd", "stderr_lines": ["Error: No such image: docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd"], "stdout": "[]", "stdout_lines": ["[]"]}
+...ignoring
+
+TASK [tag build image] *********************************************************
+changed: [php-fpm]
+changed: [centos8-minimal]
+changed: [nginx]
+changed: [base]
+changed: [httpd]
+changed: [nginx_php-fpm]
+changed: [postgres]
+changed: [moodle_app]
+changed: [moodle_nginx_web]
+changed: [moodle_nginx]
+changed: [moodle_php-fpm]
+changed: [moodle_httpd]
+changed: [moodle_web]
+
+TASK [add other tags to image] *************************************************
+ok: [base]
+ok: [centos8-minimal]
+ok: [httpd]
+ok: [php-fpm]
+ok: [nginx]
+ok: [postgres]
+ok: [nginx_php-fpm]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_app]
+ok: [moodle_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+
+TASK [show tagging output] *****************************************************
+ok: [centos8-minimal] => {
+    "msg": [
+        "TAG: '8.2.2004-5e29ed'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [base] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [httpd] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [nginx] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [php-fpm] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [nginx_php-fpm] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [postgres] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_app] => {
+    "msg": [
+        "TAG: '3.9.2-SNAPSHOT-PR-3-26'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_nginx] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_nginx_web] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_php-fpm] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_web] => {
+    "msg": [
+        "TAG: '3.9.2-SNAPSHOT-PR-3-26'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+ok: [moodle_httpd] => {
+    "msg": [
+        "TAG: '0.0.2-develop'...added",
+        "TAG: '990d715f42aec514d50cfb34378f6a85e1b7da9e'...added",
+        "TAG: 'master'...added"
+    ]
+}
+
+TASK [push image] **************************************************************
+included: /workspace/source/tasks/push.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [push image and its tags] *************************************************
+ok: [centos8-minimal]
+changed: [base]
+changed: [httpd]
+changed: [nginx]
+changed: [php-fpm]
+changed: [moodle_nginx_web]
+changed: [nginx_php-fpm]
+changed: [postgres]
+changed: [moodle_nginx]
+changed: [moodle_php-fpm]
+changed: [moodle_httpd]
+changed: [moodle_app]
+changed: [moodle_web]
+
+TASK [get push image info] *****************************************************
+ok: [base]
+ok: [centos8-minimal]
+ok: [nginx]
+ok: [php-fpm]
+ok: [httpd]
+ok: [postgres]
+ok: [nginx_php-fpm]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_web]
+ok: [moodle_httpd]
+
+TASK [state image repo digest fact] ********************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [nginx]
+ok: [httpd]
+ok: [postgres]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [moodle_app]
+ok: [moodle_nginx]
+ok: [moodle_web]
+ok: [moodle_nginx_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+
+TASK [save container state] ****************************************************
+included: /workspace/source/tasks/state-vars.yml for centos8-minimal, base, httpd, nginx, php-fpm, nginx_php-fpm, postgres, moodle_app, moodle_nginx, moodle_nginx_web, moodle_php-fpm, moodle_web, moodle_httpd
+
+TASK [check state related vars dir exists] *************************************
+ok: [centos8-minimal]
+ok: [base]
+ok: [httpd]
+ok: [nginx]
+ok: [php-fpm]
+ok: [nginx_php-fpm]
+ok: [moodle_nginx]
+ok: [postgres]
+ok: [moodle_app]
+ok: [moodle_nginx_web]
+ok: [moodle_web]
+ok: [moodle_php-fpm]
+ok: [moodle_httpd]
+
+TASK [save state related vars] *************************************************
+--- before: /workspace/source/vars/state/base.yml
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp8on8_9lw/state.yml.j2
+@@ -4,5 +4,5 @@
+ base_container:
+   build: True
+   tag: "0.0.2-develop"
+-  digest: "sha256:f1e3e0f9536d60f7eefcbb7f8152d0648792ca9fd7707efd57f32e6439ee207e"
+-  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/base@sha256:f99f71c433e36a755175d90da8455fc39f9bb98af0ef765ab89b0fbeba32e037"
++  digest: "sha256:af32c336b68a88601b19e85aed74dddac4ce47464fbf54e10f7ddc44d61c4251"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/base@sha256:20878f09d0ae1af6c000206b3a4193f92d819fb46f80c3d7d414c4bf61e0b450"
+
+changed: [base]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpmwj3wl2b/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++httpd_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:51e4ee909a6ea796b2288cb2deb6567e0454aaeaccaf70b9509c82e009babf0d"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/httpd@sha256:19409517f469d2a1fa12b07f7222fb8922cb185a24b96de450d73b4f09caad2b"
+
+changed: [httpd]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpgryg8gte/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++php-fpm_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:d903ccaca95904e0f5de70f0e72fee07ca019373e7c81a11a7f4a5c2a6dc8bdc"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/php-fpm@sha256:a63a5220b6859b888b9a565306be9f1f927a1bc158f8bf179b0e425dc36a1d86"
+
+changed: [php-fpm]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmph1erb89s/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++centos8-minimal_container:
++  build: True
++  tag: "8.2.2004-5e29ed"
++  digest: "sha256:a55f65b1b529a94e7f9c6f32fdc9a9ef49b1fc563a3d7577f9c11503d9639e59"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/centos8-minimal@sha256:eb0b7604acb289440751a0dd5d16787e1b1e252535f3320873670e0077fa73d1"
+
+changed: [centos8-minimal]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp26o9zatu/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++nginx_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:670f9f758b8639f111bfe1b84f6af8925334f35a3f3292de857e4a3e45a34d49"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx@sha256:2689eea27a9f6f393362c7905ab3e4760f985ac7a71020ac6dbeeb18e7199597"
+
+changed: [nginx]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp6fm6z9md/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++nginx_php-fpm_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:8b93b3ae90d3a8d44e579ac969dd2a15fada0679e538affa94f7d12bdabb2236"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/nginx_php-fpm@sha256:c2cedcd329b4f3379ddd4f45e0abd5ec0b3a8b61dd0cf55bf0d2e309dc6a68c9"
+
+changed: [nginx_php-fpm]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp7dxwwsxz/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_nginx_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:33257dda1f6a6efbf01e8e69bf4ca7988ce4eb63a00b8f8f62246cdba01f6c9e"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx@sha256:5bbf5c1d08b644861407c049da0e6dabede2f8204464bff9ca39303a00f5e7e3"
+
+changed: [moodle_nginx]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpi8nk28ii/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++postgres_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:e9f3242723e6294a7110395bf74280b84be72e5bc4e34c750a80b0a7d4325b25"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/postgres@sha256:a3235c63c1332caa2efebec65d3298341a0f88cf1812c1023803be9ca46ef2ed"
+
+changed: [postgres]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp1r2l0qks/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_app_container:
++  build: True
++  tag: "3.9.2-SNAPSHOT-PR-3-26"
++  digest: "sha256:a9aabe9753d276f7a7dd10763bf993329ed00fa7846c65d2fcc1ff08aeae6723"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_app@sha256:1a7c36c85824f6b02c9e229173fb38831fe0f759c7be760a663ccf1f99ec6c49"
+
+changed: [moodle_app]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmpb06_ya5v/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_php-fpm_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:6a164eda3aa23d1e8af5e997a162610febefbed8fe2127f92873df7240bf86f1"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_php-fpm@sha256:03534eec367f1a86e645d925a7bd8e4525fe1af8558d27230026d4167dd2b695"
+
+changed: [moodle_php-fpm]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmp16qnnhhs/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_nginx_web_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:a07aae7e9041e4ad105dd35b8a5b385c44350db97c7bd815a47647d9b952ebed"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_nginx_web@sha256:13b0a85659d8236ec41a5db9d5e9bc565fb524265bb993d3830420e7d5dcd467"
+
+changed: [moodle_nginx_web]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmps58rqt7_/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_httpd_container:
++  build: True
++  tag: "0.0.2-develop"
++  digest: "sha256:90e38f5aff5b441192ab7c73d45dac72fefb26f9bd29cd5e14007babdbb54932"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_httpd@sha256:d7f5dfb0543aebe039f59cde813eb611d675cee0bad40f8752a2a2170618be0f"
+
+changed: [moodle_httpd]
+--- before
++++ after: /tekton/home/.ansible/tmp/ansible-local-11fmiox17b/tmppp_ma8bx/state.yml.j2
+@@ -0,0 +1,8 @@
++#
++# Ansible managed
++#
++moodle_web_container:
++  build: True
++  tag: "3.9.2-SNAPSHOT-PR-3-26"
++  digest: "sha256:3aa77b10b41823e2055a7ef4d9b2976d501a45445d812c8931875f2017d4ea5a"
++  repo_digest: "docker-registry.**.krestomat.io/krestomatio/container_builder/moodle_web@sha256:46eb19956fad428e5a4a2f2f82b18ded98ef15958a9f6b510ef407472a759dba"
+
+changed: [moodle_web]
+
+TASK [include state related vars] **********************************************
+skipping: [centos8-minimal]
+skipping: [base]
+skipping: [nginx]
+skipping: [httpd]
+skipping: [php-fpm]
+skipping: [nginx_php-fpm]
+skipping: [postgres]
+skipping: [moodle_app]
+skipping: [moodle_nginx]
+skipping: [moodle_nginx_web]
+skipping: [moodle_php-fpm]
+skipping: [moodle_web]
+skipping: [moodle_httpd]
+
+PLAY RECAP *********************************************************************
+base                       : ok=51   changed=4    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+centos8-minimal            : ok=57   changed=4    unreachable=0    failed=0    skipped=40   rescued=0    ignored=2   
+httpd                      : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+moodle_app                 : ok=48   changed=5    unreachable=0    failed=0    skipped=32   rescued=0    ignored=1   
+moodle_httpd               : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+moodle_nginx               : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+moodle_nginx_web           : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+moodle_php-fpm             : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+moodle_web                 : ok=48   changed=5    unreachable=0    failed=0    skipped=32   rescued=0    ignored=1   
+nginx                      : ok=51   changed=6    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+nginx_php-fpm              : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+php-fpm                    : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+postgres                   : ok=51   changed=5    unreachable=0    failed=0    skipped=29   rescued=0    ignored=1   
+

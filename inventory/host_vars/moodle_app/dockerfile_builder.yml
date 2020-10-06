@@ -6,4 +6,4 @@ dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
 # other
 version_image_major: "{{ moodle_git_source_version.split('.')[0] }}"
 version_image_minor: "{{ moodle_git_source_version.split('.')[1] }}"
-version_image_full: "{{ moodle_git_source_version + version_default_suffix | default('-' + moodle_git_commit[0:5]) }}"
+version_image_full: "{{ moodle_git_source_version + version_add_build_suffix | default('-' + moodle_git_commit[0:5]) }}"

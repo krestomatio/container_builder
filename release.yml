@@ -3,8 +3,7 @@
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
   vars:
-    version_add_build: true
-    version_include_fallback_tags: true
+    version_include_major_minor_tags: true
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -24,37 +23,14 @@
       include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
       when: builder_config | default(false) | bool
 
-    - name: prepare rootfs for centos8 container
-      include_tasks: tasks/prepare-centos8.yml
-      when: ansible_host == 'centos8-minimal'
-
     - name: set version related facts
       include_tasks: tasks/version.yml
 
-    - name: use build cache
-      include_tasks: tasks/cache.yml
-      when: build_cache | default(false) | bool
+    - name: load containers state
+      include_tasks: tasks/state-vars.yml
 
-    - name: build image
-      loop_control:
-        loop_var: build_step
-      loop:
-        - "ci"
-        - "platform_s1"
-        - "platform_s2"
-        - "platform_s3"
-        - "platform_s4"
-        - "app_s1"
-        - "app_s2"
-        - "app_s3"
-      include_tasks: tasks/build.yml
+    - name: promote image
+      include_tasks: tasks/promote.yml
 
-    - name: tag image
-      include_tasks: tasks/tag.yml
-
-    - name: push image
-      include_tasks: tasks/push.yml
-      when: build_push | default(false) | bool
-
-    - name: save container state
+    - name: update container state
       include_tasks: tasks/state-vars.yml

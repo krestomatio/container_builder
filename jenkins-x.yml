@@ -27,18 +27,17 @@ pipelineConfig:
     release:
       pipeline:
         options:
-          # containerOptions:
-          #   securityContext:
-          #     privileged: true
           timeout:
-            time: 30
+            time: 60
             unit: minutes
         stages:
-        - name: build
+        - name: release
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          # - name: update submodules
-          #   command: git submodule update --init --recursive
-          - name: build containers
-            command: sleep 100 # ansible-playbook -i inventory/hosts build.yml
+          - name: fetch tags
+            command: git fetch --tag
+          - name: update submodules
+            command: git submodule update --init --recursive
+          - name: release
+            command: ansible-playbook -i inventory/hosts release.yml

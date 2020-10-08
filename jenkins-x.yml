@@ -1,4 +1,5 @@
 buildPack: none
+noReleasePrepare: true
 pipelineConfig:
   env:
   - name: CLOUD_PROVIDER
@@ -18,13 +19,26 @@ pipelineConfig:
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          - name: fetch tags
-            command: git fetch --tag
-          - name: update submodules
-            command: git submodule update --init --recursive
+          # - name: fetch tags
+          #   command: git fetch --tag
+          # - name: update submodules
+          #   command: git submodule update --init --recursive
           - name: build containers
-            command: ansible-playbook -i inventory/hosts build.yml
+            command: git rev-parse HEAD # ansible-playbook -i inventory/hosts build.yml
     release:
+      # setVersion:
+      #   steps:
+      #     - name: next-version
+      #       sh: "sleep 60; echo '' > ./VERSION"
+      # build:
+      #   replace: true
+      #   steps:
+      #   - name: fetch tags
+      #     command: git fetch --tag; sleep 180
+      #   - name: update submodules
+      #     command: git submodule update --init --recursive
+      #   - name: release
+      #     command: ansible-playbook -i inventory/hosts release.yml
       pipeline:
         options:
           timeout:
@@ -35,9 +49,9 @@ pipelineConfig:
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          - name: fetch tags
-            command: git fetch --tag
-          - name: update submodules
-            command: git submodule update --init --recursive
+          # - name: fetch tags
+          #   command: git fetch --tag
+          # - name: update submodules
+          #   command: git submodule update --init --recursive
           - name: release
-            command: ansible-playbook -i inventory/hosts release.yml
+            command: sleep 900 # ansible-playbook -i inventory/hosts release.yml

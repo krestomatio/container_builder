@@ -5,6 +5,7 @@
   vars:
     version_add_build: true
     version_include_fallback_tags: true
+    version_custom_tag: "{{ lookup('env','PULL_PULL_SHA') | default(false,true) }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -55,6 +56,3 @@
     - name: push image
       include_tasks: tasks/push.yml
       when: build_push | default(false) | bool
-
-    - name: save container state
-      include_tasks: tasks/state-vars.yml

@@ -1,9 +1,9 @@
 - vars:
     skopeo_transport: "docker://"
     skopeo_copy_src_image: "{{ skopeo_src_transport | default(skopeo_transport) + skopeo_src_image +
-      ( ':' + skopeo_src_image_tag if skopeo_src_image_tag is defined else '') }}"
+      ( ':' + skopeo_src_image_tag if skopeo_src_image_tag is defined and skopeo_src_image_tag else '') }}"
     skopeo_copy_dest_image: "{{ skopeo_dest_transport | default(skopeo_transport) + skopeo_dest_image +
-      ( ':' + skopeo_dest_image_tag if skopeo_dest_image_tag is defined else '') }}"
+      ( ':' + skopeo_dest_image_tag if skopeo_dest_image_tag is defined and skopeo_dest_image_tag else '') }}"
   block:
     - name: show source image name
       debug:

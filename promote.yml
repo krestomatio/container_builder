@@ -4,6 +4,7 @@
   vars_files: "vars/ci.yml"
   vars:
     version_include_major_minor_tags: true
+    skopeo_src_image_tag: "{{ lookup('file', '/tmp/PROMOTE_TAG') | default(false,true) }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -26,11 +27,8 @@
     - name: set version related facts
       include_tasks: tasks/version.yml
 
-    - name: load containers state
-      include_tasks: tasks/state-vars.yml
-
     - name: promote image
       include_tasks: tasks/promote.yml
 
-    - name: update container state
+    - name: save container state
       include_tasks: tasks/state-vars.yml

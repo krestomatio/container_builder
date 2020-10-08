@@ -1,0 +1,35 @@
+- hosts: "{{ play_containers | default('all') }}"
+  connection: local
+  diff: "{{ play_diff | default(omit) }}"
+  vars_files: "vars/ci.yml"
+  vars:
+    version_include_major_minor_tags: true
+    skopeo_src_image_tag: "{{ lookup('file', '/tmp/PROMOTE_TAG') | default(false,true) }}"
+    build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
+  environment:
+    DOCKER_BUILDKIT: 1
+  tasks:
+    - name: include provider variables
+      include_tasks: tasks/provider-vars.yml
+
+    - name: check valid builder
+      tags: always
+      assert:
+        that: dockerfile_builder in ['docker','podman']
+
+    - name: git related config
+      include_tasks: "tasks/git-config.yml"
+      when: git_config_list | default(false) | type_debug == "list"
+
+    - name: builder related config
+      include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
+      when: builder_config | default(false) | bool
+
+    - name: set version related facts
+      include_tasks: tasks/version.yml
+
+    - name: promote image
+      include_tasks: tasks/promote.yml
+
+    - name: save container state
+      include_tasks: tasks/state-vars.yml

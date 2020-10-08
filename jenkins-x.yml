@@ -23,7 +23,7 @@ pipelineConfig:
           - name: update submodules
             command: git submodule update --init --recursive
           - name: build containers
-            command: sleep 300 # ansible-playbook -i inventory/hosts build.yml
+            command: sleep 400 # ansible-playbook -i inventory/hosts build.yml
     release:
       pipeline:
         options:

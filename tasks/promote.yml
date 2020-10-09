@@ -1,12 +1,13 @@
 - name: copy image using skopeo
   vars:
-    skopeo_src_image: "{{ lookup('vars', ansible_host + '_image').repo_digest }}"
+    skopeo_src_image: "{{ build_image_name }}"
     skopeo_dest_image: "{{ dockerfile_builder_image }}"
+    skopeo_dest_image_tag: "{{ skopeo_src_image_tag }}"
   include_tasks: skopeo.yml
 
 - name: copy image tags using skopeo
   vars:
-    skopeo_src_image: "{{ lookup('vars', ansible_host + '_image').repo_digest }}"
+    skopeo_src_image: "{{ build_image_name }}"
     skopeo_dest_image: "{{ dockerfile_builder_image }}"
     skopeo_dest_image_tag: "{{ item }}"
   loop: "{{ dockerfile_builder_tags }}"
@@ -17,6 +18,6 @@
   vars:
     repo_digest: "{{ lookup('vars', ansible_host + '_image').repo_digest.split('@')[1] }}"
   set_fact:
-    state_yml_build: "{{ lookup('vars', ansible_host + '_image').build }}"
+    state_yml_build: true
     state_yml_id: "{{ lookup('vars', ansible_host + '_image').id }}"
     state_yml_repo_digest: "{{ dockerfile_builder_image + '@'  + repo_digest }}"

@@ -11,11 +11,12 @@ ENV IMAGE_name=ansible-podman-ci \
 ENV ANSIBLE_version="2.9" \
     MOLECULE_version="3.0" \
     CTR_pkg_mgm="dnf install -y" \
-    CTR_pip="pip install --no-cache --upgrade"
+    CTR_pip="pip3 install --no-cache --upgrade"
 
 RUN echo "Build tools..."  && \
     $CTR_pkg_mgm python-devel gcc && \
     echo "Installing pkgs..."  && \
+    python3 -m ensurepip && \
     $CTR_pip cffi pip && \
     $CTR_pip ansible~=$ANSIBLE_version && \
     $CTR_pip molecule~=$MOLECULE_version && \
@@ -30,11 +31,23 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo \
+    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo curl \
     --exclude container-selinux && \
     echo "Cleaning..." && \
     dnf clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
+
+ENV JX3_VERSION="3.0.542"
+ENV JX3_HOME=/home/.jx3
+RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
+    cd /tmp && \
+    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
+    mv jx /usr/bin/jx && \
+    echo "Pre-load jx3 plugins..."  && \
+    # jx upgrade plugins --mandatory && \
+    jx gitops version && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/*
 
 CMD [ "ansible-playbook", "--version" ]
 

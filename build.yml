@@ -1,13 +1,18 @@
-- hosts: "{{ play_containers | default('all') }}"
+- name: build
+  hosts: "{{ play_containers | default('all') }}"
   connection: local
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
   vars:
     version_add_build: true
     version_include_fallback_tags: true
+    version_custom_tag: "{{ lookup('env','PULL_PULL_SHA') | default(false,true) }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
+    - name: include skip-ci
+      include_tasks: tasks/skip-ci.yml
+
     - name: include provider variables
       include_tasks: tasks/provider-vars.yml
 
@@ -18,15 +23,14 @@
 
     - name: git related config
       include_tasks: "tasks/git-config.yml"
-      when: git_config_list | default(false) | type_debug == "list"
 
     - name: builder related config
-      include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
+      include_tasks: "tasks/config-{{ dockerfile_builder }}.yml"
       when: builder_config | default(false) | bool
 
-    - name: prepare rootfs for centos8 container
-      include_tasks: tasks/prepare-centos8.yml
-      when: ansible_host == 'centos8-minimal'
+    - name: prepare image task
+      include_tasks: tasks/prepare-{{ prepare_image_task }}.yml
+      when: prepare_image_task is defined and prepare_image_task
 
     - name: set version related facts
       include_tasks: tasks/version.yml

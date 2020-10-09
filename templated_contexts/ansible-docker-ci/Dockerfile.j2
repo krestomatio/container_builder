@@ -39,6 +39,9 @@ RUN echo "Installing other tools..."  && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache
 
+RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
+    ln -svf bash /bin/sh
+
 {% if jx2_version is defined and jx2_version %}
 ENV JX_VERSION="{{ jx2_version }}"
 ENV JX_HOME=/home/.jx
@@ -47,7 +50,8 @@ RUN echo "Installing jx2 version: ${JX_VERSION}..."  && \
     curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
     sudo mv jx /usr/bin/{{ jx2_binary_name | default('jx') }} && \
     echo "Cleaning..."  && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    cd /
 
 {% endif %}
 {% if jx3_version is defined and jx3_version %}
@@ -61,12 +65,21 @@ RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     # {{ jx3_binary_name | default('jx') }} upgrade plugins --mandatory && \
     {{ jx3_binary_name | default('jx') }} gitops version && \
     echo "Cleaning..."  && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    cd /
 
 {% endif %}
-RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
-    ln -svf bash /bin/sh
+{% if oras_version is defined and oras_version %}
+ENV ORAS_VERSION="{{ oras_version }}"
+RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
+    cd /tmp && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    mv oras /usr/bin/{{ oras_binary_name | default('oras') }} && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    cd /
 
+{% endif %}
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels

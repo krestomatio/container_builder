@@ -39,7 +39,10 @@ RUN echo "Installing other tools..."  && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache
 
-ENV JX3_VERSION="3.0.542"
+RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
+    ln -svf bash /bin/sh
+
+ENV JX3_VERSION="3.0.584"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     cd /tmp && \
@@ -49,10 +52,17 @@ RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     # jx upgrade plugins --mandatory && \
     jx gitops version && \
     echo "Cleaning..."  && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    cd /
 
-RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
-    ln -svf bash /bin/sh
+ENV ORAS_VERSION="0.8.1"
+RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
+    cd /tmp && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    mv oras /usr/bin/oras && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    cd /
 
 CMD [ "ansible-playbook", "--version" ]
 

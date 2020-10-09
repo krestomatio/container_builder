@@ -33,11 +33,23 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo && \
+    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo curl && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
     rm -rf ~/.cache
+
+ENV JX3_VERSION="3.0.542"
+ENV JX3_HOME=/home/.jx3
+RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
+    cd /tmp && \
+    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
+    mv jx /usr/bin/jx && \
+    echo "Pre-load jx3 plugins..."  && \
+    # jx upgrade plugins --mandatory && \
+    jx gitops version && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/*
 
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh

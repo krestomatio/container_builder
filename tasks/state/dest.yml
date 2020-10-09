@@ -1,0 +1,13 @@
+- name: check state related vars dir exists
+  stat:
+    path: "{{ playbook_dir }}/vars/state"
+  register: state_vars_dest_check
+
+- name: create state related vars dir
+  when:
+    - not ansible_check_mode
+    - not state_vars_dest_check.stat.exists
+  file:
+    dest: "{{ playbook_dir }}/vars/state"
+    state: directory
+    mode: '0755'

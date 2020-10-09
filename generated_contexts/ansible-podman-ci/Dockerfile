@@ -37,17 +37,27 @@ RUN echo "Installing other tools..."  && \
     dnf clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
-ENV JX3_VERSION="3.0.542"
+ENV JX3_VERSION="3.0.584"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
-    cd /tmp && \
+    pushd /tmp && \
     curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
     mv jx /usr/bin/jx && \
     echo "Pre-load jx3 plugins..."  && \
     # jx upgrade plugins --mandatory && \
     jx gitops version && \
     echo "Cleaning..."  && \
-    rm -rf /tmp/*
+    rm -rf /tmp/* && \
+    popd
+
+ENV ORAS_VERSION="0.8.1"
+RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
+    pushd /tmp && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    mv oras /usr/bin/oras && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    popd
 
 CMD [ "ansible-playbook", "--version" ]
 

@@ -1,0 +1,9 @@
+- name: git push
+  vars:
+    git_push_local_branch: "{{ lookup('pipe', 'git branch --show-current') | default('') }}"
+    git_push_remote: "{{ lookup('pipe', 'git remote | head -n 1') | default('') }}"
+  command: "git push {{ git_push_options | default ('') }} {{ git_push_remote }} {{ git_push_local_branch }}"
+  register: git_push_status
+  changed_when:
+    - git_push_status.stderr is defined
+    - "'Everything up-to-date' not in git_push_status.stderr"

@@ -15,3 +15,12 @@
     - jx3_version is not defined
   set_fact:
     jx3_version: "{{ lookup('url', jx3_version_url) | regex_search(jx3_version_regex) }}"
+
+- name: set oras version
+  when:
+    - oras_version_install | default(false)
+    - oras_version_url is defined
+    - oras_version_regex is defined
+    - oras_version is not defined
+  set_fact:
+    oras_version: "{{ lookup('url', oras_version_url) | regex_search(oras_version_regex) }}"

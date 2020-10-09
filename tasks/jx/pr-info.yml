@@ -1,0 +1,23 @@
+- name: get pull request info
+  when:
+    - lookup('env','BRANCH_NAME') | default(false,true) or
+      jx_gitops_pr_number is defined
+  command: "jx gitops pr get {{ '--pr ' + jx_gitops_pr_number if jx_gitops_pr_number is defined else '' }}"
+  register: jx_gitops_pr_check
+  changed_when: false
+
+- name: fact for pull request info
+  vars:
+    pr_yaml_regex: 'Assignees:[\S\s]*'
+    pr_yaml: "{{ jx_gitops_pr_check.stderr | regex_search(pr_yaml_regex) | from_yaml }}"
+  when:
+    - jx_gitops_pr_check.stderr is defined
+    - pr_yaml is defined and pr_yaml
+  set_fact:
+    jx_gitops_pr_info: "{{ pr_yaml }}"
+
+- name: facts for branch and clone of pull request
+  when: jx_gitops_pr_info is defined and jx_gitops_pr_info
+  set_fact:
+    git_push_pr_remote_branch: "{{ jx_gitops_pr_info.Head.Ref }}"
+    git_push_pr_remote_url: "{{ jx_gitops_pr_info.Head.Repo.Clone }}"

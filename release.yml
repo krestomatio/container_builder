@@ -11,6 +11,8 @@
     git_commit_msgs:
       - "chore(ci): save state of images"
       - "[skip.ci]"
+    state_path: "{{ playbook_dir }}/vars/state"
+    artifact_path: "{{ state_path }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -44,6 +46,9 @@
 
     - name: save image state
       include_tasks: tasks/state/save.yml
+
+    - name: pull state artifact
+      include_tasks: tasks/artifact/download.yml
 
     - name: push image state changes
       run_once: true

@@ -7,6 +7,8 @@
     version_add_build: true
     version_include_fallback_tags: true
     version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
+    state_path: "{{ playbook_dir }}/vars/tmp/state"
+    artifact_path: "{{ state_path }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -71,6 +73,5 @@
     - name: save image state
       include_tasks: tasks/state/save.yml
 
-    - name: push state artifact with oras
-      debug:
-        msg: changeme
+    - name: push state artifact
+      include_tasks: tasks/artifact/upload.yml

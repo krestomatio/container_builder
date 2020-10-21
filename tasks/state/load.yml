@@ -5,7 +5,7 @@
     - state_vars_load | default(true)
     - state_vars_dest_check.stat.exists
   include_vars:
-    dir: "{{ playbook_dir }}/vars/state"
+    dir: "{{ state_path }}"
     ignore_unknown_extensions: True
     extensions:
       - yml

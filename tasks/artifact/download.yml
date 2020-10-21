@@ -1,0 +1,31 @@
+- vars:
+    # absolute path is disallow by Oras
+    artifact_archive: "oci_artifact.tar.gz"
+    artifact_tmp_dir: '/tmp/'
+  block:
+    - name: check artifact path
+      register: check_artifact_path
+      stat:
+        path: "{{ artifact_path }}"
+
+    - name: check if there is an artifact file
+      register: check_artifact_file
+      stat:
+        path: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
+        checksum_algorithm: sha256
+        get_checksum: yes
+
+    - name: download artifact
+      command: "oras pull '{{ artifact_name }}'"
+      args:
+        chdir: "{{ artifact_tmp_dir }}"
+      changed_when: check_artifact_file.stat.checksum[0:12] | default('0') not in artifact_pull_status.stdout
+      register: artifact_pull_status
+
+    - name: unarchive artifact
+      unarchive:
+        src: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
+        dest: "{{ artifact_path }}"
+        remote_src: yes
+        extra_opts:
+          - "{{ '--strip-components=1' if check_artifact_path.stat.exists else '' }}"

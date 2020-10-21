@@ -51,3 +51,6 @@ registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name
 
 # skopeo
 skopeo_transport: "docker://"
+
+# artifact
+artifact_name: "{{ build_registry_path }}/git_push_pr_sha:{{ jx_gitops_pr_number | default('')}}"

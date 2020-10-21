@@ -21,3 +21,4 @@
   set_fact:
     git_push_pr_remote_branch: "{{ jx_gitops_pr_info.Head.Ref }}"
     git_push_pr_remote_url: "{{ jx_gitops_pr_info.Head.Repo.Clone }}"
+    git_push_pr_sha: "{{ jx_gitops_pr_info.Sha }}"

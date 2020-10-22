@@ -40,3 +40,6 @@ storage_graphroot: "{{ lookup('env','STORAGE_CONTAINER_PATH') | default('/worksp
 storage_driver: "{{ lookup('env','STORAGE_DRIVER') | default('overlay',true) }}"
 registry_unqualified: "{{ lookup('env','REGISTRY_UNQUALIFIED') | default(\"'\" + registry_name + \"'\",true) }}"
 registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name,true) }}"
+
+# artifact
+artifact_name: "{{ build_registry_path }}:{{ artifact_commit_tag if artifact_commit_tag else '' }}"

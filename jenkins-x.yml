@@ -1,4 +1,5 @@
 buildPack: none
+buildPackGitRef: https://github.com/jenkins-x/jxr-packs-kubernetes
 noReleasePrepare: true
 pipelineConfig:
   env:
@@ -9,6 +10,8 @@ pipelineConfig:
       pipeline:
         options:
           containerOptions:
+            name: ""
+            resources: {}
             securityContext:
               privileged: true
           timeout:
@@ -19,12 +22,8 @@ pipelineConfig:
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          - name: fetch tags
-            command: git fetch --tag
-          - name: update submodules
-            command: git submodule update --init --recursive
           - name: build containers
-            command: sleep 120 # ansible-playbook -i inventory/hosts build.yml
+            command: ansible-playbook -i inventory/hosts build.yml
     release:
       pipeline:
         options:
@@ -36,13 +35,5 @@ pipelineConfig:
           agent:
             image: krestomatio/ansible-docker-ci
           steps:
-          - name: fetch tags
-            command: git fetch --tag
-          - name: update submodules
-            command: git submodule update --init --recursive
-          - name: promote tag # create file to store promote tag from latest pull request number
-            command: |
-              PROMOTE_TAG_PR=$(git log --format=%B -n 1 -g --grep='Merge pull request #' | grep -oP '(?<= #)(\d+)')
-              jx gitops pr get --pr $PROMOTE_TAG_PR 2>&1 | grep -oP '(?<=^Sha: ).*' > /tmp/PROMOTE_TAG
-          - name: promote
-            command: sleep 120 # ansible-playbook -i inventory/hosts release.yml
+          - name: release
+            command: ansible-playbook -i inventory/hosts release.yml

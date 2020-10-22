@@ -8,6 +8,13 @@
       stat:
         path: "{{ artifact_path }}"
 
+    - name: create artifact path dir
+      when: not check_artifact_path.stat.exists
+      file:
+        path: "{{ artifact_path }}"
+        state: directory
+        mode: '0755'
+
     - name: check if there is an artifact file
       register: check_artifact_file
       stat:
@@ -16,6 +23,7 @@
         get_checksum: yes
 
     - name: download artifact
+      when: not ansible_check_mode
       command: "oras pull '{{ artifact_name }}'"
       args:
         chdir: "{{ artifact_tmp_dir }}"
@@ -23,9 +31,10 @@
       register: artifact_pull_status
 
     - name: unarchive artifact
+      when: not ansible_check_mode
       unarchive:
         src: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
         dest: "{{ artifact_path }}"
         remote_src: yes
         extra_opts:
-          - "{{ '--strip-components=1' if check_artifact_path.stat.exists else '' }}"
+          - '--strip-components=1'

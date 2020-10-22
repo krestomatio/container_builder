@@ -22,7 +22,6 @@ dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(
 dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(false,true) }}"
 dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
 dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
-dockerfile_builder_force_source_on_changed: false
 
 # version
 version_git_based: true

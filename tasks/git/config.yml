@@ -1,0 +1,22 @@
+- name: git config
+  when: "(git_config_list | default(false) | type_debug) == 'list'"
+  with_items: "{{ git_config_list }}"
+  git_config:
+    name: "{{ item.name | default(omit) }}"
+    scope: "{{ item.scope | default('local') }}"
+    value: "{{ item.value | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    repo: "{{ item.repo | default(playbook_dir) }}"
+    list_all: "{{ item.list_all | default(omit) }}"
+
+- name: fetch git| tags
+  when: git_config_fetch_tag | default(false)
+  changed_when: git_config_fetch_tag.stdout is defined and git_config_fetch_tag.stdout
+  register: git_config_fetch_tag
+  command: git fetch --tag
+
+- name: update git submodules
+  when: git_config_submodule_update | default(false)
+  changed_when: git_config_submodule_update_status.stdout is defined and git_config_submodule_update_status.stdout
+  register: git_config_submodule_update_status
+  command: git submodule update --init --recursive

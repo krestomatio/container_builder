@@ -1,0 +1,11 @@
+- include_tasks: dest.yml
+
+- name: load state related vars
+  when:
+    - state_vars_load | default(true)
+    - state_vars_dest_check.stat.exists
+  include_vars:
+    dir: "{{ state_path }}"
+    ignore_unknown_extensions: True
+    extensions:
+      - yml

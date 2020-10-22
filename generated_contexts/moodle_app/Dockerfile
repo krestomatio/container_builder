@@ -33,7 +33,7 @@ WORKDIR ${GIT_dest}
 
 # source variables
 ENV GIT_branch="MOODLE_39_STABLE" \
-    GIT_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
+    GIT_commit="5ea37637b7c0ac4f3c7ccddccd4f82ba9a1b86bd" \
     GIT_remote="git://github.com/moodle/moodle" \
     GIT_chk="https://api.github.com/repos/moodle/moodle/git/refs/heads/MOODLE_39_STABLE"
 
@@ -62,7 +62,7 @@ LABEL name="${IMAGE_name}" \
       org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="0.0.1" \
+      org.opencontainers.image.version="3.9.2-5ea37" \
       org.opencontainers.image.revision="${GIT_commit}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \

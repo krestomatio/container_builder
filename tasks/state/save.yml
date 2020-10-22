@@ -1,0 +1,13 @@
+- include_tasks: dest.yml
+
+- name: save state related vars
+  when:
+    - state_vars_save | default(true)
+    - state_yml_tag is defined and state_yml_tag
+    - state_yml_id is defined and state_yml_id
+    - state_yml_repo_digest is defined and state_yml_repo_digest
+    - not ansible_check_mode
+  template:
+    src: state.yml.j2
+    dest: "{{ state_path }}/{{ ansible_host }}.yml"
+    mode: '0644'

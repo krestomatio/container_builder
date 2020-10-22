@@ -1,38 +1,52 @@
-- hosts: "{{ play_containers | default('all') }}"
+- name: build
+  hosts: "{{ play_containers | default('all') }}"
   connection: local
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
   vars:
     version_add_build: true
     version_include_fallback_tags: true
+    version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
+    state_path: "{{ playbook_dir }}/vars/tmp/state"
+    artifact_path: "{{ state_path }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
+    - name: include skip-ci
+      include_tasks: tasks/pipeline/skip-ci.yml
+      run_once: true
+
     - name: include provider variables
-      include_tasks: tasks/provider-vars.yml
+      include_tasks: tasks/pipeline/provider-vars.yml
 
     - name: check valid builder
       tags: always
+      run_once: true
       assert:
         that: dockerfile_builder in ['docker','podman']
 
     - name: git related config
-      include_tasks: "tasks/git-config.yml"
-      when: git_config_list | default(false) | type_debug == "list"
+      include_tasks: "tasks/git/config.yml"
+      run_once: true
+
+    - name: pr info
+      include_tasks: "tasks/jx/pr-info.yml"
+      run_once: true
 
     - name: builder related config
-      include_tasks: "tasks/{{ dockerfile_builder }}-config.yml"
+      include_tasks: "tasks/config/{{ dockerfile_builder }}.yml"
       when: builder_config | default(false) | bool
+      run_once: true
 
-    - name: prepare rootfs for centos8 container
-      include_tasks: tasks/prepare-centos8.yml
-      when: ansible_host == 'centos8-minimal'
+    - name: prepare image task
+      include_tasks: tasks/prepare/{{ prepare_image_task }}.yml
+      when: prepare_image_task is defined and prepare_image_task
 
     - name: set version related facts
-      include_tasks: tasks/version.yml
+      include_tasks: tasks/builder/version.yml
 
     - name: use build cache
-      include_tasks: tasks/cache.yml
+      include_tasks: tasks/builder/cache.yml
       when: build_cache | default(false) | bool
 
     - name: build image
@@ -47,14 +61,17 @@
         - "app_s1"
         - "app_s2"
         - "app_s3"
-      include_tasks: tasks/build.yml
+      include_tasks: tasks/builder/build.yml
 
     - name: tag image
-      include_tasks: tasks/tag.yml
+      include_tasks: tasks/builder/tag.yml
 
     - name: push image
-      include_tasks: tasks/push.yml
+      include_tasks: tasks/builder/push.yml
       when: build_push | default(false) | bool
 
-    - name: save container state
-      include_tasks: tasks/state-vars.yml
+    - name: save image state
+      include_tasks: tasks/state/save.yml
+
+    - name: push state artifact
+      include_tasks: tasks/artifact/upload.yml

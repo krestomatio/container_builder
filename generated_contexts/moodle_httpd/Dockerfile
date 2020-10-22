@@ -11,7 +11,7 @@ ENV IMAGE_name="moodle_httpd" \
 # Component bash variables
 ENV MOODLE_version="3.9" \
     MOODLE_ver_short="39" \
-    MOODLE_commit="e290345cd65c5eccde4dd70b9373d48d33d54954" \
+    MOODLE_commit="5ea37637b7c0ac4f3c7ccddccd4f82ba9a1b86bd" \
     MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata \
     MOODLE_check_path=/login/index.php \

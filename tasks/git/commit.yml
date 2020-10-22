@@ -1,0 +1,12 @@
+- name: check git commit messages
+  assert:
+    that: git_commit_msgs is defined and git_commit_msgs | type_debug == 'list'
+
+- name: git commit
+  when:
+    - git_add_status is defined
+    - git_add_status is changed
+  command: "git commit {{ git_commit_options | default ('') }}
+    {% for msg in git_commit_msgs %} -m '{{ msg }}'{% endfor %}"
+  register: git_commit_status
+  changed_when: git_commit_status.stdout is defined and git_commit_status.stdout

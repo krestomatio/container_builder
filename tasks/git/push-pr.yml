@@ -1,0 +1,11 @@
+- name: git push to pull request
+  vars:
+    git_push_pr_local_branch: "{{ lookup('pipe', 'git branch --show-current') | default('') }}"
+  when:
+    - git_push_pr_remote_url is defined
+    - git_push_pr_remote_branch is defined
+  command: "git push {{ git_push_pr_options | default ('') }} {{ git_push_pr_remote_url }} {{ git_push_pr_local_branch + ':' + git_push_pr_remote_branch }}"
+  register: git_push_pr_status
+  changed_when:
+    - git_push_pr_status.stderr is defined
+    - "'Everything up-to-date' not in git_push_pr_status.stderr"

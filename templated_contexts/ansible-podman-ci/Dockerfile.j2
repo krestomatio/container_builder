@@ -11,11 +11,12 @@ ENV IMAGE_name=ansible-podman-ci \
 ENV ANSIBLE_version="{{ image_ansible_version }}" \
     MOLECULE_version="{{ molecule_version }}" \
     CTR_pkg_mgm="dnf install -y" \
-    CTR_pip="pip install --no-cache --upgrade"
+    CTR_pip="pip3 install --no-cache --upgrade"
 
 RUN echo "Build tools..."  && \
     $CTR_pkg_mgm python-devel gcc && \
     echo "Installing pkgs..."  && \
+    python3 -m ensurepip && \
     $CTR_pip cffi pip && \
     $CTR_pip ansible~=$ANSIBLE_version && \
     $CTR_pip molecule~=$MOLECULE_version && \
@@ -30,12 +31,50 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo \
+    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo curl \
     --exclude container-selinux && \
     echo "Cleaning..." && \
     dnf clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
+{% if jx2_version is defined and jx2_version %}
+ENV JX_VERSION="{{ jx2_version }}"
+ENV JX_HOME=/home/.jx
+RUN echo "Installing jx2 version: ${JX_VERSION}..."  && \
+    pushd /tmp && \
+    curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
+    sudo mv jx /usr/bin/{{ jx2_binary_name | default('jx') }} && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    popd
+
+{% endif %}
+{% if jx3_version is defined and jx3_version %}
+ENV JX3_VERSION="{{ jx3_version }}"
+ENV JX3_HOME=/home/.jx3
+RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
+    pushd /tmp && \
+    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
+    mv jx /usr/bin/{{ jx3_binary_name | default('jx') }} && \
+    echo "Pre-load jx3 plugins..."  && \
+    # {{ jx3_binary_name | default('jx') }} upgrade plugins --mandatory && \
+    {{ jx3_binary_name | default('jx') }} gitops version && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    popd
+
+{% endif %}
+{% if oras_version is defined and oras_version %}
+ENV ORAS_VERSION="{{ oras_version }}"
+RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
+    pushd /tmp && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    mv oras /usr/bin/{{ oras_binary_name | default('oras') }} && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    popd
+
+{% endif %}
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels

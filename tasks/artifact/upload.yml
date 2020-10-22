@@ -1,0 +1,37 @@
+- vars:
+    # absolute path is disallow by Oras
+    artifact_archive: "oci_artifact.tar.gz"
+    artifact_tmp_dir: '/tmp/'
+  block:
+    - name: check artifact path
+      register: check_artifact_path
+      stat:
+        path: "{{ artifact_path }}"
+
+    - name: upload artifact
+      when: check_artifact_path.stat.exists
+      block:
+        - name: create compressed archive to store artifact
+          register: artifact_archive_status
+          archive:
+            path: "{{ artifact_path }}"
+            dest: "{{ artifact_tmp_dir | default('/tmp/') }}/{{ artifact_archive }}"
+            format: gz
+            mode: '0644'
+            force_archive: true
+
+        - name: upload artifact
+          when: artifact_archive_status is changed
+          command: "oras push{{ ' --manifest-config ' + artifact_config_mediatype if artifact_config_mediatype
+            is defined else '' }} '{{ artifact_name }}' '{{ artifact_archive + ':' + artifact_mediatype if
+            artifact_config_mediatype is defined else artifact_archive }}'"
+          args:
+            chdir: "{{ artifact_tmp_dir }}"
+          register: artifact_push_status
+          ignore_errors: true
+
+        - name: remove local artifact archive
+          when: artifact_push_status is failed
+          file:
+            path: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
+            state: absent

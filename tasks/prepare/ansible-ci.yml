@@ -1,0 +1,26 @@
+- name: set jx2 version
+  when:
+    - jx2_version_install | default(false)
+    - jx2_version_url is defined
+    - jx2_version_regex is defined
+    - jx2_version is not defined
+  set_fact:
+    jx2_version: "{{ lookup('url', jx2_version_url) | regex_search(jx2_version_regex) }}"
+
+- name: set jx3 version
+  when:
+    - jx3_version_install | default(false)
+    - jx3_version_url is defined
+    - jx3_version_regex is defined
+    - jx3_version is not defined
+  set_fact:
+    jx3_version: "{{ lookup('url', jx3_version_url) | regex_search(jx3_version_regex) }}"
+
+- name: set oras version
+  when:
+    - oras_version_install | default(false)
+    - oras_version_url is defined
+    - oras_version_regex is defined
+    - oras_version is not defined
+  set_fact:
+    oras_version: "{{ lookup('url', oras_version_url) | regex_search(oras_version_regex) }}"

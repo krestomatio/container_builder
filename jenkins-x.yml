@@ -1,4 +1,5 @@
 buildPack: none
+noReleasePrepare: true
 pipelineConfig:
   env:
   - name: CLOUD_PROVIDER
@@ -23,7 +24,7 @@ pipelineConfig:
           - name: update submodules
             command: git submodule update --init --recursive
           - name: build containers
-            command: ansible-playbook -i inventory/hosts build.yml
+            command: sleep 120 # ansible-playbook -i inventory/hosts build.yml
     release:
       pipeline:
         options:
@@ -39,5 +40,9 @@ pipelineConfig:
             command: git fetch --tag
           - name: update submodules
             command: git submodule update --init --recursive
-          - name: release
-            command: ansible-playbook -i inventory/hosts release.yml
+          - name: promote tag # create file to store promote tag from latest pull request number
+            command: |
+              PROMOTE_TAG_PR=$(git log --format=%B -n 1 -g --grep='Merge pull request #' | grep -oP '(?<= #)(\d+)')
+              jx gitops pr get --pr $PROMOTE_TAG_PR 2>&1 | grep -oP '(?<=^Sha: ).*' > /tmp/PROMOTE_TAG
+          - name: promote
+            command: sleep 120 # ansible-playbook -i inventory/hosts release.yml

@@ -1,0 +1,32 @@
+  - name: check for [skip.ci] in commit message
+    changed_when: false
+    register: skip_ci_check
+    shell: git log -1 --pretty=%B | cat
+
+  - name: "check for [skip.ci.{{ ansible_play_name }}] in commit message"
+    changed_when: false
+    register: skip_ci_playbook_check
+    shell: git log -1 --pretty=%B | cat
+
+  - name: set skip fact based on environment variable
+    set_fact:
+      skip_ci: "{{ lookup('env','SKIP_CI_'+ ansible_play_name | upper ) | default(lookup('env','SKIP_CI'),true) | default(false,true) }}"
+
+  - name: set skip fact based on commit message
+    vars:
+      skip_ci: "{{ lookup('env','SKIP_CI_'+ ansible_play_name | upper ) | default(lookup('env','SKIP_CI'),true) | default(false,true) }}"
+    when:
+      - skip_ci_check.stdout is defined or skip_ci_playbook_check.stdout is defined
+      - "'[skip.ci]' in skip_ci_check.stdout or
+        ('[skip.ci.' + ansible_play_name + ']') in skip_ci_playbook_check.stdout"
+    set_fact:
+      skip_ci: true
+
+  - name: end playbook
+    when: skip_ci | default(false)
+    block:
+    - name: end playbook when skip message present
+      debug:
+        msg: "skipping message present in commit, ending playbook"
+
+    - meta: end_play

@@ -141,6 +141,7 @@ class LookupModule(LookupBase):
                     v = semantic_version.Version(v)
                     if bump:
                         v = getattr(v, 'next_' + bump)()
+                        commit = None
 
                     # return dict
                     if want == 'dict':

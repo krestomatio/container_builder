@@ -9,6 +9,7 @@
     version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
     state_path: "{{ playbook_dir }}/vars/tmp/state"
     artifact_path: "{{ state_path }}"
+    artifact_commit_tag: "{{ version_commit_tag }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
@@ -27,10 +28,6 @@
 
     - name: git related config
       include_tasks: "tasks/git/config.yml"
-      run_once: true
-
-    - name: pr info
-      include_tasks: "tasks/jx/pr-info.yml"
       run_once: true
 
     - name: builder related config
@@ -75,3 +72,4 @@
 
     - name: push state artifact
       include_tasks: tasks/artifact/upload.yml
+      run_once: true

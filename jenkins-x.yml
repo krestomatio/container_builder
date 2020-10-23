@@ -1,4 +1,5 @@
 buildPack: none
+buildPackGitRef: https://github.com/jenkins-x/jxr-packs-kubernetes
 noReleasePrepare: true
 pipelineConfig:
   env:
@@ -9,6 +10,8 @@ pipelineConfig:
       pipeline:
         options:
           containerOptions:
+            name: ""
+            resources: {}
             securityContext:
               privileged: true
           timeout:

@@ -2,6 +2,10 @@
     # absolute path is disallow by Oras
     artifact_archive: "oci_artifact.tar.gz"
     artifact_tmp_dir: '/tmp/'
+    artifact_registry: localhost:5000
+    artifact_tag: latest
+    artifact_name: myartifact
+    artifact_full_name: "{{ artifact_registry }}/{{ artifact_name }}:{{ artifact_tag }}"
   block:
     - name: check artifact path
       register: check_artifact_path
@@ -23,7 +27,7 @@
         - name: upload artifact
           when: artifact_archive_status is changed
           command: "oras push{{ ' --manifest-config ' + artifact_config_mediatype if artifact_config_mediatype
-            is defined else '' }} '{{ artifact_name }}' '{{ artifact_archive + ':' + artifact_mediatype if
+            is defined else '' }} '{{ artifact_full_name }}' '{{ artifact_archive + ':' + artifact_mediatype if
             artifact_config_mediatype is defined else artifact_archive }}'"
           args:
             chdir: "{{ artifact_tmp_dir }}"

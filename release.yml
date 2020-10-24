@@ -19,6 +19,12 @@
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
+    - name: skip if no artifact commit tag
+      when: not artifact_commit_tag
+      set_fact:
+        skip_ci: true
+        skip_end_msg: "commit is not from a pull request, skipping '{{ ansible_play_name }}' playbook"
+
     - name: include skip-ci
       include_tasks: tasks/pipeline/skip-ci.yml
       run_once: true

@@ -1,3 +1,5 @@
+working_dir:  "{{ lookup('env','PWD') | default(playbook_play,true) }}"
+
 # build playbook
 play_containers: "{{ lookup('env','PLAY_CONTAINERS') | default('all:!ci',true) }}"
 play_diff: "{{ lookup('env','PLAY_DIFF') | default(true,true) }}"

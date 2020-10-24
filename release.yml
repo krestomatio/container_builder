@@ -72,5 +72,5 @@
       - name: tag version
         include_tasks: tasks/git/tag.yml
 
-      # - name: push changes
-      #   include_tasks: tasks/git/push.yml
+      - name: push changes
+        include_tasks: tasks/git/push.yml

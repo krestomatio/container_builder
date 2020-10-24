@@ -7,6 +7,10 @@
     artifact_name: myartifact
     artifact_full_name: "{{ artifact_registry }}/{{ artifact_name }}:{{ artifact_tag }}"
   block:
+    - name: show artifact full name
+      debug:
+        msg: "tag: {{ artifact_full_name }}"
+
     - name: check artifact path
       register: check_artifact_path
       stat:

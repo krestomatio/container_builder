@@ -33,7 +33,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo curl && \
+    $CTR_apk bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \

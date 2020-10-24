@@ -3,22 +3,12 @@
   connection: local
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
-  vars:
-    version_include_major_minor_tags: true
-    version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
-    build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
-    git_add_path: vars/state generated_contexts/
-    git_commit_msgs:
-      - "chore(ci): save state of images"
-      - "[skip.ci]"
-    state_path: "{{ playbook_dir }}/vars/state"
-    pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |
-      default(false,true)}}"
-    artifact_path: "{{ state_path }}"
-    artifact_commit_tag: "{{ pr_commit_tag }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
+    - name: include variables
+      include_tasks: tasks/pipeline/include-vars.yml
+
     - name: skip if no artifact commit tag
       when: not artifact_commit_tag
       set_fact:
@@ -28,9 +18,6 @@
     - name: include skip-ci
       include_tasks: tasks/pipeline/skip-ci.yml
       run_once: true
-
-    - name: include provider variables
-      include_tasks: tasks/pipeline/provider-vars.yml
 
     - name: check valid builder
       tags: always
@@ -47,7 +34,7 @@
       when: builder_config | default(false) | bool
       run_once: true
 
-    - name: set version related facts
+    - name: set image version related facts
       include_tasks: tasks/builder/version.yml
 
     - name: pull state artifact
@@ -63,14 +50,21 @@
     - name: save image state
       include_tasks: tasks/state/save.yml
 
-    - name: push image state changes
+    - name: release
       run_once: true
       block:
+      - name: set release version
+        set_fact:
+          release_version: ""
+
       - name: add changes
         include_tasks: tasks/git/add.yml
 
       - name: commit changes
         include_tasks: tasks/git/commit.yml
+
+      - name: tag version
+        include_tasks: tasks/git/tag.yml
 
       - name: push changes
         include_tasks: tasks/git/push.yml

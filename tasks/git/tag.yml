@@ -1,0 +1,4 @@
+- name: git tag
+  command: "git tag {{ git_tag_options | default ('') }} {{ git_tag | default ('') }}"
+  register: git_tag_status
+  changed_when: git_tag_status.stdout is defined and git_tag_status.stdout

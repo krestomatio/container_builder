@@ -1,0 +1,6 @@
+version_add_build: true
+version_include_fallback_tags: true
+version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
+state_path: "{{ playbook_dir }}/vars/tmp/state"
+artifact_path: "{{ state_path }}"
+artifact_commit_tag: "{{ version_commit_tag }}"

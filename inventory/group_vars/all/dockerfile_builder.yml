@@ -1,5 +1,7 @@
 # container
 ctr_name: "{{ ansible_host }}"
+## state name must comply with ansible variable name convention
+state_name: "{{ ctr_name | replace('-', '_') | lower }}"
 
 # containers template dir
 template_dir: templated_contexts

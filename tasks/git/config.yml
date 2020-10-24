@@ -9,7 +9,7 @@
     repo: "{{ item.repo | default(playbook_dir) }}"
     list_all: "{{ item.list_all | default(omit) }}"
 
-- name: fetch git| tags
+- name: fetch git tags
   when: git_config_fetch_tag | default(false)
   changed_when: git_config_fetch_tag.stdout is defined and git_config_fetch_tag.stdout
   register: git_config_fetch_tag

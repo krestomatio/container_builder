@@ -37,7 +37,7 @@ RUN echo "Installing other tools..."  && \
     dnf clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
-ENV JX3_VERSION="3.0.584"
+ENV JX3_VERSION="3.0.651"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     pushd /tmp && \

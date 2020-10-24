@@ -3,22 +3,15 @@
   connection: local
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
-  vars:
-    version_add_build: true
-    version_include_fallback_tags: true
-    version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
-    state_path: "{{ playbook_dir }}/vars/tmp/state"
-    artifact_path: "{{ state_path }}"
-    artifact_commit_tag: "{{ version_commit_tag }}"
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
+    - name: include variables
+      include_tasks: tasks/pipeline/include-vars.yml
+
     - name: include skip-ci
       include_tasks: tasks/pipeline/skip-ci.yml
       run_once: true
-
-    - name: include provider variables
-      include_tasks: tasks/pipeline/provider-vars.yml
 
     - name: check valid builder
       tags: always

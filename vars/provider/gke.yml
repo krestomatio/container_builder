@@ -46,8 +46,8 @@ artifact_registry: "{{ build_registry_path }}"
 artifact_tag: "{{ pr_commit_tag | default('') }}"
 artifacts:
   - name: generated_contexts_artifact
-    archive: generated_contexts_artifact
-    path: "{{ generated_dir }}"
+    archive: generated_contexts_artifact.tar.gz
+    path: "{{ playbook_dir }}/{{ generated_dir }}"
   - name: state_image_artifact
-    archive: state_image_artifact
+    archive: state_image_artifact.tar.gz
     path: "{{ state_path }}"

@@ -1,6 +1,7 @@
 - name: release
   hosts: "{{ play_containers | default('all') }}"
   connection: local
+  any_errors_fatal: "{{ play_any_errors_fatal }}"
   diff: "{{ play_diff | default(omit) }}"
   vars_files: "vars/ci.yml"
   environment:

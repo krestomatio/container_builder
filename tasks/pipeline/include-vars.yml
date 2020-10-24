@@ -3,8 +3,8 @@
     - cloud_provider | default('none') != 'none'
     - cloud_provider in cloud_providers
   include_vars:
-    file: "{{ playbook_dir }}/vars/provider/{{ cloud_provider }}.yml"
+    file: "{{ working_dir }}/vars/provider/{{ cloud_provider }}.yml"
 
 - name: include pipeline vars
   include_vars:
-    file: "{{ playbook_dir }}/vars/pipeline/{{ ansible_play_name }}.yml"
+    file: "{{ working_dir }}/vars/pipeline/{{ ansible_play_name }}.yml"

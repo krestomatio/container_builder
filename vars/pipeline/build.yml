@@ -2,5 +2,5 @@ version_add_build: true
 version_include_fallback_tags: true
 pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
 version_commit_tag: "{{ pr_commit_tag }}"
-state_path: "{{ playbook_dir }}/vars/tmp/state"
+state_path: "{{ working_dir }}/vars/tmp/state"
 artifact_tag: "{{ version_commit_tag }}"

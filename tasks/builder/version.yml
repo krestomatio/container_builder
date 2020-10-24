@@ -7,7 +7,7 @@
     - name: set image version
       when: version_image is not defined
       set_fact:
-        version_image:  "{{ lookup('git_semver', playbook_dir, bump=version_image_bump,
+        version_image:  "{{ lookup('git_semver', working_dir, bump=version_image_bump,
           want='dict') }}"
 
     - name: set major version

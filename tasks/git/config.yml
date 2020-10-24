@@ -6,7 +6,7 @@
     scope: "{{ item.scope | default('local') }}"
     value: "{{ item.value | default(omit) }}"
     state: "{{ item.state | default(omit) }}"
-    repo: "{{ item.repo | default(playbook_dir) }}"
+    repo: "{{ item.repo | default(working_dir) }}"
     list_all: "{{ item.list_all | default(omit) }}"
 
 - name: fetch git tags

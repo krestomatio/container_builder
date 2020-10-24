@@ -1,8 +1,8 @@
 - when:
     - "ansible_host == 'centos8-minimal'"
   vars:
-    ctr_generated_path: "{{ playbook_dir }}/{{ generated_path }}"
-    ctr_template_path: "{{ playbook_dir }}/{{ template_path }}"
+    ctr_generated_path: "{{ working_dir }}/{{ generated_path }}"
+    ctr_template_path: "{{ working_dir }}/{{ template_path }}"
     pkgs_list_old: "{{ ctr_generated_path }}/pkgs-list"
     pkgs_list_new: "{{ ctr_template_path }}/pkgs-list"
     distro_release_old: "{{ ctr_generated_path }}/distro-release"

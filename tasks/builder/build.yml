@@ -9,6 +9,10 @@
       name: "{{ dockerfile_builder_image }}"
     register: build_image_status
 
+  - name: debug
+    debug:
+      msg: "{{ build_image_status }}"
+      
   - name: state image build fact
     when: not ansible_check_mode
     set_fact:

@@ -31,7 +31,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo curl \
+    $CTR_pkg_mgm xz gzip tar podman git rsync jq sudo sshpass openssh-clients skopeo curl \
     --exclude container-selinux && \
     echo "Cleaning..." && \
     dnf clean all && \

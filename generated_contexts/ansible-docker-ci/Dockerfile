@@ -42,7 +42,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV JX3_VERSION="3.0.584"
+ENV JX3_VERSION="3.0.651"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     cd /tmp && \

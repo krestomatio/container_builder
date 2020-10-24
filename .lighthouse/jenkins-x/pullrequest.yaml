@@ -196,11 +196,6 @@ spec:
           command:
           - /bin/sh
           - -c
-          env:
-          - name: CLOUD_PROVIDER
-            value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: setup-builder-home
           resources: {}
@@ -217,11 +212,6 @@ spec:
           - $(params.PULL_BASE_REF)
           command:
           - jx
-          env:
-          - name: CLOUD_PROVIDER
-            value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: git-merge
           resources: {}
@@ -241,8 +231,6 @@ spec:
           env:
           - name: CLOUD_PROVIDER
             value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: krestomatio/ansible-docker-ci
           name: build-containers
           resources: {}

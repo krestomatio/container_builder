@@ -12,6 +12,10 @@
       stat:
         path: "{{ artifact_path }}"
 
+    - name: check archive is a tar.gz
+      assert:
+        that: artifact_archive | regex_search('.*\\.tar.gz$', ignorecase=True)
+
     - name: upload artifact
       when: check_artifact_path.stat.exists
       block:

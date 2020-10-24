@@ -2,6 +2,10 @@
     # absolute path is disallow by Oras
     artifact_archive: "oci_artifact.tar.gz"
     artifact_tmp_dir: '/tmp/'
+    artifact_registry: localhost:5000
+    artifact_tag: latest
+    artifact_name: myartifact
+    artifact_full_name: "{{ artifact_registry }}/{{ artifact_name }}:{{ artifact_tag }}"
   block:
     - name: check artifact path
       register: check_artifact_path
@@ -24,7 +28,7 @@
 
     - name: download artifact
       when: not ansible_check_mode
-      command: "oras pull '{{ artifact_name }}'"
+      command: "oras pull '{{ artifact_full_name }}'"
       args:
         chdir: "{{ artifact_tmp_dir }}"
       changed_when: check_artifact_file.stat.checksum[0:12] | default('0') not in artifact_pull_status.stdout

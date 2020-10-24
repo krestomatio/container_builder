@@ -10,7 +10,7 @@
       include_tasks: tasks/pipeline/include-vars.yml
 
     - name: skip if no artifact commit tag
-      when: not artifact_commit_tag
+      when: not artifact_tag
       set_fact:
         skip_ci: true
         skip_end_msg: "commit is not from a pull request, skipping '{{ ansible_play_name }}' playbook"
@@ -37,7 +37,12 @@
     - name: set image version related facts
       include_tasks: tasks/builder/version.yml
 
-    - name: pull state artifact
+    - name: "download artifacts"
+      vars:
+        artifact_name: "{{ item.name }}"
+        artifact_archive: "{{ item.archive }}"
+        artifact_path: "{{ item.path }}"
+      loop: "{{ artifacts }}"
       include_tasks: tasks/artifact/download.yml
       run_once: true
 
@@ -66,5 +71,5 @@
       - name: tag version
         include_tasks: tasks/git/tag.yml
 
-      - name: push changes
-        include_tasks: tasks/git/push.yml
+      # - name: push changes
+      #   include_tasks: tasks/git/push.yml

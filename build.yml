@@ -63,6 +63,11 @@
     - name: save image state
       include_tasks: tasks/state/save.yml
 
-    - name: push state artifact
+    - name: "upload artifacts"
+      vars:
+        artifact_name: "{{ item.name }}"
+        artifact_archive: "{{ item.archive }}"
+        artifact_path: "{{ item.path }}"
+      loop: "{{ artifacts }}"
       include_tasks: tasks/artifact/upload.yml
       run_once: true

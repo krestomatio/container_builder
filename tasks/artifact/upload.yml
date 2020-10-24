@@ -36,10 +36,12 @@
           args:
             chdir: "{{ artifact_tmp_dir }}"
           register: artifact_push_status
-          ignore_errors: true
 
+      rescue:
         - name: remove local artifact archive
-          when: artifact_push_status is failed
           file:
             path: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
             state: absent
+
+        - name: error in previous task, uploading artifact
+          command: /bin/false

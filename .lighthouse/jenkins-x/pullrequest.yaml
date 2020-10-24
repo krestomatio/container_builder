@@ -233,6 +233,8 @@ spec:
             value: m6e
           image: krestomatio/ansible-docker-ci
           name: build-containers
+          securityContext:
+            privileged: true
           resources: {}
         volumes:
         - downwardAPI:

@@ -204,40 +204,30 @@ spec:
           - $(params.PULL_BASE_REF)
           command:
           - jx
-          env:
-          - name: CLOUD_PROVIDER
-            value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: git-merge
           resources: {}
-        - args:
-          - -c
-          - jx step next-version --use-git-tag-only
-          command:
-          - /bin/sh
-          image: gcr.io/jenkinsxio-labs-private/jxl:0.0.136
-          name: next-version
-          resources: {}
-        - args:
-          - -c
-          - jx step tag --version $(cat VERSION)
-          command:
-          - /bin/sh
-          image: gcr.io/jenkinsxio-labs-private/jxl:0.0.136
-          name: tag-version
-          resources: {}
+        # - args:
+        #   - -c
+        #   - jx step next-version --use-git-tag-only
+        #   command:
+        #   - /bin/sh
+        #   image: gcr.io/jenkinsxio-labs-private/jxl:0.0.136
+        #   name: next-version
+        #   resources: {}
+        # - args:
+        #   - -c
+        #   - jx step tag --version $(cat VERSION)
+        #   command:
+        #   - /bin/sh
+        #   image: gcr.io/jenkinsxio-labs-private/jxl:0.0.136
+        #   name: tag-version
+        #   resources: {}
         - args:
           - '[ -d /builder/home ] || mkdir -p /builder && ln -s /tekton/home /builder/home'
           command:
           - /bin/sh
           - -c
-          env:
-          - name: CLOUD_PROVIDER
-            value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: setup-builder-home
           resources: {}
@@ -257,8 +247,6 @@ spec:
           env:
           - name: CLOUD_PROVIDER
             value: m6e
-          - name: KANIKO_FLAGS
-            value: --insecure
           image: krestomatio/ansible-docker-ci
           name: release
           resources: {}

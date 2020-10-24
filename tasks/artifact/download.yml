@@ -36,6 +36,7 @@
       args:
         chdir: "{{ artifact_tmp_dir }}"
       changed_when: check_artifact_file.stat.checksum[0:12] | default('0') not in artifact_pull_status.stdout
+        | default('')
       register: artifact_pull_status
 
     - name: unarchive artifact

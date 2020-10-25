@@ -5,5 +5,3 @@ version_commit_tag: "{{ pr_commit_tag }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ pr_commit_tag }}"
 state_path: "{{ working_dir }}/vars/tmp/state"
-end_host: false
-end_host_msg: "artifact tag for pipeline does not match the one in state image file"

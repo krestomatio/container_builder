@@ -50,6 +50,9 @@
     - name: load image state
       include_tasks: tasks/state/load.yml
 
+    - name: end playbook for this host
+      include: tasks/pipeline/end_host.yml
+
     - name: promote image
       include_tasks: tasks/promote/copy.yml
 

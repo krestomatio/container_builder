@@ -8,7 +8,7 @@ git_commit_msgs:
 pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |
   default(false,true)}}"
 artifact_tag: "{{ pr_commit_tag }}"
-state_yml_artifact_tag: "{{ pr_commit_tag }}"
+state_yml_artifact_tag: "{{ artifact_tag }}"
 state_path: "{{ working_dir }}/vars/state"
 git_tag_options: -f
 git_tag: "v{{ release_version }}"
@@ -16,3 +16,4 @@ release_version:  "{{ lookup('pipe', 'git semver --next-patch || echo') | defaul
 state_image_match_artifact_tag: false
 end_host: "{{ not state_image_match_artifact_tag }}"
 end_host_msg: "artifact tag for pipeline does not match the one in state image file"
+promote_copy_throttle: 4

@@ -13,7 +13,7 @@ state_path: "{{ working_dir }}/vars/state"
 git_push_options: --tags
 git_tag_options: -f
 git_tag: "v{{ release_version }}"
-release_version: "{{ lookup('pipe', 'git semver --next-patch || echo') | default(false,true) }}"
+release_version: "{{ next_version | default(false,true) }}"
 assertion_release_version: true
 state_image_match_artifact_tag: false
 end_host: "{{ not state_image_match_artifact_tag }}"

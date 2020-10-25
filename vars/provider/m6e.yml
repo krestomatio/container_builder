@@ -62,3 +62,6 @@ artifacts:
   - name: state_image_artifact
     archive: state_image_artifact.tar.gz
     path: "{{ state_path }}"
+
+# assertions
+assertion_dockerfile_builder: true

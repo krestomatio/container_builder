@@ -5,3 +5,4 @@ version_commit_tag: "{{ pr_commit_tag }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 state_path: "{{ working_dir }}/vars/tmp/state"
+assertion_artifact_tag: true

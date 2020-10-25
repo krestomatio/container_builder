@@ -7,3 +7,8 @@
   when: assertion_artifact_tag | default(false)
   assert:
     that: artifact_tag is defined and artifact_tag
+
+- name: check release version
+  when: assertion_release_version | default(false)
+  assert:
+    that: assertion_release_version is defined and assertion_release_version

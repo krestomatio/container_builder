@@ -59,10 +59,6 @@
     - name: release
       run_once: true
       block:
-      - name: set release version
-        set_fact:
-          release_version: ""
-
       - name: add changes
         include_tasks: tasks/git/add.yml
 

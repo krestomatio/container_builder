@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+nginx_php_fpm_image:
+  build: True
+  tag: "0.0.1"
+  id: "sha256:e1d06efcdea967debb9350d9ac77de0988117941a3e33341e362ab9bade2b648"
+  repo_digest: "quay.io/krestomatio/nginx_php-fpm@sha256:3425232d303fed83f081d34fb6c3483b804155c9b39cfbf917bf41477bc7c36c"
+  artifact_tag: 1b06ffe0f3371d1d4ca79240b0696d4a745aa6a5

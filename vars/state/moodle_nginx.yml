@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+moodle_nginx_image:
+  build: True
+  tag: "0.0.1"
+  id: "sha256:a5c1d56813acc379a8af82d936bb62a935394f489a4e3cfcd6fa61271b268c6e"
+  repo_digest: "quay.io/krestomatio/moodle_nginx@sha256:d4de09db501426239df516e91725a9507d86db13365a68d87481d1e7bbb2f36c"
+  artifact_tag: 1b06ffe0f3371d1d4ca79240b0696d4a745aa6a5

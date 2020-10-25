@@ -1,0 +1,9 @@
+- name: check valid builder
+  when: assertion_dockerfile_builder | default(false)
+  assert:
+    that: dockerfile_builder in ['docker','podman']
+
+- name: check artifact tag is defined
+  when: assertion_artifact_tag | default(false)
+  assert:
+    that: artifact_tag is defined and artifact_tag

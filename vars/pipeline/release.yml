@@ -17,3 +17,4 @@ state_image_match_artifact_tag: false
 end_host: "{{ not state_image_match_artifact_tag }}"
 end_host_msg: "artifact tag for pipeline does not match the one in state image file"
 promote_copy_throttle: 4
+git_push_options: --tags

@@ -8,6 +8,8 @@ build_push: "{{ lookup('env','BUILD_PUSH') | default(true,true) }}"
 build_add_minor_major_cache_tags: "{{ lookup('env','BUILD_CACHE_ADD_MINOR_MAJOR_TAGS') | default(true,true) }}"
 build_add_minor_major_tags: "{{ lookup('env','BUILD_ADD_MINOR_MAJOR_TAGS') | default(false,true) }}"
 builder_config: "{{ lookup('env','BUILDER_CONFIG') | default(true,true) }}"
+next_version_bump: "{{ lookup('env','NEXT_VERSION_BUMP') | default('patch',true) }}"
+next_version: "{{ lookup('git_semver', working_dir, bump=next_version_bump) }}"
 
 # registry
 build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
@@ -24,6 +26,7 @@ dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',
 
 # version
 version_git_based: true
+version_image_bump: "{{ next_version_bump }}"
 
 # git
 git_config_list:

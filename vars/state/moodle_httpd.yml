@@ -6,4 +6,4 @@ moodle_httpd_image:
   tag: "0.0.1"
   id: "sha256:09651fbc03426ea9f9de4f4632e628ef2babbd744c5519994cdc0be1cebc5f00"
   repo_digest: "quay.io/krestomatio/moodle_httpd@sha256:d3345d34f6cc10752e196b0cb84a9ba489bbc5b40a70c7f871e54044137cda67"
-  artifact_tag: 98cde993994c8c27412786e25dce0d16f533120e
+  artifact_tag: 9c6d51a29cbe2a42781afa989ce0eea7708c9dbe

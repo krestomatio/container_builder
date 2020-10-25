@@ -1,0 +1,10 @@
+- name: end playbook for host
+  when: end_host | default(false)
+  block:
+  - name: message for ending playbook for host
+    vars:
+      end_host_msg: "end host was set, {{ ansible_play_name }} ending for host {{ ansible_host }}"
+    debug:
+      msg: "{{ end_host_msg }}"
+
+  - meta: end_host

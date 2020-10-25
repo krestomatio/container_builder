@@ -6,4 +6,4 @@ moodle_php_fpm_image:
   tag: "0.0.1"
   id: "sha256:1ecb0b8176d0801271a5c122293fc148dbde9383e934c87ffb73bdb42dfbea27"
   repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:ae889f334a3e4b4a33f5e20cdc7f7505c0cff81f11d1ea94102e9a9313e3f0e2"
-  artifact_tag: 1b06ffe0f3371d1d4ca79240b0696d4a745aa6a5
+  artifact_tag: 2d9b33428916a52072248169023c321f2981178f

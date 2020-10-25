@@ -215,14 +215,6 @@ spec:
           image: gcr.io/jenkinsxio/builder-jx:2.1.142-761
           name: git-merge
           resources: {}
-        # - args:
-        #   - gitops
-        #   - variables
-        #   command:
-        #   - jx
-        #   image: gcr.io/jenkinsxio/jx-cli:latest
-        #   name: jx-variables
-        #   resources: {}
         - args:
           - ansible-playbook -i inventory/hosts build.yml
           command:

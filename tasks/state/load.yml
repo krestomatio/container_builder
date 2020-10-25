@@ -12,10 +12,9 @@
 
 - name: set fact when artifact matches pipeline's
   vars:
-    pipeline_artifact_tag: "{{ lookup('vars', state_name + '_image').artifact_tag | default(false) }}"
+    pipeline_artifact_tag: "{{ lookup('vars', state_name + '_image', default=False).artifact_tag | default(false) }}"
   when:
     - artifact_tag | default(false)
-    - pipeline_artifact_tag
     - artifact_tag == pipeline_artifact_tag
   set_fact:
     state_image_match_artifact_tag: true

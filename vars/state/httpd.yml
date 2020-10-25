@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+httpd_image:
+  build: True
+  tag: "0.0.1"
+  id: "sha256:f453d26ae77d0f6e5a7ac30961dd34c425844b45fb9c5ebf6f659b37c0f12cfe"
+  repo_digest: "quay.io/krestomatio/httpd@sha256:93c261af75d70da6082583ad78ec13e8d528c2e7e51370db96bfa43389d81aff"
+  artifact_tag: 1b06ffe0f3371d1d4ca79240b0696d4a745aa6a5

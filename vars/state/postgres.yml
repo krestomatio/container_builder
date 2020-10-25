@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+postgres_image:
+  build: True
+  tag: "0.0.1"
+  id: "sha256:07434286f25ce9b64fbcf9c051e7a3ab0505b549f7f2fb610cdb590e63079a0c"
+  repo_digest: "quay.io/krestomatio/postgres@sha256:b3c414768c87a583c00fc66765c3738fbf9632c64cfd841fe8502f00e16ba751"
+  artifact_tag: 1b06ffe0f3371d1d4ca79240b0696d4a745aa6a5

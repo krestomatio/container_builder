@@ -1,6 +1,6 @@
 version_add_build: true
 version_include_fallback_tags: true
-pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
+pr_commit_tag: "{{ lookup('env','PULL_PULL_SHA') | default(lookup('pipe', 'git rev-parse HEAD')) }}"
 version_commit_tag: "{{ pr_commit_tag }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"

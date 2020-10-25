@@ -33,6 +33,9 @@
       include_tasks: tasks/prepare/{{ prepare_image_task }}.yml
       when: prepare_image_task is defined and prepare_image_task
 
+    - name: end playbook for this host
+      include: tasks/pipeline/end_host.yml
+
     - name: set version related facts
       include_tasks: tasks/builder/version.yml
 

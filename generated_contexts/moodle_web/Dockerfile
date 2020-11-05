@@ -15,7 +15,7 @@ ENV IMAGE_name=moodle_nginx_web \
 # Component bash variables
 ENV MOODLE_version="3.9" \
     MOODLE_ver_short="39" \
-    MOODLE_commit="4d9ab4ca4825d689dcd49767c101eb5139705f33" \
+    MOODLE_commit="621cd70b4c5b79c2fa33f7ff84c9b8a435fcabbd" \
     MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata
 
@@ -47,7 +47,7 @@ LABEL name="${IMAGE_name}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="3.9.2-4d9ab" \
+      org.opencontainers.image.version="3.9.2-621cd" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_oc_tags}"

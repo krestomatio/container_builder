@@ -1,6 +1,9 @@
 #!/bin/bash -e
 # description: base config for php-fpm
 
+# if based on nginx image, run its setup with php-fpm user
+[[ -f /bin/container-setup-nginx ]] && /bin/container-setup-nginx
+
 # php-fpm default config
 sed -i \
     -e 's@^error_log.*@error_log = /proc/self/fd/2@' \

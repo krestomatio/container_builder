@@ -3,5 +3,6 @@
 
 # Copy moodle config.php if variable $MOODLE_config_dir is set and file does not exist in $MOODLE_app
 if ! [ -z ${MOODLE_config_dir+x} ] && [ -f ${MOODLE_config_dir}/config.php ] && ! [ -f ${MOODLE_app}/config.php ] ; then
-    cp -pL ${MOODLE_config_dir}/config.php ${MOODLE_app}/config.php
+    cp -L ${MOODLE_config_dir}/config.php ${MOODLE_app}/config.php
+    chmod 0660 ${MOODLE_app}/config.php
 fi

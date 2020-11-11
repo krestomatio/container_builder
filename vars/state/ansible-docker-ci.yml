@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+ansible_docker_ci_image:
+  build: True
+  tag: "0.0.4"
+  id: "sha256:a08313989a10f78f5acf35c862a8c095fd0aad95ac68fce902d7a6e9bc152f38"
+  repo_digest: "docker.io/krestomatio/ansible-docker-ci@sha256:c8bde42593be9054d7c67ac235e334f87ed984298fc0e98ac4dd7ebd2fa40ac1"
+  artifact_tag: 7161f9d27f318ae89605662b973275c0021dc238

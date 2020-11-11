@@ -33,7 +33,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk bash xz git rsync jq sudo sshpass openssh-client skopeo curl && \
+    $CTR_apk bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -42,7 +42,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV JX3_VERSION="3.0.651"
+ENV JX3_VERSION="3.0.711"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     cd /tmp && \

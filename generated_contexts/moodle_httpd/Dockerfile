@@ -11,7 +11,7 @@ ENV IMAGE_name="moodle_httpd" \
 # Component bash variables
 ENV MOODLE_version="3.9" \
     MOODLE_ver_short="39" \
-    MOODLE_commit="621cd70b4c5b79c2fa33f7ff84c9b8a435fcabbd" \
+    MOODLE_commit="a8e089a8c86fa2a7a04a2f4adf39de4bbd188975" \
     MOODLE_app=${APP_dest} \
     MOODLE_data=/var/moodledata \
     MOODLE_check_path=/login/index.php \
@@ -36,7 +36,7 @@ LABEL name="${IMAGE_name}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.title="${IMAGE_title}" \
       org.opencontainers.image.description="${IMAGE_description}" \
-      org.opencontainers.image.version="0.0.3" \
+      org.opencontainers.image.version="0.0.4" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
       io.openshift.tags="${IMAGE_name},apache,apache${HTTPD_ver_short},apache-${HTTPD_ver_short},moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}"

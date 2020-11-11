@@ -31,13 +31,13 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz podman git rsync jq sudo sshpass openssh-clients skopeo curl \
+    $CTR_pkg_mgm xz gzip tar podman git rsync jq sudo sshpass openssh-clients skopeo curl \
     --exclude container-selinux && \
     echo "Cleaning..." && \
     dnf clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
-ENV JX3_VERSION="3.0.651"
+ENV JX3_VERSION="3.0.711"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     pushd /tmp && \

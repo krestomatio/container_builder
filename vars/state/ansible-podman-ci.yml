@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+ansible_podman_ci_image:
+  build: True
+  tag: "0.0.4"
+  id: "sha256:181fc95c3d58328aaf8e23079f4487cec0eb0ea9bc93b745aac84a362904599b"
+  repo_digest: "docker.io/krestomatio/ansible-podman-ci@sha256:fceeb21016fc0b146f72bfd5f328c114fead4d0d0cf1cb910394687fa40613df"
+  artifact_tag: 7161f9d27f318ae89605662b973275c0021dc238

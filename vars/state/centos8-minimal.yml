@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+centos8_minimal_image:
+  build: True
+  tag: "0.0.4"
+  id: "sha256:c446e4f77618dd02c937ee787fbed04775cf883c29703402d54fe12abe5cff4e"
+  repo_digest: "quay.io/krestomatio/centos8-minimal@sha256:822b435e4c88eb1ada9c704a3051174fe63cbd397d3d492bb08aee4ef5ed058f"
+  artifact_tag: 7161f9d27f318ae89605662b973275c0021dc238

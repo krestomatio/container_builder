@@ -3,7 +3,7 @@
 #
 moodle_httpd_image:
   build: True
-  tag: "0.0.4"
-  id: "sha256:a037c96280a082d71383099bba6d208fff381c98b8091f3c8b93b84e79b0e255"
-  repo_digest: "quay.io/krestomatio/moodle_httpd@sha256:523ccd7b7bc37ff1d3747ce05408f29f1dcbe32a82750a65db42b78909ef98da"
-  artifact_tag: 7161f9d27f318ae89605662b973275c0021dc238
+  tag: "0.0.5"
+  id: "sha256:15c5663bf0ac1ff1a20272f45304d193adadf3fc72dd04f535459de7f8683724"
+  repo_digest: "quay.io/krestomatio/moodle_httpd@sha256:a386f484945c00d1b4bc286597ae877fc93bab4af6e4f6f39373cce9cd07cbdb"
+  artifact_tag: 437a53c9c473b2bca9a7b6349c6cd6d16e173aa4

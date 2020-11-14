@@ -19,8 +19,8 @@ RUN echo "Build tools..."  && \
     $CTR_apk --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base  && \
     $CTR_pip cffi pip && \
-    $CTR_pip ansible~=$ANSIBLE_version && \
-    $CTR_pip molecule~=$MOLECULE_version && \
+    $CTR_pip ansible==$ANSIBLE_version && \
+    $CTR_pip molecule==$MOLECULE_version && \
     echo "Installing aditional python tools..."  && \
     $CTR_pip yamllint ansible-lint pycrypto pywinrm docker git-semver commitizen && \
     echo "Cleaning..."  && \

@@ -44,11 +44,11 @@
       loop_control:
         loop_var: build_step
       loop:
-        - "ci"
         - "platform_s1"
         - "platform_s2"
         - "platform_s3"
         - "platform_s4"
+        - "ci"
         - "app_s1"
         - "app_s2"
         - "app_s3"

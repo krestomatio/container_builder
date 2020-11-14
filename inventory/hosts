@@ -1,12 +1,4 @@
-[ci]
-ansible
-ansible-operator-ci
-ansible-docker-ci
-ansible-podman-ci
-rootfs-creator
-
 [platform]
-ansible
 centos8-minimal
 base
 httpd
@@ -14,6 +6,13 @@ nginx
 php-fpm
 nginx_php-fpm
 postgres
+
+[ci]
+ansible
+ansible-operator-ci
+ansible-docker-ci
+ansible-podman-ci
+rootfs-creator
 
 [m4e]
 moodle_app

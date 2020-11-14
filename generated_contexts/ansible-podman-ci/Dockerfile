@@ -1,54 +1,22 @@
 # Ansible managed
-FROM quay.io/buildah/stable
+FROM quay.io/krestomatio/base
 
 # General variables
 ENV IMAGE_name=ansible-podman-ci \
-    IMAGE_summary="Ansible image based on Buildah Stable Image for Continuous Integration" \
-    IMAGE_description="Buildah Stable Image based image with Ansible and tools like Buildah, Podman, Skopeo and Molecule, for CI" \
-    IMAGE_title="Ansible CI image based on Buildah Stable Image"
+    IMAGE_summary="Podman image based on CentOS 8 minimal for Continuous Integration" \
+    IMAGE_description="CentOS 8 minimal based image with tools like Buildah and Skopeo, for CI" \
+    IMAGE_title="Ansible CI image based on CentOS 8 minimal"
 
-# Container variables
-ENV ANSIBLE_version="2.9" \
-    MOLECULE_version="3.0" \
-    CTR_pkg_mgm="dnf install -y" \
-    CTR_pip="pip3 install --no-cache --upgrade"
+ENV BUILDAH_ISOLATION chroot
 
-RUN echo "Build tools..."  && \
-    $CTR_pkg_mgm python-devel gcc && \
-    echo "Installing pkgs..."  && \
-    python3 -m ensurepip && \
-    $CTR_pip cffi pip && \
-    $CTR_pip ansible~=$ANSIBLE_version && \
-    $CTR_pip molecule~=$MOLECULE_version && \
-    echo "Installing other pip tools..."  && \
-    $CTR_pip yamllint ansible-lint pycrypto git-semver commitizen && \
+RUN echo "Installing podman..."  && \
+    $CTR_pkg_mgm install xz gzip tar podman skopeo buildah && \
+    rpm -e --nodeps container-selinux && \
     echo "Cleaning..."  && \
-    dnf autoremove -y python-devel gcc && \
-    dnf clean all && \
-    rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
-    echo "Minimal ansible config" && \
-    mkdir -p /etc/ansible && \
-    echo 'localhost' > /etc/ansible/hosts
-
-RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz gzip tar podman git rsync jq sudo sshpass openssh-clients skopeo curl \
-    --exclude container-selinux && \
-    echo "Cleaning..." && \
-    dnf clean all && \
+    $CTR_pkg_mgm clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
-ENV JX3_VERSION="3.0.711"
-ENV JX3_HOME=/home/.jx3
-RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
-    pushd /tmp && \
-    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
-    mv jx /usr/bin/jx && \
-    echo "Pre-load jx3 plugins..."  && \
-    # jx upgrade plugins --mandatory && \
-    jx gitops version && \
-    echo "Cleaning..."  && \
-    rm -rf /tmp/* && \
-    popd
+RUN sed -i "s@^driver =.*@driver = \"vfs\"@g" /etc/containers/storage.conf
 
 ENV ORAS_VERSION="0.8.1"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
@@ -59,7 +27,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     popd
 
-CMD [ "ansible-playbook", "--version" ]
+CMD [ "/bin/bash" ]
 
 # Labels
 LABEL name="${IMAGE_name}" \
@@ -71,4 +39,4 @@ LABEL name="${IMAGE_name}" \
       org.opencontainers.image.description="${IMAGE_description}" \
       io.k8s.description="${IMAGE_description}" \
       io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},ansible,ansible2.9,buildah,buildah-stable"
+      io.openshift.tags="${IMAGE_name},ansible,ansible2.9.*,podman"

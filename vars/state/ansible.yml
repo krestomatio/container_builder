@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+ansible_image:
+  build: True
+  tag: "0.0.5"
+  id: "sha256:d571308c5dbb79dc9a3473a9c304b063d822da80265ac71580c3a82facbaab18"
+  repo_digest: "quay.io/krestomatio/ansible@sha256:d25d2e13850ce035b4044a143b8b4629c59f12a98884e694c756e59078944803"
+  artifact_tag: 437a53c9c473b2bca9a7b6349c6cd6d16e173aa4

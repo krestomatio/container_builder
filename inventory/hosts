@@ -1,9 +1,11 @@
 [ci]
+ansible
 ansible-docker-ci
 ansible-podman-ci
 rootfs-creator
 
 [platform]
+ansible
 centos8-minimal
 base
 httpd

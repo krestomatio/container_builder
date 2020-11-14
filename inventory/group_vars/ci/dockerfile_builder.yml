@@ -14,9 +14,9 @@ dockerfile_builder_pull: true
 prepare_image_task: ansible-ci
 
 # jx
-jx3_version_install: true
-jx3_version_url: https://github.com/jenkins-x/jx-cli/releases/latest
-jx3_version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'
+# jx3_version_install: true
+# jx3_version_url: https://github.com/jenkins-x/jx-cli/releases/latest
+# jx3_version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'
 # jx2_version_install: true
 # jx2_version_url: https://github.com/jenkins-x/jx/releases/latest
 # jx2_version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'

@@ -2,7 +2,6 @@
 image_ansible_version: '2.9.*'
 molecule_version: '3.1.*'
 docker_version: 'stable-dind'
-buildah_version: 'stable'
 
 # registry
 registry_name: "{{ ci_registry_name }}"

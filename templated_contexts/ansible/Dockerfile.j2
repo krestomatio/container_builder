@@ -30,6 +30,11 @@ RUN echo "Build tools..."  && \
     mkdir -p /etc/ansible && \
     echo 'localhost' > /etc/ansible/hosts
 
+# Container variables
+ENV CTR_pkg_extra="{{ dockerfile_builder_image_pck_extra }}"
+
+RUN install-pkgs -e $CTR_pkg_extra
+
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels

@@ -1,0 +1,36 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_name=ansible-operator-ci \
+    IMAGE_summary="Ansible Operator SDK image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible Operator SDK" \
+    IMAGE_title="Ansible Operator SDK CI image based on {{ dockerfile_builder_image_based }}"
+
+# Container variables
+ENV ANSIBLE_OPERATOR_version="{{ ansible_operator_version }}"
+
+RUN install-pkgs golang make which
+
+# Install kubectl. It is needed for ansible kubectl inventory.
+COPY --from=quay.io/operator-framework/operator-sdk:v{{ ansible_operator_version }} /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+
+# Container variables
+ENV KUBECTL_version="{{ kubectl_version }}"
+
+# Install kubectl. It is needed for ansible kubectl inventory.
+COPY --from=lachlanevenson/k8s-kubectl:v{{ kubectl_version }} /usr/local/bin/kubectl /usr/local/bin/kubectl
+
+CMD [ "ansible-operator", "version" ]
+
+# Labels
+LABEL name="${IMAGE_name}" \
+      summary="${IMAGE_summary}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      description="${IMAGE_description}" \
+      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_description}" \
+      io.k8s.description="${IMAGE_description}" \
+      io.k8s.display-name="${IMAGE_title}" \
+      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"

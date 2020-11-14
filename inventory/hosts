@@ -1,5 +1,6 @@
 [ci]
 ansible
+ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
 rootfs-creator

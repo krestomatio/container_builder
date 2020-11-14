@@ -1,3 +1,6 @@
+# registry
+ci_registry_name: docker.io
+
 dockerfile_builder_image_from: "docker:{{ docker_version }}"
 dockerfile_builder_image_based: "Docker {{ docker_version }}"
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},docker,docker{{ docker_version }}"

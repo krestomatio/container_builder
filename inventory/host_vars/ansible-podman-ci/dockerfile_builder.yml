@@ -1,3 +1,5 @@
-dockerfile_builder_image_from: "quay.io/buildah/{{ buildah_version }}"
-dockerfile_builder_image_based: "Buildah Stable Image"
+dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
+  dockerfile_builder_image_from_tag if
+  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},buildah,buildah-{{ buildah_version }}"
+dockerfile_builder_image_pck_extra: "git rsync jq sshpass openssh-clients curl"

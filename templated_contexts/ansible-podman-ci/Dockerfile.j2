@@ -3,52 +3,26 @@ FROM {{ dockerfile_builder_image_from }}
 
 # General variables
 ENV IMAGE_name=ansible-podman-ci \
-    IMAGE_summary="Ansible image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
-    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible and tools like Buildah, Podman, Skopeo and Molecule, for CI" \
+    IMAGE_summary="Podman image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_description="{{ dockerfile_builder_image_based }} based image with tools like Buildah and Skopeo, for CI" \
     IMAGE_title="Ansible CI image based on {{ dockerfile_builder_image_based }}"
 
-# Container variables
-ENV ANSIBLE_version="{{ image_ansible_version }}" \
-    MOLECULE_version="{{ molecule_version }}" \
-    CTR_pkg_mgm="dnf install -y" \
-    CTR_pip="pip3 install --no-cache --upgrade"
+ENV BUILDAH_ISOLATION chroot
 
-RUN echo "Build tools..."  && \
-    $CTR_pkg_mgm python-devel gcc && \
-    echo "Installing pkgs..."  && \
-    python3 -m ensurepip && \
-    $CTR_pip cffi pip && \
-    $CTR_pip ansible~=$ANSIBLE_version && \
-    $CTR_pip molecule~=$MOLECULE_version && \
-    echo "Installing other pip tools..."  && \
-    $CTR_pip yamllint ansible-lint pycrypto git-semver commitizen && \
+RUN echo "Installing podman..."  && \
+    $CTR_pkg_mgm install xz gzip tar podman skopeo buildah && \
+    rpm -e --nodeps container-selinux && \
     echo "Cleaning..."  && \
-    dnf autoremove -y python-devel gcc && \
-    dnf clean all && \
-    rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
-    echo "Minimal ansible config" && \
-    mkdir -p /etc/ansible && \
-    echo 'localhost' > /etc/ansible/hosts
-
-RUN echo "Installing other tools..."  && \
-    $CTR_pkg_mgm xz gzip tar podman git rsync jq sudo sshpass openssh-clients skopeo curl \
-    --exclude container-selinux && \
-    echo "Cleaning..." && \
-    dnf clean all && \
+    $CTR_pkg_mgm clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
-{% if jx2_version is defined and jx2_version %}
-ENV JX_VERSION="{{ jx2_version }}"
-ENV JX_HOME=/home/.jx
-RUN echo "Installing jx2 version: ${JX_VERSION}..."  && \
-    pushd /tmp && \
-    curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
-    sudo mv jx /usr/bin/{{ jx2_binary_name | default('jx') }} && \
-    echo "Cleaning..."  && \
-    rm -rf /tmp/* && \
-    popd
+RUN sed -i "s@^driver =.*@driver = \"vfs\"@g" /etc/containers/storage.conf
 
-{% endif %}
+# Container variables
+ENV CTR_pkg_extra="{{ dockerfile_builder_image_pck_extra }}"
+
+RUN install-pkgs $CTR_pkg_extra
+
 {% if jx3_version is defined and jx3_version %}
 ENV JX3_VERSION="{{ jx3_version }}"
 ENV JX3_HOME=/home/.jx3
@@ -75,7 +49,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     popd
 
 {% endif %}
-CMD [ "ansible-playbook", "--version" ]
+CMD [ "/bin/bash" ]
 
 # Labels
 LABEL name="${IMAGE_name}" \

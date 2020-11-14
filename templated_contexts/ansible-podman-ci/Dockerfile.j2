@@ -18,11 +18,6 @@ RUN echo "Installing podman..."  && \
 
 RUN sed -i "s@^driver =.*@driver = \"vfs\"@g" /etc/containers/storage.conf
 
-# Container variables
-ENV CTR_pkg_extra="{{ dockerfile_builder_image_pck_extra }}"
-
-RUN install-pkgs $CTR_pkg_extra
-
 {% if jx3_version is defined and jx3_version %}
 ENV JX3_VERSION="{{ jx3_version }}"
 ENV JX3_HOME=/home/.jx3

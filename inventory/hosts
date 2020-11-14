@@ -37,6 +37,15 @@ postgres
 [platform_s4]
 nginx_php-fpm
 
+[ci_s1]
+ansible
+rootfs-creator
+
+[ci_s2]
+ansible-operator-ci
+ansible-docker-ci
+ansible-podman-ci
+
 [app_s1]
 moodle_app
 

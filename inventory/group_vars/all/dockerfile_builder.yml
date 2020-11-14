@@ -15,7 +15,7 @@ generated_path: "{{ generated_dir }}/{{ ctr_name }}"
 registry_name: ""
 registry_project: krestomatio
 registry_path: "{{ registry_name + '/' if registry_name else '' }}{{registry_project}}"
-ci_registry_name: docker.io
+ci_registry_name: quay.io
 platform_registry_name: quay.io
 m4e_registry_name: quay.io
 cache_registry_name: gcr.io

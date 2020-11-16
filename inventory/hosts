@@ -1,5 +1,6 @@
 [platform]
 centos8-minimal
+centos8-stream-minimal
 base
 httpd
 nginx
@@ -24,6 +25,7 @@ moodle_httpd
 
 [platform_s1]
 centos8-minimal
+centos8-stream-minimal
 
 [platform_s2]
 base

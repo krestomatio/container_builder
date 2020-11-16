@@ -12,8 +12,11 @@ ENV ANSIBLE_OPERATOR_version="{{ ansible_operator_version }}"
 
 RUN install-pkgs golang make which
 
-# Install kubectl. It is needed for ansible kubectl inventory.
+# Install Operator SDK
 COPY --from=quay.io/operator-framework/operator-sdk:v{{ ansible_operator_version }} /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+
+# Install Ansible Operator
+COPY --from=quay.io/operator-framework/ansible-operator:v{{ ansible_operator_version }} /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
 ENV KUBECTL_version="{{ kubectl_version }}"

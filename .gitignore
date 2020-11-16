@@ -8,8 +8,8 @@ __pycache__
 debug.yml
 tmp/
 # centos8-artifacts in templated_contexts
-templated_contexts/centos8-minimal/centos8-minimal.tar.xz
-templated_contexts/centos8-minimal/distro-release
-templated_contexts/centos8-minimal/pkgs-list
+templated_contexts/centos8*-minimal/centos8*-minimal.tar.xz
+templated_contexts/centos8*-minimal/distro-release
+templated_contexts/centos8*-minimal/pkgs-list
 # local notes
 .notes.md

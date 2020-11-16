@@ -1,5 +1,5 @@
 - when:
-    - "ansible_host == 'centos8-minimal'"
+    - ansible_host | regex_search('centos8.*-minimal')
   vars:
     ctr_generated_path: "{{ working_dir }}/{{ generated_path }}"
     ctr_template_path: "{{ working_dir }}/{{ template_path }}"
@@ -8,24 +8,25 @@
     distro_release_old: "{{ ctr_generated_path }}/distro-release"
     distro_release_new: "{{ ctr_template_path }}/distro-release"
   block:
-  - name: get old pkgs total checksum
+  - name: check old pkgs total file
     stat:
       path: "{{ pkgs_list_old }}"
     register: centos_pkgs_file_old
 
-  - name: save old pkgs total checksum
-    when:
-      - centos_pkgs_file_old.stat is defined
-    set_fact:
-      dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_old.stat.checksum }}"
+  - name: check old distro release file
+    stat:
+      path: "{{ distro_release_old }}"
+    register: centos_distro_release_file_old
 
   - name: save old pkgs total checksum
     when:
-      - centos_pkgs_file_old.stat is defined
+      - centos_pkgs_file_old.stat.exists
     set_fact:
       dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_old.stat.checksum }}"
 
   - name: get old distro release
+    when:
+      - centos_distro_release_file_old.stat.exists
     command: "head -n 1 '{{ distro_release_old }}'"
     changed_when: false
     check_mode: false
@@ -37,32 +38,38 @@
     set_fact:
       centos_distro_release: "{{ centos_distro_release_old.stdout_lines | first }}"
 
-  - when: not centos8_omit_rootfs_creation | default(false) | bool
+  - when:
+      - not centos8_omit_rootfs_creation | default(false) | bool
+        or not centos_pkgs_file_old.stat.exists
+        or not centos_distro_release_file_old.stat.exists
     vars:
       rootfs_creator_image: docker.io/krestomatio/rootfs-creator
+      rootfs_build_kickstart: "{{ centos8_build_kickstart | default('centos8-minimal.ks') }}"
+      rootfs_build_tar: "{{ centos8_build_rootfs | default('centos8-minimal.tar.xz') }}"
     block:
-    - name: prepare artifacts for centos8-minimal
+    - name: prepare artifacts
       when:
         - dockerfile_builder == 'docker'
       docker_container:
-        name: rootfs-creator
+        name: "rootfs-creator-{{ (ctr_generated_path | to_uuid).split('-')[0] }}"
         image: "{{ rootfs_creator_image }}"
         privileged: true
         detach: false
         cleanup: true
         env:
-          BUILD_kickstart: centos8-minimal.ks
-          BUILD_rootfs: centos8-minimal.tar.xz
+          BUILD_kickstart: "{{ rootfs_build_kickstart }}"
+          BUILD_rootfs: "{{ rootfs_build_tar }}"
         volumes:
           - "{{ ctr_template_path }}:/build:z"
 
-    - name: prepare artifacts for centos8-minimal
+    - name: prepare artifacts
       when:
         - dockerfile_builder == 'podman'
       changed_when: false
       command: "podman run --privileged --rm
         -v '{{ ctr_template_path }}:/build:z' {{ rootfs_creator_image }}
-        centos8-minimal.ks centos8-minimal.tar.xz"
+        --name rootfs-creator-{{ (ctr_generated_path | to_uuid).split('-')[0] }}
+        {{ rootfs_build_kickstart }} {{ rootfs_build_tar }}"
 
     - name: get new pkgs total checksum
       stat:
@@ -92,6 +99,9 @@
         centos_distro_release: "{{ centos_distro_release_new.stdout_lines | first }}"
 
   - name: set version based on distro-release
+    when:
+      - centos_distro_release is defined
+      - dockerfile_builder_image_pkgs_checksum is defined
     set_fact:
       version_image_major: "{{ centos_distro_release.split('.')[0].split('-')[2] }}"
       version_image_minor: "{{ centos_distro_release.split('.')[1].split('-')[0] }}"

@@ -1,4 +1,0 @@
-# ci
-prepare_image_task: centos8
-centos8_build_kickstart: centos8-stream-minimal.ks
-centos8_build_rootfs: centos8-stream-minimal.tar.xz

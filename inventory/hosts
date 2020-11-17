@@ -9,6 +9,10 @@ php-fpm
 nginx_php-fpm
 postgres
 
+[minimal]
+centos8-minimal
+centos8-stream-minimal
+
 [ci]
 ansible
 ansible-operator-ci

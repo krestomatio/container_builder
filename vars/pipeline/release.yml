@@ -11,7 +11,6 @@ artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 state_path: "{{ working_dir }}/vars/state"
 git_push_options: --tags
-git_tag_options: -f
 git_tag: "v{{ release_version }}"
 release_version: "{{ next_version | default(false,true) }}"
 assertion_release_version: true

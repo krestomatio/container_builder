@@ -28,40 +28,36 @@ moodle_php-fpm
 moodle_web
 moodle_httpd
 
-[platform_s1]
+[build_step_1]
 centos8-minimal
 centos8-stream-minimal
 
-[platform_s2]
+[build_step_2]
 base
 base-stream
 
-[platform_s3]
+[build_step_3]
 httpd
 nginx
 php-fpm
 postgres
-
-[platform_s4]
-nginx_php-fpm
-
-[ci_s1]
 ansible
 rootfs-creator
 
-[ci_s2]
-ansible-operator-ci
+[build_step_4]
+nginx_php-fpm
 ansible-docker-ci
 ansible-podman-ci
 
-[app_s1]
+[build_step_5]
+ansible-operator-ci
 moodle_app
 
-[app_s2]
+[build_step_6]
 moodle_nginx
 moodle_nginx_web
 moodle_php-fpm
 moodle_httpd
 
-[app_s3]
+[build_step_7]
 moodle_web

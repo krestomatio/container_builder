@@ -29,10 +29,13 @@ As an Ansible project:
 * Variables can be changed inside [inventory](inventory) dir
 * Please update only [templated_contexts](templates) or [inventory](inventory) dir
 * List of containers:
+  - ansible
+  - ansible-operator-ci
   - ansible-docker-ci
   - ansible-podman-ci
   - rootfs-creator
   - centos8-minimal
+  - centos8-stream-minimal
   - base
   - httpd
   - nginx

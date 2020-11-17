@@ -41,15 +41,13 @@
       loop_control:
         loop_var: build_step
       loop:
-        - "platform_s1"
-        - "platform_s2"
-        - "platform_s3"
-        - "platform_s4"
-        - "ci_s1"
-        - "ci_s2"
-        - "app_s1"
-        - "app_s2"
-        - "app_s3"
+        - "build_step_1"
+        - "build_step_2"
+        - "build_step_3"
+        - "build_step_4"
+        - "build_step_5"
+        - "build_step_6"
+        - "build_step_7"
       include_tasks: tasks/builder/build.yml
 
     - name: tag image

@@ -27,7 +27,7 @@ dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',
 version_git_based: true
 
 # centos8-minimal
-centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(true,true) }}"
+centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(false,true) }}"
 
 # docker
 docker_start_daemon: true

@@ -4,8 +4,8 @@
     - moodle_git_repo_version_regex is defined
   set_fact:
     moodle_git_source_version: "{{ lookup('url', moodle_git_source_version_url) | regex_search(moodle_git_repo_version_regex) }}"
-    
-- name: set version based on distro-release
+
+- name: set version based on moodle source
   set_fact:
     version_image_major: "{{ moodle_git_source_version.split('.')[0] }}"
     version_image_minor: "{{ moodle_git_source_version.split('.')[1] }}"

@@ -30,8 +30,6 @@ spec:
             value: release
           - name: JX_BATCH_MODE
             value: "true"
-          - name: VERSION
-            value: $(inputs.params.version)
           name: ""
           resources:
             requests:

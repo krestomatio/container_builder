@@ -2,7 +2,4 @@
 ansible_operator_version: 1.1.0
 kubectl_version: 1.19.3
 
-dockerfile_builder_image_from: "{{ registry_path }}/base{{ ':' +
-  dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ ansible_operator_version }}"

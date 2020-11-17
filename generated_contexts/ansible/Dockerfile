@@ -1,5 +1,5 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_name=ansible \

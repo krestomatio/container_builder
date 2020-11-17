@@ -6,4 +6,4 @@ ansible_docker_ci_image:
   tag: "0.0.5"
   id: "sha256:a56000615e89d1854c81373a7dc01043a59776f4981e152c68c4e911f77793c3"
   repo_digest: "docker.io/krestomatio/ansible-docker-ci@sha256:2f6ea74f579bf6b30ce840e85778caf3145d300c7f29b8c2608722002618c3e5"
-  artifact_tag: 437a53c9c473b2bca9a7b6349c6cd6d16e173aa4
+  artifact_tag: 38eaf5ed7c8b1016fe74e3fe9286f120d4519832

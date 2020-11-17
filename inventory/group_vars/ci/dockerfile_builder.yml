@@ -6,11 +6,6 @@ docker_version: 'stable-dind'
 # registry
 registry_name: "{{ ci_registry_name }}"
 
-# options
-dockerfile_builder_image_from: "{{ registry_path }}/base-stream{{ ':' +
-  dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
-
 # ci
 prepare_image_task: ansible-ci
 

@@ -38,7 +38,7 @@ git_config_fetch_tag: true
 git_config_submodule_update: true
 
 # centos8-minimal
-centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(true,true) }}"
+centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(false,true) }}"
 
 # docker
 docker_start_daemon: true

@@ -2,6 +2,7 @@
 centos8-minimal
 centos8-stream-minimal
 base
+base-stream
 httpd
 nginx
 php-fpm
@@ -29,6 +30,7 @@ centos8-stream-minimal
 
 [platform_s2]
 base
+base-stream
 
 [platform_s3]
 httpd

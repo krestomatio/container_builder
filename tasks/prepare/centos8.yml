@@ -119,8 +119,6 @@
       - centos_pkgs_file_new.stat.checksum == centos_pkgs_file_old.stat.checksum
     set_fact:
       dockerfile_builder_src_omit: true
-      end_host: true
-      end_host_msg: "ending play for {{ ansible_host }}, no new pkgs"
 
   - name: omit src sync when no new pkgs list in place
     when:
@@ -128,5 +126,3 @@
         not centos_pkgs_file_new.stat.exists
     set_fact:
       dockerfile_builder_src_omit: true
-      end_host: true
-      end_host_msg: "ending play for {{ ansible_host }}, no new pkgs list in place"

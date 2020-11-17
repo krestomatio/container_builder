@@ -4,6 +4,6 @@
 php_fpm_image:
   build: True
   tag: "0.0.5"
-  id: "sha256:3e253e74c0db2c8c2204b340d3f84fe6a29e07833223a1730c3735f30cbcc42b"
-  repo_digest: "quay.io/krestomatio/php-fpm@sha256:274b98aedaee5fd1bcb00cfe5695088354745da9fbd8dbb2732b5f36215966b1"
-  artifact_tag: 036d5e16f8ec84c134d4b865340efc12ab459d31
+  id: "sha256:2f44d342694099f4a44b3cd8cb3cb005a9ecd73a931b6362221c8cdccf866d1c"
+  repo_digest: "quay.io/krestomatio/php-fpm@sha256:4920b8b84aaf2f120c210c377bb1f8399feb69ece0f7f77d589365f5f82a1ca7"
+  artifact_tag: 38eaf5ed7c8b1016fe74e3fe9286f120d4519832

@@ -1,5 +1,5 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_name=ansible-operator-ci \
@@ -12,8 +12,11 @@ ENV ANSIBLE_OPERATOR_version="1.1.0"
 
 RUN install-pkgs golang make which
 
-# Install kubectl. It is needed for ansible kubectl inventory.
+# Install Operator SDK
 COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+
+# Install Ansible Operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.1.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
 ENV KUBECTL_version="1.19.3"

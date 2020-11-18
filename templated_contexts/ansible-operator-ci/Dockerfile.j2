@@ -10,8 +10,6 @@ ENV IMAGE_name=ansible-operator-ci \
 # Container variables
 ENV ANSIBLE_OPERATOR_version="{{ ansible_operator_version }}"
 
-RUN install-pkgs golang make which
-
 # Install Operator SDK
 COPY --from=quay.io/operator-framework/operator-sdk:v{{ ansible_operator_version }} /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
 
@@ -24,7 +22,7 @@ ENV KUBECTL_version="{{ kubectl_version }}"
 # Install kubectl. It is needed for ansible kubectl inventory.
 COPY --from=lachlanevenson/k8s-kubectl:v{{ kubectl_version }} /usr/local/bin/kubectl /usr/local/bin/kubectl
 
-CMD [ "ansible-operator", "version" ]
+CMD [ "/bin/bash" ]
 
 # Labels
 LABEL name="${IMAGE_name}" \

@@ -29,6 +29,7 @@ moodle_web
 moodle_httpd
 
 [build_step_1]
+rootfs-creator
 centos8-minimal
 centos8-stream-minimal
 
@@ -42,7 +43,6 @@ nginx
 php-fpm
 postgres
 ansible
-rootfs-creator
 
 [build_step_4]
 nginx_php-fpm

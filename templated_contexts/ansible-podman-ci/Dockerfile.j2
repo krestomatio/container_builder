@@ -16,6 +16,8 @@ RUN echo "Installing podman..."  && \
     $CTR_pkg_mgm clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
+COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
+
 {% if jx3_version is defined and jx3_version %}
 ENV JX3_VERSION="{{ jx3_version }}"
 ENV JX3_HOME=/home/.jx3

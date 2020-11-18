@@ -11,9 +11,8 @@
 
 - name: fetch git tags
   when: git_config_fetch_tag | default(false)
-  changed_when: git_config_fetch_tag.stdout is defined and git_config_fetch_tag.stdout
-  register: git_config_fetch_tag
-  command: git fetch --tag
+  changed_when: false
+  command: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
 - name: update git submodules
   when: git_config_submodule_update | default(false)

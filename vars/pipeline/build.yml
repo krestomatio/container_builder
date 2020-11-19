@@ -1,6 +1,7 @@
 version_add_build: true
 version_include_fallback_tags: true
-pr_commit_tag: "{{ version_commit_tag }}"
+pr_commit_tag: "{{ lookup('env','PULL_PULL_SHA') | default(false,true) }}"
+version_commit_tag: "{{ pr_commit_tag }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 assertion_artifact_tag: true

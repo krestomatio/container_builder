@@ -1,9 +1,6 @@
 # ci
 prepare_image_task: centos8
 
-#build
-dockerfile_builder_build_omit_when_no_sync: true
-
 # prepare
 centos8_build_kickstart: "{{ ansible_host }}.ks"
 centos8_build_rootfs: "{{ ansible_host }}.tar.xz"

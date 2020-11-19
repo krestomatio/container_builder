@@ -10,12 +10,20 @@
     list_all: "{{ item.list_all | default(omit) }}"
 
 - name: fetch git tags
-  when: git_config_fetch_tag | default(false)
+  when: git_config_fetch_tag | default(true)
   changed_when: false
   command: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
 
+- name: set version based on git tags
+  when: git_version_dict is not defined
+  vars:
+    git_version_bump: patch
+  set_fact:
+    git_version_dict:  "{{ lookup('git_semver', working_dir, bump=git_version_bump,
+      want='dict') }}"
+
 - name: update git submodules
-  when: git_config_submodule_update | default(false)
+  when: git_config_submodule_update | default(true)
   changed_when: git_config_submodule_update_status.stdout is defined and git_config_submodule_update_status.stdout
   register: git_config_submodule_update_status
   command: git submodule update --init --recursive

@@ -5,6 +5,29 @@
   set_fact:
     cache_image_name: "{{ cache_registry_path }}/{{ ansible_host }}"
 
+- name: tag cache image with sha as container image
+  when: lookup('vars', state_name + '_image',default=False)
+  vars:
+    cache_repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest.split('@')[1] }}"
+    cache_image_with_sha: "{{ cache_image_name + '@' + cache_repo_digest }}"
+  block:
+    - name: pull cache image with sha
+      command: "{{ dockerfile_builder }} pull {{ cache_image_with_sha }}"
+      changed_when: "'Status: Image is up to date' not in cache_pull_image_with_sha_task.stdout"
+      register: cache_pull_image_with_sha_task
+
+    - name: check if container image name exists
+      command: "{{ dockerfile_builder }} inspect --type=image {{ dockerfile_builder_image }}"
+      changed_when: false
+      ignore_errors: true
+      register: cache_image_name_exist
+
+    - name: tag build image
+      when:
+        -  cache_image_name_exist.stderr is defined
+        - "'Error: No such image' in cache_image_name_exist.stderr"
+      command: "{{ dockerfile_builder }} tag {{ cache_image_with_sha }} {{ dockerfile_builder_image }}"
+
 - name: set cache images with respective tags (if any)
   when:
     - item is defined and item

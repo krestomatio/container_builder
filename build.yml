@@ -33,6 +33,9 @@
     - name: set version related facts
       include_tasks: tasks/builder/version.yml
 
+    - name: load image state
+      include_tasks: tasks/state/load.yml
+
     - name: use build cache
       include_tasks: tasks/builder/cache.yml
       when: build_cache | default(false) | bool

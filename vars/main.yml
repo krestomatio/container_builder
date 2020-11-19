@@ -1,0 +1,64 @@
+repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
+repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
+project_registry_path: "{{ repo_owner+'/'+repo_name }}"
+build_cache: true
+build_cache_prepull: true
+build_cache_first_prepull: true
+build_push: "{{ lookup('env','BUILD_PUSH') | default(true,true) }}"
+build_add_minor_major_cache_tags: "{{ lookup('env','BUILD_CACHE_ADD_MINOR_MAJOR_TAGS') | default(true,true) }}"
+build_add_minor_major_tags: "{{ lookup('env','BUILD_ADD_MINOR_MAJOR_TAGS') | default(false,true) }}"
+builder_config: "{{ lookup('env','BUILDER_CONFIG') | default(true,true) }}"
+next_version: "{{ lookup('env','NEXT_VERSION') | default(git_version_dict.full,true) | default('') }}"
+next_version_bump: "{{ lookup('env','NEXT_VERSION_BUMP') | default('patch',true) }}"
+
+# registry
+build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
+cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(build_registry_name,true) }}"
+cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_registry_name + '/' + project_registry_path,true) }}"
+build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + project_registry_path,true) }}"
+
+# dockerfile_builder
+dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
+dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"
+dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(false,true) }}"
+dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
+dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
+
+# version
+version_image_bump: "{{ next_version_bump }}"
+version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
+
+# centos8-minimal
+centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(false,true) }}"
+
+# docker
+docker_start_daemon: true
+docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
+docker_config_json_path: /tekton/home/.docker/config.json
+
+# podman
+podman_conf_dir: "/etc/containers"
+storage_graphroot: "{{ lookup('env','STORAGE_CONTAINER_PATH') | default('/workspace/containers/storage',true) }}"
+storage_driver: "{{ lookup('env','STORAGE_DRIVER') | default('overlay',true) }}"
+registry_unqualified: "{{ lookup('env','REGISTRY_UNQUALIFIED') | default(\"'\" + registry_name + \"'\",true) }}"
+registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name,true) }}"
+
+# skopeo
+skopeo_transport: "docker://"
+
+# state
+state_path: "{{ working_dir }}/vars/state"
+
+# artifacts
+artifact_registry: "{{ lookup('env','ARTIFACT_REGISTRY') | default(build_registry_path,true) | default(false) }}"
+artifact_tag: "{{ lookup('env','ARTIFACT_TAG') | default(pr_commit_tag,true) | default(false) }}"
+artifacts:
+  - name: generated_contexts_artifact
+    archive: generated_contexts_artifact.tar.gz
+    path: "{{ working_dir }}/{{ generated_dir }}"
+  - name: state_image_artifact
+    archive: state_image_artifact.tar.gz
+    path: "{{ state_path }}"
+
+# assertions
+assertion_dockerfile_builder: true

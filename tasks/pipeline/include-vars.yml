@@ -1,3 +1,7 @@
+- name: include main vars
+  include_vars:
+    file: "{{ working_dir }}/vars/main.yml"
+
 - name: include cloud provider vars
   when:
     - cloud_provider | default('none') != 'none'

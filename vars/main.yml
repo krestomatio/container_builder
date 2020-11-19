@@ -46,6 +46,9 @@ registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name
 # skopeo
 skopeo_transport: "docker://"
 
+# state
+state_path: "{{ working_dir }}/vars/state"
+
 # artifacts
 artifact_registry: "{{ lookup('env','ARTIFACT_REGISTRY') | default(build_registry_path,true) | default(false) }}"
 artifact_tag: "{{ lookup('env','ARTIFACT_TAG') | default(pr_commit_tag,true) | default(false) }}"

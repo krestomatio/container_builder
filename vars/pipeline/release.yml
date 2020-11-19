@@ -8,7 +8,6 @@ pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-p
   default(false,true)}}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
-state_path: "{{ working_dir }}/vars/state"
 git_push_options: --tags
 git_tag: "v{{ release_version }}"
 release_version: "{{ next_version | default(false,true) }}"

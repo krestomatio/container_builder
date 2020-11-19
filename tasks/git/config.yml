@@ -19,8 +19,13 @@
   vars:
     git_version_bump: patch
   set_fact:
-    git_version_dict:  "{{ lookup('git_semver', working_dir, bump=git_version_bump,
+    git_version_dict: "{{ lookup('git_semver', working_dir, bump=git_version_bump,
       want='dict') }}"
+
+- name: get git HEAD's commit
+  when: git_head_commit is not defined
+  set_fact:
+    git_head_commit: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
 
 - name: update git submodules
   when: git_config_submodule_update | default(true)

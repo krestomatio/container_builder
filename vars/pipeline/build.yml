@@ -4,5 +4,3 @@ pr_commit_tag: "{{ version_commit_tag }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 assertion_artifact_tag: true
-end_host: false
-end_host_msg: "artifact tag for pipeline does not match the one in state image file"

@@ -12,9 +12,8 @@ next_version: "{{ lookup('env','NEXT_VERSION') | default(git_version_dict.full,t
 next_version_bump: "{{ lookup('env','NEXT_VERSION_BUMP') | default('patch',true) }}"
 
 # registry
-registry_name: "{{ lookup('env','REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
-build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default(registry_name,true) }}"
-cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(registry_name,true) }}"
+build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
+cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(build_registry_name,true) }}"
 cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_registry_name + '/' + project_registry_path,true) }}"
 build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + project_registry_path,true) }}"
 

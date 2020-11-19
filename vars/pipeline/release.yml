@@ -1,5 +1,4 @@
 version_include_major_minor_tags: true
-version_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD') | default(false) }}"
 build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
 git_add_path: vars/state generated_contexts/
 git_commit_msgs:

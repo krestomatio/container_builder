@@ -4,8 +4,8 @@ git_add_path: vars/state generated_contexts/
 git_commit_msgs:
   - "Release version {{ release_version }}"
   - "[skip.ci]"
-pr_commit_tag: "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |
-  default(false,true)}}"
+pr_commit_tag:
+  "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |  default(false,true)}}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 git_push_options: --tags

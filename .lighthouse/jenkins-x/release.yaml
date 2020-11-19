@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
   annotations:
-    lighthouse.jenkins-x.io/prependStepsURL: https://raw.githubusercontent.com/krestomatio/jx3-pipeline-catalog/efd625bb0b513bc5050956f4f56a34200d47c7fa/tasks/git-clone/git-clone.yaml
+    lighthouse.jenkins-x.io/prependStepsURL: https://raw.githubusercontent.com/krestomatio/jx3-pipeline-catalog/0f2d0cc7cc026949280808038e4afe5f8c7a8673/tasks/git-clone/git-clone.yaml
   name: release
 spec:
   pipelineSpec:

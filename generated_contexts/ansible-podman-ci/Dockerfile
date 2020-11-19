@@ -1,5 +1,5 @@
 # Ansible managed
-FROM quay.io/krestomatio/base-stream
+FROM quay.io/krestomatio/ansible
 
 # General variables
 ENV IMAGE_name=ansible-podman-ci \
@@ -15,6 +15,8 @@ RUN echo "Installing podman..."  && \
     echo "Cleaning..."  && \
     $CTR_pkg_mgm clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
+
+COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
 
 ENV ORAS_VERSION="0.8.1"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \

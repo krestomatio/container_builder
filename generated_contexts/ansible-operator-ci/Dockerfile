@@ -1,5 +1,5 @@
 # Ansible managed
-FROM quay.io/krestomatio/base-stream
+FROM quay.io/krestomatio/ansible-podman-ci
 
 # General variables
 ENV IMAGE_name=ansible-operator-ci \
@@ -9,8 +9,6 @@ ENV IMAGE_name=ansible-operator-ci \
 
 # Container variables
 ENV ANSIBLE_OPERATOR_version="1.1.0"
-
-RUN install-pkgs golang make which
 
 # Install Operator SDK
 COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
@@ -24,7 +22,7 @@ ENV KUBECTL_version="1.19.3"
 # Install kubectl. It is needed for ansible kubectl inventory.
 COPY --from=lachlanevenson/k8s-kubectl:v1.19.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
 
-CMD [ "ansible-operator", "version" ]
+CMD [ "/bin/bash" ]
 
 # Labels
 LABEL name="${IMAGE_name}" \

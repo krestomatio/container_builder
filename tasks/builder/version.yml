@@ -1,31 +1,31 @@
 - name: get version based on git tag
-  vars:
-    version_image_bump: patch
   when:
-    - version_git_based | default(false)
+    - version_git_based | default(true)
   block:
     - name: set image version
-      when: version_image is not defined
+      when: version_image_dict is not defined
+      vars:
+        version_image_bump: patch
       set_fact:
-        version_image:  "{{ lookup('git_semver', working_dir, bump=version_image_bump,
+        version_image_dict:  "{{ lookup('git_semver', working_dir, bump=version_image_bump,
           want='dict') }}"
 
     - name: set major version
       when: version_image_major is not defined
       set_fact:
-        version_image_major: "{{ version_image.major }}"
+        version_image_major: "{{ version_image_dict.major }}"
 
     - name: set minor version
       when: version_image_minor is not defined
       set_fact:
-        version_image_minor: "{{ version_image.minor }}"
+        version_image_minor: "{{ version_image_dict.minor }}"
 
     - name: set full version
       when: version_image_full is not defined and not version_image_full
       block:
         - name: set full version
           set_fact:
-            version_image_full: "{{ version_image.full  }}"
+            version_image_full: "{{ version_image_dict.full  }}"
 
         - name: add build version
           vars:
@@ -35,11 +35,11 @@
               default('PR1',true) + '-' + lookup('env',version_add_build_suffix_build_var) | default('1',true)  }}"
           when:
             - version_add_build | default(false)
-            - not version_image.prerelease
-            - not version_image.build
+            - not version_image_dict.prerelease
+            - not version_image_dict.build
           set_fact:
             version_image_full:
-              "{{ version_image.full + version_add_build_suffix  }}"
+              "{{ version_image_dict.full + version_add_build_suffix  }}"
 
 - name: state image tag
   set_fact:
@@ -67,16 +67,16 @@
           + [version_commit_tag] }}"
 
     - name: add tags based on commit of version tag
-      when: version_image.commit is defined and version_image.commit
+      when: version_image_dict.commit is defined and version_image_dict.commit
       set_fact:
         dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-          + [version_image.commit] }}"
+          + [version_image_dict.commit] }}"
 
     - name: add tags based on branch of version tag
-      when: version_image.branch is defined and version_image.branch
+      when: version_image_dict.branch is defined and version_image_dict.branch
       set_fact:
         dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-          + [version_image.branch] }}"
+          + [version_image_dict.branch] }}"
 
     - name: add custom tag
       when: version_custom_tag is defined and version_custom_tag

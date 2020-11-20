@@ -14,12 +14,12 @@
       include_tasks: tasks/pipeline/skip-ci.yml
       run_once: true
 
-    - name: pipeline assertions
-      include_tasks: tasks/pipeline/assertion.yml
-
     - name: git related config
       include_tasks: "tasks/git/config.yml"
       run_once: true
+
+    - name: pipeline assertions
+      include_tasks: tasks/pipeline/assertion.yml
 
     - name: builder related config
       include_tasks: "tasks/config/{{ dockerfile_builder }}.yml"

@@ -3,7 +3,7 @@
 #
 ansible_docker_ci_image:
   build: True
-  tag: "0.0.7"
+  tag: "0.0.8"
   id: "sha256:56a2d280ac73740e7a50ecadc802516622161dcefc827756ef9cff45d3916399"
   repo_digest: "docker.io/krestomatio/ansible-docker-ci@sha256:ac6715d64b3de13b09ea4da674a4ff00feedef15be0263f73de4844aa95f8276"
-  artifact_tag: 5306780d323b3a4dc5c9a3f110c5fab9d4031619
+  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871

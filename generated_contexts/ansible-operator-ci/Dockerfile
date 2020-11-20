@@ -8,7 +8,7 @@ ENV IMAGE_name=ansible-operator-ci \
     IMAGE_title="Ansible Operator SDK CI image based on CentOS 8 minimal"
 
 # Container variables
-ENV ANSIBLE_OPERATOR_version="1.1.0"
+ENV OPERATOR_VERSION="1.1.0"
 
 # Install Operator SDK
 COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
@@ -17,9 +17,16 @@ COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operat
 COPY --from=quay.io/operator-framework/ansible-operator:v1.1.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
+ENV KUSTOMIZE_VERSION="3.5.4"
+
+# Install kustomize
+RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \
+    curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzf - -C /usr/local/bin/
+
+# Container variables
 ENV KUBECTL_version="1.19.3"
 
-# Install kubectl. It is needed for ansible kubectl inventory.
+# Install kubectl.
 COPY --from=lachlanevenson/k8s-kubectl:v1.19.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 CMD [ "/bin/bash" ]

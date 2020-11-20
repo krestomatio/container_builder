@@ -7,7 +7,9 @@ ENV IMAGE_name=ansible-podman-ci \
     IMAGE_description="CentOS 8 minimal based image with tools like Buildah and Skopeo, for CI" \
     IMAGE_title="Ansible CI image based on CentOS 8 minimal"
 
-ENV BUILDAH_ISOLATION chroot
+ENV BUILDAH_ISOLATION=chroot \
+    BUILDAH_LAYERS=true \
+    CONTAINER_BUILDER=podman
 
 RUN echo "Installing podman..."  && \
     $CTR_pkg_mgm install xz gzip tar podman skopeo buildah && \

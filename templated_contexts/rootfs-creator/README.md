@@ -1,4 +1,4 @@
-This container creates a rootfs. It has installed livemedia-creator in a Centos based image.
+This container creates a rootfs. It has installed livemedia-creator in a Centos 8 Stream minimal based image.
 An example [here](https://github.com/krestomatio/centos8-minimal)
 
 ## How rootfs can be generated using this container

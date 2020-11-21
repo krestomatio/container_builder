@@ -10,12 +10,42 @@
     extensions:
       - yml
 
-- name: set fact when artifact matches pipeline's
+- name: assign respective state variables
+  when: load_state_yml
   vars:
-    pipeline_artifact_tag: "{{ lookup('vars', state_name + '_image').artifact_tag | default(false) }}"
+    load_state_yml: lookup('vars', state_name + '_image',default=False)
+  block:
+    - name: set state tag
+      when:
+        - state_yml_tag is not defined
+        - load_state_yml.tag is defined
+      set_fact:
+        state_yml_tag: "{{ load_state_yml.tag }}"
+
+    - name: set state ID
+      when:
+        - state_yml_tag is not defined
+        - load_state_yml.id is defined
+      set_fact:
+        state_yml_id: "{{ load_state_yml.id }}"
+
+    - name: set state repo digest
+      when:
+        - state_yml_repo_digest is not defined
+        - load_state_yml.repo_digest is defined
+      set_fact:
+        state_yml_repo_digest: "{{ load_state_yml.repo_digest }}"
+
+    - name: set state artifact tag
+      when:
+        - state_yml_artifact_tag is not defined
+        - load_state_yml.artifact_tag is defined
+      set_fact:
+        state_yml_artifact_tag: "{{ load_state_yml.artifact_tag }}"
+
+- name: set fact when artifact matches pipeline's
   when:
-    - lookup('vars', state_name + '_image', default=False)
     - artifact_tag | default(false)
-    - artifact_tag == pipeline_artifact_tag
+    - artifact_tag == state_yml_artifact_tag
   set_fact:
     state_image_match_artifact_tag: true

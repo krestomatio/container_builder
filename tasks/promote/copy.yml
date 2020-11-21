@@ -11,12 +11,3 @@
     skopeo_dest_image_tag: "{{ item }}"
   loop: "{{ dockerfile_builder_tags }}"
   include_tasks: skopeo.yml
-
-- name: update state image facts
-  when: not ansible_check_mode
-  vars:
-    repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest.split('@')[1] }}"
-  set_fact:
-    state_yml_build: "{{ lookup('vars', state_name + '_image').build }}"
-    state_yml_id: "{{ lookup('vars', state_name + '_image').id }}"
-    state_yml_repo_digest: "{{ dockerfile_builder_image + '@'  + repo_digest }}"

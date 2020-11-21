@@ -10,6 +10,7 @@ build_add_minor_major_tags: "{{ lookup('env','BUILD_ADD_MINOR_MAJOR_TAGS') | def
 builder_config: "{{ lookup('env','BUILDER_CONFIG') | default(true,true) }}"
 next_version: "{{ lookup('env','NEXT_VERSION') | default(git_version_dict.full,true) | default('') }}"
 next_version_bump: "{{ lookup('env','NEXT_VERSION_BUMP') | default('patch',true) }}"
+container_builder_image_tag_from: "{{ lookup('env','BUILD_IMAGE_TAG_FROM') | default(false,true) }}"
 
 # registry
 build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
@@ -20,7 +21,6 @@ build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_reg
 # dockerfile_builder
 dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
 dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"
-dockerfile_builder_image_from_tag: "{{ lookup('env','BUILD_FROM_TAG') | default(false,true) }}"
 dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
 dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
 

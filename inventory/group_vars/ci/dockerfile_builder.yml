@@ -3,9 +3,6 @@ image_ansible_version: '2.9.*'
 molecule_version: '3.1.*'
 docker_version: 'stable-dind'
 
-# registry
-registry_name: "{{ ci_registry_name }}"
-
 # ci
 prepare_image_task: ansible-ci
 

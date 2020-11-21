@@ -1,3 +1,5 @@
+rootfs-creator
+
 [platform]
 centos8-minimal
 centos8-stream-minimal
@@ -18,7 +20,6 @@ ansible
 ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
-rootfs-creator
 
 [m4e]
 moodle_app

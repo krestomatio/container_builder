@@ -6,7 +6,9 @@
     cache_image_name: "{{ cache_registry_path }}/{{ ansible_host }}"
 
 - name: tag cache image with sha as container image
-  when: lookup('vars', state_name + '_image',default=False)
+  when:
+    - build_cache_prepull_image_with_sha | default(false)
+    - lookup('vars', state_name + '_image',default=False)
   vars:
     cache_repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest.split('@')[1] }}"
     cache_image_with_sha: "{{ cache_image_name + '@' + cache_repo_digest }}"

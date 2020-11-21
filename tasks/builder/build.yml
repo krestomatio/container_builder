@@ -1,5 +1,10 @@
-- when: ansible_host in groups[build_step|default('all')]
+- name: hola
+  when: ansible_host in groups[build_step|default('all')]
   block:
+  - name: show build group name
+    debug:
+      msg: "building images in group: {{ build_step|default('all') }}"
+
   - name: build image
     include_role:
       name: dockerfile_builder

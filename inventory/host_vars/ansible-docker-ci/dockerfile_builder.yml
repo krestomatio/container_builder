@@ -1,5 +1,5 @@
 # registry
-ci_registry_name: docker.io
+registry_name: docker.io
 
 dockerfile_builder_pull: true
 dockerfile_builder_image_from: "docker:{{ docker_version }}"

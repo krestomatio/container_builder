@@ -5,10 +5,10 @@
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-mkdir -p ${POSTGRES_data} ${POSTGRES_app_data}
+mkdir -p ${POSTGRES_DATA} ${POSTGRES_APP_DATA}
 
-fix-permissions -u ${CTR_user_id} ${POSTGRES_run} ${POSTGRES_home}
-fix-permissions -r -u ${CTR_user_id} ${POSTGRES_app_data}
+fix-permissions -u ${CTR_USER_ID} ${POSTGRES_RUN} ${POSTGRES_HOME}
+fix-permissions -r -u ${CTR_USER_ID} ${POSTGRES_APP_DATA}
 
 # restore rpm permissions
 rpm-file-permissions

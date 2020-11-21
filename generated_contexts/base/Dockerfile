@@ -2,39 +2,39 @@
 FROM quay.io/krestomatio/centos8-minimal
 
 # General variables
-ENV IMAGE_name=base \
-    IMAGE_summary="CentOS 8 minimal based image" \
-    IMAGE_description="CentOS 8 minimal based for building other images" \
-    IMAGE_title="CentOS 8 minimal based image"
+ENV IMAGE_NAME=base \
+    IMAGE_SUMMARY="CentOS 8 minimal based image" \
+    IMAGE_DESCRIPTION="CentOS 8 minimal based for building other images" \
+    IMAGE_TITLE="CentOS 8 minimal based image"
 
 # Container variables
-ENV CTR_pkg_mgm="microdnf --setopt=tsflags=nodocs -y" \
-    CTR_user=default \
-    CTR_user_id="1001" \
-    CTR_user_gecos="Default Application User" \
-    CTR_group=root \
-    CTR_group_id="0" \
-    CTR_app="/opt/default" \
-    CTR_entrypoint_opt_path=/opt/container-entrypoint.d
+ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs -y" \
+    CTR_USER=default \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="Default Application User" \
+    CTR_GROUP=root \
+    CTR_GROUP_ID="0" \
+    CTR_APP="/opt/default" \
+    CTR_ENTRYPOINT_OPT_PATH=/opt/container-entrypoint.d
 
-ENV OS_install_pkgs="findutils gzip platform-python"
+ENV OS_INSTALL_PKGS="findutils gzip platform-python"
 
 COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${OS_install_pkgs}
+RUN install-pkgs ${OS_INSTALL_PKGS}
 
 ENTRYPOINT ["container-entrypoint"]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},centos,centos8"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},centos,centos8"

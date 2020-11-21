@@ -2,10 +2,10 @@
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_name=ansible-operator-ci \
-    IMAGE_summary="Ansible Operator SDK image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
-    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible Operator SDK" \
-    IMAGE_title="Ansible Operator SDK CI image based on {{ dockerfile_builder_image_based }}"
+ENV IMAGE_NAME=ansible-operator-ci \
+    IMAGE_SUMMARY="Ansible Operator SDK image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with Ansible Operator SDK" \
+    IMAGE_TITLE="Ansible Operator SDK CI image based on {{ dockerfile_builder_image_based }}"
 
 # Container variables
 ENV OPERATOR_VERSION="{{ operator_version }}"
@@ -32,13 +32,13 @@ COPY --from=lachlanevenson/k8s-kubectl:v{{ kubectl_version }} /usr/local/bin/kub
 CMD [ "/bin/bash" ]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
       maintainer="{{ dockerfile_builder_image_authors }}" \
-      description="${IMAGE_description}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},{{ dockerfile_builder_image_ocp_tags }}"

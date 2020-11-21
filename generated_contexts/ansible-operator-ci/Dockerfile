@@ -2,10 +2,10 @@
 FROM quay.io/krestomatio/ansible-podman-ci
 
 # General variables
-ENV IMAGE_name=ansible-operator-ci \
-    IMAGE_summary="Ansible Operator SDK image based on CentOS 8 minimal for Continuous Integration" \
-    IMAGE_description="CentOS 8 minimal based image with Ansible Operator SDK" \
-    IMAGE_title="Ansible Operator SDK CI image based on CentOS 8 minimal"
+ENV IMAGE_NAME=ansible-operator-ci \
+    IMAGE_SUMMARY="Ansible Operator SDK image based on CentOS 8 minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 8 minimal based image with Ansible Operator SDK" \
+    IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 minimal"
 
 # Container variables
 ENV OPERATOR_VERSION="1.1.0"
@@ -32,13 +32,13 @@ COPY --from=lachlanevenson/k8s-kubectl:v1.19.3 /usr/local/bin/kubectl /usr/local
 CMD [ "/bin/bash" ]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      description="${IMAGE_description}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},ansible,ansible2.9.*,ansible-operator,ansible-operator1.1.0"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.1.0"

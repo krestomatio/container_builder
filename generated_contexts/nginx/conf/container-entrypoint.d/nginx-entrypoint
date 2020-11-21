@@ -3,8 +3,8 @@
 
 # nginx default config
 sed -i \
-    -e "s@__listen__@${NGINX_listen}@" \
-    -e "s@__server_name__@${NGINX_server_name}@" \
-    -e "s@__rootdocument__@${NGINX_documentroot}@" \
-    -e "s@__listen_option__@${NGINX_listen_options}@" \
-    ${NGINX_main_conf_file}
+    -e "s@__listen__@${NGINX_LISTEN}@" \
+    -e "s@__server_name__@${NGINX_SERVER_NAME}@" \
+    -e "s@__rootdocument__@${NGINX_DOCUMENTROOT}@" \
+    -e "s@__listen_option__@${NGINX_LISTEN_OPTIONS}@" \
+    ${NGINX_MAIN_CONF_FILE}

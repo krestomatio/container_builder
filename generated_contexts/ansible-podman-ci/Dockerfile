@@ -2,20 +2,20 @@
 FROM quay.io/krestomatio/ansible
 
 # General variables
-ENV IMAGE_name=ansible-podman-ci \
-    IMAGE_summary="Podman image based on CentOS 8 minimal for Continuous Integration" \
-    IMAGE_description="CentOS 8 minimal based image with tools like Buildah and Skopeo, for CI" \
-    IMAGE_title="Ansible CI image based on CentOS 8 minimal"
+ENV IMAGE_NAME=ansible-podman-ci \
+    IMAGE_SUMMARY="Podman image based on CentOS 8 minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 8 minimal based image with tools like Buildah and Skopeo, for CI" \
+    IMAGE_TITLE="Ansible CI image based on CentOS 8 minimal"
 
 ENV BUILDAH_ISOLATION=chroot \
     BUILDAH_LAYERS=true \
     CONTAINER_BUILDER=podman
 
 RUN echo "Installing podman..."  && \
-    $CTR_pkg_mgm install xz gzip tar podman skopeo buildah && \
+    $CTR_PKG_MGM install xz gzip tar podman skopeo buildah && \
     rpm -e --nodeps container-selinux && \
     echo "Cleaning..."  && \
-    $CTR_pkg_mgm clean all && \
+    $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
 COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
@@ -32,13 +32,13 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
 CMD [ "/bin/bash" ]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      description="${IMAGE_description}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},ansible,ansible2.9.*,podman"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,podman"

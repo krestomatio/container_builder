@@ -2,8 +2,8 @@
 # description: additional entrypoint script for moodle nginx
 
 # root default config
-if ! [ -f ${NGINX_default_conf_root_file} ]; then
-    cat << "EOF" > ${NGINX_default_conf_root_file}
+if ! [ -f ${NGINX_DEFAULT_CONF_ROOT_FILE} ]; then
+    cat << "EOF" > ${NGINX_DEFAULT_CONF_ROOT_FILE}
 location / {
     index index.php index.html index.htm;
     try_files $uri $uri/ /index.php;
@@ -12,8 +12,8 @@ EOF
 fi
 
 # php-fpm default config
-if ! [ -f ${NGINX_default_conf_app_file} ]; then
-    cat << "EOF" > ${NGINX_default_conf_app_file}
+if ! [ -f ${NGINX_DEFAULT_CONF_APP_FILE} ]; then
+    cat << "EOF" > ${NGINX_DEFAULT_CONF_APP_FILE}
 location ~ [^/]\.php(/|$) {
     include                         fastcgi_params;
     fastcgi_split_path_info         ^(.+?\.php)(/.*)$;
@@ -23,5 +23,5 @@ location ~ [^/]\.php(/|$) {
     fastcgi_param   SCRIPT_FILENAME $document_root$fastcgi_script_name;
 }
 EOF
-    sed -i "s@__fastcgi_pass__@${NGINX_fastcgi_pass}@" $NGINX_default_conf_app_file
+    sed -i "s@__fastcgi_pass__@${NGINX_FASTCGI_PASS}@" $NGINX_DEFAULT_CONF_APP_FILE
 fi

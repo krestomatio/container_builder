@@ -8,9 +8,9 @@ usage() {
 Script to create roofs with livemedia-creator
 
 ENVIRONMENT VARS:
-CTR_working_dir            working dir for kickstart source and image destination (default current directory)
-BUILD_kickstart            kickstart source file ROOTFS_NAME
-BUILD_rootfs               rootfs output file name
+CTR_WORKING_DIR            working dir for kickstart source and image destination (default current directory)
+BUILD_KICKSTART            kickstart source file ROOTFS_NAME
+BUILD_ROOTFS               rootfs output file name
 
 USAGE:
     build-rootfs KICKSTART_FILE ROOTFS_NAME
@@ -20,11 +20,11 @@ EXAMPLES:
 EOF
 }
 
-CTR_working_dir=${CTR_working_dir:-./}
-BUILD_kickstart=${BUILD_kickstart:-$1}
-BUILD_rootfs=${BUILD_rootfs:-$2}
+CTR_WORKING_DIR=${CTR_WORKING_DIR:-./}
+BUILD_KICKSTART=${BUILD_KICKSTART:-$1}
+BUILD_ROOTFS=${BUILD_ROOTFS:-$2}
 
-if [ -z ${BUILD_kickstart} ] || [ -z ${BUILD_rootfs} ]
+if [ -z ${BUILD_KICKSTART} ] || [ -z ${BUILD_ROOTFS} ]
 then
   echo "Please provide two parameters, kickstart source file and rootfs output file name"
   usage
@@ -33,14 +33,14 @@ fi
 
 # create rootfs
 livemedia-creator --logfile="/tmp/rootfs-creator.log" \
-    --make-tar --ks="${CTR_working_dir}/${BUILD_kickstart}" --no-virt \
-    --image-only --image-name="${BUILD_rootfs}"
+    --make-tar --ks="${CTR_WORKING_DIR}/${BUILD_KICKSTART}" --no-virt \
+    --image-only --image-name="${BUILD_ROOTFS}"
 
 # move rootfs to working dir
-cp -rp /var/tmp/${BUILD_rootfs} ${CTR_working_dir}/${BUILD_rootfs}
+cp -rp /var/tmp/${BUILD_ROOTFS} ${CTR_WORKING_DIR}/${BUILD_ROOTFS}
 
 # extract os-release info
-tar -xvf /var/tmp/${BUILD_rootfs} -C /tmp/ --strip-components=3 ./usr/lib/os-release
+tar -xvf /var/tmp/${BUILD_ROOTFS} -C /tmp/ --strip-components=3 ./usr/lib/os-release
 os_release_id=$(awk -F= '$1=="ID" { print $2 ;}' /tmp/os-release | tr -d '"')
 distro_release=$(grep "${os_release_id}*-release-" /tmp/anaconda/packaging.log | grep -o "Verifying:.*" | sed -n 's/Verifying: //p')
 
@@ -48,8 +48,8 @@ if [ -z ${distro_release+x} ]; then
     exit 1
 else
     # save distro release info
-    echo "$distro_release" > ${CTR_working_dir}/distro-release
+    echo "$distro_release" > ${CTR_WORKING_DIR}/distro-release
 fi
 
 # save list of packages installed
-jq .[] -r /tmp/dnf.cache/tempfiles.json | awk -F '/' '{print $5}' | sort > ${CTR_working_dir}/pkgs-list
+jq .[] -r /tmp/dnf.cache/tempfiles.json | awk -F '/' '{print $5}' | sort > ${CTR_WORKING_DIR}/pkgs-list

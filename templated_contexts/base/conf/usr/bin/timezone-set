@@ -5,13 +5,13 @@
 reinstall_tzdata(){
     echo "Reinstalling tzdata"
     # update
-    ${CTR_pkg_mgm} update
+    ${CTR_PKG_MGM} update
     # remove
     rpm -e --nodeps tzdata > /dev/null 2>&1
     # reinstall
-    ${CTR_pkg_mgm} install tzdata
+    ${CTR_PKG_MGM} install tzdata
     # clean
-    ${CTR_pkg_mgm} clean all
+    ${CTR_PKG_MGM} clean all
 }
 
 if ! [ -z ${@+x} ]; then

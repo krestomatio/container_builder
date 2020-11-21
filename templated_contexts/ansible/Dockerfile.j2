@@ -2,49 +2,49 @@
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_name=ansible \
-    IMAGE_summary="Ansible image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
-    IMAGE_description="{{ dockerfile_builder_image_based }} based image with Ansible and Molecule" \
-    IMAGE_title="Ansible image based on {{ dockerfile_builder_image_based }}"
+ENV IMAGE_NAME=ansible \
+    IMAGE_SUMMARY="Ansible image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with Ansible and Molecule" \
+    IMAGE_TITLE="Ansible image based on {{ dockerfile_builder_image_based }}"
 
 # Container variables
-ENV ANSIBLE_version="{{ image_ansible_version }}" \
-    MOLECULE_version="{{ molecule_version }}" \
-    CTR_pip="pip3 install --no-cache --upgrade" \
-    CTR_pip_extra="{{ dockerfile_builder_image_pip_extra }}"
+ENV ANSIBLE_VERSION="{{ image_ansible_version }}" \
+    MOLECULE_VERSION="{{ molecule_version }}" \
+    CTR_PIP="pip3 install --no-cache --upgrade" \
+    CTR_PIP_EXTRA="{{ dockerfile_builder_image_pip_extra }}"
 
 RUN echo "Build tools..."  && \
-    $CTR_pkg_mgm install python3-devel gcc && \
+    $CTR_PKG_MGM install python3-devel gcc && \
     echo "Installing pkgs..."  && \
     python3 -m ensurepip && \
-    $CTR_pip cffi pip && \
-    $CTR_pip ansible==$ANSIBLE_version && \
-    $CTR_pip molecule==$MOLECULE_version && \
+    $CTR_PIP cffi pip && \
+    $CTR_PIP ansible==$ANSIBLE_VERSION && \
+    $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing other pip tools..."  && \
-    $CTR_pip $CTR_pip_extra && \
+    $CTR_PIP $CTR_PIP_EXTRA && \
     echo "Cleaning..."  && \
-    $CTR_pkg_mgm remove -y python3-devel gcc && \
-    $CTR_pkg_mgm clean all && \
+    $CTR_PKG_MGM remove -y python3-devel gcc && \
+    $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
     echo "Minimal ansible config" && \
     mkdir -p /etc/ansible && \
     echo 'localhost' > /etc/ansible/hosts
 
 # Container variables
-ENV CTR_pkg_extra="{{ dockerfile_builder_image_pck_extra }}"
+ENV CTR_PKG_EXTRA="{{ dockerfile_builder_image_pck_extra }}"
 
-RUN install-pkgs -e $CTR_pkg_extra
+RUN install-pkgs -e $CTR_PKG_EXTRA
 
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
       maintainer="{{ dockerfile_builder_image_authors }}" \
-      description="${IMAGE_description}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},{{ dockerfile_builder_image_ocp_tags }}"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},{{ dockerfile_builder_image_ocp_tags }}"

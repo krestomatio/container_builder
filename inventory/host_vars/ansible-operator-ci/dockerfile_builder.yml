@@ -1,7 +1,7 @@
 # platform vars
 operator_version: 1.1.0
 kustomize_version: 3.5.4
-kubectl_version: 1.19.3
+KUBECTL_VERSION: 1.19.3
 
 dockerfile_builder_image_from: "{{ registry_path }}/ansible-podman-ci{{ ':' +
   dockerfile_builder_image_from_tag if

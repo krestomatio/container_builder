@@ -2,7 +2,7 @@
 # description: entrypoint script for container
 
 # source other script
-for f in ${CTR_entrypoint_opt_path}/*; do
+for f in ${CTR_ENTRYPOINT_OPT_PATH}/*; do
     if [ -f "$f" ]; then
         if [[ ! -x "$f" || "${f##*.}" == "source" ]]; then
             echo "$0: sourcing $f"
@@ -12,7 +12,7 @@ for f in ${CTR_entrypoint_opt_path}/*; do
 done
 
 # exec other script
-for f in ${CTR_entrypoint_opt_path}/*; do
+for f in ${CTR_ENTRYPOINT_OPT_PATH}/*; do
     if [ -f "$f" ]; then
         if [[ -x "$f" && "${f##*.}" != "source" ]]; then
             echo "$0: running $f"
@@ -23,8 +23,8 @@ done
 
 # first arg is `-f` or `--some-option
 if [ "${1#-}" != "$1" ]; then
-    if ! [ -z ${CTR_cmd+x} ]; then
-	       set -- ${CTR_cmd} "$@"
+    if ! [ -z ${CTR_CMD+x} ]; then
+	       set -- ${CTR_CMD} "$@"
     fi
 fi
 

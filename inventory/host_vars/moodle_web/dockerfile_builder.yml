@@ -3,13 +3,13 @@ dockerfile_builder_image_from: "{{ registry_path }}/moodle_nginx_web{{ ':' +
   dockerfile_builder_image_from_tag if
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
 dockerfile_builder_image_name: moodle_nginx_web
-dockerfile_builder_image_summary: "PHP $PHP_version and NGINX ${NGINX_version} for Moodle"
-dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_version} and NGINX ${NGINX_version} for Moodle"
-dockerfile_builder_image_title: "PHP ${PHP_version} and NGINX ${NGINX_version} for Moodle"
+dockerfile_builder_image_summary: "PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle"
+dockerfile_builder_image_title: "PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle"
 dockerfile_builder_image_oc_tags:
-  "{{ '${IMAGE_name},php,php-fpm,php${PHP_ver_short},php-${PHP_ver_short}'
-  + ',nginx,nginx-${NGINX_ver_short},nginx${NGINX_ver_short}'
-  + ',moodle,moodle${MOODLE_ver_short},moodle-${MOODLE_ver_short}' }}"
+  "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
+  + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'
+  + ',moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}' }}"
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"

@@ -6,5 +6,5 @@
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-mkdir -p ${APP_dest} ${GIT_dest}
-fix-permissions -u ${CTR_user_id} ${APP_dest} ${GIT_dest}
+mkdir -p ${APP_DEST} ${GIT_DEST}
+fix-permissions -u ${CTR_USER_ID} ${APP_DEST} ${GIT_DEST}

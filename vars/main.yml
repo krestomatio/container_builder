@@ -31,6 +31,7 @@ git_version_bump: "{{ next_version_bump }}"
 version_image_bump: "{{ next_version_bump }}"
 
 # centos8-minimal
+rootfs_creator_image: docker-registry.jx.krestomat.io/krestomatio/container_builder/rootfs-creator
 centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(false,true) }}"
 
 # docker

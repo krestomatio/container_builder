@@ -5,18 +5,9 @@
   set_fact:
     build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
 
-- name: check if build image exists
-  when: build_image_name is defined
-  command: "{{ dockerfile_builder }} inspect --type=image {{ build_image_name }}"
-  changed_when: false
-  ignore_errors: true
-  register: build_image_name_exist
-
 - name: tag build image
-  when:
-    -  build_image_name_exist.stderr is defined
-    - "'Error: No such image' in build_image_name_exist.stderr"
   command: "{{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name }}"
+  changed_when: false
 
 - name: add other tags to image
   when:

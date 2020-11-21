@@ -3,9 +3,7 @@
 # dockerfile_builder_image_based: UBI 8 minimal
 # dockerfile_builder_image_ocp_tags: ubi,ubi8
 
-dockerfile_builder_image_from: "{{ registry_path }}/centos8-stream-minimal{{ ':' +
-  dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
+container_builder_image_from: centos8-stream-minimal
 dockerfile_builder_image_based: CentOS 8 Stream minimal
 dockerfile_builder_image_ocp_tags: centos,centos8-stream
 

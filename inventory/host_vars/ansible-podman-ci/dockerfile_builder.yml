@@ -1,4 +1,2 @@
-dockerfile_builder_image_from: "{{ registry_path }}/ansible{{ ':' +
-  dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"
+container_builder_image_from: ansible
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},podman"

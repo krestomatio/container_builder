@@ -8,6 +8,6 @@ timezone-set
 # writeable as OpenShift default security model is to run the container under
 # random UID.
 
-mkdir -p ${MOODLE_app} ${MOODLE_data}
+mkdir -p ${MOODLE_APP} ${MOODLE_DATA}
 
-fix-permissions -u ${CTR_user_id} ${MOODLE_app} ${MOODLE_data}
+fix-permissions -u ${CTR_USER_ID} ${MOODLE_APP} ${MOODLE_DATA}

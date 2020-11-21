@@ -9,7 +9,7 @@ usage() {
 Script to install packages usgins
 
 ENVIRONMENT VARS:
-CTR_pkg_mgm             main package command
+CTR_PKG_MGM             main package command
 
 USAGE:
     install-pkgs [OPTIONS]
@@ -26,11 +26,11 @@ install_pkgs() {
     # install packages
     if ! [ -z ${@+x} ]; then
         # update
-        ${CTR_pkg_mgm} ${enabled_epel} update
+        ${CTR_PKG_MGM} ${enabled_epel} update
         # install
-        ${CTR_pkg_mgm} ${enabled_epel} install ${@}
+        ${CTR_PKG_MGM} ${enabled_epel} install ${@}
         # clean
-        ${CTR_pkg_mgm} clean all
+        ${CTR_PKG_MGM} clean all
     else
         echo -e "No package as parameter  to install\n"
         usage

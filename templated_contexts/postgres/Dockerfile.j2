@@ -2,67 +2,66 @@
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_name=postgres \
-    IMAGE_summary="Postgres {{ postgres_version }}" \
-    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image runs Postgres {{ postgres_version }}. \
+ENV IMAGE_NAME=postgres \
+    IMAGE_SUMMARY="Postgres {{ postgres_version }}" \
+    IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs Postgres {{ postgres_version }}. \
 It follows https://github.com/sclorg/postgresql-container" \
-    IMAGE_title="Postgres {{ postgres_version }}" \
-    IMAGE_service_port="5432" \
-    IMAGE_service_name="postgres" \
+    IMAGE_TITLE="Postgres {{ postgres_version }}" \
+    IMAGE_SERVICE_PORT="5432" \
+    IMAGE_SERVICE_NAME="postgres" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
 # Container variables
-ENV CTR_locale_id=${IMAGE_locale_id} \
-    CTR_user=postgres \
-    CTR_user_id="26" \
-    CTR_home=/var/lib/pgsql \
-    CTR_cmd="run-postgresql" \
-    CTR_scripts_path=/usr/share/container-scripts/postgresql
+ENV CTR_USER=postgres \
+    CTR_USER_ID="26" \
+    CTR_HOME=/var/lib/pgsql \
+    CTR_CMD="run-postgresql" \
+    CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql
 
 # Component bash variables
-ENV POSTGRES_version="{{ postgres_version }}" \
-    POSTGRES_ver_short="{{ postgres_version | replace('.','') }}" \
-    POSTGRES_prev_version="{{ postgres_prev_version }}" \
-    POSTGRES_port=${IMAGE_service_port} \
-    POSTGRES_run=/var/run/postgresql \
-    POSTGRES_home=${CTR_home} \
-    POSTGRES_data="${CTR_home}/data"
+ENV POSTGRES_VERSION="{{ postgres_version }}" \
+    POSTGRES_VER_SHORT="{{ postgres_version | replace('.','') }}" \
+    POSTGRES_PREV_VERSION="{{ postgres_prev_version }}" \
+    POSTGRES_PORT=${IMAGE_SERVICE_PORT} \
+    POSTGRES_RUN=/var/run/postgresql \
+    POSTGRES_HOME=${CTR_HOME} \
+    POSTGRES_DATA="${CTR_HOME}/data"
 
 # Frequent environment variables
-ENV HOME="${CTR_home}" \
-    PGUSER="$CTR_user" \
+ENV HOME="${CTR_HOME}" \
+    PGUSER="$CTR_USER" \
     LANG="{{ dockerfile_builder_image_lang }}"
 
-ENV OS_install_pkgs="postgresql-server postgresql-contrib gettext nss_wrapper"
+ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper"
 
 USER 0
 
 COPY conf/usr /usr/
-COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${OS_install_pkgs}
+RUN install-pkgs ${OS_INSTALL_PKGS}
 
 RUN container-setup-postgres
 
-WORKDIR ${CTR_home}
+WORKDIR ${CTR_HOME}
 
-USER ${CTR_user_id}
+USER ${CTR_USER_ID}
 
-EXPOSE ${POSTGRES_port}
+EXPOSE ${POSTGRES_PORT}
 
-CMD ${CTR_cmd}
+CMD ${CTR_CMD}
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
       maintainer="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
-      io.openshift.tags="${IMAGE_name},postgres,postgres-${POSTGRES_ver_short},postgres${POSTGRES_ver_short}"
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
+      io.openshift.tags="${IMAGE_NAME},postgres,postgres-${POSTGRES_VER_SHORT},postgres${POSTGRES_VER_SHORT}"

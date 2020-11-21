@@ -2,61 +2,61 @@
 FROM quay.io/krestomatio/base
 
 # General variables
-ENV IMAGE_name=httpd \
-    IMAGE_summary="Apache 2.4" \
-    IMAGE_description="This CentOS 8 minimal based container image runs Apache 2.4" \
-    IMAGE_title="Apache 2.4" \
-    IMAGE_service_port="8080" \
-    IMAGE_service_name="http"
+ENV IMAGE_NAME=httpd \
+    IMAGE_SUMMARY="Apache 2.4" \
+    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Apache 2.4" \
+    IMAGE_TITLE="Apache 2.4" \
+    IMAGE_SERVICE_PORT="8080" \
+    IMAGE_SERVICE_NAME="http"
 
 # Container variables
-ENV CTR_user=apache \
-    CTR_user_id="48" \
-    CTR_cmd="httpd -D FOREGROUND" \
-    CTR_stopsignal=SIGWINCH
+ENV CTR_USER=apache \
+    CTR_USER_ID="48" \
+    CTR_CMD="httpd -D FOREGROUND" \
+    CTR_STOPSIGNAL=SIGWINCH
 
 # Component bash variables
-ENV HTTPD_version="2.4" \
-    HTTPD_ver_short="24" \
-    HTTPD_main_conf_path=/etc/httpd/conf \
-    HTTPD_main_conf_file=/etc/httpd/conf/httpd.conf \
-    HTTPD_main_conf_d_path=/etc/httpd/conf.d \
-    HTTPD_modules_conf_d_path=/etc/httpd/conf.modules.d \
-    HTTPD_var_run_path=/var/run/httpd \
-    HTTPD_port=${IMAGE_service_port} \
-    HTTPD_log_path=/var/log/httpd \
-    APP_dest=/var/www/html
+ENV HTTPD_VERSION="2.4" \
+    HTTPD_VER_SHORT="24" \
+    HTTPD_MAIN_CONF_PATH=/etc/httpd/conf \
+    HTTPD_MAIN_CONF_FILE=/etc/httpd/conf/httpd.conf \
+    HTTPD_MAIN_CONF_D_PATH=/etc/httpd/conf.d \
+    HTTPD_MODULES_CONF_D_PATH=/etc/httpd/conf.modules.d \
+    HTTPD_VAR_RUN_PATH=/var/run/httpd \
+    HTTPD_PORT=${IMAGE_SERVICE_PORT} \
+    HTTPD_LOG_PATH=/var/log/httpd \
+    APP_DEST=/var/www/html
 
 USER 0
 
 COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs httpd
 
 RUN container-setup-httpd
 
-WORKDIR ${APP_dest}
+WORKDIR ${APP_DEST}
 
-USER ${CTR_user_id}
+USER ${CTR_USER_ID}
 
-STOPSIGNAL ${CTR_stopsignal}
+STOPSIGNAL ${CTR_STOPSIGNAL}
 
-EXPOSE ${HTTPD_port}
+EXPOSE ${HTTPD_PORT}
 
-CMD ${CTR_cmd}
+CMD ${CTR_CMD}
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.version="0.0.8" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
-      io.openshift.tags="${IMAGE_name},apache,apache-${HTTPD_ver_short},apache${HTTPD_ver_short}"
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
+      io.openshift.tags="${IMAGE_NAME},apache,apache-${HTTPD_VER_SHORT},apache${HTTPD_VER_SHORT}"

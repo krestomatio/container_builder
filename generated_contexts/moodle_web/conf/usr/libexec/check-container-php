@@ -6,9 +6,9 @@ usage() {
 Script to check moodle php container.
 
 ENVIRONMENT VARS:
-PHP_FPM_port            tcp port php-fpm listen to
-MOODLE_app              path to moodle code
-MOODLE_data             moodledata path
+PHP_FPM_PORT            tcp port php-fpm listen to
+MOODLE_APP              path to moodle code
+MOODLE_DATA             moodledata path
 
 USAGE:
     check-container [OPTIONS]
@@ -33,8 +33,8 @@ check_tcp_port() {
     # check php-fpm tcp port
 
     # Check php-fpm is not using unix socket
-    if [[ ${PHP_FPM_listen+x} != /* ]]; then
-        cat < /dev/null > /dev/tcp/127.0.0.1/${PHP_FPM_port}
+    if [[ ${PHP_FPM_LISTEN+x} != /* ]]; then
+        cat < /dev/null > /dev/tcp/127.0.0.1/${PHP_FPM_PORT}
     else
         echo "$0: CHECK: php-fpm is using unix socket"
     fi
@@ -42,12 +42,12 @@ check_tcp_port() {
 
 check_config_file() {
     # check config.php exists and its sintax
-    test -f ${MOODLE_app}/config.php
+    test -f ${MOODLE_APP}/config.php
     if [ $? -ne 0 ]; then
         echo "$0: CHECK: config.php does not exist"
         exit 1
     fi
-    php -l ${MOODLE_app}/config.php
+    php -l ${MOODLE_APP}/config.php
     if [ $? -ne 0 ]; then
         echo "$0: CHECK: config.php sintax error"
         exit 1
@@ -61,7 +61,7 @@ check_database_installed() {
     php <<CODE
 <?php
 define('CLI_SCRIPT', true);
-require('${MOODLE_app}/config.php');
+require('${MOODLE_APP}/config.php');
 if (empty(\$CFG->version)) {
     echo "CHECK: Database is not yet installed\n";
     exit(2);
@@ -84,7 +84,7 @@ if (function_exists('opcache_reset') and !isset(\$_SERVER['REMOTE_ADDR'])) {
 define('CLI_SCRIPT', true);
 define('CACHE_DISABLE_ALL', true);
 
-require('${MOODLE_app}/config.php');
+require('${MOODLE_APP}/config.php');
 if (moodle_needs_upgrading()) {
     echo "CHECK: Moodle upgrade needed\n";
     exit(2);
@@ -95,9 +95,9 @@ CODE
 
 check_moodledata() {
     # check moodledata is writable
-    TMPFILE=`mktemp -q -p ${MOODLE_data}/`
+    TMPFILE=`mktemp -q -p ${MOODLE_DATA}/`
     if [ $? -ne 0 ]; then
-        echo "$0: CHECK: Can't create file in '${MOODLE_data}'"
+        echo "$0: CHECK: Can't create file in '${MOODLE_DATA}'"
         exit 1
     fi
     rm $TMPFILE

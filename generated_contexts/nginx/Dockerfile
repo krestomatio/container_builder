@@ -2,63 +2,63 @@
 FROM quay.io/krestomatio/base
 
 # General variables
-ENV IMAGE_name=nginx \
-    IMAGE_summary="Nginx 1.14" \
-    IMAGE_description="This CentOS 8 minimal based container image runs Nginx 1.14" \
-    IMAGE_title="Nginx 1.14" \
-    IMAGE_service_port="8080" \
-    IMAGE_service_name="http"
+ENV IMAGE_NAME=nginx \
+    IMAGE_SUMMARY="Nginx 1.14" \
+    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Nginx 1.14" \
+    IMAGE_TITLE="Nginx 1.14" \
+    IMAGE_SERVICE_PORT="8080" \
+    IMAGE_SERVICE_NAME="http"
 
 # Container variables
-ENV CTR_user=nginx \
-    CTR_user_id="998" \
-    CTR_stopsignal=SIGQUIT
+ENV CTR_USER=nginx \
+    CTR_USER_ID="998" \
+    CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables
-ENV NGINX_version="1.14" \
-    NGINX_ver_short="114" \
-    NGINX_sysconf_path=/etc/nginx \
-    NGINX_main_conf_file=/etc/nginx/nginx.conf \
-    NGINX_main_conf_d_path=/etc/nginx/conf.d \
-    NGINX_default_conf_d_path=/etc/nginx/default.d \
-    NGINX_default_conf_root_file="/etc/nginx/default.d/root.conf" \
-    NGINX_default_conf_app_file="/etc/nginx/default.d/app.conf" \
-    NGINX_var_run_path=/var/run \
-    NGINX_lib_path=/var/lib/nginx \
-    NGINX_port=${IMAGE_service_port} \
-    NGINX_log_path=/var/log/nginx \
-    APP_dest=/usr/share/nginx/html
+ENV NGINX_VERSION="1.14" \
+    NGINX_VER_SHORT="114" \
+    NGINX_SYSCONF_PATH=/etc/nginx \
+    NGINX_MAIN_CONF_FILE=/etc/nginx/nginx.conf \
+    NGINX_MAIN_CONF_D_PATH=/etc/nginx/conf.d \
+    NGINX_DEFAULT_CONF_D_PATH=/etc/nginx/default.d \
+    NGINX_DEFAULT_CONF_ROOT_FILE="/etc/nginx/default.d/root.conf" \
+    NGINX_DEFAULT_CONF_APP_FILE="/etc/nginx/default.d/app.conf" \
+    NGINX_VAR_RUN_PATH=/var/run \
+    NGINX_LIB_PATH=/var/lib/nginx \
+    NGINX_PORT=${IMAGE_SERVICE_PORT} \
+    NGINX_LOG_PATH=/var/log/nginx \
+    APP_DEST=/usr/share/nginx/html
 
 USER 0
 
 COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs nginx
 
 RUN container-setup-nginx
 
-WORKDIR ${APP_dest}
+WORKDIR ${APP_DEST}
 
-USER ${CTR_user_id}
+USER ${CTR_USER_ID}
 
-STOPSIGNAL ${CTR_stopsignal}
+STOPSIGNAL ${CTR_STOPSIGNAL}
 
-EXPOSE ${NGINX_port}
+EXPOSE ${NGINX_PORT}
 
 CMD ["nginx", "-g", "daemon off;"]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.version="0.0.8" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
-      io.openshift.tags="${IMAGE_name},nginx,nginx-${NGINX_ver_short},nginx${NGINX_ver_short}"
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
+      io.openshift.tags="${IMAGE_NAME},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}"

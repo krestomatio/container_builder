@@ -5,13 +5,13 @@ if ! command -v useradd > /dev/null 2>&1; then
     install-pkgs shadow-utils
 fi
 
-if ! id -u ${CTR_user_id} > /dev/null 2>&1; then
+if ! id -u ${CTR_USER_ID} > /dev/null 2>&1; then
     mkdir -p ${HOME}
-    useradd -u ${CTR_user_id} -r -g ${CTR_group_id} -d ${HOME} \
-        -s /sbin/nologin -c "${CTR_user_gecos}" ${CTR_user}
-    fix-permissions -u ${CTR_user_id} ${HOME}
+    useradd -u ${CTR_USER_ID} -r -g ${CTR_GROUP_ID} -d ${HOME} \
+        -s /sbin/nologin -c "${CTR_USER_GECOS}" ${CTR_USER}
+    fix-permissions -u ${CTR_USER_ID} ${HOME}
 else
-    # ${CTR_user} should be in ${CTR_group} group
-    usermod -a -G ${CTR_group} ${CTR_user}
-    echo "${CTR_user} added to group {CTR_group}"
+    # ${CTR_USER} should be in ${CTR_GROUP} group
+    usermod -a -G ${CTR_GROUP} ${CTR_USER}
+    echo "${CTR_USER} added to group {CTR_GROUP}"
 fi

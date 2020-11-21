@@ -2,28 +2,28 @@
 FROM docker:stable-dind
 
 # General variables
-ENV IMAGE_name=ansible-docker-ci \
-    IMAGE_summary="Ansible image based on Docker stable-dind for Continuous Integration" \
-    IMAGE_description="Docker stable-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
-    IMAGE_title="Ansible CI image based on Docker stable-dind"
+ENV IMAGE_NAME=ansible-docker-ci \
+    IMAGE_SUMMARY="Ansible image based on Docker stable-dind for Continuous Integration" \
+    IMAGE_DESCRIPTION="Docker stable-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_TITLE="Ansible CI image based on Docker stable-dind"
 
 # Container variables
-ENV ANSIBLE_version="2.9.*" \
-    MOLECULE_version="3.1.*" \
-    CTR_apk="apk add --update --no-cache" \
-    CTR_pip="pip install --no-cache --upgrade" \
+ENV ANSIBLE_VERSION="2.9.*" \
+    MOLECULE_VERSION="3.1.*" \
+    CTR_APK="apk add --update --no-cache" \
+    CTR_PIP="pip install --no-cache --upgrade" \
     DOCKER_HOST=unix:///var/run/docker.sock \
     CONTAINER_BUILDER=docker
 
 RUN echo "Build tools..."  && \
-    $CTR_apk py-pip openssl ca-certificates && \
-    $CTR_apk --virtual build-dependencies python3-dev \
+    $CTR_APK py-pip openssl ca-certificates && \
+    $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base  && \
-    $CTR_pip cffi pip && \
-    $CTR_pip ansible==$ANSIBLE_version && \
-    $CTR_pip molecule==$MOLECULE_version && \
+    $CTR_PIP cffi pip && \
+    $CTR_PIP ansible==$ANSIBLE_VERSION && \
+    $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
-    $CTR_pip yamllint ansible-lint pycrypto pywinrm docker git-semver commitizen && \
+    $CTR_PIP yamllint ansible-lint pycrypto pywinrm docker git-semver commitizen && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \
@@ -34,7 +34,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_apk bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl && \
+    $CTR_APK bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -55,13 +55,13 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      description="${IMAGE_description}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
-      org.opencontainers.image.description="${IMAGE_description}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.tags="${IMAGE_name},ansible,ansible2.9.*,docker,dockerstable-dind"
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,docker,dockerstable-dind"

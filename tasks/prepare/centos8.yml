@@ -57,8 +57,8 @@
         detach: false
         cleanup: true
         env:
-          BUILD_kickstart: "{{ rootfs_build_kickstart }}"
-          BUILD_rootfs: "{{ rootfs_build_tar }}"
+          BUILD_KICKSTART: "{{ rootfs_build_kickstart }}"
+          BUILD_ROOTFS: "{{ rootfs_build_tar }}"
         volumes:
           - "{{ ctr_template_path }}:/build:z"
 
@@ -66,7 +66,8 @@
       when:
         - dockerfile_builder == 'podman'
       changed_when: false
-      command: "podman run --privileged --rm
+      command: "podman run --privileged --rm -e BUILD_KICKSTART='{{ rootfs_build_kickstart }}'
+        -e BUILD_ROOTFS='{{ rootfs_build_tar }}'
         -v '{{ ctr_template_path }}:/build:z' {{ rootfs_creator_image }}
         --name rootfs-creator-{{ (ctr_generated_path | to_uuid).split('-')[0] }}
         {{ rootfs_build_kickstart }} {{ rootfs_build_tar }}"

@@ -2,64 +2,64 @@
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_name=php-fpm \
-    IMAGE_summary="PHP {{ php_version }}" \
-    IMAGE_description="This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }}" \
-    IMAGE_title="PHP {{ php_version }}" \
-    IMAGE_service_port="9000" \
-    IMAGE_service_name="php-fpm"
+ENV IMAGE_NAME=php-fpm \
+    IMAGE_SUMMARY="PHP {{ php_version }}" \
+    IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }}" \
+    IMAGE_TITLE="PHP {{ php_version }}" \
+    IMAGE_SERVICE_PORT="9000" \
+    IMAGE_SERVICE_NAME="php-fpm"
 
 # Container variables
-ENV CTR_user=apache \
-    CTR_user_id="48" \
-    CTR_cmd="php-fpm" \
-    CTR_stopsignal=SIGQUIT
+ENV CTR_USER=apache \
+    CTR_USER_ID="48" \
+    CTR_CMD="php-fpm" \
+    CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables
-ENV PHP_version="{{ php_version }}" \
-    PHP_ver_short="{{ php_version | replace('.','') }}" \
-    PHP_run=/var/run/php-fpm \
-    PHP_conf_dir=/etc/php.d \
-    PHP_conf_file=/etc/php.ini \
-    PHP_module_dir=/usr/lib64/php/modules/ \
-    PHP_FPM_conf_dir=/etc/php-fpm.d \
-    PHP_FPM_conf_file=/etc/php-fpm.conf \
-    PHP_FPM_pool_file=/etc/php-fpm.d/www.conf \
-    PHP_FPM_port=${IMAGE_service_port} \
-    APP_dest=/var/www/html
+ENV PHP_VERSION="{{ php_version }}" \
+    PHP_VER_SHORT="{{ php_version | replace('.','') }}" \
+    PHP_RUN=/var/run/php-fpm \
+    PHP_CONF_DIR=/etc/php.d \
+    PHP_CONF_FILE=/etc/php.ini \
+    PHP_MODULE_DIR=/usr/lib64/php/modules/ \
+    PHP_FPM_CONF_DIR=/etc/php-fpm.d \
+    PHP_FPM_CONF_FILE=/etc/php-fpm.conf \
+    PHP_FPM_POOL_FILE=/etc/php-fpm.d/www.conf \
+    PHP_FPM_PORT=${IMAGE_SERVICE_PORT} \
+    APP_DEST=/var/www/html
 
-ENV OS_install_pkgs="php-fpm php-cli php-opcache php-soap"
+ENV OS_INSTALL_PKGS="php-fpm php-cli php-opcache php-soap"
 
 USER 0
 
 COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_entrypoint_opt_path}/
+COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${OS_install_pkgs}
+RUN install-pkgs ${OS_INSTALL_PKGS}
 
 RUN container-setup-php
 
-WORKDIR ${APP_dest}
+WORKDIR ${APP_DEST}
 
-USER ${CTR_user_id}
+USER ${CTR_USER_ID}
 
-STOPSIGNAL ${CTR_stopsignal}
+STOPSIGNAL ${CTR_STOPSIGNAL}
 
-EXPOSE ${PHP_FPM_port}
+EXPOSE ${PHP_FPM_PORT}
 
-CMD ${CTR_cmd}
+CMD ${CTR_CMD}
 
 # Labels
-LABEL name="${IMAGE_name}" \
-      summary="${IMAGE_summary}" \
-      description="${IMAGE_description}" \
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
       maintainer="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.title="${IMAGE_title}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
-      org.opencontainers.image.description="${IMAGE_description}" \
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
-      io.k8s.description="${IMAGE_description}" \
-      io.k8s.display-name="${IMAGE_title}" \
-      io.openshift.expose-services="${IMAGE_service_port}:${IMAGE_service_name}" \
-      io.openshift.tags="${IMAGE_name},php,php${PHP_ver_short},php-${PHP_ver_short}"
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
+      io.openshift.tags="${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}"

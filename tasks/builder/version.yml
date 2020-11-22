@@ -1,4 +1,4 @@
-- name: get version based on git tag
+- name: get semantic version based on git tag
   when:
     - version_git_based | default(true)
   block:
@@ -11,35 +11,34 @@
           want='dict') }}"
 
     - name: set major version
-      when: version_image_major is not defined
+      when: version_image_major is not defined and not version_image_major
       set_fact:
         version_image_major: "{{ version_image_dict.major }}"
 
     - name: set minor version
-      when: version_image_minor is not defined
+      when: version_image_minor is not defined and not version_image_minor
       set_fact:
         version_image_minor: "{{ version_image_dict.minor }}"
 
+    - name: set patch version
+      when: version_image_patch is not defined and not version_image_patch
+      set_fact:
+        version_image_patch: "{{ version_image_dict.patch }}"
+
+    - name: set prerelease version
+      when: version_image_prerelease is not defined and not version_image_prerelease
+      set_fact:
+        version_image_prerelease: "{{ version_image_dict.prerelease }}"
+
+    - name: set build version
+      when: version_image_build is not defined and not version_image_build
+      set_fact:
+        version_image_build: "{{ version_image_dict.build }}"
+
     - name: set full version
       when: version_image_full is not defined and not version_image_full
-      block:
-        - name: set full version
-          set_fact:
-            version_image_full: "{{ version_image_dict.full  }}"
-
-        - name: add build version
-          vars:
-            version_add_build_suffix_build_var: BUILD_ID
-            version_add_build_suffix_branch_var: BRANCH_NAME
-            version_add_build_suffix: "{{ '-SNAPSHOT-' + lookup('env',version_add_build_suffix_branch_var) |
-              default('PR1',true) + '-' + lookup('env',version_add_build_suffix_build_var) | default('1',true)  }}"
-          when:
-            - version_add_build | default(false)
-            - not version_image_dict.prerelease
-            - not version_image_dict.build
-          set_fact:
-            version_image_full:
-              "{{ version_image_dict.full + version_add_build_suffix  }}"
+      set_fact:
+        version_image_full: "{{ version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_prerelease if version_image_prerelease else '' ) + ( '+' + version_image_build if version_image_build else '' ) }}"
 
 - name: state image tag
   set_fact:

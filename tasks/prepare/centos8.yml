@@ -108,17 +108,14 @@
     when:
       - centos_distro_release is defined
       - dockerfile_builder_image_pkgs_checksum is defined
-    vars:
-      centos_image_major: "{{ centos_distro_release.split('.')[0] }}"
-      centos_image_minor: "{{ centos_distro_release.split('.')[1] }}"
-      centos_image_patch: "{{ centos_distro_release.split('.')[2] + '-' +
-        dockerfile_builder_image_pkgs_checksum[:7] if centos_distro_release.split('.')[2]
-        is defined else dockerfile_builder_image_pkgs_checksum[:7] }}"
     set_fact:
-      version_image_major: "{{ centos_image_major }}"
-      version_image_minor: "{{ centos_image_minor }}"
-      version_image_patch: "{{ centos_image_patch }}"
-      version_image_full: "{{ centos_image_major + '.' + centos_image_minor + '.'  + centos_image_patch }}"
+      version_image_major: "{{ centos_distro_release.split('.')[0] |
+        default(false) }}"
+      version_image_minor: "{{ centos_distro_release.split('.')[1].split('-')[0] |
+        default(false) }}"
+      version_image_patch: "{{ centos_distro_release.split('.')[1].split('-')[1] |
+        default(centos_distro_release.split('.')[2]) | default(false) }}"
+
 
   - name: omit src sync when no new pkgs
     when:

@@ -18,7 +18,6 @@ ENV APP_DEST=/var/www/html
 
 ENV MOODLE_VERSION="{{ moodle_version }}" \
     MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
-    MOODLE_COMMIT="{{ moodle_git_commit }}" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata \
     MOODLE_CHECK_PATH=/login/index.php \

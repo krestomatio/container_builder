@@ -11,32 +11,32 @@
           want='dict') }}"
 
     - name: set major version
-      when: version_image_major is not defined and not version_image_major
+      when: version_image_major is not defined or not version_image_major
       set_fact:
         version_image_major: "{{ version_image_dict.major }}"
 
     - name: set minor version
-      when: version_image_minor is not defined and not version_image_minor
+      when: version_image_minor is not defined or not version_image_minor
       set_fact:
         version_image_minor: "{{ version_image_dict.minor }}"
 
     - name: set patch version
-      when: version_image_patch is not defined and not version_image_patch
+      when: version_image_patch is not defined or not version_image_patch
       set_fact:
         version_image_patch: "{{ version_image_dict.patch }}"
 
     - name: set prerelease version
-      when: version_image_prerelease is not defined and not version_image_prerelease
+      when: version_image_prerelease is not defined or not version_image_prerelease
       set_fact:
         version_image_prerelease: "{{ version_image_dict.prerelease }}"
 
     - name: set build version
-      when: version_image_build is not defined and not version_image_build
+      when: version_image_build is not defined or not version_image_build
       set_fact:
         version_image_build: "{{ version_image_dict.build }}"
 
     - name: set full version
-      when: version_image_full is not defined and not version_image_full
+      when: version_image_full is not defined or not version_image_full
       set_fact:
         version_image_full: "{{ version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_prerelease if version_image_prerelease else '' ) + ( '+' + version_image_build if version_image_build else '' ) }}"
 
@@ -55,7 +55,7 @@
 
 - name: set container image version
   when:
-    dockerfile_builder_image_version is not defined and
+    dockerfile_builder_image_version is not defined or not
     dockerfile_builder_image_version
   set_fact:
     dockerfile_builder_image_version: "{{ version_image_full }}"

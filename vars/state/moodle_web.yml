@@ -2,8 +2,8 @@
 # Ansible managed
 #
 moodle_web_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:d9e763133773285b3c92f987cc296ef9b739ccd696e51a4ac27dc9c56b02bfc8"
-  repo_digest: "quay.io/krestomatio/moodle_web@sha256:64cf0d0c242b9c6eaaaafc95eb920e989b30ad411a71d78c93f95bdc1f20db01"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:3fa292232b085c21c99430f74487da0ffa945a61eb97a1770bfbdb05cea0a38e"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle_web@sha256:92631596e347a20c9b8f5e8efe0159cc82f0da7d25f7f8f35b38e8c4c9ed70cf"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

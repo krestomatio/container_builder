@@ -2,8 +2,8 @@
 # Ansible managed
 #
 nginx_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:e43a4704ebc0db31a02fa072e28ebf481579e7876a1201511d11fa694b12c962"
-  repo_digest: "quay.io/krestomatio/nginx@sha256:e156c62b23f74c4679f165882338c68290d82f837c553f38fc28889a0672bfa1"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:83e785c59af502afe2196d7f7629b3c8d2b869c4fb8b310fb393830625cabac6"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx@sha256:6dcec78f5810700ebb6ff5672b815f4fb80e082b3b7eed0bc259b766834c37b4"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

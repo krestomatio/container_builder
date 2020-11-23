@@ -2,8 +2,8 @@
 # Ansible managed
 #
 rootfs_creator_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:1d1a21e9cce82ddb8be0f57b0712a7ee73f19ce1b1426cb844f6ca6faf2fbd65"
-  repo_digest: "quay.io/krestomatio/rootfs-creator@sha256:dbda4798e606f22df952140013a3437cfab765f4b020a90b546757b26648eb17"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:949a9d504d57db3d6a0f74bad968e9bd9c047ed2bb7004dd8d764d5f5c71eaa1"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/rootfs-creator@sha256:7822d7dc10430a17700ad7951e4487c464a954cc336ada8aaaa7c992be786f53"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

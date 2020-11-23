@@ -2,8 +2,8 @@
 # Ansible managed
 #
 postgres_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:d6abc3abd271520731e889e97e41a19927e5ed112981788b4262b3cde5f0e7b8"
-  repo_digest: "quay.io/krestomatio/postgres@sha256:2959349503418c198565b2d048627beec1225d93acfae0babfe0bb87e30b837b"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:e0dc40ff5a7d52884dcd4684472729ace42b362e59566c87694c130da0a58074"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/postgres@sha256:52270debedb8c6249e5ecd61d233cac4167ce35a23e4f7c0a886643fcab038bb"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

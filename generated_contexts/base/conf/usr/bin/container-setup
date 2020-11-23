@@ -4,13 +4,12 @@
 # dir for optional entrypoint scripts
 mkdir -p ${CTR_ENTRYPOINT_OPT_PATH}
 
-# specific timezones
 if ! [ -z ${TZ+x} ]; then
-    if ! [ -z ${AVAILABLE_TZ+x} ]; then
-        timezone-set ${AVAILABLE_TZ} ${TZ}
-    else
-        timezone-set ${TZ}
-    fi
+    # install only specific timezones
+    timezone-set ${TZ}
+else
+    # install all timezones
+    timezone-set
 fi
 
 # specify lang

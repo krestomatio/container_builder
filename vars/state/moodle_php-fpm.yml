@@ -2,8 +2,8 @@
 # Ansible managed
 #
 moodle_php_fpm_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:7b256b9d5ae974926e9f524aaa3308cffd725d683a3e3bab06ca1e469001ab93"
-  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:6943384f90e0555784dbe2b1784692f242259d1ef0f15abdab4e071633812670"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:6b33e200aebe98c21f3b45c5dd2b01b26c9a75bfaba0349f5bcb2a6a5b9cfd57"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle_php-fpm@sha256:cef0b6cc7de2074c50f336910284aebaaff7b9c5dbd099a63fa2eed7386ab93f"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

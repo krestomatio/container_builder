@@ -12,7 +12,7 @@ ENV IMAGE_NAME=moodle_php-fpm \
 # Component bash variables
 ENV MOODLE_VERSION="3.9" \
     MOODLE_VER_SHORT="39" \
-    MOODLE_COMMIT="ff2b655928da2a0deeddc5b6a9ecf95981482b33" \
+    MOODLE_COMMIT="87bcff8c6e75421f87ba46419dcd11206e4688da" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata
 
@@ -20,7 +20,7 @@ ENV MOODLE_VERSION="3.9" \
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-ENV MOODLE_install_php_pkgs="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
+ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
 
 USER 0
 
@@ -29,7 +29,7 @@ COPY conf/usr/libexec/* /usr/libexec/
 COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${MOODLE_install_php_pkgs}
+RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 
 RUN container-setup-php-moodle
 
@@ -42,7 +42,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.0.8" \
+      org.opencontainers.image.version="0.0.9+5219095" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

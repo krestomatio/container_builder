@@ -42,7 +42,7 @@ cp -rp /var/tmp/${BUILD_ROOTFS} ${CTR_WORKING_DIR}/${BUILD_ROOTFS}
 # extract os-release info
 tar -xvf /var/tmp/${BUILD_ROOTFS} -C /tmp/ --strip-components=3 ./usr/lib/os-release
 os_release_id=$(awk -F= '$1=="ID" { print $2 ;}' /tmp/os-release | tr -d '"')
-distro_release=$(grep "${os_release_id}*-release-" /tmp/anaconda/packaging.log | grep -o "Verifying:.*" | sed -n 's/Verifying: //p')
+distro_release=$(grep "${os_release_id}.*-release-" /tmp/anaconda/packaging.log | grep -o "Verifying:.*" | sed -n 's/Verifying: //p')
 
 if [ -z ${distro_release+x} ]; then
     exit 1

@@ -12,8 +12,7 @@ It follows https://github.com/sclorg/postgresql-container" \
     TZ="UTC"
 
 # Container variables
-ENV CTR_LOCALE_ID=${IMAGE_locale_id} \
-    CTR_USER=postgres \
+ENV CTR_USER=postgres \
     CTR_USER_ID="26" \
     CTR_HOME=/var/lib/pgsql \
     CTR_CMD="run-postgresql" \
@@ -61,7 +60,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.0.8" \
+      org.opencontainers.image.version="0.0.9+5219095" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

@@ -2,8 +2,8 @@
 # Ansible managed
 #
 ansible_operator_ci_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:a432c59c2bc81f18703ec0e730cb21671398405bc89b3ac0bec5029107fe9a70"
-  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:3bc037699c0ef459d28a426aafe369fdd06c716b38767b8db1ba55306307856b"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:5940e00767d5550e909e26b64fcde88cd79e3ffa8b58c04caf4e0d01b22df721"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-operator-ci@sha256:310f8f01efed33811bd3bf2de875e8bb9bf3dc571f414c9be1ac5cfe0b0a3a6e"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

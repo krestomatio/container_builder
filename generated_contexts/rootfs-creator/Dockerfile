@@ -1,19 +1,23 @@
 # Ansible managed
-FROM docker.io/centos:8
+FROM quay.io/krestomatio/base
 
 # General variables
 ENV IMAGE_NAME=rootfs-creator \
-    IMAGE_SUMMARY="CentOS 8 based image" \
-    IMAGE_DESCRIPTION="CentOS 8 based for building rootfs" \
-    IMAGE_TITLE="CentOS 8 based image"
+    IMAGE_SUMMARY="CentOS 8 minimal based image" \
+    IMAGE_DESCRIPTION="CentOS 8 minimal based for building rootfs" \
+    IMAGE_TITLE="CentOS 8 minimal based image"
 
 # Container variables
-ENV CTR_WORKING_DIR=/build
-
-RUN dnf install -y anaconda-tui lorax jq
-RUN mkdir $CTR_WORKING_DIR
+ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar" \
+    CTR_WORKING_DIR=/build
 
 COPY conf/usr/bin/* /usr/bin/
+
+RUN install-pkgs ${OS_INSTALL_PKGS} && \
+    mkdir -p ${CTR_WORKING_DIR} && \
+    fix-permissions -u ${CTR_USER_ID} ${CTR_WORKING_DIR}
+
+RUN fix-permissions -u ${CTR_USER_ID} ${CTR_WORKING_DIR}
 
 WORKDIR $CTR_WORKING_DIR
 

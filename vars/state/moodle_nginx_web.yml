@@ -2,8 +2,8 @@
 # Ansible managed
 #
 moodle_nginx_web_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:5eca84cd4cececd2de2c9106460e394c43a685a8bc0d8ac20e5d7c3a1b13d146"
-  repo_digest: "quay.io/krestomatio/moodle_nginx_web@sha256:1aa790f32e24dc23cdbfb12c4331d6aab6f6d58c421d1fea16420a5a09088cf7"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:40d551541c96059c64536a5e42120121600688b556dd003727b51ffa4c5f6406"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle_nginx_web@sha256:f936cf68fc46ecb4d7c73401de70e745381eff1b0f9692b7e93659a932a84619"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

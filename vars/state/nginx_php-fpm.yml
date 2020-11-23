@@ -2,8 +2,8 @@
 # Ansible managed
 #
 nginx_php_fpm_image:
-  build: True
-  tag: "0.0.8"
-  id: "sha256:c0cb7603a2ad26333b399af2674576186f944b8dbe19f2109d8874d71d21a875"
-  repo_digest: "quay.io/krestomatio/nginx_php-fpm@sha256:907d3bbbf801e94cee1c3107d96901c4bc60f375ae3def532b0b7d5ddd4f589d"
-  artifact_tag: f033f5f070936db60e210d720bd0156b1eb1e871
+  build: False
+  tag: "0.0.9"
+  id: "sha256:45a853a77d363c1fbbe03c1753cc611ab18a01f42102078b3e77091a57a89075"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx_php-fpm@sha256:b0225fd57cfd3d9588533a6ffd150bf5e775624d6b49e1f932a21abcdfc97012"
+  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49

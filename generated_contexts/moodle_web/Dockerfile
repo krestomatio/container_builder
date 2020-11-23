@@ -5,7 +5,7 @@ RUN app-git -a -e '.git*'
 FROM quay.io/krestomatio/moodle_nginx_web
 
 # General ansible variables
-ENV IMAGE_NAME=moodle_nginx_web \
+ENV IMAGE_NAME=moodle_web \
     IMAGE_SUMMARY="PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle" \
     IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle" \
     IMAGE_TITLE="PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle" \
@@ -15,7 +15,7 @@ ENV IMAGE_NAME=moodle_nginx_web \
 # Component bash variables
 ENV MOODLE_VERSION="3.9" \
     MOODLE_VER_SHORT="39" \
-    MOODLE_COMMIT="ff2b655928da2a0deeddc5b6a9ecf95981482b33" \
+    MOODLE_COMMIT="87bcff8c6e75421f87ba46419dcd11206e4688da" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata
 
@@ -23,7 +23,7 @@ ENV MOODLE_VERSION="3.9" \
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-ENV MOODLE_install_php_pkgs="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
+ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
 
 USER 0
 
@@ -32,7 +32,7 @@ COPY conf/usr/libexec/* /usr/libexec/
 COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${MOODLE_install_php_pkgs}
+RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 
 COPY --from=app /var/www/html /var/www/html
 
@@ -47,7 +47,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="3.9.3-ff2b6" \
+      org.opencontainers.image.version="3.9.3+87bcff8" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

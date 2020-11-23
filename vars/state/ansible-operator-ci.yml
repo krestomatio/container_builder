@@ -3,7 +3,7 @@
 #
 ansible_operator_ci_image:
   build: False
-  tag: "0.0.9"
+  tag: "0.0.10"
   id: "sha256:5940e00767d5550e909e26b64fcde88cd79e3ffa8b58c04caf4e0d01b22df721"
   repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-operator-ci@sha256:310f8f01efed33811bd3bf2de875e8bb9bf3dc571f414c9be1ac5cfe0b0a3a6e"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

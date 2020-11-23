@@ -3,7 +3,7 @@
 #
 nginx_image:
   build: False
-  tag: "0.0.9"
-  id: "sha256:83e785c59af502afe2196d7f7629b3c8d2b869c4fb8b310fb393830625cabac6"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx@sha256:6dcec78f5810700ebb6ff5672b815f4fb80e082b3b7eed0bc259b766834c37b4"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  tag: "0.0.10"
+  id: "sha256:b7e1b5cc94ba7b44cdf92d9aeb87f3c656b960292fc9f413f65862cd324afba8"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx@sha256:5528f71cad14abcc95e00c54022e53dedf0aa60370c156de99b7ad1bc241361e"
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

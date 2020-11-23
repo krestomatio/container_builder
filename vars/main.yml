@@ -26,9 +26,11 @@ dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',
 
 # git
 git_version_bump: "{{ next_version_bump }}"
+check_git_version_tag: true
 
 # version
 version_image_bump: "{{ next_version_bump }}"
+check_image_version_tag: true
 
 # centos8-minimal
 rootfs_creator_image: docker-registry.jx.krestomat.io/krestomatio/container_builder/rootfs-creator
@@ -66,3 +68,4 @@ artifacts:
 
 # assertions
 assertion_dockerfile_builder: true
+assertion_release_version_tag: true

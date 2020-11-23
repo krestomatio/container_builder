@@ -8,6 +8,15 @@
   assert:
     that: artifact_tag is defined and artifact_tag
 
+- name: check release version tag does not exist in git repo
+  when:
+    - release_version is defined
+    - assertion_release_version_tag | default(false)
+  command: "git tag -l {{ release_version }}"
+  register: release_version_tag_status
+  failed_when: release_version_tag_status.stdout is defined and release_version_tag_status.stdout
+  changed_when: false
+
 - name: check release version
   when: assertion_release_version | default(false)
   assert:

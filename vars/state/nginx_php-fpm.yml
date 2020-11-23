@@ -3,7 +3,7 @@
 #
 nginx_php_fpm_image:
   build: False
-  tag: "0.0.9"
-  id: "sha256:45a853a77d363c1fbbe03c1753cc611ab18a01f42102078b3e77091a57a89075"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx_php-fpm@sha256:b0225fd57cfd3d9588533a6ffd150bf5e775624d6b49e1f932a21abcdfc97012"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  tag: "0.0.10"
+  id: "sha256:e7e01b0422e6a9313c1d66ce7c1a698c4a5da6cb7f0febe2927cd961e6af2826"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/nginx_php-fpm@sha256:61a5538181b05a93d7ce955c150c802f1861297e89ce59c8df44dd1880176c89"
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

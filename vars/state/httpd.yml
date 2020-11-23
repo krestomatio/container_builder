@@ -3,7 +3,7 @@
 #
 httpd_image:
   build: False
-  tag: "0.0.9"
-  id: "sha256:9b079e04065d8815295ba14cc90e0d188b189e12f8b4801b158aa444cac3463e"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/httpd@sha256:7865b977c0c3e6727d487ec8d9d977643674bd1132ab1b4bf6b0b01be4568d4a"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  tag: "0.0.10"
+  id: "sha256:b6f937e2c85b687de1f7774a9987708349e21585836b21adc218052eaa26b34c"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/httpd@sha256:f797343d6777552015ace4b7ed54bf24e21d9734c9b32721ed5b52a2110deb90"
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

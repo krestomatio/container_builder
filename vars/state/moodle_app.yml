@@ -3,7 +3,7 @@
 #
 moodle_app_image:
   build: False
-  tag: "0.0.9"
-  id: "sha256:9cb7a7c174ccea54d7e3427864b86cfaa9dc3c897ea1938dff173d95e8868cd2"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle_app@sha256:ff6fadfefd12d82faceb7450278da8bbe47d61a3e20c6086ab8d32ba425837de"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  tag: "0.0.10"
+  id: "sha256:d7dd926c966d111487e2a3237854ed3cff8c1db1138971de176c39d4d1bb5257"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle_app@sha256:f31ae7113fcfd22fad22222bb81209b20e091cb6d9dfad87979a74a99f220cac"
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

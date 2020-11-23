@@ -3,7 +3,7 @@
 #
 postgres_image:
   build: False
-  tag: "0.0.9"
-  id: "sha256:e0dc40ff5a7d52884dcd4684472729ace42b362e59566c87694c130da0a58074"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/postgres@sha256:52270debedb8c6249e5ecd61d233cac4167ce35a23e4f7c0a886643fcab038bb"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  tag: "0.0.10"
+  id: "sha256:ec43ed2ec179bce51b1e90b9412c612e3ec0f4c3dbf74fad3999f92cf648ee26"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/postgres@sha256:fddec0120adb91cfde4867fcbf45dd1ee78be921b32c528f577d1e0939aaf683"
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

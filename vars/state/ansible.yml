@@ -3,7 +3,7 @@
 #
 ansible_image:
   build: False
-  tag: "0.0.9"
+  tag: "0.0.10"
   id: "sha256:dd17810e3dd0bd9a78bf35e38fd3cb0883139d411b20d2ddb23e863aa4adaf99"
   repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible@sha256:e6ce947311fa2e67fb64f47861257f1af48e774b3ab7d34f01d0d2ecd01e7fba"
-  artifact_tag: 521909574c279fb429c4a4871041a9fdbdb63a49
+  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3

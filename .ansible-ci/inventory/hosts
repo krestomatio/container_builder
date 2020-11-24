@@ -30,35 +30,37 @@ moodle_web
 moodle_httpd
 
 [build_step_1]
+rootfs-creator
+
+[build_step_2]
 centos8-minimal
 centos8-stream-minimal
 
-[build_step_2]
+[build_step_3]
 base
 base-stream
 
-[build_step_3]
+[build_step_4]
 ansible
 httpd
 nginx
 php-fpm
 postgres
-rootfs-creator
 
-[build_step_4]
+[build_step_5]
 nginx_php-fpm
 ansible-docker-ci
 ansible-podman-ci
 
-[build_step_5]
+[build_step_6]
 ansible-operator-ci
 moodle_app
 
-[build_step_6]
+[build_step_7]
 moodle_nginx
 moodle_nginx_web
 moodle_php-fpm
 moodle_httpd
 
-[build_step_7]
+[build_step_8]
 moodle_web

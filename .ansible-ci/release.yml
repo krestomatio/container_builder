@@ -48,17 +48,4 @@
       include_tasks: tasks/state/save.yml
 
     - name: release
-      run_once: true
-      block:
-      - name: add changes
-        include_tasks: tasks/git/add.yml
-        run_once: false
-
-      - name: commit changes
-        include_tasks: tasks/git/commit.yml
-
-      - name: tag version
-        include_tasks: tasks/git/tag.yml
-
-      - name: push changes
-        include_tasks: tasks/git/push.yml
+      include_tasks: tasks/git/release.yml

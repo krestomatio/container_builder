@@ -10,4 +10,4 @@
     version_image_major: "{{ moodle_git_source_version.split('.')[0] | default(false) }}"
     version_image_minor: "{{ moodle_git_source_version.split('.')[1] | default(false) }}"
     version_image_patch: "{{ moodle_git_source_version.split('.')[2] | default(false) }}"
-    version_image_build: "{{ moodle_git_commit[0:7] | default(false) }}"
+    version_image_prerelease: "{{ moodle_git_commit[0:7] | default(false) }}"

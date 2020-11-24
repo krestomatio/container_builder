@@ -9,5 +9,5 @@
     - not ansible_check_mode
   template:
     src: state.yml.j2
-    dest: "{{ state_path }}/{{ ansible_host }}.yml"
+    dest: "{{ state_file }}"
     mode: '0644'

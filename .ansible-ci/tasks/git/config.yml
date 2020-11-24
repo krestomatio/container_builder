@@ -6,7 +6,7 @@
     scope: "{{ item.scope | default('local') }}"
     value: "{{ item.value | default(omit) }}"
     state: "{{ item.state | default(omit) }}"
-    repo: "{{ item.repo | default(working_dir) }}"
+    repo: "{{ item.repo | default(git_repo_dir) | default(playbook_dir) }}"
     list_all: "{{ item.list_all | default(omit) }}"
 
 - name: fetch git tags
@@ -19,8 +19,8 @@
   vars:
     git_version_bump: patch
   set_fact:
-    git_version_dict: "{{ lookup('git_semver', working_dir, bump=git_version_bump,
-      want='dict') }}"
+    git_version_dict: "{{ lookup('git_semver', git_repo_dir | default(playbook_dir),
+      bump=git_version_bump, want='dict') }}"
 
 - name: check version tag does not exist
   when:

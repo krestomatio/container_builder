@@ -7,8 +7,8 @@
       vars:
         version_image_bump: patch
       set_fact:
-        version_image_dict:  "{{ lookup('git_semver', working_dir, bump=version_image_bump,
-          want='dict') }}"
+        version_image_dict: "{{ lookup('git_semver', version_image_dir | default(playbook_dir),
+        bump=version_image_bump, want='dict') }}"
 
     - name: set major version
       when: version_image_major is not defined or not version_image_major

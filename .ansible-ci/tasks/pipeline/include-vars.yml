@@ -1,0 +1,17 @@
+- vars:
+    ansible_ci_dir: "{{ playbook_dir }}"
+  block:
+    - name: include main vars
+      include_vars:
+        file: "{{ ansible_ci_dir }}/vars/main.yml"
+
+    - name: include cloud provider vars
+      when:
+        - cloud_provider | default('none') != 'none'
+        - cloud_provider in cloud_providers
+      include_vars:
+        file: "{{ ansible_ci_dir }}/vars/provider/{{ cloud_provider }}.yml"
+
+    - name: include pipeline vars
+      include_vars:
+        file: "{{ ansible_ci_dir }}/vars/pipeline/{{ ansible_play_name }}.yml"

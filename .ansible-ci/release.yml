@@ -40,9 +40,9 @@
         artifact_name: "{{ item.name }}"
         artifact_archive: "{{ item.archive }}"
         artifact_path: "{{ item.path }}"
+        artifact_file: "{{ item.file | default('') }}"
       loop: "{{ artifacts }}"
       include_tasks: tasks/artifact/download.yml
-      run_once: true
 
     - name: load image state
       include_tasks: tasks/state/load.yml
@@ -58,6 +58,7 @@
       block:
       - name: add changes
         include_tasks: tasks/git/add.yml
+        run_once: false
 
       - name: commit changes
         include_tasks: tasks/git/commit.yml

@@ -1,4 +1,4 @@
-working_dir:  "{{ lookup('env','PWD') | default(playbook_play,true) }}"
+working_dir: "{{ lookup('env','WORKING_DIR') | default(playbook_dir,true) }}"
 
 # build playbook
 play_containers: "{{ lookup('env','PLAY_CONTAINERS') | default('all',true) }}"

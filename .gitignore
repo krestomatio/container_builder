@@ -1,15 +1,15 @@
 # temporary variables files
-vars/**/*tmp_vars.yml
-vars/**/*tmp_vault_vars.yml
-vars/tmp/
+.ansible-ci/vars/**/*tmp_vars.yml
+.ansible-ci/vars/**/*tmp_vault_vars.yml
+.ansible-ci/vars/tmp/
 # python
 __pycache__
 # local files
-debug.yml
-tmp/
+.ansible-ci/debug.yml
+.ansible-ci/tmp/
 # centos8-artifacts in templated_contexts
-templated_contexts/centos8*-minimal/centos8*-minimal.tar.xz
-templated_contexts/centos8*-minimal/distro-release
-templated_contexts/centos8*-minimal/pkgs-list
+.ansible-ci/templated_contexts/centos8*-minimal/centos8*-minimal.tar.xz
+.ansible-ci/templated_contexts/centos8*-minimal/distro-release
+.ansible-ci/templated_contexts/centos8*-minimal/pkgs-list
 # local notes
 .notes.md

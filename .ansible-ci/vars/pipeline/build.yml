@@ -10,3 +10,5 @@ version_image_build: "{{ lookup('env','BUILD_ID') | default(version_commit_tag[:
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 assertion_artifact_tag: true
+artifact_generated_context_task: upload
+artifact_state_task: upload

@@ -1,0 +1,7 @@
+- name: "{{ artifact_state_task }} state artifact"
+  vars:
+    artifact_name: "{{ artifact_state_name }}"
+    artifact_archive: "{{ artifact_state_archive }}"
+    artifact_path: "{{ artifact_state_path }}"
+    artifact_file: "{{ artifact_state_file | default('') }}"
+  include_tasks: "{{ artifact_state_task }}.yml"

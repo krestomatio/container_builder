@@ -53,19 +53,17 @@ registry_location: "{{ lookup('env','REGISTRY_LOCATION') | default(registry_name
 # skopeo
 skopeo_transport: "docker://"
 
-# state
-state_path: "{{ working_dir }}/vars/state"
-
 # artifacts
 artifact_registry: "{{ lookup('env','ARTIFACT_REGISTRY') | default(build_registry_path,true) | default(false) }}"
 artifact_tag: "{{ lookup('env','ARTIFACT_TAG') | default(pr_commit_tag,true) | default(false) }}"
 artifacts:
-  - name: generated_contexts_artifact
-    archive: generated_contexts_artifact.tar.gz
-    path: "{{ working_dir }}/{{ generated_dir }}"
-  - name: state_image_artifact
-    archive: state_image_artifact.tar.gz
-    path: "{{ state_path }}"
+  - name: "{{ ctr_name }}_generated_contexts_artifact"
+    archive: "{{ ctr_name }}_generated_contexts_artifact.tar.gz"
+    path: "{{ generated_path }}"
+  - name: "{{ ctr_name }}_state_image_artifact"
+    archive: "{{ ctr_name }}_state_image_artifact.tar.gz"
+    file: "{{ state_file }}"
+    path: "{{ state_file | dirname }}"
 
 # assertions
 assertion_dockerfile_builder: true

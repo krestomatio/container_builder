@@ -1,12 +1,10 @@
 - when:
     - ansible_host | regex_search('centos8.*-minimal')
   vars:
-    ctr_generated_path: "{{ working_dir }}/{{ generated_path }}"
-    ctr_template_path: "{{ working_dir }}/{{ template_path }}"
-    pkgs_list_old: "{{ ctr_generated_path }}/pkgs-list"
-    pkgs_list_new: "{{ ctr_template_path }}/pkgs-list"
-    distro_release_old: "{{ ctr_generated_path }}/distro-release"
-    distro_release_new: "{{ ctr_template_path }}/distro-release"
+    pkgs_list_old: "{{ generated_path }}/pkgs-list"
+    pkgs_list_new: "{{ template_path }}/pkgs-list"
+    distro_release_old: "{{ generated_path }}/distro-release"
+    distro_release_new: "{{ template_path }}/distro-release"
     centos_distro_version_regex: '(?<=release\-).*(?=\.el8)'
   block:
   - name: check old pkgs total file
@@ -53,7 +51,7 @@
       when:
         - dockerfile_builder == 'docker'
       docker_container:
-        name: "rootfs-creator-{{ (ctr_generated_path | to_uuid).split('-')[0] }}"
+        name: "rootfs-creator-{{ (generated_path | to_uuid).split('-')[0] }}"
         image: "{{ rootfs_creator_image }}"
         privileged: true
         detach: false
@@ -63,7 +61,7 @@
           BUILD_KICKSTART: "{{ rootfs_build_kickstart }}"
           BUILD_ROOTFS: "{{ rootfs_build_tar }}"
         volumes:
-          - "{{ ctr_template_path }}:/build:z"
+          - "{{ template_path }}:/build:z"
 
     - name: prepare artifacts
       when:
@@ -73,8 +71,8 @@
         --pull {{ 'always' if centos8_build_rootfs_pull else 'missing' }}
         -e BUILD_KICKSTART='{{ rootfs_build_kickstart }}'
         -e BUILD_ROOTFS='{{ rootfs_build_tar }}'
-        -v '{{ ctr_template_path }}:/build:z' {{ rootfs_creator_image }}
-        --name rootfs-creator-{{ (ctr_generated_path | to_uuid).split('-')[0] }}
+        -v '{{ template_path }}:/build:z' {{ rootfs_creator_image }}
+        --name rootfs-creator-{{ (generated_path | to_uuid).split('-')[0] }}
         {{ rootfs_build_kickstart }} {{ rootfs_build_tar }}"
 
     - name: get new pkgs total checksum

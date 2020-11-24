@@ -26,11 +26,12 @@
         - name: create compressed archive to store artifact
           register: artifact_archive_status
           archive:
-            path: "{{ artifact_path }}"
+            path: "{{ artifact_file | default(artifact_path,true) }}"
             dest: "{{ artifact_tmp_dir | default('/tmp/') }}/{{ artifact_archive }}"
             format: gz
             mode: '0644'
             force_archive: true
+            exclude_path: "{{ artifact_exclude_path | default(omit) }}"
 
         - name: upload artifact
           when: artifact_archive_status is changed

@@ -1,14 +1,22 @@
+working_dir: "{{ playbook_dir }}"
+
 # container
-ctr_name: "{{ ansible_host }}"
+ctr_name: "{{ inventory_hostname }}"
+
 ## state name must comply with ansible variable name convention
 state_name: "{{ ctr_name | replace('-', '_') | lower }}"
+state_dir: "{{ working_dir }}/vars/state"
+state_file: "{{ state_dir }}/{{ ctr_name }}.yml"
+
+git_repo_dir: "{{  working_dir }}/../"
+version_image_dir: "{{ git_repo_dir }}"
 
 # containers template dir
-template_dir: templated_contexts
-template_path: "{{ template_dir }}/{{ ctr_name }}"
+template_dir: "{{ working_dir }}/templated_contexts"
+template_path: "{{template_dir }}/{{ ctr_name }}"
 
 # containers generated build dir
-generated_dir: generated_contexts
+generated_dir: "{{ git_repo_dir }}"
 generated_path: "{{ generated_dir }}/{{ ctr_name }}"
 
 # registry

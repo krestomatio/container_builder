@@ -1,4 +1,15 @@
+- name: get moodle commit
+  run_once: true
+  when:
+    - dockerfile_builder_image_git_chk is defined
+    - moodle_git_commit_get | default(false)
+  vars:
+    moodle_git_ref: "{{ lookup('url', dockerfile_builder_image_git_chk) }}"
+  set_fact:
+    moodle_git_commit: "{{ moodle_git_ref.object.sha }}"
+
 - name: get moodle version from remote source
+  run_once: true
   when:
     - moodle_git_source_version_url is defined
     - moodle_git_repo_version_regex is defined
@@ -10,4 +21,3 @@
     version_image_major: "{{ moodle_git_source_version.split('.')[0] | default(false) }}"
     version_image_minor: "{{ moodle_git_source_version.split('.')[1] | default(false) }}"
     version_image_patch: "{{ moodle_git_source_version.split('.')[2] | default(false) }}"
-    version_image_prerelease: "{{ moodle_git_commit[0:7] | default(false) }}"

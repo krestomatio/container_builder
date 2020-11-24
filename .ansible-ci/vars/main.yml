@@ -56,14 +56,13 @@ skopeo_transport: "docker://"
 # artifacts
 artifact_registry: "{{ lookup('env','ARTIFACT_REGISTRY') | default(build_registry_path,true) | default(false) }}"
 artifact_tag: "{{ lookup('env','ARTIFACT_TAG') | default(pr_commit_tag,true) | default(false) }}"
-artifacts:
-  - name: "{{ ctr_name }}_generated_contexts_artifact"
-    archive: "{{ ctr_name }}_generated_contexts_artifact.tar.gz"
-    path: "{{ generated_path }}"
-  - name: "{{ ctr_name }}_state_image_artifact"
-    archive: "{{ ctr_name }}_state_image_artifact.tar.gz"
-    file: "{{ state_file }}"
-    path: "{{ state_file | dirname }}"
+artifact_generated_context_name: "{{ state_name }}_generated_context_artifact"
+artifact_generated_context_archive: "{{ state_name }}_generated_context_artifact.tar.gz"
+artifact_generated_context_path: "{{ generated_path }}"
+artifact_state_name: "{{ state_name }}_state_image_artifact"
+artifact_state_archive: "{{ state_name }}_state_image_artifact.tar.gz"
+artifact_state_file: "{{ state_file }}"
+artifact_state_path: "{{ state_file | dirname }}"
 
 # assertions
 assertion_dockerfile_builder: true

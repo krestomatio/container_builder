@@ -1,0 +1,7 @@
+- name: "{{ artifact_generated_context_task }} generated_context artifact"
+  vars:
+    artifact_name: "{{ artifact_generated_context_name }}"
+    artifact_archive: "{{ artifact_generated_context_archive }}"
+    artifact_path: "{{ artifact_generated_context_path }}"
+    artifact_file: "{{ artifact_generated_context_file | default('') }}"
+  include_tasks: "{{ artifact_generated_context_task }}.yml"

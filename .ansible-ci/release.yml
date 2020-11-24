@@ -36,13 +36,7 @@
       include_tasks: tasks/builder/version.yml
 
     - name: "download artifacts"
-      vars:
-        artifact_name: "{{ item.name }}"
-        artifact_archive: "{{ item.archive }}"
-        artifact_path: "{{ item.path }}"
-        artifact_file: "{{ item.file | default('') }}"
-      loop: "{{ artifacts }}"
-      include_tasks: tasks/artifact/download.yml
+      include_tasks: tasks/artifact/main.yml
 
     - name: load image state
       include_tasks: tasks/state/load.yml

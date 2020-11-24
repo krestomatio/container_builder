@@ -64,10 +64,4 @@
       include_tasks: tasks/state/save.yml
 
     - name: "upload artifacts"
-      vars:
-        artifact_name: "{{ item.name }}"
-        artifact_archive: "{{ item.archive }}"
-        artifact_path: "{{ item.path }}"
-        artifact_file: "{{ item.file | default('') }}"
-      loop: "{{ artifacts }}"
-      include_tasks: tasks/artifact/upload.yml
+      include_tasks: tasks/artifact/main.yml

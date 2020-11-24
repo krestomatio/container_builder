@@ -1,0 +1,7 @@
+- name: include state artifact task
+  include_tasks: state.yml
+  when: artifact_state_task is defined
+
+- name: include generated context artifact task
+  include_tasks: generated_context.yml
+  when: artifact_generated_context_task is defined

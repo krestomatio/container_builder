@@ -3,8 +3,6 @@ moodle_version: '3.9'
 
 # moodle
 moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
-moodle_git_ref: "{{ lookup('url', dockerfile_builder_image_git_chk) }}"
-moodle_git_commit: "{{ moodle_git_ref.object.sha }}"
 
 dockerfile_builder_image_git_remote: "git://github.com/moodle/moodle"
 dockerfile_builder_image_git_chk:

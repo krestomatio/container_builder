@@ -1,4 +1,5 @@
 - name: set jx2 version
+  run_once: true
   when:
     - jx2_version_install | default(false)
     - jx2_version_url is defined
@@ -8,6 +9,7 @@
     jx2_version: "{{ lookup('url', jx2_version_url) | regex_search(jx2_version_regex) }}"
 
 - name: set jx3 version
+  run_once: true
   when:
     - jx3_version_install | default(false)
     - jx3_version_url is defined
@@ -17,6 +19,7 @@
     jx3_version: "{{ lookup('url', jx3_version_url) | regex_search(jx3_version_regex) }}"
 
 - name: set oras version
+  run_once: true
   when:
     - oras_version_install | default(false)
     - oras_version_url is defined

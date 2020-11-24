@@ -11,7 +11,7 @@
       - yml
 
 - name: assign respective state variables
-  when: load_state_yml
+  when: load_state_yml is defined and load_state_yml
   vars:
     load_state_yml: "{{ lookup('vars', state_name + '_image',default=False) }}"
   block:

@@ -1,0 +1,29 @@
+- name: include variables
+  include_tasks: pipeline/include-vars.yml
+
+- name: git related config
+  include_tasks: "git/config.yml"
+  run_once: true
+
+- name: skip if no artifact commit tag
+  when:
+    - skip_if_no_artifact_tag | default(true)
+    - not artifact_tag
+  vars:
+    skip_end_msg_extra: "{{ '. Probably, commit is not from a pull request, skipping ' +
+      ansible_play_name + ' playbook' if 'release' in ansible_play_name else '' }}"
+  set_fact:
+    skip_ci: true
+    skip_end_msg: "No artifact commit tag set{{ skip_end_msg_extra }}"
+
+- name: include skip-ci
+  include_tasks: pipeline/skip-ci.yml
+  run_once: true
+
+- name: pipeline assertions
+  include_tasks: pipeline/assertion.yml
+
+- name: builder related config
+  include_tasks: "config/{{ dockerfile_builder }}.yml"
+  when: builder_config | default(false) | bool
+  run_once: true

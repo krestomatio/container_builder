@@ -7,40 +7,10 @@
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
-    - name: include variables
-      include_tasks: tasks/pipeline/include-vars.yml
+    - name: setup pipeline
+      include_tasks: tasks/setup.yml
 
-    - name: include skip-ci
-      include_tasks: tasks/pipeline/skip-ci.yml
-      run_once: true
-
-    - name: git related config
-      include_tasks: "tasks/git/config.yml"
-      run_once: true
-
-    - name: pipeline assertions
-      include_tasks: tasks/pipeline/assertion.yml
-
-    - name: builder related config
-      include_tasks: "tasks/config/{{ dockerfile_builder }}.yml"
-      when: builder_config | default(false) | bool
-      run_once: true
-
-    - name: prepare image task
-      include_tasks: tasks/prepare/{{ prepare_image_task }}.yml
-      when: prepare_image_task is defined and prepare_image_task
-
-    - name: set version related facts
-      include_tasks: tasks/builder/version.yml
-
-    - name: load image state
-      include_tasks: tasks/state/load.yml
-
-    - name: use build cache
-      include_tasks: tasks/builder/cache.yml
-      when: build_cache | default(false) | bool
-
-    - name: build image
+    - name: build images by group
       loop_control:
         loop_var: build_step
       loop:
@@ -51,17 +21,5 @@
         - "build_step_5"
         - "build_step_6"
         - "build_step_7"
-      include_tasks: tasks/builder/build.yml
-
-    - name: tag image
-      include_tasks: tasks/builder/tag.yml
-
-    - name: push image
-      include_tasks: tasks/builder/push.yml
-      when: build_push | default(false) | bool
-
-    - name: save image state
-      include_tasks: tasks/state/save.yml
-
-    - name: "upload artifacts"
-      include_tasks: tasks/artifact/main.yml
+        - "build_step_8"
+      include_tasks: tasks/build-group.yml

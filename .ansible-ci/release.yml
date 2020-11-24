@@ -7,45 +7,11 @@
   environment:
     DOCKER_BUILDKIT: 1
   tasks:
-    - name: include variables
-      include_tasks: tasks/pipeline/include-vars.yml
-
-    - name: skip if no artifact commit tag
-      when: not artifact_tag
-      set_fact:
-        skip_ci: true
-        skip_end_msg: "commit is not from a pull request, skipping '{{ ansible_play_name }}' playbook"
-
-    - name: include skip-ci
-      include_tasks: tasks/pipeline/skip-ci.yml
-      run_once: true
-
-    - name: git related config
-      include_tasks: "tasks/git/config.yml"
-      run_once: true
-
-    - name: pipeline assertions
-      include_tasks: tasks/pipeline/assertion.yml
-
-    - name: builder related config
-      include_tasks: "tasks/config/{{ dockerfile_builder }}.yml"
-      when: builder_config | default(false) | bool
-      run_once: true
-
-    - name: set image version related facts
-      include_tasks: tasks/builder/version.yml
-
-    - name: "download artifacts"
-      include_tasks: tasks/artifact/main.yml
-
-    - name: load image state
-      include_tasks: tasks/state/load.yml
+    - name: setup pipeline
+      include_tasks: tasks/setup.yml
 
     - name: promote image
-      include_tasks: tasks/promote/copy.yml
+      include_tasks: tasks/promote.yml
 
-    - name: save image state
-      include_tasks: tasks/state/save.yml
-
-    - name: release
+    - name: release 
       include_tasks: tasks/git/release.yml

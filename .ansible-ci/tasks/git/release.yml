@@ -1,0 +1,19 @@
+- name: add changes
+  include_tasks: add.yml
+  run_once: "{{ release_add_run_once | default(true) }}"
+  when: release_add | default(true) | bool
+
+- name: commit changes
+  include_tasks: commit.yml
+  run_once: "{{ release_commit_run_once | default(true) }}"
+  when: release_commit | default(true) | bool
+
+- name: tag version
+  include_tasks: tag.yml
+  run_once: "{{ release_tag_run_once | default(true) }}"
+  when: release_tag | default(true) | bool
+
+- name: push changes
+  include_tasks: push.yml
+  run_once: "{{ release_push_run_once | default(true) }}"
+  when: release_push | default(true) | bool

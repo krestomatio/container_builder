@@ -5,44 +5,5 @@
       debug:
         msg: "building images in group: {{ build_step|default('all') }}"
 
-    - name: prepare image task
-      include_tasks: tasks/prepare/{{ prepare_image_task }}.yml
-      when: prepare_image_task is defined and prepare_image_task
-
-    - name: set version related facts
-      include_tasks: tasks/builder/version.yml
-
-    - name: load image state
-      include_tasks: tasks/state/load.yml
-
-    - name: use build cache
-      include_tasks: tasks/builder/cache.yml
-      when: build_cache | default(false) | bool
-
-    - name: build image
-      include_role:
-        name: dockerfile_builder
-
-    - name: get build image info
-      docker_image_info:
-        name: "{{ dockerfile_builder_image }}"
-      register: build_image_status
-
-    - name: state image build fact
-      when: not ansible_check_mode
-      set_fact:
-        state_yml_build: true
-        state_yml_id: "{{ build_image_status.images[0].Id }}"
-
-    - name: tag image
-      include_tasks: tasks/builder/tag.yml
-
-    - name: push image
-      include_tasks: tasks/builder/push.yml
-      when: build_push | default(false) | bool
-
-    - name: save image state
-      include_tasks: tasks/state/save.yml
-
-    - name: "upload artifact"
-      include_tasks: tasks/artifact/main.yml
+    - name: build
+      include_tasks: build.yml

@@ -1,15 +1,20 @@
-- name: get semantic version based on git tag
+- name: get next semantic version based on git tag
   when:
     - version_git_based | default(true)
-  block:
-    - name: set image version
-      when: version_image_dict is not defined
-      vars:
-        version_image_bump: patch
-      set_fact:
-        version_image_dict: "{{ lookup('git_semver', version_image_dir | default(playbook_dir),
-        bump=version_image_bump, want='dict') }}"
+    - version_image_dict is not defined or not version_image_dict
+  set_fact:
+    version_image_dict: "{{ lookup('git_semver', version_image_dir | default(playbook_dir),
+    bump=version_image_bump|default('patch'), want='dict') }}"
 
+- name: set next version based on saved tag
+  when:
+    - version_image_dict is not defined or not version_image_dict
+  set_fact:
+    version_image_dict:
+      "{{ state_yml_tag | default('0.0.1') | next_version_dict(version_image_bump|default('patch')) }}"
+
+- when: version_image_dict is defined
+  block:
     - name: set major version
       when: version_image_major is not defined or not version_image_major
       set_fact:
@@ -35,21 +40,22 @@
       set_fact:
         version_image_build: "{{ version_image_dict.build }}"
 
-    - name: set full version
-      when: version_image_full is not defined or not version_image_full
-      set_fact:
-        version_image_full: "{{ version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_prerelease if version_image_prerelease else '' ) + ( '+' + version_image_build if version_image_build else '' ) }}"
+- name: set full version
+  when: version_image_full is not defined or not version_image_full
+  set_fact:
+    version_image_full: "{{ version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_prerelease if version_image_prerelease else '' ) + ( '+' + version_image_build if version_image_build else '' ) }}"
 
 - name: check image version tag does not exist in git repo
   when:
     - version_image_full is defined
+    - version_git_based | default(true)
     - check_image_version_tag | default(false)
   command: "git tag -l {{ version_image_full }}"
   register: image_version_tag_status
   failed_when: image_version_tag_status.stdout is defined and image_version_tag_status.stdout
   changed_when: false
 
-- name: state image tag
+- name: update state image tag
   set_fact:
     state_yml_tag: "{{ version_image_full }}"
 

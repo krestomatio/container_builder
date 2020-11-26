@@ -2,11 +2,11 @@
   include_tasks: tasks/prepare/{{ prepare_image_task }}.yml
   when: prepare_image_task is defined and prepare_image_task
 
-- name: set version related facts
-  include_tasks: tasks/builder/version.yml
-
 - name: load image state
   include_tasks: tasks/state/load.yml
+
+- name: set version related facts
+  include_tasks: tasks/builder/version.yml
 
 - name: use build cache
   include_tasks: tasks/builder/cache.yml

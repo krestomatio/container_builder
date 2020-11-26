@@ -1,0 +1,4 @@
+docker
+podman
+git-semver
+semantic-version

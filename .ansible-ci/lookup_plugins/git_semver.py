@@ -4,7 +4,7 @@ __metaclass__ = type
 
 DOCUMENTATION = """
         lookup: git_semver
-        author: Job Céspedes <jobcespedes@gmail.com>
+        author: Job Céspedes Ortiz <jobcespedes@gmail.com>
         version_added: "2.9"
         short_description: get/bump version from git current branch latest tag
         requirements:
@@ -67,8 +67,13 @@ _list:
 
 """
 import os
-import semantic_version
 import git
+HAS_SEMATIC_VERSION = False
+try:
+    import semantic_version
+    HAS_SEMATIC_VERSION = True
+except ImportError:
+    pass
 from git import Repo
 from ansible.errors import AnsibleError, AnsibleParserError
 from ansible.module_utils.six import string_types

@@ -1,7 +1,7 @@
 # platform vars
 operator_version: 1.1.0
 kustomize_version: 3.5.4
-KUBECTL_VERSION: 1.19.3
+kubectl_version: 1.19.3
 
 container_builder_image_from: ansible-podman-ci
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ operator_version }}"

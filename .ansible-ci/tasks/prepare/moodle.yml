@@ -16,11 +16,17 @@
   retries: 3
   delay: 3
   vars:
-    moodle_git_source_version: "{{ lookup('url', moodle_git_source_version_url) | regex_search(moodle_git_repo_version_regex) }}"
-  until: moodle_git_source_version is defined
+    moodle_git_source_version_from_url: "{{ lookup('url', moodle_git_source_version_url) | regex_search(moodle_git_repo_version_regex) }}"
+  until: moodle_git_source_version_from_url is defined
   when:
     - moodle_git_source_version_url is defined
     - moodle_git_repo_version_regex is defined
+  set_fact:
+    moodle_git_source_version: "{{ moodle_git_source_version_from_url }}"
+
+- name: set moodle version from remote source
+  when:
+    - moodle_git_source_version is defined
   set_fact:
     version_image_major: "{{ moodle_git_source_version.split('.')[0] | default(false) }}"
     version_image_minor: "{{ moodle_git_source_version.split('.')[1] | default(false) }}"

@@ -30,6 +30,7 @@ git_version_bump: "{{ next_version_bump }}"
 check_git_version_tag: true
 
 # version
+version_git_based: false
 version_image_bump: "{{ next_version_bump }}"
 check_image_version_tag: true
 

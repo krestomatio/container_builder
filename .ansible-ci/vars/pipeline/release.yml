@@ -15,4 +15,5 @@ state_image_match_artifact_tag: false
 promote_copy_throttle: 1
 artifact_generated_context_task: download
 artifact_state_task: download
+artifact_download_ignore_errors: true
 release_add_run_once: false

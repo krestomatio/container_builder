@@ -35,6 +35,7 @@
         get_checksum: yes
 
     - name: download artifact
+      ignore_errors: "{{ artifact_download_ignore_errors | default(false) }}"
       when: not ansible_check_mode
       command: "oras pull '{{ artifact_full_name }}'"
       args:
@@ -44,7 +45,9 @@
       register: artifact_pull_status
 
     - name: unarchive artifact
-      when: not ansible_check_mode
+      when:
+        - not ansible_check_mode
+        - artifact_pull_status is not failed
       unarchive:
         src: "{{ artifact_tmp_dir }}/{{ artifact_archive }}"
         dest: "{{ artifact_path }}"

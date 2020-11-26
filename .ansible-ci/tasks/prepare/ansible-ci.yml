@@ -1,29 +1,44 @@
 - name: set jx2 version
   run_once: true
+  retries: 3
+  delay: 3
+  until: jx2_version_from_url is defined
+  vars:
+    jx2_version_from_url: "{{ lookup('url', jx2_version_url) | regex_search(jx2_version_regex) }}"
   when:
     - jx2_version_install | default(false)
     - jx2_version_url is defined
     - jx2_version_regex is defined
     - jx2_version is not defined
   set_fact:
-    jx2_version: "{{ lookup('url', jx2_version_url) | regex_search(jx2_version_regex) }}"
+    jx2_version: "{{ jx2_version_from_url }}"
 
 - name: set jx3 version
   run_once: true
+  retries: 3
+  delay: 3
+  until: jx3_version_from_url is defined
+  vars:
+    jx3_version_from_url: "{{ lookup('url', jx3_version_url) | regex_search(jx3_version_regex) }}"
   when:
     - jx3_version_install | default(false)
     - jx3_version_url is defined
     - jx3_version_regex is defined
     - jx3_version is not defined
   set_fact:
-    jx3_version: "{{ lookup('url', jx3_version_url) | regex_search(jx3_version_regex) }}"
+    jx3_version: "{{ jx3_version_from_url }}"
 
 - name: set oras version
   run_once: true
+  retries: 3
+  delay: 3
+  until: oras_version_from_url is defined
+  vars:
+    oras_version_from_url: "{{ lookup('url', oras_version_url) | regex_search(oras_version_regex) }}"
   when:
     - oras_version_install | default(false)
     - oras_version_url is defined
     - oras_version_regex is defined
     - oras_version is not defined
   set_fact:
-    oras_version: "{{ lookup('url', oras_version_url) | regex_search(oras_version_regex) }}"
+    oras_version: "{{ oras_version_from_url }}"

@@ -24,10 +24,10 @@ RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \
     curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzf - -C /usr/local/bin/
 
 # Container variables
-ENV KUBECTL_VERSION="{{ KUBECTL_VERSION }}"
+ENV KUBECTL_VERSION="{{ kubectl_version }}"
 
 # Install kubectl.
-COPY --from=lachlanevenson/k8s-kubectl:v{{ KUBECTL_VERSION }} /usr/local/bin/kubectl /usr/local/bin/kubectl
+COPY --from=lachlanevenson/k8s-kubectl:v{{ kubectl_version }} /usr/local/bin/kubectl /usr/local/bin/kubectl
 
 CMD [ "/bin/bash" ]
 

@@ -16,4 +16,5 @@ promote_copy_throttle: 1
 artifact_generated_context_task: download
 artifact_state_task: download
 artifact_download_ignore_errors: true
+artifact_generated_context_path: "{{ generated_dir }}"
 release_add_run_once: false

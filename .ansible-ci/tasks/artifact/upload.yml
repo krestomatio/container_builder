@@ -11,27 +11,21 @@
       debug:
         msg: "tag: {{ artifact_full_name }}"
 
-    - name: check artifact path
-      register: check_artifact_path
-      stat:
-        path: "{{ artifact_path }}"
-
     - name: check archive is a tar.gz
       assert:
         that: artifact_archive | regex_search('.*\\.tar.gz$', ignorecase=True)
 
     - name: upload artifact
-      when: check_artifact_path.stat.exists
       block:
         - name: create compressed archive to store artifact
           register: artifact_archive_status
           archive:
-            path: "{{ artifact_file | default(artifact_path,true) }}"
+            path: "{{ artifact_path }}"
             dest: "{{ artifact_tmp_dir | default('/tmp/') }}/{{ artifact_archive }}"
             format: gz
             mode: '0644'
             force_archive: true
-            exclude_path: "{{ artifact_exclude_path | default(omit) }}"
+            exclude_path: "{{ artifact_exclude_path | default(omit,true) }}"
 
         - name: upload artifact
           when: artifact_archive_status is changed

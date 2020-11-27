@@ -51,4 +51,4 @@
         dest: "{{ artifact_path }}"
         remote_src: yes
         extra_opts:
-          - "{{ '--strip-components=1' if not artifact_file | default(false,true) else '' }}"
+          - "{{ '--strip-components=1' if unarchive_strip_components | default(true) else '' }}"

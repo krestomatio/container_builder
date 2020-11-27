@@ -4,4 +4,5 @@
     artifact_archive: "{{ artifact_generated_context_archive }}"
     artifact_path: "{{ artifact_generated_context_path }}"
     artifact_exclude_path: "{{ artifact_generated_context_exclude_path | default('') }}"
+    unarchive_strip_components: "{{ artifact_generated_context_unarchive_strip_components | default(true) }}"
   include_tasks: "{{ artifact_generated_context_task }}.yml"

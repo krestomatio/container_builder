@@ -4,4 +4,5 @@
     artifact_archive: "{{ artifact_state_archive }}"
     artifact_path: "{{ artifact_state_path }}"
     artifact_exclude_path: "{{ artifact_state_exclude_path | default('') }}"
+    unarchive_strip_components: "{{ artifact_state_unarchive_strip_components | default(true) }}"
   include_tasks: "{{ artifact_state_task }}.yml"

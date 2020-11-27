@@ -18,7 +18,6 @@
     - name: upload artifact
       block:
         - name: create compressed archive to store artifact
-          register: artifact_archive_status
           archive:
             path: "{{ artifact_path }}"
             dest: "{{ artifact_tmp_dir | default('/tmp/') }}/{{ artifact_archive }}"
@@ -28,7 +27,6 @@
             exclude_path: "{{ artifact_exclude_path | default(omit,true) }}"
 
         - name: upload artifact
-          when: artifact_archive_status is changed
           command: "oras push{{ ' --manifest-config ' + artifact_config_mediatype if artifact_config_mediatype
             is defined else '' }} '{{ artifact_full_name }}' '{{ artifact_archive + ':' + artifact_mediatype if
             artifact_config_mediatype is defined else artifact_archive }}'"

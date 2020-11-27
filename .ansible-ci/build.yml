@@ -23,3 +23,7 @@
         - "build_step_7"
         - "build_step_8"
       include_tasks: tasks/build-group.yml
+
+    - name: "upload artifacts"
+      include_tasks: tasks/artifact/main.yml
+      run_once: true

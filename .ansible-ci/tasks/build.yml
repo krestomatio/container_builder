@@ -36,6 +36,3 @@
 
 - name: save image state
   include_tasks: tasks/state/save.yml
-
-- name: "upload artifact"
-  include_tasks: tasks/artifact/main.yml

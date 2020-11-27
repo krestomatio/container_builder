@@ -1,6 +1,3 @@
-- name: "download artifacts"
-  include_tasks: tasks/artifact/main.yml
-
 - name: load image state
   include_tasks: tasks/state/load.yml
 

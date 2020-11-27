@@ -59,11 +59,9 @@ artifact_registry: "{{ lookup('env','ARTIFACT_REGISTRY') | default(build_registr
 artifact_tag: "{{ lookup('env','ARTIFACT_TAG') | default(pr_commit_tag,true) | default(false) }}"
 artifact_generated_context_name: "{{ state_name }}_generated_context_artifact"
 artifact_generated_context_archive: "{{ state_name }}_generated_context_artifact.tar.gz"
-artifact_generated_context_path: "{{ generated_path }}"
 artifact_state_name: "{{ state_name }}_state_image_artifact"
 artifact_state_archive: "{{ state_name }}_state_image_artifact.tar.gz"
-artifact_state_file: "{{ state_file }}"
-artifact_state_path: "{{ state_file | dirname }}"
+artifact_state_path: "{{ state_dir }}"
 
 # assertions
 assertion_dockerfile_builder: true

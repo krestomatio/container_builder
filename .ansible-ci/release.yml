@@ -10,8 +10,12 @@
     - name: setup pipeline
       include_tasks: tasks/setup.yml
 
+    - name: "download artifacts"
+      include_tasks: tasks/artifact/main.yml
+      run_once: true
+
     - name: promote image
       include_tasks: tasks/promote.yml
 
-    - name: release 
+    - name: release
       include_tasks: tasks/git/release.yml

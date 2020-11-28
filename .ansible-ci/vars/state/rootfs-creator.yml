@@ -3,7 +3,7 @@
 #
 rootfs_creator_image:
   build: False
-  tag: "0.0.10"
+  tag: "0.1.0"
   id: "sha256:949a9d504d57db3d6a0f74bad968e9bd9c047ed2bb7004dd8d764d5f5c71eaa1"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/rootfs-creator@sha256:7822d7dc10430a17700ad7951e4487c464a954cc336ada8aaaa7c992be786f53"
-  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3
+  repo_digest: "quay.io/krestomatio/rootfs-creator@sha256:7822d7dc10430a17700ad7951e4487c464a954cc336ada8aaaa7c992be786f53"
+  artifact_tag: 86306d8873068a870221a8317df1e80b4a03eb97

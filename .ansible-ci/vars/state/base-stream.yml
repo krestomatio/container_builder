@@ -3,7 +3,7 @@
 #
 base_stream_image:
   build: False
-  tag: "0.0.10"
+  tag: "0.1.0"
   id: "sha256:9f6011cf3c67b5796e0ea817b8d284f1c5bf23254ec2c4132b152527dc7ceb4d"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/base-stream@sha256:6e382b34097c308e112c8f0212c7dab8af4fe2ca8dfbf94c1eb8818dc674026d"
-  artifact_tag: b8956d8b0038dd3ae73dab5a29a21336e6e2a0f3
+  repo_digest: "quay.io/krestomatio/base-stream@sha256:6e382b34097c308e112c8f0212c7dab8af4fe2ca8dfbf94c1eb8818dc674026d"
+  artifact_tag: 86306d8873068a870221a8317df1e80b4a03eb97

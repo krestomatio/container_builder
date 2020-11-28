@@ -19,7 +19,7 @@
       register: cache_pull_image_with_sha_task
 
     - name: check if container image name exists
-      command: "{{ dockerfile_builder }} inspect --type=image {{ dockerfile_builder_image }}"
+      command: "{{ dockerfile_builder }} inspect --type=image {{ container_image }}"
       changed_when: false
       ignore_errors: true
       register: cache_image_name_exist
@@ -28,7 +28,7 @@
       when:
         -  cache_image_name_exist.stderr is defined
         - "'Error: No such image' in cache_image_name_exist.stderr"
-      command: "{{ dockerfile_builder }} tag {{ cache_image_with_sha }} {{ dockerfile_builder_image }}"
+      command: "{{ dockerfile_builder }} tag {{ cache_image_with_sha }} {{ container_image }}"
 
 - name: set cache images with respective tags (if any)
   when:
@@ -38,7 +38,7 @@
   set_fact:
     dockerfile_builder_cache_from:
       "{{ dockerfile_builder_cache_from | default([]) +
-      [cache_image_name | default(dockerfile_builder_image) +
+      [cache_image_name | default(container_image) +
       ':' + item] }}"
 
 - name: set cache build args variables

@@ -1,0 +1,29 @@
+# CONTAINER_BUILDER
+Containers are built from this project. It is done using Ansible. The containers are defined as hosts in the Ansible inventory. They are generated using host and group variables, templates and local connection.
+
+## Requirements
+* Ansible >= 2.9
+* docker or podman
+* python docker
+
+## Build
+Run it with:
+```bash
+ansible-playbook .ansible-ci/build.yml
+```
+## Directory layout
+```
+├── .ansible-ci             # ansible tasks to build and release container images
+├── .lighthouse             # jenkins-x pipelines
+└── */                      # directories where generated container contexts are saved
+```
+## Contribute
+* Context and dockerfile templates are inside each container's [directory](.ansible-ci/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory
+* Variables can be changed inside [the inventory](.ansible-ci/inventory) dir
+* Please modify or update only [templated context](.ansible-ci/templated_contexts/) or [the inventory](.ansible-ci/inventory)
+## Container info
+| Container Directory  | Container Image  | Version  |
+|---|---|---|
+{% for ctr in ansible_play_hosts %}
+| [{{ ctr }}]({{ ctr }}/ )| [{{ hostvars[ctr].dockerfile_builder_image }}]({{ hostvars[ctr].state_yml_repo_digest }}) | {{ hostvars[ctr].state_yml_tag }} |
+{% endfor %}

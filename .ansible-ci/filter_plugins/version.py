@@ -23,6 +23,7 @@ EXAMPLES = """
       {{ myversion | next_version_list('major') }}
       {{ myversion | next_version_list('minor') }}
       {{ myversion | next_version_list }}
+      {{ myversion | release_version }}
 """
 
 HAS_SEMATIC_VERSION = False
@@ -35,13 +36,18 @@ from ansible.module_utils.six import string_types
 from ansible.module_utils._text import to_text
 from ansible.errors import AnsibleFilterError
 
-def bump_version(v, bump):
-    ''' Bump semantic version '''
+def semver(v, bump):
+    ''' Bump semantic version
+    Raises:
+        errors.AnsibleFilterError: If 'bump' is not 'major', 'minor', 'patch' or ''
+    Returns:
+        version: next semantic version
+    '''
 
     bump = bump.lower()
-    if not isinstance(bump, string_types) or bump not in ['patch', 'minor', 'major']:
+    if not isinstance(bump, string_types) or bump not in ['patch', 'minor', 'major', '']:
         raise AnsibleFilterError(
-            'Bump paramater must be a string and one of "patch", "minor" or "major", not %s' % bump)
+            'Bump paramater must be a string and one of "", "patch", "minor" or "major", not %s' % bump)
 
     # check v prefix
     if v.startswith('v'):
@@ -63,26 +69,20 @@ def next_version(v, bump='patch'):
     ''' Get next semantic version as a string
         Args:
             bump (str): Which semantic version part to bump
-        Raises:
-            errors.AnsibleFilterError: If 'bump' is not 'major', 'minor'
-            or 'patch'
         Returns:
             str: Next semantic version
     '''
-    v = bump_version(to_text(v), bump)
+    v = semver(to_text(v), bump)
     return v
 
 def next_version_dict(v, bump='patch'):
     ''' Get next semantic version as a dictionary
         Args:
             bump (str): Which semantic version part to bump
-        Raises:
-            errors.AnsibleFilterError: If 'bump' is not 'major', 'minor'
-            or 'patch'
         Returns:
             dict: Next semantic version as a dictionary
     '''
-    v = bump_version(to_text(v),bump)
+    v = semver(to_text(v),bump)
     v = {
         "full": str(v),
         "major": v.major,
@@ -97,14 +97,20 @@ def next_version_list(v, bump='patch'):
     ''' Get next semantic version as a list
         Args:
             bump (str): Which semantic version part to bump
-        Raises:
-            errors.AnsibleFilterError: If 'bump' is not 'major', 'minor'
-            or 'patch'
         Returns:
             list: Next semantic version as a list
     '''
-    v = bump_version(to_text(v),bump)
+    v = semver(to_text(v),bump)
     v = [str(v)] + list(v)
+    return v
+
+def release_version(v):
+    ''' Get release version: Major.Minor.Patch
+        Returns:
+            str: version
+    '''
+    v = semver(to_text(v),'')
+    v = to_text(v.major) + '.' + to_text(v.minor) + '.' + to_text(v.patch)
     return v
 
 # ---- Ansible filters ----
@@ -115,5 +121,6 @@ class FilterModule(object):
         return {
             'next_version': next_version,
             'next_version_dict': next_version_dict,
-            'next_version_list': next_version_list
+            'next_version_list': next_version_list,
+            'release_version': release_version
         }

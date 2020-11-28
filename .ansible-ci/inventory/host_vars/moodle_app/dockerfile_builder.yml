@@ -3,6 +3,7 @@ container_builder_image_from: base
 
 # ci
 prepare_image_task: moodle
+version_release_no_bump: true
 
 # other
 moodle_git_commit_get: true

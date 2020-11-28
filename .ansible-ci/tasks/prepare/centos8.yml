@@ -114,7 +114,6 @@
       version_image_patch: "{{ centos_distro_release.split('.')[1].split('-')[1] |
         default(centos_distro_release.split('.')[2]) | default(false) }}"
 
-
   - name: omit src sync when no new pkgs
     when:
       - centos_pkgs_file_old.stat is defined

@@ -1,10 +1,5 @@
 - when: version_image_full is not defined or not version_image_full
   block:
-    - name: set bump version
-      when: version_bump_only_patch | default(false)
-      set_fact:
-        version_image_bump: patch
-
     - name: get next semantic version based on git tag
       when:
         - version_git_based | default(true)
@@ -12,6 +7,14 @@
       set_fact:
         version_image_dict: "{{ lookup('git_semver', version_image_dir | default(playbook_dir),
         bump=version_image_bump|default('patch'), want='dict') }}"
+
+    - name: set release version from saved tag with no bump (major.minor.patch)
+      when:
+        - version_image_dict is not defined or not version_image_dict
+        - version_release_no_bump | default(false)
+        - "ansible_play_name == 'release'"
+      set_fact:
+        version_image_full: "{{ state_yml_tag | default('0.0.1') | release_version }}"
 
     - name: set next version based on saved tag
       when:

@@ -14,6 +14,7 @@ template_path: "{{ template_dir }}/moodle_php-fpm"
 
 # ci
 prepare_image_task: moodle
+version_release_no_bump: true
 
 # other
 moodle_app_copy_from: "{{ registry_path }}/moodle_app{{ ':' +

@@ -5,7 +5,7 @@
   include_tasks: tasks/builder/version.yml
 
 - name: promote image
-  include_tasks: tasks/promote/copy.yml
+  include_tasks: tasks/promote/main.yml
 
 - name: save image state
   include_tasks: tasks/state/save.yml

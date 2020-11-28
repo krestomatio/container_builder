@@ -1,0 +1,9 @@
+- name: copy image
+  include_tasks: copy.yml
+
+- name: update repo digest
+  when: state_yml_repo_digest is defined
+  vars:
+    same_digest: "{{ state_yml_repo_digest.split('@')[1] }}"
+  set_fact:
+    state_yml_repo_digest: "{{ container_image + '@' + same_digest }}"

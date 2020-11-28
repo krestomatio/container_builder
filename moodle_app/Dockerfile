@@ -33,7 +33,7 @@ WORKDIR ${GIT_DEST}
 
 # source variables
 ENV GIT_BRANCH="MOODLE_39_STABLE" \
-    GIT_COMMIT="87bcff8c6e75421f87ba46419dcd11206e4688da" \
+    GIT_COMMIT="4825c139ef9c4d39f8604994c919f120a1e7ed70" \
     GIT_REMOTE="git://github.com/moodle/moodle" \
     GIT_CHK="https://api.github.com/repos/moodle/moodle/git/refs/heads/MOODLE_39_STABLE"
 

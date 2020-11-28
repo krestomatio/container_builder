@@ -6,7 +6,7 @@
     build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
 
 - name: tag build image
-  command: "{{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name }}"
+  command: "{{ dockerfile_builder }} tag {{ container_image }} {{ build_image_name }}"
   changed_when: false
 
 - name: add other tags to image
@@ -19,7 +19,7 @@
     tags=( "{{ dockerfile_builder_tags | join('" "')}}" )
     for tag in "${tags[@]}"
     do
-      {{ dockerfile_builder }} tag {{ dockerfile_builder_image }} {{ build_image_name | default(dockerfile_builder_image) }}:${tag}
+      {{ dockerfile_builder }} tag {{ container_image }} {{ build_image_name | default(container_image) }}:${tag}
       exit_code=$?
       if ! [ $exit_code -eq 0 ]
       then

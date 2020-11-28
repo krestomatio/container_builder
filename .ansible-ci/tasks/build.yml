@@ -18,7 +18,7 @@
 
 - name: get build image info
   docker_image_info:
-    name: "{{ dockerfile_builder_image }}"
+    name: "{{ container_image }}"
   register: build_image_status
 
 - name: state image build fact

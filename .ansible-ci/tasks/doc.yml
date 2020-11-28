@@ -1,0 +1,7 @@
+- name: generate project readme
+  run_once: true
+  when: doc_generate_project_readme | default(false)
+  template:
+    src: "{{ doc_project_readme_src }}"
+    dest: "{{ doc_project_readme_dest }}"
+    mode: '0644'

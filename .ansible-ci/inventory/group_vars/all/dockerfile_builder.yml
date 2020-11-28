@@ -40,3 +40,8 @@ dockerfile_builder_image: "{{ registry_path }}/{{ ctr_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
+
+# doc
+doc_generate_project_readme: true
+doc_project_readme_src: README.md.j2
+doc_project_readme_dest: "{{ git_repo_dir }}/README.md"

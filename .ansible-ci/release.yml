@@ -17,5 +17,8 @@
     - name: promote image
       include_tasks: tasks/promote.yml
 
+    - name: generate doc
+      include_tasks: tasks/doc.yml
+
     - name: release
       include_tasks: tasks/git/release.yml

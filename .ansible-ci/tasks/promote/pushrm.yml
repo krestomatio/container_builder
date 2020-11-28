@@ -1,0 +1,20 @@
+- name: push readme
+  vars:
+    promote_pushrm_bin: ~/.docker/cli-plugins/docker-pushrm
+    promote_pushrm_file: "{{ generated_path }}/README.md"
+    promote_pushrm_image: "{{ container_image }}"
+  block:
+    - name: check README file exists
+      register: promote_pushrm_file_status
+      stat:
+        path: "{{ promote_pushrm_file }}"
+
+    - name: push readme
+      when:
+        - not ansible_check_mode
+        - promote_pushrm_file_status.stat.exists
+      command: "{{ promote_pushrm_bin }} -f '{{ promote_pushrm_file }}' '{{ promote_pushrm_image }}'"
+      retries: 3
+      delay: 3
+      register: promote_pushrm_status
+      until: promote_pushrm_status.rc == 0

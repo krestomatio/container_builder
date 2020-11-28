@@ -34,6 +34,7 @@ ansible-playbook .ansible-ci/build.yml
 * Ansible >= 2.9
 * docker or podman
 * python docker
+* see [requirements.txt](.ansible-ci/requirements.txt)
 
 ### Want to contribute?
 * Context and dockerfile templates are inside each container's [directory](.ansible-ci/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory

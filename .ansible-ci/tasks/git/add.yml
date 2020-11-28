@@ -2,3 +2,4 @@
   command: "git add -v {{ git_add_options | default ('-A') }} {{ git_add_path | default ('') }}"
   register: git_add_status
   changed_when: git_add_status.stdout is defined and git_add_status.stdout
+  throttle: "{{ git_add_throttle if git_add_throttle is defined and git_add_throttle else omit }}"

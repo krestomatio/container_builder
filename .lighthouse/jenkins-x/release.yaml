@@ -38,7 +38,7 @@ spec:
           workingDir: /workspace/source
         steps:
         - args:
-          - ansible-playbook release.yml
+          - ansible-playbook .ansible-ci/release.yml
           command:
           - /bin/sh
           - -c

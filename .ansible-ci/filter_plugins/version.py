@@ -24,6 +24,7 @@ EXAMPLES = """
       {{ myversion | next_version_list('minor') }}
       {{ myversion | next_version_list }}
       {{ myversion | release_version }}
+      {{ myversion | release_version_dict }}
 """
 
 HAS_SEMATIC_VERSION = False
@@ -85,9 +86,9 @@ def next_version_dict(v, bump='patch'):
     v = semver(to_text(v),bump)
     v = {
         "full": str(v),
-        "major": v.major,
-        "minor": v.minor,
-        "patch": v.patch,
+        "major": to_text(v.major),
+        "minor": to_text(v.minor),
+        "patch": to_text(v.patch),
         "prerelease": '.'.join(v.prerelease),
         "build": '.'.join(v.build)
     }
@@ -113,6 +114,20 @@ def release_version(v):
     v = to_text(v.major) + '.' + to_text(v.minor) + '.' + to_text(v.patch)
     return v
 
+def release_version_dict(v):
+    ''' Get release version as dictionary: Major.Minor.Patch
+        Returns:
+            dict: version
+    '''
+    v = semver(to_text(v),'')
+    v = {
+        "full": to_text(v.major) + '.' + to_text(v.minor) + '.' + to_text(v.patch),
+        "major": to_text(v.major),
+        "minor": to_text(v.minor),
+        "patch": to_text(v.patch)
+    }
+    return v
+
 # ---- Ansible filters ----
 class FilterModule(object):
     ''' Semantic version filter '''
@@ -122,5 +137,6 @@ class FilterModule(object):
             'next_version': next_version,
             'next_version_dict': next_version_dict,
             'next_version_list': next_version_list,
-            'release_version': release_version
+            'release_version': release_version,
+            'release_version_dict': release_version_dict,
         }

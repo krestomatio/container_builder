@@ -32,7 +32,7 @@ spec:
           env:
           - name: CLOUD_PROVIDER
             value: m6e
-          image: krestomatio/ansible-docker-ci
+          image: quay.io/krestomatio/ansible-docker-ci
           name: build-containers
           securityContext:
             privileged: true

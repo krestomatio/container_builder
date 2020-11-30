@@ -45,7 +45,7 @@
     msg: "{{ git_head_commit }}"
 
 - name: update git submodules
-  when: git_config_submodule_update | default(true)
+  when: git_config_submodule_update | default(true) | bool
   changed_when: git_config_submodule_update_status.stdout is defined and git_config_submodule_update_status.stdout
   register: git_config_submodule_update_status
   command: git submodule update --init --recursive

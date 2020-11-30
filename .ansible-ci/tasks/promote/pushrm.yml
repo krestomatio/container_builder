@@ -1,6 +1,6 @@
 - name: push readme
   vars:
-    promote_pushrm_bin: ~/.docker/cli-plugins/docker-pushrm
+    promote_pushrm_bin: docker-pushrm
     promote_pushrm_file: "{{ generated_path }}/README.md"
     promote_pushrm_image: "{{ container_image }}"
   block:

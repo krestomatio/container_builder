@@ -42,3 +42,18 @@
     - oras_version is not defined
   set_fact:
     oras_version: "{{ oras_version_from_url }}"
+
+- name: set pushrm version
+  run_once: true
+  retries: 3
+  delay: 3
+  until: pushrm_version_from_url is defined
+  vars:
+    pushrm_version_from_url: "{{ lookup('url', pushrm_version_url) | regex_search(pushrm_version_regex) }}"
+  when:
+    - pushrm_version_install | default(false)
+    - pushrm_version_url is defined
+    - pushrm_version_regex is defined
+    - pushrm_version is not defined
+  set_fact:
+    pushrm_version: "{{ pushrm_version_from_url }}"

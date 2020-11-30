@@ -81,6 +81,13 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /
 
 {% endif %}
+{% if pushrm_version is defined and pushrm_version %}
+ENV PUSHRM_VERSION="{{ pushrm_version }}"
+RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
+    curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }} && \
+    chmod +x /usr/local/bin/docker-pushrm
+
+{% endif %}
 CMD [ "ansible-playbook", "--version" ]
 
 # Labels

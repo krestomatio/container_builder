@@ -12,7 +12,7 @@ git_repo_dir: "{{  working_dir }}/../"
 version_image_dir: "{{ git_repo_dir }}"
 
 # containers template dir
-template_dir: "{{ working_dir }}/templated_contexts"
+template_dir: "{{ working_dir }}/files/templated_contexts"
 template_path: "{{template_dir }}/{{ ctr_name }}"
 
 # containers generated build dir

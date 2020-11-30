@@ -37,9 +37,9 @@ ansible-playbook .ansible-ci/build.yml
 * see [requirements.txt](.ansible-ci/requirements.txt)
 
 ### Want to contribute?
-* Context and dockerfile templates are inside each container's [directory](.ansible-ci/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory
+* Context and dockerfile templates are inside each container's [directory](.ansible-ci/files/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory
 * Variables can be changed inside [the inventory](.ansible-ci/inventory) dir
-* Please modify or update only [templated context](.ansible-ci/templated_contexts/) or [the inventory](.ansible-ci/inventory)
+* Please modify or update only [templated context](.ansible-ci/files/templated_contexts/) or [the inventory](.ansible-ci/inventory)
 
 ### Directory layout
 ```

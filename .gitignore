@@ -7,9 +7,9 @@ __pycache__
 # local files
 .ansible-ci/debug.yml
 .ansible-ci/tmp/
-# centos8-artifacts in templated_contexts
-.ansible-ci/templated_contexts/centos8*-minimal/centos8*-minimal.tar.xz
-.ansible-ci/templated_contexts/centos8*-minimal/distro-release
-.ansible-ci/templated_contexts/centos8*-minimal/pkgs-list
+# centos8-artifacts in files/templated_contexts
+.ansible-ci/files/templated_contexts/centos8*-minimal/centos8*-minimal.tar.xz
+.ansible-ci/files/templated_contexts/centos8*-minimal/distro-release
+.ansible-ci/files/templated_contexts/centos8*-minimal/pkgs-list
 # local notes
 .notes.md

@@ -1,5 +1,4 @@
-This container creates a rootfs. It has installed livemedia-creator in a Centos 8 minimal based image.
-An example [here](https://github.com/krestomatio/centos8-minimal)
+This container creates a rootfs. It has installed livemedia-creator in a Centos 8 minimal based image. An example [here](https://github.com/krestomatio/container_builder/tree/master/rootfs-creator)
 
 ## How rootfs can be generated using this container
 ```
@@ -9,6 +8,7 @@ An example [here](https://github.com/krestomatio/centos8-minimal)
 ```bash
 # run
 docker run --rm --privileged -v "$PWD:/build:z" \
-    quay.io/krestomatio/rootfs-creator \
-    centos8-minimal.ks centos8-minimal.tar.xz
+    -e BUILD_KICKSTART=centos8-minimal.ks \
+    -e BUILD_ROOTFS=centos8-minimal.tar.xz \
+    quay.io/krestomatio/rootfs-creator
 ```

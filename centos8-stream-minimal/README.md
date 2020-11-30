@@ -1,15 +1,17 @@
-[![Docker Repository on Quay](https://quay.io/repository/krestomatio/centos8-stream-minimal/status "Docker Repository on Quay")](https://quay.io/repository/krestomatio/centos8-stream-minimal)
+This is a Centos8 Stream minimal container image similar to Fedora-minimal or UBI.
 
-This is a Centos 8 minimal container image similar to Fedora-minimal or UBI.
-
-## How rootfs is generated for this repo?
+## How rootfs is created?
 ```bash
 docker run --rm --privileged -v "$PWD:/build:z" \
-    quay.io/krestomatio/rootfs-creator \
-    centos8-stream-minimal.ks centos8-stream-minimal.tar.xz
+    -e BUILD_KICKSTART=centos8-stream-minimal.ks \
+    -e BUILD_ROOTFS=centos8-stream-minimal.tar.xz \
+    quay.io/krestomatio/rootfs-creator
 ```
 
 ## How image is built?
 ```bash
 docker build .
 ```
+
+## Repository
+This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/centos8-stream-minimal)

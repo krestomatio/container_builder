@@ -6,6 +6,9 @@ docker_version: 'stable-dind'
 # ci
 prepare_image_task: ansible-ci
 
+# get latest versions
+version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'
+
 # jx
 # jx3_version_install: true
 # jx3_version_url: https://github.com/jenkins-x/jx-cli/releases/latest
@@ -17,4 +20,9 @@ prepare_image_task: ansible-ci
 # oras
 oras_version_install: true
 oras_version_url: https://github.com/deislabs/oras/releases/latest
-oras_version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'
+oras_version_regex: "{{ version_regex }}"
+
+# pushrm
+pushrm_version_install: true
+pushrm_version_url: https://github.com/christian-korneck/docker-pushrm/releases/latest
+pushrm_version_regex: "{{ version_regex }}"

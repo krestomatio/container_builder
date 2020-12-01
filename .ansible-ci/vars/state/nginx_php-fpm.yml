@@ -3,7 +3,7 @@
 #
 nginx_php_fpm_image:
   build: False
-  tag: "0.1.1"
-  id: "sha256:2a0a063c9d3cdbdb7574894db96a0806bb138a4c13a5e5384202b97ac0098610"
-  repo_digest: "quay.io/krestomatio/nginx_php-fpm@sha256:7fcaad78961c6185b5643e7f8b029f1f6bc9bc787a608eb28b53088922246806"
-  artifact_tag: 8d1d5eb7b1cf455d192cd0970279fabc362b4a36
+  tag: "0.1.2"
+  id: "sha256:667d95c0fa6cd22f919082040b426ebe23ab89ac3918177088405a4c46a1f27c"
+  repo_digest: "quay.io/krestomatio/nginx_php-fpm@sha256:7acda1ef3333deb5fd56caa8dd9a773a900b90e02b6183035837354656c2a91d"
+  artifact_tag: 6f1d694fe6aefe6b6a4719ff80622917b5457e87

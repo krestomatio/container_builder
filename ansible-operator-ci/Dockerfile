@@ -29,6 +29,11 @@ ENV KUBECTL_VERSION="1.19.3"
 # Install kubectl.
 COPY --from=lachlanevenson/k8s-kubectl:v1.19.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
 
+# Install requirements.
+RUN curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v1.1.0/test/ansible/requirements.yml -o /tmp/requirements.yml && \
+    ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
+    rm -f /tmp/requirements.yml
+
 CMD [ "/bin/bash" ]
 
 # Labels

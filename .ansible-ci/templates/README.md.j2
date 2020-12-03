@@ -4,8 +4,9 @@ This project builds containers using Ansible. The containers are defined as host
 ### Containers build info
 | Container Directory  | Container Image  | Version  |
 |---|---|---|
-{% for ctr in ansible_play_hosts %}
-| [{{ ctr }}]({{ ctr }}/ )| [{{ hostvars[ctr].container_image }}](https://{{ hostvars[ctr].container_image }}) | {{ hostvars[ctr].state_yml_tag }} |
+{% for ctr in doc_ctr_names | default(ansible_play_hosts,true) %}
+{% set ctr_state = lookup('vars', ctr | replace('-', '_') | lower + '_image',default=False) %}
+| [{{ ctr }}]({{ ctr }}/ )| [{{ ctr_state.repo_digest.split('@')[0] }}](https://{{ ctr_state.repo_digest.split('@')[0] }}) | {{ ctr_state.tag }} |
 {% endfor %}
 
 ### How to build them?

@@ -1,3 +1,12 @@
+- name: get container images from state dir
+  vars:
+    doc_get_ctr_names: "{{ lookup('pipe', 'find \"' + state_dir + '\" -maxdepth 1 -type f  -name \"*.yml\" -print0 | sort -z | xargs -r0 basename -s .yml').split('\n') }}"
+  when:
+    - doc_ctr_names_from_state_dir | default(false)
+    - doc_get_ctr_names is defined and doc_get_ctr_names
+  set_fact:
+    doc_ctr_names: "{{ doc_get_ctr_names }}"
+
 - name: generate project readme
   run_once: true
   when: doc_generate_project_readme | default(false)

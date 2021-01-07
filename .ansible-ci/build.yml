@@ -21,7 +21,6 @@
         - "build_step_5"
         - "build_step_6"
         - "build_step_7"
-        - "build_step_8"
       include_tasks: tasks/build-group.yml
 
     - name: "upload artifacts"

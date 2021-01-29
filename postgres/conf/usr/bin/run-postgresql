@@ -41,16 +41,9 @@ pg_ctl start -w --timeout 86400 -o "-h ''"
 pg_isready
 
 if $PG_INITIALIZED ; then
-    process_extending_files \
-        "${APP_DATA}/src/postgresql-init" \
-        "${CONTAINER_SCRIPTS_PATH}/init"
     migrate_db
     create_users
 fi
-
-process_extending_files \
-    "${APP_DATA}/src/postgresql-start" \
-    "${CONTAINER_SCRIPTS_PATH}/start"
 
 pg_ctl stop
 

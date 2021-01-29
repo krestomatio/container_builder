@@ -429,23 +429,3 @@ get_matched_files ()
     find -L "$dir" -maxdepth 1 -type f -name "$pattern" -printf "%f\n"
   done
 }
-
-# process_extending_files DIR [DIR ...]
-# -------------------------------------
-# Source all *.sh files in DIRs in alphabetical order, but if the file exists in
-# more then one DIR, source only the first occurrence (first found wins).
-process_extending_files()
-{
-  local filename dir
-  while read filename ; do
-    for dir in "$@"; do
-      local file="$dir/$filename"
-      if test -f "$file"; then
-        echo "=> sourcing $file ..."
-        source "$file"
-        set -e # ensure that users don't mistakenly change this
-        break
-      fi
-    done
-  done <<<"$(get_matched_files '*.sh' "$@" | sort -u)"
-}

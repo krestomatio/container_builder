@@ -2,8 +2,8 @@
 # Ansible managed
 #
 centos8_minimal_image:
-  build: True
-  tag: "8.3.1-4b93b21"
-  id: "sha256:baafca9a06d81f99fcab97fec9af91b8b53b166a9d10175657b651c25d709a86"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/centos8-minimal@sha256:6bfc47f038c985cd73d9f41a56ddd043c8d41052ebe868d81b779c69782cee5e"
-  artifact_tag: 4b93b210d6638a4d70ff28665bc2620df2718093
+  build: False
+  tag: "8.3.1"
+  id: "sha256:780aac997fbef936b1ea0eb5d79bf9beb9e34225ad7c5294d069bb61ce5ef310"
+  repo_digest: "quay.io/krestomatio/centos8-minimal@sha256:fe580f6fae65df4b15471c7c804e937219e66b909fd90928f8e7fb9db9e9b594"
+  artifact_tag: 0f41eab61795295658aac0309168434c670389d0

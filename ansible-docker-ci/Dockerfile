@@ -34,7 +34,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_APK bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl && \
+    $CTR_APK bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl coreutils && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -43,7 +43,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="0.8.1"
+ENV ORAS_VERSION="0.9.0"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \

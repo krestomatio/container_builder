@@ -20,7 +20,7 @@ RUN echo "Installing podman..."  && \
 
 COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
 
-ENV ORAS_VERSION="0.8.1"
+ENV ORAS_VERSION="0.9.0"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     pushd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \

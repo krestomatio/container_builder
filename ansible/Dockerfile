@@ -11,7 +11,7 @@ ENV IMAGE_NAME=ansible \
 ENV ANSIBLE_VERSION="2.9.*" \
     MOLECULE_VERSION="3.1.*" \
     CTR_PIP="pip3 install --no-cache --upgrade" \
-    CTR_PIP_EXTRA="yamllint ansible-lint flake8 pycrypto git-semver"
+    CTR_PIP_EXTRA="yamllint ansible-lint flake8 pycrypto git-semver openshift"
 
 RUN echo "Build tools..."  && \
     $CTR_PKG_MGM install python3-devel gcc && \

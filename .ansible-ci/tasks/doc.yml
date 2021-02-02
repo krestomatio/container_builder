@@ -1,4 +1,8 @@
+- name: load image state
+  include_tasks: tasks/state/load.yml
+
 - name: get container images from state dir
+  run_once: true
   vars:
     doc_get_ctr_names: "{{ lookup('pipe', 'find \"' + state_dir + '\" -maxdepth 1 -type f  -name \"*.yml\" -print0 | sort -z | xargs -r0 basename -s .yml').split('\n') }}"
   when:

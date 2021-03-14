@@ -6,8 +6,6 @@ spec:
     context: "pr"
     always_run: true
     optional: false
-    trigger: (?m)^/test( all| pr),?(s+|$)
-    rerun_command: /test pr
     source: "pullrequest.yaml"
   postsubmits:
   - name: release

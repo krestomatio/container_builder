@@ -1,66 +1,45 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  annotations:
-    lighthouse.jenkins-x.io/prependStepsURL: https://raw.githubusercontent.com/krestomatio/jx3-pipeline-catalog/master/tasks/git-clone/git-clone.yaml
+  creationTimestamp: null
   name: release
 spec:
   pipelineSpec:
-    params:
-    - default: master
-      description: git revision to checkout (branch, tag, sha, ref…)
-      name: revision
-      type: string
     tasks:
-    - name: from-build-pack
-      params:
-      - name: revision
-        value: $(params.revision)
-      resources: {}
-      taskSpec:
-        metadata: {}
-        params:
-        - default: master
-          description: git revision to checkout (branch, tag, sha, ref…)
-          name: revision
-          type: string
-        stepTemplate:
-          env:
-          - name: PIPELINE_KIND
-            value: release
-          - name: JX_BATCH_MODE
-            value: "true"
-          name: ""
-          resources:
-            requests:
-              cpu: 400m
-              memory: 512Mi
-          workingDir: /workspace/source
-        steps:
-        - args:
-          - ansible-playbook .ansible-ci/release.yml
-          command:
-          - /bin/sh
-          - -c
-          env:
-          - name: CLOUD_PROVIDER
-            value: m6e
-          - name: APIKEY__QUAY_IO
-            valueFrom:
-              secretKeyRef:
-                key: apikey
-                name: quay-io-api-key
-          image: quay.io/krestomatio/ansible-docker-ci
-          name: release
-          workingDir: /workspace/source
-          resources: {}
-          volumeMounts:
-          - name: libdocker
-            mountPath: /var/lib/docker
-        volumes:
-        - name: libdocker
-          persistentVolumeClaim:
-            claimName: libdocker-0sd6j3-pvc
+      - name: release
+        resources: {}
+        taskSpec:
+          metadata: {}
+          stepTemplate:
+            name: ''
+            resources:
+              requests:
+                cpu: 400m
+                memory: 512Mi
+            workingDir: /workspace/source
+          steps:
+            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@4a2339d4be2ca7f857302ac9441cac7966bfb875
+            - image: quay.io/krestomatio/ansible-docker-ci
+              name: release
+              env:
+              - name: CLOUD_PROVIDER
+                value: m6e
+              - name: APIKEY__QUAY_IO
+                valueFrom:
+                  secretKeyRef:
+                    key: apikey
+                    name: quay-io-api-key
+              args:
+              - .ansible-ci/release.yml
+              command:
+              - ansible-playbook
+              volumeMounts:
+              - name: libdocker
+                mountPath: /var/lib/docker
+            volumes:
+            - name: libdocker
+              persistentVolumeClaim:
+                claimName: libdocker-0sd6j3-pvc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

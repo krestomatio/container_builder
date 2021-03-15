@@ -1,6 +1,14 @@
 #!/bin/bash -e
 # description: additional entrypoint script for php-fpm
 
+# Exit if nginx is installed and php-fpm conf file not writable
+if rpm -q nginx &>null; then
+    if ! [ -w "${PHP_FPM_CONF_FILE}" ]; then
+        echo "Nginx installed and ${PHP_FPM_CONF_FILE} not writable...doing nothing here"
+        exit 0
+    fi
+fi
+
 # listen.allowed_clients with values 'empty' or 'any' does not  work
 # so it is remove in that case
 if [ ${PHP_FPM_LISTEN_ALLOWED_CLIENTS} != '127.0.0.1' ]; then

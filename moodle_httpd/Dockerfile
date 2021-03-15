@@ -4,7 +4,7 @@ FROM quay.io/krestomatio/httpd
 # General variables
 ENV IMAGE_NAME="moodle_httpd" \
     IMAGE_SUMMARY="Apache ${HTTPD_VERSION} for Moodle 3.9" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Apache ${HTTPD_VERSION} for Moodle 3.9" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Apache ${HTTPD_VERSION} for Moodle 3.9" \
     IMAGE_TITLE="Apache ${HTTPD_VERSION} for Moodle3.9 " \
     TZ="UTC"
 

@@ -1,10 +1,10 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=postgres \
     IMAGE_SUMMARY="Postgres 10" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Postgres 10. \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Postgres 10. \
 It follows https://github.com/sclorg/postgresql-container" \
     IMAGE_TITLE="Postgres 10" \
     IMAGE_SERVICE_PORT="5432" \

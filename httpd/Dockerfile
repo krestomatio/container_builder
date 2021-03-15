@@ -1,10 +1,10 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=httpd \
     IMAGE_SUMMARY="Apache 2.4" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Apache 2.4" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Apache 2.4" \
     IMAGE_TITLE="Apache 2.4" \
     IMAGE_SERVICE_PORT="8080" \
     IMAGE_SERVICE_NAME="http"

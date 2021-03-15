@@ -4,7 +4,7 @@ FROM quay.io/krestomatio/nginx_php-fpm
 # General variables
 ENV IMAGE_NAME="moodle_nginx" \
     IMAGE_SUMMARY="Nginx ${NGINX_VERSION} for Moodle 3.9" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Nginx ${NGINX_VERSION} for Moodle 3.9" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx ${NGINX_VERSION} for Moodle 3.9" \
     IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle 3.9" \
     TZ="UTC"
 

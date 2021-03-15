@@ -4,7 +4,7 @@ FROM quay.io/krestomatio/base
 # General variables
 ENV IMAGE_NAME=moodle_app \
     IMAGE_SUMMARY="Moodle app code $MOODLE_VERSION" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image has Moodle code for ${MOODLE_VERSION}" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image has Moodle code for ${MOODLE_VERSION}" \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="3.9" \
     MOODLE_VER_SHORT="39"

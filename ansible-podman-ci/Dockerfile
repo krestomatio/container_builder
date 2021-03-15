@@ -3,9 +3,9 @@ FROM quay.io/krestomatio/ansible
 
 # General variables
 ENV IMAGE_NAME=ansible-podman-ci \
-    IMAGE_SUMMARY="Podman image based on CentOS 8 minimal for Continuous Integration" \
-    IMAGE_DESCRIPTION="CentOS 8 minimal based image with tools like Buildah and Skopeo, for CI" \
-    IMAGE_TITLE="Ansible CI image based on CentOS 8 minimal"
+    IMAGE_SUMMARY="Podman image based on CentOS 8 Stream minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based image with tools like Buildah and Skopeo, for CI" \
+    IMAGE_TITLE="Ansible CI image based on CentOS 8 Stream minimal"
 
 ENV BUILDAH_ISOLATION=chroot \
     BUILDAH_LAYERS=true \

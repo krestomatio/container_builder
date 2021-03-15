@@ -1,7 +1,8 @@
 # {{ ansible_managed  }}
 {% if moodle_app_copy_from is defined %}
 FROM {{ moodle_app_copy_from }} AS app
-RUN app-git -a -e '.git*'
+ENV GIT_COMMIT={{ moodle_git_commit }}
+RUN app-git -v -a -e '.git*'
 
 {% endif %}
 FROM {{ dockerfile_builder_image_from }}
@@ -36,6 +37,8 @@ RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 
 {% if moodle_app_copy_from is defined %}
+ENV MOODLE_COMMIT="{{ moodle_git_commit }}"
+
 COPY --from=app {{ moodle_code_copy_path | default('/var/www/html') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
 
 {% endif %}

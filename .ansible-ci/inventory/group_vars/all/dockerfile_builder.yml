@@ -34,7 +34,7 @@ dockerfile_builder: docker
 # dockerfile_builder_push: true
 dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@gmail.com>
-dockerfile_builder_image_based: CentOS 8 minimal
+dockerfile_builder_image_based: CentOS 8 Stream minimal
 dockerfile_builder_image_from:
   "{{ registry_path }}/{{ container_builder_image_from }}{{ ':' + container_builder_image_tag_from
   if container_builder_image_tag_from is defined

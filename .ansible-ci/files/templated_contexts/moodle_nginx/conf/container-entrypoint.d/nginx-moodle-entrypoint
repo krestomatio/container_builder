@@ -1,6 +1,14 @@
 #!/bin/bash -e
 # description: additional entrypoint script for moodle nginx
 
+# Exit if php-fpm is installed and nginx conf file not writable
+if rpm -q php-fpm &>/dev/null; then
+    if ! [ -w "${NGINX_MAIN_CONF_FILE}" ]; then
+        echo "PHP-FPM installed and ${NGINX_MAIN_CONF_FILE} not writable...doing nothing here"
+        exit 0
+    fi
+fi
+
 # root default config
 if ! [ -f ${NGINX_DEFAULT_CONF_ROOT_FILE} ]; then
     cat << "EOF" > ${NGINX_DEFAULT_CONF_ROOT_FILE}

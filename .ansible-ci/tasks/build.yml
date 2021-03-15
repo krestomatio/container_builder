@@ -12,6 +12,15 @@
   include_tasks: tasks/builder/cache.yml
   when: build_cache | default(false) | bool
 
+- name: force build if image from is built and changed
+  when:
+    - container_builder_image_from is defined
+    - hostvars[container_builder_image_from].dockerfile_builder_image_build is defined
+    - hostvars[container_builder_image_from].dockerfile_builder_image_build is changed
+  set_fact:
+    dockerfile_builder_force_source: true
+    dockerfile_builder_force: true
+
 - name: build image
   include_role:
     name: dockerfile_builder

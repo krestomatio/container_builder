@@ -8,6 +8,10 @@ dockerfile_builder_image_oc_tags:
   "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'
   + ',moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}' }}"
+dockerfile_builder_force:
+  "{{ true if hostvars['moodle_app'].dockerfile_builder_image_build is defined
+  and hostvars['moodle_app'].dockerfile_builder_image_build is changed else false  }}"
+dockerfile_builder_force_source: "{{ dockerfile_builder_force }}"
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"

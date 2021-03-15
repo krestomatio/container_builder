@@ -21,7 +21,7 @@ for f in ${CTR_ENTRYPOINT_OPT_PATH}/*; do
     fi
 done
 
-# first arg is `-f` or `--some-option
+# first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     if ! [ -z ${CTR_CMD+x} ]; then
 	       set -- ${CTR_CMD} "$@"

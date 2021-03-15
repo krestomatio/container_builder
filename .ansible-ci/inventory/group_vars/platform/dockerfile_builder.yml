@@ -8,5 +8,5 @@ postgres_prev_version: '9.6'
 
 # builder
 # dockerfile_builder_push: true
-container_builder_image_from: base
+container_builder_image_from: base-stream
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y

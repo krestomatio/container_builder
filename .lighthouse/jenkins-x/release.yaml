@@ -36,10 +36,10 @@ spec:
               volumeMounts:
               - name: libdocker
                 mountPath: /var/lib/docker
-            volumes:
-            - name: libdocker
-              persistentVolumeClaim:
-                claimName: libdocker-0sd6j3-pvc
+          volumes:
+          - name: libdocker
+            persistentVolumeClaim:
+              claimName: libdocker-0sd6j3-pvc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

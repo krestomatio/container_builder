@@ -1,4 +1,5 @@
 container_builder_image_from: nginx
+dockerfile_builder_image_name: "{{ ctr_name }}"
 
 # source dir
 template_path: "{{ template_dir }}/php-fpm"

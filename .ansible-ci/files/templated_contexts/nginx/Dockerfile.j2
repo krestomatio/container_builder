@@ -11,7 +11,7 @@ ENV IMAGE_NAME=nginx \
 
 # Container variables
 ENV CTR_USER=nginx \
-    CTR_USER_ID="998" \
+    CTR_USER_ID="999" \
     CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables

@@ -3,7 +3,7 @@
 #
 nginx_image:
   build: False
-  tag: "0.1.5"
-  id: "sha256:398ccf15802cfcb3f7da323f847945178bfe85144c3b5e1813033b5a68cb1b97"
-  repo_digest: "quay.io/krestomatio/nginx@sha256:ece09796012bf08614b7d65902a4c42ffee13e5f74053ea6083a414e9404a4cf"
-  artifact_tag: e2a4f2a40f4f79b4bbb46fdd9edc35d6645ead05
+  tag: "0.1.6"
+  id: "sha256:abd3802ccfd05e3b911dccb85eac3b4411afaeec55b9d16b5c0ebc8719832699"
+  repo_digest: "quay.io/krestomatio/nginx@sha256:99145d820573555ed9f57db027436a896dfec86becfc2818c01e042f2dd14bca"
+  artifact_tag: 7b70d1de4e46b8a6fc503f6671c79312038fe285

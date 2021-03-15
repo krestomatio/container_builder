@@ -1,13 +1,14 @@
 # Ansible managed
 FROM quay.io/krestomatio/moodle_app AS app
-RUN app-git -a -e '.git*'
+ENV GIT_COMMIT=8ee6f49384dfb8e5fa6bf61a11cdb90fa79d2cd1
+RUN app-git -v -a -e '.git*'
 
 FROM quay.io/krestomatio/moodle_nginx_web
 
 # General ansible variables
 ENV IMAGE_NAME=moodle_web \
     IMAGE_SUMMARY="PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle" \
     IMAGE_TITLE="PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle" \
     IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
     TZ="UTC"
@@ -32,6 +33,8 @@ COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
+
+ENV MOODLE_COMMIT="8ee6f49384dfb8e5fa6bf61a11cdb90fa79d2cd1"
 
 COPY --from=app /var/www/html /var/www/html
 

@@ -3,9 +3,9 @@ FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=ansible \
-    IMAGE_SUMMARY="Ansible image based on CentOS 8 minimal for Continuous Integration" \
-    IMAGE_DESCRIPTION="CentOS 8 minimal based image with Ansible and Molecule" \
-    IMAGE_TITLE="Ansible image based on CentOS 8 minimal"
+    IMAGE_SUMMARY="Ansible image based on CentOS 8 Stream minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based image with Ansible and Molecule" \
+    IMAGE_TITLE="Ansible image based on CentOS 8 Stream minimal"
 
 # Container variables
 ENV ANSIBLE_VERSION="2.9.*" \

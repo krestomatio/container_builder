@@ -3,9 +3,9 @@ FROM quay.io/krestomatio/ansible-podman-ci
 
 # General variables
 ENV IMAGE_NAME=ansible-operator-ci \
-    IMAGE_SUMMARY="Ansible Operator SDK image based on CentOS 8 minimal for Continuous Integration" \
-    IMAGE_DESCRIPTION="CentOS 8 minimal based image with Ansible Operator SDK" \
-    IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 minimal"
+    IMAGE_SUMMARY="Ansible Operator SDK image based on CentOS 8 Stream minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based image with Ansible Operator SDK" \
+    IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 Stream minimal"
 
 # Container variables
 ENV OPERATOR_VERSION="1.1.0"

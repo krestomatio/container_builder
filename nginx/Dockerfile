@@ -1,10 +1,10 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=nginx \
     IMAGE_SUMMARY="Nginx 1.14" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs Nginx 1.14" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx 1.14" \
     IMAGE_TITLE="Nginx 1.14" \
     IMAGE_SERVICE_PORT="8080" \
     IMAGE_SERVICE_NAME="http"

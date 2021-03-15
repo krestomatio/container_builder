@@ -4,7 +4,7 @@ FROM quay.io/krestomatio/nginx
 # General variables
 ENV IMAGE_NAME=php-fpm \
     IMAGE_SUMMARY="PHP 7.2" \
-    IMAGE_DESCRIPTION="This CentOS 8 minimal based container image runs PHP 7.2" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.2" \
     IMAGE_TITLE="PHP 7.2" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"

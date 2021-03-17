@@ -10,8 +10,8 @@ sed -i \
 sed -i \
     -e 's@^user =.*@user = ${PHP_FPM_USER}@' \
     -e 's@^group =.*@group = ${PHP_FPM_GROUP}@' \
-    -e 's@^slowlog =.*@slowlog = /proc/self/fd/1@' \
-    -e 's@^;access.log =.*@access.log = /proc/self/fd/1@' \
+    -e 's@^slowlog =.*@slowlog = /proc/self/fd/2@' \
+    -e 's@^;access.log =.*@access.log = /proc/self/fd/2@' \
     -e 's@^;clear_env.*@clear_env = no@' \
     -e 's@^;catch_workers_output.*@catch_workers_output = yes@' \
     -e 's@^listen =.*@listen = ${PHP_FPM_LISTEN}@' \

@@ -2,6 +2,7 @@
 # From https://github.com/sclorg/postgresql-container
 
 # Configuration settings.
+export POSTGRESQL_LOG_STDERR=${POSTGRESQL_LOG_STDERR:-}
 export POSTGRESQL_MAX_CONNECTIONS=${POSTGRESQL_MAX_CONNECTIONS:-100}
 export POSTGRESQL_MAX_PREPARED_TRANSACTIONS=${POSTGRESQL_MAX_PREPARED_TRANSACTIONS:-0}
 
@@ -20,6 +21,7 @@ else
     export POSTGRESQL_SHARED_BUFFERS=${POSTGRESQL_SHARED_BUFFERS:-$shared_buffers_computed}
     export POSTGRESQL_EFFECTIVE_CACHE_SIZE=${POSTGRESQL_EFFECTIVE_CACHE_SIZE:-$effective_cache}
 fi
+
 
 export POSTGRESQL_RECOVERY_FILE=$HOME/openshift-custom-recovery.conf
 export POSTGRESQL_CONFIG_FILE=$HOME/openshift-custom-postgresql.conf
@@ -129,6 +131,14 @@ function generate_postgresql_config() {
     # https://github.com/postgres/postgres/commit/9ccdd7f66e3324d2b6d3dec282cfa9ff084083f1
     # RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=1779150
     echo "data_sync_retry = on" >>"${POSTGRESQL_CONFIG_FILE}"
+  fi
+
+  # For easier debugging, allow users to log to stderr (will be visible
+  # in the pod logs) using a single variable
+  # https://github.com/sclorg/postgresql-container/issues/353
+  if [ -n "${POSTGRESQL_LOG_STDERR:-}" ] ; then
+    echo "log_destination = 'stderr'" >>"${POSTGRESQL_CONFIG_FILE}"
+    echo "logging_collector = off" >>"${POSTGRESQL_CONFIG_FILE}"
   fi
 
   (

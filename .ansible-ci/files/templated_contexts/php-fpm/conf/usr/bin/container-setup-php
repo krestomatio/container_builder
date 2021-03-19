@@ -5,6 +5,7 @@
 sed -i \
     -e 's@^error_log.*@error_log = ${PHP_FPM_ERROR_LOG}@' \
     -e 's@^daemonize.*@daemonize = no@' \
+    -e 's@;process_control_timeout.*@process_control_timeout = ${PHP_FPM_PROCESS_CONTROL_TIMEOUT}@' \
     ${PHP_FPM_CONF_FILE}
 
 sed -i \

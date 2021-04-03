@@ -5,11 +5,13 @@ moodle_version: '3.9'
 moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
 
 dockerfile_builder_image_git_remote: "git://github.com/moodle/moodle"
-dockerfile_builder_image_git_chk:
-  "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +
-  moodle_git_branch }}"
-moodle_git_source_version_url:
-  "{{ 'https://raw.githubusercontent.com/moodle/moodle/' +
+moodle_git_refs_json:
+  url: "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +
+    moodle_git_branch }}"
+  headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
+moodle_git_repo_version:
+  url: "{{ 'https://raw.githubusercontent.com/moodle/moodle/' +
   moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
-moodle_git_repo_version_regex: '([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?'
-moodle_git_repo_version_number_regex: '(?<=\=\s)\d+\.\d+(?=\;)'
+  headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
+  regex: '([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?'
+  number_regex: '(?<=\=\s)\d+\.\d+(?=\;)'

@@ -35,11 +35,10 @@ WORKDIR ${GIT_DEST}
 # source variables
 ENV GIT_BRANCH="{{ moodle_git_branch }}" \
     GIT_COMMIT="{{ moodle_git_commit }}" \
-    GIT_REMOTE="{{ dockerfile_builder_image_git_remote }}" \
-    GIT_CHK="{{ dockerfile_builder_image_git_chk }}"
+    GIT_REMOTE="{{ dockerfile_builder_image_git_remote }}"
 
 # verify it has changed
-ADD "${GIT_CHK}" /tmp/version.json
+ADD version.json /tmp/version.json
 
 # get source code
 RUN git clone --branch "${GIT_BRANCH}" --depth 1 \

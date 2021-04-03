@@ -6,10 +6,8 @@ reinstall_tzdata(){
     echo "Reinstalling tzdata"
     # update
     ${CTR_PKG_MGM} update
-    # remove
-    rpm -e --nodeps tzdata > /dev/null 2>&1
     # reinstall
-    ${CTR_PKG_MGM} install tzdata
+    ${CTR_PKG_MGM} reinstall tzdata
     # clean
     ${CTR_PKG_MGM} clean all
 }

@@ -83,7 +83,7 @@ ncurses-libs-6.1-7.20180224.el8.x86_64.rpm
 nettle-3.4.1-2.el8.x86_64.rpm
 npth-1.5-4.el8.x86_64.rpm
 openldap-2.4.46-15.el8.x86_64.rpm
-openssl-libs-1.1.1g-12.el8_3.x86_64.rpm
+openssl-libs-1.1.1g-15.el8_3.x86_64.rpm
 p11-kit-0.23.14-5.el8_0.x86_64.rpm
 p11-kit-trust-0.23.14-5.el8_0.x86_64.rpm
 pcre-8.42-4.el8.x86_64.rpm

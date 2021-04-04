@@ -7,7 +7,8 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image has Moodle code for ${MOODLE_VERSION}" \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="3.9" \
-    MOODLE_VER_SHORT="39"
+    MOODLE_VER_SHORT="39" \
+    MOODLE_VERSION_NUMBER="2020061506.01"
 
 # Container variables
 ENV CTR_USER=apache \
@@ -33,16 +34,15 @@ WORKDIR ${GIT_DEST}
 
 # source variables
 ENV GIT_BRANCH="MOODLE_39_STABLE" \
-    GIT_COMMIT="8ee6f49384dfb8e5fa6bf61a11cdb90fa79d2cd1" \
-    GIT_REMOTE="git://github.com/moodle/moodle" \
-    GIT_CHK="https://api.github.com/repos/moodle/moodle/git/refs/heads/MOODLE_39_STABLE"
+    GIT_COMMIT="a2e4730a351c1b1b9ec983214663282c127edef0" \
+    GIT_REMOTE="git://github.com/moodle/moodle"
+
+# verify it has changed
+ADD version.json /tmp/version.json
 
 # get source code
 RUN git clone --branch "${GIT_BRANCH}" --depth 1 \
     "${GIT_REMOTE}" "${GIT_DEST}"
-
-# verify it has changed
-ADD "${GIT_CHK}" /tmp/version.json
 
 # Pull and verify
 RUN app-git -p -v

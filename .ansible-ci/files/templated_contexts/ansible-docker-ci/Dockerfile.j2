@@ -18,8 +18,9 @@ ENV ANSIBLE_VERSION="{{ image_ansible_version }}" \
 RUN echo "Build tools..."  && \
     $CTR_APK py-pip openssl ca-certificates && \
     $CTR_APK --virtual build-dependencies python3-dev \
-        libffi-dev openssl-dev build-base  && \
-    $CTR_PIP cffi pip && \
+        libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
+    $CTR_PIP cffi wheel && \
+    $CTR_PIP pip && \
     $CTR_PIP ansible==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
@@ -34,7 +35,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_APK bash xz gzip tar git rsync jq sudo sshpass openssh-client skopeo curl coreutils && \
+    $CTR_APK bash xz gzip tar git git-lfs rsync jq sudo sshpass openssh-client skopeo curl coreutils && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \

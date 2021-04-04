@@ -1,32 +1,74 @@
-- name: get moodle commit
-  run_once: true
-  retries: 3
-  delay: 3
-  until: moodle_git_ref is defined
+- name: get moodle repo refs info
   when:
-    - dockerfile_builder_image_git_chk is defined
-    - moodle_git_commit_get | default(false)
-  vars:
-    moodle_git_ref: "{{ lookup('url', dockerfile_builder_image_git_chk) }}"
-  set_fact:
-    moodle_git_commit: "{{ moodle_git_ref.object.sha }}"
+    - moodle_git_refs_json is defined
+    - moodle_git_commit is not defined
+  block:
+    - name: get moodle repo json
+      run_once: true
+      retries: 3
+      delay: 3
+      until: moodle_git_commit_get_task.json is defined
+      register: moodle_git_commit_get_task
+      uri:
+        client_cert: "{{ moodle_git_refs_json.client_cert | default(omit) }}"
+        client_key: "{{ moodle_git_refs_json.client_key | default(omit) }}"
+        force_basic_auth: "{{ moodle_git_refs_json.force_basic_auth | default(omit) }}"
+        follow_redirects: "{{ moodle_git_refs_json.follow_redirects | default(omit) }}"
+        headers: "{{ moodle_git_refs_json.headers_json | default(omit,true) }}"
+        method: "{{ moodle_git_refs_json.method | default(omit) }}"
+        return_content: "{{ moodle_git_refs_json.return_content | default(true) }}"
+        status_code: "{{ moodle_git_refs_json.status_code | default(omit) }}"
+        timeout: "{{ moodle_git_refs_json.timeout | default(omit) }}"
+        url: "{{ moodle_git_refs_json.url }}"
+        url_password: "{{ moodle_git_refs_json.url_password | default(omit) }}"
+        url_username: "{{ moodle_git_refs_json.url_username | default(omit) }}"
+        validate_certs: "{{ moodle_git_refs_json.validate_certs | default(omit) }}"
 
-- name: get moodle version from remote source
-  run_once: true
-  retries: 3
-  delay: 3
-  vars:
-    moodle_git_source_version_from_url: "{{ lookup('url', moodle_git_source_version_url) | regex_search(moodle_git_repo_version_regex) }}"
-  until: moodle_git_source_version_from_url is defined
+    - name: store moodle repo refs as json
+      when: moodle_git_refs_json_dest is defined
+      copy:
+        content: "{{ moodle_git_commit_get_task.json }}"
+        mode: '0644'
+        dest: "{{ moodle_git_refs_json_dest }}"
+
+    - name: set moodle repo commmit fact
+      set_fact:
+        moodle_git_commit: "{{ moodle_git_commit_get_task.json.object.sha }}"
+
+- name: get moodle version from remote source (version.php)
   when:
-    - moodle_git_source_version_url is defined
-    - moodle_git_repo_version_regex is defined
-  set_fact:
-    moodle_git_source_version: "{{ moodle_git_source_version_from_url }}"
+    - moodle_git_repo_version is defined
+    - moodle_git_source_version is not defined
+    - moodle_git_source_version_number is not defined
+  block:
+    - name: get moodle repo json
+      run_once: true
+      retries: 3
+      delay: 3
+      until: moodle_git_repo_version_task.content is defined
+      register: moodle_git_repo_version_task
+      uri:
+        client_cert: "{{ moodle_git_repo_version.client_cert | default(omit) }}"
+        client_key: "{{ moodle_git_repo_version.client_key | default(omit) }}"
+        force_basic_auth: "{{ moodle_git_repo_version.force_basic_auth | default(omit) }}"
+        follow_redirects: "{{ moodle_git_repo_version.follow_redirects | default(omit) }}"
+        headers: "{{ moodle_git_repo_version.headers_json | default(omit,true) }}"
+        method: "{{ moodle_git_repo_version.method | default(omit) }}"
+        return_content: "{{ moodle_git_repo_version.return_content | default(true) }}"
+        status_code: "{{ moodle_git_repo_version.status_code | default(omit) }}"
+        timeout: "{{ moodle_git_repo_version.timeout | default(omit) }}"
+        url: "{{ moodle_git_repo_version.url }}"
+        url_password: "{{ moodle_git_repo_version.url_password | default(omit) }}"
+        url_username: "{{ moodle_git_repo_version.url_username | default(omit) }}"
+        validate_certs: "{{ moodle_git_repo_version.validate_certs | default(omit) }}"
+
+    - name: set moodle version facts
+      set_fact:
+        moodle_git_source_version: "{{ moodle_git_repo_version_task.content | regex_search(moodle_git_repo_version.regex) }}"
+        moodle_git_source_version_number: "{{ moodle_git_repo_version_task.content | regex_search(moodle_git_repo_version.number_regex) }}"
 
 - name: set moodle version from remote source
-  when:
-    - moodle_git_source_version is defined
+  when: moodle_git_source_version is defined
   set_fact:
     version_image_major: "{{ moodle_git_source_version.split('.')[0] | default(false) }}"
     version_image_minor: "{{ moodle_git_source_version.split('.')[1] | default(false) }}"

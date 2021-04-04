@@ -9,13 +9,15 @@
 # https://catalog.redhat.com/software/containers/detail/5c359a62bed8bd75a2c3fba8
 
 # Basic setup information
-install
 url --url http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/
 bootloader --disabled
 timezone --isUtc --nontp Etc/UTC
 rootpw --lock --iscrypted locked
-keyboard us
-network --bootproto=dhcp --device=link --activate
+keyboard --vckeymap=us --xlayouts='us'
+lang en_US.UTF-8
+network  --bootproto=dhcp --device=link --activate
+network  --hostname=localhost.localdomain
+skipx
 reboot
 
 # Disk setup
@@ -26,16 +28,19 @@ autopart --noboot --nohome --noswap --nolvm --fstype=ext4
 # Package setup
 %packages --excludedocs --instLangs=en --nocore --excludeWeakdeps
 centos-stream-release
+centos-stream-repos
 bash
 coreutils-single
 glibc-minimal-langpack
 libusbx
 microdnf
 rootfiles
+-crypto-policies-scripts
 -dosfstools
 -e2fsprogs
 -fuse-libs
 -gnupg2-smime
+-grubby
 -kernel
 -libss
 -pinentry
@@ -46,7 +51,8 @@ rootfiles
 -xkeyboard-config
 %end
 
-%addon com_redhat_kdump --disable
+%addon com_redhat_kdump --disable --reserve-mb='128'
+
 %end
 
 %post --erroronfail --log=/root/anaconda-post.log
@@ -54,15 +60,19 @@ rootfiles
 set -eux
 
 # Limit languages to help reduce size.
-LANG="en_US"
+LANG="C.utf8"
 echo "%_install_langs $LANG" > /etc/rpm/macros.image-language-conf
 echo "LANG=C.utf8" > /etc/locale.conf
 
+# https://bugzilla.redhat.com/show_bug.cgi?id=1400682
+echo "Import RPM GPG key"
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 
 # Remove network configuration files leftover from anaconda installation
 # https://bugzilla.redhat.com/show_bug.cgi?id=1713089
 rm -f /etc/sysconfig/network-scripts/ifcfg-*
+
+echo "# fstab intentionally empty for containers" > /etc/fstab
 
 # Remove machine-id on pre generated images
 rm -f /etc/machine-id

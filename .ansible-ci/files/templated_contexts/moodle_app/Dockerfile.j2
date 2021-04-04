@@ -7,7 +7,8 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image has Moodle code for ${MOODLE_VERSION}" \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}"
+    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+    MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}"
 
 # Container variables
 ENV CTR_USER=apache \
@@ -34,15 +35,14 @@ WORKDIR ${GIT_DEST}
 # source variables
 ENV GIT_BRANCH="{{ moodle_git_branch }}" \
     GIT_COMMIT="{{ moodle_git_commit }}" \
-    GIT_REMOTE="{{ dockerfile_builder_image_git_remote }}" \
-    GIT_CHK="{{ dockerfile_builder_image_git_chk }}"
+    GIT_REMOTE="{{ dockerfile_builder_image_git_remote }}"
+
+# verify it has changed
+ADD version.json /tmp/version.json
 
 # get source code
 RUN git clone --branch "${GIT_BRANCH}" --depth 1 \
     "${GIT_REMOTE}" "${GIT_DEST}"
-
-# verify it has changed
-ADD "${GIT_CHK}" /tmp/version.json
 
 # Pull and verify
 RUN app-git -p -v

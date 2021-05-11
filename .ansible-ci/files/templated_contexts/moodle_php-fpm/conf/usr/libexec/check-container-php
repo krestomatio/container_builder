@@ -19,7 +19,6 @@ OPTIONS (check moodle php container):
   -l            check liveness (-d -m) (Default)
   -m            check if moodledata is writable
   -r            check readiness (-c -d -m)
-  -s <status>   get a json output of moodle checks and get status: all|critical|error|warning|unknown|info|ok|na
   -t            check php-fpm tcp port (if not using unix socket)
   -u            check if upgrade not needed
 
@@ -62,7 +61,8 @@ check_database_installed() {
     php <<'CODE'
 <?php
 define('CLI_SCRIPT', true);
-require(getenv('MOODLE_APP') . '/config.php');
+$MOODLE_APP = getenv('MOODLE_APP') ?: '/var/www/html';
+require($MOODLE_APP . '/config.php');
 if (empty($CFG->version)) {
     echo "CHECK: Database is not yet installed\n";
     exit(2);
@@ -85,7 +85,8 @@ if (function_exists('opcache_reset') and !isset($_SERVER['REMOTE_ADDR'])) {
 define('CLI_SCRIPT', true);
 define('CACHE_DISABLE_ALL', true);
 
-require(getenv('MOODLE_APP') . '/config.php');
+$MOODLE_APP = getenv('MOODLE_APP') ?: '/var/www/html';
+require($MOODLE_APP . '/config.php');
 if (moodle_needs_upgrading()) {
     echo "CHECK: Moodle upgrade needed\n";
     exit(2);
@@ -104,55 +105,7 @@ check_moodledata() {
     rm $TMPFILE
 }
 
-get_json_moodle_checks() {
-    # check moodle checks
-    set -e
-    php <<'CODE'
-<?php
-
-define('CLI_SCRIPT', true);
-require(getenv('MOODLE_APP') . '/config.php');
-
-use core\check\result;
-
-$filter_status='all';
-if(getenv('CHECK_INCLUDE_STATUS')){
-    $filter_status=explode( ',', strtolower(getenv('CHECK_INCLUDE_STATUS')));
-}
-
-$types = array('status', 'security', 'performance');
-$all_checks = array();
-
-foreach ($types as $type){
-    $method = 'get_' . $type . '_checks';
-    $checks = \core\check\manager::$method();
-    foreach ($checks as $check){
-        $result = $check->get_result();
-        $status = $result->get_status();
-        if (empty($filter_status) || in_array("all", $filter_status) || in_array(strtolower($status), $filter_status)) {
-            $type_check = array();
-            $action_link = $check->get_action_link();
-            $type_check['name'] = $check->get_name();
-            $type_check['ref'] = $check->get_ref();
-            $type_check['status'] = $status;
-            $type_check['summary'] = $result->get_summary();
-            $type_check['details'] = $result->get_details();
-            if ($actionlink){
-                $type_check['action_link']['name'] = $actionlink->name;
-                $type_check['action_link']['url'] = $actionlink->url;
-            }
-            $all_checks[$type][] = $type_check;
-        }
-    }
-}
-if($all_checks){
-    echo json_encode($all_checks);
-}
-?>
-CODE
-}
-
-while getopts ":cdlmrs:tu" opt; do
+while getopts ":cdlmrtu" opt; do
   case ${opt} in
     c )
         check_config_file
@@ -171,10 +124,6 @@ while getopts ":cdlmrs:tu" opt; do
         check_config_file
         check_database_installed
         check_moodledata
-        ;;
-    s )
-        export CHECK_INCLUDE_STATUS=${OPTARG:-all}
-        get_json_moodle_checks
         ;;
     t )
         check_tcp_port

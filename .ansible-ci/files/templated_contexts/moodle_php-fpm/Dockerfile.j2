@@ -12,12 +12,12 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
     IMAGE_SUMMARY="{{ dockerfile_builder_image_summary | default('PHP $PHP_VERSION for Moodle') }}" \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ${PHP_VERSION} for Moodle') }}" \
     IMAGE_TITLE="{{ dockerfile_builder_image_title | default('PHP ${PHP_VERSION} for Moodle') }}" \
-    IMAGE_OC_TAGS="{{ dockerfile_builder_image_oc_tags | default('${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}') }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_oc_tags | default('${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
 # Component bash variables
 ENV MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+    MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata
 

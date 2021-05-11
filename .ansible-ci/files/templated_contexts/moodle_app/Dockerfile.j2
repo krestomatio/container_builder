@@ -7,7 +7,7 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image has Moodle code for ${MOODLE_VERSION}" \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="{{ moodle_version }}" \
-    MOODLE_VER_SHORT="{{ moodle_version | replace('.','') }}" \
+    MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}"
 
 # Container variables
@@ -66,4 +66,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.revision="${GIT_COMMIT}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},moodle,moodle-${MOODLE_VER_SHORT},moodle${MOODLE_VERSION}"
+      io.openshift.tags="${IMAGE_NAME},moodle,moodle-${MOODLE_VERSION_SHORT},moodle${MOODLE_VERSION}"

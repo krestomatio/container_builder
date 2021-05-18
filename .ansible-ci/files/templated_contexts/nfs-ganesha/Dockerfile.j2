@@ -1,0 +1,73 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_NAME=nfs-ganesha \
+    IMAGE_SUMMARY="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \
+    IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs a NFSv4 Ganesha server." \
+    IMAGE_TITLE="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \
+    IMAGE_SERVICE_PORT="2049" \
+    IMAGE_SERVICE_NAME="nfs" \
+    TZ="{{ dockerfile_builder_image_timezone }}"
+
+# Container variables
+ENV CTR_USER=ganesha \
+    CTR_USER_ID="998" \
+    CTR_HOME=/run/ganesha \
+    CTR_CMD="ganesha.nfsd"
+
+# Component bash variables
+ENV NFS_GANESHA_VERSION="{{ nfs_ganesha_version }}" \
+    NFS_GANESHA_PORT=${IMAGE_SERVICE_PORT} \
+    NFS_GANESHA_CONF_FILE=/etc/ganesha/ganesha.conf \
+    NFS_GANESHA_CONF_DIR=/etc/ganesha/ \
+    NFS_GANESHA_CONF_EXPORTS_DIR=/etc/ganesha/exports \
+    NFS_GANESHA_CONF_EXPORT_FILE=/etc/ganesha/exports/export.conf \
+    NFS_GANESHA_EXPORTS_DIR=/exports \
+    NFS_GANESHA_EXPORT_DIR=/exports/default \
+    NFS_GANESHA_EXPORT_ID=1 \
+    NFS_GANESHA_EXPORT_SQUASH=root_squash \
+    NFS_GANESHA_EXPORT_LOG_LEVEL=EVENT \
+    NFS_GANESHA_EXPORT_HWMARK=100000 \
+    NFS_GANESHA_RUN_DIR=/run/ganesha \
+    NFS_GANESHA_DBUS_RUN_DIR=/run/dbus \
+    NFS_GANESHA_HOME=${CTR_HOME} \
+    NFS_GANESHA_PID=/run/ganesha/ganesha.pid
+
+# Frequent environment variables
+ENV HOME="${CTR_HOME}"
+
+ENV OS_INSTALL_PKGS="nfs-ganesha nfs-ganesha-vfs"
+
+USER 0
+
+COPY conf/usr /usr/
+
+RUN container-setup
+RUN install-pkgs centos-release-nfs-ganesha{{ '30' if nfs_ganesha_version == '3' else nfs_ganesha_version }}; install-pkgs ${OS_INSTALL_PKGS}
+
+RUN container-setup-nfs-ganesha
+
+WORKDIR ${CTR_HOME}
+
+USER ${CTR_USER_ID}
+
+EXPOSE ${NFS_GANESHA_PORT}
+
+ENTRYPOINT ["nfs-ganesha-dbus-entrypoint"]
+
+CMD ["ganesha.nfsd", "-F", "-L", "STDOUT", "-p", "/run/ganesha/ganesha.pid", "-f", "/etc/ganesha/ganesha.conf"]
+
+# Labels
+LABEL name="${IMAGE_NAME}" \
+      summary="${IMAGE_SUMMARY}" \
+      description="${IMAGE_DESCRIPTION}" \
+      maintainer="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.title="${IMAGE_TITLE}" \
+      org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+      org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
+      io.k8s.description="${IMAGE_DESCRIPTION}" \
+      io.k8s.display-name="${IMAGE_TITLE}" \
+      io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
+      io.openshift.tags="${IMAGE_NAME},nfs"

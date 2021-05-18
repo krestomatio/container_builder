@@ -1,0 +1,42 @@
+#!/bin/bash -e
+# description: additional entrypoint script for nfs ganesha
+
+# Configure default export
+cat << _EOF > ${NFS_GANESHA_CONF_EXPORT_FILE}
+MDCACHE {
+    Entries_HWMark = ${NFS_GANESHA_EXPORT_HWMARK};
+}
+EXPORT {
+    Export_Id = ${NFS_GANESHA_EXPORT_ID};
+    Path = ${NFS_GANESHA_EXPORT_DIR};
+    Pseudo = /;
+    Protocols = 4;
+    Transports = TCP;
+    Access_Type = RW;
+    Squash = ${NFS_GANESHA_EXPORT_SQUASH};
+    Sectype = sys;
+    FSAL {
+        Name = VFS;
+    }
+}
+LOG {
+    COMPONENTS {
+        ALL = ${NFS_GANESHA_EXPORT_LOG_LEVEL};
+    }
+}
+_EOF
+
+# run dbus as deamon
+echo "starting dbus for ganesha..."
+systemd-tmpfiles --create /usr/lib/tmpfiles.d/dbus.conf
+dbus-uuidgen --ensure
+dbus-daemon --fork --nopidfile --system
+
+# first arg is `-f` or `--some-option`
+if [ "${1#-}" != "$1" ]; then
+    if ! [ -z ${CTR_CMD+x} ]; then
+	       set -- ${CTR_CMD} "$@"
+    fi
+fi
+
+exec "$@"

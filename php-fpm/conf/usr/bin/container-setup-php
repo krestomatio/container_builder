@@ -21,6 +21,12 @@ sed -i \
     -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = ${PHP_FPM_ERROR_LOG}@' \
     ${PHP_FPM_POOL_FILE}
 
+# add nginx to apache group (if install)
+if command -v nginx &> /dev/null
+then
+    usermod -a -G apache nginx
+fi
+
 # In order to drop the root user, make some directories world
 # writeable as OpenShift default security model is to run the container under
 # random UID.

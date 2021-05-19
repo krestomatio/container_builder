@@ -7,8 +7,8 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image has Moodle code for ${MOODLE_VERSION}" \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="3.9" \
-    MOODLE_VER_SHORT="39" \
-    MOODLE_VERSION_NUMBER="2020061506.01"
+    MOODLE_VERSION_SHORT="39" \
+    MOODLE_VERSION_NUMBER="2020061507.01"
 
 # Container variables
 ENV CTR_USER=apache \
@@ -34,7 +34,7 @@ WORKDIR ${GIT_DEST}
 
 # source variables
 ENV GIT_BRANCH="MOODLE_39_STABLE" \
-    GIT_COMMIT="a2e4730a351c1b1b9ec983214663282c127edef0" \
+    GIT_COMMIT="b56affcfe6ad1005c5af417c772a8a9c5885f26f" \
     GIT_REMOTE="git://github.com/moodle/moodle"
 
 # verify it has changed
@@ -66,4 +66,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.revision="${GIT_COMMIT}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},moodle,moodle-${MOODLE_VER_SHORT},moodle${MOODLE_VERSION}"
+      io.openshift.tags="${IMAGE_NAME},moodle,moodle-${MOODLE_VERSION_SHORT},moodle${MOODLE_VERSION}"

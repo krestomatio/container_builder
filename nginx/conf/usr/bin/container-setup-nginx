@@ -15,6 +15,7 @@ cat << "EOF" > ${NGINX_MAIN_CONF_FILE}
 #   * Official English Documentation: http://nginx.org/en/docs/
 #   * Official Russian Documentation: http://nginx.org/ru/docs/
 
+daemon off;
 worker_processes auto;
 error_log /var/log/nginx/error.log;
 pid /run/nginx.pid;

@@ -6,12 +6,12 @@ ENV IMAGE_NAME=moodle_php-fpm \
     IMAGE_SUMMARY="PHP $PHP_VERSION for Moodle" \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} for Moodle" \
     IMAGE_TITLE="PHP ${PHP_VERSION} for Moodle" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}" \
     TZ="UTC"
 
 # Component bash variables
 ENV MOODLE_VERSION="3.9" \
-    MOODLE_VER_SHORT="39" \
+    MOODLE_VERSION_SHORT="39" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata
 

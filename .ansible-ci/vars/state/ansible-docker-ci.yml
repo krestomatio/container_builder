@@ -3,7 +3,7 @@
 #
 ansible_docker_ci_image:
   build: False
-  tag: "0.1.9"
-  id: "sha256:c84e5aa14620686825f43bd1d142416deacfae6ad9945c470e18f50c0038eb54"
-  repo_digest: "quay.io/krestomatio/ansible-docker-ci@sha256:857f197ffa6c5b2d58904bb2d485aaede57d58bd85eda086aba1f6cf18473695"
-  artifact_tag: 7dcfa63ad1cc4bcb7bd67000b910c9d657c7e8a2
+  tag: "0.1.10"
+  id: "sha256:f3659f6d87270affe88680ce83c3cd39ffac8825d0fa40d1f2d94100d00f9724"
+  repo_digest: "quay.io/krestomatio/ansible-docker-ci@sha256:9f45558d6b060edc2043543d4ff723b875083b98298b92e8bd035ece6e7b8c98"
+  artifact_tag: 22315ea2a0948288f076019e5515e48a7d9ae49f

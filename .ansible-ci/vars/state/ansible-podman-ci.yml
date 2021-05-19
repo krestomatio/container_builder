@@ -3,7 +3,7 @@
 #
 ansible_podman_ci_image:
   build: False
-  tag: "0.1.9"
-  id: "sha256:083327d86cd436c35c660e37e4c50df01e2943510f7018994c52cf5a4e1c8877"
-  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:aa4919c911042d8b18bf76f7dcb35da2d0dcb1ade89c14a66865172cf21b8dda"
-  artifact_tag: 7dcfa63ad1cc4bcb7bd67000b910c9d657c7e8a2
+  tag: "0.1.10"
+  id: "sha256:a0532edd998ad946930dba798e9ca637abdfb5507809eca7455159df192dd65d"
+  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:9ce677887893e08e9414b8609e7ffdfa58d1ff4aec3baf2356fc03997463f76b"
+  artifact_tag: 22315ea2a0948288f076019e5515e48a7d9ae49f

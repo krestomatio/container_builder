@@ -12,7 +12,7 @@ ENV IMAGE_NAME="moodle_nginx" \
 ENV APP_DEST=/var/www/html
 
 ENV MOODLE_VERSION="3.9" \
-    MOODLE_VER_SHORT="39" \
+    MOODLE_VERSION_SHORT="39" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata \
     MOODLE_CHECK_PATH=/login/index.php \
@@ -41,4 +41,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.version="0.1" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},nginx,nginx${NGINX_VER_SHORT},nginx-${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}"
+      io.openshift.tags="${IMAGE_NAME},nginx,nginx${NGINX_VER_SHORT},nginx-${NGINX_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}"

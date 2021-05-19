@@ -3,7 +3,7 @@
 #
 httpd_image:
   build: False
-  tag: "0.1.9"
-  id: "sha256:3ec73c12b54a0275b6be3484308b9a16f232cff7f024088b40afa323242fb8ac"
-  repo_digest: "quay.io/krestomatio/httpd@sha256:7c89282e3d72afd18a957b1d160c57c4d476b3bdb89f681f6780b4de32c7cfc7"
-  artifact_tag: 7dcfa63ad1cc4bcb7bd67000b910c9d657c7e8a2
+  tag: "0.1.10"
+  id: "sha256:981cd8432dd537931df6bce1babda1337db67bd5e3ef3b6983f2ac9e52ea15bb"
+  repo_digest: "quay.io/krestomatio/httpd@sha256:acc4e092bad984042701d26d0c9a406a2aa320b0abf414ffd0fbf9c47b5508c8"
+  artifact_tag: 22315ea2a0948288f076019e5515e48a7d9ae49f

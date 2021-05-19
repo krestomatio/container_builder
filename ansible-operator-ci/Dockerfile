@@ -17,7 +17,7 @@ COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operat
 COPY --from=quay.io/operator-framework/ansible-operator:v1.1.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
-ENV KUSTOMIZE_VERSION="3.5.4"
+ENV KUSTOMIZE_VERSION="3.8.2"
 
 # Install kustomize
 RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \

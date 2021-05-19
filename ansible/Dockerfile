@@ -31,7 +31,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 # Container variables
-ENV CTR_PKG_EXTRA="git git-lfs rsync jq openssh-clients sudo sshpass curl sudo make"
+ENV CTR_PKG_EXTRA="git git-lfs rsync jq openssh-clients sudo sshpass curl sudo make which"
 
 RUN install-pkgs -e $CTR_PKG_EXTRA
 

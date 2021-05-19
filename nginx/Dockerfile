@@ -12,6 +12,7 @@ ENV IMAGE_NAME=nginx \
 # Container variables
 ENV CTR_USER=nginx \
     CTR_USER_ID="999" \
+    CTR_CMD="nginx" \
     CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables
@@ -47,7 +48,7 @@ STOPSIGNAL ${CTR_STOPSIGNAL}
 
 EXPOSE ${NGINX_PORT}
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ${CTR_CMD}
 
 # Labels
 LABEL name="${IMAGE_NAME}" \

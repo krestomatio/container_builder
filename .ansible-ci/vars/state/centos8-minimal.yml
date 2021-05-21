@@ -6,4 +6,4 @@ centos8_minimal_image:
   tag: "8.3.1"
   id: "sha256:c8142b0347614e1a7c204ce750f511b81683356f2fb6b638af66e95c8ec10483"
   repo_digest: "quay.io/krestomatio/centos8-minimal@sha256:0dcc94e5e9c80d11df3ea0cc366102a9fd3c59865f4cfcca28da571aa17666a4"
-  artifact_tag: 22315ea2a0948288f076019e5515e48a7d9ae49f
+  artifact_tag: 10c9b22ea60be05ada2ddae4f73941769c27705d

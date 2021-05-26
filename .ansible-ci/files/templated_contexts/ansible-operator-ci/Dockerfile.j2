@@ -27,7 +27,9 @@ RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \
 ENV KUBECTL_VERSION="{{ kubectl_version }}"
 
 # Install kubectl.
-COPY --from=lachlanevenson/k8s-kubectl:v{{ kubectl_version }} /usr/local/bin/kubectl /usr/local/bin/kubectl
+RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
+    curl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl
 
 # Install requirements.
 RUN curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v{{ operator_version }}/test/ansible/requirements.yml -o /tmp/requirements.yml && \

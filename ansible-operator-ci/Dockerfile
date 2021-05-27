@@ -8,13 +8,13 @@ ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 Stream minimal"
 
 # Container variables
-ENV OPERATOR_VERSION="1.1.0"
+ENV OPERATOR_VERSION="1.7.2"
 
 # Install Operator SDK
-COPY --from=quay.io/operator-framework/operator-sdk:v1.1.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+COPY --from=quay.io/operator-framework/operator-sdk:v1.7.2 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v1.1.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.7.2 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
 ENV KUSTOMIZE_VERSION="4.1.3"
@@ -24,13 +24,15 @@ RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \
     curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzf - -C /usr/local/bin/
 
 # Container variables
-ENV KUBECTL_VERSION="1.19.3"
+ENV KUBECTL_VERSION="1.20.7"
 
 # Install kubectl.
-COPY --from=lachlanevenson/k8s-kubectl:v1.19.3 /usr/local/bin/kubectl /usr/local/bin/kubectl
+RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
+    curl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+    chmod +x /usr/local/bin/kubectl
 
 # Install requirements.
-RUN curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v1.1.0/test/ansible/requirements.yml -o /tmp/requirements.yml && \
+RUN curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v1.7.2/test/ansible/requirements.yml -o /tmp/requirements.yml && \
     ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
     rm -f /tmp/requirements.yml
 
@@ -46,4 +48,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.1.0"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.7.2"

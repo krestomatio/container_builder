@@ -8,7 +8,7 @@ ENV IMAGE_NAME=rootfs-creator \
     IMAGE_TITLE="{{ dockerfile_builder_image_based }} based image"
 
 # Container variables
-ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar" \
+ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar policycoreutils" \
     CTR_WORKING_DIR=/build
 
 COPY conf/usr/bin/* /usr/bin/

@@ -6,7 +6,7 @@ labels: enhancement,request
 assignees: ''
 ---
 
-**What is the motivation or use case for the change? **
+**What is the motivation or use case for the change?**
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.

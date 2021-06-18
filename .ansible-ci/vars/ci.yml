@@ -1,7 +1,7 @@
 working_dir: "{{ lookup('env','WORKING_DIR') | default(playbook_dir,true) }}"
 
 # build playbook
-play_containers: "{{ lookup('env','PLAY_CONTAINERS') | default('all:!rootfs-creator',true) }}"
+play_containers: "{{ lookup('env','PLAY_CONTAINERS') | default('all',true) }}"
 play_diff: "{{ lookup('env','PLAY_DIFF') | default(true,true) }}"
 play_any_errors_fatal: "{{ lookup('env','PLAY_ANY_ERRORS_FATAL') | default(true,true) }}"
 

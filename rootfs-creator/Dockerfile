@@ -1,14 +1,14 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=rootfs-creator \
-    IMAGE_SUMMARY="CentOS 8 minimal based image" \
-    IMAGE_DESCRIPTION="CentOS 8 minimal based for building rootfs" \
-    IMAGE_TITLE="CentOS 8 minimal based image"
+    IMAGE_SUMMARY="CentOS 8 Stream minimal based image" \
+    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based for building rootfs" \
+    IMAGE_TITLE="CentOS 8 Stream minimal based image"
 
 # Container variables
-ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar" \
+ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar policycoreutils" \
     CTR_WORKING_DIR=/build
 
 COPY conf/usr/bin/* /usr/bin/

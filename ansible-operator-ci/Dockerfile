@@ -20,7 +20,7 @@ COPY --from=quay.io/operator-framework/ansible-operator:v1.7.2 /usr/local/bin/an
 ENV KUSTOMIZE_VERSION="4.1.3"
 
 # Install kustomize
-RUN echo "Installing kustomize version: ${ORAS_VERSION}..."  && \
+RUN echo "Installing kustomize version: ${KUSTOMIZE_VERSION}..."  && \
     curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzf - -C /usr/local/bin/
 
 # Container variables
@@ -28,11 +28,12 @@ ENV KUBECTL_VERSION="1.20.7"
 
 # Install kubectl.
 RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
-    curl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+    curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl
 
 # Install requirements.
-RUN curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v1.7.2/test/ansible/requirements.yml -o /tmp/requirements.yml && \
+RUN echo "Installing operator sdk version: ${OPERATOR_VERSION}..."  && \
+    curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v${OPERATOR_VERSION}/testdata/ansible/memcached-operator/requirements.yml -o /tmp/requirements.yml && \
     ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
     rm -f /tmp/requirements.yml
 

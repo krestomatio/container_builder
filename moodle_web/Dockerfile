@@ -1,6 +1,6 @@
 # Ansible managed
 FROM quay.io/krestomatio/moodle_app AS app
-ENV GIT_COMMIT=8dea153c6b6d50ec8a00979b53a1eb4decb65589
+ENV GIT_COMMIT=1d8512bc0eef1399995918b9071909b97c54a390
 RUN app-git -v -a -e '.git*'
 
 FROM quay.io/krestomatio/moodle_nginx_web
@@ -34,8 +34,8 @@ COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 
-ENV MOODLE_COMMIT="8dea153c6b6d50ec8a00979b53a1eb4decb65589" \
-    MOODLE_VERSION_NUMBER="2020061507.02"
+ENV MOODLE_COMMIT="1d8512bc0eef1399995918b9071909b97c54a390" \
+    MOODLE_VERSION_NUMBER="2020061507.03"
 
 COPY --from=app /var/www/html /var/www/html
 

@@ -6,7 +6,7 @@ labels: question,request
 assignees: ''
 ---
 
-** Which example are you working with? **
+** Which example are you working with?**
 
 **What is the current behavior?**
 

@@ -7,10 +7,12 @@ spec:
     always_run: true
     optional: false
     source: "pullrequest.yaml"
+    max_concurrency: 1
   postsubmits:
   - name: release
     context: "release"
     source: "release.yaml"
+    max_concurrency: 1
     branches:
     - ^main$
     - ^master$

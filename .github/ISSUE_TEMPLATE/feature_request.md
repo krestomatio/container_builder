@@ -6,7 +6,7 @@ labels: feature,request
 assignees: ''
 ---
 
-**What is the motivation or use case for the feature? **
+**What is the motivation or use case for the feature?**
 
 **Describe the solution you'd like**
 A clear and concise description of what you want to happen.

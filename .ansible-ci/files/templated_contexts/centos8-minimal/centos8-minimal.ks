@@ -123,6 +123,8 @@ umount /mnt/sysimage/run
 # NOTE: chroot to run "install" because it is not in anaconda env
 chroot /mnt/sysimage install -d /run/lock -m 0755 -o root -g root
 
+# workarount error /mnt/sysimage/run cannot be unmounted
+mount -t bind -o bind,defaults /run /mnt/sysimage/run
 
 # See: https://bugzilla.redhat.com/show_bug.cgi?id=1051816
 # NOTE: run this in nochroot because "find" does not exist in chroot

@@ -47,33 +47,20 @@
       rootfs_build_tar: "{{ centos8_build_rootfs | default('centos8-minimal.tar.xz') }}"
       centos8_build_rootfs_pull: false
     block:
-    - name: prepare artifacts
-      when:
-        - dockerfile_builder == 'docker'
-      docker_container:
-        name: "rootfs-creator-{{ (generated_path | to_uuid).split('-')[0] }}"
-        image: "{{ rootfs_creator_image }}"
-        privileged: true
-        detach: false
-        cleanup: true
-        pull: "{{ centos8_build_rootfs_pull }}"
-        env:
-          BUILD_KICKSTART: "{{ rootfs_build_kickstart }}"
-          BUILD_ROOTFS: "{{ rootfs_build_tar }}"
-        volumes:
-          - "{{ template_path }}:/build:z"
+    - name: pull rootfs-creator image
+      when: centos8_build_rootfs_pull
+      command: "{{ dockerfile_builder }} pull {{ rootfs_creator_image }}"
+      changed_when: "'Status: Image is up to date' not in pull_rootfs_creator_image_task.stdout"
+      register: pull_rootfs_creator_image_task
 
     - name: prepare artifacts
-      when:
-        - dockerfile_builder == 'podman'
       changed_when: false
-      command: "podman run --privileged --rm
-        --pull {{ 'always' if centos8_build_rootfs_pull else 'missing' }}
+      command: "{{ dockerfile_builder }} run --privileged --rm
         -e BUILD_KICKSTART='{{ rootfs_build_kickstart }}'
         -e BUILD_ROOTFS='{{ rootfs_build_tar }}'
-        -v '{{ template_path }}:/build:z' {{ rootfs_creator_image }}
+        -v '{{ template_path }}:/build:z'
         --name rootfs-creator-{{ (generated_path | to_uuid).split('-')[0] }}
-        {{ rootfs_build_kickstart }} {{ rootfs_build_tar }}"
+        {{ rootfs_creator_image }}"
 
     - name: get new pkgs total checksum
       stat:

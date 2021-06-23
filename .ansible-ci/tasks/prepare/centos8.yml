@@ -1,5 +1,5 @@
 - when:
-    - ansible_host | regex_search('centos8.*-minimal')
+    - ansible_host | regex_search('(centos|rocky)*.*-minimal')
   vars:
     pkgs_list_old: "{{ generated_path }}/pkgs-list"
     pkgs_list_new: "{{ template_path }}/pkgs-list"

@@ -1,6 +1,7 @@
 [platform]
 centos8-minimal
 centos8-stream-minimal
+rocky8-minimal
 base
 base-stream
 httpd
@@ -13,6 +14,7 @@ rootfs-creator
 [minimal]
 centos8-minimal
 centos8-stream-minimal
+rocky8-minimal
 
 [ci]
 ansible
@@ -31,6 +33,7 @@ moodle_httpd
 [build_step_1]
 centos8-minimal
 centos8-stream-minimal
+rocky8-minimal
 
 [build_step_2]
 base

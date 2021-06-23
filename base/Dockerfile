@@ -1,11 +1,11 @@
 # Ansible managed
-FROM quay.io/krestomatio/centos8-minimal
+FROM quay.io/krestomatio/rocky8-minimal
 
 # General variables
 ENV IMAGE_NAME=base \
-    IMAGE_SUMMARY="CentOS 8 minimal based image" \
-    IMAGE_DESCRIPTION="CentOS 8 minimal based for building other images" \
-    IMAGE_TITLE="CentOS 8 minimal based image"
+    IMAGE_SUMMARY="Rocky Linux 8 minimal based image" \
+    IMAGE_DESCRIPTION="Rocky Linux 8 minimal based for building other images" \
+    IMAGE_TITLE="Rocky Linux 8 minimal based image"
 
 # Container variables
 ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs -y" \
@@ -37,4 +37,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},centos,centos8"
+      io.openshift.tags="${IMAGE_NAME},rocky,rocky8"

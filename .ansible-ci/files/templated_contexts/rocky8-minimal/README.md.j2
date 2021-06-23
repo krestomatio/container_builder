@@ -1,4 +1,4 @@
-This is a Rocky8 minimal container image similar to Fedora-minimal or UBI.
+This is a Rocky Linux 8 minimal container image similar to Fedora-minimal or UBI.
 
 ## How rootfs is created?
 ```bash

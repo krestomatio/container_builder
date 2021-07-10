@@ -20,8 +20,15 @@ spec:
           steps:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@1a6580e62be0986d18dbb1c42327231ccc378e7c
             - image: quay.io/krestomatio/ansible-docker-ci
-              name: gitlab-lfs
+              name: release
               env:
+              - name: CLOUD_PROVIDER
+                value: m6e
+              - name: APIKEY__QUAY_IO
+                valueFrom:
+                  secretKeyRef:
+                    key: apikey
+                    name: quay-io-api-key
               - name: APIKEY_GITLAB
                 valueFrom:
                   secretKeyRef:
@@ -34,21 +41,10 @@ spec:
                     name: tekton-git
               script: |
                 #!/bin/bash
+                ## add gitlab lfs api
                 echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
-            - image: quay.io/krestomatio/ansible-docker-ci
-              name: release
-              env:
-              - name: CLOUD_PROVIDER
-                value: m6e
-              - name: APIKEY__QUAY_IO
-                valueFrom:
-                  secretKeyRef:
-                    key: apikey
-                    name: quay-io-api-key
-              args:
-              - .ansible-ci/release.yml
-              command:
-              - ansible-playbook
+                ## run release play
+                ansible-playbook .ansible-ci/release.yml
               volumeMounts:
               - name: libdocker
                 mountPath: /var/lib/docker

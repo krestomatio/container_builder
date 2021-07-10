@@ -18,7 +18,23 @@ spec:
                 memory: 512Mi
             workingDir: /workspace/source
           steps:
-            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@32ed0f0242976605e0bec32476eb2b13441e48ed
+            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@1a6580e62be0986d18dbb1c42327231ccc378e7c
+            - image: quay.io/krestomatio/ansible-docker-ci
+              name: gitlab-lfs
+              env:
+              - name: APIKEY_GITLAB
+                valueFrom:
+                  secretKeyRef:
+                    key: apikey
+                    name: gitlab-api-key
+              - name: USERNAME_GITLAB
+                valueFrom:
+                  secretKeyRef:
+                    key: username
+                    name: tekton-git
+              script: |
+                #!/bin/bash
+                echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
             - image: quay.io/krestomatio/ansible-docker-ci
               name: release
               env:

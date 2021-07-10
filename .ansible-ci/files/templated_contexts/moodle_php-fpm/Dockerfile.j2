@@ -35,18 +35,17 @@ COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
+RUN container-setup-php-moodle
+
+USER ${CTR_USER_ID}
 
 {% if moodle_app_copy_from is defined %}
 ENV MOODLE_COMMIT="{{ moodle_git_commit }}" \
     MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}"
 
-COPY --from=app {{ moodle_code_copy_path | default('/var/www/html') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
+COPY --chown=${CTR_USER_ID}:0 --from=app {{ moodle_code_copy_path | default('/var/www/html/') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
 
 {% endif %}
-RUN container-setup-php-moodle
-
-USER ${CTR_USER_ID}
-
 # Labels
 LABEL name="${IMAGE_NAME}" \
       summary="${IMAGE_SUMMARY}" \

@@ -4,6 +4,6 @@
 centos8_stream_minimal_image:
   build: False
   tag: "8.5.3"
-  id: "sha256:5a27c7f1cacbcf87c4ef06a1e5bc3f7719f4f25266fb86d7c7c91318c35a39eb"
-  repo_digest: "quay.io/krestomatio/centos8-stream-minimal@sha256:a9e5f7f13a04565d474838f38e2ca0cb3ad4cf012704ad7f66967c71d7d3de30"
-  artifact_tag: c79baf002e55b1a1fb33c68a1eb9f840ea8edfbb
+  id: "sha256:a6eef4a358b6341b619d7d32e0431a1eca4cf6f0d3b2ee6d0768e24bed2cd4be"
+  repo_digest: "quay.io/krestomatio/centos8-stream-minimal@sha256:2799fb997c93da79a0ef9b0a3c1fe8c5bf2441c4d539cd9ffb50f2c480ee08c5"
+  artifact_tag: 50cf533e7a1c3eff3b10c53ea4bf2c12e797ae73

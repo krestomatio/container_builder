@@ -29,7 +29,6 @@ COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
-
 RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}

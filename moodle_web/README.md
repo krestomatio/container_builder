@@ -1,4 +1,4 @@
-Moodle PHP-FPM image based on Centos8 minimal
+Moodle PHP-FPM image based on CentOS 8 Stream minimal
 
 ## Repository
 This image is built from [this repo](https://github.com/krestomatio/moodle_web)

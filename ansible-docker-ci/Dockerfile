@@ -16,7 +16,7 @@ ENV ANSIBLE_VERSION="2.9.*" \
     CONTAINER_BUILDER=docker
 
 RUN echo "Build tools..."  && \
-    $CTR_APK py-pip openssl ca-certificates && \
+    $CTR_APK py-pip openssl ca-certificates make && \
     $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
     $CTR_PIP cffi wheel && \

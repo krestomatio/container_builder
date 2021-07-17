@@ -1,0 +1,10 @@
+- name: load image state
+  when: state_vars_dest_check is not defined
+  include_tasks: tasks/state/load.yml
+
+- name: save m4e updatebot file
+  run_once: true
+  template:
+    src: "{{ updatebot_m4e_template_src }}"
+    dest: "{{ updatebot_m4e_template_dest }}"
+    mode: '0644'

@@ -48,3 +48,7 @@ dockerfile_builder_sync_checksum: true
 doc_generate_project_readme: true
 doc_project_readme_src: README.md.j2
 doc_project_readme_dest: "{{ git_repo_dir }}/README.md"
+
+# updatebot
+updatebot_m4e_template_src: updatebot-m4e.yaml.j2
+updatebot_m4e_template_dest: "{{ git_repo_dir }}/.lighthouse/updatebot-m4e.yaml"

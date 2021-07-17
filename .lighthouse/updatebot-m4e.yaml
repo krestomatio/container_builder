@@ -1,0 +1,27 @@
+apiVersion: updatebot.jenkins-x.io/v1alpha1
+kind: UpdateConfig
+spec:
+  rules:
+  - urls:
+    - https://github.com/krestomatio/ansible-collection-k8s
+    changes:
+    - command:
+        # update Moodle image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          moodle_web_image='quay.io/krestomatio/moodle_app:3.9.7'
+          sed -i \
+            "s@^moodle_image:.*@moodle_image: ${moodle_web_image}@" \
+            roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
+    - command:
+        # update Postgres image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          postgres_image='quay.io/krestomatio/postgres:0.1.16'
+          sed -i \
+            "s@^postgres_image:.*@postgres_image: ${postgres_image}@" \
+            roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml

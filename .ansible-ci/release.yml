@@ -20,5 +20,8 @@
     - name: generate doc
       include_tasks: tasks/doc.yml
 
+    - name: updatebot
+      include_tasks: tasks/updatebot.yml
+
     - name: release
       include_tasks: tasks/git/release.yml

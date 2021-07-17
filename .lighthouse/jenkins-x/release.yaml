@@ -51,6 +51,13 @@ spec:
               volumeMounts:
               - name: libdocker
                 mountPath: /var/lib/docker
+            - name: promote
+              image: ghcr.io/jenkins-x/jx-updatebot:0.0.86
+              script: |
+                #!/bin/bash
+                jx-updatebot pr -c .lighthouse/updatebot-m4e.yaml \
+                    --commit-title "chore(m4e): bump image versions with updatebot" \
+                    --no-version
           volumes:
           - name: libdocker
             persistentVolumeClaim:

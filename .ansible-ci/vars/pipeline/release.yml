@@ -1,6 +1,7 @@
 version_include_major_minor_tags: true
 build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
-git_add_path: "'{{ state_file }}' '{{ dockerfile_builder_path }}' '{{ doc_project_readme_dest }}'"
+git_add_path:
+  "'{{ state_file }}' '{{ dockerfile_builder_path }}' '{{ doc_project_readme_dest }}' '{{ updatebot_m4e_template_dest }}'"
 git_add_throttle: 1
 git_commit_msgs:
   - "chore(release): {{ release_version }}"

@@ -4,7 +4,7 @@ __metaclass__ = type
 
 DOCUMENTATION = """
         lookup: git_semver
-        author: Job Céspedes Ortiz <jobcespedes@gmail.com>
+        author: Job Céspedes Ortiz <jobcespedes@krestomatio.com>
         version_added: "2.9"
         short_description: get/bump version from git current branch latest tag
         requirements:

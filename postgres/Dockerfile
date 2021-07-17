@@ -30,7 +30,7 @@ ENV POSTGRES_VERSION="10" \
 # Frequent environment variables
 ENV HOME="${CTR_HOME}" \
     PGUSER="$CTR_USER" \
-    LANG="es_CR.UTF-8"
+    LANG="en_US.UTF-8"
 
 ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper"
 

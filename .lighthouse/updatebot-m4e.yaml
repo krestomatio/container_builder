@@ -13,7 +13,7 @@ spec:
         - |
           moodle_web_image='quay.io/krestomatio/moodle_web@sha256:6c28b349d44e844b960ac1288309a3390ce454310ef47c859d3fbd6ec53416df'
           sed -i \
-            "s@^moodle_image:.*@moodle_image: ${moodle_web_image}@" \
+            "s#^moodle_image:.*#moodle_image: ${moodle_web_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
     - command:
         # update Postgres image and its tag
@@ -23,5 +23,5 @@ spec:
         - |
           postgres_image='quay.io/krestomatio/postgres@sha256:8311a580403c8ca65a4d34bb54557c54cbaf09094be1946707b48fcead8ad407'
           sed -i \
-            "s@^postgres_image:.*@postgres_image: ${postgres_image}@" \
+            "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml

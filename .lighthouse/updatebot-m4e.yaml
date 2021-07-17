@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_web_image='quay.io/krestomatio/moodle_app:3.9.7'
+          moodle_web_image='quay.io/krestomatio/moodle_app:3.9.8'
           sed -i \
             "s@^moodle_image:.*@moodle_image: ${moodle_web_image}@" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='quay.io/krestomatio/postgres:0.1.16'
+          postgres_image='quay.io/krestomatio/postgres:0.1.17'
           sed -i \
             "s@^postgres_image:.*@postgres_image: ${postgres_image}@" \
             roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml

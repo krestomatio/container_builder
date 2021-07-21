@@ -1,0 +1,32 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_NAME=go-toolset \
+    IMAGE_SUMMARY="Go-toolset image based on {{ dockerfile_builder_image_based }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with go-toolset" \
+    IMAGE_TITLE="Go-toolset image based on {{ dockerfile_builder_image_based }}"
+
+# Component bash variables
+ENV GO_VERSION_MAJOR_MINOR="{{ go_version_major_minor }}"
+
+# Container variables
+ENV CTR_CMD="go version"
+
+RUN install-pkgs go-toolset git make tar which curl; \
+    v=$(go version | { read _ _ v _; echo ${v#go}; }); \
+    [ "$GO_VERSION_MAJOR_MINOR" == "${v%.*}" ] || "error: major version differs from env var"
+
+CMD $CTR_CMD
+
+# Labels
+LABEL name="${IMAGE_NAME}" \
+    summary="${IMAGE_SUMMARY}" \
+    maintainer="{{ dockerfile_builder_image_authors }}" \
+    description="${IMAGE_DESCRIPTION}" \
+    org.opencontainers.image.title="${IMAGE_TITLE}" \
+    org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+    org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.display-name="${IMAGE_TITLE}" \
+    io.openshift.tags="${IMAGE_NAME},{{ dockerfile_builder_image_ocp_tags }}"

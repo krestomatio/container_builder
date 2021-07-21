@@ -97,7 +97,7 @@ rpm-libs-4.14.3-14.el8_4.x86_64.rpm
 sed-4.5-2.el8.x86_64.rpm
 setup-2.12.2-6.el8.noarch.rpm
 sqlite-libs-3.26.0-13.el8.x86_64.rpm
-systemd-libs-239-45.el8_4.1.x86_64.rpm
+systemd-libs-239-45.el8_4.2.x86_64.rpm
 tzdata-2021a-1.el8.noarch.rpm
 xz-libs-5.2.4-3.el8.x86_64.rpm
 zlib-1.2.11-17.el8.x86_64.rpm

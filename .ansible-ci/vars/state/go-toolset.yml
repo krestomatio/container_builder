@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+go_toolset_image:
+  build: False
+  tag: "0.0.2"
+  id: "sha256:513e02a486fa151712d2e2b444d7806d371d2b8d171f9e610a5728dc28dfd115"
+  repo_digest: "quay.io/krestomatio/go-toolset@sha256:ff765f81f62fcb267d0e25cd649b567eaf17155235dc9baa7dee6ab837fcfdb8"
+  artifact_tag: 39038c71dd5b60711f34202dd91c55acd8f8e1a7

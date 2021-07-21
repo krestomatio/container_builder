@@ -46,7 +46,7 @@ COPY --chown=${CTR_USER_ID}:0 --from=app /var/www/html/ /var/www/html
 LABEL name="${IMAGE_NAME}" \
       summary="${IMAGE_SUMMARY}" \
       description="${IMAGE_DESCRIPTION}" \
-      maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+      maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.version="3.9" \

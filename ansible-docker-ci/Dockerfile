@@ -53,7 +53,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     cd /
 
-ENV PUSHRM_VERSION="1.7.0"
+ENV PUSHRM_VERSION="1.8.0"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
@@ -63,10 +63,10 @@ CMD [ "ansible-playbook", "--version" ]
 # Labels
 LABEL name="${IMAGE_NAME}" \
       summary="${IMAGE_SUMMARY}" \
-      maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+      maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       description="${IMAGE_DESCRIPTION}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
-      org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+      org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \

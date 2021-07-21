@@ -3,7 +3,7 @@
 #
 moodle_php_fpm_image:
   build: False
-  tag: "0.1.19"
-  id: "sha256:d2265270258677e9711678f0a1722405c4a23cc63e7bcef72313b64f28d54295"
-  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:7000e1c97bcc4478467687c1a48183335c7d74f333d2837cc8b94a274c895532"
-  artifact_tag: 4bc5758f7dc68d53d3b61f6c21a441694d3eae32
+  tag: "0.1.20"
+  id: "sha256:7519262465dcb0e138582dce47f4d25fe529d182f3405e9eabecd2fafd70d3e8"
+  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:d1efd0cd3714dd3a11b00dff4a7c00b94a0c10b74f54c806a0c661e011ae998c"
+  artifact_tag: 39038c71dd5b60711f34202dd91c55acd8f8e1a7

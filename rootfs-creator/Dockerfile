@@ -27,9 +27,9 @@ ENTRYPOINT ["/usr/bin/rootfs-creator"]
 LABEL name="${IMAGE_NAME}" \
       summary="${IMAGE_SUMMARY}" \
       description="${IMAGE_DESCRIPTION}" \
-      maintainer="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+      maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
-      org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@gmail.com>" \
+      org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \

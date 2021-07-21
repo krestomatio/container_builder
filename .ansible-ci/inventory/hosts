@@ -10,6 +10,7 @@ php-fpm
 nginx_php-fpm
 postgres
 rootfs-creator
+go-toolset
 
 [minimal]
 centos8-minimal
@@ -46,6 +47,7 @@ httpd
 nginx
 php-fpm
 postgres
+go-toolset
 
 [build_step_4]
 nginx_php-fpm

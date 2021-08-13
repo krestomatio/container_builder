@@ -19,7 +19,8 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
 ENV MOODLE_VERSION="{{ moodle_version }}" \
     MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_APP=${APP_DEST} \
-    MOODLE_DATA=/var/moodledata
+    MOODLE_DATA=/var/moodledata \
+    MOODLE_CLI_TOOLS=/usr/libexec/moodle
 
 # php-curl included in php-common
 # php-zip as php-pecl-zip

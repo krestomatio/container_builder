@@ -11,7 +11,7 @@ ENV IMAGE_NAME=rootfs-creator \
 ENV OS_INSTALL_PKGS="anaconda-tui lorax jq tar policycoreutils" \
     CTR_WORKING_DIR=/build
 
-COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/bin /usr/bin/
 
 RUN install-pkgs ${OS_INSTALL_PKGS} && \
     mkdir -p ${CTR_WORKING_DIR} && \

@@ -30,9 +30,9 @@ ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xml
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}

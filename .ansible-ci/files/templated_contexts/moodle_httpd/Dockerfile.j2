@@ -19,8 +19,8 @@ ENV MOODLE_VERSION="{{ moodle_version }}" \
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
 
 RUN container-setup
 

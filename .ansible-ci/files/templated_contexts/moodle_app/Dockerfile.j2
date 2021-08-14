@@ -23,7 +23,7 @@ ENV OS_INSTALL_PKGS="git rsync"
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/bin /usr/bin/
 
 RUN container-setup
 RUN install-pkgs ${OS_INSTALL_PKGS}

@@ -19,7 +19,8 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
 ENV MOODLE_VERSION="{{ moodle_version }}" \
     MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_APP=${APP_DEST} \
-    MOODLE_DATA=/var/moodledata
+    MOODLE_DATA=/var/moodledata \
+    MOODLE_CLI_TOOLS=/usr/libexec/moodle
 
 # php-curl included in php-common
 # php-zip as php-pecl-zip
@@ -29,9 +30,9 @@ ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xml
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}

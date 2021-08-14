@@ -19,8 +19,8 @@ ENV MOODLE_VERSION="3.9" \
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
 
 RUN container-setup
 

@@ -32,8 +32,8 @@ ENV NGINX_VERSION="1.14" \
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs nginx

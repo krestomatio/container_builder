@@ -4,6 +4,6 @@
 rocky8_minimal_image:
   build: False
   tag: "8.4.32"
-  id: "sha256:0f31a4098f7f7a6b5dc0b48d4df715c8d570e0b2d96afb7880bb4e1eed4bc851"
-  repo_digest: "quay.io/krestomatio/rocky8-minimal@sha256:d8dc5972e31b2d6d83fa900c412b3f31fd8c06721bbaaecbce17042bb7c73fb4"
-  artifact_tag: 39038c71dd5b60711f34202dd91c55acd8f8e1a7
+  id: "sha256:ca8786e263016dc1023321855709e8fd4da35f66d78f6c7bb88a55d5eb090eb3"
+  repo_digest: "quay.io/krestomatio/rocky8-minimal@sha256:2f1d8fc3b8b7ec0eb7a51089fbe97fa26cda117e9560f230c3da2a190146b882"
+  artifact_tag: f7c00ae0effeec5dbf3982949c78d56a6901751f

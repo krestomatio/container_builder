@@ -21,9 +21,9 @@ ENV MOODLE_VERSION="3.9" \
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 

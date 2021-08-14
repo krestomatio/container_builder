@@ -32,8 +32,8 @@ ENV OS_INSTALL_PKGS="php-fpm php-cli php-opcache php-soap"
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${OS_INSTALL_PKGS}

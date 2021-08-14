@@ -19,8 +19,8 @@ ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs -y" \
 
 ENV OS_INSTALL_PKGS="findutils gzip platform-python"
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${OS_INSTALL_PKGS}

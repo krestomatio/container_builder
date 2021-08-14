@@ -37,7 +37,7 @@ ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper"
 USER 0
 
 COPY conf/usr /usr/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${OS_INSTALL_PKGS}

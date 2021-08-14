@@ -8,7 +8,7 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="3.9" \
     MOODLE_VERSION_SHORT="39" \
-    MOODLE_VERSION_NUMBER="2020061508.01"
+    MOODLE_VERSION_NUMBER="2020061509.02"
 
 # Container variables
 ENV CTR_USER=apache \
@@ -23,7 +23,7 @@ ENV OS_INSTALL_PKGS="git rsync"
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
+COPY conf/usr/bin /usr/bin/
 
 RUN container-setup
 RUN install-pkgs ${OS_INSTALL_PKGS}
@@ -34,7 +34,7 @@ WORKDIR ${GIT_DEST}
 
 # source variables
 ENV GIT_BRANCH="MOODLE_39_STABLE" \
-    GIT_COMMIT="54a2d7df227a53897e8926221348dc8cc2c6d271" \
+    GIT_COMMIT="fdb7aa8035b1d1f4d0af0b2361b6ba10acf8497d" \
     GIT_REMOTE="git://github.com/moodle/moodle"
 
 # verify it has changed

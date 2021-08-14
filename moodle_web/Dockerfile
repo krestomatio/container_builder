@@ -1,6 +1,6 @@
 # Ansible managed
 FROM quay.io/krestomatio/moodle_app AS app
-ENV GIT_COMMIT=54a2d7df227a53897e8926221348dc8cc2c6d271
+ENV GIT_COMMIT=fdb7aa8035b1d1f4d0af0b2361b6ba10acf8497d
 RUN app-git -v -a -e '.git*'
 
 FROM quay.io/krestomatio/moodle_nginx_web
@@ -17,7 +17,8 @@ ENV IMAGE_NAME=moodle_web \
 ENV MOODLE_VERSION="3.9" \
     MOODLE_VERSION_SHORT="39" \
     MOODLE_APP=${APP_DEST} \
-    MOODLE_DATA=/var/moodledata
+    MOODLE_DATA=/var/moodledata \
+    MOODLE_CLI_TOOLS=/usr/libexec/moodle
 
 # php-curl included in php-common
 # php-zip as php-pecl-zip
@@ -27,9 +28,9 @@ ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xml
 
 USER 0
 
-COPY conf/usr/bin/* /usr/bin/
-COPY conf/usr/libexec/* /usr/libexec/
-COPY conf/container-entrypoint.d/* ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY conf/usr/bin /usr/bin/
+COPY conf/usr/libexec /usr/libexec/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
@@ -37,8 +38,8 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ENV MOODLE_COMMIT="54a2d7df227a53897e8926221348dc8cc2c6d271" \
-    MOODLE_VERSION_NUMBER="2020061508.01"
+ENV MOODLE_COMMIT="fdb7aa8035b1d1f4d0af0b2361b6ba10acf8497d" \
+    MOODLE_VERSION_NUMBER="2020061509.02"
 
 COPY --chown=${CTR_USER_ID}:0 --from=app /var/www/html/ /var/www/html
 

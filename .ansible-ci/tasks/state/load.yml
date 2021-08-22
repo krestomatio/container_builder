@@ -21,6 +21,7 @@
         - load_state_yml.tag is defined
       set_fact:
         state_yml_tag: "{{ load_state_yml.tag }}"
+        load_state_yml_tag: "{{ load_state_yml.tag }}"
 
     - name: set state ID
       when:

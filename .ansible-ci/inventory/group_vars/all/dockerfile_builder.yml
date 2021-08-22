@@ -29,6 +29,9 @@ build_registry_name: gcr.io
 # container image
 container_image: "{{ registry_path }}/{{ ctr_name }}"
 
+# regex
+external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
+
 # build vars
 dockerfile_builder: docker
 # dockerfile_builder_push: true

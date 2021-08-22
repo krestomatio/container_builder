@@ -25,23 +25,26 @@
   include_role:
     name: dockerfile_builder
 
-- name: get build image info
-  docker_image_info:
-    name: "{{ container_image }}"
-  register: build_image_status
+- name: no build, end host
+  when: not dockerfile_builder_build_omit | default(false)
+  block:
+    - name: get build image info
+      docker_image_info:
+        name: "{{ container_image }}"
+      register: build_image_status
 
-- name: state image build fact
-  when: not ansible_check_mode
-  set_fact:
-    state_yml_build: true
-    state_yml_id: "{{ build_image_status.images[0].Id }}"
+    - name: state image build fact
+      when: not ansible_check_mode
+      set_fact:
+        state_yml_build: true
+        state_yml_id: "{{ build_image_status.images[0].Id }}"
 
-- name: tag image
-  include_tasks: tasks/builder/tag.yml
+    - name: tag image
+      include_tasks: tasks/builder/tag.yml
 
-- name: push image
-  include_tasks: tasks/builder/push.yml
-  when: build_push | default(false) | bool
+    - name: push image
+      include_tasks: tasks/builder/push.yml
+      when: build_push | default(false) | bool
 
-- name: save image state
-  include_tasks: tasks/state/save.yml
+    - name: save image state
+      include_tasks: tasks/state/save.yml

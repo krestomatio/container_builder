@@ -1,0 +1,17 @@
+graphql_engine_version: 2.0.7
+postgres_major_version: 13
+
+# source dir
+template_path: "{{ template_dir }}/graphql-engine"
+
+# ci
+version_release_no_bump: true
+
+# version tags
+version_image_major: "{{ graphql_engine_version.split('.')[0] | default(false) }}"
+version_image_minor: "{{ graphql_engine_version.split('.')[1] | default(false) }}"
+version_image_patch: "{{ graphql_engine_version.split('.')[2] | default(false) }}"
+
+# builder
+container_builder_image_from: graphql-engine-base
+dockerfile_builder_image_ocp_tags: "graphql-engine,graphql-engine-{{ graphql_engine_version }}"

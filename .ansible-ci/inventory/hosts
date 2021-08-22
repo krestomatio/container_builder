@@ -11,6 +11,7 @@ nginx_php-fpm
 postgres
 rootfs-creator
 go-toolset
+graphql-engine-base
 
 [minimal]
 centos8-minimal
@@ -31,6 +32,11 @@ moodle_php-fpm
 moodle_web
 moodle_httpd
 
+[graphql_engine]
+graphql-engine
+graphql-engine-base
+graphql-engine-build
+
 [build_step_1]
 centos8-minimal
 centos8-stream-minimal
@@ -48,15 +54,18 @@ nginx
 php-fpm
 postgres
 go-toolset
+graphql-engine-base
 
 [build_step_4]
 nginx_php-fpm
 ansible-docker-ci
 ansible-podman-ci
+graphql-engine-build
 
 [build_step_5]
 ansible-operator-ci
 moodle_app
+graphql-engine
 
 [build_step_6]
 moodle_nginx

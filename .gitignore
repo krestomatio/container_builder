@@ -11,5 +11,6 @@ __pycache__
 .ansible-ci/files/templated_contexts/*-minimal/*-minimal.tar.xz
 .ansible-ci/files/templated_contexts/*-minimal/distro-release
 .ansible-ci/files/templated_contexts/*-minimal/pkgs-list
+version.json
 # local notes
 .notes.md

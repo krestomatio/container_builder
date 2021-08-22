@@ -4,6 +4,8 @@
 
 - name: save m4e updatebot file
   run_once: true
+  when:
+    - "'moodle_web' in ansible_play_hosts_all or 'postgres' in ansible_play_hosts_all"
   template:
     src: "{{ updatebot_m4e_template_src }}"
     dest: "{{ updatebot_m4e_template_dest }}"

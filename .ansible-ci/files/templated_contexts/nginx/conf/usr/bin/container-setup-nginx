@@ -1,6 +1,10 @@
 #!/bin/bash -e
 # description: base config for nginx
 
+# install pkgs
+microdnf module enable nginx:${NGINX_VERSION}
+install-pkgs ${OS_INSTALL_PKGS}
+
 # persistent user id
 sed "/^${CTR_USER}/d" /etc/passwd | grep -q -w ${CTR_USER_ID} && exit 1 || echo "Setting userid to ${CTR_USER_ID}..."
 sed -i "s@^nginx:.*@nginx:x:${CTR_USER_ID}:${CTR_USER_ID}:Nginx web server:/var/lib/nginx:/sbin/nologin@" /etc/passwd

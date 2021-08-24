@@ -30,15 +30,14 @@ ENV NGINX_VERSION="{{ nginx_version }}" \
     NGINX_LOG_PATH=/var/log/nginx \
     APP_DEST=/usr/share/nginx/html
 
+ENV OS_INSTALL_PKGS="nginx"
+
 USER 0
 
 COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN container-setup
-RUN install-pkgs nginx
-
-RUN container-setup-nginx
+RUN container-setup && container-setup-nginx
 
 WORKDIR ${APP_DEST}
 

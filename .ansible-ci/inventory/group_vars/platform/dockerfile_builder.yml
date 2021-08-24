@@ -2,7 +2,7 @@
 centos_version: '8'
 php_version: '7.2'
 httpd_version: '2.4'
-nginx_version: '1.14'
+nginx_version: '1.18'
 postgres_version: '13'
 postgres_prev_version: '10'
 

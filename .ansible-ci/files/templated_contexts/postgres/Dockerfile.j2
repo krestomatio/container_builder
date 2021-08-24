@@ -1,4 +1,15 @@
 # {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }} AS old_pg_bin
+
+# Component bash variables
+ENV POSTGRES_PREV_VERSION="{{ postgres_prev_version }}"
+
+RUN microdnf module enable postgresql:${POSTGRES_PREV_VERSION} && \
+    install-pkgs postgresql-server && \
+    mkdir -p /opt/pg_bin && \
+    cp -rp /usr/bin/{postgres,pg_*} /opt/pg_bin/
+
+
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
@@ -20,7 +31,6 @@ ENV CTR_USER=postgres \
 
 # Component bash variables
 ENV POSTGRES_VERSION="{{ postgres_version }}" \
-    POSTGRES_VER_SHORT="{{ postgres_version | replace('.','') }}" \
     POSTGRES_PREV_VERSION="{{ postgres_prev_version }}" \
     POSTGRES_PORT=${IMAGE_SERVICE_PORT} \
     POSTGRES_RUN=/var/run/postgresql \
@@ -39,10 +49,9 @@ USER 0
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN container-setup
-RUN install-pkgs ${OS_INSTALL_PKGS}
+COPY --from=old_pg_bin /opt/pg_bin/ ${HOME}/old_pg_bin_${POSTGRES_PREV_VERSION}
 
-RUN container-setup-postgres
+RUN container-setup && container-setup-postgres
 
 WORKDIR ${CTR_HOME}
 
@@ -64,4 +73,4 @@ LABEL name="${IMAGE_NAME}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
-      io.openshift.tags="${IMAGE_NAME},postgres,postgres-${POSTGRES_VER_SHORT},postgres${POSTGRES_VER_SHORT}"
+      io.openshift.tags="${IMAGE_NAME},postgres,postgres-${POSTGRES_VERSION},postgres${POSTGRES_VERSION}"

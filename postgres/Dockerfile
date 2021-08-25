@@ -1,12 +1,23 @@
 # Ansible managed
+FROM quay.io/krestomatio/base-stream AS old_pg_bin
+
+# Component bash variables
+ENV POSTGRES_PREV_VERSION="10"
+
+RUN microdnf module enable postgresql:${POSTGRES_PREV_VERSION} && \
+    install-pkgs postgresql-server && \
+    mkdir -p /opt/pg_bin && \
+    cp -rp /usr/bin/{postgres,pg_*} /opt/pg_bin/
+
+
 FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=postgres \
-    IMAGE_SUMMARY="Postgres 10" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Postgres 10. \
+    IMAGE_SUMMARY="Postgres 13" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Postgres 13. \
 It follows https://github.com/sclorg/postgresql-container" \
-    IMAGE_TITLE="Postgres 10" \
+    IMAGE_TITLE="Postgres 13" \
     IMAGE_SERVICE_PORT="5432" \
     IMAGE_SERVICE_NAME="postgres" \
     TZ="UTC"
@@ -19,9 +30,8 @@ ENV CTR_USER=postgres \
     CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql
 
 # Component bash variables
-ENV POSTGRES_VERSION="10" \
-    POSTGRES_VER_SHORT="10" \
-    POSTGRES_PREV_VERSION="9.6" \
+ENV POSTGRES_VERSION="13" \
+    POSTGRES_PREV_VERSION="10" \
     POSTGRES_PORT=${IMAGE_SERVICE_PORT} \
     POSTGRES_RUN=/var/run/postgresql \
     POSTGRES_HOME=${CTR_HOME} \
@@ -39,10 +49,9 @@ USER 0
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN container-setup
-RUN install-pkgs ${OS_INSTALL_PKGS}
+COPY --from=old_pg_bin /opt/pg_bin/ ${HOME}/old_pg_bin_${POSTGRES_PREV_VERSION}
 
-RUN container-setup-postgres
+RUN container-setup && container-setup-postgres
 
 WORKDIR ${CTR_HOME}
 
@@ -64,4 +73,4 @@ LABEL name="${IMAGE_NAME}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
-      io.openshift.tags="${IMAGE_NAME},postgres,postgres-${POSTGRES_VER_SHORT},postgres${POSTGRES_VER_SHORT}"
+      io.openshift.tags="${IMAGE_NAME},postgres,postgres-${POSTGRES_VERSION},postgres${POSTGRES_VERSION}"

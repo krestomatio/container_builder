@@ -1,6 +1,10 @@
 #!/bin/bash -e
 # description: base config for php-fpm
 
+# install pkgs
+microdnf module enable php:${PHP_VERSION}
+install-pkgs ${OS_INSTALL_PKGS}
+
 # php-fpm default config
 sed -i \
     -e 's@^error_log.*@error_log = ${PHP_FPM_ERROR_LOG}@' \

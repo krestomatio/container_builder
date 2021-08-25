@@ -9,8 +9,6 @@
 # wait for it (this script might run forever, we expect that the timeout is
 # maintained externally).
 
-test -z "$ENABLED_COLLECTIONS" || . scl_source enable $ENABLED_COLLECTIONS
-
 if test x"$1" = "x--live"; then
     # Since livenessProbe is about to detect container deadlocks, and we
     # so far don't know about real deadlocks to be detected -- we keep
@@ -26,4 +24,4 @@ pg_isready -q \
     -h 127.0.0.1 \
     ${POSTGRESQL_USER+-U "$POSTGRESQL_USER"} \
     ${POSTGRESQL_DATABASE+-d "$POSTGRESQL_DATABASE"} \
-    --timeout 0
+    --timeout ${PG_ISREADY_TIMEOUT:-3}

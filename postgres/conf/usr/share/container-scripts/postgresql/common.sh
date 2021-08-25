@@ -266,14 +266,8 @@ run_pgupgrade ()
   old_raw_version=${POSTGRESQL_PREV_VERSION//\./}
   new_raw_version=${POSTGRESQL_VERSION//\./}
 
-  if test "$old_raw_version" = 92; then
-    old_collection=postgresql92
-  else
-    old_collection=rh-postgresql$old_raw_version
-  fi
-
-  old_pgengine=/opt/rh/$old_collection/root/usr/bin
-  new_pgengine=/opt/rh/rh-postgresql${new_raw_version}/root/usr/bin
+  old_pgengine=${HOME}/old_pg_bin_${POSTGRESQL_PREV_VERSION}/
+  new_pgengine=/usr/bin
   PGDATA_new="${PGDATA}-new"
 
   printf >&2 "\n==========  \$PGDATA upgrade: %s -> %s  ==========\n\n" \
@@ -284,17 +278,6 @@ run_pgupgrade ()
 
   # pg_upgrade writes logs to cwd, so go to the persistent storage first
   cd "$HOME"/data
-
-  # disable this because of scl_source, 'set +u' just makes the code ugly
-  # anyways
-  set +u
-
-  # we need to have the old SCL enabled, otherwise the $old_pgengine is not
-  # working.  The scl_source script doesn't pay attention to non-zero exit
-  # statuses, so use 'set +e'.
-  set +e
-  source scl_source enable $old_collection
-  set -e
 
   case $POSTGRESQL_UPGRADE in
     copy) # we accept this

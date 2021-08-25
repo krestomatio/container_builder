@@ -3,9 +3,9 @@ FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=php-fpm \
-    IMAGE_SUMMARY="PHP 7.2" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.2" \
-    IMAGE_TITLE="PHP 7.2" \
+    IMAGE_SUMMARY="PHP 7.4" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.4" \
+    IMAGE_TITLE="PHP 7.4" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 
@@ -16,8 +16,8 @@ ENV CTR_USER=apache \
     CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables
-ENV PHP_VERSION="7.2" \
-    PHP_VER_SHORT="72" \
+ENV PHP_VERSION="7.4" \
+    PHP_VER_SHORT="74" \
     PHP_RUN=/var/run/php-fpm \
     PHP_CONF_DIR=/etc/php.d \
     PHP_CONF_FILE=/etc/php.ini \
@@ -35,10 +35,7 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN container-setup
-RUN install-pkgs ${OS_INSTALL_PKGS}
-
-RUN container-setup-php
+RUN container-setup && container-setup-php
 
 WORKDIR ${APP_DEST}
 

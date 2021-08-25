@@ -3,7 +3,7 @@
 #
 php_fpm_image:
   build: False
-  tag: "0.1.22"
-  id: "sha256:6a0d10e8907c8f37c6b8a8bff8728e7f05a227173a6d9652c6b87101ed9769c0"
-  repo_digest: "quay.io/krestomatio/php-fpm@sha256:22206c59b78d94eb6bf4842fee8be31bf225f3389cd0133baf62a50b52df826e"
-  artifact_tag: c0ad7c2d7c71d721ed65626327688b2919e941f7
+  tag: "0.1.23"
+  id: "sha256:824bb60606d7028ed5320f37bd15e474d4f421b5b6a40f8061272cc550dd5fb8"
+  repo_digest: "quay.io/krestomatio/php-fpm@sha256:a181e5e27d7491565a6a4804404a9de05aa0a2612a148eae8928a25b909e2e52"
+  artifact_tag: 88f032db1730504dc777aac9d1551130950b9ca2

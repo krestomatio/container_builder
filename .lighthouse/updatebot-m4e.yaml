@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:e168092082bdfc49ab242991e6168c0535438cca5809c6b09ab3ad46bd624873'
+          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:94d0313fd9f0d91e5efa8e27eeae61ba9d9a69fe674441ec55b88a4fb09e7dbb'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_web_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='quay.io/krestomatio/postgres@sha256:4e713facd55275a300ca8493d28e66f42b60b737caf80afe6af1dc6cdbd32d3f'
+          postgres_image='quay.io/krestomatio/postgres@sha256:d58e072a5b6084639a9d7180fa702471accd7d17bbf2059635a1b49d359ff929'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml

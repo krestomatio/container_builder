@@ -55,9 +55,16 @@ spec:
               image: ghcr.io/jenkins-x/jx-updatebot:0.0.86
               script: |
                 #!/bin/bash
-                jx-updatebot pr -c .lighthouse/updatebot-m4e.yaml \
-                    --commit-title "chore(m4e): bump image versions with updatebot" \
-                    --no-version
+                HEAD_COMMIT=$(git rev-parse HEAD 2> /dev/null || echo)
+
+                # promote if a new commit is made during pipeline
+                if [[ ! -z ${HEAD_COMMIT} && ! -z ${PULL_BASE_SHA} && "${HEAD_COMMIT}" != "${PULL_BASE_SHA}" ]]; then
+                  jx-updatebot pr -c .lighthouse/updatebot-m4e.yaml \
+                      --commit-title "chore(m4e): bump image versions with updatebot" \
+                      --no-version
+                else
+                  echo "not promoted"
+                fi
           volumes:
           - name: libdocker
             persistentVolumeClaim:

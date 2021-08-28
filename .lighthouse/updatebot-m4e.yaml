@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:94d0313fd9f0d91e5efa8e27eeae61ba9d9a69fe674441ec55b88a4fb09e7dbb'
+          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:d0ac2fb7ba268b129aff46fb28e5b1bcebb2eb496dded46a012b195d7104749d'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_web_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
@@ -24,4 +24,14 @@ spec:
           postgres_image='quay.io/krestomatio/postgres@sha256:d58e072a5b6084639a9d7180fa702471accd7d17bbf2059635a1b49d359ff929'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
-            roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml
+            roles/v1alpha1/database/postgres/defaults/main/postgres.yml
+    - command:
+        # update Nginx image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          nginx_image='quay.io/krestomatio/nginx@sha256:ef14942fd15230ac347724c508df3c81e16dfbc58b166f26bfe4f2f55d1c8319'
+          sed -i \
+            "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
+            roles/v1alpha1/web/nginx/defaults/main/nginx.yml

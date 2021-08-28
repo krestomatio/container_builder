@@ -3,7 +3,7 @@
 #
 go_toolset_image:
   build: False
-  tag: "0.0.5"
+  tag: "0.0.6"
   id: "sha256:d8d8f3a237be9b71d8090686bf74cd66f8f39822a30e983df76ee05f940e8bf2"
   repo_digest: "quay.io/krestomatio/go-toolset@sha256:4a85a67e1d808b21158dfbe787a8dd1f888fa25ecbb63eba6efb21b10d654090"
-  artifact_tag: 88f032db1730504dc777aac9d1551130950b9ca2
+  artifact_tag: 393dd97d0d490dca829010b31375fec6c300eaa0

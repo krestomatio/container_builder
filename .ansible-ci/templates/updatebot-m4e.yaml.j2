@@ -24,4 +24,14 @@ spec:
           postgres_image='{{ hostvars['postgres'].state_yml_repo_digest }}'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
-            roles/v1alpha1/m4e/m4e/defaults/main/postgres.yml
+            roles/v1alpha1/database/postgres/defaults/main/postgres.yml
+    - command:
+        # update Nginx image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          nginx_image='{{ hostvars['nginx'].state_yml_repo_digest }}'
+          sed -i \
+            "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
+            roles/v1alpha1/web/nginx/defaults/main/nginx.yml

@@ -8,13 +8,13 @@ ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 Stream minimal"
 
 # Container variables
-ENV OPERATOR_VERSION="1.9.0"
+ENV OPERATOR_VERSION="1.11.0"
 
 # Install Operator SDK
-COPY --from=quay.io/operator-framework/operator-sdk:v1.9.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+COPY --from=quay.io/operator-framework/operator-sdk:v1.11.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v1.9.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.11.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
 ENV KUSTOMIZE_VERSION="4.1.3"
@@ -49,4 +49,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.9.0"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.11.0"

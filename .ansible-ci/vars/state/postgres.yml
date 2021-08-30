@@ -3,7 +3,7 @@
 #
 postgres_image:
   build: False
-  tag: "0.1.24"
-  id: "sha256:b18590d05f03f3d4eee394f1eab75f46fc62cf1f80aadd4362f3720c771f6d82"
-  repo_digest: "quay.io/krestomatio/postgres@sha256:d58e072a5b6084639a9d7180fa702471accd7d17bbf2059635a1b49d359ff929"
-  artifact_tag: 393dd97d0d490dca829010b31375fec6c300eaa0
+  tag: "0.1.25"
+  id: "sha256:0c331f42c2cafc31aff86a54efff3dbde5115a0288f1f3196cd3a9c81d45efe7"
+  repo_digest: "quay.io/krestomatio/postgres@sha256:6806d4db4b57622a5e6616d27228235309ba00a11db7b435533fd77f729160d2"
+  artifact_tag: d44cb6732351275f1832d18228749ae6c4a79876

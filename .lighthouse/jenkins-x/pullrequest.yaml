@@ -21,7 +21,7 @@ spec:
                 memory: 512Mi
             workingDir: /workspace/source
           steps:
-            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@25de7882a54f869732075eb46b04203ada8926c5
+            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@9ae86d98b3fc7a74e20148a39f269adc88f96933
             - image: quay.io/krestomatio/ansible-docker-ci
               name: build-containers
               args:

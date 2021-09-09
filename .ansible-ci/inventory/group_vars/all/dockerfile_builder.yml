@@ -53,5 +53,5 @@ doc_project_readme_src: README.md.j2
 doc_project_readme_dest: "{{ git_repo_dir }}/README.md"
 
 # updatebot
-updatebot_m4e_template_src: updatebot-m4e.yaml.j2
-updatebot_m4e_template_dest: "{{ git_repo_dir }}/.lighthouse/updatebot-m4e.yaml"
+updatebot_ansible_collection_template_src: updatebot-ansible-collection.yaml.j2
+updatebot_ansible_collection_template_dest: "{{ git_repo_dir }}/.lighthouse/updatebot-ansible-collection.yaml"

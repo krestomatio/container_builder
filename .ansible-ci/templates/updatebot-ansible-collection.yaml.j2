@@ -35,3 +35,13 @@ spec:
           sed -i \
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml
+    - command:
+        # update Graphql Engine image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          graphql_engine_image='{{ hostvars['graphql-engine'].state_yml_repo_digest }}'
+          sed -i \
+            "s#^graphql_engine_image:.*#graphql_engine_image: ${graphql_engine_image//@/\\@}#" \
+            roles/v1alpha1/app/g12e/defaults/main/graphql-engine.yml

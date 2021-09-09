@@ -4,6 +4,6 @@
 graphql_engine_base_image:
   build: False
   tag: "2.0.7"
-  id: "sha256:bb36417a8505548dd77d24605d9dab6d9b1e7e89e1341603247b1e1396fb85f7"
-  repo_digest: "quay.io/krestomatio/graphql-engine-base@sha256:2fa29c90ab2f495916a3a655b84cbf47a096c14c61853964209d894648c8cc97"
-  artifact_tag: d44cb6732351275f1832d18228749ae6c4a79876
+  id: "sha256:497f0abc8a303e227e4168aaadf2c503385641f9a2583d65cb988a9f63d461f3"
+  repo_digest: "quay.io/krestomatio/graphql-engine-base@sha256:092fcdc8089c612b27bf0f1d912a6b81c27ece0a3bb9a86fa4fcf37880566f6b"
+  artifact_tag: 4f8a269d15085524169c52f93d03e559aafe259f

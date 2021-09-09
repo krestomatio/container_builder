@@ -3,7 +3,7 @@
 #
 base_stream_image:
   build: False
-  tag: "0.1.25"
-  id: "sha256:38b77f8f48f3891f6c59d74c381ff9071fc91af6101e76371bb2840c8646bb94"
-  repo_digest: "quay.io/krestomatio/base-stream@sha256:5bb09e6eab1d1574fc5b307cb9a64879363d0f36fd438dbe225c7f1c7a1b1279"
-  artifact_tag: d44cb6732351275f1832d18228749ae6c4a79876
+  tag: "0.1.26"
+  id: "sha256:e81cf950acc24e24057b7f424cfbd17751672799c2d91cb55538ba4d98971531"
+  repo_digest: "quay.io/krestomatio/base-stream@sha256:6d66ee304b995ca8355e0fc017c2d8e2ff385863b0d69801c80dea4482aef4e1"
+  artifact_tag: 4f8a269d15085524169c52f93d03e559aafe259f

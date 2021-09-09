@@ -6,6 +6,6 @@
   when:
     - "'moodle_web' in ansible_play_hosts_all or 'postgres' in ansible_play_hosts_all"
   template:
-    src: "{{ updatebot_m4e_template_src }}"
-    dest: "{{ updatebot_m4e_template_dest }}"
+    src: "{{ updatebot_ansible_collection_template_src }}"
+    dest: "{{ updatebot_ansible_collection_template_dest }}"
     mode: '0644'

@@ -59,8 +59,8 @@ spec:
 
                 # promote if a new commit is made during pipeline
                 if [[ ! -z ${HEAD_COMMIT} && ! -z ${PULL_BASE_SHA} && "${HEAD_COMMIT}" != "${PULL_BASE_SHA}" ]]; then
-                  jx-updatebot pr -c .lighthouse/updatebot-m4e.yaml \
-                      --commit-title "chore(m4e): bump image versions with updatebot" \
+                  jx-updatebot pr -c .lighthouse/updatebot-ansible-collection.yaml \
+                      --commit-title "chore: bump image versions in ansible collection with updatebot" \
                       --no-version
                 else
                   echo "not promoted"

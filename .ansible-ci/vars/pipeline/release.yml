@@ -1,7 +1,7 @@
 version_include_major_minor_tags: true
 build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
 git_add_path:
-  "'{{ state_file }}' '{{ dockerfile_builder_path }}' '{{ doc_project_readme_dest }}' '{{ updatebot_m4e_template_dest }}'"
+  "'{{ state_file }}' '{{ dockerfile_builder_path }}' '{{ doc_project_readme_dest }}' '{{ updatebot_ansible_collection_template_dest }}'"
 git_add_throttle: 1
 git_commit_msgs:
   - "chore(release): {{ release_version }}"
@@ -9,6 +9,8 @@ git_commit_msgs:
 pr_commit_tag:
   "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |  default(false,true)}}"
 artifact_tag: "{{ pr_commit_tag }}"
+dockerfile_builder_tags:
+  - "{{ artifact_tag }}"
 git_push_options: --tags
 git_tag: "v{{ release_version }}"
 release_version: "{{ next_version | default(false,true) }}"

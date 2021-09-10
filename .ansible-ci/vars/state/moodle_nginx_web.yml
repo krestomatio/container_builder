@@ -3,7 +3,7 @@
 #
 moodle_nginx_web_image:
   build: False
-  tag: "0.1.26"
+  tag: "0.1.27"
   id: "sha256:a7b7b6a5a956b4f2679f30006149faab8f0227f4b2c8992214cb61075cfd0553"
   repo_digest: "quay.io/krestomatio/moodle_nginx_web@sha256:332ace9339369baef46085c856314076824de27d7448ab52951ab8bb6a7819d2"
-  artifact_tag: 4f8a269d15085524169c52f93d03e559aafe259f
+  artifact_tag: f3fc63e9c16d3e592cb24f2f1768829d3e486995

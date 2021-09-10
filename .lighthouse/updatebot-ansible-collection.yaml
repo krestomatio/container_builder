@@ -41,7 +41,7 @@ spec:
         args:
         - -c
         - |
-          graphql_engine_image='quay.io/krestomatio/graphql-engine@sha256:93a574a0e43b33fa5203586d55aca2cb266862bac593c5394f646f0c456ba2b1'
+          graphql_engine_image='quay.io/krestomatio/graphql-engine@sha256:8532329449533627cd486cf5dca02d8f116128515b833af4703f1124a764e6ef'
           sed -i \
             "s#^graphql_engine_image:.*#graphql_engine_image: ${graphql_engine_image//@/\\@}#" \
             roles/v1alpha1/app/g12e/defaults/main/graphql-engine.yml

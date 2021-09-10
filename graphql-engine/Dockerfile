@@ -11,11 +11,11 @@ ENV IMAGE_NAME=graphql-engine \
 ENV CTR_USER=hasura \
     CTR_USER_ID="1001"
 
-COPY --from=quay.io/krestomatio/graphql-engine-build:2.0.7 /bin/graphql-engine /bin/graphql-engine
+COPY --from=quay.io/krestomatio/graphql-engine-build:2.0.9 /bin/graphql-engine /bin/graphql-engine
 
-COPY --from=quay.io/krestomatio/graphql-engine-build:2.0.7 /usr/bin/pg_dump /usr/bin/pg_dump
+COPY --from=quay.io/krestomatio/graphql-engine-build:2.0.9 /usr/bin/pg_dump /usr/bin/pg_dump
 
-COPY --from=hasura/graphql-engine:v2.0.7 /srv/ /srv
+COPY --from=hasura/graphql-engine:v2.0.9 /srv/ /srv
 
 RUN containeruser-create
 
@@ -33,4 +33,4 @@ LABEL name="${IMAGE_NAME}" \
     org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
     io.k8s.description="${IMAGE_DESCRIPTION}" \
     io.k8s.display-name="${IMAGE_TITLE}" \
-    io.openshift.tags="${IMAGE_NAME},graphql-engine,graphql-engine-2.0.7"
+    io.openshift.tags="${IMAGE_NAME},graphql-engine,graphql-engine-2.0.9"

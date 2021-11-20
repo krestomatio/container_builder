@@ -1,5 +1,5 @@
 # Ansible managed
-FROM quay.io/krestomatio/base-stream
+FROM quay.io/krestomatio/base
 
 # General variables
 ENV IMAGE_NAME=go-toolset \

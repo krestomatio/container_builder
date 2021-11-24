@@ -10,7 +10,6 @@
 # https://catalog.redhat.com/software/containers/detail/5c359a62bed8bd75a2c3fba8
 
 # Basic setup information
-install
 url --url https://download.rockylinux.org/pub/rocky/8/BaseOS/x86_64/os/
 bootloader --disabled
 timezone --isUtc --nontp Etc/UTC
@@ -39,6 +38,7 @@ rootfiles
 -gnupg2-smime
 -kernel
 -libss
+-open-vm-tools
 -pinentry
 -qemu-guest-agent
 -shared-mime-info

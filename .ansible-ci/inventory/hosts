@@ -12,6 +12,7 @@ postgres
 rootfs-creator
 go-toolset
 graphql-engine-base
+keydb
 
 [minimal]
 centos8-minimal
@@ -55,6 +56,7 @@ php-fpm
 postgres
 go-toolset
 graphql-engine-base
+keydb
 
 [build_step_4]
 nginx_php-fpm

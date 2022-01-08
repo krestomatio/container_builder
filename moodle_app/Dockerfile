@@ -8,7 +8,7 @@ ENV IMAGE_NAME=moodle_app \
     IMAGE_TITLE="Moodle ${MOODLE_VERSION}" \
     MOODLE_VERSION="3.9" \
     MOODLE_VERSION_SHORT="39" \
-    MOODLE_VERSION_NUMBER="2020061511.03"
+    MOODLE_VERSION_NUMBER="2020061511.08"
 
 # Container variables
 ENV CTR_USER=apache \
@@ -34,7 +34,7 @@ WORKDIR ${GIT_DEST}
 
 # source variables
 ENV GIT_BRANCH="MOODLE_39_STABLE" \
-    GIT_COMMIT="448a2aa60ca80d7a474040c92ae0cf6267898152" \
+    GIT_COMMIT="504f784ae6fb62946a1a70d61ed8b7ef208fe41d" \
     GIT_REMOTE="git://github.com/moodle/moodle"
 
 # verify it has changed

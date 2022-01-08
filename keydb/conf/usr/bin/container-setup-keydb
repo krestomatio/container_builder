@@ -1,0 +1,48 @@
+#!/bin/bash -e
+# description: base config for keydb
+
+# install keydb
+echo "Download keydb.."
+curl -L https://download.keydb.dev/pkg/open_source/rpm/centos8/x86_64/keydb_all_versions/keydb-${KEYDB_VERSION_PCKG}.el8.x86_64.rpm -o /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
+echo "Download rpm signing key..."
+rpm --import https://download.keydb.dev/pkg/open_source/rpm/RPM-GPG-KEY-keydb && \
+echo "Verify keydb..."
+rpm -Kv /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
+echo "Install keydb..."
+rpm -ivh /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
+echo "Cleanup..."
+rm -rf /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
+
+# redis symlinks
+pushd /usr/bin/
+ln -s keydb-cli redis-cli
+popd
+pushd /etc/keydb
+ln -s keydb.conf redis.conf
+popd
+
+# keydb default config
+sed -i.ori \
+    -e 's/^\(bind .*\)$/# \1/' \
+    -e 's/^\(daemonize .*\)$/# \1/' \
+    -e 's/^\(dir .*\)$/# \1\ndir \/data/' \
+    -e 's/^\(logfile .*\)$/# \1/' \
+    -e 's/^protected-mode yes/protected-mode no/g' \
+    /etc/keydb/keydb.conf
+
+# check user id match
+if ! grep -q "^${CTR_USER}:x:${CTR_USER_ID}:" /etc/passwd; then
+    echo "CTR_USER_ID does not match"
+    exit 1
+fi
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${KEYDB_DATA} ${KEYDB_FLASH}
+
+fix-permissions -u ${CTR_USER_ID} ${KEYDB_DATA} ${KEYDB_FLASH} ${KEYDB_CONF_DIR}
+
+# restore rpm permissions
+rpm-file-permissions

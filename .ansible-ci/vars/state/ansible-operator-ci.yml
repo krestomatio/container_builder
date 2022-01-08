@@ -3,7 +3,7 @@
 #
 ansible_operator_ci_image:
   build: False
-  tag: "0.1.31"
-  id: "sha256:75b61bc02a7bf5d6269a8c01a3436a516b5e02c7c2d06e2c6f7d3a97dc477f92"
-  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:6682f2fdc66b17c920a2f618de203f5cea35429a23444f9fd25daf3faf6bb1bb"
-  artifact_tag: 25953b64a8395eebe59463097c642ddc810c46cf
+  tag: "0.1.32"
+  id: "sha256:6396edf2ff297131c951d12fcf31dc9ab0ee8ac1e9e4a362e07c416611f62395"
+  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:4602a9ef23b17757d4f1adb722e3fae99213577e56ce01bd629b28cb14d075ba"
+  artifact_tag: 17829a1df41e86e2dea7dab9777751285272f83e

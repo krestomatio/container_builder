@@ -19,6 +19,7 @@ ENV KEYDB_VERSION="{{ keydb_version }}" \
     KEYDB_VERSION_PCKG="{{ keydb_version_pkg }}" \
     KEYDB_PORT=${IMAGE_SERVICE_PORT} \
     KEYDB_CONF_DIR=/etc/keydb \
+    KEYDB_CONF_FILE=/etc/keydb/keydb.conf \
     KEYDB_DATA="/data" \
     KEYDB_FLASH="/flash"
 

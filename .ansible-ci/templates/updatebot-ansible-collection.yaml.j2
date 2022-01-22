@@ -36,6 +36,16 @@ spec:
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml
     - command:
+        # update Keydb image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          keydb_image='{{ hostvars['keydb'].state_yml_repo_digest }}'
+          sed -i \
+            "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
+            roles/v1alpha1/database/keydb/defaults/main/keydb.yml
+    - command:
         # update Graphql Engine image and its tag
         name: bash
         args:

@@ -41,7 +41,7 @@ spec:
         args:
         - -c
         - |
-          keydb_image='quay.io/krestomatio/keydb@sha256:ad2e72c45ddd4514960d6b4db75c07d43dc11b19c1a8a05fbc159c47b4d795d2'
+          keydb_image='quay.io/krestomatio/keydb@sha256:1402669f3bc3ee52dc2828d7a997e37efa289e82f4504416441caaf54d73b3b5'
           sed -i \
             "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
             roles/v1alpha1/database/keydb/defaults/main/keydb.yml

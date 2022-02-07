@@ -5,6 +5,14 @@ ENV GIT_COMMIT={{ moodle_git_commit }}
 RUN app-git -v -a -e '.git*'
 
 {% endif %}
+{% if moodle_php_redis_build | default(false) %}
+FROM {{ dockerfile_builder_image_from }} AS php-redis-builder
+
+USER 0
+
+RUN install-pkgs php-pear php-devel make libzstd-devel; pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis; chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
+
+{% endif %}
 FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
@@ -33,6 +41,10 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
+{% if moodle_php_redis_build | default(false) %}
+COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
+COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
+{% endif %}
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}

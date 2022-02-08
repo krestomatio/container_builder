@@ -1,5 +1,4 @@
 [platform]
-centos8-minimal
 centos8-stream-minimal
 rocky8-minimal
 base
@@ -15,7 +14,6 @@ graphql-engine-base
 keydb
 
 [minimal]
-centos8-minimal
 centos8-stream-minimal
 rocky8-minimal
 
@@ -39,7 +37,6 @@ graphql-engine-base
 graphql-engine-build
 
 [build_step_1]
-centos8-minimal
 centos8-stream-minimal
 rocky8-minimal
 

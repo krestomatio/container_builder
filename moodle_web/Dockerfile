@@ -1,7 +1,13 @@
 # Ansible managed
 FROM quay.io/krestomatio/moodle_app AS app
-ENV GIT_COMMIT=3bd1f3824982025b15cdc685a5d1d508a8c811c9
+ENV GIT_COMMIT=bb743c23587c30177880422ce36212c90ce6f40b
 RUN app-git -v -a -e '.git*'
+
+FROM quay.io/krestomatio/moodle_nginx_web AS php-redis-builder
+
+USER 0
+
+RUN install-pkgs php-pear php-devel make libzstd-devel; pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis; chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
 
 FROM quay.io/krestomatio/moodle_nginx_web
 
@@ -31,6 +37,8 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
+COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
+COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
@@ -38,8 +46,8 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ENV MOODLE_COMMIT="3bd1f3824982025b15cdc685a5d1d508a8c811c9" \
-    MOODLE_VERSION_NUMBER="2020061512.01"
+ENV MOODLE_COMMIT="bb743c23587c30177880422ce36212c90ce6f40b" \
+    MOODLE_VERSION_NUMBER="2020061512.03"
 
 COPY --chown=${CTR_USER_ID}:0 --from=app /var/www/html/ /var/www/html
 

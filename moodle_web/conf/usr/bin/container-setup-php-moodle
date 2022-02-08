@@ -8,3 +8,11 @@
 mkdir -p ${MOODLE_APP} ${MOODLE_DATA} ${MOODLE_CLI_TOOLS}
 
 fix-permissions -u ${CTR_USER_ID} ${MOODLE_APP} ${MOODLE_DATA} ${MOODLE_CLI_TOOLS}
+
+# enable redis and igbinary php modules
+if [ -f /usr/lib64/php/modules/redis.so ] && [ ! -f /etc/php.d/50-redis.ini ]; then
+    echo "extension = redis.so" > /etc/php.d/50-redis.ini
+fi
+if [ -f /usr/lib64/php/modules/igbinary.so ] && [ ! -f /etc/php.d/40-igbinary.ini ]; then
+    echo "extension = igbinary.so" > /etc/php.d/40-igbinary.ini;
+fi

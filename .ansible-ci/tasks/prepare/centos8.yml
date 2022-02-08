@@ -43,8 +43,8 @@
         or not centos_distro_release_file_old.stat.exists
     vars:
       rootfs_creator_image: quay.io/krestomatio/rootfs-creator
-      rootfs_build_kickstart: "{{ centos8_build_kickstart | default('centos8-minimal.ks') }}"
-      rootfs_build_tar: "{{ centos8_build_rootfs | default('centos8-minimal.tar.xz') }}"
+      rootfs_build_kickstart: "{{ centos8_build_kickstart | default('rocky8-minimal.ks') }}"
+      rootfs_build_tar: "{{ centos8_build_rootfs | default('rocky8-minimal.tar.xz') }}"
       centos8_build_rootfs_pull: false
     block:
     - name: pull rootfs-creator image

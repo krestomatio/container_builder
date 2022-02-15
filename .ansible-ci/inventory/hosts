@@ -10,6 +10,7 @@ nginx_php-fpm
 postgres
 rootfs-creator
 go-toolset
+node
 graphql-engine-base
 keydb
 
@@ -52,6 +53,7 @@ nginx
 php-fpm
 postgres
 go-toolset
+node
 graphql-engine-base
 keydb
 

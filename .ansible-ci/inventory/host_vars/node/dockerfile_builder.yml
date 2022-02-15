@@ -1,0 +1,13 @@
+# platform vars
+node_version_name:
+  '14': fermium
+  '16': gallium
+
+dockerfile_builder_tags:
+  - "{{ node_version_name[node_version] }}"
+
+# builder
+version_release_no_bump: true
+version_include_major_minor_tags: false
+version_image_full: "{{ node_version }}"
+dockerfile_builder_image_ocp_tags: "node,node{{ node_version }},node-{{ node_version_name[node_version] }}"

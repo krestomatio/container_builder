@@ -1,0 +1,41 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_NAME=node \
+    IMAGE_SUMMARY="Node image based on {{ dockerfile_builder_image_based }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with node javascript runtime" \
+    IMAGE_TITLE="Node image based on {{ dockerfile_builder_image_based }}"
+
+# Component bash variables
+ENV NODE_VERSION="{{ node_version }}"
+
+# Container variables
+ENV CTR_CMD="node" \
+    CTR_USER=node \
+    CTR_USER_ID="1000" \
+    CTR_USER_GECOS="Node user" \
+    CTR_HOME="/home/node"
+
+# Frequent environment variables
+ENV HOME="${CTR_HOME}"
+
+RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs
+
+USER ${CTR_USER_ID}
+
+WORKDIR ${CTR_HOME}
+
+CMD $CTR_CMD
+
+# Labels
+LABEL name="${IMAGE_NAME}" \
+    summary="${IMAGE_SUMMARY}" \
+    maintainer="{{ dockerfile_builder_image_authors }}" \
+    description="${IMAGE_DESCRIPTION}" \
+    org.opencontainers.image.title="${IMAGE_TITLE}" \
+    org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+    org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.display-name="${IMAGE_TITLE}" \
+    io.openshift.tags="${IMAGE_NAME},{{ dockerfile_builder_image_ocp_tags }}"

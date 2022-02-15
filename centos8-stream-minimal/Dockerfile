@@ -1,7 +1,7 @@
 FROM scratch
 
 # General variables
-ENV IMAGE_ROOTFS_PKGS_CHECKSUM="790c89e9dfd51062dae02efd284bde6ca52c050a"
+ENV IMAGE_ROOTFS_PKGS_CHECKSUM="3975068270365a966efbae6030de3c97608fcbdb"
 
 ADD centos8-stream-minimal.tar.xz /
 

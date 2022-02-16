@@ -11,6 +11,7 @@ postgres
 rootfs-creator
 go-toolset
 node
+node-ci
 graphql-engine-base
 keydb
 
@@ -23,6 +24,7 @@ ansible
 ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
+node-ci
 
 [m4e]
 moodle_app
@@ -36,6 +38,10 @@ moodle_httpd
 graphql-engine
 graphql-engine-base
 graphql-engine-build
+
+[node]
+node
+node-ci
 
 [build_step_1]
 centos8-stream-minimal
@@ -62,6 +68,7 @@ nginx_php-fpm
 ansible-docker-ci
 ansible-podman-ci
 graphql-engine-build
+node-ci
 
 [build_step_5]
 ansible-operator-ci

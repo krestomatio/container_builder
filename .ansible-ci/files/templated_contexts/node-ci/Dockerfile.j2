@@ -1,0 +1,24 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# General variables
+ENV IMAGE_NAME=node-ci \
+    IMAGE_SUMMARY="Node image based on {{ dockerfile_builder_image_based }} for Continuous Integration (CI)" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with node javascript runtime for CI" \
+    IMAGE_TITLE="Node image based on {{ dockerfile_builder_image_based }} for CI"
+
+USER 0
+
+RUN install-pkgs make git curl tar xz
+
+# Labels
+LABEL name="${IMAGE_NAME}" \
+    summary="${IMAGE_SUMMARY}" \
+    maintainer="{{ dockerfile_builder_image_authors }}" \
+    description="${IMAGE_DESCRIPTION}" \
+    org.opencontainers.image.title="${IMAGE_TITLE}" \
+    org.opencontainers.image.authors="{{ dockerfile_builder_image_authors }}" \
+    org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.description="${IMAGE_DESCRIPTION}" \
+    io.k8s.display-name="${IMAGE_TITLE}" \
+    io.openshift.tags="${IMAGE_NAME},{{ dockerfile_builder_image_ocp_tags }}"

@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+node_ci_image:
+  build: False
+  tag: "14"
+  id: "sha256:c663acc059d44ea2ad38b87ff01f4034d31e603efa02c841bf7b013039076716"
+  repo_digest: "quay.io/krestomatio/node-ci@sha256:375edfaa6b0a17dbb5aee1ea698d82d9a95df67651400915f68a8d491238f621"
+  artifact_tag: 66105a37ead16d49faf11e6cfab2fa1484a044db

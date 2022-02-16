@@ -6,4 +6,4 @@ keydb_image:
   tag: "6.2.1"
   id: "sha256:88f012589d8403a950fcc52f18af634abe075463bedca8ceccfc1a9a4be1917d"
   repo_digest: "quay.io/krestomatio/keydb@sha256:7722d2ef25a4e4ad6efeb46105e31c81382f05ebbd6ef3bbf8a420fd8d1f46e3"
-  artifact_tag: f8be0659cc94f68ef6b554f72ac86df585e867dd
+  artifact_tag: 66105a37ead16d49faf11e6cfab2fa1484a044db

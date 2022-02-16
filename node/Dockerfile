@@ -20,7 +20,7 @@ ENV CTR_CMD="node" \
 # Frequent environment variables
 ENV HOME="${CTR_HOME}"
 
-RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs make
+RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs
 
 USER ${CTR_USER_ID}
 
@@ -38,4 +38,4 @@ LABEL name="${IMAGE_NAME}" \
     org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
     io.k8s.description="${IMAGE_DESCRIPTION}" \
     io.k8s.display-name="${IMAGE_TITLE}" \
-    io.openshift.tags="${IMAGE_NAME},node,node14,node-fermium"
+    io.openshift.tags="${IMAGE_NAME},node,node14,node-fermium,node-ci,ci"

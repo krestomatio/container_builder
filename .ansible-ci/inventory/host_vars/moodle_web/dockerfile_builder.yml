@@ -21,6 +21,7 @@ prepare_image_task: moodle
 version_release_no_bump: true
 
 # other
+moodle_php_redis_build: true
 moodle_app_copy_from: "{{ registry_path }}/moodle_app{{ ':' +
   dockerfile_builder_image_from_tag if
   dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"

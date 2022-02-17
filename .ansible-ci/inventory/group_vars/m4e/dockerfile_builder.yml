@@ -4,7 +4,6 @@ moodle_version: '3.9'
 # moodle
 moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
 
-moodle_php_redis_build: true
 dockerfile_builder_image_git_remote: "git://github.com/moodle/moodle"
 moodle_git_refs_json:
   url: "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +

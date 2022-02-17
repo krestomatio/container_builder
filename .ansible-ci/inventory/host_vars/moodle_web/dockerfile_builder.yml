@@ -1,9 +1,9 @@
 # image
 container_builder_image_from: moodle_nginx_web
 dockerfile_builder_image_name: "{{ ctr_name }}"
-dockerfile_builder_image_summary: "PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle"
-dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle"
-dockerfile_builder_image_title: "PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle"
+dockerfile_builder_image_summary: "PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_VERSION} or NGINX ${NGINX_VERSION} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_title: "PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle {{ moodle_version }}"
 dockerfile_builder_image_ocp_tags:
   "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'

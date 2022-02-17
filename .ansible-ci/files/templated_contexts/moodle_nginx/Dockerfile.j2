@@ -1,3 +1,8 @@
+{% set dockerfile_builder_image_name = 'moodle_nginx' %}
+{% set dockerfile_builder_image_summary = 'Nginx ${NGINX_VERSION} for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_description = 'This ' + dockerfile_builder_image_based + ' based container image runs Nginx ${NGINX_VERSION} for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_title = 'Nginx ${NGINX_VERSION} for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_ocp_tags = '${IMAGE_NAME},nginx,nginx${NGINX_VER_SHORT},nginx-${NGINX_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}' %}
 # {{ ansible_managed  }}
 {% if moodle_app_copy_from is defined %}
 FROM {{ moodle_app_copy_from }} AS app
@@ -7,10 +12,11 @@ RUN app-git -a -e '.git*'
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_NAME="moodle_nginx" \
-    IMAGE_SUMMARY="Nginx ${NGINX_VERSION} for Moodle {{ moodle_version }}" \
-    IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION} for Moodle {{ moodle_version }}" \
-    IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle {{ moodle_version }}" \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
+    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description }}" \
+    IMAGE_TITLE="{{ dockerfile_builder_image_title }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
 # Component bash variables
@@ -50,4 +56,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.version="{{ dockerfile_builder_image_version }}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},nginx,nginx${NGINX_VER_SHORT},nginx-${NGINX_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}"
+      io.openshift.tags="${IMAGE_OC_TAGS}"

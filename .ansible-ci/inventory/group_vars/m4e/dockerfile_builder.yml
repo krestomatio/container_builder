@@ -1,6 +1,3 @@
-# platform vars
-moodle_version: '3.9'
-
 # moodle
 moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
 

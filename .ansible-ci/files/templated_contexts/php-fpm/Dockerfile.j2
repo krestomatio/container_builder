@@ -1,17 +1,12 @@
-{% set dockerfile_builder_image_name = 'php-fpm' %}
-{% set dockerfile_builder_image_summary = 'PHP ' + php_version %}
-{% set dockerfile_builder_image_description = 'This ' + dockerfile_builder_image_based + ' based container image runs PHP ' + php_version %}
-{% set dockerfile_builder_image_title = 'PHP ' + php_version %}
-{% set dockerfile_builder_image_ocp_tags = '${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}' %}
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
-    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary }}" \
-    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description }}" \
-    IMAGE_TITLE="{{ dockerfile_builder_image_title }}" \
-    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags }}" \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('php-fpm') }} \
+    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary | default('PHP ' + php_version) }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ' + php_version) }}" \
+    IMAGE_TITLE="{{ dockerfile_builder_image_title | default('PHP ' + php_version) }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags | default('${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}') }}" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 

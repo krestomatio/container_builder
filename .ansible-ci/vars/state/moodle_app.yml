@@ -6,4 +6,4 @@ moodle_app_image:
   tag: "3.9.12"
   id: "sha256:a7155805d2c1cb1c6e486c13c21f21fcedbfb9827041929843883cdab4b978f4"
   repo_digest: "quay.io/krestomatio/moodle_app@sha256:96ec95198755c8600a6afee38ac1e6f9e46c882692f887840dfb415d87c54c04"
-  artifact_tag: 66105a37ead16d49faf11e6cfab2fa1484a044db
+  artifact_tag: ef122d1849c8c3359a2c75d39c32cff8e3a63412

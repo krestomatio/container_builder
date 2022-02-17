@@ -1,17 +1,11 @@
 # Ansible managed
-FROM quay.io/krestomatio/php-fpm AS php-redis-builder
-
-USER 0
-
-RUN install-pkgs php-pear php-devel make libzstd-devel; pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis; chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
-
 FROM quay.io/krestomatio/php-fpm
 
 # General ansible variables
 ENV IMAGE_NAME=moodle_php-fpm \
-    IMAGE_SUMMARY="PHP $PHP_VERSION for Moodle" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} for Moodle" \
-    IMAGE_TITLE="PHP ${PHP_VERSION} for Moodle" \
+    IMAGE_SUMMARY="PHP $PHP_VERSION for Moodle 3.9" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} for Moodle 3.9" \
+    IMAGE_TITLE="PHP ${PHP_VERSION} for Moodle 3.9" \
     IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}" \
     TZ="UTC"
 
@@ -33,8 +27,6 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
-COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
 
 RUN container-setup
 RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}

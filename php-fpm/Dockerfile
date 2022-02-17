@@ -6,6 +6,7 @@ ENV IMAGE_NAME=php-fpm \
     IMAGE_SUMMARY="PHP 7.4" \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.4" \
     IMAGE_TITLE="PHP 7.4" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 
@@ -59,4 +60,4 @@ LABEL name="${IMAGE_NAME}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
-      io.openshift.tags="${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}"
+      io.openshift.tags="${IMAGE_OC_TAGS}"

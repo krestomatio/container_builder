@@ -11,7 +11,6 @@ postgres
 rootfs-creator
 go-toolset
 node
-node-ci
 graphql-engine-base
 keydb
 

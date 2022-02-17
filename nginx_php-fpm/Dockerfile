@@ -2,11 +2,11 @@
 FROM quay.io/krestomatio/nginx
 
 # General variables
-ENV IMAGE_NAME=php-fpm \
-    IMAGE_SUMMARY="PHP 7.4" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.4" \
-    IMAGE_TITLE="PHP 7.4" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}" \
+ENV IMAGE_NAME=nginx_php-fpm \
+    IMAGE_SUMMARY="Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION} for Moodle 3.9" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION} for Moodle 3.9" \
+    IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle 3.9" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 

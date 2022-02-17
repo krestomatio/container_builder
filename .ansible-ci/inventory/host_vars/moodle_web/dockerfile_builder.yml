@@ -12,6 +12,23 @@ dockerfile_builder_force:
   "{{ true if hostvars['moodle_app'].dockerfile_builder_image_build is defined
   and hostvars['moodle_app'].dockerfile_builder_image_build is changed else false  }}"
 dockerfile_builder_force_source: "{{ dockerfile_builder_force }}"
+ctr_readme_section: |-
+  This {{ dockerfile_builder_image_based }} based container image runs PHP ${PHP_VERSION} or NGINX ${NGINX_VERSION} for Moodle {{ moodle_version }}.
+
+  It includes a copy of Moodle source, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set)
+
+  {% if moodle_git_branch is defined %}
+  Moodle remote branch: {{ moodle_git_branch }}
+  {% endif %}
+  {% if moodle_git_commit is defined %}
+  Moodle commit: {{ moodle_git_commit }}
+  {% endif %}
+  {% if moodle_git_source_version is defined %}
+  Moodle version: {{ moodle_git_source_version }}
+  {% endif %}
+  {% if moodle_git_source_version_number is defined %}
+  Moodle version number: {{ moodle_git_source_version_number }}
+  {% endif %}
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"

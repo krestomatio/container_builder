@@ -1,14 +1,3 @@
-# platform vars
-centos_version: '8'
-php_version: '7.4'
-httpd_version: '2.4'
-nginx_version: '1.18'
-postgres_version: '13'
-postgres_prev_version: '10'
-keydb_version_pkg: 6.2.1-1
-keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_regex) }}"
-node_version: '14'
-
 # builder
 # dockerfile_builder_push: true
 container_builder_image_from: base-stream

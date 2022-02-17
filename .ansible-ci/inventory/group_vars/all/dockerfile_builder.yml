@@ -10,6 +10,10 @@ keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_reg
 node_version: '14'
 moodle_version: '3.9'
 
+node_version_name:
+  '14': fermium
+  '16': gallium
+
 working_dir: "{{ playbook_dir }}"
 
 # container

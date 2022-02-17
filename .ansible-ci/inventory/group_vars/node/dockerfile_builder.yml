@@ -1,10 +1,4 @@
-# platform vars
-node_version_name:
-  '14': fermium
-  '16': gallium
-
-dockerfile_builder_tags:
-  - "{{ node_version_name[node_version] }}"
-
 # builder
+dockerfile_builder_tags:
+- "{{ node_version_name[node_version] }}"
 version_image_full: "{{ node_version }}"

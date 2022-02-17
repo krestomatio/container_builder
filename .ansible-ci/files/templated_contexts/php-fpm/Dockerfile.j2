@@ -1,11 +1,17 @@
+{% set dockerfile_builder_image_name = 'php-fpm' %}
+{% set dockerfile_builder_image_summary = 'PHP ' + php_version %}
+{% set dockerfile_builder_image_description = 'This ' + dockerfile_builder_image_based + ' based container image runs PHP ' + php_version %}
+{% set dockerfile_builder_image_title = 'PHP ' + php_version %}
+{% set dockerfile_builder_image_ocp_tags = '${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}' %}
 # {{ ansible_managed  }}
 FROM {{ dockerfile_builder_image_from }}
 
 # General variables
-ENV IMAGE_NAME=php-fpm \
-    IMAGE_SUMMARY="PHP {{ php_version }}" \
-    IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }}" \
-    IMAGE_TITLE="PHP {{ php_version }}" \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
+    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description }}" \
+    IMAGE_TITLE="{{ dockerfile_builder_image_title }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags }}" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 
@@ -59,4 +65,4 @@ LABEL name="${IMAGE_NAME}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \
-      io.openshift.tags="${IMAGE_NAME},php,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}"
+      io.openshift.tags="${IMAGE_OC_TAGS}"

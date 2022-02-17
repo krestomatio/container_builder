@@ -1,4 +1,8 @@
+{% if ctr_readme_section is defined %}
+{{ ctr_readme_section }}
+{% else %}
 Moodle NGINX image based on {{ dockerfile_builder_image_based }}
+{% endif %}
 
 ## Repository
 This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/{{ ctr_name }})

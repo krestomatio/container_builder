@@ -1,3 +1,8 @@
+{% set dockerfile_builder_image_name = 'moodle_php-fpm' %}
+{% set dockerfile_builder_image_summary = 'PHP $PHP_VERSION for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_description = 'This ' + dockerfile_builder_image_based + ' based container image runs PHP ${PHP_VERSION} for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_title = 'PHP ${PHP_VERSION} for Moodle ' + moodle_version %}
+{% set dockerfile_builder_image_ocp_tags = '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}' %}
 # {{ ansible_managed  }}
 {% if moodle_app_copy_from is defined %}
 FROM {{ moodle_app_copy_from }} AS app
@@ -16,11 +21,11 @@ RUN install-pkgs php-pear php-devel make libzstd-devel; pecl install -D 'enable-
 FROM {{ dockerfile_builder_image_from }}
 
 # General ansible variables
-ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
-    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary | default('PHP $PHP_VERSION for Moodle') }}" \
-    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ${PHP_VERSION} for Moodle') }}" \
-    IMAGE_TITLE="{{ dockerfile_builder_image_title | default('PHP ${PHP_VERSION} for Moodle') }}" \
-    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags | default('${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}') }}" \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
+    IMAGE_SUMMARY="{{ dockerfile_builder_image_summary }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description }}" \
+    IMAGE_TITLE="{{ dockerfile_builder_image_title }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags }}" \
     TZ="{{ dockerfile_builder_image_timezone }}"
 
 # Component bash variables

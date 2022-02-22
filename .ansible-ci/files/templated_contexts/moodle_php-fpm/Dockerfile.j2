@@ -56,7 +56,7 @@ USER ${CTR_USER_ID}
 ENV MOODLE_COMMIT="{{ moodle_git_commit }}" \
     MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}"
 
-COPY --chown=${CTR_USER_ID}:0 --from=app {{ moodle_code_copy_path | default('/var/www/html/') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
+COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app {{ moodle_code_copy_path | default('/var/www/html/') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
 
 {% endif %}
 # Labels

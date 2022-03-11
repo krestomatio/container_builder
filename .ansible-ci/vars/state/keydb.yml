@@ -4,6 +4,6 @@
 keydb_image:
   build: False
   tag: "6.2.1"
-  id: "sha256:d4ecbf81fb952f7621e629901b9aca4a6833a250e18252da0729102c07b92625"
-  repo_digest: "quay.io/krestomatio/keydb@sha256:3236ec16e0d2950590d6c1d7686ff1ec4ae9e6589c7c651c6c2f0df6169057c5"
-  artifact_tag: 6f901ffff73164cedd6b8e51b67b11ef2050c16d
+  id: "sha256:c2e71d83b17517197398a4c9fd2a168995c01cfd3ae62aa919a9dd7c746c9edb"
+  repo_digest: "quay.io/krestomatio/keydb@sha256:a16729f3887a20aa40576719de9c8c954681f98a65761136503a5e0ee334c7bc"
+  artifact_tag: c3dc07aa32d6a413fb6bd1eed749a71fe50f9e97

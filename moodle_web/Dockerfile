@@ -1,6 +1,6 @@
 # Ansible managed
 FROM quay.io/krestomatio/moodle_app AS app
-ENV GIT_COMMIT=5adfd0fa462c148ffebd877edf983e5f572b6fbf
+ENV GIT_COMMIT=7c52eaaf180ba34534c3b4106fe18ac7a02f0f20
 RUN app-git -v -a -e '.git*'
 
 FROM quay.io/krestomatio/moodle_nginx_web AS php-redis-builder
@@ -46,8 +46,8 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ENV MOODLE_COMMIT="5adfd0fa462c148ffebd877edf983e5f572b6fbf" \
-    MOODLE_VERSION_NUMBER="2020061512.05"
+ENV MOODLE_COMMIT="7c52eaaf180ba34534c3b4106fe18ac7a02f0f20" \
+    MOODLE_VERSION_NUMBER="2020061512.06"
 
 COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app /var/www/html/ /var/www/html
 

@@ -2,6 +2,8 @@
 # description: run postgres as slave on replication
 # From https://github.com/sclorg/postgresql-container
 
+export ENABLE_REPLICATION=${ENABLE_REPLICATION:-true}
+
 set -eu
 
 source "$CONTAINER_SCRIPTS_PATH"/common.sh

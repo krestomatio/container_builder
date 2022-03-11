@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:da1ad05dfd747fa13b75f9a7721472e3268ea9247d295f5a55865ca9dc6a1e0e'
+          moodle_web_image='quay.io/krestomatio/moodle_web@sha256:6b4f2e8c9bd1f534b2141270730b2470ada79a87bda51c39c98b094828a2e72a'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_web_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='quay.io/krestomatio/postgres@sha256:009e7a824e42df696c8d3b0a522d1adefc6194d00f847ef5011c29636d9a8806'
+          postgres_image='quay.io/krestomatio/postgres@sha256:f527a2bb839c50d7453f79dc3566be7efa45345925d780f98b7868ddfa7f3e44'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/postgres.yml
@@ -31,7 +31,7 @@ spec:
         args:
         - -c
         - |
-          nginx_image='quay.io/krestomatio/nginx@sha256:c0e3bb9614dc657d4c78fc78b59be2c5d908e27671257ee2b0697a96f4b985e0'
+          nginx_image='quay.io/krestomatio/nginx@sha256:a827b5629fe24d75e9c1b3e96932f23cb00d708ce511fd712e8890b64e57a542'
           sed -i \
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml
@@ -41,7 +41,7 @@ spec:
         args:
         - -c
         - |
-          keydb_image='quay.io/krestomatio/keydb@sha256:7722d2ef25a4e4ad6efeb46105e31c81382f05ebbd6ef3bbf8a420fd8d1f46e3'
+          keydb_image='quay.io/krestomatio/keydb@sha256:3236ec16e0d2950590d6c1d7686ff1ec4ae9e6589c7c651c6c2f0df6169057c5'
           sed -i \
             "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
             roles/v1alpha1/database/keydb/defaults/main/keydb.yml
@@ -51,7 +51,7 @@ spec:
         args:
         - -c
         - |
-          graphql_engine_image='quay.io/krestomatio/graphql-engine@sha256:cbc3fe775932e95ebe8ea84e19c5baf96f85945b5f6663afe8de1e2cd1b374b0'
+          graphql_engine_image='quay.io/krestomatio/graphql-engine@sha256:17697b5664788ab8fa7fe6e0a656fceddc16019074b21a00556e2242324d81e7'
           sed -i \
             "s#^graphql_engine_image:.*#graphql_engine_image: ${graphql_engine_image//@/\\@}#" \
             roles/v1alpha1/app/g12e/defaults/main/graphql-engine.yml

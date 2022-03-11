@@ -8,7 +8,7 @@ chkconfig-1.19.1-1.el8.x86_64.rpm
 coreutils-single-8.30-12.el8.x86_64.rpm
 crypto-policies-20210617-1.gitc776d3e.el8.noarch.rpm
 curl-7.61.1-22.el8.x86_64.rpm
-cyrus-sasl-lib-2.1.27-5.el8.x86_64.rpm
+cyrus-sasl-lib-2.1.27-6.el8_5.x86_64.rpm
 elfutils-libelf-0.185-1.el8.x86_64.rpm
 file-libs-5.33-20.el8.x86_64.rpm
 filesystem-3.8-6.el8.x86_64.rpm

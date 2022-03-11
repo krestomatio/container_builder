@@ -1,7 +1,7 @@
 FROM scratch
 
 # General variables
-ENV IMAGE_ROOTFS_PKGS_CHECKSUM="5828d85e871e79dfb9c49bafd9af4ba4fcc4d626"
+ENV IMAGE_ROOTFS_PKGS_CHECKSUM="1ece9dd9b95d4aab76ef3914581433bc5763a029"
 
 ADD rocky8-minimal.tar.xz /
 

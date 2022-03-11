@@ -42,7 +42,7 @@ ENV HOME="${CTR_HOME}" \
     PGUSER="$CTR_USER" \
     LANG="en_US.UTF-8"
 
-ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper"
+ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper bind-utils"
 
 USER 0
 

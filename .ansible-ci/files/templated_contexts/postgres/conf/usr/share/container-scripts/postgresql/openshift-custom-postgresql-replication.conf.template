@@ -1,4 +1,4 @@
-# description: reṕlication
+# description: replication
 # From https://github.com/sclorg/postgresql-container
 
 # required on master for replication

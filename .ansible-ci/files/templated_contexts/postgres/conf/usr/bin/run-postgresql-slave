@@ -18,11 +18,12 @@ function initialize_replica() {
 
   # PostgreSQL recovery configuration.
   generate_postgresql_recovery_config
-  cat >> "$PGDATA/recovery.conf" <<EOF
-
+  cat >> "$PGDATA/postgresql.auto.conf" <<EOF
 # Custom OpenShift recovery configuration:
 include '${POSTGRESQL_RECOVERY_FILE}'
 EOF
+  # activate standby mode
+  touch "$PGDATA/standby.signal"
 }
 
 check_env_vars

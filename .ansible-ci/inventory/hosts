@@ -38,7 +38,7 @@ graphql-engine
 graphql-engine-base
 graphql-engine-build
 
-[node]
+[nodejs]
 node
 node-ci
 

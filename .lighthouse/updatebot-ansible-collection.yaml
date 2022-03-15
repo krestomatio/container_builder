@@ -46,6 +46,16 @@ spec:
             "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
             roles/v1alpha1/database/keydb/defaults/main/keydb.yml
     - command:
+        # update PgBouncer image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          pgbouncer_image='quay.io/krestomatio/pgbouncer@sha256:71668f4469b8d0925e2f9e85646e1d46ac585ed2765f90609fad426b99fa3235'
+          sed -i \
+            "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
+            roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml
+    - command:
         # update Graphql Engine image and its tag
         name: bash
         args:

@@ -3,7 +3,7 @@
 #
 ansible_operator_ci_image:
   build: False
-  tag: "0.1.47"
+  tag: "0.1.48"
   id: "sha256:86f6b27671f7ef7e5ca24c96364f54b7836144a42b462d494bf14fe99efd4806"
   repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:799a8ddb7e3a1612e7cb875c4d22970d7beec65434a24da46708635068945583"
-  artifact_tag: d586ec447c62770accee307406ce39dde42775bb
+  artifact_tag: abc9904df466728f0e0ac273295de500630dd500

@@ -21,6 +21,11 @@ cat << EOF > ${PGBOUNCER_CONFIG_FILE}
 [databases]
 ;;add_fallback_database_placeholder
 
+;;include_config_databases_placeholder
+
+[users]
+;;include_config_users_placeholder
+
 [pgbouncer]
 pidfile = ${PGBOUNCER_PID_FILE}
 
@@ -31,6 +36,8 @@ auth_type = ${PGBOUNCER_AUTH_TYPE}
 auth_file = ${PGBOUNCER_USERS_FILE}
 admin_users = ${PGBOUNCER_ADMIN_USER}
 stats_users = ${PGBOUNCER_STATS_USERS}
+
+;;include_config_pgbouncer_placeholder
 
 EOF
 chmod 0660 ${PGBOUNCER_CONFIG_FILE} ${PGBOUNCER_USERS_FILE}

@@ -27,7 +27,8 @@ ENV CTR_USER=postgres \
     CTR_USER_ID="26" \
     CTR_HOME=/var/lib/pgsql \
     CTR_CMD="run-postgresql" \
-    CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql
+    CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
+    CTR_STOPSIGNAL=SIGINT
 
 # Component bash variables
 ENV POSTGRES_VERSION="{{ postgres_version }}" \
@@ -56,6 +57,8 @@ RUN container-setup && container-setup-postgres
 WORKDIR ${CTR_HOME}
 
 USER ${CTR_USER_ID}
+
+STOPSIGNAL ${CTR_STOPSIGNAL}
 
 EXPOSE ${POSTGRES_PORT}
 

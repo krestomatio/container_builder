@@ -30,6 +30,8 @@ ENV POSTGRES_VERSION="{{ postgres_version }}" \
     PGBOUNCER_CONFIG_DIR=/etc/pgbouncer/ \
     PGBOUNCER_CONFIG_FILE=/etc/pgbouncer/pgbouncer.ini \
     PGBOUNCER_EXTRA_CONFIG_FILE=/etc/pgbouncer/pgbouncer-extra.ini \
+    PGBOUNCER_EXTRA_USERS_CONFIG_FILE=/etc/pgbouncer/pgbouncer-extra-users.ini \
+    PGBOUNCER_EXTRA_DATABASES_CONFIG_FILE=/etc/pgbouncer/pgbouncer-extra-databases.ini \
     PGBOUNCER_USERS_FILE=/etc/pgbouncer/userlist.txt
 
 # Frequent environment variables

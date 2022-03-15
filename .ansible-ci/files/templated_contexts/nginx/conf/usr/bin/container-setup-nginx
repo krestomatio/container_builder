@@ -7,11 +7,7 @@ install-pkgs ${OS_INSTALL_PKGS}
 
 # persistent user id
 sed "/^${CTR_USER}/d" /etc/passwd | grep -q -w ${CTR_USER_ID} && exit 1 || echo "Setting userid to ${CTR_USER_ID}..."
-sed -i "s@^nginx:.*@nginx:x:${CTR_USER_ID}:${CTR_USER_ID}:Nginx web server:/var/lib/nginx:/sbin/nologin@" /etc/passwd
-
-sed "/^${CTR_USER}/d" /etc/passwd | grep -q -w ${CTR_USER_ID} && exit 1 || echo "setting
-groupid to ${CTR_USER_ID}..."
-sed -i "s@^nginx:.*@nginx:x:${CTR_USER_ID}:@" /etc/group
+sed -i "s@^nginx:.*@nginx:x:${CTR_USER_ID}:$(id -u ${CTR_USER}):Nginx web server:/var/lib/nginx:/sbin/nologin@" /etc/passwd
 
 # nginx default config
 cat << "EOF" > ${NGINX_MAIN_CONF_FILE}

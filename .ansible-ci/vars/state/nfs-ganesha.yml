@@ -1,0 +1,9 @@
+#
+# Ansible managed
+#
+nfs_ganesha_image:
+  build: False
+  tag: "0.0.2"
+  id: "sha256:8b185b4dfdaa4fd93232f8d56ce7e9e79bf595808f0f2847cc373ff693616ea0"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha@sha256:7449dff9f18c8a32efbbd379831f0b716a85c58fa7b681ceca663f2a9429479c"
+  artifact_tag: d7c641a8fddbe0526329b99b64daf74f7fd4dd72

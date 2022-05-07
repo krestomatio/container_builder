@@ -4,6 +4,6 @@
 node_image:
   build: False
   tag: "14"
-  id: "sha256:8c4a40672afae5c6a6deb047fee0a8133351ae6a6fd43e5ac6b30841e4d139ed"
-  repo_digest: "quay.io/krestomatio/node@sha256:64b7380a7e5484631a74934245fdc479f3f547526a8f6d87e8ed8112344fff89"
-  artifact_tag: abc9904df466728f0e0ac273295de500630dd500
+  id: "sha256:e484361f38ccdaa446e8eeedbec217d51fb9a8c4a0883113922a312daa7ba1a2"
+  repo_digest: "quay.io/krestomatio/node@sha256:f7db42af04d1e6cbe8960a7486a2a0cda9c47406c8e14e11e989eed2a9ceaa0b"
+  artifact_tag: d7c641a8fddbe0526329b99b64daf74f7fd4dd72

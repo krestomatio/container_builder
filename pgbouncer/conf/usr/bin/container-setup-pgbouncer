@@ -10,7 +10,7 @@ install-pkgs -e pgbouncer
 
 # persistent user id
 sed "/^${CTR_USER}/d" /etc/passwd | grep -q -w ${CTR_USER_ID} && exit 1 || echo "Setting userid to ${CTR_USER_ID}..."
-sed -i "s@^pgbouncer:.*@pgbouncer:x:${CTR_USER_ID}:$(id -u ${CTR_USER}):PgBouncer Server:${CTR_HOME}:/sbin/nologin@" /etc/passwd
+sed -i "s@^pgbouncer:.*@pgbouncer:x:${CTR_USER_ID}:$(id -g ${CTR_USER}):PgBouncer Server:${CTR_HOME}:/sbin/nologin@" /etc/passwd
 
 # create dirs
 mkdir -p ${PGBOUNCER_RUN_DIR} ${CTR_HOME}

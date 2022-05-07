@@ -5,8 +5,8 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 ## Details
 
 * Moodle version: 3.9.13
-* Moodle version number: 2020061513.00
-* Moodle commit: 4e2c4bfaedc4057c3b22976757f9a2c845ba3124
+* Moodle version number: 2020061513.06
+* Moodle commit: f4b45aa02c347ea6c9e25a9b7819f8ad18f7f6a2
 * Moodle remote branch: MOODLE\_39\_STABLE
 
 

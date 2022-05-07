@@ -7,6 +7,7 @@ httpd
 nginx
 php-fpm
 nginx_php-fpm
+nfs-ganesha
 postgres
 pgbouncer
 rootfs-creator
@@ -56,6 +57,7 @@ rootfs-creator
 ansible
 httpd
 nginx
+nfs-ganesha
 php-fpm
 postgres
 pgbouncer

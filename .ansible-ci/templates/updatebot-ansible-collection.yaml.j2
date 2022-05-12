@@ -55,13 +55,3 @@ spec:
           sed -i \
             "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml
-    - command:
-        # update Graphql Engine image and its tag
-        name: bash
-        args:
-        - -c
-        - |
-          graphql_engine_image='{{ hostvars['graphql-engine'].state_yml_repo_digest }}'
-          sed -i \
-            "s#^graphql_engine_image:.*#graphql_engine_image: ${graphql_engine_image//@/\\@}#" \
-            roles/v1alpha1/app/g12e/defaults/main/graphql-engine.yml

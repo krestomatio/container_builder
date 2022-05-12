@@ -61,8 +61,13 @@ check_database_installed() {
     php <<'CODE'
 <?php
 define('CLI_SCRIPT', true);
+define('NO_UPGRADE_CHECK', true);
 $MOODLE_APP = getenv('MOODLE_APP') ?: '/var/www/html';
 require($MOODLE_APP . '/config.php');
+if (!empty($CFG->upgraderunning)) {
+    echo "CHECK: Upgrade is running\n";
+    exit(0);
+}
 if (empty($CFG->version)) {
     echo "CHECK: Database is not yet installed\n";
     exit(2);

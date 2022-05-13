@@ -21,7 +21,8 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ${PHP_VERSION} for Moodle ' + moodle_version) }}" \
     IMAGE_TITLE="{{ dockerfile_builder_image_title | default('PHP ${PHP_VERSION} for Moodle ' + moodle_version) }}" \
     IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags | default('${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}') }}" \
-    TZ="{{ dockerfile_builder_image_timezone }}"
+    TZ="{{ dockerfile_builder_image_timezone }}" \
+    LANG="en_AU.UTF-8"
 
 # Component bash variables
 ENV MOODLE_VERSION="{{ moodle_version }}" \
@@ -46,8 +47,6 @@ COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/mod
 COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
 {% endif %}
 
-RUN container-setup
-RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}

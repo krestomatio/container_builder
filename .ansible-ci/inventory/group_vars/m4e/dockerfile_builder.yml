@@ -10,5 +10,6 @@ moodle_git_repo_version:
   url: "{{ 'https://raw.githubusercontent.com/moodle/moodle/' +
   moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
-  regex: '([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?'
+  regex: '(?<=\$release)(.*)(?=\s\(Build:)'
+  regex_group: '([[0-9]+)\.([[0-9]+)\.([[0-9A-Za-z-+]+)'
   number_regex: '(?<=\=\s)\d+\.\d+(?=\;)'

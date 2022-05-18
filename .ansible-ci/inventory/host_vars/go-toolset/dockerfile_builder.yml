@@ -1,5 +1,5 @@
 # platform vars
-go_version_major_minor: 1.16
+go_version_major_minor: 1.17
 
 # builder
 container_builder_image_from: base

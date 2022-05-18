@@ -1,10 +1,4 @@
 # {{ ansible_managed  }}
-{% if moodle_app_copy_from is defined %}
-FROM {{ moodle_app_copy_from }} AS app
-ENV GIT_COMMIT={{ moodle_git_commit }}
-RUN app-git -v -a -e '.git*'
-
-{% endif %}
 {% if moodle_php_redis_build | default(false) %}
 FROM {{ dockerfile_builder_image_from }} AS php-redis-builder
 
@@ -51,13 +45,6 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-{% if moodle_app_copy_from is defined %}
-ENV MOODLE_COMMIT="{{ moodle_git_commit }}" \
-    MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}"
-
-COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app {{ moodle_code_copy_path | default('/var/www/html/') }} {{ moodle_code_copy_dest | default('/var/www/html') }}
-
-{% endif %}
 # Labels
 LABEL name="${IMAGE_NAME}" \
       summary="${IMAGE_SUMMARY}" \

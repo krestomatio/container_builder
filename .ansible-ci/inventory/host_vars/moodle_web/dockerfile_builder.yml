@@ -8,10 +8,6 @@ dockerfile_builder_image_ocp_tags:
   "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'
   + ',moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}' }}"
-dockerfile_builder_force:
-  "{{ true if hostvars['moodle_app'].dockerfile_builder_image_build is defined
-  and hostvars['moodle_app'].dockerfile_builder_image_build is changed else false  }}"
-dockerfile_builder_force_source: "{{ dockerfile_builder_force }}"
 ctr_readme_section: |-
   This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }} or NGINX {{ nginx_version }} for Moodle {{ moodle_version }}.
 
@@ -41,6 +37,3 @@ version_release_no_bump: true
 
 # other
 moodle_php_redis_build: true
-moodle_app_copy_from: "{{ registry_path }}/moodle_app{{ ':' +
-  dockerfile_builder_image_from_tag if
-  dockerfile_builder_image_from_tag is defined and dockerfile_builder_image_from_tag else '' }}"

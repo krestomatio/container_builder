@@ -1,9 +1,0 @@
-# image
-container_builder_image_from: base-stream
-
-# ci
-prepare_image_task: moodle
-version_release_no_bump: true
-
-# other
-moodle_git_refs_json_dest: "{{ template_path }}/version.json"

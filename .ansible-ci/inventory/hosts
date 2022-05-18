@@ -28,7 +28,6 @@ ansible-podman-ci
 node-ci
 
 [m4e]
-moodle_app
 moodle_nginx
 moodle_nginx_web
 moodle_php-fpm
@@ -75,7 +74,6 @@ node-ci
 
 [build_step_5]
 ansible-operator-ci
-moodle_app
 graphql-engine
 
 [build_step_6]

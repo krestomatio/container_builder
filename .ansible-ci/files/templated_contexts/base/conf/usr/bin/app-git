@@ -40,7 +40,7 @@ while getopts ":apvsde:" opt; do
   case ${opt} in
     a )
         sync=true
-        rsync_options="-ia"
+        rsync_options="--stats -a"
         ;;
     p )
         pull=true

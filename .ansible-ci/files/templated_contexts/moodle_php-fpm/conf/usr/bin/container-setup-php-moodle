@@ -5,7 +5,7 @@
 locale-tz-all
 
 # install moodle dependencies
-install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
+install-pkgs ${MOODLE_INSTALL_PHP_PKGS} unzip
 
 # In order to drop the root user, make some directories world
 # writeable as OpenShift default security model is to run the container under

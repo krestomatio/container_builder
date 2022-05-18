@@ -4,7 +4,7 @@
 usage() {
     cat 1>&2 <<EOF
 Script to install moodle plugin(s) by component name (ex. 'mod_jitsi').
-It requires PHP cli and rsync
+It requires PHP cli, PHP json, unzip
 
 ENVIRONMENT VARS:
 MOODLE_APP                  path to moodle code
@@ -35,11 +35,12 @@ install_plugin() {
     script_moodle_plugin_component_url="${script_moodle_plugin_component_url_md5_dest[0]:1:-1}"
     script_moodle_plugin_component_md5="${script_moodle_plugin_component_url_md5_dest[1]:1:-1}"
     script_moodle_plugin_component_dest="${script_moodle_plugin_component_url_md5_dest[2]:1:-1}"
-    script_moodle_plugin_component_temp_dest="/tmp/${script_moodle_plugin_component_md5}"
-    script_moodle_plugin_component_bak_dest="${script_moodle_plugin_component_temp_dest}/backup"
-    script_moodle_plugin_component_zip="${script_moodle_plugin_component_temp_dest}/${script_moodle_plugin_component_name}.zip"
+    script_moodle_plugin_component_tmp_parent_dest="/tmp/moodle-plugins/${script_moodle_plugin_component_md5}"
+    script_moodle_plugin_component_tmp_dest="${script_moodle_plugin_component_tmp_parent_dest}/$(basename ${script_moodle_plugin_component_dest})"
+    script_moodle_plugin_component_bak_dest="${script_moodle_plugin_component_tmp_parent_dest}/backup"
+    script_moodle_plugin_component_zip="${script_moodle_plugin_component_tmp_parent_dest}/${script_moodle_plugin_component_name}.zip"
     # create temp and backup dir
-    mkdir -p "${script_moodle_plugin_component_temp_dest}" "${script_moodle_plugin_component_bak_dest}"
+    mkdir -p "${script_moodle_plugin_component_tmp_parent_dest}" "${script_moodle_plugin_component_bak_dest}" "${script_moodle_plugin_component_tmp_dest}"
     # download zip
     if ! test -f "${script_moodle_plugin_component_zip}"; then
         echo "Downloading plugin zip: ${script_moodle_plugin_component_name}"
@@ -62,8 +63,11 @@ install_plugin() {
         mv "${script_moodle_plugin_component_dest}" "${script_moodle_plugin_component_bak_dest}"
     fi
     # unzip plugin in destination directory
-    echo "Uncompressing to: ${script_moodle_plugin_component_dest}"
-    echo "unzip ${script_moodle_plugin_component_zip} -d ${script_moodle_plugin_component_dest}"
+    echo "Uncompressing to: ${script_moodle_plugin_component_tmp_dest}"
+    unzip -q "${script_moodle_plugin_component_zip}" -d "${script_moodle_plugin_component_tmp_dest}"
+    plugin_base_dirname=$(basename "${script_moodle_plugin_component_tmp_dest}"/$(ls -d "${script_moodle_plugin_component_tmp_dest}"/* | head -n 1))
+    echo "Installing to: ${script_moodle_plugin_component_dest}"
+    mv "${script_moodle_plugin_component_tmp_dest}/${plugin_base_dirname}/" "${script_moodle_plugin_component_dest}"
 }
 
 get_plugin_url_md5_dest() {
@@ -123,10 +127,12 @@ if($errno = curl_errno($curl)){
 curl_close($curl);
 if ($response) {
     $moodle_plugin_info = $response->pluginfo;
+    $moodle_plugin_type = explode('_',$MOODLE_PLUGIN_COMPONENT_NAME)[0];
+    $moodle_plugin_base_name = substr_replace($MOODLE_PLUGIN_COMPONENT_NAME, '', 0, strlen($moodle_plugin_type . '_'));
     $moodle_plugin_info_latest_download_url = $moodle_plugin_info->version->downloadurl;
     $moodle_plugin_info_latest_download_md5 = $moodle_plugin_info->version->downloadmd5;
     $moodle_plugin_info_maturity = (int) $moodle_plugin_info->version->maturity;
-    $moodle_plugin_info_install_path = $MOODLE_APP . '/' . $components['plugintypes'][explode('_',$MOODLE_PLUGIN_COMPONENT_NAME)[0]] . '/' . $MOODLE_PLUGIN_COMPONENT_NAME;
+    $moodle_plugin_info_install_path = $MOODLE_APP . '/' . $components['plugintypes'][explode('_',$MOODLE_PLUGIN_COMPONENT_NAME)[0]] . '/' . $moodle_plugin_base_name;
     $supported_moodle_release = $moodle_plugin_info->version->supportedmoodles;
     if (!$to_be_installed) {
         if (in_array($MOODLE_RELEASE, array_column($supported_moodle_release, 'release'))) {

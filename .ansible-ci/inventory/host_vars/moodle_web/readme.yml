@@ -5,6 +5,9 @@ ctr_readme_section: |-
   It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
   ## Details
+  {% if dockerfile_builder_image_git_remote is defined %}
+  * Moodle remote repo: {{ dockerfile_builder_image_git_remote }}
+  {% endif %}
   {% if moodle_git_source_version is defined %}
   * Moodle version: {{ moodle_git_source_version }}
   {% endif %}
@@ -22,24 +25,24 @@ ctr_readme_section: |-
   ## Custom builds
   This Dockerfile allows for changing Moodle remote, its branch and installing Moodle plugins. For that purpose, use build args to customize the build as you need.
   ### Moodle remote
-  For building from a different Moodle remote branch, use `GIT_REMOTE`:
+  For building from a different Moodle remote, use `ARG_GIT_REMOTE`:
   ```
   docker build . -t my_moodle_image:my_tag \
-      --build-arg GIT_REMOTE='https://github.com/moodle/moodle.git'
+      --build-arg ARG_GIT_REMOTE='https://github.com/moodle/moodle.git'
   ```
 
   ### Moodle branch
-  For building from a different Moodle remote branch, use `GIT_BRANCH`:
+  For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
   ```
   docker build . -t my_moodle_image:my_tag \
-      --build-arg GIT_BRANCH='MOODLE_400_STABLE'
+      --build-arg ARG_GIT_BRANCH='MOODLE_400_STABLE'
   ```
 
   ### Moodle plugins
-  For installing plugins while building the main Dockerfile (slower), use `MOODLE_PLUGIN_LIST`:
+  For installing plugins while building the main Dockerfile (slower), use `ARG_MOODLE_PLUGIN_LIST`:
   ```
   docker build . -t my_moodle_image:my_tag \
-      --build-arg MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert'
+      --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance,mod_checklist,mod_customcert,block_checklist,gradeexport_checklist'
   ```
   For building only to install additional moodle plugins (faster), create a Dockerfile like the following and then build.
   Example of `Dockerfile.plugins`:
@@ -59,7 +62,7 @@ ctr_readme_section: |-
   # Build
   docker build . -t my_moodle_image:my_tag \
       -f Dockerfile.plugins \
-      --build-arg MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert'
+      --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance,mod_checklist,mod_customcert,block_checklist,gradeexport_checklist'
   ```
   {% endif %}
 

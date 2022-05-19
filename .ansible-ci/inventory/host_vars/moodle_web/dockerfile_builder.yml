@@ -9,7 +9,7 @@ dockerfile_builder_image_ocp_tags:
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'
   + ',moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}' }}"
 dockerfile_builder_args:
-  GIT_COMMIT: "{{ moodle_git_commit }}"
+  ARG_GIT_COMMIT: "{{ moodle_git_commit }}"
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"

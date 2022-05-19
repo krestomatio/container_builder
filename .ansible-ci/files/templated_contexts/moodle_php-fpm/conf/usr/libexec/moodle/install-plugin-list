@@ -9,7 +9,7 @@ It requires PHP cli, PHP json, unzip
 ENVIRONMENT VARS:
 MOODLE_APP                  path to moodle code
 MOODLE_API_PLUGIN_INFO      url to plug info json
-MOODLE_PLUGIN_LIST          list of plugin separeted by comma
+MOODLE_PLUGIN_LIST          plugin list separated by space
 MOODLE_RELEASE              Moodle release (ex: '3.9'). Default is gotten from version.php
 
 USAGE:
@@ -18,11 +18,11 @@ USAGE:
 OPTIONS (install moodle plugin(s)):
   -f            force installation of latest available version despite lack of compatibility of maturity
   -m            minimun plugin maturity level (ex: '200'). Default 0
-  -p            plugin list, separate by comma, to be installed
+  -p            plugin list, separate by space, to be installed
 
 EXAMPLES:
-    install-plugin-list -p 'mod_jitsi,mod_customcert'
-    MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert' install-plugin-list
+    install-plugin-list -p 'mod_jitsi mod_customcert'
+    MOODLE_PLUGIN_LIST='mod_jitsi mod_customcert' install-plugin-list
 EOF
 }
 
@@ -161,7 +161,7 @@ CODE
 }
 
 export script_moodle_app=${MOODLE_APP:-/var/www/html}
-export script_moodle_plugin_list=${MOODLE_PLUGIN_LIST:-}
+export script_moodle_plugin_list=(${MOODLE_PLUGIN_LIST:-})
 export script_moodle_api_plugin_list=${MOODLE_API_PLUGIN_INFO:-https://download.moodle.org/api/1.3/pluginfo.php}
 export script_moodle_plugin_force=
 export script_moodle_plugin_maturiy=0
@@ -172,7 +172,7 @@ while getopts ":fp:m:" opt; do
         script_moodle_plugin_force="true"
         ;;
     p )
-        script_moodle_plugin_list="${OPTARG}"
+        script_moodle_plugin_list=(${OPTARG})
         ;;
     m )
         script_moodle_plugin_maturiy="${OPTARG}"
@@ -192,13 +192,13 @@ if (( $OPTIND == 1 )); then
 fi
 
 # check plugin list is not empty
-if [ -z $script_moodle_plugin_list ]; then
+if [ -z "${script_moodle_plugin_list}" ]; then
     >&2 echo "ERROR: No plugin list set.\n"
     usage
     exit 1
 fi
 
-for plugin in ${script_moodle_plugin_list//,/ }
+for plugin in "${script_moodle_plugin_list[@]}"
 do
     install_plugin "$plugin"
 done

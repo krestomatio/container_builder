@@ -11,9 +11,9 @@ spec:
         args:
         - -c
         - |
-          moodle_web_image='{{ hostvars['moodle_web'].state_yml_repo_digest }}'
+          moodle_image='{{ hostvars['moodle'].state_yml_repo_digest }}'
           sed -i \
-            "s#^moodle_image:.*#moodle_image: ${moodle_web_image//@/\\@}#" \
+            "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
     - command:
         # update Postgres image and its tag

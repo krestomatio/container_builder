@@ -1,12 +1,6 @@
 #!/bin/bash -e
 # description: base config for moodle
 
-# install all locales and timezones
-locale-tz-all
-
-# install moodle dependencies
-install-pkgs ${MOODLE_INSTALL_PHP_PKGS} unzip
-
 # In order to drop the root user, make some directories world
 # writeable as OpenShift default security model is to run the container under
 # random UID.

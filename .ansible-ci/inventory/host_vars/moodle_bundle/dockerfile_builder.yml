@@ -1,0 +1,2 @@
+container_builder_image_from: moodle
+moodle_plugin_list: mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist

@@ -13,14 +13,7 @@
     - name: build images by group
       loop_control:
         loop_var: build_step
-      loop:
-        - "build_step_1"
-        - "build_step_2"
-        - "build_step_3"
-        - "build_step_4"
-        - "build_step_5"
-        - "build_step_6"
-        - "build_step_7"
+      loop: "{{ groups.keys() | map('regex_search','^build_step_.*') | select('string') | sort }}"
       include_tasks: tasks/build-group.yml
 
     - name: "upload artifacts"

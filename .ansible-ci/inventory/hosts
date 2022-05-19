@@ -29,10 +29,11 @@ node-ci
 
 [m4e]
 moodle_nginx
-moodle_nginx_web
+moodle_nginx_php-fpm
 moodle_php-fpm
-moodle_web
+moodle
 moodle_httpd
+moodle_bundle
 
 [graphql_engine]
 graphql-engine
@@ -78,9 +79,12 @@ graphql-engine
 
 [build_step_6]
 moodle_nginx
-moodle_nginx_web
+moodle_nginx_php-fpm
 moodle_php-fpm
 moodle_httpd
 
 [build_step_7]
-moodle_web
+moodle
+
+[build_step_8]
+moodle_bundle

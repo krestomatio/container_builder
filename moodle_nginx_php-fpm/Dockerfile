@@ -2,7 +2,7 @@
 FROM quay.io/krestomatio/nginx_php-fpm
 
 # General variables
-ENV IMAGE_NAME=moodle_nginx_web \
+ENV IMAGE_NAME=moodle_nginx_php-fpm \
     IMAGE_SUMMARY="Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION} for Moodle 3.9" \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION} for Moodle 3.9" \
     IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle 3.9" \
@@ -39,7 +39,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.1" \
+      org.opencontainers.image.version="0.0" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

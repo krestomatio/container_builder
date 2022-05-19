@@ -17,10 +17,12 @@ RUN install-pkgs git rsync php-json unzip && \
 # Get source code
 # Arguments for moodle git remote, branch and commit
 # They are also a mechanism to invalidate cache if changed
-ARG GIT_REMOTE="https://github.com/moodle/moodle.git"
-ARG GIT_BRANCH="MOODLE_39_STABLE"
-ARG GIT_COMMIT=""
-ENV GIT_COMMIT=${GIT_COMMIT}
+ARG ARG_GIT_REMOTE="https://github.com/moodle/moodle.git"
+ARG ARG_GIT_BRANCH="MOODLE_39_STABLE"
+ARG ARG_GIT_COMMIT=""
+ENV GIT_REMOTE=${ARG_GIT_REMOTE} \
+    GIT_BRANCH=${ARG_GIT_BRANCH} \
+    GIT_COMMIT=${ARG_GIT_COMMIT}
 RUN git clone --branch "${GIT_BRANCH}" --depth 1 \
     "${GIT_REMOTE}" "${GIT_DEST}"
 
@@ -34,7 +36,8 @@ COPY conf/usr/libexec /usr/libexec/
 
 # Install additional plugins, a comma separated arg, (if any)
 # Argument is also a mechanism to invalidate cache if changed
-ARG MOODLE_PLUGIN_LIST=""
+ARG ARG_MOODLE_PLUGIN_LIST=""
+ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
 FROM quay.io/krestomatio/moodle_nginx_web AS php-redis-builder
@@ -81,10 +84,11 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ARG MOODLE_COMMIT=""
-ENV MOODLE_COMMIT=${MOODLE_COMMIT} \
+ARG ARG_MOODLE_PLUGIN_LIST=""
+ARG ARG_MOODLE_COMMIT=""
+ENV MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
     MOODLE_VERSION_NUMBER="2020061514.00" \
-    MOODLE_PLUGIN_LIST=""
+    MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 
 COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app-src /var/www/html/ /var/www/html
 

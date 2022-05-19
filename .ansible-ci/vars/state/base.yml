@@ -3,7 +3,7 @@
 #
 base_image:
   build: False
-  tag: "0.1.50"
+  tag: "0.1.51"
   id: "sha256:cc87b5dd99111c19271dffaa30b92c61483b1eda9b364b7e914e36fe47f77881"
   repo_digest: "quay.io/krestomatio/base@sha256:53fa4aa83e60aad2e2c1ffdb17eea4db601aec9941029b50c8688483630f29c2"
-  artifact_tag: da63d51a96999cc6506069432408dadeda3119d1
+  artifact_tag: a47c7b0be9b313f4715ad1f05b904a23ad154227

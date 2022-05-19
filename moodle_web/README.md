@@ -3,6 +3,7 @@ This CentOS 8 Stream minimal based container image runs PHP 7.4 (default) or NGI
 It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
 ## Details
+* Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 3.9.14
 * Moodle version number: 2020061514.00
 * Moodle commit: a63efe42d15236e08f10d9158eef5d20f92222db
@@ -11,24 +12,24 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 ## Custom builds
 This Dockerfile allows for changing Moodle remote, its branch and installing Moodle plugins. For that purpose, use build args to customize the build as you need.
 ### Moodle remote
-For building from a different Moodle remote branch, use `GIT_REMOTE`:
+For building from a different Moodle remote, use `ARG_GIT_REMOTE`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg GIT_REMOTE='https://github.com/moodle/moodle.git'
+    --build-arg ARG_GIT_REMOTE='https://github.com/moodle/moodle.git'
 ```
 
 ### Moodle branch
-For building from a different Moodle remote branch, use `GIT_BRANCH`:
+For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg GIT_BRANCH='MOODLE_400_STABLE'
+    --build-arg ARG_GIT_BRANCH='MOODLE_400_STABLE'
 ```
 
 ### Moodle plugins
-For installing plugins while building the main Dockerfile (slower), use `MOODLE_PLUGIN_LIST`:
+For installing plugins while building the main Dockerfile (slower), use `ARG_MOODLE_PLUGIN_LIST`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert'
+    --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance,mod_checklist,mod_customcert,block_checklist,gradeexport_checklist'
 ```
 For building only to install additional moodle plugins (faster), create a Dockerfile like the following and then build.
 Example of `Dockerfile.plugins`:
@@ -48,7 +49,7 @@ Example of build using `Dockerfile.plugins`:
 # Build
 docker build . -t my_moodle_image:my_tag \
     -f Dockerfile.plugins \
-    --build-arg MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert'
+    --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance,mod_checklist,mod_customcert,block_checklist,gradeexport_checklist'
 ```
 
 ## PHP-FPM or NGINX

@@ -56,7 +56,7 @@ ctr_readme_section: |-
   Example of `Dockerfile.plugins`:
   ```dockerfile
   # Dockerfile.plugins
-  FROM quay.io/krestomatio/moodle_web:{{ moodle_version }}
+  FROM quay.io/krestomatio/moodle:{{ moodle_version }}
 
   # Install additional plugins, a space separated arg, (if any)
   # Argument is also a mechanism to invalidate cache if changed

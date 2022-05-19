@@ -51,7 +51,7 @@ RUN chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
 FROM quay.io/krestomatio/moodle_nginx_web
 
 # General ansible variables
-ENV IMAGE_NAME=moodle_web \
+ENV IMAGE_NAME=moodle \
     IMAGE_SUMMARY="PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle 3.9" \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} or NGINX ${NGINX_VERSION} for Moodle 3.9" \
     IMAGE_TITLE="PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle 3.9" \

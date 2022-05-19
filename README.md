@@ -21,7 +21,7 @@ This project builds containers using Ansible. The containers are defined as host
 | [moodle_nginx](moodle_nginx/ )| [quay.io/krestomatio/moodle_nginx](https://quay.io/krestomatio/moodle_nginx) | 0.1.51 |
 | [moodle_nginx_web](moodle_nginx_web/ )| [quay.io/krestomatio/moodle_nginx_web](https://quay.io/krestomatio/moodle_nginx_web) | 0.1.51 |
 | [moodle_php-fpm](moodle_php-fpm/ )| [quay.io/krestomatio/moodle_php-fpm](https://quay.io/krestomatio/moodle_php-fpm) | 0.1.51 |
-| [moodle_web](moodle_web/ )| [quay.io/krestomatio/moodle_web](https://quay.io/krestomatio/moodle_web) | 3.9.14 |
+| [moodle](moodle/ )| [quay.io/krestomatio/moodle](https://quay.io/krestomatio/moodle) | 3.9.14 |
 | [nfs-ganesha](nfs-ganesha/ )| [quay.io/krestomatio/nfs-ganesha](https://quay.io/krestomatio/nfs-ganesha) | 0.0.5 |
 | [nginx](nginx/ )| [quay.io/krestomatio/nginx](https://quay.io/krestomatio/nginx) | 0.1.51 |
 | [nginx_php-fpm](nginx_php-fpm/ )| [quay.io/krestomatio/nginx_php-fpm](https://quay.io/krestomatio/nginx_php-fpm) | 0.1.51 |

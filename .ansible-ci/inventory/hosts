@@ -31,7 +31,7 @@ node-ci
 moodle_nginx
 moodle_nginx_web
 moodle_php-fpm
-moodle_web
+moodle
 moodle_httpd
 
 [graphql_engine]
@@ -83,4 +83,4 @@ moodle_php-fpm
 moodle_httpd
 
 [build_step_7]
-moodle_web
+moodle

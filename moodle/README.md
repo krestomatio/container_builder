@@ -35,7 +35,7 @@ For building only to install additional moodle plugins (faster), create a Docker
 Example of `Dockerfile.plugins`:
 ```dockerfile
 # Dockerfile.plugins
-FROM quay.io/krestomatio/moodle_web:3.9
+FROM quay.io/krestomatio/moodle:3.9
 
 # Install additional plugins, a comma separated arg, (if any)
 # Argument is also a mechanism to invalidate cache if changed
@@ -61,4 +61,4 @@ For adjusting PHP-FPM or Nginx config, just place the .ini or .conf files in the
 - `/etc/nginx/default.d/`: Nginx .conf server extra configuration
 
 ## Repository
-This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/moodle_web)
+This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/moodle)

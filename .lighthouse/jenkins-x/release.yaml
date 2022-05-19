@@ -47,7 +47,7 @@ spec:
                 ## add gitlab lfs api
                 echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
                 ## run release play
-                ansible-playbook .ansible-ci/release.yml
+                NEXT_VERSION=${VERSION} ansible-playbook .ansible-ci/release.yml
               volumeMounts:
               - name: libdocker
                 mountPath: /var/lib/docker

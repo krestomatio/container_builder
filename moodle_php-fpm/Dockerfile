@@ -17,18 +17,30 @@ ENV MOODLE_VERSION="3.9" \
     MOODLE_DATA=/var/moodledata \
     MOODLE_CLI_TOOLS=/usr/libexec/moodle
 
-# php-curl included in php-common
-# php-zip as php-pecl-zip
-# php-xsl as php-xml
-# php-fpm php-cli php-opcache already installed in base image
-ENV MOODLE_INSTALL_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
-
 USER 0
 
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
+# Install all locales and timezones
+RUN locale-tz-all
+
+# Install dependencies:
+# php-curl included in php-common
+# php-zip as php-pecl-zip
+# php-xsl as php-xml
+# php-fpm php-cli php-opcache already installed in base image
+ARG ARG_INSTALL_MOODLE_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xmlrpc php-xml php-pecl-zip php-mbstring php-json"
+ENV INSTALL_MOODLE_PHP_PKGS=${ARG_INSTALL_MOODLE_PHP_PKGS}
+RUN install-pkgs unzip ${INSTALL_MOODLE_PHP_PKGS}
+
+# Install extra packages (a space separated list)
+ARG ARG_INSTALL_EXTRA_PKGS=""
+ENV INSTALL_EXTRA_PKGS=${ARG_INSTALL_EXTRA_PKGS}
+RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs "${INSTALL_EXTRA_PKGS}"; fi
+
+# Other OS moodle config
 RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}

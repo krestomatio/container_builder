@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_image='quay.io/krestomatio/moodle@sha256:3b4db9f7bc5bf7f886c7f5dd11636f9d8a78bbadcb8f6ba6e8996cc55f044211'
+          moodle_image='quay.io/krestomatio/moodle@sha256:113f63714a196f77dba4027295f3e04a466a4554ccf91f742513a26a6bddda38'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml

@@ -1,9 +1,9 @@
 #
 # Ansible managed
 #
-moodle_nginx_php-fpm_image:
+moodle_nginx_php_fpm_image:
   build: False
-  tag: "0.1.51"
-  id: "sha256:41a1c20a7662b0c862527f78c7dce9c7a8d37771889ebdc085cdf65b073fdd26"
-  repo_digest: "quay.io/krestomatio/moodle_nginx_php-fpm@sha256:fdefaa74038287d4699891092110dfb935cfd7e643b2c383cf41882aecd68456"
-  artifact_tag: a47c7b0be9b313f4715ad1f05b904a23ad154227
+  tag: "0.0.2"
+  id: "sha256:b8c8d3f616c9a560e6f0a73140601ea6b49e415d511503dd147598659d65bcdc"
+  repo_digest: "quay.io/krestomatio/moodle_nginx_php-fpm@sha256:de6e38e973049e3f1e539fb846ff43ab929e045f110997a97251e1157af37181"
+  artifact_tag: dad0ced51db44d18c62061af94dd6dc9fa17dc0a

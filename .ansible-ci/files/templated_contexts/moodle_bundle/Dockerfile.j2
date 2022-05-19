@@ -1,0 +1,9 @@
+# {{ ansible_managed  }}
+FROM {{ dockerfile_builder_image_from }}
+
+# Install additional plugins, a space separated arg, (if any)
+# Argument is also a mechanism to invalidate cache if changed
+ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default('') }}"
+ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
+RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi && \
+  rm -rf /tmp/moodle-plugins

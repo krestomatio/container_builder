@@ -33,6 +33,7 @@ moodle_nginx_php-fpm
 moodle_php-fpm
 moodle
 moodle_httpd
+moodle_bundle
 
 [graphql_engine]
 graphql-engine
@@ -84,3 +85,6 @@ moodle_httpd
 
 [build_step_7]
 moodle
+
+[build_step_8]
+moodle_bundle

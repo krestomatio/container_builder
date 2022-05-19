@@ -3,7 +3,7 @@
 #
 ansible_image:
   build: False
-  tag: "0.1.49"
-  id: "sha256:dec30d6d71b96e35e2970389602979e8a63d2e61c79d8ec93663ebf3529e54eb"
-  repo_digest: "quay.io/krestomatio/ansible@sha256:f6633f5a81708038c86fdf35d0510ff7c7e0a0ae70c3362731b3a1b2c078beea"
-  artifact_tag: 2d8942f41d7b2c9f98dabc6343e3da54dfa82996
+  tag: "0.1.50"
+  id: "sha256:00e918adcc036735fc807ef18485878bfa76af274c95ab62ff03d9606eceb64b"
+  repo_digest: "quay.io/krestomatio/ansible@sha256:bb8b7b6a5716e20aae6188bd6aac9c3b1864a0b91ecd6caf8d49f267cb51cf01"
+  artifact_tag: da63d51a96999cc6506069432408dadeda3119d1

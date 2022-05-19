@@ -4,6 +4,6 @@
 moodle_web_image:
   build: False
   tag: "3.9.14"
-  id: "sha256:be3342fbdb886fd99f5ed86dcc71cc2af7e87023e5795a61cc4ab339ff71171f"
-  repo_digest: "quay.io/krestomatio/moodle_web@sha256:0a5ad13a14dbc899780e4da96bc1606accfffe2bdf642c3216091c4e928b46e8"
-  artifact_tag: 2d8942f41d7b2c9f98dabc6343e3da54dfa82996
+  id: "sha256:730c07c6c00063ec4fc98a652fbcf78e7198dda601efbdfea5178b29b819084f"
+  repo_digest: "quay.io/krestomatio/moodle_web@sha256:7d3a9c2208fd04809bbe79377038211b2e5108892cfed314ad22b7b59eb51c35"
+  artifact_tag: da63d51a96999cc6506069432408dadeda3119d1

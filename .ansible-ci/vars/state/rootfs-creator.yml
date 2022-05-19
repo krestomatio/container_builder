@@ -3,7 +3,7 @@
 #
 rootfs_creator_image:
   build: False
-  tag: "0.1.40"
-  id: "sha256:f64a60a0fc78801a5cdf78400410124ef0fa4c9ae7727d626f6ac03ad7142cc5"
-  repo_digest: "quay.io/krestomatio/rootfs-creator@sha256:8d164f9ad2d79709ebfd7be0fdf68a30d3f2984342e1722446635ad1b5ad75ea"
-  artifact_tag: 2d8942f41d7b2c9f98dabc6343e3da54dfa82996
+  tag: "0.1.41"
+  id: "sha256:68e21ba2245636814148ca042c43d83ecb22ad23e75563673f845e81b1c431c6"
+  repo_digest: "quay.io/krestomatio/rootfs-creator@sha256:41b08347d4eadbe94f4b3d8821c191aea20411884b7b3da15255d65203a4e2ed"
+  artifact_tag: da63d51a96999cc6506069432408dadeda3119d1

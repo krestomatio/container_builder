@@ -24,7 +24,7 @@ RUN echo "Build tools..."  && \
     $CTR_PIP ansible==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
-    $CTR_PIP yamllint ansible-lint'<6' pycrypto pywinrm docker git-semver commitizen && \
+    $CTR_PIP yamllint ansible-lint'<6' pycrypto pywinrm docker git-semver commitizen jmespath && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

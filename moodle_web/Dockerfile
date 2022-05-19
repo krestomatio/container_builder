@@ -1,13 +1,49 @@
 # Ansible managed
-FROM quay.io/krestomatio/moodle_app AS app
-ENV GIT_COMMIT=a63efe42d15236e08f10d9158eef5d20f92222db
+FROM quay.io/krestomatio/moodle_nginx_web AS app-src
+
+# Component bash variables
+ENV GIT_DEST="/opt/app/" \
+    APP_DEST=/var/www/html
+
+USER 0
+WORKDIR ${GIT_DEST}
+
+# Install deps
+COPY conf/usr/bin /usr/bin/
+COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
+RUN install-pkgs git rsync php-json unzip && \
+    mkdir -p ${GIT_DEST} ${APP_DEST}
+
+# Get source code
+# Arguments for moodle git remote, branch and commit
+# They are also a mechanism to invalidate cache if changed
+ARG GIT_REMOTE="https://github.com/moodle/moodle.git"
+ARG GIT_BRANCH="MOODLE_39_STABLE"
+ARG GIT_COMMIT=""
+ENV GIT_COMMIT=${GIT_COMMIT}
+RUN git clone --branch "${GIT_BRANCH}" --depth 1 \
+    "${GIT_REMOTE}" "${GIT_DEST}"
+
+# Verify commit, if any
+RUN if [ -n "${GIT_COMMIT}" ]; then app-git -v; fi
+
+# Move src to app destination without .git files
 RUN app-git -v -a -e '.git*'
+
+COPY conf/usr/libexec /usr/libexec/
+
+# Install additional plugins, a comma separated arg, (if any)
+# Argument is also a mechanism to invalidate cache if changed
+ARG MOODLE_PLUGIN_LIST=""
+RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
 FROM quay.io/krestomatio/moodle_nginx_web AS php-redis-builder
 
 USER 0
 
-RUN install-pkgs php-pear php-devel make libzstd-devel; pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis; chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
+RUN install-pkgs php-pear php-devel make libzstd-devel
+RUN pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis
+RUN chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
 
 FROM quay.io/krestomatio/moodle_nginx_web
 
@@ -17,7 +53,8 @@ ENV IMAGE_NAME=moodle_web \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} or NGINX ${NGINX_VERSION} for Moodle 3.9" \
     IMAGE_TITLE="PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle 3.9" \
     IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
-    TZ="UTC"
+    TZ="UTC" \
+    LANG="en_AU.UTF-8"
 
 # Component bash variables
 ENV MOODLE_VERSION="3.9" \
@@ -40,16 +77,16 @@ COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
 COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
 
-RUN container-setup
-RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ENV MOODLE_COMMIT="a63efe42d15236e08f10d9158eef5d20f92222db" \
-    MOODLE_VERSION_NUMBER="2020061514.00"
+ARG MOODLE_COMMIT=""
+ENV MOODLE_COMMIT=${MOODLE_COMMIT} \
+    MOODLE_VERSION_NUMBER="2020061514.00" \
+    MOODLE_PLUGIN_LIST=""
 
-COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app /var/www/html/ /var/www/html
+COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app-src /var/www/html/ /var/www/html
 
 # Labels
 LABEL name="${IMAGE_NAME}" \

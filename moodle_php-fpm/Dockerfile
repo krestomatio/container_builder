@@ -3,11 +3,12 @@ FROM quay.io/krestomatio/php-fpm
 
 # General ansible variables
 ENV IMAGE_NAME=moodle_php-fpm \
-    IMAGE_SUMMARY="PHP $PHP_VERSION for Moodle 3.9" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP ${PHP_VERSION} for Moodle 3.9" \
-    IMAGE_TITLE="PHP ${PHP_VERSION} for Moodle 3.9" \
+    IMAGE_SUMMARY="PHP 7.4 for Moodle 3.9" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs PHP 7.4 for Moodle 3.9" \
+    IMAGE_TITLE="PHP 7.4 for Moodle 3.9" \
     IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}" \
-    TZ="UTC"
+    TZ="UTC" \
+    LANG="en_AU.UTF-8"
 
 # Component bash variables
 ENV MOODLE_VERSION="3.9" \
@@ -28,8 +29,6 @@ COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN container-setup
-RUN install-pkgs ${MOODLE_INSTALL_PHP_PKGS}
 RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}

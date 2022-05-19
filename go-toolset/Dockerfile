@@ -8,7 +8,7 @@ ENV IMAGE_NAME=go-toolset \
     IMAGE_TITLE="Go-toolset image based on CentOS 8 Stream minimal"
 
 # Component bash variables
-ENV GO_VERSION_MAJOR_MINOR="1.16"
+ENV GO_VERSION_MAJOR_MINOR="1.17"
 
 # Container variables
 ENV CTR_CMD="go version"
@@ -29,4 +29,4 @@ LABEL name="${IMAGE_NAME}" \
     org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
     io.k8s.description="${IMAGE_DESCRIPTION}" \
     io.k8s.display-name="${IMAGE_TITLE}" \
-    io.openshift.tags="${IMAGE_NAME},go,go-toolset,go-toolset1.16"
+    io.openshift.tags="${IMAGE_NAME},go,go-toolset,go-toolset1.17"

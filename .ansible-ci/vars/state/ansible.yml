@@ -3,7 +3,7 @@
 #
 ansible_image:
   build: False
-  tag: "0.1.53"
+  tag: "0.1.54"
   id: "sha256:00e918adcc036735fc807ef18485878bfa76af274c95ab62ff03d9606eceb64b"
   repo_digest: "quay.io/krestomatio/ansible@sha256:bb8b7b6a5716e20aae6188bd6aac9c3b1864a0b91ecd6caf8d49f267cb51cf01"
-  artifact_tag: b9363e881508689a468781ea7491835d850b0a1b
+  artifact_tag: 9e74d912922afca8c5b88a67d907ee5b608a1474

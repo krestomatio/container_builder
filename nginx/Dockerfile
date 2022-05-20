@@ -3,9 +3,9 @@ FROM quay.io/krestomatio/base-stream
 
 # General variables
 ENV IMAGE_NAME=nginx \
-    IMAGE_SUMMARY="Nginx 1.18" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx 1.18" \
-    IMAGE_TITLE="Nginx 1.18" \
+    IMAGE_SUMMARY="Nginx 1.20" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs Nginx 1.20" \
+    IMAGE_TITLE="Nginx 1.20" \
     IMAGE_SERVICE_PORT="8080" \
     IMAGE_SERVICE_NAME="http"
 
@@ -16,8 +16,8 @@ ENV CTR_USER=nginx \
     CTR_STOPSIGNAL=SIGQUIT
 
 # Component bash variables
-ENV NGINX_VERSION="1.18" \
-    NGINX_VER_SHORT="118" \
+ENV NGINX_VERSION="1.20" \
+    NGINX_VER_SHORT="120" \
     NGINX_SYSCONF_PATH=/etc/nginx \
     NGINX_MAIN_CONF_FILE=/etc/nginx/nginx.conf \
     NGINX_MAIN_CONF_D_PATH=/etc/nginx/conf.d \

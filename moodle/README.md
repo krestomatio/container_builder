@@ -1,4 +1,4 @@
-This CentOS 8 Stream minimal based container image runs PHP 7.4 (default) or NGINX 1.18 for Moodle 3.9. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
+This CentOS 8 Stream minimal based container image runs PHP 7.4 (default) or NGINX 1.20 for Moodle 3.9. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
 
 It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 

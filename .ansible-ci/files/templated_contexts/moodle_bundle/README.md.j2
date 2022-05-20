@@ -4,14 +4,14 @@ Extends [{{ hostvars[container_builder_image_from].ctr_name }} container image](
 {% if dockerfile_builder_image_git_remote is defined %}
 * Moodle remote repo: {{ dockerfile_builder_image_git_remote }}
 {% endif %}
-{% if moodle_git_source_version is defined %}
-* Moodle version: {{ moodle_git_source_version }}
+{% if hostvars[container_builder_image_from].moodle_git_source_version is defined %}
+* Moodle version: {{ hostvars[container_builder_image_from].moodle_git_source_version }}
 {% endif %}
-{% if moodle_git_source_version_number is defined %}
-* Moodle version number: {{ moodle_git_source_version_number }}
+{% if hostvars[container_builder_image_from].moodle_git_source_version_number is defined %}
+* Moodle version number: {{ hostvars[container_builder_image_from].moodle_git_source_version_number }}
 {% endif %}
-{% if moodle_git_commit is defined %}
-* Moodle commit: {{ moodle_git_commit }}
+{% if hostvars[container_builder_image_from].moodle_git_commit is defined %}
+* Moodle commit: {{ hostvars[container_builder_image_from].moodle_git_commit }}
 {% endif %}
 {% if moodle_git_branch is defined %}
 * Moodle remote branch: {{ moodle_git_branch | replace('_','\_') }}

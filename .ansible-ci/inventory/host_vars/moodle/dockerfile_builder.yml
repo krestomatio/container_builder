@@ -18,6 +18,6 @@ template_path: "{{ template_dir }}/moodle_php-fpm"
 prepare_image_task: moodle
 version_release_no_bump: true
 
-# other
+# dockerfile
 moodle_app_src: true
 moodle_php_redis_build: true

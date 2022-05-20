@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_image='quay.io/krestomatio/moodle@sha256:113f63714a196f77dba4027295f3e04a466a4554ccf91f742513a26a6bddda38'
+          moodle_image='quay.io/krestomatio/moodle@sha256:957ce8d99661abc80e5966b04194e3a9ccd29d01b13aeeffaf02e9e54abf512a'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
             roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
@@ -31,7 +31,7 @@ spec:
         args:
         - -c
         - |
-          nginx_image='quay.io/krestomatio/nginx@sha256:7b3d728f25e640b5734657d85f4a08a5a0551acdb42a3d194892a0b03891b0e5'
+          nginx_image='quay.io/krestomatio/nginx@sha256:3f5d8ba93a0f5b558d5dbb40a3d5ca191790182ddce88494655fa461f86a55c3'
           sed -i \
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml

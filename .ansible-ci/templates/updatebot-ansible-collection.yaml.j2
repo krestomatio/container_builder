@@ -55,3 +55,13 @@ spec:
           sed -i \
             "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml
+    - command:
+        # update NFS Ganesha image and its tag
+        name: bash
+        args:
+        - -c
+        - |
+          nfs_ganesha_image='{{ hostvars['nfs-ganesha'].state_yml_repo_digest }}'
+          sed -i \
+            "s#^server_image:.*#server_image: ${nfs_ganesha_image//@/\\@}#" \
+            roles/v1alpha1/nfs/server/defaults/main/server.yml

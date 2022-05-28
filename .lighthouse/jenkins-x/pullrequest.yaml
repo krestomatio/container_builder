@@ -16,9 +16,9 @@ spec:
               - name: HOME
                 value: /tekton/home
             resources:
-              requests:
-                cpu: 400m
-                memory: 512Mi
+              limits:
+                cpu: 1000m
+                memory: 2048Mi
             workingDir: /workspace/source
           steps:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@9ae86d98b3fc7a74e20148a39f269adc88f96933
@@ -33,6 +33,10 @@ spec:
                   mountPath: /var/lib/docker
               securityContext:
                 privileged: true
+              resources:
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi
           volumes:
             - name: libdocker
               persistentVolumeClaim:

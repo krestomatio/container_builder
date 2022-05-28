@@ -16,7 +16,7 @@ spec:
               - name: HOME
                 value: /tekton/home
             resources:
-              requests:
+              limits:
                 cpu: 400m
                 memory: 512Mi
             workingDir: /workspace/source
@@ -48,6 +48,10 @@ spec:
                 echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
                 ## run release play
                 NEXT_VERSION=${VERSION} ansible-playbook .ansible-ci/release.yml
+              resources:
+                requests:
+                  cpu: 0.1
+                  memory: 128Mi
               volumeMounts:
               - name: libdocker
                 mountPath: /var/lib/docker

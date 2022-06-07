@@ -19,6 +19,9 @@ spec:
               limits:
                 cpu: 400m
                 memory: 512Mi
+              requests:
+                cpu: 50m
+                memory: 32Mi
             workingDir: /workspace/source
           steps:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone.yaml@9ae86d98b3fc7a74e20148a39f269adc88f96933

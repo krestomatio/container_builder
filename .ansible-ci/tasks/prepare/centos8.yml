@@ -1,98 +1,24 @@
-- when:
-    - ansible_host | regex_search('(centos|rocky)*.*-minimal')
-  vars:
-    pkgs_list_old: "{{ generated_path }}/pkgs-list"
-    pkgs_list_new: "{{ template_path }}/pkgs-list"
-    distro_release_old: "{{ generated_path }}/distro-release"
-    distro_release_new: "{{ template_path }}/distro-release"
-    centos_distro_version_regex: '(?<=release\-).*(?=\.el8)'
+- when: ansible_host | regex_search('(centos|rocky)*.*-minimal')
   block:
-  - name: check old pkgs total file
-    stat:
-      path: "{{ pkgs_list_old }}"
-    register: centos_pkgs_file_old
-
-  - name: check old distro release file
-    stat:
-      path: "{{ distro_release_old }}"
-    register: centos_distro_release_file_old
-
-  - name: save old pkgs total checksum
-    when:
-      - centos_pkgs_file_old.stat.exists
-    set_fact:
-      dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_old.stat.checksum }}"
-
-  - name: get old distro release
-    when:
-      - centos_distro_release_file_old.stat.exists
-    command: "head -n 1 '{{ distro_release_old }}'"
-    changed_when: false
-    check_mode: false
-    register: centos_distro_release_old
-
-  - name: save old distro release
-    when:
-      - centos_distro_release_old.stdout | default(false,true)
-    set_fact:
-      centos_distro_release: "{{ centos_distro_release_old.stdout_lines | first | regex_search(centos_distro_version_regex) }}"
-
-  - when:
-      - not centos8_omit_rootfs_creation | default(false) | bool
-        or not centos_pkgs_file_old.stat.exists
-        or not centos_distro_release_file_old.stat.exists
+  - name: build image
     vars:
-      rootfs_creator_image: quay.io/krestomatio/rootfs-creator
-      rootfs_build_kickstart: "{{ centos8_build_kickstart | default('rocky8-minimal.ks') }}"
-      rootfs_build_tar: "{{ centos8_build_rootfs | default('rocky8-minimal.tar.xz') }}"
-      centos8_build_rootfs_pull: false
-    block:
-    - name: pull rootfs-creator image
-      when: centos8_build_rootfs_pull
-      command: "{{ dockerfile_builder }} pull {{ rootfs_creator_image }}"
-      changed_when: "'Status: Image is up to date' not in pull_rootfs_creator_image_task.stdout"
-      register: pull_rootfs_creator_image_task
+      dockerfile_builder_image: "{{ container_image }}_prepare"
+      dockerfile_builder_force_source: true
+      dockerfile_builder_force: true
+    include_role:
+      name: dockerfile_builder
 
-    - name: prepare artifacts
-      changed_when: false
-      command: "{{ dockerfile_builder }} run --privileged --rm
-        -e BUILD_KICKSTART='{{ rootfs_build_kickstart }}'
-        -e BUILD_ROOTFS='{{ rootfs_build_tar }}'
-        -v '{{ template_path }}:/build:z'
-        --name rootfs-creator-{{ (generated_path | to_uuid).split('-')[0] }}
-        {{ rootfs_creator_image }}"
+  - name: get distro-release
+    command: "{{ dockerfile_builder }} run --rm {{ dockerfile_builder_image }}_prepare rpm -qa"
+    register: distro_release_task
 
-    - name: get new pkgs total checksum
-      stat:
-        path: "{{ pkgs_list_new }}"
-      register: centos_pkgs_file_new
-      when: not ansible_check_mode
-      failed_when:
-        - not centos_pkgs_file_new.stat.exists
-
-    - name: save new pkgs total checksum
-      when:
-        - centos_pkgs_file_new.stat is defined
-        - centos_pkgs_file_new.stat.exists
-      set_fact:
-        dockerfile_builder_image_pkgs_checksum: "{{ centos_pkgs_file_new.stat.checksum }}"
-
-    - name: get new distro release
-      command: "head -n 1 '{{ distro_release_new }}'"
-      changed_when: false
-      when: not ansible_check_mode
-      register: centos_distro_release_new
-
-    - name: save new distro release
-      when:
-        - centos_distro_release_new.stdout | default(false,true)
-      set_fact:
-        centos_distro_release: "{{ centos_distro_release_new.stdout_lines | first | regex_search(centos_distro_version_regex) }}"
+  - name: save new distro release
+    when: distro_release_task.stdout_lines
+    set_fact:
+      centos_distro_release: "{{ distro_release_task.stdout_lines | map('regex_search',distro_version_regex) | select('string') | first }}"
 
   - name: set version based on distro-release
-    when:
-      - centos_distro_release is defined
-      - dockerfile_builder_image_pkgs_checksum is defined
+    when: centos_distro_release is defined
     set_fact:
       version_image_major: "{{ centos_distro_release.split('.')[0] |
         default(false) }}"
@@ -101,19 +27,18 @@
       version_image_patch: "{{ centos_distro_release.split('.')[1].split('-')[1] |
         default(centos_distro_release.split('.')[2]) | default(false) }}"
 
-  - name: omit src sync when no new pkgs
-    when:
-      - centos_pkgs_file_old.stat is defined
-      - centos_pkgs_file_new.stat is defined
-      - centos_pkgs_file_old.stat.exists
-      - centos_pkgs_file_new.stat.exists
-      - centos_pkgs_file_new.stat.checksum == centos_pkgs_file_old.stat.checksum
-    set_fact:
-      dockerfile_builder_src_omit: true
+  - name: store pkg-list
+    when: distro_release_task.stdout_lines
+    register: store_pkg_list_task
+    copy:
+      dest: "{{ pkgs_list_dest }}"
+      content: |
+        {% for line in distro_release_task.stdout_lines | sort %}
+        {{ line }}
+        {% endfor %}
 
-  - name: omit src sync when no new pkgs list in place
-    when:
-      - centos_pkgs_file_new.stat is not defined or
-        not centos_pkgs_file_new.stat.exists
+  - name: omit src sync when no new pkgs
+    when: store_pkg_list_task is changed
     set_fact:
-      dockerfile_builder_src_omit: true
+      dockerfile_builder_force_source: true
+      dockerfile_builder_force: true

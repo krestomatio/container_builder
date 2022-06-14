@@ -1,0 +1,41 @@
+# builder
+ARG ROOTFS_IMAGE_BASE={{ rootfs_image_base }}
+FROM ${ROOTFS_IMAGE_BASE} as builder
+
+ARG ARG_ROOTFS_INSTALL_DIR='{{ rootfs_install_dir }}'
+ARG ARG_ROOTFS_EXTRA_REMOVAL='{{ rootfs_extra_removal | default('false') }}'
+ARG ARG_ROOTFS_REPO_CONTENTDIR='{{ rootfs_repo_contentdir }}'
+ARG ARG_ROOTFS_REPO_RELEASEVER='{{ rootfs_repo_releasever }}'
+ARG ARG_ROOTFS_REPO_BASEOS_NAME='{{ rootfs_repo_baseos_name }}'
+ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST='{{ rootfs_repo_baseos_mirrorlist }}'
+ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='{{ rootfs_repo_baseos_gpgkey }}'
+ARG ARG_ROOTFS_DNF_VARS='{{ rootfs_dnf_vars }}'
+ARG ARG_ROOTFS_EXTRA_PKGS='{{ rootfs_extra_pkgs }}'
+ARG ARG_ROOTFS_RELEASE_PKG='{{ rootfs_release_pkg }}'
+
+ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
+    ROOTFS_EXTRA_REMOVAL="${ARG_ROOTFS_EXTRA_REMOVAL}" \
+    ROOTFS_REPO_CONTENTDIR="${ARG_ROOTFS_REPO_CONTENTDIR}" \
+    ROOTFS_REPO_RELEASEVER="${ARG_ROOTFS_REPO_RELEASEVER}" \
+    ROOTFS_REPO_BASEOS_NAME="${ARG_ROOTFS_REPO_BASEOS_NAME}" \
+    ROOTFS_REPO_BASEOS_MIRRORLIST="${ARG_ROOTFS_REPO_BASEOS_MIRRORLIST}" \
+    ROOTFS_REPO_BASEOS_GPGKEY="${ARG_ROOTFS_REPO_BASEOS_GPGKEY}" \
+    ROOTFS_DNF_VARS="${ARG_ROOTFS_DNF_VARS}" \
+    ROOTFS_EXTRA_PKGS="${ARG_ROOTFS_EXTRA_PKGS}" \
+    ROOTFS_RELEASE_PKG="${ARG_ROOTFS_RELEASE_PKG}"
+
+COPY conf/usr/bin /usr/bin
+
+RUN rootfs
+
+# image
+FROM scratch
+
+ARG ARG_ROOTFS_INSTALL_DIR='{{ rootfs_install_dir }}'
+
+COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
+
+# Labels
+LABEL org.opencontainers.image.title="{{ dockerfile_builder_image_title | default('Rootfs container image') }}"
+
+CMD ["/bin/bash"]

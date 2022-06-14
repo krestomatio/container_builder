@@ -20,6 +20,9 @@ keydb
 centos8-stream-minimal
 rocky8-minimal
 
+[rootfs:children]
+minimal
+
 [ci]
 ansible
 ansible-operator-ci

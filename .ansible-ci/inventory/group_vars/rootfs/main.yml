@@ -1,0 +1,17 @@
+# dockerfile_builder
+dockerfile_builder_excluded_files:
+  - "{{ pkgs_list_file }}"
+
+# source dir
+template_path: "{{ template_dir }}/rootfs"
+
+# rootfs
+rootfs_image_base: quay.io/fedora/fedora-minimal
+rootfs_install_dir: /mnt/rootfs
+rootfs_dnf_vars: "contentdir={{ rootfs_repo_contentdir }} stream={{ rootfs_repo_releasever | string + '-stream' }} infra=container"
+rootfs_extra_pkgs: ""
+
+# prepare
+distro_version_regex: '(?<=release\-).*(?=\.el8.noarch)'
+pkgs_list_file: "pkgs-list"
+pkgs_list_dest: "{{ generated_path }}/{{ pkgs_list_file }}"

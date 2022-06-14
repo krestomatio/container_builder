@@ -1,0 +1,10 @@
+# dockerfile_builder
+dockerfile_builder_image_title: Rocky Linux Minimal Image
+
+# rootfs
+rootfs_repo_contentdir: rocky
+rootfs_repo_releasever: 8
+rootfs_repo_baseos_name: 'Rocky Linux $releasever - BaseOS'
+rootfs_repo_baseos_mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever'
+rootfs_repo_baseos_gpgkey: 'https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-rockyofficial'
+rootfs_release_pkg: rocky-release

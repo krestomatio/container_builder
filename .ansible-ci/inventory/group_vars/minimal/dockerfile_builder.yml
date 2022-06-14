@@ -7,3 +7,10 @@ centos8_build_rootfs: "{{ ansible_host }}.tar.xz"
 
 # other
 version_release_no_bump: true
+ctr_readme_section: |-
+  This is a {{ dockerfile_builder_image_title }}, similar to Fedora-minimal or UBI.
+
+  ## How image is built?
+  ```bash
+  docker build . -t "{{ container_image }}"
+  ```

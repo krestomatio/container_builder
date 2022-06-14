@@ -13,7 +13,7 @@
     register: distro_release_task
 
   - name: save new distro release
-    when: distro_release_task.stdout_lines
+    when: distro_release_task.stdout_lines is defined and distro_release_task.stdout_lines
     set_fact:
       centos_distro_release: "{{ distro_release_task.stdout_lines | map('regex_search',distro_version_regex) | select('string') | first }}"
 
@@ -28,7 +28,7 @@
         default(centos_distro_release.split('.')[2]) | default(false) }}"
 
   - name: store pkg-list
-    when: distro_release_task.stdout_lines
+    when: distro_release_task.stdout_lines is defined and distro_release_task.stdout_lines
     register: store_pkg_list_task
     copy:
       dest: "{{ pkgs_list_dest }}"

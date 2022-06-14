@@ -26,3 +26,8 @@ oras_version_regex: "{{ version_regex }}"
 pushrm_version_install: true
 pushrm_version_url: https://github.com/christian-korneck/docker-pushrm/releases/latest
 pushrm_version_regex: "{{ version_regex }}"
+
+# buildx
+buildx_version_install: true
+buildx_version_url: https://github.com/docker/buildx/releases/latest
+buildx_version_regex: "{{ version_regex }}"

@@ -57,3 +57,18 @@
     - pushrm_version is not defined
   set_fact:
     pushrm_version: "{{ pushrm_version_from_url }}"
+
+- name: set buildx version
+  run_once: true
+  retries: 3
+  delay: 3
+  until: buildx_version_from_url is defined
+  vars:
+    buildx_version_from_url: "{{ lookup('url', buildx_version_url) | regex_search(buildx_version_regex) }}"
+  when:
+    - buildx_version_install | default(false)
+    - buildx_version_url is defined
+    - buildx_version_regex is defined
+    - buildx_version is not defined
+  set_fact:
+    buildx_version: "{{ buildx_version_from_url }}"

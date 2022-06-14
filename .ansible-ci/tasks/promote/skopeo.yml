@@ -31,7 +31,7 @@
         - skopeo_dest_image_inspect is failed or
           (skopeo_src_image_inspect.stdout | from_json).Digest !=
           (skopeo_dest_image_inspect.stdout | from_json).Digest
-      command: "skopeo copy --src-tls-verify={{ skopeo_src_tls_verify | default(true) }} --dest-tls-verify={{ skopeo_dest_tls_verify | default(true)}} {{ skopeo_copy_src_image }} {{ skopeo_copy_dest_image }}"
+      command: "skopeo copy -all --src-tls-verify={{ skopeo_src_tls_verify | default(true) }} --dest-tls-verify={{ skopeo_dest_tls_verify | default(true)}} {{ skopeo_copy_src_image }} {{ skopeo_copy_dest_image }}"
       throttle: "{{ promote_copy_throttle if promote_copy_throttle is defined and promote_copy_throttle else omit }}"
       retries: 3
       delay: 3

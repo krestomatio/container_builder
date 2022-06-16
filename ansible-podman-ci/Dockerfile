@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/ansible
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/ansible
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-podman-ci \
@@ -29,7 +30,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     popd
 
-ENV PUSHRM_VERSION="1.8.0"
+ENV PUSHRM_VERSION="1.8.1"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm

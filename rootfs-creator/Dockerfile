@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=rootfs-creator \

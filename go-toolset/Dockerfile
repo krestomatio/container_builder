@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/base
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=go-toolset \

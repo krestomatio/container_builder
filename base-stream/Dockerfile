@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/centos8-stream-minimal
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos8-stream-minimal
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=base \

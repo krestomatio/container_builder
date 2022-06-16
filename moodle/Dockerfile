@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/moodle_nginx_php-fpm AS app-src
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/moodle_nginx_php-fpm
+FROM ${ARG_IMAGE_FROM} AS app-src
 
 # Component bash variables
 ENV GIT_DEST="/opt/app/" \
@@ -40,7 +41,8 @@ ARG ARG_MOODLE_PLUGIN_LIST=""
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
-FROM quay.io/krestomatio/moodle_nginx_php-fpm AS php-redis-builder
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/moodle_nginx_php-fpm
+FROM ${ARG_IMAGE_FROM} AS php-redis-builder
 
 USER 0
 
@@ -48,7 +50,8 @@ RUN install-pkgs php-pear php-devel make libzstd-devel
 RUN pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis
 RUN chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
 
-FROM quay.io/krestomatio/moodle_nginx_php-fpm
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/moodle_nginx_php-fpm
+FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
 ENV IMAGE_NAME=moodle \
@@ -99,7 +102,7 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_COMMIT=""
 ENV MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
-    MOODLE_VERSION_NUMBER="2020061514.00" \
+    MOODLE_VERSION_NUMBER="2020061514.02" \
     MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 
 COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app-src /var/www/html/ /var/www/html

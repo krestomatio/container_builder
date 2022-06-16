@@ -1,16 +1,8 @@
-This is a Centos8 Stream minimal container image similar to Fedora-minimal or UBI.
-
-## How rootfs is created?
-```bash
-docker run --rm --privileged -v "$PWD:/build:z" \
-    -e BUILD_KICKSTART=centos8-stream-minimal.ks \
-    -e BUILD_ROOTFS=centos8-stream-minimal.tar.xz \
-    quay.io/krestomatio/rootfs-creator
-```
+This is a CentOS Stream Minimal Image, similar to Fedora-minimal or UBI.
 
 ## How image is built?
 ```bash
-docker build .
+docker build . -t "docker-registry.jx.krestomat.io/krestomatio/container_builder/centos8-stream-minimal"
 ```
 
 ## Repository

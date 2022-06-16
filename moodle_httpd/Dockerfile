@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/httpd
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/httpd
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME="moodle_httpd" \

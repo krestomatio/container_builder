@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/moodle
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/moodle
+FROM ${ARG_IMAGE_FROM}
 
 # Install additional plugins, a space separated arg, (if any)
 # Argument is also a mechanism to invalidate cache if changed

@@ -1,5 +1,6 @@
 # Ansible managed
-FROM docker:stable-dind
+ARG ARG_IMAGE_FROM=docker:stable-dind
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-docker-ci \
@@ -53,10 +54,16 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     cd /
 
-ENV PUSHRM_VERSION="1.8.0"
+ENV PUSHRM_VERSION="1.8.1"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
+
+ENV BUILDX_VERSION="0.8.2"
+RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
+    mkdir -p /usr/local/lib/docker/cli-plugins && \
+    curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-amd64" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
+    chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
 CMD [ "ansible-playbook", "--version" ]
 

@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/node
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/node
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=node-ci \

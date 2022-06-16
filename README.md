@@ -4,35 +4,35 @@ This project builds containers using Ansible. The containers are defined as host
 ### Containers build info
 | Container Directory  | Container Image  | Version  |
 |---|---|---|
-| [ansible-docker-ci](ansible-docker-ci/ )| [quay.io/krestomatio/ansible-docker-ci](https://quay.io/krestomatio/ansible-docker-ci) | 0.1.54 |
-| [ansible-operator-ci](ansible-operator-ci/ )| [quay.io/krestomatio/ansible-operator-ci](https://quay.io/krestomatio/ansible-operator-ci) | 0.1.55 |
-| [ansible-podman-ci](ansible-podman-ci/ )| [quay.io/krestomatio/ansible-podman-ci](https://quay.io/krestomatio/ansible-podman-ci) | 0.1.54 |
-| [ansible](ansible/ )| [quay.io/krestomatio/ansible](https://quay.io/krestomatio/ansible) | 0.1.54 |
-| [base-stream](base-stream/ )| [quay.io/krestomatio/base-stream](https://quay.io/krestomatio/base-stream) | 0.1.54 |
-| [base](base/ )| [quay.io/krestomatio/base](https://quay.io/krestomatio/base) | 0.1.54 |
+| [ansible-docker-ci](ansible-docker-ci/ )| [quay.io/krestomatio/ansible-docker-ci](https://quay.io/krestomatio/ansible-docker-ci) | 0.1.55 |
+| [ansible-operator-ci](ansible-operator-ci/ )| [quay.io/krestomatio/ansible-operator-ci](https://quay.io/krestomatio/ansible-operator-ci) | 0.1.56 |
+| [ansible-podman-ci](ansible-podman-ci/ )| [quay.io/krestomatio/ansible-podman-ci](https://quay.io/krestomatio/ansible-podman-ci) | 0.1.55 |
+| [ansible](ansible/ )| [quay.io/krestomatio/ansible](https://quay.io/krestomatio/ansible) | 0.1.55 |
+| [base-stream](base-stream/ )| [quay.io/krestomatio/base-stream](https://quay.io/krestomatio/base-stream) | 0.1.55 |
+| [base](base/ )| [quay.io/krestomatio/base](https://quay.io/krestomatio/base) | 0.1.55 |
 | [centos8-stream-minimal](centos8-stream-minimal/ )| [quay.io/krestomatio/centos8-stream-minimal](https://quay.io/krestomatio/centos8-stream-minimal) | 8.6.1 |
-| [go-toolset](go-toolset/ )| [quay.io/krestomatio/go-toolset](https://quay.io/krestomatio/go-toolset) | 0.0.36 |
+| [go-toolset](go-toolset/ )| [quay.io/krestomatio/go-toolset](https://quay.io/krestomatio/go-toolset) | 0.0.37 |
 | [graphql-engine-base](graphql-engine-base/ )| [quay.io/krestomatio/graphql-engine-base](https://quay.io/krestomatio/graphql-engine-base) | 2.0.9 |
 | [graphql-engine-build](graphql-engine-build/ )| [quay.io/krestomatio/graphql-engine-build](https://quay.io/krestomatio/graphql-engine-build) | 2.0.9 |
 | [graphql-engine](graphql-engine/ )| [quay.io/krestomatio/graphql-engine](https://quay.io/krestomatio/graphql-engine) | 2.0.9 |
-| [httpd](httpd/ )| [quay.io/krestomatio/httpd](https://quay.io/krestomatio/httpd) | 0.1.54 |
+| [httpd](httpd/ )| [quay.io/krestomatio/httpd](https://quay.io/krestomatio/httpd) | 0.1.55 |
 | [keydb](keydb/ )| [quay.io/krestomatio/keydb](https://quay.io/krestomatio/keydb) | 6.3.0 |
-| [moodle](moodle/ )| [quay.io/krestomatio/moodle](https://quay.io/krestomatio/moodle) | 3.9.14 |
 | [moodle_bundle](moodle_bundle/ )| [quay.io/krestomatio/moodle_bundle](https://quay.io/krestomatio/moodle_bundle) | 3.9.14 |
-| [moodle_httpd](moodle_httpd/ )| [quay.io/krestomatio/moodle_httpd](https://quay.io/krestomatio/moodle_httpd) | 0.1.54 |
-| [moodle_nginx](moodle_nginx/ )| [quay.io/krestomatio/moodle_nginx](https://quay.io/krestomatio/moodle_nginx) | 0.1.54 |
-| [moodle_nginx_php-fpm](moodle_nginx_php-fpm/ )| [quay.io/krestomatio/moodle_nginx_php-fpm](https://quay.io/krestomatio/moodle_nginx_php-fpm) | 0.0.4 |
-| [moodle_php-fpm](moodle_php-fpm/ )| [quay.io/krestomatio/moodle_php-fpm](https://quay.io/krestomatio/moodle_php-fpm) | 0.1.54 |
-| [nfs-ganesha](nfs-ganesha/ )| [quay.io/krestomatio/nfs-ganesha](https://quay.io/krestomatio/nfs-ganesha) | 0.0.8 |
-| [nginx](nginx/ )| [quay.io/krestomatio/nginx](https://quay.io/krestomatio/nginx) | 0.1.54 |
-| [nginx_php-fpm](nginx_php-fpm/ )| [quay.io/krestomatio/nginx_php-fpm](https://quay.io/krestomatio/nginx_php-fpm) | 0.1.54 |
+| [moodle_httpd](moodle_httpd/ )| [quay.io/krestomatio/moodle_httpd](https://quay.io/krestomatio/moodle_httpd) | 0.1.55 |
+| [moodle_nginx_php-fpm](moodle_nginx_php-fpm/ )| [quay.io/krestomatio/moodle_nginx_php-fpm](https://quay.io/krestomatio/moodle_nginx_php-fpm) | 0.0.5 |
+| [moodle_nginx](moodle_nginx/ )| [quay.io/krestomatio/moodle_nginx](https://quay.io/krestomatio/moodle_nginx) | 0.1.55 |
+| [moodle_php-fpm](moodle_php-fpm/ )| [quay.io/krestomatio/moodle_php-fpm](https://quay.io/krestomatio/moodle_php-fpm) | 0.1.55 |
+| [moodle](moodle/ )| [quay.io/krestomatio/moodle](https://quay.io/krestomatio/moodle) | 3.9.14 |
+| [nfs-ganesha](nfs-ganesha/ )| [quay.io/krestomatio/nfs-ganesha](https://quay.io/krestomatio/nfs-ganesha) | 0.0.9 |
+| [nginx_php-fpm](nginx_php-fpm/ )| [quay.io/krestomatio/nginx_php-fpm](https://quay.io/krestomatio/nginx_php-fpm) | 0.1.55 |
+| [nginx](nginx/ )| [quay.io/krestomatio/nginx](https://quay.io/krestomatio/nginx) | 0.1.55 |
 | [node-ci](node-ci/ )| [quay.io/krestomatio/node-ci](https://quay.io/krestomatio/node-ci) | 14 |
 | [node](node/ )| [quay.io/krestomatio/node](https://quay.io/krestomatio/node) | 14 |
-| [pgbouncer](pgbouncer/ )| [quay.io/krestomatio/pgbouncer](https://quay.io/krestomatio/pgbouncer) | 0.0.10 |
-| [php-fpm](php-fpm/ )| [quay.io/krestomatio/php-fpm](https://quay.io/krestomatio/php-fpm) | 0.1.54 |
-| [postgres](postgres/ )| [quay.io/krestomatio/postgres](https://quay.io/krestomatio/postgres) | 0.1.54 |
-| [rocky8-minimal](rocky8-minimal/ )| [quay.io/krestomatio/rocky8-minimal](https://quay.io/krestomatio/rocky8-minimal) | 8.6.2 |
-| [rootfs-creator](rootfs-creator/ )| [quay.io/krestomatio/rootfs-creator](https://quay.io/krestomatio/rootfs-creator) | 0.1.45 |
+| [pgbouncer](pgbouncer/ )| [quay.io/krestomatio/pgbouncer](https://quay.io/krestomatio/pgbouncer) | 0.0.11 |
+| [php-fpm](php-fpm/ )| [quay.io/krestomatio/php-fpm](https://quay.io/krestomatio/php-fpm) | 0.1.55 |
+| [postgres](postgres/ )| [quay.io/krestomatio/postgres](https://quay.io/krestomatio/postgres) | 0.1.55 |
+| [rocky8-minimal](rocky8-minimal/ )| [quay.io/krestomatio/rocky8-minimal](https://quay.io/krestomatio/rocky8-minimal) | 8.6.3 |
+| [rootfs-creator](rootfs-creator/ )| [quay.io/krestomatio/rootfs-creator](https://quay.io/krestomatio/rootfs-creator) | 0.1.46 |
 
 ### How to build them?
 ```bash
@@ -43,6 +43,7 @@ ansible-playbook .ansible-ci/build.yml
 * Ansible >= 2.9
 * docker or podman
 * python docker
+* [buildx](https://github.com/docker/buildx)
 * see [requirements.txt](.ansible-ci/requirements.txt)
 
 ### Want to contribute?

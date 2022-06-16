@@ -1,10 +1,10 @@
-Extends [moodle container image](https://quay.io/krestomatio/moodle) to add additional Moodle plugins.
+Extends [moodle container image](https://docker-registry.jx.krestomat.io/krestomatio/container_builder/moodle) to add additional Moodle plugins.
 
 ## Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 3.9.14
-* Moodle version number: 2020061514.00
-* Moodle commit: a63efe42d15236e08f10d9158eef5d20f92222db
+* Moodle version number: 2020061514.02
+* Moodle commit: f4df13fb6c3854fcfbc90c91bdafceb4dc492880
 * Moodle remote branch: MOODLE\_39\_STABLE
 
 ## Plugins

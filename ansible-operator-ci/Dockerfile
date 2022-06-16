@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/ansible-podman-ci
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/ansible-podman-ci
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-operator-ci \
@@ -8,13 +9,13 @@ ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 8 Stream minimal"
 
 # Container variables
-ENV OPERATOR_VERSION="1.15.0"
+ENV OPERATOR_VERSION="1.21.0"
 
 # Install Operator SDK
-COPY --from=quay.io/operator-framework/operator-sdk:v1.15.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+COPY --from=quay.io/operator-framework/operator-sdk:v1.21.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v1.15.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.21.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
 
 # Container variables
 ENV KUSTOMIZE_VERSION="4.1.3"
@@ -24,7 +25,7 @@ RUN echo "Installing kustomize version: ${KUSTOMIZE_VERSION}..."  && \
     curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xzf - -C /usr/local/bin/
 
 # Container variables
-ENV KUBECTL_VERSION="1.20.8"
+ENV KUBECTL_VERSION="1.23.6"
 
 # Install kubectl.
 RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
@@ -49,4 +50,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.15.0"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,ansible-operator,ansible-operator1.21.0"

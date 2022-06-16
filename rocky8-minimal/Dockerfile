@@ -1,12 +1,41 @@
+# builder
+ARG ROOTFS_IMAGE_BASE=quay.io/fedora/fedora-minimal
+FROM ${ROOTFS_IMAGE_BASE} as builder
+
+ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
+ARG ARG_ROOTFS_EXTRA_REMOVAL='True'
+ARG ARG_ROOTFS_REPO_CONTENTDIR='rocky'
+ARG ARG_ROOTFS_REPO_RELEASEVER='8'
+ARG ARG_ROOTFS_REPO_BASEOS_NAME='Rocky Linux $releasever - BaseOS'
+ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST='https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever'
+ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-rockyofficial'
+ARG ARG_ROOTFS_DNF_VARS='contentdir=rocky stream=8-stream infra=container'
+ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles'
+ARG ARG_ROOTFS_RELEASE_PKG='rocky-release'
+
+ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
+    ROOTFS_EXTRA_REMOVAL="${ARG_ROOTFS_EXTRA_REMOVAL}" \
+    ROOTFS_REPO_CONTENTDIR="${ARG_ROOTFS_REPO_CONTENTDIR}" \
+    ROOTFS_REPO_RELEASEVER="${ARG_ROOTFS_REPO_RELEASEVER}" \
+    ROOTFS_REPO_BASEOS_NAME="${ARG_ROOTFS_REPO_BASEOS_NAME}" \
+    ROOTFS_REPO_BASEOS_MIRRORLIST="${ARG_ROOTFS_REPO_BASEOS_MIRRORLIST}" \
+    ROOTFS_REPO_BASEOS_GPGKEY="${ARG_ROOTFS_REPO_BASEOS_GPGKEY}" \
+    ROOTFS_DNF_VARS="${ARG_ROOTFS_DNF_VARS}" \
+    ROOTFS_EXTRA_PKGS="${ARG_ROOTFS_EXTRA_PKGS}" \
+    ROOTFS_RELEASE_PKG="${ARG_ROOTFS_RELEASE_PKG}"
+
+COPY conf/usr/bin /usr/bin
+
+RUN rootfs
+
+# image
 FROM scratch
 
-# General variables
-ENV IMAGE_ROOTFS_PKGS_CHECKSUM="b6b0798312319684f3dd3bbcacc4f0e3a59dc655"
+ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 
-ADD rocky8-minimal.tar.xz /
+COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 # Labels
-LABEL org.opencontainers.image.title="Rocky Linux Minimal Image" \
-      org.opencontainers.image.licenses="GPLv2"
+LABEL org.opencontainers.image.title="Rocky Linux Minimal Image"
 
 CMD ["/bin/bash"]

@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/nginx
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/nginx
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=nginx_php-fpm \

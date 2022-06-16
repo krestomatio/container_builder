@@ -1,5 +1,6 @@
 # Ansible managed
-FROM quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible \
@@ -14,7 +15,7 @@ ENV ANSIBLE_VERSION="2.9.*" \
     CTR_PIP_EXTRA="yamllint ansible-lint flake8 pycrypto git-semver openshift"
 
 RUN echo "Build tools..."  && \
-    $CTR_PKG_MGM install python3-devel gcc && \
+    $CTR_PKG_MGM install python3-devel gcc libffi-devel && \
     echo "Installing pkgs..."  && \
     python3 -m ensurepip && \
     $CTR_PIP cffi pip && \
@@ -23,7 +24,7 @@ RUN echo "Build tools..."  && \
     echo "Installing other pip tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \
     echo "Cleaning..."  && \
-    $CTR_PKG_MGM remove -y python3-devel gcc && \
+    $CTR_PKG_MGM remove -y python3-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
     echo "Minimal ansible config" && \

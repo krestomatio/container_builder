@@ -51,6 +51,7 @@ fi
 
 # post config
 pushd ${ROOTFS_INSTALL_DIR}
+chroot ${ROOTFS_INSTALL_DIR} rpm --rebuilddb
 date +%Y%m%d_%H%M > ${ROOTFS_INSTALL_DIR}/etc/BUILDTIME
 echo '%_install_langs C.utf8' > ${ROOTFS_INSTALL_DIR}/etc/rpm/macros.image-language-conf
 echo 'LANG="C.utf8"' >  ${ROOTFS_INSTALL_DIR}/etc/locale.conf

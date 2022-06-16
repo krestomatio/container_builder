@@ -2,8 +2,9 @@
 # description: base config for keydb
 
 # install keydb
+
 echo "Download keydb.."
-curl -L https://download.keydb.dev/pkg/open_source/rpm/centos8/x86_64/keydb_all_versions/keydb-${KEYDB_VERSION_PCKG}.el8.x86_64.rpm -o /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
+curl -L https://download.keydb.dev/pkg/open_source/rpm/centos8/$(uname -m)/keydb_all_versions/keydb-${KEYDB_VERSION_PCKG}.el8.$(uname -m).rpm -o /tmp/keydb-${KEYDB_VERSION_PCKG}.rpm
 echo "Download rpm signing key..."
 rpm --import https://download.keydb.dev/pkg/open_source/rpm/RPM-GPG-KEY-keydb && \
 echo "Verify keydb..."

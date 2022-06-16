@@ -51,7 +51,11 @@ external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
 
 # build vars
 dockerfile_builder: docker
-# dockerfile_builder_push: true
+dockerfile_builder_use_buildx: true
+dockerfile_builder_platforms:
+  - 'linux/amd64'
+  - 'linux/arm64'
+dockerfile_builder_push: "{{ true if dockerfile_builder_use_buildx else false }}"
 dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@krestomatio.com>
 dockerfile_builder_image_based: CentOS 8 Stream minimal
@@ -63,6 +67,7 @@ dockerfile_builder_image: "{{ container_image }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
+dockerfile_builder_pull: "{{ true if dockerfile_builder_use_buildx else false }}"
 
 # doc
 doc_generate_project_readme: true

@@ -4,6 +4,5 @@
 {{ state_name }}_image:
   build: {{ state_yml_build | default('false') | bool  }}
   tag: "{{ state_yml_tag }}"
-  id: "{{ state_yml_id }}"
   repo_digest: "{{ state_yml_repo_digest }}"
   artifact_tag: {{ state_yml_artifact_tag  }}

@@ -23,13 +23,6 @@
         state_yml_tag: "{{ load_state_yml.tag }}"
         load_state_yml_tag: "{{ load_state_yml.tag }}"
 
-    - name: set state ID
-      when:
-        - state_yml_id is not defined
-        - load_state_yml.id is defined
-      set_fact:
-        state_yml_id: "{{ load_state_yml.id }}"
-
     - name: set state repo digest
       when:
         - state_yml_repo_digest is not defined

@@ -1,5 +1,4 @@
 version_include_major_minor_tags: "{{ release_version_include_major_minor_tags | default(true) }}"
-build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
 git_add_path:
   "'{{ state_file }}' '{{ dockerfile_builder_path }}' '{{ doc_project_readme_dest }}' '{{ updatebot_ansible_collection_template_dest }}'"
 git_add_throttle: 1

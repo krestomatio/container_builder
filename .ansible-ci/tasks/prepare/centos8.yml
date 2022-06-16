@@ -1,21 +1,32 @@
-- when: ansible_host | regex_search('(centos|rocky)*.*-minimal')
+- when:
+    - not ansible_check_mode
+    - ansible_host | regex_search('(centos|rocky)*.*-minimal')
+  vars:
+    dockerfile_builder_image: "{{ container_image }}_prepare"
   block:
   - name: build image
     vars:
-      dockerfile_builder_image: "{{ container_image }}_prepare"
-      dockerfile_builder_force_source: true
       dockerfile_builder_force: true
     include_role:
       name: dockerfile_builder
 
-  - name: get distro-release
-    command: "{{ dockerfile_builder }} run --rm {{ dockerfile_builder_image }}_prepare rpm -qa"
-    register: distro_release_task
+  - name: get distro-release for multi arch manifests
+    loop: "{{ dockerfile_builder_platforms }}"
+    register: prepare_distro_release_task
+    vars:
+      prepare_distro_release_image_digest:
+        "{{ dockerfile_builder_image_info.manifest.manifests | default([])
+          | selectattr('platform.os', 'equalto', item.split('/')[0])
+          |  selectattr('platform.architecture', 'equalto', item.split('/')[1])
+          | map(attribute='digest') | first }}"
+      prepare_distro_release_image: "{{ dockerfile_builder_image }}@{{ prepare_distro_release_image_digest }}"
+    command: "{{ dockerfile_builder }} run --rm {{ prepare_distro_release_image }} rpm -qa"
 
   - name: save new distro release
-    when: distro_release_task.stdout_lines is defined and distro_release_task.stdout_lines
     set_fact:
-      centos_distro_release: "{{ distro_release_task.stdout_lines | map('regex_search',distro_version_regex) | select('string') | first }}"
+      centos_distro_release: "{{ prepare_distro_release_task.results | selectattr('item', 'equalto', 'linux/amd64')
+        | map(attribute='stdout_lines') | first | map('regex_search',distro_version_regex)
+        | select('string') | first }}"
 
   - name: set version based on distro-release
     when: centos_distro_release is defined
@@ -28,17 +39,17 @@
         default(centos_distro_release.split('.')[2]) | default(false) }}"
 
   - name: store pkg-list
-    when: distro_release_task.stdout_lines is defined and distro_release_task.stdout_lines
-    register: store_pkg_list_task
+    loop: "{{ prepare_distro_release_task.results }}"
+    register: prepare_store_pkg_list_task
     copy:
-      dest: "{{ pkgs_list_dest }}"
+      dest: "{{ pkgs_list_dest }}_{{ item.item.split('/')[0] }}_{{ item.item.split('/')[1] }}"
       content: |
-        {% for line in distro_release_task.stdout_lines | sort %}
+        {% for line in item.stdout_lines | sort %}
         {{ line }}
         {% endfor %}
 
   - name: omit src sync when no new pkgs
-    when: store_pkg_list_task is changed
+    when: prepare_store_pkg_list_task is changed
     set_fact:
       dockerfile_builder_force_source: true
       dockerfile_builder_force: true

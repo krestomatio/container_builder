@@ -1,14 +1,3 @@
-- name: set destination image name
-  when:
-    - build_registry_path is defined and build_registry_path
-    - registry_path != build_registry_path
-  set_fact:
-    build_image_name: "{{ build_registry_path }}/{{ ansible_host }}"
-
-- name: tag build image
-  command: "{{ dockerfile_builder }} tag {{ container_image }} {{ build_image_name }}"
-  changed_when: false
-
 - name: add other tags to image
   when:
     - dockerfile_builder_tags is defined and dockerfile_builder_tags
@@ -31,8 +20,8 @@
         fi
       done
     }
-    add_tags {{ build_image_name | default(container_image) }}
-    {% if tag_alternative_image_name is defined and tag_alternative_image_name and tag_alternative_image_name != build_image_name | default(container_image) %}
+    add_tags {{ container_image }}
+    {% if tag_alternative_image_name is defined and tag_alternative_image_name and tag_alternative_image_name != container_image %}
     add_tags {{ tag_alternative_image_name }}
     {% endif %}
 

@@ -1,6 +1,11 @@
 # dockerfile_builder
-dockerfile_builder_excluded_files:
-  - "{{ pkgs_list_file }}"
+dockerfile_builder_excluded_files: >-
+  {%- set files = [] -%}
+  {%- for builder_platform in dockerfile_builder_platforms | default([]) -%}
+  {%-   set f = ([pkgs_list_file] + [builder_platform.split('/')[0]] + [builder_platform.split('/')[1]]) | join('_') -%}
+  {%-   set _ = files.append(f) -%}
+  {%- endfor -%}
+  {{ files }}
 
 # source dir
 template_path: "{{ template_dir }}/rootfs"
@@ -13,5 +18,5 @@ rootfs_extra_pkgs: ""
 
 # prepare
 distro_version_regex: '(?<=release\-).*(?=\.el8.noarch)'
-pkgs_list_file: "pkgs-list"
+pkgs_list_file: "pkg_list"
 pkgs_list_dest: "{{ generated_path }}/{{ pkgs_list_file }}"

@@ -1,3 +1,5 @@
+registry_name: "{{ build_registry_name }}"
+registry_path: "{{ build_registry_path }}"
 version_include_fallback_tags: true
 pr_commit_tag:
   "{{ lookup('env','PULL_PULL_SHA') | default(git_head_commit,true) |

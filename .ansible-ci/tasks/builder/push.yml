@@ -1,5 +1,5 @@
 - vars:
-    push_image_name: "{{ build_image_name | default(container_image) }}"
+    push_image_name: "{{ container_image }}"
   block:
   - name: push image and its tags
     command: "{{ dockerfile_builder }} push {{ push_image_name }}"

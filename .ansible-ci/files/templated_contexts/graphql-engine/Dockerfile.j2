@@ -17,7 +17,7 @@ ENV GHC_VERSION="8.10.2" \
 
 RUN install-pkgs -e ${OS_INSTALL_PKGS}
 
-RUN curl https://downloads.haskell.org/~ghc/${GHC_VERSION}/ghc-${GHC_VERSION}-x86_64-centos7-linux.tar.xz | tar xJ  && \
+RUN curl "https://downloads.haskell.org/~ghc/${GHC_VERSION}/ghc-${GHC_VERSION}-$(uname -m)-centos7-$(uname -s | tr '[:upper:]' '[:lower:]').tar.xz" | tar xJ  && \
     pushd ghc-${GHC_VERSION} && ./configure && make install && \
     popd && rm -rf ghc-${GHC_VERSION}
 

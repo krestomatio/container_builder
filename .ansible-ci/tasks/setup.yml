@@ -7,7 +7,7 @@
 
 - name: skip if no artifact commit tag
   when:
-    - skip_if_no_artifact_tag | default(true)
+    - skip_if_no_artifact_tag | default(true) | bool
     - not artifact_tag
   vars:
     skip_end_msg_extra: "{{ '. Probably, commit is not from a pull request, skipping ' +

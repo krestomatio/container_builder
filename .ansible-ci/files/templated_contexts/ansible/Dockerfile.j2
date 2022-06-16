@@ -15,7 +15,7 @@ ENV ANSIBLE_VERSION="{{ image_ansible_version }}" \
     CTR_PIP_EXTRA="{{ dockerfile_builder_image_pip_extra }}"
 
 RUN echo "Build tools..."  && \
-    $CTR_PKG_MGM install python3-devel gcc && \
+    $CTR_PKG_MGM install python3-devel gcc libffi-devel && \
     echo "Installing pkgs..."  && \
     python3 -m ensurepip && \
     $CTR_PIP cffi pip && \
@@ -24,7 +24,7 @@ RUN echo "Build tools..."  && \
     echo "Installing other pip tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \
     echo "Cleaning..."  && \
-    $CTR_PKG_MGM remove -y python3-devel gcc && \
+    $CTR_PKG_MGM remove -y python3-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
     echo "Minimal ansible config" && \

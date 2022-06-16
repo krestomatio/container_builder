@@ -114,8 +114,8 @@ class LookupModule(LookupBase):
 
                     # get tag
                     try:
-                        # get tag
-                        v = repo.git.describe('--tags', '--abbrev=0')
+                        # get sorted tags
+                        v = repo.git.tag('--sort=-v:refname', '--merged').splitlines()[0]
                         # set tag as rev
                         rev = v
                     except git.GitCommandError as e:

@@ -1,5 +1,6 @@
 # {{ ansible_managed  }}
-FROM {{ dockerfile_builder_image_from }} AS nfs-ganesha-builder
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM} AS nfs-ganesha-builder
 
 USER 0
 
@@ -84,7 +85,8 @@ RUN mkdir -p ${DESTDIR} \
     && /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha \
     && fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
 
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=nfs-ganesha \

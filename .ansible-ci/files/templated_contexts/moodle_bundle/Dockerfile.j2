@@ -1,5 +1,6 @@
 # {{ ansible_managed  }}
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 # Install additional plugins, a space separated arg, (if any)
 # Argument is also a mechanism to invalidate cache if changed

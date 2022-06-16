@@ -11,5 +11,5 @@ moodle_git_repo_version:
   moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
   regex: '(?<=\$release)(.*)(?=\s\(Build:)'
-  regex_group: '([[0-9]+)\.([[0-9]+)\.([[0-9A-Za-z-+]+)'
+  regex_group: '([0-9]+)\.([0-9]+)\.([0-9]+)'
   number_regex: '(?<=\=\s)\d+\.\d+(?=\;)'

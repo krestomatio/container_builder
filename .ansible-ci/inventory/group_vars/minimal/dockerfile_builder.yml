@@ -1,3 +1,6 @@
+# dockerfile_builder
+container_builder_image_from: false
+
 # ci
 prepare_image_task: centos8
 

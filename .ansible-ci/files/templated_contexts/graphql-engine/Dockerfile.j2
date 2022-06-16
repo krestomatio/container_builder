@@ -1,6 +1,7 @@
 # {{ ansible_managed  }}
 {% if ansible_host == 'graphql-engine-base' %}
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 \
     GRAPHQL_ENGINE_VERSION="{{ graphql_engine_version }}" \
@@ -10,7 +11,8 @@ RUN microdnf module enable postgresql:${POSTGRES_MAJOR_VERSION} && \
     install-pkgs libpq unixODBC mysql-libs
 {% endif %}
 {% if ansible_host == 'graphql-engine-build' %}
-FROM {{ dockerfile_builder_image_from }} AS graphql-engine-builder
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM} AS graphql-engine-builder
 
 ENV GHC_VERSION="8.10.2" \
     OS_INSTALL_PKGS="binutils upx make curl git tar xz postgresql gcc gcc-c++ gmp gmp-devel ncurses ncurses-devel ncurses-compat-libs perl mysql-devel pcre pcre-devel ca-certificates krb5-libs numactl-libs libpq libpq-devel unixODBC-devel"
@@ -46,7 +48,8 @@ RUN cabal update  && \
     upx /bin/graphql-engine
 
 
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=graphql-engine-build \
@@ -58,7 +61,8 @@ COPY --from=graphql-engine-builder /usr/bin/pg_dump /usr/bin/pg_dump
 COPY --from=graphql-engine-builder /bin/graphql-engine /bin/graphql-engine
 {% endif %}
 {% if ansible_host == 'graphql-engine' %}
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=graphql-engine \

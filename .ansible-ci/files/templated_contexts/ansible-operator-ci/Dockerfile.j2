@@ -1,5 +1,6 @@
 # {{ ansible_managed  }}
-FROM {{ dockerfile_builder_image_from }}
+ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-operator-ci \

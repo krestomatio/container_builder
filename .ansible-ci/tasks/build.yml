@@ -14,7 +14,7 @@
 
 - name: force build if image from is built and changed
   when:
-    - container_builder_image_from is defined
+    - container_builder_image_from is defined and container_builder_image_from
     - hostvars[container_builder_image_from].dockerfile_builder_image_build is defined
     - hostvars[container_builder_image_from].dockerfile_builder_image_build is changed
   set_fact:

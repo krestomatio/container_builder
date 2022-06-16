@@ -8,6 +8,9 @@
 - name: set version related facts
   include_tasks: tasks/builder/version.yml
 
+- name: set common labels
+  include_tasks: tasks/builder/label.yml
+
 - name: use build cache
   include_tasks: tasks/builder/cache.yml
   when: build_cache | default(false) | bool

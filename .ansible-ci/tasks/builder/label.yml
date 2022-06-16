@@ -1,0 +1,35 @@
+- name: add title label
+  when: dockerfile_builder_image_title is defined and dockerfile_builder_image_title
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine({'org.opencontainers.image.title': dockerfile_builder_image_title}) }}"
+
+- name: add authors label
+  when: dockerfile_builder_image_authors is defined and dockerfile_builder_image_authors
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine({'org.opencontainers.image.authors': dockerfile_builder_image_authors}) }}"
+
+- name: add description label
+  when: dockerfile_builder_image_description is defined and dockerfile_builder_image_description
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine({'org.opencontainers.image.description': dockerfile_builder_image_description}) }}"
+
+- name: add version label
+  when: dockerfile_builder_image_version is defined and dockerfile_builder_image_version
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine({'org.opencontainers.image.version': dockerfile_builder_image_version}) }}"
+
+- name: add title label
+  when: dockerfile_builder_image_title is defined
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine({'org.opencontainers.image.title': dockerfile_builder_image_title}) }}"
+
+- name: add common labels
+  when: dockerfile_builder_common_labels is defined and dockerfile_builder_common_labels
+  set_fact:
+    dockerfile_builder_labels:
+      "{{ dockerfile_builder_labels | default({}) | combine(dockerfile_builder_common_labels) }}"

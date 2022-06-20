@@ -13,6 +13,7 @@
   - name: get distro-release for multi arch manifests
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task
+    changed_when: false
     vars:
       prepare_distro_release_image_digest:
         "{{ dockerfile_builder_image_info.manifest.manifests | default([])
@@ -40,6 +41,7 @@
 
   - name: store pkg-list
     loop: "{{ prepare_distro_release_task.results }}"
+    no_log: true
     register: prepare_store_pkg_list_task
     copy:
       dest: "{{ pkgs_list_dest }}_{{ item.item.split('/')[0] }}_{{ item.item.split('/')[1] }}"
@@ -48,8 +50,8 @@
         {{ line }}
         {% endfor %}
 
-  - name: omit src sync when no new pkgs
-    when: prepare_store_pkg_list_task is changed
+  - name: force build or omit it if pkg list has changed
     set_fact:
-      dockerfile_builder_force_source: true
-      dockerfile_builder_force: true
+      dockerfile_builder_build_omit: "{{ prepare_store_pkg_list_task is not changed }}"
+      dockerfile_builder_force_source: "{{ prepare_store_pkg_list_task is changed }}"
+      dockerfile_builder_force: "{{ prepare_store_pkg_list_task is changed }}"

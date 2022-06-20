@@ -2,7 +2,7 @@ repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
 repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
 project_registry_path: "{{ repo_owner+'/'+repo_name }}"
 build_cache: true
-build_cache_prepull: true
+build_cache_prepull: "{{ false if dockerfile_builder_use_buildx else true }}"
 build_cache_first_prepull: true
 build_push: "{{ lookup('env','BUILD_PUSH') | default(true,true) }}"
 build_add_minor_major_cache_tags: "{{ lookup('env','BUILD_CACHE_ADD_MINOR_MAJOR_TAGS') | default(true,true) }}"

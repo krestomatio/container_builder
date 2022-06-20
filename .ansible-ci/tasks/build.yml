@@ -18,8 +18,8 @@
 - name: force build if image from is built and changed
   when:
     - container_builder_image_from is defined and container_builder_image_from
-    - hostvars[container_builder_image_from].dockerfile_builder_image_build is defined
-    - hostvars[container_builder_image_from].dockerfile_builder_image_build is changed
+    - not hostvars[container_builder_image_from].dockerfile_builder_build_omit | default(false)
+    - hostvars[container_builder_image_from].dockerfile_builder_image_build.changed | default(false)
   set_fact:
     dockerfile_builder_force_source: true
     dockerfile_builder_force: true
@@ -28,17 +28,16 @@
   include_role:
     name: dockerfile_builder
 
-- name: no build, end host here
-  when: dockerfile_builder_build_omit | default(false)
-  include_tasks: pipeline/end_host.yml
+- name: omit
+  when: not dockerfile_builder_build_omit | default(false)
+  block:
+    - name: state image build fact
+      when:
+        - not ansible_check_mode
+        - dockerfile_builder_image_info is defined and dockerfile_builder_image_info
+      set_fact:
+        state_yml_build: true
+        state_yml_repo_digest: "{{ dockerfile_builder_image_info.name }}@{{ dockerfile_builder_image_info.manifest.digest }}"
 
-- name: state image build fact
-  when:
-    - not ansible_check_mode
-    - dockerfile_builder_image_info is defined and dockerfile_builder_image_info
-  set_fact:
-    state_yml_build: true
-    state_yml_repo_digest: "{{ dockerfile_builder_image_info.name }}@{{ dockerfile_builder_image_info.manifest.digest }}"
-
-- name: save image state
-  include_tasks: tasks/state/save.yml
+    - name: save image state
+      include_tasks: tasks/state/save.yml

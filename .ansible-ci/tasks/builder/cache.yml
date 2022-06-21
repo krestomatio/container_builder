@@ -22,8 +22,7 @@
           set_fact:
             dockerfile_builder_cache_from:
               "{{ dockerfile_builder_cache_from | default([]) +
-              [cache_image +
-              ':' + item] }}"
+              [cache_image + ':' + item] }}"
 
         - name: set cache build args variables
           when:
@@ -72,4 +71,5 @@
         cache_separate_image_name_tag: "{{ cache_image }}:build-cache"
       set_fact:
         dockerfile_builder_cache_from: "{{ [cache_separate_image_name_tag] }}"
-        dockerfile_builder_cache_to: "{{ [cache_separate_image_name_tag] }}"
+        dockerfile_builder_cache_to: "{{ ['type=' + dockerfile_builder_cache_to_type | default('registry') +
+         ',mode=' + dockerfile_builder_cache_to_mode | default('max') + ',ref=' + cache_separate_image_name_tag] }}"

@@ -52,6 +52,7 @@ external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
 # build vars
 dockerfile_builder: docker
 dockerfile_builder_use_buildx: true
+dockerfile_builder_buildx_multiplatform_cache: false
 dockerfile_builder_platforms:
   - 'linux/amd64'
   - 'linux/arm64'

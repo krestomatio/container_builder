@@ -50,7 +50,7 @@ ENV JX_VERSION="{{ jx2_version }}"
 ENV JX_HOME=/home/.jx
 RUN echo "Installing jx2 version: ${JX_VERSION}..."  && \
     cd /tmp && \
-    curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-amd64.tar.gz | tar xzv && \
+    curl -L https://github.com/jenkins-x/jx/releases/download/v${JX_VERSION}/jx-linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
     sudo mv jx /usr/bin/{{ jx2_binary_name | default('jx') }} && \
     echo "Cleaning..."  && \
     rm -rf /tmp/* && \
@@ -62,7 +62,7 @@ ENV JX3_VERSION="{{ jx3_version }}"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     cd /tmp && \
-    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
+    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
     mv jx /usr/bin/{{ jx3_binary_name | default('jx') }} && \
     echo "Pre-load jx3 plugins..."  && \
     # {{ jx3_binary_name | default('jx') }} upgrade plugins --mandatory && \
@@ -76,7 +76,7 @@ RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
 ENV ORAS_VERSION="{{ oras_version }}"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
-    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
     mv oras /usr/bin/{{ oras_binary_name | default('oras') }} && \
     echo "Cleaning..."  && \
     rm -rf /tmp/* && \
@@ -86,7 +86,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
 {% if pushrm_version is defined and pushrm_version %}
 ENV PUSHRM_VERSION="{{ pushrm_version }}"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
-    curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }} && \
+    curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }} && \
     chmod +x /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }}
 
 {% endif %}
@@ -94,8 +94,21 @@ RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
 ENV BUILDX_VERSION="{{ buildx_version }}"
 RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     mkdir -p /usr/local/lib/docker/cli-plugins && \
-    curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-amd64" -o /usr/local/lib/docker/cli-plugins/{{ buildx_binary_name | default('docker-buildx') }} && \
+    curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/{{ buildx_binary_name | default('docker-buildx') }} && \
     chmod +x /usr/local/lib/docker/cli-plugins/{{ buildx_binary_name | default('docker-buildx') }}
+
+{% endif %}
+{% if terraform_version is defined and terraform_version %}
+ENV TERRAFORM_VERSION="{{ terraform_version }}"
+RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
+    cd /tmp && \
+    curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \
+    unzip -q /tmp/terraform.zip && \
+    mv terraform /usr/local/bin/{{ terraform_binary_name | default('terraform') }} && \
+    chmod +x /usr/local/bin/{{ terraform_binary_name | default('terraform') }} && \
+    echo "Cleaning..."  && \
+    rm -rf /tmp/* && \
+    cd /
 
 {% endif %}
 CMD [ "ansible-playbook", "--version" ]

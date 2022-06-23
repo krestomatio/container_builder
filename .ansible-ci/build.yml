@@ -10,11 +10,39 @@
     - name: setup pipeline
       include_tasks: tasks/setup.yml
 
-    - name: build images by group
-      loop_control:
-        loop_var: build_step
-      loop: "{{ groups.keys() | map('regex_search','^build_step_.*') | select('string') | sort }}"
-      include_tasks: tasks/build-group.yml
+    - name: build
+      block:
+        - name: deploy multiarch-builder
+          when: terraform_multiarch_builder
+          include_tasks: tasks/terraform-module.yml
+
+        - name: build images by group
+          loop_control:
+            loop_var: build_step
+          loop: "{{ groups.keys() | map('regex_search','^build_step_.*') | select('string') | sort }}"
+          include_tasks: tasks/build-group.yml
+      rescue:
+        - name: undeploy multiarch-builder, if failed
+          when: terraform_module_task is defined
+          vars:
+            terraform_module_state: absent
+          include_tasks: tasks/terraform-module.yml
+
+        - name: fail
+          fail:
+            msg: |
+              {% if ansible_failed_result | default(false,true) and ansible_failed_task | default(false,true) %}
+              Task '{{ ansible_failed_task }}' failed with error:
+              {{ ansible_failed_result }}
+              {% else %}
+              There was a error during playbook execution
+              {% endif %}
+      always:
+        - name: undeploy multiarch-builder, if deployed
+          when: terraform_module_task is defined
+          vars:
+            terraform_module_state: absent
+          include_tasks: tasks/terraform-module.yml
 
     - name: "upload artifacts"
       include_tasks: tasks/artifact/main.yml

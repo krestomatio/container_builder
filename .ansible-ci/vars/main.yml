@@ -40,7 +40,7 @@ centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(
 centos8_build_rootfs_pull: true
 
 # docker
-docker_start_daemon: true
+docker_start_daemon: false
 docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
 

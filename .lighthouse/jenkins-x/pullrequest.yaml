@@ -27,15 +27,19 @@ spec:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@e3ba7ae6c62bc3ee26c073920d5662556a21f51f
             - image: quay.io/krestomatio/ansible-docker-ci
               name: build-containers
-              args:
-                - .ansible-ci/build.yml
-              command:
-                - ansible-playbook
+              env:
+                - name: DOCKER_HOST
+                  value:
+              envFrom:
+              - secretRef:
+                  name: multiarch-builder-envvars
+                  optional: true
+              script: |
+                #!/bin/bash -eu
+                ansible-playbook .ansible-ci/build.yml -e terraform_multiarch_builder=true
               volumeMounts:
                 - name: libdocker
                   mountPath: /var/lib/docker
-              securityContext:
-                privileged: true
               resources:
                 requests:
                   cpu: 0.1

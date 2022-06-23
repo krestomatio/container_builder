@@ -1,0 +1,51 @@
+- name: terraform module
+  run_once: true
+  block:
+    - name: check terraform module dir
+      stat:
+        path: "{{ terraform_module_project_path }}"
+      register: terraform_module_check_dir_task
+
+    - name: create terraform module dir
+      register: terraform_module_create_dir_task
+      when: not terraform_module_check_dir_task.stat.exists
+      file:
+        dest: "{{ terraform_module_project_path }}"
+        state: directory
+        mode: '0755'
+
+    - name: check terraform module dir files
+      find:
+        paths: "{{ terraform_module_project_path }}"
+      register: terraform_module_create_dir_files_task
+
+    - name: validate terraform module
+      when: terraform_module_check_dir_task.stat.exists or terraform_module_create_dir_task is changed
+      command:
+        cmd: terraform validate -json
+        chdir: "{{ terraform_module_project_path }}"
+      check_mode: false
+      register: terraform_module_validate_task
+      failed_when:
+        - terraform_module_validate_task.rc > 0 or
+          not (terraform_module_validate_task.stdout | default('{}') | from_json).valid | default(false)
+      changed_when: false
+      ignore_errors: true
+
+    - name: init terraform module
+      register: terraform_module_init_task
+      when:
+       - terraform_module_validate_task is not failed
+       - terraform_module_create_dir_files_task.examined | default(0) < 2
+      command:
+        cmd: "terraform init -input=false -from-module={{ terraform_module_ref }}"
+        chdir: "{{ terraform_module_project_path }}"
+
+    - name: "terraform module: {{ terraform_module }}, state: {{ terraform_module_state }}"
+      register: terraform_module_task
+      when: terraform_module_validate_task is not failed
+      terraform:
+        project_path: "{{ terraform_module_project_path }}"
+        variables: "{{ terraform_module_variables | default(omit) }}"
+        state: "{{ terraform_module_state }}"
+        backend_config: "{{ terraform_module_backend_config | default(omit) }}"

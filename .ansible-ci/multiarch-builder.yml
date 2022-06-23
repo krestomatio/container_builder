@@ -1,0 +1,25 @@
+- name: deploy multiarch-builder
+  hosts: localhost
+  connection: local
+  diff: "{{ play_diff | default(omit) }}"
+  tasks:
+    - name: build
+      block:
+        - name: deploy multiarch-builder
+          include_tasks: tasks/terraform-module.yml
+      rescue:
+        - name: undeploy multiarch-builder, if failed
+          when: terraform_module_task is defined
+          vars:
+            terraform_module_state: absent
+          include_tasks: tasks/terraform-module.yml
+
+        - name: fail
+          fail:
+            msg: |
+              {% if ansible_failed_result | default(false,true) and ansible_failed_task | default(false,true) %}
+              Task '{{ ansible_failed_task }}' failed with error:
+              {{ ansible_failed_result }}
+              {% else %}
+              There was a error during playbook execution
+              {% endif %}

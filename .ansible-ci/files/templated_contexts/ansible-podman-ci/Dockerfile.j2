@@ -26,7 +26,7 @@ ENV JX3_VERSION="{{ jx3_version }}"
 ENV JX3_HOME=/home/.jx3
 RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
     pushd /tmp && \
-    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-amd64.tar.gz | tar xzv && \
+    curl -L https://github.com/jenkins-x/jx-cli/releases/download/v${JX3_VERSION}/jx-cli-linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
     mv jx /usr/bin/{{ jx3_binary_name | default('jx') }} && \
     echo "Pre-load jx3 plugins..."  && \
     # {{ jx3_binary_name | default('jx') }} upgrade plugins --mandatory && \
@@ -40,7 +40,7 @@ RUN echo "Installing jx3 version: ${JX3_VERSION}..."  && \
 ENV ORAS_VERSION="{{ oras_version }}"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     pushd /tmp && \
-    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_amd64.tar.gz | tar xzv && \
+    curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
     mv oras /usr/bin/{{ oras_binary_name | default('oras') }} && \
     echo "Cleaning..."  && \
     rm -rf /tmp/* && \
@@ -50,7 +50,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
 {% if pushrm_version is defined and pushrm_version %}
 ENV PUSHRM_VERSION="{{ pushrm_version }}"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
-    curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_amd64" -o /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }} && \
+    curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/{{ pushrm_binary_name | default('docker-pushrm') }} && \
     chmod +x /usr/local/bin/docker-pushrm
 
 {% endif %}

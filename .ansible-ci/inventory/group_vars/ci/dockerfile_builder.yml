@@ -31,3 +31,8 @@ pushrm_version_regex: "{{ version_regex }}"
 buildx_version_install: true
 buildx_version_url: https://github.com/docker/buildx/releases/latest
 buildx_version_regex: "{{ version_regex }}"
+
+# terraform
+terraform_version_install: true
+terraform_version_url: https://github.com/hashicorp/terraform/releases/latest
+terraform_version_regex: "{{ version_regex }}"

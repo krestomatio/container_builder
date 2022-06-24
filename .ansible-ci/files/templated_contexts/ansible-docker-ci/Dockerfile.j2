@@ -13,7 +13,6 @@ ENV ANSIBLE_VERSION="{{ image_ansible_version }}" \
     MOLECULE_VERSION="{{ molecule_version }}" \
     CTR_APK="apk add --update --no-cache" \
     CTR_PIP="pip install --no-cache --upgrade" \
-    DOCKER_HOST=unix:///var/run/docker.sock \
     CONTAINER_BUILDER=docker
 
 RUN echo "Build tools..."  && \

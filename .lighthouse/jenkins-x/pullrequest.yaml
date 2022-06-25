@@ -33,7 +33,11 @@ spec:
                   optional: true
               script: |
                 #!/bin/bash -eu
-                ansible-playbook .ansible-ci/build.yml -e terraform_multiarch_builder=true
+                ansible-playbook .ansible-ci/build.yml \
+                  -e '{"terraform_multiarch_builder": true}' \
+                  -e '{"dockerfile_builder_buildx_multiplatform_cache": false}' \
+                  -e '{"dockerfile_builder_cache_from": []}' \
+                  -e '{"dockerfile_builder_cache_to": []}'
               volumeMounts:
                 - name: libdocker
                   mountPath: /var/lib/docker

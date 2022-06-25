@@ -31,13 +31,29 @@ spec:
               - secretRef:
                   name: multiarch-builder-envvars
                   optional: true
+              env:
+                - name: TERRAFORM_MULTIARCH_BUILDER
+                  value: "true"
+                - name: TF_VAR_create_amd64
+                  value: "false"
               script: |
                 #!/bin/bash -eu
-                ansible-playbook .ansible-ci/build.yml \
-                  -e '{"terraform_multiarch_builder": true}' \
-                  -e '{"dockerfile_builder_buildx_multiplatform_cache": false}' \
-                  -e '{"dockerfile_builder_cache_from": []}' \
-                  -e '{"dockerfile_builder_cache_to": []}'
+                ## config amd64 builder in k8s
+                docker buildx create --append --name=multiarch-builder \
+                  --driver=kubernetes \
+                  --platform=linux/amd64 \
+                  --node=multiarch-builder-amd64-k8s \
+                  --driver-opt="namespace=jx,requests.cpu=100m,requests.memory=500Mi" \
+                  multiarch-builder-amd64-k8s
+                docker buildx use multiarch-builder
+                docker buildx inspect --bootstrap
+
+                # run ansible build
+                sleep 300
+                # ansible-playbook .ansible-ci/build.yml \
+                #   -e '{"dockerfile_builder_buildx_multiplatform_cache": false}' \
+                #   -e '{"dockerfile_builder_cache_from": []}' \
+                #   -e '{"dockerfile_builder_cache_to": []}'
               volumeMounts:
                 - name: libdocker
                   mountPath: /var/lib/docker

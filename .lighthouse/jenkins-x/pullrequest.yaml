@@ -31,9 +31,12 @@ spec:
               - secretRef:
                   name: multiarch-builder-envvars
                   optional: true
+              env:
+              - name: TERRAFORM_MULTIARCH_BUILDER
+                value: "true"
               script: |
                 #!/bin/bash -eu
-                ansible-playbook .ansible-ci/build.yml -e terraform_multiarch_builder=true
+                ansible-playbook .ansible-ci/build.yml
               volumeMounts:
                 - name: libdocker
                   mountPath: /var/lib/docker

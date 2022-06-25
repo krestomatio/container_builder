@@ -10,6 +10,10 @@
     include_role:
       name: dockerfile_builder
 
+  - name: enable arm64 emulation
+    when: "{{ docker_config_arm64_emulation | default(false) }}"
+    command: "{{ dockerfile_builder }} run --privileged --rm tonistiigi/binfmt --install arm64"
+
   - name: get distro-release for multi arch manifests
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task

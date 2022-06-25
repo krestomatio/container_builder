@@ -43,6 +43,7 @@ centos8_build_rootfs_pull: true
 docker_start_daemon: false
 docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
+docker_config_arm64_emulation: "{{ true if 'linux/arm64' in dockerfile_builder_platforms | default([]) else false }}"
 
 # podman
 podman_conf_dir: "/etc/containers"

@@ -3,8 +3,8 @@ Extends [moodle container image](https://docker-registry.jx.krestomat.io/krestom
 ## Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 3.9.14
-* Moodle version number: 2020061514.02
-* Moodle commit: f4df13fb6c3854fcfbc90c91bdafceb4dc492880
+* Moodle version number: 2020061514.03
+* Moodle commit: 2dc581f71794ac0ae6c14243e298c90bfbd81e46
 * Moodle remote branch: MOODLE\_39\_STABLE
 
 ## Plugins

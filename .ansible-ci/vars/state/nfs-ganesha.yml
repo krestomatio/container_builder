@@ -3,6 +3,6 @@
 #
 nfs_ganesha_image:
   build: False
-  tag: "0.0.9"
-  repo_digest: "quay.io/krestomatio/nfs-ganesha@sha256:c8c3dba511cb6eb1309864edd50225a62d4f7b48ce45accef90cfff22e63c4c4"
-  artifact_tag: 9b04c3065f92112fda4a6a39f3d3e32e0065e965
+  tag: "0.0.10"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha@sha256:c99320d5b376cf222f79a91eb19720ed6bc7dae694fcf68f5cd6e2a85a61340d"
+  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d

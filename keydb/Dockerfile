@@ -3,9 +3,9 @@ FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=keydb \
-    IMAGE_SUMMARY="KeyDB 6.3.0" \
-    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs KeyDB 6.3.0" \
-    IMAGE_TITLE="KeyDB 6.3.0" \
+    IMAGE_SUMMARY="KeyDB 6.3.1" \
+    IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs KeyDB 6.3.1" \
+    IMAGE_TITLE="KeyDB 6.3.1" \
     IMAGE_SERVICE_PORT="6379" \
     IMAGE_SERVICE_NAME="keydb" \
     TZ="UTC"
@@ -16,8 +16,8 @@ ENV CTR_USER=keydb \
     CTR_CMD="keydb-server /etc/keydb/keydb.conf"
 
 # Component bash variables
-ENV KEYDB_VERSION="6.3.0" \
-    KEYDB_VERSION_PCKG="6.3.0-1" \
+ENV KEYDB_VERSION="6.3.1" \
+    KEYDB_VERSION_PCKG="6.3.1-1" \
     KEYDB_PORT=${IMAGE_SERVICE_PORT} \
     KEYDB_CONF_DIR=/etc/keydb \
     KEYDB_CONF_FILE=/etc/keydb/keydb.conf \

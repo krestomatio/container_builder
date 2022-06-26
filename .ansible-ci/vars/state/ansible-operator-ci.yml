@@ -3,6 +3,6 @@
 #
 ansible_operator_ci_image:
   build: False
-  tag: "0.1.57"
+  tag: "0.2.2"
   repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:764dc56260e6da9b8897799a1c6f8cbf1444cff6e404ec729ed658866ca79812"
   artifact_tag: 4029c60b615399e9055626dab593d84137c9895d

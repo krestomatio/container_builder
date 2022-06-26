@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-rootfs_creator_image:
-  build: False
-  tag: "0.1.47"
-  repo_digest: "quay.io/krestomatio/rootfs-creator@sha256:ad5e7d09654db213446cfebbcf2ddeea851eae7ccce88f0150d91cdb15d00e05"
-  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d

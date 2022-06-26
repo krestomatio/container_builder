@@ -10,7 +10,6 @@ nginx_php-fpm
 nfs-ganesha
 postgres
 pgbouncer
-rootfs-creator
 go-toolset
 node
 graphql-engine-base
@@ -56,7 +55,6 @@ base
 base-stream
 
 [build_step_3]
-rootfs-creator
 ansible
 httpd
 nginx

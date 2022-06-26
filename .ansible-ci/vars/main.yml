@@ -35,7 +35,6 @@ version_image_bump: "{{ next_version_bump }}"
 check_image_version_tag: true
 
 # rocky8-minimal
-rootfs_creator_image: docker-registry.jx.krestomat.io/krestomatio/container_builder/rootfs-creator
 centos8_omit_rootfs_creation: "{{ lookup('env','CENTOS8_OMIT_ROOTFS') | default(false,true) }}"
 centos8_build_rootfs_pull: true
 

@@ -5,7 +5,7 @@ httpd_version: '2.4'
 nginx_version: '1.20'
 postgres_version: '13'
 postgres_prev_version: '10'
-keydb_version_pkg: 6.3.0-1
+keydb_version_pkg: 6.3.1-1
 keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_regex) }}"
 nfs_ganesha_version: '4.0.5'
 node_version: '14'
@@ -52,6 +52,7 @@ external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
 # build vars
 dockerfile_builder: docker
 dockerfile_builder_use_buildx: true
+dockerfile_builder_buildx_multiplatform_cache: false
 dockerfile_builder_platforms:
   - 'linux/amd64'
   - 'linux/arm64'

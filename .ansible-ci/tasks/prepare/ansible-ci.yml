@@ -72,3 +72,18 @@
     - buildx_version is not defined
   set_fact:
     buildx_version: "{{ buildx_version_from_url }}"
+
+- name: set terraform version
+  run_once: true
+  retries: 3
+  delay: 3
+  until: terraform_version_from_url is defined
+  vars:
+    terraform_version_from_url: "{{ lookup('url', terraform_version_url) | regex_search(terraform_version_regex) }}"
+  when:
+    - terraform_version_install | default(false)
+    - terraform_version_url is defined
+    - terraform_version_regex is defined
+    - terraform_version is not defined
+  set_fact:
+    terraform_version: "{{ terraform_version_from_url }}"

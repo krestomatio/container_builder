@@ -1,78 +1,75 @@
 - name: set cache image name
-  when:
-    - cache_registry_path is defined and cache_registry_path
-    - registry_path != cache_registry_path
-  set_fact:
-    cache_image_name: "{{ cache_registry_path }}/{{ ansible_host }}"
-
-- name: tag cache image with sha as container image
-  when:
-    - build_cache_prepull_image_with_sha | default(false)
-    - lookup('vars', state_name + '_image',default=False)
   vars:
-    cache_repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest.split('@')[1] }}"
-    cache_image_with_sha: "{{ cache_image_name + '@' + cache_repo_digest }}"
+    cache_image: "{{ container_image }}"
   block:
-    - name: pull cache image with sha
-      command: "{{ dockerfile_builder }} pull {{ cache_image_with_sha }}"
-      changed_when: "'Status: Image is up to date' not in cache_pull_image_with_sha_task.stdout"
-      register: cache_pull_image_with_sha_task
+    - name: build cache when not buildx
+      when: not dockerfile_builder_use_buildx | default(false)
+      block:
+        - name: add image with digest from state to cache tags
+          when: cache_repo_digest is defined and cache_repo_digest
+          vars:
+            cache_repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest | default(false, true) }}"
+          set_fact:
+            cache_repo_digest: "{{ cache_repo_digest }}"
+            dockerfile_builder_cache_from:
+              "{{ dockerfile_builder_cache_from | default([]) +
+              [cache_repo_digest] }}"
 
-    - name: check if container image name exists
-      command: "{{ dockerfile_builder }} inspect --type=image {{ container_image }}"
-      changed_when: false
-      ignore_errors: true
-      register: cache_image_name_exist
+        - name: set cache images with respective tags (if any)
+          when: item is defined and item
+          loop: "{{ (dockerfile_builder_cache_from_tags |
+            default(dockerfile_builder_tags) | default(['latest'])) }}"
+          set_fact:
+            dockerfile_builder_cache_from:
+              "{{ dockerfile_builder_cache_from | default([]) +
+              [cache_image + ':' + item] }}"
 
-    - name: tag build image
-      when:
-        -  cache_image_name_exist.stderr is defined
-        - "'Error: No such image' in cache_image_name_exist.stderr"
-      command: "{{ dockerfile_builder }} tag {{ cache_image_with_sha }} {{ container_image }}"
+        - name: set cache build args variables
+          when:
+          - dockerfile_builder == 'docker'
+          - dockerfile_builder_cache_from | default(false)
+          block:
+            - name: set inline cache build arg
+              set_fact:
+                dockerfile_builder_args: "{{  dockerfile_builder_args | default({}) | combine({'BUILDKIT_INLINE_CACHE': 1}) }}"
+                dockerfile_builder_buildkit: '1'
 
-- name: set cache images with respective tags (if any)
-  when:
-    - item is defined and item
-  loop: "{{ (dockerfile_builder_cache_from_tags |
-    default(dockerfile_builder_tags) | default(['latest'])) }}"
-  set_fact:
-    dockerfile_builder_cache_from:
-      "{{ dockerfile_builder_cache_from | default([]) +
-      [cache_image_name | default(container_image) +
-      ':' + item] }}"
+        - name: prepull
+          when: build_cache_prepull | default(false) | bool
+          block:
+            - name: prepull cache from image(s)
+              register: build_cache_prepull_task
+              ignore_errors: true
+              changed_when: false
+              shell: |
+                images=( "{{ dockerfile_builder_cache_from | join('" "')}}" )
+                for image in "${images[@]}"
+                do
+                  prepull=`{{ dockerfile_builder }} pull ${image}`
+                  exit_code=$?
+                  if ! [ $exit_code -eq 0 ]
+                  then
+                    echo "${image}...not available"
+                  else
+                    echo "${image}...available"
+                    echo "${prepull}" | grep "^Status"
+                {% if build_cache_first_prepull | default(false) | bool %}
+                    echo "Continue after first successfully prepull image..."
+                    break
+                {% endif %}
+                  fi
+                done
 
-- name: set cache build args variables
-  when: dockerfile_builder == 'docker'
-  set_fact:
-    dockerfile_builder_args: "{{  dockerfile_builder_args | default({}) | combine({'BUILDKIT_INLINE_CACHE': 1}) }}"
-    dockerfile_builder_buildkit: '1'
+            - name: show prepull output
+              when: build_cache_prepull_task.stdout_lines is defined
+              debug:
+                msg: "{{ build_cache_prepull_task.stdout_lines }}"
 
-- name: prepull cache from image(s)
-  when:
-    - build_cache_prepull | default(false) | bool
-  register: build_cache_prepull_task
-  ignore_errors: true
-  changed_when: false
-  shell: |
-    images=( "{{ dockerfile_builder_cache_from | join('" "')}}" )
-    for image in "${images[@]}"
-    do
-      prepull=`{{ dockerfile_builder }} pull ${image}`
-      exit_code=$?
-      if ! [ $exit_code -eq 0 ]
-      then
-        echo "${image}...not available"
-      else
-        echo "${image}...available"
-        echo "${prepull}" | grep "^Status"
-    {% if build_cache_first_prepull | default(false) | bool %}
-        echo "Continue after first successfully prepull image..."
-        break
-    {% endif %}
-      fi
-    done
-
-- name: show prepull output
-  when: build_cache_prepull_task.stdout_lines is defined
-  debug:
-    msg: "{{ build_cache_prepull_task.stdout_lines }}"
+    - name: set buildx --cache-from and --cache-to
+      when: dockerfile_builder_use_buildx | default(false)
+      vars:
+        cache_separate_image_name_tag: "{{ cache_image }}:build-cache"
+      set_fact:
+        dockerfile_builder_cache_from: "{{ [cache_separate_image_name_tag] }}"
+        dockerfile_builder_cache_to: "{{ ['type=' + dockerfile_builder_cache_to_type | default('registry') +
+         ',mode=' + dockerfile_builder_cache_to_mode | default('max') + ',ref=' + cache_separate_image_name_tag] }}"

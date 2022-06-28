@@ -1,12 +1,12 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=docker:20
+ARG ARG_IMAGE_FROM=docker:20-dind
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-docker-ci \
-    IMAGE_SUMMARY="Ansible image based on Docker 20 for Continuous Integration" \
-    IMAGE_DESCRIPTION="Docker 20 based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
-    IMAGE_TITLE="Ansible CI image based on Docker 20"
+    IMAGE_SUMMARY="Ansible image based on Docker 20-dind for Continuous Integration" \
+    IMAGE_DESCRIPTION="Docker 20-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_TITLE="Ansible CI image based on Docker 20-dind"
 
 # Container variables
 ENV ANSIBLE_VERSION="2.9.*" \
@@ -87,4 +87,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,docker,docker20"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,docker,docker20-dind"

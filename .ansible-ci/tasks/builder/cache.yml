@@ -1,6 +1,6 @@
 - name: set cache image name
   vars:
-    cache_image: "{{ container_image }}"
+    cache_image: "{{ build_container_image }}"
   block:
     - name: build cache when not buildx
       when: not dockerfile_builder_use_buildx | default(false)

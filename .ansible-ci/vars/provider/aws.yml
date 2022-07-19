@@ -1,0 +1,11 @@
+project_registry_path: e3i0l4d7
+# project_registry_path: krestomatio-dev
+
+# registry
+build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('public.ecr.aws',true) }}"
+
+# dockerfile_builder
+dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
+dockerfile_builder_use_buildx: "{{ lookup('env','DOCKERFILE_BUILDX') | default(true,true) | bool }}"
+# dockerfile_builder_buildx_multiplatform_cache:
+#   "{{ lookup('env','DOCKERFILE_BUILDX_CACHE') | default(true,true) | bool }}"

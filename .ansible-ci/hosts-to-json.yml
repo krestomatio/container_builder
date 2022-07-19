@@ -1,0 +1,14 @@
+- name: build
+  hosts: "{{ play_containers | default('all') }}"
+  connection: local
+  any_errors_fatal: "{{ play_any_errors_fatal }}"
+  diff: "{{ play_diff | default(omit) }}"
+  vars_files: "vars/ci.yml"
+  run_once: true
+  environment:
+    DOCKER_BUILDKIT: 1
+  tasks:
+    - name: save json with host
+      copy:
+        dest: /tmp/hosts.json
+        content: "{{ ansible_play_hosts_all | to_nice_json }}"

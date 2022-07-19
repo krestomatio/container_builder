@@ -2,7 +2,8 @@
     - not ansible_check_mode
     - ansible_host | regex_search('(centos|rocky)*.*-minimal')
   vars:
-    dockerfile_builder_image: "{{ container_image }}_prepare"
+    dockerfile_builder_image: "{{ container_image }}:build-cache"
+    dockerfile_builder_tags: []
   block:
   - name: build image
     vars:
@@ -18,14 +19,20 @@
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task
     changed_when: false
+    environment: "{{ {'DOCKER_CONTEXT': prepare_distro_release_docker_context}
+      if dockerfile_builder_use_buildx | default(false) and
+      dockerfile_builder_use_buildx | default(false) else {} }}"
     vars:
+      prepare_distro_release_docker_context: "{{ 'multiarch-builder-'
+        + item.split('/')[1] }}"
       prepare_distro_release_image_digest:
         "{{ dockerfile_builder_image_info.manifest.manifests | default([])
           | selectattr('platform.os', 'equalto', item.split('/')[0])
           |  selectattr('platform.architecture', 'equalto', item.split('/')[1])
           | map(attribute='digest') | first }}"
       prepare_distro_release_image: "{{ dockerfile_builder_image }}@{{ prepare_distro_release_image_digest }}"
-    command: "{{ dockerfile_builder }} run --rm {{ prepare_distro_release_image }} rpm -qa"
+    command: "{{ dockerfile_builder }} run --rm
+      {{ prepare_distro_release_image }} rpm -qa"
 
   - name: save new distro release
     set_fact:

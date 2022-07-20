@@ -31,11 +31,8 @@ sed -i.ori \
     -e 's/^protected-mode yes/protected-mode no/g' \
     /etc/keydb/keydb.conf
 
-# check user id match
-if ! grep -q "^${CTR_USER}:x:${CTR_USER_ID}:" /etc/passwd; then
-    echo "CTR_USER_ID does not match"
-    exit 1
-fi
+# persistent user id and group id
+persist-ugid
 
 # In order to drop the root user, make some directories world
 # writeable as OpenShift default security model is to run the container under

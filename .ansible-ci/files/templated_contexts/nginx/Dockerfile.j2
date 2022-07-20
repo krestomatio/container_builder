@@ -12,7 +12,9 @@ ENV IMAGE_NAME=nginx \
 
 # Container variables
 ENV CTR_USER=nginx \
-    CTR_USER_ID="999" \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="Nginx web server" \
+    CTR_HOME=/var/lib/nginx \
     CTR_CMD="nginx" \
     CTR_STOPSIGNAL=SIGQUIT
 

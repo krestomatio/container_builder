@@ -12,7 +12,9 @@ ENV IMAGE_NAME=keydb \
 
 # Container variables
 ENV CTR_USER=keydb \
-    CTR_USER_ID="998" \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="KeyDB Database Server" \
+    CTR_HOME=/var/lib/keydb \
     CTR_CMD="keydb-server /etc/keydb/keydb.conf"
 
 # Component bash variables
@@ -23,7 +25,6 @@ ENV KEYDB_VERSION="{{ keydb_version }}" \
     KEYDB_CONF_FILE=/etc/keydb/keydb.conf \
     KEYDB_DATA="/data" \
     KEYDB_FLASH="/flash"
-
 
 ENV OS_INSTALL_PKGS="initscripts libatomic logrotate"
 

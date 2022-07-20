@@ -39,19 +39,22 @@ generated_path: "{{ generated_dir }}/{{ ctr_name }}"
 # registry
 registry_name: "quay.io"
 registry_project: krestomatio
-registry_path: "{{ registry_name + '/' if registry_name else '' }}{{registry_project}}"
-cache_registry_name: gcr.io
-build_registry_name: gcr.io
+registry_path: "{{ registry_name + '/' if registry_name else '' }}{{ registry_project }}"
+cache_registry_name: "{{ registry_name }}"
+build_registry_name: "{{ registry_name }}"
+build_registry_project: "{{ registry_project }}"
+build_registry_path: "{{ build_registry_name + '/' if build_registry_name else '' }}{{ build_registry_project }}"
 
 # container image
 container_image: "{{ registry_path }}/{{ ctr_name }}"
+build_container_image: "{{ build_registry_path }}/{{ ctr_name }}"
 
 # regex
 external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
 
 # build vars
 dockerfile_builder: docker
-dockerfile_builder_use_buildx: true
+dockerfile_builder_use_buildx: false
 dockerfile_builder_buildx_multiplatform_cache: false
 dockerfile_builder_platforms:
   - 'linux/amd64'
@@ -80,7 +83,8 @@ dockerfile_builder_arg_image_from: |-
   {%- else -%}
   {{ false }}
   {%- endif -%}
-dockerfile_builder_image: "{{ container_image }}"
+dockerfile_builder_image: "{{ build_container_image if build_pipeline | default(false)
+  else container_image }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true

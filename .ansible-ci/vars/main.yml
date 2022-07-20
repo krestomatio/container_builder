@@ -1,6 +1,5 @@
 repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
 repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
-project_registry_path: "{{ repo_owner+'/'+repo_name }}"
 build_cache: "{{ not dockerfile_builder_buildx_multiplatform_cache | default(false) }}"
 build_cache_prepull: "{{ false if dockerfile_builder_use_buildx else true }}"
 build_cache_first_prepull: true
@@ -14,12 +13,17 @@ container_builder_image_tag_from: "{{ lookup('env','BUILD_IMAGE_TAG_FROM') | def
 
 # registry
 build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
+build_project_registry_path: "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default(repo_owner+'/'+repo_name,true) }}"
+build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + build_project_registry_path,true) }}"
 cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(build_registry_name,true) }}"
-cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_registry_name + '/' + project_registry_path,true) }}"
-build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + project_registry_path,true) }}"
+cache_project_registry_path: "{{ lookup('env','CACHE_PROJECT_REGISTRY_PATH') | default(project_registry_path,true) }}"
+cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_registry_name + '/' + cache_project_registry_path,true) }}"
 
 # dockerfile_builder
 dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
+dockerfile_builder_use_buildx: "{{ lookup('env','DOCKERFILE_BUILDX') | default(false,true) | bool }}"
+dockerfile_builder_buildx_multiplatform_cache:
+  "{{ lookup('env','DOCKERFILE_BUILDX_CACHE') | default(false,true) | bool }}"
 dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"
 dockerfile_builder_username: "{{ lookup('env','REGISTRY_USERNAME') | default('',true) }}"
 dockerfile_builder_password: "{{ lookup('env','REGISTRY_PASSWORD') | default('',true) }}"
@@ -42,7 +46,9 @@ centos8_build_rootfs_pull: true
 docker_start_daemon: false
 docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
-docker_config_arm64_emulation: "{{ true if 'linux/arm64' in dockerfile_builder_platforms | default([]) else false }}"
+docker_config_arm64_emulation: "{{ true if 'linux/arm64' in dockerfile_builder_platforms | default([])
+  and not (dockerfile_builder_use_buildx | default(false) and dockerfile_builder_use_buildx
+  | default(false)) else false }}"
 
 # podman
 podman_conf_dir: "/etc/containers"

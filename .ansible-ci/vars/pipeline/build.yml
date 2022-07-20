@@ -1,5 +1,3 @@
-registry_name: "{{ build_registry_name }}"
-registry_path: "{{ build_registry_path }}"
 dockerfile_builder_arg_image_from_registry_path: "{{ build_registry_path }}"
 version_include_fallback_tags: true
 pr_commit_tag:
@@ -14,3 +12,4 @@ assertion_artifact_tag: true
 artifact_generated_context_task: upload
 artifact_generated_context_path: "{{ generated_dir }}/*/"
 artifact_state_task: upload
+build_pipeline: true

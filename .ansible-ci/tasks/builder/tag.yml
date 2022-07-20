@@ -10,7 +10,7 @@
       echo "TAGGING: '$1'"
       for tag in "${tags[@]}"
       do
-        {{ dockerfile_builder }} tag {{ container_image }} $1:${tag}
+        {{ dockerfile_builder }} tag {{ build_container_image }} $1:${tag}
         exit_code=$?
         if ! [ $exit_code -eq 0 ]
         then
@@ -20,8 +20,8 @@
         fi
       done
     }
-    add_tags {{ container_image }}
-    {% if tag_alternative_image_name is defined and tag_alternative_image_name and tag_alternative_image_name != container_image %}
+    add_tags {{ build_container_image }}
+    {% if tag_alternative_image_name is defined and tag_alternative_image_name and tag_alternative_image_name != build_container_image %}
     add_tags {{ tag_alternative_image_name }}
     {% endif %}
 

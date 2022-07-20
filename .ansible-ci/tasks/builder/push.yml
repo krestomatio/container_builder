@@ -1,5 +1,5 @@
 - vars:
-    push_image_name: "{{ container_image }}"
+    push_image_name: "{{ build_container_image }}"
   block:
   - name: push image and its tags
     command: "{{ dockerfile_builder }} push {{ push_image_name }}"
@@ -8,7 +8,7 @@
 
   - name: get push image info
     docker_image_info:
-      name: "{{ container_image }}"
+      name: "{{ build_container_image }}"
     register: push_image_status
 
   - name: state image repo digest fact

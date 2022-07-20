@@ -12,8 +12,9 @@ ENV IMAGE_NAME=pgbouncer \
 
 # Container variables
 ENV CTR_USER=pgbouncer \
-    CTR_USER_ID="998" \
-    CTR_HOME=/opt/pgbouncer/ \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="PgBouncer Server" \
+    CTR_HOME=/opt/pgbouncer \
     CTR_CMD="pgbouncer /etc/pgbouncer/pgbouncer.ini" \
     CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
     CTR_STOPSIGNAL=SIGINT

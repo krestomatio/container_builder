@@ -8,5 +8,6 @@ play_any_errors_fatal: "{{ lookup('env','PLAY_ANY_ERRORS_FATAL') | default(true,
 # provider
 cloud_provider: "{{ lookup('env','CLOUD_PROVIDER') | default('none',true) }}"
 cloud_providers:
-  - gke
+  - aws
+  - gcp
   - m6e

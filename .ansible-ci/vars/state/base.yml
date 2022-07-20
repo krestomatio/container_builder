@@ -3,6 +3,6 @@
 #
 base_image:
   build: False
-  tag: "0.2.2"
+  tag: "0.2.3"
   repo_digest: "quay.io/krestomatio/base@sha256:1792e80045d7b8f5b2f596ab43d6876510529a6c1031efc7e871d17fcaac9595"
   artifact_tag: 4029c60b615399e9055626dab593d84137c9895d

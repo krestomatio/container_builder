@@ -17,13 +17,13 @@
     - name: inspect src image
       changed_when: false
       register: skopeo_src_image_inspect
-      command: "skopeo inspect {{ skopeo_copy_src_image }}"
+      command: "skopeo inspect {{ '-n' if skopeo_no_tags | default(false) else '' }} {{ skopeo_copy_src_image }}"
 
     - name: inspect dest image
       ignore_errors: true
       changed_when: false
       register: skopeo_dest_image_inspect
-      command: "skopeo inspect {{ skopeo_copy_dest_image }}"
+      command: "skopeo inspect {{ '-n' if skopeo_no_tags | default(false) else '' }} {{ skopeo_copy_dest_image }}"
 
     - name: copy src to dest image
       when:

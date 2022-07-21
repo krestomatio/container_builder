@@ -58,10 +58,12 @@ echo 'LANG="C.utf8"' >  ${ROOTFS_INSTALL_DIR}/etc/locale.conf
 echo 'container' > ${ROOTFS_INSTALL_DIR}/etc/dnf/vars/infra
 rm -f ${ROOTFS_INSTALL_DIR}/etc/machine-id
 touch ${ROOTFS_INSTALL_DIR}/etc/machine-id
+chmod 0444 ${ROOTFS_INSTALL_DIR}/etc/machine-id
 ## extra removal stuff
 if [ ! -z ${ROOTFS_EXTRA_REMOVAL} ] && [ "${ROOTFS_EXTRA_REMOVAL,,}" != "false" ]; then
-    ## remove some random help txt files
+    ## remove some random things
     rm -fv ${ROOTFS_INSTALL_DIR}/usr/share/gnupg/help*.txt
+    rm -fv ${ROOTFS_INSTALL_DIR}/usr/lib/rpm/rpm.daily
     ## don't need icons
     rm -rfv ${ROOTFS_INSTALL_DIR}/usr/share/icons/*
     ## remove systemd

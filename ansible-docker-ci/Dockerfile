@@ -35,7 +35,7 @@ RUN echo "Build tools..."  && \
     echo 'localhost' > /etc/ansible/hosts
 
 RUN echo "Installing other tools..."  && \
-    $CTR_APK bash xz gzip tar git git-lfs rsync jq sudo sshpass openssh-client skopeo curl coreutils && \
+    $CTR_APK bash xz gzip tar git git-lfs rsync jq sudo sshpass openssh-client skopeo curl coreutils procps ncurses && \
     echo "Cleaning..."  && \
     rm -rf /var/cache/apk/* && \
     rm -rf /tmp/* && \
@@ -44,7 +44,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="0.12.0"
+ENV ORAS_VERSION="0.13.0"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -53,7 +53,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     cd /
 
-ENV PUSHRM_VERSION="1.8.1"
+ENV PUSHRM_VERSION="1.9.0"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
@@ -64,7 +64,7 @@ RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.2.3"
+ENV TERRAFORM_VERSION="1.2.5"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \

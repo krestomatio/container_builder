@@ -12,7 +12,9 @@ ENV IMAGE_NAME=nginx \
 
 # Container variables
 ENV CTR_USER=nginx \
-    CTR_USER_ID="999" \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="Nginx web server" \
+    CTR_HOME=/var/lib/nginx \
     CTR_CMD="nginx" \
     CTR_STOPSIGNAL=SIGQUIT
 
@@ -58,7 +60,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.1" \
+      org.opencontainers.image.version="0.2" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

@@ -3,6 +3,6 @@
 #
 moodle_bundle_image:
   build: False
-  tag: "3.9.14"
-  repo_digest: "quay.io/krestomatio/moodle_bundle@sha256:16d4c8f63c7600c7fc24bb1b745a1e546dfb708bab5669224187efd09ff28652"
-  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d
+  tag: "3.9.15"
+  repo_digest: "quay.io/krestomatio/moodle_bundle@sha256:fca05d38fe3eae5a57c717be6436284805b938cdf71f97fdb3d6180363d6b64e"
+  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4

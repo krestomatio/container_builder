@@ -21,7 +21,7 @@ RUN echo "Installing podman..."  && \
 
 COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
 
-ENV ORAS_VERSION="0.12.0"
+ENV ORAS_VERSION="0.13.0"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     pushd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -30,7 +30,7 @@ RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     rm -rf /tmp/* && \
     popd
 
-ENV PUSHRM_VERSION="1.8.1"
+ENV PUSHRM_VERSION="1.9.0"
 RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm

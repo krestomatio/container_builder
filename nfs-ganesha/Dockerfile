@@ -8,7 +8,7 @@ RUN install-pkgs epel-release
 
 # Container variables
 ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs --enablerepo=powertools --enablerepo=epel -y" \
-    CTR_USER_ID="998"
+    CTR_USER_ID="1001"
 
 # Component bash variables
 ENV NFS_GANESHA_EXPORT_DIR=/export
@@ -38,6 +38,7 @@ RUN install-pkgs \
         graphviz \
         doxygen \
         redhat-lsb-core
+
 
 ENV NFS_GANESHA_VERSION="4.0.5" \
     DESTDIR=/build
@@ -99,7 +100,8 @@ ENV IMAGE_NAME=nfs-ganesha \
 
 # Container variables
 ENV CTR_USER=ganesha \
-    CTR_USER_ID="998" \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="NFS Ganesha Server" \
     CTR_HOME=/usr/local/var/run/ganesha \
     CTR_CMD="ganesha.nfsd"
 
@@ -153,7 +155,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.0" \
+      org.opencontainers.image.version="0.2" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

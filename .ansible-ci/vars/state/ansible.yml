@@ -4,5 +4,5 @@
 ansible_image:
   build: False
   tag: "0.2.3"
-  repo_digest: "quay.io/krestomatio/ansible@sha256:0a5b34483683b99e39848b0216e6d6bf77744609b86365a67ce9dacbb82b4104"
-  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d
+  repo_digest: "quay.io/krestomatio/ansible@sha256:46261a7d7a50f09b0eaeeb8e4207411190d94930ee8e56c20936d893fe0db377"
+  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4

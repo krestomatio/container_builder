@@ -2,7 +2,7 @@ This is a CentOS Stream Minimal Image, similar to Fedora-minimal or UBI.
 
 ## How image is built?
 ```bash
-docker build . -t "docker-registry.jx.krestomat.io/krestomatio/container_builder/centos8-stream-minimal"
+docker build . -t "quay.io/krestomatio/centos8-stream-minimal"
 ```
 
 ## Repository

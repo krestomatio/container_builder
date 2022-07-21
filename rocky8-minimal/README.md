@@ -2,7 +2,7 @@ This is a Rocky Linux Minimal Image, similar to Fedora-minimal or UBI.
 
 ## How image is built?
 ```bash
-docker build . -t "docker-registry.jx.krestomat.io/krestomatio/container_builder/rocky8-minimal"
+docker build . -t "quay.io/krestomatio/rocky8-minimal"
 ```
 
 ## Repository

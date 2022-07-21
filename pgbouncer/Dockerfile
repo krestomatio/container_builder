@@ -12,8 +12,9 @@ ENV IMAGE_NAME=pgbouncer \
 
 # Container variables
 ENV CTR_USER=pgbouncer \
-    CTR_USER_ID="998" \
-    CTR_HOME=/opt/pgbouncer/ \
+    CTR_USER_ID="1001" \
+    CTR_USER_GECOS="PgBouncer Server" \
+    CTR_HOME=/opt/pgbouncer \
     CTR_CMD="pgbouncer /etc/pgbouncer/pgbouncer.ini" \
     CTR_SCRIPTS_PATH=/usr/share/container-scripts/postgresql \
     CTR_STOPSIGNAL=SIGINT
@@ -66,7 +67,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.0" \
+      org.opencontainers.image.version="0.2" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

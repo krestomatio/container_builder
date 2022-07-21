@@ -4,5 +4,5 @@
 base_stream_image:
   build: False
   tag: "0.2.3"
-  repo_digest: "quay.io/krestomatio/base-stream@sha256:41569face96be4ca7fc02ac5816de5b310fadc7f61c195231a09afb9a52f3a71"
-  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d
+  repo_digest: "quay.io/krestomatio/base-stream@sha256:466e936790cdf2e22f4090b6b4a55627199bdf23b37adebb3da524e4b7ed3520"
+  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4

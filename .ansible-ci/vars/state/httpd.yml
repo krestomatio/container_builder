@@ -4,5 +4,5 @@
 httpd_image:
   build: False
   tag: "0.2.3"
-  repo_digest: "quay.io/krestomatio/httpd@sha256:bbb003663ce91671c721c8cc2023dc4d73072fc9e8e2f8383f2f1620d5bc8b23"
-  artifact_tag: 4029c60b615399e9055626dab593d84137c9895d
+  repo_digest: "quay.io/krestomatio/httpd@sha256:102cb143630f850701e6b76ad780981ca60f7d33ac1234a365d81ab8a58662f3"
+  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4

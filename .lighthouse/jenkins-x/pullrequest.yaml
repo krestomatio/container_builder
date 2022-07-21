@@ -19,8 +19,6 @@ spec:
                 value: "/shared/$(params.REPO_OWNER)/$(params.REPO_NAME)/$(params.JOB_NAME)/$(params.PULL_NUMBER)/multiarch-builder"
               - name: TF_VAR_prefix_name
                 value: "$(params.REPO_OWNER)-$(params.REPO_NAME)-$(params.JOB_NAME)-$(params.PULL_NUMBER)"
-              - name: CLOUD_PROVIDER
-                value: aws
             resources:
               limits:
                 cpu: 1000m

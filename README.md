@@ -40,7 +40,7 @@ ansible-playbook .ansible-ci/build.yml
 
 ### Requirements
 * Ansible >= 2.9
-* docker or podman
+* docker
 * python docker
 * [buildx](https://github.com/docker/buildx)
 * see [requirements.txt](.ansible-ci/requirements.txt)

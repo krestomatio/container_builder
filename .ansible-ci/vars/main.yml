@@ -12,8 +12,8 @@ next_version_bump: "{{ lookup('env','NEXT_VERSION_BUMP') | default('patch',true)
 container_builder_image_tag_from: "{{ lookup('env','BUILD_IMAGE_TAG_FROM') | default(false,true) }}"
 
 # registry
-build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
-build_project_registry_path: "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default(repo_owner+'/'+repo_name,true) }}"
+build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('public.ecr.aws',true) }}"
+build_project_registry_path: "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default('e3i0l4d7',true) }}"
 build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + build_project_registry_path,true) }}"
 cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(build_registry_name,true) }}"
 cache_project_registry_path: "{{ lookup('env','CACHE_PROJECT_REGISTRY_PATH') | default(project_registry_path,true) }}"
@@ -21,7 +21,7 @@ cache_registry_path: "{{ lookup('env','CACHE_REGISTRY_PATH') | default(cache_reg
 
 # dockerfile_builder
 dockerfile_builder: "{{ lookup('env','DOCKERFILE_BUILDER') | default('docker',true) }}"
-dockerfile_builder_use_buildx: "{{ lookup('env','DOCKERFILE_BUILDX') | default(false,true) | bool }}"
+dockerfile_builder_use_buildx: "{{ lookup('env','DOCKERFILE_BUILDX') | default(true,true) | bool }}"
 dockerfile_builder_buildx_multiplatform_cache:
   "{{ lookup('env','DOCKERFILE_BUILDX_CACHE') | default(false,true) | bool }}"
 dockerfile_builder_validate_certs: "{{ lookup('env','VALIDATE_CERTS') | default(true,true) }}"

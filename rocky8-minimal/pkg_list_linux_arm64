@@ -1,6 +1,6 @@
 audit-libs-3.0.7-2.el8.2.aarch64
 basesystem-11-5.el8.noarch
-bash-4.4.20-3.el8.aarch64
+bash-4.4.20-4.el8_6.aarch64
 brotli-1.0.6-3.el8.aarch64
 bzip2-libs-1.0.6-26.el8.aarch64
 ca-certificates-2021.2.50-80.0.el8_4.noarch
@@ -38,7 +38,7 @@ libcom_err-1.45.6-4.el8.aarch64
 libcurl-7.61.1-22.el8_6.3.aarch64
 libdb-5.3.28-42.el8_4.aarch64
 libdb-utils-5.3.28-42.el8_4.aarch64
-libdnf-0.63.0-8.el8.aarch64
+libdnf-0.63.0-8.1.el8_6.aarch64
 libffi-3.1-23.el8.aarch64
 libgcc-8.5.0-10.1.el8_6.aarch64
 libgcrypt-1.8.5-7.el8_6.aarch64
@@ -77,11 +77,11 @@ ncurses-libs-6.1-9.20180224.el8.aarch64
 nettle-3.4.1-7.el8.aarch64
 npth-1.5-4.el8.aarch64
 openldap-2.4.46-18.el8.aarch64
-openssl-libs-1.1.1k-6.el8_5.aarch64
+openssl-libs-1.1.1k-7.el8_6.aarch64
 p11-kit-0.23.22-1.el8.aarch64
 p11-kit-trust-0.23.22-1.el8.aarch64
 pcre-8.42-6.el8.aarch64
-pcre2-10.32-2.el8.aarch64
+pcre2-10.32-3.el8_6.aarch64
 popt-1.18-1.el8.aarch64
 publicsuffix-list-dafsa-20180723-1.el8.noarch
 readline-7.0-10.el8.aarch64
@@ -94,7 +94,7 @@ rpm-libs-4.14.3-23.el8.aarch64
 sed-4.5-5.el8.aarch64
 setup-2.12.2-6.el8.noarch
 sqlite-libs-3.26.0-15.el8.aarch64
-systemd-libs-239-58.el8.aarch64
+systemd-libs-239-58.el8_6.3.aarch64
 tzdata-2022a-1.el8.noarch
 xz-libs-5.2.4-4.el8_6.aarch64
 zlib-1.2.11-18.el8_5.aarch64

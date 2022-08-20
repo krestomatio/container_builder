@@ -40,7 +40,7 @@ RUN install-pkgs \
         redhat-lsb-core
 
 
-ENV NFS_GANESHA_VERSION="4.0.5" \
+ENV NFS_GANESHA_VERSION="4.0.7" \
     DESTDIR=/build
 
 # invalidate cache if new version
@@ -91,9 +91,9 @@ FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=nfs-ganesha \
-    IMAGE_SUMMARY="NFSv4 Ganesha server 4.0.5" \
+    IMAGE_SUMMARY="NFSv4 Ganesha server 4.0.7" \
     IMAGE_DESCRIPTION="This CentOS 8 Stream minimal based container image runs a NFSv4 Ganesha server." \
-    IMAGE_TITLE="NFSv4 Ganesha server 4.0.5" \
+    IMAGE_TITLE="NFSv4 Ganesha server 4.0.7" \
     IMAGE_SERVICE_PORT="2049" \
     IMAGE_SERVICE_NAME="nfs" \
     TZ="UTC"
@@ -108,7 +108,7 @@ ENV CTR_USER=ganesha \
 # Component bash variables
 ENV DBUS_RUN_DIR=/var/run/dbus \
     DBUS_RUN_WAIT=false \
-    NFS_GANESHA_VERSION="4.0.5" \
+    NFS_GANESHA_VERSION="4.0.7" \
     NFS_GANESHA_PORT=${IMAGE_SERVICE_PORT} \
     NFS_GANESHA_RQUOTA_PORT=875 \
     NFS_GANESHA_CONF_FILE=/usr/local/etc/ganesha/ganesha.conf \

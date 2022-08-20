@@ -1,0 +1,8 @@
+#
+# Ansible managed
+#
+centos9_stream_minimal_image:
+  build: False
+  tag: "0.0.2"
+  repo_digest: "quay.io/krestomatio/centos9-stream-minimal@sha256:73960440f29f3b7ab330f3873ca27fc3689dcff4cd52160caab7778a55ad7d62"
+  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

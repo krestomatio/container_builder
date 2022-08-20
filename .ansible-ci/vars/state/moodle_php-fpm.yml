@@ -3,6 +3,6 @@
 #
 moodle_php_fpm_image:
   build: False
-  tag: "0.2.3"
-  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:ce99b40c4e4ba959136b7ecbad57206d60905097fba54e7b7f2dfb74a5c32270"
-  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4
+  tag: "0.2.4"
+  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:535c8004c73576a1892974bc993153eec975efda011d02000213c410cb68ada7"
+  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

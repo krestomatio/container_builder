@@ -3,6 +3,6 @@
 #
 pgbouncer_image:
   build: False
-  tag: "0.2.3"
-  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:ad3c7aae600558bcab983ac53383e74074e399f219fcb286e0bcbd471a563e59"
-  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4
+  tag: "0.2.4"
+  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:064660ead62fc5be23a7f3c233571b4730dfa13972abc6e869d1f29178d53303"
+  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

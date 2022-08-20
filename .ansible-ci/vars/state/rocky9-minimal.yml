@@ -1,0 +1,8 @@
+#
+# Ansible managed
+#
+rocky9_minimal_image:
+  build: False
+  tag: "0.0.2"
+  repo_digest: "quay.io/krestomatio/rocky9-minimal@sha256:294ab1e1a28ddf43e61c7fa78181da92686d4eaca0a7e4b82de2831ffdcf18d6"
+  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

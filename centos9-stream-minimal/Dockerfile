@@ -4,15 +4,15 @@ FROM ${ROOTFS_IMAGE_BASE} as builder
 
 ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 ARG ARG_ROOTFS_EXTRA_REMOVAL='True'
-ARG ARG_ROOTFS_REPO_CONTENTDIR='rocky'
-ARG ARG_ROOTFS_REPO_RELEASEVER='8'
-ARG ARG_ROOTFS_REPO_BASEOS_NAME='Rocky Linux $releasever - BaseOS'
-ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST='https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever'
-ARG ARG_ROOTFS_REPO_BASEOS_METALINK=''
-ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-Rocky-8'
-ARG ARG_ROOTFS_DNF_VARS='contentdir=rocky stream=8-stream infra=container'
+ARG ARG_ROOTFS_REPO_CONTENTDIR='centos'
+ARG ARG_ROOTFS_REPO_RELEASEVER='9'
+ARG ARG_ROOTFS_REPO_BASEOS_NAME='CentOS Stream $releasever - BaseOS'
+ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST=''
+ARG ARG_ROOTFS_REPO_BASEOS_METALINK='https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http'
+ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official'
+ARG ARG_ROOTFS_DNF_VARS='contentdir=centos stream=9-stream infra=container'
 ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles'
-ARG ARG_ROOTFS_RELEASE_PKG='rocky-release'
+ARG ARG_ROOTFS_RELEASE_PKG='centos-stream-release'
 
 ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
     ROOTFS_EXTRA_REMOVAL="${ARG_ROOTFS_EXTRA_REMOVAL}" \
@@ -38,6 +38,6 @@ ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 # Labels
-LABEL org.opencontainers.image.title="Rocky Linux Minimal Image"
+LABEL org.opencontainers.image.title="CentOS Stream Minimal Image"
 
 CMD ["/bin/bash"]

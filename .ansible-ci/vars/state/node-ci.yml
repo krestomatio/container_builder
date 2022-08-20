@@ -4,5 +4,5 @@
 node_ci_image:
   build: False
   tag: "14"
-  repo_digest: "quay.io/krestomatio/node-ci@sha256:e57613bef5be9315b55e3c0d7ab69fad788ff2f517e43135a51de01a9a4d7285"
-  artifact_tag: c793f195f72eb88ec37ffdbe23d365cb2c0da5f4
+  repo_digest: "quay.io/krestomatio/node-ci@sha256:f1377ca1fd886c1624202a6aac47bde9d3a85fc180f9a7a303f16a5ea8e31a8f"
+  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

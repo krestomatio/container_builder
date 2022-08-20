@@ -1,0 +1,3 @@
+# rootfs
+rootfs_repo_releasever: 9
+rootfs_repo_baseos_gpgkey: 'https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-Rocky-9'

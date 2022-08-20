@@ -15,6 +15,8 @@ enabled=1
 countme=1
 gpgkey=${ROOTFS_REPO_BASEOS_GPGKEY}
 _EOF
+## use metalink over mirrorlist, if set
+[ -z "${ROOTFS_REPO_BASEOS_METALINK}" ] || sed -i "s@^mirrorlist=.*@metalink=${ROOTFS_REPO_BASEOS_METALINK//&/\\&}@" /tmp_dnf/repos/baseos.repo
 for repo_var in $(echo ${ROOTFS_DNF_VARS})
 do
     echo "${repo_var##*=}" > "/tmp_dnf/vars/${repo_var%%=*}"
@@ -58,10 +60,12 @@ echo 'LANG="C.utf8"' >  ${ROOTFS_INSTALL_DIR}/etc/locale.conf
 echo 'container' > ${ROOTFS_INSTALL_DIR}/etc/dnf/vars/infra
 rm -f ${ROOTFS_INSTALL_DIR}/etc/machine-id
 touch ${ROOTFS_INSTALL_DIR}/etc/machine-id
+chmod 0444 ${ROOTFS_INSTALL_DIR}/etc/machine-id
 ## extra removal stuff
 if [ ! -z ${ROOTFS_EXTRA_REMOVAL} ] && [ "${ROOTFS_EXTRA_REMOVAL,,}" != "false" ]; then
-    ## remove some random help txt files
+    ## remove some random things
     rm -fv ${ROOTFS_INSTALL_DIR}/usr/share/gnupg/help*.txt
+    rm -fv ${ROOTFS_INSTALL_DIR}/usr/lib/rpm/rpm.daily
     ## don't need icons
     rm -rfv ${ROOTFS_INSTALL_DIR}/usr/share/icons/*
     ## remove systemd

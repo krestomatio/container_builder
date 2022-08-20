@@ -1,6 +1,8 @@
 [platform]
 centos8-stream-minimal
 rocky8-minimal
+centos9-stream-minimal
+rocky9-minimal
 base
 base-stream
 httpd
@@ -18,6 +20,16 @@ keydb
 [minimal]
 centos8-stream-minimal
 rocky8-minimal
+centos9-stream-minimal
+rocky9-minimal
+
+[centos_minimal]
+centos8-stream-minimal
+centos9-stream-minimal
+
+[rocky_minimal]
+rocky8-minimal
+rocky9-minimal
 
 [rootfs:children]
 minimal
@@ -46,9 +58,8 @@ graphql-engine-build
 node
 node-ci
 
-[build_step_1]
-centos8-stream-minimal
-rocky8-minimal
+[build_step_1:children]
+minimal
 
 [build_step_2]
 base

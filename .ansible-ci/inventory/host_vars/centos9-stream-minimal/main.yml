@@ -1,0 +1,4 @@
+# rootfs
+rootfs_repo_releasever: 9
+rootfs_repo_baseos_mirrorlist: ''
+rootfs_repo_baseos_metalink: 'https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http'

@@ -17,6 +17,7 @@
     command: "{{ dockerfile_builder }} run --privileged --rm tonistiigi/binfmt --install arm64"
 
   - name: get distro-release for multi arch manifests
+    when: dockerfile_builder_image_info is defined
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task
     changed_when: false
@@ -37,6 +38,7 @@
       {{ prepare_distro_release_image }} rpm -qa"
 
   - name: save new distro release
+    when: (prepare_distro_release_task.results | selectattr('item', 'equalto', 'linux/amd64')).stdout_lines is defined
     set_fact:
       centos_distro_release: "{{ prepare_distro_release_task.results | selectattr('item', 'equalto', 'linux/amd64')
         | map(attribute='stdout_lines') | first | map('regex_search',distro_version_regex)
@@ -53,6 +55,7 @@
         default(centos_distro_release.split('.')[2]) | default(false) }}"
 
   - name: store pkg-list
+    when: item is not skipped
     loop: "{{ prepare_distro_release_task.results }}"
     no_log: true
     register: prepare_store_pkg_list_task

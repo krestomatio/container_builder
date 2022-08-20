@@ -88,6 +88,7 @@ dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
 dockerfile_builder_pull: "{{ true if dockerfile_builder_use_buildx else false }}"
+dockerfile_builder_throttle: 4
 
 # doc
 doc_generate_project_readme: true

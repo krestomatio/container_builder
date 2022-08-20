@@ -28,8 +28,6 @@ spec:
             - image: quay.io/krestomatio/ansible-docker-ci
               name: release
               env:
-              - name: CLOUD_PROVIDER
-                value: m6e
               - name: APIKEY__QUAY_IO
                 valueFrom:
                   secretKeyRef:

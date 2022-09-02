@@ -63,5 +63,5 @@ spec:
         - |
           nfs_ganesha_image='{{ hostvars['nfs-ganesha'].state_yml_repo_digest }}'
           sed -i \
-            "s#^server_image:.*#server_image: ${nfs_ganesha_image//@/\\@}#" \
-            roles/v1alpha1/nfs/server/defaults/main/server.yml
+            "s#^ganesha_image:.*#ganesha_image: ${nfs_ganesha_image//@/\\@}#" \
+            roles/v1alpha1/nfs/ganesha/defaults/main/ganesha.yml

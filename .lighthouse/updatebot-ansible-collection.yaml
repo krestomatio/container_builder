@@ -14,7 +14,7 @@ spec:
           moodle_image='quay.io/krestomatio/moodle@sha256:186f3e2a06d8f7d37517a570ba2afeeb40ef71867d0904791c45bedc39230eff'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
-            roles/v1alpha1/m4e/m4e/defaults/main/moodle.yml
+            roles/v1alpha1/m4e/moodle/defaults/main/moodle.yml
     - command:
         # update Postgres image and its tag
         name: bash

@@ -20,6 +20,7 @@ OPTIONS (check moodle nginx container):
   -m            check if moodledata is writable
   -l            check liveness (-u)
   -r            check readiness (-u -m)
+  -t            check tcp port of php-fpm host
 
 EXAMPLES:
     check-container -u
@@ -50,6 +51,20 @@ check_url() {
     fi
 }
 
+check_php_fpm_host() {
+    # check php-fpm host
+    # check php-fpm host is not local and using unix socket
+    if [[ ${PHP_FPM_LISTEN+x} != /* ]]; then
+        timeout ${PHP_FPM_CHECK_PORT_TIMEOUT:-3} bash -c "cat < /dev/null > /dev/tcp/${PHP_FPM_HOST:-127.0.0.1}/${PHP_FPM_PORT}"
+        if [ $? -ne 0 ]; then
+            echo "$0: CHECK: timeout checking tcp port '${PHP_FPM_HOST}:${PHP_FPM_PORT}'"
+            exit 1
+        fi
+    else
+        echo "$0: CHECK: php-fpm is using unix socket"
+    fi
+}
+
 while getopts ":mulr" opt; do
   case ${opt} in
     m )
@@ -64,6 +79,9 @@ while getopts ":mulr" opt; do
         ;;
     r )
         check_url
+        ;;
+    t )
+        check_php_fpm_host
         ;;
     \? )
         usage

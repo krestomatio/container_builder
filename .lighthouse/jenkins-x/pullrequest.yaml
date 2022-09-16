@@ -32,7 +32,6 @@ spec:
                 mountPath: /shared
           steps:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
-            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/multiarch-builder/ecr-public-login.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/multiarch-builder/deploy.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
             - image: quay.io/krestomatio/ansible-docker-ci:0.2.3
               name: build-containers

@@ -3,8 +3,10 @@ centos8-stream-minimal
 rocky8-minimal
 centos9-stream-minimal
 rocky9-minimal
-base
-base-stream
+base8
+base8-stream
+base9
+base9-stream
 httpd
 nginx
 php-fpm
@@ -30,6 +32,12 @@ centos9-stream-minimal
 [rocky_minimal]
 rocky8-minimal
 rocky9-minimal
+
+[base]
+base8
+base8-stream
+base9
+base9-stream
 
 [rootfs:children]
 minimal
@@ -61,9 +69,8 @@ node-ci
 [build_step_1:children]
 minimal
 
-[build_step_2]
+[build_step_2:children]
 base
-base-stream
 
 [build_step_3]
 ansible

@@ -6,6 +6,3 @@
 container_builder_image_from: centos8-stream-minimal
 dockerfile_builder_image_based: CentOS 8 Stream minimal
 dockerfile_builder_image_ocp_tags: centos,centos8-stream
-
-# source dir
-template_path: "{{ template_dir }}/base"

@@ -1,0 +1,8 @@
+# image
+# dockerfile_builder_image_from: "registry.access.redhat.com/ubi8/ubi-minimal"
+# dockerfile_builder_image_based: UBI 8 minimal
+# dockerfile_builder_image_ocp_tags: ubi,ubi8
+
+container_builder_image_from: centos9-stream-minimal
+dockerfile_builder_image_based: CentOS 9 Stream minimal
+dockerfile_builder_image_ocp_tags: centos,centos9-stream

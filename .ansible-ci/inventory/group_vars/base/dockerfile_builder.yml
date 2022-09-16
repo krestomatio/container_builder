@@ -1,0 +1,2 @@
+# source dir
+template_path: "{{ template_dir }}/base"

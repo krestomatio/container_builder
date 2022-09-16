@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-base_image:
-  build: False
-  tag: "0.2.4"
-  repo_digest: "quay.io/krestomatio/base@sha256:f39d3ff6e45a36152ddf478e804b38fb9ca9868cee514549f2a7d5fbb782db31"
-  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0

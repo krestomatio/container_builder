@@ -1,3 +1,4 @@
 # rootfs
 rootfs_repo_releasever: 8
+rootfs_image_base: quay.io/fedora/fedora-minimal:32
 rootfs_repo_baseos_gpgkey: 'https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-Rocky-8'

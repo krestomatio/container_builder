@@ -1,7 +1,7 @@
 - name: load image state
   include_tasks: tasks/state/load.yml
 
-- name: save m4e updatebot file
+- name: save moodle updatebot file
   run_once: true
   when:
     - "'moodle' in ansible_play_hosts_all or 'postgres' in ansible_play_hosts_all"

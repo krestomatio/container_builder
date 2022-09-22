@@ -1,4 +1,4 @@
-container_builder_image_from: base-stream
+container_builder_image_from: base8-stream
 dockerfile_builder_image_ocp_tags:
   "ansible,ansible{{ image_ansible_version.split('.')[0] + '.' + image_ansible_version.split('.')[0] }}"
 dockerfile_builder_image_pip_extra: yamllint ansible-lint flake8 pycrypto git-semver openshift

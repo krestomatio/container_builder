@@ -1,3 +1,2 @@
 # image
 container_builder_image_from: php-fpm
-dockerfile_builder_image_name: "{{ ctr_name }}"

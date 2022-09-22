@@ -12,40 +12,49 @@
       name: dockerfile_builder
 
   - name: enable arm64 emulation
-    when: "{{ docker_config_arm64_emulation | default(false) }}"
+    when: docker_config_arm64_emulation | default(false) | bool
     run_once: true
     command: "{{ dockerfile_builder }} run --privileged --rm tonistiigi/binfmt --install arm64"
 
   - name: get distro-release for multi arch manifests
-    when: dockerfile_builder_image_info is defined
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task
     changed_when: false
     throttle: 2
     environment: "{{ {'DOCKER_CONTEXT': prepare_distro_release_docker_context}
       if dockerfile_builder_use_buildx | default(false) and
-      dockerfile_builder_use_buildx | default(false) else {} }}"
+      prepare_distro_release_docker_context_exists else {} }}"
     vars:
-      prepare_distro_release_docker_context: "{{ 'multiarch-builder-'
-        + item.split('/')[1] }}"
-      prepare_distro_release_image_digest:
+      prepare_distro_release_docker_context: "{{ 'multiarch-builder-' + item.split('/')[1] }}"
+      prepare_distro_release_docker_context_exists: "{{ lookup('pipe','docker context inspect ' +
+        prepare_distro_release_docker_context + ' 1>/dev/null && echo True || echo False') |
+        default(false,true) | bool }}"
+      prepare_distro_release_image_manifest:
         "{{ dockerfile_builder_image_info.manifest.manifests | default([])
           | selectattr('platform.os', 'equalto', item.split('/')[0])
-          |  selectattr('platform.architecture', 'equalto', item.split('/')[1])
-          | map(attribute='digest') | first }}"
+          |  selectattr('platform.architecture', 'equalto', item.split('/')[1]) | first
+        if
+          dockerfile_builder_image_info.manifest.manifests is defined
+        else
+          dockerfile_builder_image_info.manifest }}"
+      prepare_distro_release_image_digest: "{{ prepare_distro_release_image_manifest.digest }}"
       prepare_distro_release_image: "{{ dockerfile_builder_image }}@{{ prepare_distro_release_image_digest }}"
     command: "{{ dockerfile_builder }} run --rm
       {{ prepare_distro_release_image }} rpm -qa"
 
+  - name: assert distro release packages info
+    loop: "{{ prepare_distro_release_task.results }}"
+    assert:
+      that: item.stdout_lines | default([]) | length > 0
+      fail_msg: "pkg-list is empty"
+      quiet: true
+
   - name: save new distro release
-    when: (prepare_distro_release_task.results | selectattr('item', 'equalto', 'linux/amd64')).stdout_lines is defined
     set_fact:
-      centos_distro_release: "{{ prepare_distro_release_task.results | selectattr('item', 'equalto', 'linux/amd64')
-        | map(attribute='stdout_lines') | first | map('regex_search',distro_version_regex)
-        | select('string') | first }}"
+      centos_distro_release: "{{ prepare_distro_release_task.results[0].stdout_lines
+        | map('regex_search',distro_version_regex) | select('string') | first }}"
 
   - name: set version based on distro-release
-    when: centos_distro_release is defined
     set_fact:
       version_image_major: "{{ centos_distro_release.split('.')[0] |
         default(false) }}"

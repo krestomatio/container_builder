@@ -11,7 +11,6 @@ dockerfile_builder_excluded_files: >-
 template_path: "{{ template_dir }}/rootfs"
 
 # rootfs
-rootfs_image_base: quay.io/fedora/fedora-minimal
 rootfs_install_dir: /mnt/rootfs
 rootfs_dnf_vars: "contentdir={{ rootfs_repo_contentdir }} stream={{ rootfs_repo_releasever | string + '-stream' }} infra=container"
 rootfs_extra_pkgs: ""

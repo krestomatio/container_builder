@@ -3,7 +3,7 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=base \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="{{ dockerfile_builder_image_based }} based image" \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based for building other images" \
     IMAGE_TITLE="{{ dockerfile_builder_image_based }} based image"

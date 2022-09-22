@@ -1,5 +1,7 @@
 # dockerfile_builder
 container_builder_image_from: false
+dockerfile_builder_excluded_files:
+  - pkg_list_linux_*
 
 # ci
 prepare_image_task: centos-minimal

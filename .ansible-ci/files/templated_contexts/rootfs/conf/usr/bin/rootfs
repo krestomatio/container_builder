@@ -21,7 +21,7 @@ for repo_var in $(echo ${ROOTFS_DNF_VARS})
 do
     echo "${repo_var##*=}" > "/tmp_dnf/vars/${repo_var%%=*}"
 done
-## TODO: varsdir seems to be looking inside installroot,
+## TODO: varsdir seems to be looking inside installroot
 cp -rp /tmp_dnf/ ${ROOTFS_INSTALL_DIR}/tmp_dnf
 
 ## install release package
@@ -35,7 +35,6 @@ microdnf --config /etc/dnf/dnf.conf --refresh --noplugins --nodocs \
     --setopt=install_weak_deps=0 \
     install -y ${ROOTFS_RELEASE_PKG}
 cp -rp ${ROOTFS_INSTALL_DIR}/etc/pki/rpm-gpg/* /etc/pki/rpm-gpg/
-rm -rf ${ROOTFS_INSTALL_DIR}/tmp_dnf
 
 # install other packages
 ## TODO: varsdir seems to be looking inside installroot, even though ${ROOTFS_INSTALL_DIR} is not prepended when setting its value
@@ -50,6 +49,9 @@ if ! [ -z "${ROOTFS_EXTRA_PKGS}" ]; then
         --setopt=install_weak_deps=0 \
         install -y ${ROOTFS_EXTRA_PKGS}
 fi
+
+## TODO: varsdir seems to be looking inside installroot
+rm -rf ${ROOTFS_INSTALL_DIR}/tmp_dnf
 
 # post config
 pushd ${ROOTFS_INSTALL_DIR}

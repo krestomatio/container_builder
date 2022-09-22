@@ -1,5 +1,5 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base8-stream
 FROM ${ARG_IMAGE_FROM} AS nfs-ganesha-builder
 
 USER 0
@@ -86,7 +86,7 @@ RUN mkdir -p ${DESTDIR} \
     && /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha \
     && fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
 
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base8-stream
 FROM ${ARG_IMAGE_FROM}
 
 # General variables

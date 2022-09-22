@@ -1,0 +1,109 @@
+#!/bin/bash -e
+# description: source code for app using git and rsync
+
+usage() {
+    cat 1>&2 <<"EOF"
+Script to pull and/or sync source code of an app.
+It requires git and rsync
+
+ENVIRONMENT VARS:
+GIT_BRANCH              branch to pull from
+GIT_COMMIT              commit to verify
+GIT_DEST                git destination
+APP_DEST                sync destination
+
+USAGE:
+    app-git [OPTIONS]
+
+OPTIONS (app git):
+  -a                     sync and use rsync archive mode
+  -p                     pull from "${GIT_BRANCH}" before syncing
+  -v                     veriy git commit matches "${GIT_COMMIT}"
+  -s                     sync code from "${GIT_DEST}" to "${APP_DEST}"
+  -d                     delete files in "${APP_DEST}" not present in "${GIT_DEST}"
+  -e                     exclude criteria. Ex -e '.git*'
+
+EXAMPLES:
+    app-git -s
+    app-git -s -e '.git*'
+    app-git -s -d -e 'config.php' -e '.git*'
+    app-git -p -v -s -a
+EOF
+}
+
+pull=false
+sync=false
+verify=false
+rsync_options="-icrlD"
+
+while getopts ":apvsde:" opt; do
+  case ${opt} in
+    a )
+        sync=true
+        rsync_options="--stats -a"
+        ;;
+    p )
+        pull=true
+        ;;
+    v )
+        verify=true
+        ;;
+    s )
+        sync=true
+        ;;
+    d )
+        delete=true
+        ;;
+    e )
+        exclude+=(--exclude="${OPTARG}")
+        ;;
+    \? )
+        usage
+        exit
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if (( $OPTIND == 1 )); then
+    echo -e "No option\n"
+    usage
+    exit 1
+fi
+
+echo "git dir:"
+pushd ${GIT_DEST}
+
+# Pull
+if  [ "$pull" != "false" ]; then
+    echo -e "\npulling from branch ${GIT_BRANCH} to '${GIT_DEST}'..."
+    git pull origin "${GIT_BRANCH}"
+fi
+
+# Verify commit
+if  [ "$verify" != "false" ]; then
+    echo -e "\nverifying ${GIT_COMMIT}..."
+    git rev-parse --verify HEAD | grep -q "${GIT_COMMIT}"
+fi
+
+# add exclude to rsync_options
+if ! [ -z $exclude ]; then
+    echo -e "\nadding: '${exclude[@]}'..."
+    rsync_options+=" ${exclude[@]}"
+fi
+
+# add delete option
+if ! [ -z $delete ]; then
+    echo -e "\nadding delete option..."
+    rsync_options+=" --delete"
+fi
+
+# create clean copy, excluding .git* and files in .gitignore
+if  [ "$sync" != "false" ]; then
+    echo -e "\nsyncing to '${APP_DEST}'..."
+    rsync ${rsync_options} \
+        --filter='dir-merge,- .gitignore' "${GIT_DEST}/" "${APP_DEST}"
+fi
+
+echo -e "\nreturning to:"
+popd

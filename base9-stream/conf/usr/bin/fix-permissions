@@ -1,0 +1,57 @@
+#!/bin/bash
+# description: set permission for non-root container
+
+usage() {
+    set +x
+    cat 1>&2 <<EOF
+Script to fix permissions of a directory (recursive) in order to supporting arbitrary user ids.
+USAGE:
+    fix-permissions [OPTIONS] dir1 dir2
+OPTIONS (fix permissions):
+  -u <uid>               Assign this user id when fixing permissions
+  -r                     Assign read-only permission for group
+  -a                     Assign all permissions (world readable)
+
+EXAMPLES:
+    fix-permissions /dir1 /dir2
+    fix-permissions -u 36 /dir1 /dir2
+    fix-permissions -r -u 36 /dir1
+    fix-permissions -a /dir1
+EOF
+}
+
+all=
+uid=
+write=w
+
+while getopts ":u:ra" opt; do
+  case ${opt} in
+    u )
+        uid=$OPTARG
+        ;;
+    r )
+        write=
+        ;;
+    a )
+        all=true
+        ;;
+    \? )
+        usage
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+for dir; do
+    test -d "$dir" || echo "no such directory '$dir'"
+    echo >&2 "fixing permissions on '$dir' directory"
+    if ! [ -z ${uid} ]; then
+        find "$dir" -exec chown "$uid:0" {} \;
+    fi
+    if ! [ -z ${all} ]; then
+        chmod -R a+rwx "$dir"
+    else
+        find "$dir" -exec chmod "g+r$write" {} \;
+        find "$dir" -type d -exec chmod g+x {} +
+    fi
+done

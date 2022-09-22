@@ -1,5 +1,5 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base8-stream
 FROM ${ARG_IMAGE_FROM} AS old_pg_bin
 
 # Component bash variables
@@ -11,7 +11,7 @@ RUN microdnf module enable postgresql:${POSTGRES_PREV_VERSION} && \
     cp -rp /usr/bin/{postgres,pg_*} /opt/pg_bin/
 
 
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base8-stream
 FROM ${ARG_IMAGE_FROM}
 
 # General variables

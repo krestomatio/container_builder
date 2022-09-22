@@ -3,6 +3,6 @@
 #
 centos9_stream_minimal_image:
   build: False
-  tag: "0.0.2"
-  repo_digest: "quay.io/krestomatio/centos9-stream-minimal@sha256:73960440f29f3b7ab330f3873ca27fc3689dcff4cd52160caab7778a55ad7d62"
-  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0
+  tag: "9.0.12"
+  repo_digest: "quay.io/krestomatio/centos9-stream-minimal@sha256:e0e893d47231c51f168f358a7cd4958fc993732428ccea66ae2ca416d744d8df"
+  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

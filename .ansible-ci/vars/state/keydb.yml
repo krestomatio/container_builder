@@ -4,5 +4,5 @@
 keydb_image:
   build: False
   tag: "6.3.1"
-  repo_digest: "quay.io/krestomatio/keydb@sha256:be477e7bddb72243a2b0f250380c66646d9df65b63b2ca17fd68bf0dd3450270"
-  artifact_tag: a7fea121f9e2fdd8e8dac8379678e1af3b56b3a0
+  repo_digest: "quay.io/krestomatio/keydb@sha256:2eff176335ffd83025459db8edca6a42eeb6d18f6ad02cbefd5288a3698f5912"
+  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

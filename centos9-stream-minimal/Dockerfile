@@ -1,5 +1,5 @@
 # builder
-ARG ROOTFS_IMAGE_BASE=quay.io/fedora/fedora-minimal
+ARG ROOTFS_IMAGE_BASE=quay.io/fedora/fedora-minimal:34
 FROM ${ROOTFS_IMAGE_BASE} as builder
 
 ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'

@@ -1,0 +1,31 @@
+#!/bin/bash -e
+# description: reconfig timezone
+# param: list of timezones separated by space
+
+reinstall_tzdata(){
+    rpm -q tzdata 1>/dev/null && install_type=reinstall || install_type=install
+    echo "About to ${install_type} tzdata..."
+    # update
+    ${CTR_PKG_MGM} update
+    # reinstall or install
+    ${CTR_PKG_MGM} ${install_type} tzdata
+    # clean
+    ${CTR_PKG_MGM} clean all
+}
+
+if ! [ -z ${@+x} ]; then
+    reinstall_tzdata
+    # leave only $@
+    echo "leaving only specific timezones"
+    rm -rf /tmp/zoneinfo
+    cp -rp /usr/share/zoneinfo/ /tmp/zoneinfo/
+    rm -rf /usr/share/zoneinfo/*
+    for tz in "$@"; do
+        mkdir -p $(dirname /usr/share/zoneinfo/${tz})
+        cp -rp /tmp/zoneinfo/${tz} /usr/share/zoneinfo/${tz}
+    done
+    cp -rp /tmp/zoneinfo/UTC /usr/share/zoneinfo/UTC
+    rm -rf /tmp/zoneinfo
+else
+    reinstall_tzdata
+fi

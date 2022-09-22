@@ -2,9 +2,9 @@ Extends [moodle container image](https://quay.io/krestomatio/moodle) to add addi
 
 ## Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 3.9.16
-* Moodle version number: 2020061516.00
-* Moodle commit: d369112db45e9d35b7bd338b2b60b2a28f772647
+* Moodle version: 3.9.17
+* Moodle version number: 2020061517.00
+* Moodle commit: 33e9b8c3944731e646296d53e71932bed65d2f9e
 * Moodle remote branch: MOODLE\_39\_STABLE
 
 ## Plugins

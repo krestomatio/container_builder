@@ -1,5 +1,5 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/base-stream
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/base8-stream
 FROM ${ARG_IMAGE_FROM}
 
 # General variables

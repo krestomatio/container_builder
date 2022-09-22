@@ -18,8 +18,9 @@ USAGE:
 OPTIONS (check moodle nginx container):
   -u            check url
   -m            check if moodledata is writable
-  -l            check liveness (-u)
-  -r            check readiness (-u -m)
+  -l            check liveness (-m -t -u)
+  -r            check readiness (-m -t -u)
+  -t            check tcp port of php-fpm host
 
 EXAMPLES:
     check-container -u
@@ -38,15 +39,42 @@ check_moodledata() {
     rm $TMPFILE
 }
 
+check_maintenance() {
+    # check if moodle is in maintenance
+    moodle_maintenance=$(test -f "${MOODLE_DATA}/climaintenance.html" && echo true || echo false)
+    if [ "${moodle_maintenance}" == "true" ]; then
+        echo "$0: CHECK: moodle maintenance detected"
+    fi
+}
+
 check_url() {
     # check url for http status code
     check_url="${MOODLE_CHECK_URL:-localhost:${NGINX_PORT}${MOODLE_CHECK_PATH}}"
-
-    curl -s -o /dev/null -w %{http_code} -H "Host: ${MOODLE_CHECK_HOST}" \
-        "${check_url}" | grep -q "${MOODLE_CHECK_CODE}"
-    if [ $? -ne 0 ]; then
-        echo "$0: CHECK: Did not receive status code: ${MOODLE_CHECK_CODE}"
+    ## check if moodle is in maintenance
+    check_maintenance
+    ## if moodle is in maintenance, allow 503 http status code
+    if [ "${moodle_maintenance}" == "true" ]; then
+        MOODLE_CHECK_CODE="${MOODLE_CHECK_CODE}\|503"
+    fi
+    ## check http code
+    status_code=$(curl -s -o /dev/null -w %{http_code} -H "Host: ${MOODLE_CHECK_HOST}" "${check_url}")
+    if [ $? -ne 0 ] && [[ ! "${MOODLE_CHECK_CODE}" =~ ${status_code} ]] ; then
+        echo "$0: CHECK: http status code is ${status_code} and not ${MOODLE_CHECK_CODE//\\|/ or }"
         exit 1
+    fi
+}
+
+check_php_fpm_host() {
+    # check php-fpm host
+    ## check php-fpm host is not local and using unix socket
+    if [[ ${PHP_FPM_LISTEN+x} != /* ]]; then
+        timeout ${PHP_FPM_CHECK_PORT_TIMEOUT:-3} bash -c "cat < /dev/null > /dev/tcp/${PHP_FPM_HOST:-127.0.0.1}/${PHP_FPM_PORT}"
+        if [ $? -ne 0 ]; then
+            echo "$0: CHECK: timeout for tcp port '${PHP_FPM_HOST}:${PHP_FPM_PORT}'"
+            exit 1
+        fi
+    else
+        echo "$0: CHECK: php-fpm is using unix socket"
     fi
 }
 
@@ -60,10 +88,16 @@ while getopts ":mulr" opt; do
         ;;
     l )
         check_moodledata
+        check_php_fpm_host
         check_url
         ;;
     r )
+        check_moodledata
+        check_php_fpm_host
         check_url
+        ;;
+    t )
+        check_php_fpm_host
         ;;
     \? )
         usage

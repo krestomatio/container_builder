@@ -2,7 +2,8 @@
 {# state name must comply with ansible variable name convention: #}
 {# Ej: state_name: "{{ ansible_host | replace('-', '_') | lower }}" #}
 {{ state_name }}_image:
-  build: {{ state_yml_build | default('false') | bool  }}
+  build: {{ state_yml_build | default('false') | bool }}
   tag: "{{ state_yml_tag }}"
   repo_digest: "{{ state_yml_repo_digest }}"
-  artifact_tag: {{ state_yml_artifact_tag  }}
+  artifact_tag: "{{ state_yml_artifact_tag }}"
+  relative_path: "{{ state_yml_relative_path }}"

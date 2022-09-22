@@ -37,6 +37,13 @@
       set_fact:
         state_yml_artifact_tag: "{{ load_state_yml.artifact_tag }}"
 
+    - name: set state relative path
+      when:
+        - state_yml_relative_path is not defined
+        - load_state_yml.relative_path is defined
+      set_fact:
+        state_yml_relative_path: "{{ load_state_yml.relative_path }}"
+
 - name: set fact when artifact matches pipeline's
   when:
     - artifact_tag | default(false)

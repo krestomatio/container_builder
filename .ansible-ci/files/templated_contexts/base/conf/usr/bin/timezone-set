@@ -3,11 +3,12 @@
 # param: list of timezones separated by space
 
 reinstall_tzdata(){
-    echo "Reinstalling tzdata"
+    rpm -q tzdata 1>/dev/null && install_type=reinstall || install_type=install
+    echo "About to ${install_type} tzdata..."
     # update
     ${CTR_PKG_MGM} update
-    # reinstall
-    ${CTR_PKG_MGM} reinstall tzdata
+    # reinstall or install
+    ${CTR_PKG_MGM} ${install_type} tzdata
     # clean
     ${CTR_PKG_MGM} clean all
 }

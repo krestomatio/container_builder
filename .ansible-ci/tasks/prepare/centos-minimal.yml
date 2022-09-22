@@ -12,7 +12,7 @@
       name: dockerfile_builder
 
   - name: enable arm64 emulation
-    when: "{{ docker_config_arm64_emulation | default(false) }}"
+    when: docker_config_arm64_emulation | default(false) | bool
     run_once: true
     command: "{{ dockerfile_builder }} run --privileged --rm tonistiigi/binfmt --install arm64"
 

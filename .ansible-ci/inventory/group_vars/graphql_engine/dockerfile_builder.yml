@@ -4,6 +4,9 @@ postgres_major_version: 13
 # source dir
 template_path: "{{ template_dir }}/graphql-engine"
 
+# containers generated build dir
+generated_subdir: graphql-engine
+
 # ci
 version_release_no_bump: true
 

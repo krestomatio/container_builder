@@ -1,3 +1,6 @@
+# containers generated build dir
+generated_subdir: moodle
+
 # moodle
 moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
 

@@ -6,6 +6,9 @@ docker_version: '20-dind'
 # ci
 prepare_image_task: ansible-ci
 
+# containers generated build dir
+generated_subdir: ci
+
 # get latest versions
 version_regex: '(?<=[\/v|\/])([0-9]+)\.([0-9]+)\.([0-9]+)'
 

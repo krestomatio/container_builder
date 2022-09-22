@@ -1,2 +1,5 @@
 # source dir
 template_path: "{{ template_dir }}/base"
+
+# containers generated build dir
+generated_subdir: base

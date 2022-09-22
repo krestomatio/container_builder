@@ -32,8 +32,9 @@ template_dir: "{{ working_dir }}/files/templated_contexts"
 template_path: "{{template_dir }}/{{ ctr_name }}"
 
 # containers generated build dir
-generated_dir: "{{ git_repo_dir }}"
+generated_dir: "{{  working_dir }}/../{{ generated_subdir + '/' if generated_subdir is defined else '' }}"
 generated_path: "{{ generated_dir }}/{{ ctr_name }}"
+generated_relative_path: "{{ generated_path | relpath(working_dir + '/..') }}"
 
 # registry
 registry_name: "quay.io"

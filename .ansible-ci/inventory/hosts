@@ -1,11 +1,11 @@
 [platform]
 centos8-stream-minimal
-rocky8-minimal
 centos9-stream-minimal
+rocky8-minimal
 rocky9-minimal
 base8
-base8-stream
 base9
+base8-stream
 base9-stream
 httpd
 nginx

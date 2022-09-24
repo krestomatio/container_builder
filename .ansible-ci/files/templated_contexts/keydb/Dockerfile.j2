@@ -2,7 +2,7 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=keydb \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="KeyDB {{ keydb_version }}" \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs KeyDB {{ keydb_version }}" \
     IMAGE_TITLE="KeyDB {{ keydb_version }}" \

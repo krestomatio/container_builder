@@ -1,0 +1,3 @@
+# image
+keydb_version: "{{ keydb_versions.63 }}"
+keydb_version_pkg: "{{ keydb_versions_pkg.63 }}"

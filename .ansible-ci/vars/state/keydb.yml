@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-keydb_image:
-  build: False
-  tag: "6.3.1"
-  repo_digest: "quay.io/krestomatio/keydb@sha256:2eff176335ffd83025459db8edca6a42eeb6d18f6ad02cbefd5288a3698f5912"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

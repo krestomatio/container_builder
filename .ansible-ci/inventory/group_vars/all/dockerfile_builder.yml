@@ -9,8 +9,10 @@ postgres_versions:
   13: '13'
 postgres_prev_versions:
   13: '10'
-keydb_version_pkg: 6.3.1-1
-keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_regex) }}"
+keydb_versions_pkg:
+  63: '6.3.1-1'
+keydb_versions:
+  63: "{{ keydb_versions_pkg.63 | regex_search(external_release_version_regex) }}"
 nfs_ganesha_versions:
   40: '4.0.9'
 node_version: '14'

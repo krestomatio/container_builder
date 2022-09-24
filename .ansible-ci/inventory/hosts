@@ -17,7 +17,7 @@ pgbouncer
 go-toolset
 node
 graphql-engine-base
-keydb
+keydb63
 
 [minimal]
 centos8-stream-minimal
@@ -53,6 +53,9 @@ postgres13
 
 [nfs_ganesha]
 nfs-ganesha40
+
+[keydb]
+keydb63
 
 [rootfs:children]
 minimal
@@ -98,7 +101,7 @@ pgbouncer
 go-toolset
 node
 graphql-engine-base
-keydb
+keydb63
 
 [build_step_4]
 nginx_php-fpm

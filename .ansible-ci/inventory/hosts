@@ -7,7 +7,7 @@ base8
 base9
 base8-stream
 base9-stream
-httpd
+httpd24
 nginx
 php-fpm
 nginx_php-fpm
@@ -38,6 +38,9 @@ base8
 base8-stream
 base9
 base9-stream
+
+[httpd]
+httpd24
 
 [rootfs:children]
 minimal
@@ -74,7 +77,7 @@ base
 
 [build_step_3]
 ansible
-httpd
+httpd24
 nginx
 nfs-ganesha
 php-fpm

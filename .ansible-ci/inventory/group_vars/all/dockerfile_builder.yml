@@ -1,5 +1,6 @@
 # platform vars
-php_version: '7.4'
+php_versions:
+  80: '8.0'
 httpd_versions:
   24: '2.4'
 nginx_versions:

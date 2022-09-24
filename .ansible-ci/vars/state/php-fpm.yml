@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-php_fpm_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/php-fpm@sha256:28a27f0334d946cf6828813029ae6a6da4b46eadab3c636477e5bd5ce64dd58d"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

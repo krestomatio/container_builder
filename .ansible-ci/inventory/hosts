@@ -9,7 +9,7 @@ base8-stream
 base9-stream
 httpd24
 nginx120
-php-fpm
+php80-fpm
 nginx_php-fpm
 nfs-ganesha
 postgres
@@ -44,6 +44,9 @@ httpd24
 
 [nginx]
 nginx120
+
+[php]
+php80-fpm
 
 [rootfs:children]
 minimal
@@ -83,7 +86,7 @@ ansible
 httpd24
 nginx120
 nfs-ganesha
-php-fpm
+php80-fpm
 postgres
 pgbouncer
 go-toolset

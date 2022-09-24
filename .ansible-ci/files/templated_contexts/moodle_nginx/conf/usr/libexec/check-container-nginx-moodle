@@ -41,9 +41,11 @@ check_moodledata() {
 
 check_maintenance() {
     # check if moodle is in maintenance
-    moodle_maintenance=$(test -f "${MOODLE_DATA}/climaintenance.html" && echo true || echo false)
-    if [ "${moodle_maintenance}" == "true" ]; then
-        echo "$0: CHECK: moodle maintenance detected"
+    if ! [ -z ${MOODLE_DATA} ] ; then
+        moodle_maintenance=$(test -f "${MOODLE_DATA}/climaintenance.html" && echo true || echo false)
+        if [ "${moodle_maintenance}" == "true" ]; then
+            echo "$0: CHECK: moodle maintenance detected"
+        fi
     fi
 }
 

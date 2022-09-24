@@ -2,7 +2,8 @@
 php_version: '7.4'
 httpd_versions:
   24: '2.4'
-nginx_version: '1.20'
+nginx_versions:
+  120: '1.20'
 postgres_version: '13'
 postgres_prev_version: '10'
 keydb_version_pkg: 6.3.1-1

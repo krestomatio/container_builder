@@ -8,7 +8,7 @@ base9
 base8-stream
 base9-stream
 httpd24
-nginx
+nginx120
 php-fpm
 nginx_php-fpm
 nfs-ganesha
@@ -41,6 +41,9 @@ base9-stream
 
 [httpd]
 httpd24
+
+[nginx]
+nginx120
 
 [rootfs:children]
 minimal
@@ -78,7 +81,7 @@ base
 [build_step_3]
 ansible
 httpd24
-nginx
+nginx120
 nfs-ganesha
 php-fpm
 postgres

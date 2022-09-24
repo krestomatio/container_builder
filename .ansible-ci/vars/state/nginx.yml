@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-nginx_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/nginx@sha256:27b4ac498e979b1748a98524e307d444cf052dcccc1f239d94ecfa6cc6b5828e"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

@@ -3,7 +3,7 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=nginx \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="Nginx {{ nginx_version }}" \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs Nginx {{ nginx_version }}" \
     IMAGE_TITLE="Nginx {{ nginx_version }}" \

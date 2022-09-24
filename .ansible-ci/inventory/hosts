@@ -12,7 +12,7 @@ nginx120
 php80-fpm
 nginx_php-fpm
 nfs-ganesha
-postgres
+postgres13
 pgbouncer
 go-toolset
 node
@@ -47,6 +47,9 @@ nginx120
 
 [php]
 php80-fpm
+
+[postgres]
+postgres13
 
 [rootfs:children]
 minimal
@@ -87,7 +90,7 @@ httpd24
 nginx120
 nfs-ganesha
 php80-fpm
-postgres
+postgres13
 pgbouncer
 go-toolset
 node

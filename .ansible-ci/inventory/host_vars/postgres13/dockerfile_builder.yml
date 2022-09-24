@@ -1,0 +1,4 @@
+# image
+postgres_version: "{{ postgres_versions.13 }}"
+postgres_prev_version: "{{ postgres_prev_versions.13 }}"
+dockerfile_builder_image_lang: en_US.UTF-8

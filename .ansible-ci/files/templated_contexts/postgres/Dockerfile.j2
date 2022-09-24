@@ -15,7 +15,7 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=postgres \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="Postgres {{ postgres_version }}" \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs Postgres {{ postgres_version }}. \
 It follows https://github.com/sclorg/postgresql-container" \

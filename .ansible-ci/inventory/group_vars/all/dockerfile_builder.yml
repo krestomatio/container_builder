@@ -5,8 +5,10 @@ httpd_versions:
   24: '2.4'
 nginx_versions:
   120: '1.20'
-postgres_version: '13'
-postgres_prev_version: '10'
+postgres_versions:
+  13: '13'
+postgres_prev_versions:
+  13: '10'
 keydb_version_pkg: 6.3.1-1
 keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_regex) }}"
 nfs_ganesha_version: '4.0.7'

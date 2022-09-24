@@ -11,7 +11,7 @@ httpd24
 nginx120
 php80-fpm
 nginx_php-fpm
-nfs-ganesha
+nfs-ganesha40
 postgres13
 pgbouncer
 go-toolset
@@ -51,6 +51,9 @@ php80-fpm
 [postgres]
 postgres13
 
+[nfs_ganesha]
+nfs-ganesha40
+
 [rootfs:children]
 minimal
 
@@ -88,7 +91,7 @@ base
 ansible
 httpd24
 nginx120
-nfs-ganesha
+nfs-ganesha40
 php80-fpm
 postgres13
 pgbouncer

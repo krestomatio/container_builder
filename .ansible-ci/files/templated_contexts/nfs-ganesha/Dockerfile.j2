@@ -90,7 +90,7 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=nfs-ganesha \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs a NFSv4 Ganesha server." \
     IMAGE_TITLE="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \

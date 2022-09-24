@@ -11,7 +11,8 @@ postgres_prev_versions:
   13: '10'
 keydb_version_pkg: 6.3.1-1
 keydb_version: "{{ keydb_version_pkg | regex_search(external_release_version_regex) }}"
-nfs_ganesha_version: '4.0.7'
+nfs_ganesha_versions:
+  40: '4.0.9'
 node_version: '14'
 moodle_version: '3.9'
 

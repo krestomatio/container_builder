@@ -2,7 +2,9 @@
 # description: base config for php-fpm
 
 # install pkgs
+{% if postgres_version_by_module | default(false) %}
 microdnf module enable postgresql:${POSTGRES_VERSION}
+{% endif %}
 install-pkgs ${OS_INSTALL_PKGS}
 
 # install pgbouncer

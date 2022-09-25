@@ -1,2 +1,7 @@
 # image
 dockerfile_builder_image_lang: en_US.UTF-8
+
+# containers generated build dir
+generated_subdir: postgres
+
+postgres_version: "{{ postgres_versions.13 }}"

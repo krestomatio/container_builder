@@ -10,7 +10,7 @@ base9-stream
 httpd24
 nginx120
 php80-fpm
-nginx_php-fpm
+nginx120_php80-fpm
 nfs-ganesha40
 postgres13
 pgbouncer
@@ -44,6 +44,7 @@ httpd24
 
 [nginx]
 nginx120
+nginx120_php80-fpm
 
 [php]
 php80-fpm
@@ -104,7 +105,7 @@ graphql-engine-base
 keydb63
 
 [build_step_4]
-nginx_php-fpm
+nginx120_php80-fpm
 ansible-docker-ci
 ansible-podman-ci
 graphql-engine-build

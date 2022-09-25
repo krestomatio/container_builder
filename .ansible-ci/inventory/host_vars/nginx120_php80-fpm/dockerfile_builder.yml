@@ -1,0 +1,12 @@
+# image
+nginx_version: "{{ nginx_versions.120 }}"
+php_version: "{{ php_versions.80 }}"
+container_builder_image_from: "nginx120"
+dockerfile_builder_image_summary: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION}"
+dockerfile_builder_image_title: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}"
+dockerfile_builder_image_ocp_tags: "${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
+  + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}"
+
+# source dir
+template_path: "{{ template_dir }}/php-fpm"

@@ -7,7 +7,7 @@ USER 0
 RUN install-pkgs epel-release
 
 # Container variables
-ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs --enablerepo=powertools --enablerepo=epel -y" \
+ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs --enablerepo={{ 'powertools' if 'base8' in dockerfile_builder_image_from else 'crb' }} --enablerepo=epel -y" \
     CTR_USER_ID="1001"
 
 # Component bash variables
@@ -24,6 +24,7 @@ RUN install-pkgs \
         git \
         jemalloc-devel \
         krb5-devel \
+        libacl-devel \
         libblkid-devel \
         libcap-devel \
         libnfsidmap-devel \
@@ -36,9 +37,12 @@ RUN install-pkgs \
 # Other req
 RUN install-pkgs \
         graphviz \
+{% if 'base8' in dockerfile_builder_image_from %}
         doxygen \
         redhat-lsb-core
-
+{% else %}
+        doxygen
+{% endif %}
 
 ENV NFS_GANESHA_VERSION="{{ nfs_ganesha_version }}" \
     DESTDIR=/build
@@ -46,7 +50,7 @@ ENV NFS_GANESHA_VERSION="{{ nfs_ganesha_version }}" \
 # invalidate cache if new version
 ADD https://api.github.com/repos/nfs-ganesha/nfs-ganesha/git/refs/tags/V${NFS_GANESHA_VERSION} /tmp/version.json
 
-RUN git clone --branch V${NFS_GANESHA_VERSION} --recursive \
+RUN git clone --branch V${NFS_GANESHA_VERSION} --depth 1 --recursive \
     https://github.com/nfs-ganesha/nfs-ganesha /nfs-ganesha
 
 WORKDIR /nfs-ganesha
@@ -54,6 +58,7 @@ WORKDIR /nfs-ganesha
 RUN mkdir -p ${DESTDIR} \
     && cmake -DCMAKE_BUILD_TYPE=Release \
           -DCMAKE_INSTALL_PREFIX=/usr/local \
+          -DCEPHFS_POSIX_ACL=OFF \
           -DRADOS_URLS=OFF \
           -DRPCBIND=OFF \
           -DUSE_DBUS=ON \

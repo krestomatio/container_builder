@@ -14,7 +14,7 @@ keydb_versions_pkg:
 keydb_versions:
   63: "{{ keydb_versions_pkg.63 | regex_search(external_release_version_regex) }}"
 nfs_ganesha_versions:
-  40: '4.0.9'
+  40: '4.0.7'
 node_versions:
   14: '14'
 node_version_name:

@@ -1,23 +1,4 @@
-[minimal]
-centos8-stream-minimal
-rocky8-minimal
-centos9-stream-minimal
-rocky9-minimal
-
-[centos]
-centos8-stream-minimal
-centos9-stream-minimal
-
-[rocky]
-rocky8-minimal
-rocky9-minimal
-
-[base]
-base8
-base8-stream
-base9
-base9-stream
-
+## containers
 [httpd]
 httpd24
 
@@ -40,12 +21,41 @@ keydb63
 [go_toolset]
 go118-toolset
 
-[base8_stream]
+[graphql_engine]
+graphql-engine2
+graphql-engine2-base
+graphql-engine2-build
+
+[node]
+node14
+
+## container groups
+[minimal_grp]
+centos8-stream-minimal
+rocky8-minimal
+centos9-stream-minimal
+rocky9-minimal
+
+[centos_grp]
+centos8-stream-minimal
+centos9-stream-minimal
+
+[rocky_grp]
+rocky8-minimal
+rocky9-minimal
+
+[base_grp]
+base8
+base8-stream
+base9
+base9-stream
+
+[base8_stream_grp]
 node14
 graphql-engine2-base
 ansible
 
-[base9_stream]
+[base9_stream_grp]
 httpd24
 nginx120
 php80-fpm
@@ -56,10 +66,10 @@ pgbouncer
 go118-toolset
 keydb63
 
-[rootfs:children]
-minimal
+[rootfs_grp:children]
+minimal_grp
 
-[ci]
+[ci_grp]
 ansible
 ansible-operator-ci
 ansible-docker-ci
@@ -77,20 +87,11 @@ moodle40
 moodle40_httpd24
 moodle40_bundle
 
-[graphql_engine]
-graphql-engine2
-graphql-engine2-base
-graphql-engine2-build
-
-[node]
-node14
-node14-ci
-
 [build_step_1:children]
-minimal
+minimal_grp
 
 [build_step_2:children]
-base
+base_grp
 
 [build_step_3]
 ansible

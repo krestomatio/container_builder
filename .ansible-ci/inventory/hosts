@@ -29,6 +29,10 @@ graphql-engine2-build
 [node]
 node14
 
+[node_grp]
+node14
+node14-ci
+
 ## container groups
 [minimal_grp]
 centos8-stream-minimal

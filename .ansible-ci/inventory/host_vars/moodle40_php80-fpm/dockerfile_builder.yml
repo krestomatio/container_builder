@@ -1,0 +1,5 @@
+# image
+container_builder_image_from: php80-fpm
+
+# source dir
+template_path: "{{ template_dir }}/moodle_php-fpm"

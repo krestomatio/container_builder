@@ -1,9 +1,6 @@
 # containers generated build dir
 generated_subdir: moodle
 
-# moodle
-moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','') }}_STABLE"
-
 dockerfile_builder_image_git_remote: "https://github.com/moodle/moodle.git"
 moodle_git_refs_json:
   url: "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +

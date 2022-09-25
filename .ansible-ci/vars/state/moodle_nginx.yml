@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-moodle_nginx_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/moodle_nginx@sha256:b2ec60a7279e45cc0e7758ab5875c0af388bc0158639af04650b35333b3fabbc"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

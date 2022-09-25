@@ -1,5 +1,8 @@
 # image
-container_builder_image_from: moodle
+container_builder_image_from: moodle40
+
+# source dir
+template_path: "{{ template_dir }}/moodle_bundle"
 
 # ci
 prepare_image_task: moodle

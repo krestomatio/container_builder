@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-moodle_bundle_image:
-  build: False
-  tag: "3.9.17"
-  repo_digest: "quay.io/krestomatio/moodle_bundle@sha256:f7462808e58bd29e5a4f7cd3addf0d54d63fe31961d240eb6e354cc61b3d9570"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

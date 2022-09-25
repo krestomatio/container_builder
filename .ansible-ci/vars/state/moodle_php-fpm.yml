@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-moodle_php_fpm_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/moodle_php-fpm@sha256:3507a706149f529e4db4b5dee1e45c30c78b12ab040628aa8a48170bead77491"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

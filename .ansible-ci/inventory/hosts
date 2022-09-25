@@ -66,13 +66,16 @@ ansible-docker-ci
 ansible-podman-ci
 node14-ci
 
-[m4e]
-moodle_nginx
-moodle_nginx_php-fpm
-moodle_php-fpm
-moodle
-moodle_httpd
-moodle_bundle
+[moodle_grp:children]
+moodle40_grp
+
+[moodle40_grp]
+moodle40_nginx120
+moodle40_nginx120_php80-fpm
+moodle40_php80-fpm
+moodle40
+moodle40_httpd24
+moodle40_bundle
 
 [graphql_engine]
 graphql-engine2
@@ -114,13 +117,13 @@ ansible-operator-ci
 graphql-engine2
 
 [build_step_6]
-moodle_nginx
-moodle_nginx_php-fpm
-moodle_php-fpm
-moodle_httpd
+moodle40_nginx120
+moodle40_nginx120_php80-fpm
+moodle40_php80-fpm
+moodle40_httpd24
 
 [build_step_7]
-moodle
+moodle40
 
 [build_step_8]
-moodle_bundle
+moodle40_bundle

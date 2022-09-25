@@ -43,7 +43,7 @@ ctr_readme_section: |-
   For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
   ```
   docker build . -t my_moodle_image:my_tag \
-      --build-arg ARG_GIT_BRANCH='MOODLE_400_STABLE'
+      --build-arg ARG_GIT_BRANCH='{{ moodle_git_branch }}'
   ```
 
   ### Moodle plugins

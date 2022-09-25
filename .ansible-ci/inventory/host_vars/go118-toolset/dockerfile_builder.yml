@@ -3,5 +3,4 @@ go_version: "{{ go_versions.118 }}"
 go_version_major_minor: "{{ go_version.split('.')[0] + '.' + go_version.split('.')[1] }}"
 
 # builder
-container_builder_image_from: base9-stream
 dockerfile_builder_image_ocp_tags: "go,go-toolset,go-toolset{{ go_version_major_minor }}"

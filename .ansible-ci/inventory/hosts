@@ -1,24 +1,3 @@
-[platform]
-centos8-stream-minimal
-centos9-stream-minimal
-rocky8-minimal
-rocky9-minimal
-base8
-base9
-base8-stream
-base9-stream
-httpd24
-nginx120
-php80-fpm
-nginx120_php80-fpm
-nfs-ganesha40
-postgres13
-pgbouncer
-go118-toolset
-node14
-graphql-engine2-base
-keydb63
-
 [minimal]
 centos8-stream-minimal
 rocky8-minimal
@@ -60,6 +39,22 @@ keydb63
 
 [go_toolset]
 go118-toolset
+
+[base8_stream]
+node14
+graphql-engine2-base
+ansible
+
+[base9_stream]
+httpd24
+nginx120
+php80-fpm
+nginx120_php80-fpm
+nfs-ganesha40
+postgres13
+pgbouncer
+go118-toolset
+keydb63
 
 [rootfs:children]
 minimal

@@ -1,4 +1,0 @@
-# builder
-# dockerfile_builder_push: true
-container_builder_image_from: base8-stream
-dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y

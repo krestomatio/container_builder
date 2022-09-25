@@ -2,7 +2,9 @@
 # description: base config for php-fpm
 
 # install pkgs
+{% if php_version_by_module | default(false) %}
 microdnf module enable php:${PHP_VERSION}
+{% endif %}
 install-pkgs ${OS_INSTALL_PKGS}
 
 # php-fpm default config

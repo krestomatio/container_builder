@@ -1,4 +1,4 @@
-graphql_engine_version: 2.0.9
+graphql_engine_version: "{{ graphql_engine_versions.2 }}"
 postgres_major_version: 13
 
 # source dir
@@ -16,5 +16,6 @@ version_image_minor: "{{ graphql_engine_version.split('.')[1] | default(false) }
 version_image_patch: "{{ graphql_engine_version.split('.')[2] | default(false) }}"
 
 # builder
-container_builder_image_from: graphql-engine-base
-dockerfile_builder_image_ocp_tags: "graphql-engine,graphql-engine-{{ graphql_engine_version }}"
+container_builder_image_from: "graphql-engine{{ graphql_engine_version.split('.')[0] | default('') }}-base"
+dockerfile_builder_image_ocp_tags:
+  "graphql-engine,graphql-engine-{{ graphql_engine_version.split('.')[0] }},graphql-engine-{{ graphql_engine_version }}"

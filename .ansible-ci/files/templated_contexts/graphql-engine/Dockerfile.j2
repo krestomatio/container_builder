@@ -1,5 +1,5 @@
 # {{ ansible_managed  }}
-{% if ansible_host == 'graphql-engine-base' %}
+{% if 'base' in ansible_host %}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
@@ -9,8 +9,7 @@ ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 \
 
 RUN microdnf module enable postgresql:${POSTGRES_MAJOR_VERSION} && \
     install-pkgs libpq unixODBC mysql-libs
-{% endif %}
-{% if ansible_host == 'graphql-engine-build' %}
+{% elif 'build' in ansible_host %}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM} AS graphql-engine-builder
 
@@ -52,20 +51,19 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=graphql-engine-build \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="Graphql-engine build image based on {{ dockerfile_builder_image_based }}" \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image" \
     IMAGE_TITLE="Graphql-engine build image based on {{ dockerfile_builder_image_based }}"
 
 COPY --from=graphql-engine-builder /usr/bin/pg_dump /usr/bin/pg_dump
 COPY --from=graphql-engine-builder /bin/graphql-engine /bin/graphql-engine
-{% endif %}
-{% if ansible_host == 'graphql-engine' %}
+{% else %}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=graphql-engine \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_SUMMARY="Graphql-engine image based on {{ dockerfile_builder_image_based }}" \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image" \
     IMAGE_TITLE="Graphql-engine image based on {{ dockerfile_builder_image_based }}"

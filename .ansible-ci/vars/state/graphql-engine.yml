@@ -1,9 +1,0 @@
-#
-# Ansible managed
-#
-graphql_engine_image:
-  build: False
-  tag: "2.0.9"
-  id: "sha256:582c762cc984fe12da0d4fd6b55740b1c3f3b6f82377e2e10181e729d3e65d5c"
-  repo_digest: "quay.io/krestomatio/graphql-engine@sha256:b612c3e3da62252ece5cb2e468fafd7e6d73e5c430793ddd3bd5cbf4a9ac343f"
-  artifact_tag: 2d8942f41d7b2c9f98dabc6343e3da54dfa82996

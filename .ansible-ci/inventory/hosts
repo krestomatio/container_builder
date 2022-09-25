@@ -16,7 +16,7 @@ postgres13
 pgbouncer
 go-toolset
 node14
-graphql-engine-base
+graphql-engine2-base
 keydb63
 
 [minimal]
@@ -46,7 +46,7 @@ httpd24
 nginx120
 nginx120_php80-fpm
 
-[php]
+[php_fpm]
 php80-fpm
 
 [postgres]
@@ -77,9 +77,9 @@ moodle_httpd
 moodle_bundle
 
 [graphql_engine]
-graphql-engine
-graphql-engine-base
-graphql-engine-build
+graphql-engine2
+graphql-engine2-base
+graphql-engine2-build
 
 [node]
 node14
@@ -101,19 +101,19 @@ postgres13
 pgbouncer
 go-toolset
 node14
-graphql-engine-base
+graphql-engine2-base
 keydb63
 
 [build_step_4]
 nginx120_php80-fpm
 ansible-docker-ci
 ansible-podman-ci
-graphql-engine-build
+graphql-engine2-build
 node14-ci
 
 [build_step_5]
 ansible-operator-ci
-graphql-engine
+graphql-engine2
 
 [build_step_6]
 moodle_nginx

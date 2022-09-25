@@ -14,7 +14,7 @@ nginx120_php80-fpm
 nfs-ganesha40
 postgres13
 pgbouncer
-go-toolset
+go118-toolset
 node14
 graphql-engine2-base
 keydb63
@@ -58,6 +58,9 @@ nfs-ganesha40
 [keydb]
 keydb63
 
+[go_toolset]
+go118-toolset
+
 [rootfs:children]
 minimal
 
@@ -99,7 +102,7 @@ nfs-ganesha40
 php80-fpm
 postgres13
 pgbouncer
-go-toolset
+go118-toolset
 node14
 graphql-engine2-base
 keydb63

@@ -1,0 +1,5 @@
+# containers generated build dir
+template_path: "{{ template_dir }}/go-toolset"
+
+# containers generated build dir
+generated_subdir: go-toolset

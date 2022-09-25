@@ -1,6 +1,0 @@
-# platform vars
-go_version_major_minor: 1.17
-
-# builder
-container_builder_image_from: base8
-dockerfile_builder_image_ocp_tags: "go,go-toolset,go-toolset{{ go_version_major_minor }}"

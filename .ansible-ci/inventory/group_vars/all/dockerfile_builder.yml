@@ -15,12 +15,12 @@ keydb_versions:
   63: "{{ keydb_versions_pkg.63 | regex_search(external_release_version_regex) }}"
 nfs_ganesha_versions:
   40: '4.0.9'
-node_version: '14'
-moodle_version: '3.9'
-
+node_versions:
+  14: '14'
 node_version_name:
-  '14': fermium
-  '16': gallium
+  14: fermium
+  16: gallium
+moodle_version: '3.9'
 
 working_dir: "{{ playbook_dir }}"
 

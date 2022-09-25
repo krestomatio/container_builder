@@ -3,9 +3,9 @@ ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=node \
-    IMAGE_SUMMARY="Node image based on {{ dockerfile_builder_image_based }}" \
-    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with node javascript runtime" \
+ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
+    IMAGE_SUMMARY="Nodejs {{ node_version }} image based on {{ dockerfile_builder_image_based }}" \
+    IMAGE_DESCRIPTION="{{ dockerfile_builder_image_based }} based image with node {{ node_version }} javascript runtime" \
     IMAGE_TITLE="Node image based on {{ dockerfile_builder_image_based }}"
 
 # Component bash variables

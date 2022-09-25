@@ -1,4 +1,0 @@
-# builder
-dockerfile_builder_tags:
-- "{{ node_version_name[node_version] }}"
-version_image_full: "{{ node_version }}"

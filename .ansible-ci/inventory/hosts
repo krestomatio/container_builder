@@ -15,7 +15,7 @@ nfs-ganesha40
 postgres13
 pgbouncer
 go-toolset
-node
+node14
 graphql-engine-base
 keydb63
 
@@ -65,7 +65,7 @@ ansible
 ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
-node-ci
+node14-ci
 
 [m4e]
 moodle_nginx
@@ -80,9 +80,9 @@ graphql-engine
 graphql-engine-base
 graphql-engine-build
 
-[nodejs]
-node
-node-ci
+[node]
+node14
+node14-ci
 
 [build_step_1:children]
 minimal
@@ -99,7 +99,7 @@ php80-fpm
 postgres13
 pgbouncer
 go-toolset
-node
+node14
 graphql-engine-base
 keydb63
 
@@ -108,7 +108,7 @@ nginx_php-fpm
 ansible-docker-ci
 ansible-podman-ci
 graphql-engine-build
-node-ci
+node14-ci
 
 [build_step_5]
 ansible-operator-ci

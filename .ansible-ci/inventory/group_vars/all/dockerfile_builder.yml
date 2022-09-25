@@ -84,7 +84,7 @@ dockerfile_builder_image_from_tag: "{{ container_builder_image_tag_from
   if container_builder_image_tag_from is defined
   and container_builder_image_tag_from else false }}"
 dockerfile_builder_image_from: |-
-  {%- if container_builder_image_from is defined and container_builder_image_from -%}
+  {%- if dockerfile_builder_image_from_name | default(false) -%}
   {{ dockerfile_builder_image_from_registry_path }}/{{ dockerfile_builder_image_from_name }}{{ ':' + dockerfile_builder_image_from_tag if dockerfile_builder_image_from_tag else '' }}
   {%- else -%}
   {{ false }}
@@ -93,7 +93,7 @@ dockerfile_builder_arg_image_from_registry_path: "{{ dockerfile_builder_image_fr
 dockerfile_builder_arg_image_from_name: "{{ dockerfile_builder_image_from_name }}"
 dockerfile_builder_arg_image_from_tag: "{{ dockerfile_builder_image_from_tag }}"
 dockerfile_builder_arg_image_from: |-
-  {%- if container_builder_image_from is defined and container_builder_image_from -%}
+  {%- if dockerfile_builder_arg_image_from_name | default(false) -%}
   {{ dockerfile_builder_arg_image_from_registry_path + '/' + dockerfile_builder_arg_image_from_name }}{{ ':' + dockerfile_builder_arg_image_from_tag if dockerfile_builder_arg_image_from_tag else '' }}
   {%- else -%}
   {{ false }}

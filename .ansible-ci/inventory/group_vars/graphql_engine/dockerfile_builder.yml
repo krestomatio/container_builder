@@ -1,5 +1,5 @@
 graphql_engine_version: "{{ graphql_engine_versions.2 }}"
-postgres_major_version: 13
+postgres_version: 13
 
 # source dir
 template_path: "{{ template_dir }}/graphql-engine"

@@ -5,10 +5,14 @@ FROM ${ARG_IMAGE_FROM}
 
 ENV LANG=C.UTF-8 LC_ALL=C.UTF-8 \
     GRAPHQL_ENGINE_VERSION="{{ graphql_engine_version }}" \
-    POSTGRES_MAJOR_VERSION="{{ postgres_major_version }}"
+    POSTGRES_VERSION="{{ postgres_version }}"
 
-RUN microdnf module enable postgresql:${POSTGRES_MAJOR_VERSION} && \
+{% if postgres_version_by_module | default(true) %}
+RUN microdnf module enable postgresql:${POSTGRES_VERSION} && \
     install-pkgs libpq unixODBC mysql-libs
+{% else %}
+RUN install-pkgs libpq unixODBC mysql-libs
+{% endif %}
 {% elif 'build' in ansible_host %}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM} AS graphql-engine-builder
@@ -27,7 +31,7 @@ RUN curl https://gitlab.haskell.org/haskell/ghcup/raw/master/ghcup > /usr/local/
     ghcup install-cabal && \
     cp -rp ~/.ghcup/bin/cabal /usr/local/bin/cabal
 
-RUN git clone -b v${GRAPHQL_ENGINE_VERSION} https://github.com/hasura/graphql-engine /repo/graphql-engine
+RUN git clone --branch v${GRAPHQL_ENGINE_VERSION} --depth 1 https://github.com/hasura/graphql-engine /repo/graphql-engine
 
 WORKDIR /repo/graphql-engine
 

@@ -6,8 +6,8 @@ terraform_module_state: present
 terraform_module_variables:
   prefix_name:
     "{{ [
-          lookup('env','REPO_OWNER') | default('krestomatio',true),
-          lookup('env','REPO_SUBDIR') | default('repo',true),
+          lookup('env','CTR_REPO_OWNER') | default('krestomatio',true),
+          lookup('env','CTR_REPO_SUBDIR') | default('repo',true),
           lookup('env','JOB_NAME') | default('pr',true),
           lookup('env','PULL_NUMBER') | default('0',true),
           lookup('env','BUILD_ID') | default('0',true)

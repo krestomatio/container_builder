@@ -28,9 +28,6 @@ graphql-engine2-build
 
 [node]
 node14
-
-[node_grp]
-node14
 node14-ci
 
 ## container groups
@@ -78,7 +75,6 @@ ansible
 ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
-node14-ci
 
 [moodle_grp:children]
 moodle40_grp

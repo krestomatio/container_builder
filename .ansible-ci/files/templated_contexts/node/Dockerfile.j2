@@ -21,7 +21,11 @@ ENV CTR_CMD="node" \
 # Frequent environment variables
 ENV HOME="${CTR_HOME}"
 
+{% if node_version_by_module | default(true) %}
 RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs
+{% else %}
+RUN containeruser-create; install-pkgs nodejs
+{% endif %}
 
 USER ${CTR_USER_ID}
 

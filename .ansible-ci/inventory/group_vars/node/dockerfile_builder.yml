@@ -1,0 +1,12 @@
+dockerfile_builder_tags:
+- "{{ node_version_name[node_version|int] }}"
+ctr_repo_name: node
+version_image_minor: "{{ version_image_dict.major | default(false) }}"
+version_image_patch: "{{ version_image_dict.minor + version_image_dict.patch
+  if version_image_dict.minor is defined and version_image_dict.patch is defined else false }}"
+
+# containers generated build dir
+template_path: "{{ template_dir }}/node"
+
+# containers generated build dir
+generated_subdir: node

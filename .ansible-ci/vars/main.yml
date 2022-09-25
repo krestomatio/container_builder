@@ -1,5 +1,5 @@
 repo_owner: "{{ lookup('env','REPO_OWNER') | default('krestomatio',true) }}"
-repo_name: "{{ lookup('env','REPO_NAME') | default('container_builder',true) }}"
+repo_subdir: "{{ lookup('env','REPO_SUBDIR') | default('container_builder',true) }}"
 build_cache: "{{ not dockerfile_builder_buildx_multiplatform_cache | default(false) }}"
 build_cache_prepull: "{{ false if dockerfile_builder_use_buildx else true }}"
 build_cache_first_prepull: true
@@ -15,7 +15,7 @@ container_builder_image_tag_from: "{{ lookup('env','BUILD_IMAGE_TAG_FROM') | def
 build_registry_name:
   "{{ lookup('env','BUILD_REGISTRY_NAME') | default('docker-registry.jx.krestomat.io',true) }}"
 build_project_registry_path:
-  "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default(repo_owner+'/'+repo_name,true) }}"
+  "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default(repo_owner+'/'+repo_subdir,true) }}"
 build_registry_path: "{{ lookup('env','BUILD_REGISTRY_PATH') | default(build_registry_name + '/' + build_project_registry_path,true) }}"
 cache_registry_name: "{{ lookup('env','CACHE_REGISTRY_NAME') | default(build_registry_name,true) }}"
 cache_project_registry_path: "{{ lookup('env','CACHE_PROJECT_REGISTRY_PATH') | default(project_registry_path,true) }}"

@@ -33,6 +33,7 @@ working_dir: "{{ playbook_dir }}"
 
 # container
 ctr_name: "{{ inventory_hostname }}"
+ctr_repo_name: "{{ ctr_name }}"
 
 ## state name must comply with ansible variable name convention
 state_name: "{{ ctr_name | replace('-', '_') | lower }}"
@@ -61,8 +62,8 @@ build_registry_project: "{{ registry_project }}"
 build_registry_path: "{{ build_registry_name + '/' if build_registry_name else '' }}{{ build_registry_project }}"
 
 # container image
-container_image: "{{ registry_path }}/{{ ctr_name }}"
-build_container_image: "{{ build_registry_path }}/{{ ctr_name }}"
+container_image: "{{ registry_path }}/{{ ctr_repo_name }}"
+build_container_image: "{{ build_registry_path }}/{{ ctr_repo_name }}"
 
 # regex
 external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)

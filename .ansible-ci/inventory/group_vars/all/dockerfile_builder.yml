@@ -44,6 +44,8 @@ state_file: "{{ state_dir }}/{{ ctr_name }}.yml"
 
 git_repo_dir: "{{  working_dir }}/../"
 version_image_dir: "{{ git_repo_dir }}"
+version_ctr_name: "{{ ctr_name }}"
+version_ctr_repo_name: "{{ ctr_repo_name }}"
 
 # containers template dir
 template_dir: "{{ working_dir }}/files/templated_contexts"
@@ -84,7 +86,6 @@ dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@krestomatio.c
 dockerfile_builder_image_based: CentOS 8 Stream minimal
 dockerfile_builder_image_from_registry_path: "quay.io/krestomatio"
 dockerfile_builder_image_from_repo_name: "{{ image_from_ctr | default(false) }}"
-dockerfile_builder_image_from_repo_name_hash: "{{ image_from_ctr | hash('md5') }}"
 dockerfile_builder_image_from_tag: "{{ image_tag_from_ctr
   if image_tag_from_ctr is defined
   and image_tag_from_ctr else false }}"
@@ -96,10 +97,9 @@ dockerfile_builder_image_from: |-
   {%- endif -%}
 dockerfile_builder_arg_image_from_registry_path: "{{ dockerfile_builder_image_from_registry_path }}"
 dockerfile_builder_arg_image_from_repo_name: "{{ dockerfile_builder_image_from_repo_name }}"
-dockerfile_builder_arg_image_from_repo_name_hash: "{{ dockerfile_builder_image_from_repo_name_hash }}"
 dockerfile_builder_arg_image_from_tag:
-  "{{ dockerfile_builder_arg_image_from_repo_name_hash + '-' + version_commit_tag
-  if version_commit_tag is defined and version_commit_tag else dockerfile_builder_image_from_tag }}"
+  "{{ image_from_ctr if image_from_ctr | default('') != dockerfile_builder_arg_image_from_repo_name | default('')
+  else dockerfile_builder_image_from_tag }}"
 dockerfile_builder_arg_image_from: |-
   {%- if dockerfile_builder_arg_image_from_repo_name | default(false) -%}
   {{ dockerfile_builder_arg_image_from_registry_path + '/' + dockerfile_builder_arg_image_from_repo_name }}{{ ':' + dockerfile_builder_arg_image_from_tag if dockerfile_builder_arg_image_from_tag else '' }}
@@ -107,7 +107,7 @@ dockerfile_builder_arg_image_from: |-
   {{ false }}
   {%- endif -%}
 dockerfile_builder_image: "{{ build_container_image if build_pipeline | default(false)
-  else container_image }}"
+  else container_image }}{{ ':' + ctr_repo_name if ctr_repo_name != ctr_name else '' }}"
 dockerfile_builder_image_name: "{{ ctr_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"

@@ -1,10 +1,14 @@
 dockerfile_builder_tags:
 - "{{ node_version_name[node_version|int] }}"
 ctr_repo_name: node
-version_image_major: "{{ node_version }}"
 
 # containers generated build dir
 template_path: "{{ template_dir }}/node"
 
 # containers generated build dir
 generated_subdir: node
+
+# version tags
+version_image_major: "{{ node_version.split('.')[0] | default(false) }}"
+version_image_minor: "{{ node_version.split('.')[1] | default(false) }}"
+version_image_patch: "{{ node_version.split('.')[2] | default(false) }}"

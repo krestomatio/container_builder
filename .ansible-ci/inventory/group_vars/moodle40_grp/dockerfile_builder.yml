@@ -2,6 +2,7 @@
 moodle_version: "{{ moodle_versions.40 }}"
 nginx_version: "{{ nginx_versions.120 }}"
 php_version: "{{ php_versions.80 }}"
+httpd_version: "{{ httpd_versions.24 }}"
 
 # moodle
 moodle_git_branch: "MOODLE_400_STABLE"

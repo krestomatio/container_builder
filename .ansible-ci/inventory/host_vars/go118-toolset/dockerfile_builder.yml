@@ -2,5 +2,9 @@
 go_version: "{{ go_versions.118 }}"
 go_version_major_minor: "{{ go_version.split('.')[0] + '.' + go_version.split('.')[1] }}"
 
+# containers generated build dir
+template_path: "{{ template_dir }}/go-toolset"
+version_image_suffix: toolset
+
 # builder
 dockerfile_builder_image_ocp_tags: "go,go-toolset,go-toolset{{ go_version_major_minor }}"

@@ -1,2 +1,3 @@
 image_from_ctr: centos8-base
 image_tag_from_ctr: 8-base
+dockerfile_builder_image_from_repo_name: centos

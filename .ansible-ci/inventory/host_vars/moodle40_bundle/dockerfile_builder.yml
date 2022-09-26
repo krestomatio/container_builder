@@ -1,6 +1,8 @@
 # image
 version_image_suffix: bundle
 image_from_ctr: moodle40
+image_tag_from_ctr: "{{ moodle_version }}"
+dockerfile_builder_image_from_repo_name: moodle
 
 # source dir
 template_path: "{{ template_dir }}/moodle_bundle"

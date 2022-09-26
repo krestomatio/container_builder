@@ -1,5 +1,4 @@
-tag_alternative_image_name: "{{ container_image }}"
-dockerfile_builder_tags:
-  - "{{ graphql_engine_version }}"
 dockerfile_builder_build_omit: "{{ false if load_state_yml_tag is not defined else
   (true if load_state_yml_tag | regex_search(external_release_version_regex) == graphql_engine_version else false) }}"
+
+version_image_suffix: build

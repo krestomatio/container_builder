@@ -1,6 +1,8 @@
 # image
 version_image_suffix: httpd
 image_from_ctr: httpd24
+image_tag_from_ctr: "{{ httpd_version }}"
+dockerfile_builder_image_from_repo_name: httpd
 
 # source dir
 template_path: "{{ template_dir }}/moodle_httpd"

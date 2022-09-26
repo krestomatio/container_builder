@@ -14,7 +14,7 @@ httpd24
 nginx120
 nginx120_php80-fpm
 
-[php_fpm]
+[php]
 php80-fpm
 
 [postgres]
@@ -26,7 +26,7 @@ nfs-ganesha40
 [keydb]
 keydb63
 
-[go_toolset]
+[go]
 go118-toolset
 
 [graphql_engine]

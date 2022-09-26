@@ -1,0 +1,7 @@
+# containers generated build dir
+generated_subdir: go
+
+# version tags
+version_image_major: "{{ go_version.split('.')[0] | default(false) }}"
+version_image_minor: "{{ go_version.split('.')[1] | default(false) }}"
+version_image_patch: "{{ go_version.split('.')[2] | default(false) }}"

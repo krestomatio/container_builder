@@ -1,0 +1,10 @@
+# containers generated build dir
+template_path: "{{ template_dir }}/php-fpm"
+
+# containers generated build dir
+generated_subdir: php
+
+# version tags
+version_image_major: "{{ php_version.split('.')[0] | default(false) }}"
+version_image_minor: "{{ php_version.split('.')[1] | default(false) }}"
+version_image_patch: "{{ php_version.split('.')[2] | default(false) }}"

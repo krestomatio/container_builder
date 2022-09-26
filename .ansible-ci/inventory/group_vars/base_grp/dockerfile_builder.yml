@@ -4,3 +4,5 @@ template_path: "{{ template_dir }}/base"
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
 
 prepare_image_task: base
+
+version_image_suffix: base

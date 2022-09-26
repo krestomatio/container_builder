@@ -2,6 +2,8 @@
 nginx_version: "{{ nginx_versions.120 }}"
 php_version: "{{ php_versions.80 }}"
 image_from_ctr: "nginx120"
+image_tag_from_ctr: "{{ nginx_version }}"
+dockerfile_builder_image_from_repo_name: nginx
 dockerfile_builder_image_summary: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}"
 dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION}"
 dockerfile_builder_image_title: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}"

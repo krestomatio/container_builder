@@ -1,4 +1,5 @@
 # image
+version_image_suffix: php-fpm
 container_builder_image_from: php80-fpm
 
 # source dir

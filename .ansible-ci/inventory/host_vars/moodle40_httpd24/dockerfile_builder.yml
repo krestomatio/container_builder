@@ -1,4 +1,5 @@
 # image
+version_image_suffix: httpd
 container_builder_image_from: httpd24
 
 # source dir

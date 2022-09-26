@@ -6,13 +6,6 @@ php_version: "{{ php_versions.80 }}"
 # moodle
 moodle_git_branch: "MOODLE_400_STABLE"
 
-# ci
-prepare_image_task: moodle
-version_release_no_bump: true
-
-# dockerfile
-moodle_app_src: true
-
 moodle_php_pecl_exts:
   - redis
   - sodium

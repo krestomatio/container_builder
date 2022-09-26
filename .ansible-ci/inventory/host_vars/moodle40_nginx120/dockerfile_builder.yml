@@ -1,4 +1,5 @@
 # image
+version_image_suffix: nginx
 container_builder_image_from: nginx120
 
 # source dir

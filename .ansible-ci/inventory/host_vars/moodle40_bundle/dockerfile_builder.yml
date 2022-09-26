@@ -1,4 +1,5 @@
 # image
+version_image_suffix: bundle
 container_builder_image_from: moodle40
 
 # source dir

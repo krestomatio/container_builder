@@ -6,5 +6,5 @@ rm -f /etc/rpm/macros.image-language-conf
 if ! [ -z ${LANG+x} ]; then
     echo "LANG=\"${LANG}\"" > /etc/locale.conf
 fi
-microdnf reinstall filesystem glibc-common glibc-langpack
+${CTR_PKG_MGM} reinstall filesystem glibc-common glibc-langpack
 install-pkgs glibc-all-langpacks

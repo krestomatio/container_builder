@@ -5,7 +5,7 @@ dockerfile_builder_excluded_files:
   - pkg_list_linux_*
 
 # ci
-prepare_image_task: centos-minimal
+prepare_image_task: minimal
 
 # other
 version_release_no_bump: true

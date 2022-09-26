@@ -1,5 +1,8 @@
 node_version: "{{ node_versions.14 }}"
+version_image_suffix: ci
 container_builder_image_from: "node{{ node_version }}"
+dockerfile_builder_tags:
+- "{{ node_version_name[node_version|int] }}-ci"
 
 dockerfile_builder_image_ocp_tags: "node,node{{ node_version }},node-{{ node_version_name[node_version|int] }},node-ci,ci"
 

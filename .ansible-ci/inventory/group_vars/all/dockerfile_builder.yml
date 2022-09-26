@@ -34,6 +34,8 @@ working_dir: "{{ playbook_dir }}"
 # container
 ctr_name: "{{ inventory_hostname }}"
 ctr_repo_name: "{{ ctr_name }}"
+ctr_name_hash: "{{ ctr_name | hash('md5') }}"
+ctr_name_hash_short: "{{ ctr_name_hash[:7] }}"
 
 ## state name must comply with ansible variable name convention
 state_name: "{{ ctr_name | replace('-', '_') | lower }}"

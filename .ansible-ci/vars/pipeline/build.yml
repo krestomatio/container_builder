@@ -5,7 +5,9 @@ pr_commit_tag:
   default(lookup('pipe', 'git rev-parse HEAD 2> /dev/null  || echo')) |
   default(false) }}"
 version_commit_tag: "{{ pr_commit_tag }}"
-version_image_prerelease: "{{ lookup('env','PRERELEASE') | default(version_commit_tag[:7],true) | default(false) }}"
+version_commit_tag_short: "{{ version_commit_tag[:7] }}"
+version_image_prerelease: "{{ lookup('env','PRERELEASE') |
+  default(ctr_name_hash_short + '-' + version_commit_tag_short,true) | default(false) }}"
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 state_yml_relative_path: "{{ generated_relative_path }}"

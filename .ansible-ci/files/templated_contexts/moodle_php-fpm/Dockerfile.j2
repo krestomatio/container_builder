@@ -1,6 +1,6 @@
 # {{ ansible_managed  }}
-{% if moodle_app_src is defined %}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
+{% if moodle_app_src is defined %}
 FROM ${ARG_IMAGE_FROM} AS app-src
 
 # Component bash variables
@@ -42,19 +42,32 @@ ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default('') }}"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
+
 {% endif %}
-{% if moodle_php_redis_build | default(false) %}
-ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
-FROM ${ARG_IMAGE_FROM} AS php-redis-builder
+{% if moodle_php_pecl_exts is defined %}
+FROM ${ARG_IMAGE_FROM} AS php-exts-builder
 
 USER 0
 
-RUN install-pkgs php-pear php-devel make libzstd-devel
+RUN install-pkgs -e php-pear php-devel make libzstd-devel libsodium-devel
+{% if 'redis' in moodle_php_pecl_exts | default([]) %}
+# redis
 RUN pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis
 RUN chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
+{% endif %}
+{% if 'sodium' in moodle_php_pecl_exts | default([]) %}
+# sodium
+RUN pecl install libsodium
+RUN chmod 755 /usr/lib64/php/modules/sodium.so
+{% endif %}
+{% if 'xmlrpc' in moodle_php_pecl_exts | default([]) %}
+# xmlrpc is deprecated: https://tracker.moodle.org/browse/MDL-70889
+RUN pecl install xmlrpc-beta
+RUN chmod 755 /usr/lib64/php/modules/xmlrpc.so
+{% endif %}
+
 
 {% endif %}
-ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
@@ -67,7 +80,8 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
     LANG="en_AU.UTF-8"
 
 # Component bash variables
-ENV MOODLE_VERSION="{{ moodle_version }}" \
+ENV PHP_MAX_INPUT_VARS=5000 \
+    MOODLE_VERSION="{{ moodle_version }}" \
     MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata \
@@ -78,9 +92,21 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-{% if moodle_php_redis_build | default(false) %}
-COPY --from=php-redis-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
-COPY --from=php-redis-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
+{% if 'redis' in moodle_php_pecl_exts | default([]) %}
+COPY --from=php-exts-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
+COPY --from=php-exts-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
+RUN echo "extension = redis.so" > /etc/php.d/50-redis.ini && \
+    echo "extension = igbinary.so" > /etc/php.d/40-igbinary.ini
+{% endif %}
+{% if 'sodium' in moodle_php_pecl_exts | default([]) %}
+COPY --from=php-exts-builder /usr/lib64/php/modules/sodium.so /usr/lib64/php/modules/sodium.so
+RUN install-pkgs -e libsodium && \
+    echo "extension = sodium.so" > /etc/php.d/40-sodium.ini
+{% endif %}
+{% if 'xmlrpc' in moodle_php_pecl_exts | default([]) %}
+# xmlrpc is deprecated: https://tracker.moodle.org/browse/MDL-70889
+COPY --from=php-exts-builder /usr/lib64/php/modules/xmlrpc.so /usr/lib64/php/modules/xmlrpc.so
+RUN echo "extension = xmlrpc.so" > /etc/php.d/40-xmlrpc.ini
 {% endif %}
 
 # Install all locales and timezones

@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-centos8_stream_minimal_image:
-  build: False
-  tag: "8.6.1"
-  repo_digest: "quay.io/krestomatio/centos8-stream-minimal@sha256:aeb0e56891fffa67a8c68605ea2e5bd7f22408af221c3cd6d234bd0f7cc478af"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

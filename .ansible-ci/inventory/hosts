@@ -1,4 +1,12 @@
 ## containers
+[centos:children]
+centos_minimal_grp
+centos_base_grp
+
+[rocky:children]
+rocky_minimal_grp
+rocky_base_grp
+
 [httpd]
 httpd24
 
@@ -34,32 +42,36 @@ node14-ci
 moodle40_grp
 
 ## container groups
-[minimal_grp]
-centos8-stream-minimal
+[centos_minimal_grp]
+centos8-minimal
+centos9-minimal
+
+[centos_base_grp]
+centos8-base
+centos9-base
+
+[rocky_base_grp]
+rocky8-base
+rocky9-base
+
+[rocky_minimal_grp]
 rocky8-minimal
-centos9-stream-minimal
 rocky9-minimal
 
-[centos_grp]
-centos8-stream-minimal
-centos9-stream-minimal
+[minimal_grp:children]
+centos_minimal_grp
+rocky_minimal_grp
 
-[rocky_grp]
-rocky8-minimal
-rocky9-minimal
+[base_grp:children]
+centos_base_grp
+rocky_base_grp
 
-[base_grp]
-base8
-base8-stream
-base9
-base9-stream
-
-[base8_stream_grp]
+[centos8_based_grp]
 node14
 graphql-engine2-base
 ansible
 
-[base9_stream_grp]
+[centos9_based_grp]
 httpd24
 nginx120
 php80-fpm

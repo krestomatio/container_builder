@@ -1,6 +1,6 @@
 # image
 version_image_suffix: php-fpm
-container_builder_image_from: php80-fpm
+image_from_ctr: php80-fpm
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"

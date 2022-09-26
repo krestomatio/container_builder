@@ -1,2 +1,2 @@
-container_builder_image_from: ansible
+image_from_ctr: ansible
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},podman"

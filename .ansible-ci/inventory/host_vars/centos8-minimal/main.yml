@@ -1,0 +1,5 @@
+centos_version: 8
+
+# rootfs
+rootfs_repo_releasever: "{{ centos_version }}"
+rootfs_image_base: quay.io/fedora/fedora-minimal:32

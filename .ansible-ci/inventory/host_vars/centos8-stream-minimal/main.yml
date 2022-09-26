@@ -1,3 +1,0 @@
-# rootfs
-rootfs_repo_releasever: 8
-rootfs_image_base: quay.io/fedora/fedora-minimal:32

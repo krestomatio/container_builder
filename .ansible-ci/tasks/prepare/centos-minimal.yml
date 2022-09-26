@@ -2,7 +2,7 @@
     - not ansible_check_mode
     - ansible_host | regex_search('(centos|rocky)*.*-minimal')
   vars:
-    dockerfile_builder_image: "{{ build_container_image }}:build-cache"
+    dockerfile_builder_image: "{{ build_container_image }}:build-cache-{{ ctr_name }}"
     dockerfile_builder_tags: []
   block:
   - name: build image

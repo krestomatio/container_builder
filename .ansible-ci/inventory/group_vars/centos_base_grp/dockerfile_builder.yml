@@ -1,0 +1,5 @@
+image_from_ctr: "centos{{ centos_version }}-minimal"
+image_tag_from_ctr: "{{ centos_version }}-minimal"
+dockerfile_builder_image_from_repo_name: centos
+dockerfile_builder_image_based: "CentOS {{ centos_version }} Stream minimal"
+dockerfile_builder_image_ocp_tags: "centos,centos{{ centos_version }}-stream"

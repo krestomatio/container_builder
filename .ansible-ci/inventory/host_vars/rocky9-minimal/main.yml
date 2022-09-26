@@ -1,4 +1,6 @@
+rocky_version: 9
+
 # rootfs
-rootfs_repo_releasever: 9
+rootfs_repo_releasever: "{{ rocky_version }}"
 rootfs_image_base: quay.io/fedora/fedora-minimal:34
 rootfs_repo_baseos_gpgkey: 'https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-Rocky-9'

@@ -1,8 +1,0 @@
-#
-# Ansible managed
-#
-rocky8_minimal_image:
-  build: False
-  tag: "8.6.4"
-  repo_digest: "quay.io/krestomatio/rocky8-minimal@sha256:8b0bc85560c78a6df481904d48ce52095bb678c8d3310a56daf3ee51b8a6254e"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26

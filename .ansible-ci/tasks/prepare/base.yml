@@ -1,0 +1,23 @@
+- when:
+    - not ansible_check_mode
+    - ansible_host | regex_search('(centos|rocky)*.*-base')
+  block:
+    - name: pull base image from
+      command: "{{ dockerfile_builder }} pull {{ dockerfile_builder_arg_image_from }}"
+
+    - name: inspect base image from
+      register: prepare_inspect_base_image_from_task
+      changed_when: false
+      throttle: 4
+      command: "{{ dockerfile_builder }} inspect {{ dockerfile_builder_arg_image_from }}"
+
+    - name: set base image version
+      vars:
+        prepare_base_image_inspection: "{{ prepare_inspect_base_image_from_task.stdout | from_json
+          | default([], true) | first | default({}, true) }}"
+        prepare_base_version:
+          "{{ prepare_base_image_inspection.Config.Labels['org.opencontainers.image.version'] }}"
+      set_fact:
+        version_image_major: "{{ prepare_base_version.split('.')[0] | default(false) }}"
+        version_image_minor: "{{ prepare_base_version.split('.')[1] | default(false) }}"
+        version_image_patch: "{{ prepare_base_version.split('.')[2] | default(false) }}"

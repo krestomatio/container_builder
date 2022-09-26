@@ -1,0 +1,5 @@
+image_from_ctr: "rocky{{ rocky_version }}-minimal"
+image_tag_from_ctr: "{{ rocky_version }}-minimal"
+dockerfile_builder_image_from_repo_name: rocky
+dockerfile_builder_image_based: "Rocky Linux {{ rocky_version }} minimal"
+dockerfile_builder_image_ocp_tags: "rocky,rocky{{ rocky_version }}"

@@ -17,9 +17,9 @@
 
 - name: force build if image from is built and changed
   when:
-    - container_builder_image_from is defined and container_builder_image_from
-    - not hostvars[container_builder_image_from].dockerfile_builder_build_omit | default(false)
-    - hostvars[container_builder_image_from].dockerfile_builder_image_build.changed | default(false)
+    - image_from_ctr is defined and image_from_ctr
+    - not hostvars[image_from_ctr].dockerfile_builder_build_omit | default(false)
+    - hostvars[image_from_ctr].dockerfile_builder_image_build.changed | default(false)
   set_fact:
     dockerfile_builder_force_source: true
     dockerfile_builder_force: true

@@ -1,0 +1,8 @@
+# dockerfile_builder
+dockerfile_builder_image_title: Rocky Linux Minimal Image
+
+# rootfs
+rootfs_repo_contentdir: rocky
+rootfs_repo_baseos_name: 'Rocky Linux $releasever - BaseOS'
+rootfs_repo_baseos_mirrorlist: 'https://mirrors.rockylinux.org/mirrorlist?arch=$basearch&repo=BaseOS-$releasever'
+rootfs_release_pkg: rocky-release

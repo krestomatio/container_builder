@@ -1,7 +1,6 @@
 # source dir
 template_path: "{{ template_dir }}/base"
 
-# containers generated build dir
-generated_subdir: base
-
 dockerfile_builder_image_pkgs_mgm: microdnf --setopt=tsflags=nodocs -y
+
+prepare_image_task: base

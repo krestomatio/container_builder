@@ -30,14 +30,18 @@ COPY conf/usr/bin /usr/bin
 
 RUN rootfs
 
+
 # image
 FROM scratch
 
 ARG ARG_ROOTFS_INSTALL_DIR='{{ rootfs_install_dir }}'
 
+ENV IMAGE_VERSION={{ dockerfile_builder_image_version | default('0.0.1') }}
+
 COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
-# Labels
-LABEL org.opencontainers.image.title="{{ dockerfile_builder_image_title | default('Rootfs container image') }}"
-
 CMD ["/bin/bash"]
+
+# Labels
+LABEL org.opencontainers.image.title="{{ dockerfile_builder_image_title | default('Rootfs container image') }}" \
+      org.opencontainers.image.version="{{ dockerfile_builder_image_version | default('0.0.1') }}"

@@ -11,6 +11,8 @@ version_image_prerelease: "{{ lookup('env','PRERELEASE') |
 artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 state_yml_relative_path: "{{ generated_relative_path }}"
+state_yml_prefix_tag: "{{ version_image_prefix | default('') }}"
+state_yml_suffix_tag: "{{ version_image_suffix | default('') }}"
 assertion_artifact_tag: true
 artifact_generated_context_task: upload
 artifact_generated_context_path: "{{ generated_dir }}/*/"

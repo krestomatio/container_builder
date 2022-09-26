@@ -11,6 +11,15 @@
   set_fact:
     doc_ctr_names: "{{ doc_get_ctr_names }}"
 
+- name: generate ctr repo readme
+  when:
+    - doc_generate_ctr_repo_readme | default(false)
+    - ansible_host in groups[ctr_repo_name]
+  template:
+    src: "{{ doc_ctr_repo_readme_src }}"
+    dest: "{{ doc_ctr_repo_readme_dest }}"
+    mode: '0644'
+
 - name: generate project readme
   run_once: true
   when: doc_generate_project_readme | default(false)

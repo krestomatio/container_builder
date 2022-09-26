@@ -4,6 +4,8 @@
 {{ state_name }}_image:
   build: {{ state_yml_build | default('false') | bool }}
   tag: "{{ state_yml_tag }}"
-  repo_digest: "{{ state_yml_repo_digest }}"
   artifact_tag: "{{ state_yml_artifact_tag }}"
+  prefix_tag: "{{ state_yml_prefix_tag | default('') }}"
+  suffix_tag: "{{ state_yml_suffix_tag | default('') }}"
+  repo_digest: "{{ state_yml_repo_digest }}"
   relative_path: "{{ state_yml_relative_path }}"

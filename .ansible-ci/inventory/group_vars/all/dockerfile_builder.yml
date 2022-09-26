@@ -107,7 +107,7 @@ dockerfile_builder_arg_image_from: |-
   {{ false }}
   {%- endif -%}
 dockerfile_builder_image: "{{ build_container_image if build_pipeline | default(false)
-  else container_image }}{{ ':' + ctr_repo_name if ctr_repo_name != ctr_name else '' }}"
+  else container_image }}{{ ':' + ctr_name if ctr_repo_name != ctr_name else '' }}"
 dockerfile_builder_image_name: "{{ ctr_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"

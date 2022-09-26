@@ -44,6 +44,20 @@
       set_fact:
         state_yml_relative_path: "{{ load_state_yml.relative_path }}"
 
+    - name: set state suffix tag
+      when:
+        - state_yml_suffix_tag is not defined
+        - load_state_yml.suffix_tag is defined
+      set_fact:
+        state_yml_suffix_tag: "{{ load_state_yml.suffix_tag }}"
+
+    - name: set state prefix tag
+      when:
+        - state_yml_prefix_tag is not defined
+        - load_state_yml.prefix_tag is defined
+      set_fact:
+        state_yml_prefix_tag: "{{ load_state_yml.prefix_tag }}"
+
 - name: set fact when artifact matches pipeline's
   when:
     - artifact_tag | default(false)

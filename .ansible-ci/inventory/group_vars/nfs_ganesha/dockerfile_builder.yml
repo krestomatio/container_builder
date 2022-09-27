@@ -1,3 +1,5 @@
+ctr_repo_name: nfs-ganesha
+
 # ci
 version_release_no_bump: true
 

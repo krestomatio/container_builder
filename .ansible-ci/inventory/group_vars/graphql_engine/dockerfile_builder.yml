@@ -1,3 +1,4 @@
+ctr_repo_name: graphql-engine
 graphql_engine_version: "{{ graphql_engine_versions.2 }}"
 postgres_version: 13
 dockerfile_builder_tags:

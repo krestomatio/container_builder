@@ -1,3 +1,5 @@
+ctr_repo_name: nginx
+
 # version tags
 version_image_major: "{{ nginx_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ nginx_version.split('.')[1] | default(false) }}"

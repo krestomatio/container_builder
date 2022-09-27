@@ -1,6 +1,6 @@
+ctr_repo_name: node
 dockerfile_builder_tags:
 - "{{ node_version_name[node_version|int] }}"
-ctr_repo_name: node
 
 # version tags
 version_image_major: "{{ node_version.split('.')[0] | default(false) }}"

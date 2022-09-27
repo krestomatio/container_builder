@@ -1,5 +1,4 @@
-# containers generated build dir
-generated_subdir: go
+ctr_repo_name: go
 
 # version tags
 version_image_major: "{{ go_version.split('.')[0] | default(false) }}"

@@ -1,9 +1,3 @@
-# containers generated build dir
-template_path: "{{ template_dir }}/postgres"
-
-# containers generated build dir
-generated_subdir: postgres
-
 # version tags
 version_image_major: "{{ postgres_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ postgres_version.split('.')[1] | default(false) }}"

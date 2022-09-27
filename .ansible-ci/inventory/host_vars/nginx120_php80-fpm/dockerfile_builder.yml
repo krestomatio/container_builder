@@ -1,6 +1,7 @@
 # image
 nginx_version: "{{ nginx_versions.120 }}"
 php_version: "{{ php_versions.80 }}"
+version_image_suffix: php-fpm
 image_from_ctr: "nginx120"
 image_tag_from_ctr: "{{ nginx_version }}"
 dockerfile_builder_image_from_repo_name: nginx

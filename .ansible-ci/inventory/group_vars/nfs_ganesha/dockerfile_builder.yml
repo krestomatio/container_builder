@@ -1,9 +1,3 @@
-# containers generated build dir
-template_path: "{{ template_dir }}/nfs-ganesha"
-
-# containers generated build dir
-generated_subdir: nfs
-
 # ci
 version_release_no_bump: true
 

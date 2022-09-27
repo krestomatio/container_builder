@@ -1,8 +1,8 @@
 # image
 version_image_suffix: nginx_php-fpm
 image_from_ctr: nginx120_php80-fpm
-image_tag_from_ctr: "{{ moodle_version }}-nginx_php-fpm"
-dockerfile_builder_image_from_repo_name: moodle
+image_tag_from_ctr: "{{ nginx_version }}-php-fpm"
+dockerfile_builder_image_from_repo_name: nginx
 dockerfile_builder_image_summary: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION} for Moodle {{ moodle_version }}"
 dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION} for Moodle {{ moodle_version }}"
 dockerfile_builder_image_title: "Nginx ${NGINX_VERSION} for Moodle {{ moodle_version }}"

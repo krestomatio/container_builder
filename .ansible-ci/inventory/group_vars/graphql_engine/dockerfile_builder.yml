@@ -1,14 +1,7 @@
 graphql_engine_version: "{{ graphql_engine_versions.2 }}"
 postgres_version: 13
-tag_alternative_image_name: "{{ container_image }}"
 dockerfile_builder_tags:
   - "{{ graphql_engine_version }}"
-
-# source dir
-template_path: "{{ template_dir }}/graphql-engine"
-
-# containers generated build dir
-generated_subdir: graphql-engine
 
 # ci
 version_release_no_bump: true

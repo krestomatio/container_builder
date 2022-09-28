@@ -1,5 +1,5 @@
 # dockerfile_builder
-dockerfile_builder_image_title: Rocky Linux Minimal Image
+dockerfile_builder_image_title: Rocky {{ rocky_version }} Linux Minimal Image
 
 # rootfs
 rootfs_repo_contentdir: rocky

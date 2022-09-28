@@ -1,1 +1,2 @@
 ctr_repo_name: rocky
+ctr_version: "{{ rocky_version }}"

@@ -3,7 +3,7 @@
 - name: save state related vars
   when:
     - state_vars_save | default(true)
-    - state_yml_tag is defined and state_yml_tag
+    - state_yml_version is defined and state_yml_version
     - state_yml_repo_digest is defined and state_yml_repo_digest
     - not ansible_check_mode
   template:

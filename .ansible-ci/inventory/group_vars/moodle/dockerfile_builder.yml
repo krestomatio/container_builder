@@ -1,5 +1,7 @@
 ctr_repo_name: moodle
+ctr_version: "{{ moodle_version }}"
 
+promote_pushrm_file: "{{ doc_generate_ctr_repo_readme_dest }}"
 dockerfile_builder_image_git_remote: "https://github.com/moodle/moodle.git"
 moodle_git_refs_json:
   url: "{{ 'https://api.github.com/repos/moodle/moodle/git/refs/heads/' +

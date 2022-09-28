@@ -1,10 +1,12 @@
-version_include_major_minor_tags: "{{ release_version_include_major_minor_tags | default(true) }}"
 git_add_path: >-
   '{{ state_file }}'
   '{{ dockerfile_builder_path }}'
   '{{ updatebot_ansible_collection_template_dest }}'"
   {% if doc_generate_project_readme | default(false) %}
   '{{ doc_generate_project_readme_dest }}'
+  {% endif %}
+  {% if doc_generate_ctr_repo_readme | default(false) %}
+  '{{ doc_generate_ctr_repo_readme_dest }}'
   {% endif %}
 git_add_throttle: 1
 git_commit_msgs:

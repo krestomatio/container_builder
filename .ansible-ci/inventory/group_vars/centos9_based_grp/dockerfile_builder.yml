@@ -1,3 +1,4 @@
 image_from_ctr: centos9-base
 image_tag_from_ctr: 9-base
 dockerfile_builder_image_from_repo_name: centos
+dockerfile_builder_image_based: "CentOS 9 Stream minimal"

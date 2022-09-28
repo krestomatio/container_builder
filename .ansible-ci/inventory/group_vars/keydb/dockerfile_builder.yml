@@ -1,4 +1,5 @@
 ctr_repo_name: keydb
+ctr_version: "{{ keydb_version }}"
 
 # ci
 version_release_no_bump: true

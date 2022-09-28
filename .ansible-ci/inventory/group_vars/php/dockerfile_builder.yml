@@ -1,4 +1,5 @@
 ctr_repo_name: php
+ctr_version: "{{ php_version }}"
 template_path: "{{ template_dir }}/php-fpm"
 
 # version tags

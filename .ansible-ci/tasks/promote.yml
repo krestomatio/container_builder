@@ -6,7 +6,7 @@
     - version_image_dict is not defined or not version_image_dict
     - version_release_no_bump | default(false)
   vars:
-    version_release_dict: "{{ state_yml_tag | default('0.0.1') | release_version_dict }}"
+    version_release_dict: "{{ state_yml_version | default('0.0.1') | release_version_dict }}"
   set_fact:
     version_image_dict: "{{ version_release_dict }}"
     version_image_full: "{{ version_release_dict.full }}"

@@ -1,4 +1,5 @@
 ctr_repo_name: postgres
+ctr_version: "{{ postgres_version }}"
 
 # version tags
 version_image_major: "{{ postgres_version.split('.')[0] | default(false) }}"

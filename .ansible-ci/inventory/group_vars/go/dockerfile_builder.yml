@@ -1,4 +1,5 @@
 ctr_repo_name: go
+ctr_version: "{{ go_version }}"
 
 # version tags
 version_image_major: "{{ go_version.split('.')[0] | default(false) }}"

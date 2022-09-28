@@ -1,4 +1,8 @@
-Node image based on {{ dockerfile_builder_image_based }} for Continuous Integration (CI). It contains node javascript runtime and other tools for build node apps in CI.
+{% if ctr_readme_section is defined %}
+{{ ctr_readme_section }}
+{% else %}
+### {{ ctr_readme_section_variant_title }}
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
 
-## Repository
-This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+Node image based on {{ dockerfile_builder_image_based }} for Continuous Integration (CI). It contains node javascript runtime and other tools for build node apps in CI.
+{% endif %}

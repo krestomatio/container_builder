@@ -1,4 +1,5 @@
 ctr_repo_name: nfs-ganesha
+ctr_version: "{{ nfs_ganesha_version }}"
 
 # ci
 version_release_no_bump: true

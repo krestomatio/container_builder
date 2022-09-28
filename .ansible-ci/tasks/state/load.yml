@@ -17,11 +17,11 @@
   block:
     - name: set state tag
       when:
-        - state_yml_tag is not defined
-        - load_state_yml.tag is defined
+        - state_yml_version is not defined
+        - load_state_yml.version is defined
       set_fact:
-        state_yml_tag: "{{ load_state_yml.tag }}"
-        load_state_yml_tag: "{{ load_state_yml.tag }}"
+        state_yml_version: "{{ load_state_yml.version }}"
+        load_state_yml_version: "{{ load_state_yml.version }}"
 
     - name: set state repo digest
       when:
@@ -44,19 +44,19 @@
       set_fact:
         state_yml_relative_path: "{{ load_state_yml.relative_path }}"
 
-    - name: set state suffix tag
+    - name: set state tags
       when:
-        - state_yml_suffix_tag is not defined
-        - load_state_yml.suffix_tag is defined
+        - state_yml_tags is not defined
+        - load_state_yml.tags is defined
       set_fact:
-        state_yml_suffix_tag: "{{ load_state_yml.suffix_tag }}"
+        state_yml_tags: "{{ load_state_yml.tags }}"
 
-    - name: set state prefix tag
+    - name: set state image name
       when:
-        - state_yml_prefix_tag is not defined
-        - load_state_yml.prefix_tag is defined
+        - state_yml_name is not defined
+        - load_state_yml.name is defined
       set_fact:
-        state_yml_prefix_tag: "{{ load_state_yml.prefix_tag }}"
+        state_yml_name: "{{ load_state_yml.name }}"
 
 - name: set fact when artifact matches pipeline's
   when:

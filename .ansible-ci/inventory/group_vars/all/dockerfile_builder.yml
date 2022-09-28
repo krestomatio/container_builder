@@ -120,8 +120,8 @@ dockerfile_builder_throttle: 4
 
 # doc
 doc_generate_project_readme: true
-doc_project_readme_src: README.md.j2
-doc_project_readme_dest: "{{ git_repo_dir }}/README.md"
+doc_generate_project_readme_src: README.md.j2
+doc_generate_project_readme_dest: "{{ git_repo_dir }}/README.md"
 
 # updatebot
 updatebot_ansible_collection_template_src: updatebot-ansible-collection.yaml.j2

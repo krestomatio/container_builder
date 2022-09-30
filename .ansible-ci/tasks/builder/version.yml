@@ -75,13 +75,15 @@
   when: version_include_fallback_tags | default(false)
   block:
     - name: add ctr name plus commit tag
+      vars:
+        _version_image_name_commit_tag: "{{ version_ctr_name + '-' + version_commit_tag }}"
       when:
         - version_ctr_name | default('') != version_ctr_repo_name | default('')
         - version_commit_tag is defined and version_commit_tag
       set_fact:
-        version_image_name_commit_tag: "{{ version_ctr_name + '-' + version_commit_tag }}"
+        version_image_name_commit_tag: "{{ _version_image_name_commit_tag }}"
         dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-          + [version_image_name_commit_tag] }}"
+          + [_version_image_name_commit_tag] }}"
 
     - name: add tag based on commit of version tag
       when: version_image_dict.commit is defined and version_image_dict.commit
@@ -98,7 +100,7 @@
 - name: set container image derivative tags from main version, suffix and prefix
   when: version_image_derivative_tag_list | default([]) | length > 0
   vars:
-    version_image_derivative_tag_list: >-
+    version_image_derivative_tags_string: >-
       {%- set _version_image_derivative_tags = [] -%}
       {%- if (ctr_version is defined and (ctr_version | string).split('.') | length == 1) or ctr_version is not defined -%}
       {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
@@ -111,11 +113,11 @@
       {{- _version_image_derivative_tags.append(version_image_name_commit_tag) -}}
       {%- endif -%}
       {{- _version_image_derivative_tags | join(',') -}}
+    version_image_derivative_tag_list:
+      "{{ version_image_derivative_tags_string.split(',') | default([]) +
+      version_image_derivative_extra_tags | default([]) }}"
   set_fact:
     version_image_derivative_tags: "{{ version_image_derivative_tags | default([])
-      + version_image_derivative_tag_list.split(',')
-      + version_image_derivative_extra_tags | default([]) }}"
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-      + version_image_derivative_tags | default([])
-      + version_image_derivative_tag_list.split(',')
-      + version_image_derivative_extra_tags | default([]) }}"
+      + version_image_derivative_tag_list }}"
+    dockerfile_builder_tags: "{{ (dockerfile_builder_tags | default([])
+      + version_image_derivative_tag_list) | unique | sort }}"

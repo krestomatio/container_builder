@@ -53,10 +53,10 @@
 
     - name: set state image name
       when:
-        - state_yml_name is not defined
-        - load_state_yml.name is defined
+        - state_yml_variant_name is not defined
+        - load_state_yml.variant_name is defined
       set_fact:
-        state_yml_name: "{{ load_state_yml.name }}"
+        state_yml_variant_name: "{{ load_state_yml.variant_name }}"
 
 - name: set fact when artifact matches pipeline's
   when:

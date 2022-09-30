@@ -6,11 +6,7 @@ This project builds containers using Ansible. The containers are defined as host
 |---|---|---|
 {% for ctr in doc_ctr_names | default(ansible_play_hosts,true) %}
 {% set ctr_state = lookup('vars', ctr | replace('-', '_') | lower + '_image',default=False) %}
-{% set
-    ctr_state_full_tag = ctr_state.prefix_tag | default('') + ctr_state.tag +
-    ('-' + ctr_state.suffix_tag | default('') | string if ctr_state.suffix_tag | default('') | string != '' else '')
-%}
-| [{{ ctr }}]({{ ctr_state.relative_path | default(ctr) }}/)| [{{ ctr_state.repo_digest.split('@')[0] }}](https://{{ ctr_state.repo_digest.split('@')[0] }}) | {{ ctr_state_full_tag }} |
+| [{{ ctr_state.name }}]({{ ctr_state.relative_path | default(ctr) }}/)| [{{ ctr_state.repo_digest.split('@')[0] }}](https://{{ ctr_state.repo_digest.split('@')[0].split(':')[0] }}) | {{ ctr_state.version }} |
 {% endfor %}
 
 ### How to build them?

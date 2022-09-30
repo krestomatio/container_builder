@@ -2,7 +2,10 @@
 # Ansible managed
 #
 ansible_docker_ci_image:
-  build: False
-  tag: "0.2.6"
-  repo_digest: "quay.io/krestomatio/ansible-docker-ci@sha256:40701d468f2465936afb5d9da7473389f6e2555314587d18d17aa2ca4b4e2899"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26
+  name: "ansible-docker-ci"
+  build: True
+  version: "0.0.2-a4bcef2-bbe1276"
+  tags: "0,0.0,0.0.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-docker-ci@sha256:fb3084e21f99ffc27cd1e22898338fcaa1d556b531cf1323b069106392ed9796"
+  relative_path: "ci/ansible-docker-ci"

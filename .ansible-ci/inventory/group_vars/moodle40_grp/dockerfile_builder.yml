@@ -1,3 +1,5 @@
+dockerfile_builder_image_based: "CentOS 9 Stream minimal"
+
 # containers generated build dir
 moodle_version: "{{ moodle_versions.40 }}"
 nginx_version: "{{ nginx_versions.120 }}"

@@ -2,7 +2,10 @@
 # Ansible managed
 #
 ansible_podman_ci_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:fb18d8b25c68a63a1f80ce7c10756bbd638c3a2b13c1ef08a8ac4e82388bfb73"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26
+  name: "ansible-podman-ci"
+  build: True
+  version: "0.0.2-effff65-bbe1276"
+  tags: "0,0.0,0.0.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-podman-ci@sha256:995001b2b605624d093c8d0637a3d1e7c9f8941110241b3344bab9778381dfaa"
+  relative_path: "ci/ansible-podman-ci"

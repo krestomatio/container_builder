@@ -13,7 +13,7 @@
         - version_image_dict is not defined or not version_image_dict
       set_fact:
         version_image_dict:
-          "{{ state_yml_tag | default('0.0.1') | next_version_dict(version_image_bump|default('patch')) }}"
+          "{{ state_yml_version | default('0.0.1') | next_version_dict(version_image_bump|default('patch')) }}"
 
     - when: version_image_dict is defined
       block:
@@ -57,7 +57,7 @@
 
 - name: update state image tag
   set_fact:
-    state_yml_tag: "{{ version_image_full }}"
+    state_yml_version: "{{ version_image_full }}"
 
 - name: set container image version
   when:
@@ -106,38 +106,22 @@
         dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
           + [version_custom_tag] }}"
 
-- name: set container image tags based on major and minor version
+- name: set container image derivative tags from main version, suffix and prefix
   when:
-    - version_include_major_minor_tags | default(false) | bool
-    - version_image_major is defined
-    - version_image_minor is defined
+    - version_image_derivative_tags is not defined or not version_image_derivative_tags
+    - version_image_derivative_tag_list | default([]) | length > 0
+  vars:
+    version_image_derivative_tag_list: >-
+      {%- set _version_image_derivative_tags = [] -%}
+      {%- if (ctr_version is defined and (ctr_version | string).split('.') | length == 1) or ctr_version is not defined -%}
+      {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
+      {%- endif -%}
+      {%- if (ctr_version is defined and (ctr_version | string).split('.') | length <= 2) or ctr_version is not defined -%}
+      {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + '.' + version_image_minor + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
+      {%- endif -%}
+      {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
+      {{- _version_image_derivative_tags | join(',') -}}
   set_fact:
+    version_image_derivative_tags: "{{ version_image_derivative_tag_list.split(',') }}"
     dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-      + [version_image_major + '.' + version_image_minor]
-      + [version_image_major] }}"
-
-- name: add suffix to container image tags based on major, minor and patch version
-  when:
-    - version_include_major_minor_tags | default(false) | bool
-    - version_image_suffix is defined
-    - version_image_major is defined
-    - version_image_minor is defined
-    - version_image_patch is defined
-  set_fact:
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-      + [version_image_major + '.' + version_image_minor + '.' + version_image_patch + '-' + version_image_suffix]
-      + [version_image_major + '.' + version_image_minor + '-' + version_image_suffix]
-      + [version_image_major + '-' + version_image_suffix] }}"
-
-- name: add prefix to container image tags based on major, minor and patch version
-  when:
-    - version_include_major_minor_tags | default(false) | bool
-    - version_image_prefix is defined
-    - version_image_major is defined
-    - version_image_minor is defined
-    - version_image_patch is defined
-  set_fact:
-    dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
-      + [version_image_major + '.' + version_image_minor + '.' + version_image_patch + '-' + version_image_prefix]
-      + [version_image_major + '.' + version_image_minor + '-' + version_image_prefix]
-      + [version_image_major + '-' + version_image_prefix] }}"
+      + version_image_derivative_tag_list.split(',') }}"

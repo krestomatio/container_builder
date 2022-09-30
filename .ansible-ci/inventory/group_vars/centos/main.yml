@@ -1,1 +1,3 @@
 ctr_repo_name: centos
+
+ctr_version: "{{ centos_version }}"

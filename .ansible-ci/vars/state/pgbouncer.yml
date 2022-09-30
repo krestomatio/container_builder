@@ -2,7 +2,10 @@
 # Ansible managed
 #
 pgbouncer_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:df87e9cc5b41ebd2e66610160afc1ec7f2fa4bcbeaaf6417e10cbb5be7a918e7"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26
+  name: "pgbouncer"
+  build: True
+  version: "0.0.2-44b26af-bbe1276"
+  tags: "0,0.0,0.0.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/pgbouncer@sha256:e763d4cf1d2cf516f78af1a56dca589b71bc23c95fd36f1a31ec5adcb9ba3794"
+  relative_path: "pgbouncer"

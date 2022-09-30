@@ -1,5 +1,5 @@
 # dockerfile_builder
-dockerfile_builder_image_title: CentOS Stream Minimal Image
+dockerfile_builder_image_title: CentOS {{ centos_version }} Stream Minimal Image
 
 # rootfs
 rootfs_repo_contentdir: centos

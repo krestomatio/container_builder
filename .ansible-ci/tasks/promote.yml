@@ -6,12 +6,13 @@
     - version_image_dict is not defined or not version_image_dict
     - version_release_no_bump | default(false)
   vars:
-    version_release_dict: "{{ state_yml_tag | default('0.0.1') | release_version_dict }}"
+    version_release_dict: "{{ state_yml_version | default('0.0.1') | release_version_dict }}"
   set_fact:
     version_image_dict: "{{ version_release_dict }}"
     version_image_full: "{{ version_release_dict.full }}"
     version_image_major: "{{ version_release_dict.major }}"
     version_image_minor: "{{ version_release_dict.minor }}"
+    version_image_patch: "{{ version_release_dict.patch }}"
 
 - name: set image version related facts
   include_tasks: tasks/builder/version.yml

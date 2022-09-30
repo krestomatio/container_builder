@@ -34,6 +34,13 @@ working_dir: "{{ playbook_dir }}"
 # container
 ctr_name: "{{ inventory_hostname }}"
 ctr_repo_name: "{{ ctr_name }}"
+ctr_variant_name: >-
+  {%- if ctr_repo_name == ctr_name -%}
+  {{ ctr_repo_name }}
+  {%- else -%}
+  {{ ctr_repo_name }}:{{ ctr_version }}{{ '-' + version_image_suffix if
+  version_image_suffix is defined and version_image_suffix else '' }}
+  {%- endif -%}
 ctr_name_hash: "{{ ctr_name | hash('md5') }}"
 ctr_name_hash_short: "{{ ctr_name_hash[:7] }}"
 
@@ -52,10 +59,10 @@ template_dir: "{{ working_dir }}/files/templated_contexts"
 template_path: "{{template_dir }}/{{ ctr_repo_name }}"
 
 # containers generated build dir
-generated_dir: "{{  working_dir }}/..{{ '/' + generated_subdir + '/' if
-  generated_subdir != '' else '' }}"
+generated_dir: "{{  working_dir }}/.."
 generated_subdir: "{{ ctr_repo_name if ctr_repo_name != ctr_name else '' }}"
-generated_path: "{{ generated_dir }}/{{ ctr_name }}"
+generated_path: "{{ generated_dir }}{{ '/' + generated_subdir + '/' if
+  generated_subdir != '' else '' }}/{{ ctr_name }}"
 generated_relative_path: "{{ generated_path | relpath(working_dir + '/..') }}"
 
 # registry
@@ -85,7 +92,6 @@ dockerfile_builder_platforms:
 dockerfile_builder_push: "{{ true if dockerfile_builder_use_buildx else false }}"
 dockerfile_builder_image_timezone: UTC
 dockerfile_builder_image_authors: Job Céspedes Ortiz <jobcespedes@krestomatio.com>
-dockerfile_builder_image_based: CentOS 8 Stream minimal
 dockerfile_builder_image_from_registry_path: "quay.io/krestomatio"
 dockerfile_builder_image_from_repo_name: "{{ image_from_ctr | default('') }}"
 dockerfile_builder_image_from_tag: "{{ image_tag_from_ctr
@@ -111,7 +117,7 @@ dockerfile_builder_arg_image_from: |-
   {%- endif -%}
 dockerfile_builder_image: "{{ build_container_image if build_pipeline | default(false)
   else container_image }}{{ ':' + ctr_name if ctr_repo_name != ctr_name else '' }}"
-dockerfile_builder_image_name: "{{ ctr_name }}"
+dockerfile_builder_image_name: "{{ ctr_variant_name }}"
 dockerfile_builder_path: "{{ generated_path }}"
 dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
@@ -119,9 +125,18 @@ dockerfile_builder_pull: "{{ true if dockerfile_builder_use_buildx else false }}
 dockerfile_builder_throttle: 4
 
 # doc
+ctr_readme_section_variant_title: "{{ ctr_variant_name }}"
 doc_generate_project_readme: true
 doc_generate_project_readme_src: README.md.j2
 doc_generate_project_readme_dest: "{{ git_repo_dir }}/README.md"
+doc_generate_ctr_repo_readme: "{{ true if ctr_repo_name != ctr_name else false }}"
+doc_generate_ctr_repo_readme_src: CTR-REPO-README.md.j2
+doc_generate_ctr_repo_readme_dest: "{{ generated_path }}/../README.md"
+
+# pushrm
+promote_pushrm_bin: docker-pushrm
+promote_pushrm_file: "{{ doc_generate_ctr_repo_readme_dest if ctr_repo_name != ctr_name else generated_path + '/README.md' }}"
+promote_pushrm_image: "{{ container_image }}"
 
 # updatebot
 updatebot_ansible_collection_template_src: updatebot-ansible-collection.yaml.j2

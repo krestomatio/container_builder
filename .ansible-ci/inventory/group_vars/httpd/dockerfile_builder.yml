@@ -1,4 +1,5 @@
 ctr_repo_name: httpd
+ctr_version: "{{ httpd_version }}"
 
 # version tags
 version_image_major: "{{ httpd_version.split('.')[0] | default(false) }}"

@@ -2,7 +2,10 @@
 # Ansible managed
 #
 ansible_image:
-  build: False
-  tag: "0.2.5"
-  repo_digest: "quay.io/krestomatio/ansible@sha256:361bbd2ff0fb2f1d7c66ee59f53ec01384cdd0fa72bd96d4f85888e853be2e13"
-  artifact_tag: 078d0e52d74cc69bac249372d76e4a938d02eb26
+  name: "ansible"
+  build: True
+  version: "0.0.2-640c8a5-bbe1276"
+  tags: "0,0.0,0.0.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible@sha256:71712e1864521cbda99487068968256445365ed6742d03ed168c9c4dd0308a98"
+  relative_path: "ci/ansible"

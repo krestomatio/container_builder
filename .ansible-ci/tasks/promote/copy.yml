@@ -1,13 +1,18 @@
-- name: copy image using skopeo
+- name: copy
   vars:
-    skopeo_src_image: "{{ lookup('vars', state_name + '_image').repo_digest }}"
-    skopeo_dest_image: "{{ container_image }}"
-  include_tasks: skopeo.yml
+    skopeo_src_image_repo_digest: "{{ lookup('vars', state_name + '_image').repo_digest }}"
+    skopeo_src_image_name: "{{ skopeo_src_image_repo_digest.split('@')[0] }}"
+    skopeo_src_image_variant_name: "{{ skopeo_src_image_name.split(':')[1] | default('') }}"
+    skopeo_src_image_digest: "{{ skopeo_src_image_repo_digest.split('@')[1] }}"
+    skopeo_src_image: "{{ skopeo_src_image_name.split(':')[0] + '@' + skopeo_src_image_digest }}"
+    skopeo_dest_image: "{{ container_image + ':' + skopeo_src_image_variant_name if
+      skopeo_src_image_variant_name != '' else container_image }}"
+  block:
+    - name: copy image using skopeo
+      include_tasks: skopeo.yml
 
-- name: copy image tags using skopeo
-  vars:
-    skopeo_src_image: "{{ lookup('vars', state_name + '_image').repo_digest }}"
-    skopeo_dest_image: "{{ container_image }}"
-    skopeo_dest_image_tag: "{{ item }}"
-  loop: "{{ dockerfile_builder_tags }}"
-  include_tasks: skopeo.yml
+    - name: copy image tags using skopeo
+      vars:
+        skopeo_dest_image_tag: "{{ item }}"
+      loop: "{{ dockerfile_builder_tags }}"
+      include_tasks: skopeo.yml

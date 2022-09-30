@@ -11,10 +11,5 @@ template_path: "{{ template_dir }}/moodle_bundle"
 prepare_image_task: moodle
 version_release_no_bump: true
 
-# version
-version_image_major: "{{ hostvars[image_from_ctr].moodle_git_source_version.split('.')[0] | default(false) }}"
-version_image_minor: "{{ hostvars[image_from_ctr].moodle_git_source_version.split('.')[1] | default(false) }}"
-version_image_patch: "{{ hostvars[image_from_ctr].moodle_git_source_version.split('.')[2] | default(false) }}"
-
 # moodle
 moodle_plugin_list: mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist

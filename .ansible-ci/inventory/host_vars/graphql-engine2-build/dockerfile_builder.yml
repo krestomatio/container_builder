@@ -1,4 +1,4 @@
-dockerfile_builder_build_omit: "{{ false if load_state_yml_tag is not defined else
-  (true if load_state_yml_tag | regex_search(external_release_version_regex) == graphql_engine_version else false) }}"
+dockerfile_builder_build_omit: "{{ false if load_state_yml_version is not defined else
+  (true if load_state_yml_version | regex_search(external_release_version_regex) == graphql_engine_version else false) }}"
 
 version_image_suffix: build

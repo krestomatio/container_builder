@@ -1,4 +1,5 @@
 ctr_repo_name: graphql-engine
+ctr_version: "{{ graphql_engine_version }}"
 graphql_engine_version: "{{ graphql_engine_versions.2 }}"
 postgres_version: 13
 dockerfile_builder_tags:
@@ -18,3 +19,5 @@ image_tag_from_ctr: 9-base
 dockerfile_builder_image_from_repo_name: centos
 dockerfile_builder_image_ocp_tags:
   "graphql-engine,graphql-engine-{{ graphql_engine_version.split('.')[0] }},graphql-engine-{{ graphql_engine_version }}"
+
+dockerfile_builder_image_based: "CentOS 8 Stream minimal"

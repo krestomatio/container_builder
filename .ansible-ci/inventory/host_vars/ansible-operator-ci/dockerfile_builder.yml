@@ -5,3 +5,4 @@ kubectl_version: 1.23.6
 
 image_from_ctr: ansible-podman-ci
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ operator_version }}"
+dockerfile_builder_image_based: "CentOS 8 Stream minimal"

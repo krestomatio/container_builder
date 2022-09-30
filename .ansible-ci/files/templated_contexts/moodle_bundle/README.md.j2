@@ -1,6 +1,12 @@
-Extends [{{ hostvars[image_from_ctr].ctr_name }} container image](https://{{ hostvars[image_from_ctr].container_image }}) to add additional Moodle plugins.
+{% if ctr_readme_section is defined %}
+{{ ctr_readme_section }}
+{% else %}
+### {{ ctr_readme_section_variant_title }}
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
 
-## Details
+Extends [{{ ctr_repo_name }}:{{ moodle_version }}](#{{ ctr_repo_name }}{{ moodle_version | replace('.','') }}) to add additional Moodle plugins.
+
+#### Details
 {% if dockerfile_builder_image_git_remote is defined %}
 * Moodle remote repo: {{ dockerfile_builder_image_git_remote }}
 {% endif %}
@@ -17,10 +23,9 @@ Extends [{{ hostvars[image_from_ctr].ctr_name }} container image](https://{{ hos
 * Moodle remote branch: {{ moodle_git_branch | replace('_','\_') }}
 {% endif %}
 
-## Plugins
+#### Plugins
 The following is the list of plugins:
 {% for plugin in moodle_plugin_list.split() %}
 - [{{ plugin }}](https://moodle.org/plugins/{{ plugin }})
 {% endfor %}
-## Repository
-This image is built from [this repo](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+{% endif %}

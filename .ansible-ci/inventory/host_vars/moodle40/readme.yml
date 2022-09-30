@@ -1,10 +1,13 @@
 # readme
 ctr_readme_section: |-
+  ### {{ ctr_repo_name }}:{{ moodle_version }}
+  > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+
   This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }} (default) or NGINX {{ nginx_version }} for Moodle {{ moodle_version }}. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
 
   It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
-  ## Details
+  #### Details
   {% if dockerfile_builder_image_git_remote is defined %}
   * Moodle remote repo: {{ dockerfile_builder_image_git_remote }}
   {% endif %}
@@ -22,31 +25,31 @@ ctr_readme_section: |-
   {% endif %}
 
   {% if moodle_app_src is defined %}
-  ## Custom builds
+  #### Custom builds
   This Dockerfile allows setting OS extra packages, Moodle remote repo, Moodle repo branch and/or additional Moodle plugins. For that purpose, use build args to customize the build as you need.
 
-  ### Extra packages
+  ##### Extra packages
   For building with OS extra packages, use `ARG_INSTALL_EXTRA_PKGS`:
   ```
   docker build . -t my_moodle_image:my_tag \
       --build-arg ARG_INSTALL_EXTRA_PKGS='php-xdebug php-mysqlnd'
   ```
 
-  ### Moodle remote
+  ##### Moodle remote
   For building from a different Moodle remote, use `ARG_GIT_REMOTE`:
   ```
   docker build . -t my_moodle_image:my_tag \
       --build-arg ARG_GIT_REMOTE='https://github.com/moodle/moodle.git'
   ```
 
-  ### Moodle branch
+  ##### Moodle branch
   For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
   ```
   docker build . -t my_moodle_image:my_tag \
       --build-arg ARG_GIT_BRANCH='{{ moodle_git_branch }}'
   ```
 
-  ### Moodle plugins
+  ##### Moodle plugins
   For installing plugins while building the main Dockerfile (slower), use `ARG_MOODLE_PLUGIN_LIST`:
   ```
   docker build . -t my_moodle_image:my_tag \
@@ -74,9 +77,9 @@ ctr_readme_section: |-
   ```
   {% endif %}
 
-  ## PHP-FPM or NGINX
+  #### PHP-FPM or NGINX
   The image packs both programs: PHP-FPM and Nginx. However, it only runs one, with a non-root user. This design is for those programs to run in different containers, using one image. By default, in a Kubernetes cluster, it runs php-fpm with user 48. For nginx, set pod args to 'nginx' and run it as user 999. For a OKD cluster, setting args to `nginx` will suffice.
-  ### Configuration files
+  ##### Configuration files
   For adjusting PHP-FPM or Nginx config, just place the .ini or .conf files in the respective folders.
   - `/etc/php.d/`: PHP .ini extra configuration
   - `/etc/php-fpm.d/`: PHP-FPM .conf extra configuration

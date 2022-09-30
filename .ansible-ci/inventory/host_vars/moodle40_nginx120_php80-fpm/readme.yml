@@ -1,0 +1,6 @@
+# readme
+ctr_readme_section: |-
+  ### {{ ctr_repo_name }}:{{ moodle_version }}-{{ version_image_suffix }}
+  > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+
+  Image based on {{ dockerfile_builder_image_based }} with [nginx HTTP Server](https://nginx.org/) and [PHP-FPM](https://php-fpm.org/) for Moodle app/source (not included)

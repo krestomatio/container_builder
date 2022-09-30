@@ -10,9 +10,12 @@ prepare_image_task: minimal
 # other
 version_release_no_bump: true
 ctr_readme_section: |-
+  ### {{ ctr_readme_section_variant_title }}
+  > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+
   This is a {{ dockerfile_builder_image_title }}, similar to Fedora-minimal or UBI.
 
-  ## How image is built?
+  ## How the image is built?
   ```bash
   docker build . -t "{{ container_image }}"
   ```

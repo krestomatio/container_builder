@@ -1,0 +1,38 @@
+{%- set ctr_repo_variant_readmes = [] -%}
+{%- if ctr_repo_variant_readmes | length == 0 -%}
+{%-   for ctr_repo_variant in groups[ctr_repo_name | replace('-', '_')] | sort -%}
+{{- ctr_repo_variant_readmes.append(doc_generate_ctr_repo_readme_dest | dirname | realpath + '/' + ctr_repo_variant + '/README.md') -}}
+{%-   endfor -%}
+{%- endif -%}
+## Quick reference
+{% if ctr_repo_readme_mantained_by is defined %}
+{{ ctr_repo_readme_mantained_by}}
+{% else %}
+- **Maintained by**:
+[Krestomatio](https://github.com/krestomatio)
+{% endif %}
+{% if ctr_repo_readme_get_help is defined %}
+{{ ctr_repo_readme_get_help }}
+{% else %}
+- **Where to get help**:
+[Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
+{% endif %}
+
+## Variants and tags
+{% for ctr_repo_variant in groups[ctr_repo_name | replace('-', '_')] | sort %}
+{% set ctr_repo_variant_state = lookup('vars', ctr_repo_variant | replace('-', '_') | lower + '_image',default=False) %}
+{%   if ctr_repo_variant_state.tags != '' %}
+- [{{ ctr_repo_variant_state.name }}](#{{ ctr_repo_variant_state.name | replace('_','') | replace(':','') | replace('.','') }}): `{{ ctr_repo_variant_state.tags.split(',') | join(', ') + ', ' + ctr_name }}`
+{%   endif %}
+{% endfor %}
+
+{% if ctr_repo_readme_extra_section is defined %}
+{{ ctr_repo_readme_extra_section }}
+
+{% endif %}
+
+## Image Variants
+{% for ctr_repo_variant_readme in ctr_repo_variant_readmes %}
+{{ lookup('file', ctr_repo_variant_readme) }}
+
+{% endfor %}

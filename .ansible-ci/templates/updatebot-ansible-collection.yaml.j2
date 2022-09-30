@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_image='{{ hostvars['moodle'].state_yml_repo_digest }}'
+          moodle_image='{{ hostvars[updatebot_moodle_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
             roles/v1alpha1/m4e/moodle/defaults/main/moodle.yml
@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='{{ hostvars['postgres'].state_yml_repo_digest }}'
+          postgres_image='{{ hostvars[updatebot_postgres_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/postgres.yml
@@ -31,7 +31,7 @@ spec:
         args:
         - -c
         - |
-          nginx_image='{{ hostvars['nginx'].state_yml_repo_digest }}'
+          nginx_image='{{ hostvars[updatebot_nginx_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml
@@ -41,7 +41,7 @@ spec:
         args:
         - -c
         - |
-          keydb_image='{{ hostvars['keydb'].state_yml_repo_digest }}'
+          keydb_image='{{ hostvars[updatebot_keydb_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
             roles/v1alpha1/database/keydb/defaults/main/keydb.yml
@@ -51,7 +51,7 @@ spec:
         args:
         - -c
         - |
-          pgbouncer_image='{{ hostvars['pgbouncer'].state_yml_repo_digest }}'
+          pgbouncer_image='{{ hostvars[updatebot_pgbouncer_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml
@@ -61,7 +61,7 @@ spec:
         args:
         - -c
         - |
-          nfs_ganesha_image='{{ hostvars['nfs-ganesha'].state_yml_repo_digest }}'
+          nfs_ganesha_image='{{ hostvars[updatebot_nfs_ganesha_ctr_name].state_yml_repo_digest }}'
           sed -i \
             "s#^ganesha_image:.*#ganesha_image: ${nfs_ganesha_image//@/\\@}#" \
             roles/v1alpha1/nfs/ganesha/defaults/main/ganesha.yml

@@ -1,3 +1,4 @@
 image_from_ctr: rocky9-base
 image_tag_from_ctr: 9-base
 dockerfile_builder_image_from_repo_name: rocky
+dockerfile_builder_image_based: "Rocky Linux 9 minimal"

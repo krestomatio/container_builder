@@ -5,8 +5,7 @@
     skopeo_src_image_variant_name: "{{ skopeo_src_image_name.split(':')[1] | default('') }}"
     skopeo_src_image_digest: "{{ skopeo_src_image_repo_digest.split('@')[1] }}"
     skopeo_src_image: "{{ skopeo_src_image_name.split(':')[0] + '@' + skopeo_src_image_digest }}"
-    skopeo_dest_image: "{{ container_image + ':' + skopeo_src_image_variant_name if
-      skopeo_src_image_variant_name != '' else container_image }}"
+    skopeo_dest_image: "{{ container_image_variant }}"
   block:
     - name: copy image using skopeo
       include_tasks: skopeo.yml

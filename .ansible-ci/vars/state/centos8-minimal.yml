@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+centos8_minimal_image:
+  name: "centos:8-minimal"
+  build: False
+  version: "8.6.1"
+  tags: "8-minimal,8.6-minimal,8.6.1-minimal"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/centos@sha256:505f5c3c83a2410a6fa88ec8db4f7b5d96cb3d63a5634f14eb0f821048a05e4e"
+  relative_path: "centos/centos8-minimal"

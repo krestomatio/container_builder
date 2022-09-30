@@ -1,0 +1,53 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+# install pkgs
+install-pkgs ${OS_INSTALL_PKGS}
+
+# install pgbouncer
+install-pkgs -e pgbouncer
+
+# persistent user id and group id
+persist-ugid
+
+# create dirs
+mkdir -p ${PGBOUNCER_RUN_DIR} ${CTR_HOME}
+
+# pgbouncer default config
+cp -rp ${PGBOUNCER_CONFIG_FILE} ${PGBOUNCER_CONFIG_FILE}.ori
+cat << EOF > ${PGBOUNCER_CONFIG_FILE}
+[databases]
+;;add_fallback_database_placeholder
+
+;;include_config_databases_placeholder
+
+[users]
+;;include_config_users_placeholder
+
+[pgbouncer]
+pidfile = ${PGBOUNCER_PID_FILE}
+
+listen_addr = ${PGBOUNCER_LISTEN_ADDR}
+listen_port = ${PGBOUNCER_PORT}
+
+auth_type = ${PGBOUNCER_AUTH_TYPE}
+auth_file = ${PGBOUNCER_USERS_FILE}
+admin_users = ${PGBOUNCER_ADMIN_USER}
+stats_users = ${PGBOUNCER_STATS_USERS}
+
+;;include_config_pgbouncer_placeholder
+
+EOF
+chmod 0660 ${PGBOUNCER_CONFIG_FILE} ${PGBOUNCER_USERS_FILE}
+
+# empty users file
+echo '' > ${PGBOUNCER_USERS_FILE}
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+fix-permissions -u ${CTR_USER_ID} ${PGBOUNCER_RUN_DIR} ${PGBOUNCER_CONFIG_DIR} ${CTR_HOME}
+
+# restore rpm permissions
+rpm-file-permissions

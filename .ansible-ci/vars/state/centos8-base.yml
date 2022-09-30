@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+centos8_base_image:
+  name: "centos:8-base"
+  build: False
+  version: "8.6.1"
+  tags: "8-base,8.6-base,8.6.1-base"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/centos@sha256:7686c6bc84b68cbaf18df45b9de70fa19aec4e0c13c5a9a1ecdffe103df6416c"
+  relative_path: "centos/centos8-base"

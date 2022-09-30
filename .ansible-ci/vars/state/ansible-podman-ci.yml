@@ -3,9 +3,9 @@
 #
 ansible_podman_ci_image:
   name: "ansible-podman-ci"
-  build: True
-  version: "0.0.2-effff65-bbe1276"
+  build: False
+  version: "0.0.2"
   tags: "0,0.0,0.0.2"
   artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-podman-ci@sha256:995001b2b605624d093c8d0637a3d1e7c9f8941110241b3344bab9778381dfaa"
+  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:995001b2b605624d093c8d0637a3d1e7c9f8941110241b3344bab9778381dfaa"
   relative_path: "ci/ansible-podman-ci"

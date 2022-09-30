@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+go118_toolset_image:
+  name: "go:1.18-toolset"
+  build: False
+  version: "1.18.2"
+  tags: "1.18-toolset,1.18.2-toolset"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/go@sha256:ba2e58893261be00783cb65710abdbdad84ca842243d196409e190890facdaa2"
+  relative_path: "go/go118-toolset"

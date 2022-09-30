@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle40_httpd24_image:
+  name: "moodle:4.0-httpd"
+  build: False
+  version: "4.0.4"
+  tags: "4.0-httpd,4.0.4-httpd"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/moodle@sha256:09205cbefc51440c9c97954853081295f2b564a2d334076c08372891130b317d"
+  relative_path: "moodle/moodle40_httpd24"

@@ -1,0 +1,45 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+# install pkgs
+install-pkgs ${OS_INSTALL_PKGS}
+
+# php-fpm default config
+sed -i \
+    -e 's@^error_log.*@error_log = ${PHP_FPM_ERROR_LOG}@' \
+    -e 's@^daemonize.*@daemonize = no@' \
+    -e 's@;process_control_timeout.*@process_control_timeout = ${PHP_FPM_PROCESS_CONTROL_TIMEOUT}@' \
+    ${PHP_FPM_CONF_FILE}
+
+sed -i \
+    -e 's@^user =.*@user = ${PHP_FPM_USER}@' \
+    -e 's@^group =.*@group = ${PHP_FPM_GROUP}@' \
+    -e 's@^slowlog =.*@slowlog = ${PHP_FPM_ACCESS_LOG}@' \
+    -e 's@^;access.log =.*@access.log = ${PHP_FPM_SLOWLOG}@' \
+    -e 's@^;clear_env.*@clear_env = no@' \
+    -e 's@^;catch_workers_output.*@catch_workers_output = yes@' \
+    -e 's@^listen =.*@listen = ${PHP_FPM_LISTEN}@' \
+    -e 's@^listen.owner =.*@listen.owner = ${PHP_FPM_LISTEN_OWNER}@' \
+    -e 's@^listen.group =.*@listen.group = ${PHP_FPM_LISTEN_GROUP}@' \
+    -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = ${PHP_FPM_ERROR_LOG}@' \
+    ${PHP_FPM_POOL_FILE}
+
+# add nginx to apache group (if install)
+if command -v nginx &> /dev/null
+then
+    usermod -a -G apache nginx
+fi
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${PHP_RUN}
+
+fix-permissions -u ${CTR_USER_ID} ${PHP_RUN} ${PHP_CONF_FILE} ${PHP_CONF_DIR} ${PHP_FPM_CONF_DIR} ${PHP_FPM_CONF_FILE} ${APP_DEST}
+
+# restore rpm permissions
+rpm-file-permissions
+
+# arbitrary user
+# containeruser-arbitrary

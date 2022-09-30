@@ -1,0 +1,67 @@
+#!/bin/bash -e
+# description: base config for nfs-ganesha
+
+# add user
+containeruser-create ganesha
+
+# install deps
+install-pkgs -e dbus jemalloc libattr libblkid libcap libnfsidmap libuuid nfs-utils xfsprogs userspace-rcu
+
+# create default conf
+mkdir -p ${DBUS_RUN_DIR} ${NFS_GANESHA_CONF_DIR} ${NFS_GANESHA_EXPORT_DIR}
+
+cat << _EOF > "${NFS_GANESHA_CONF_FILE}"
+NFS_CORE_PARAM {
+    Protocols = 4;
+    NFS_Port = ${NFS_GANESHA_PORT};
+    Rquota_Port = ${NFS_GANESHA_RQUOTA_PORT};
+    fsid_device = true;
+}
+NFS_KRB5 {
+    Active_krb5 = false;
+}
+EXPORT_DEFAULTS {
+    SecType = sys;
+}
+%include "${NFS_GANESHA_CONF_EXTRA_FILE}"
+_EOF
+
+cat << _EOF > "${NFS_GANESHA_CONF_EXTRA_FILE}"
+NFSv4 {
+    Grace_Period = ${NFS_GANESHA_GRACE_PERIOD};
+}
+MDCACHE {
+    Entries_HWMark = ${NFS_GANESHA_EXPORT_HWMARK};
+}
+EXPORT {
+    Export_Id = ${NFS_GANESHA_EXPORT_ID};
+    Path = "${NFS_GANESHA_EXPORT_DIR}";
+    Pseudo = /;
+    Access_Type = RW;
+    Squash = ${NFS_GANESHA_EXPORT_SQUASH};
+    FSAL {
+        Name = VFS;
+    }
+}
+LOG {
+    COMPONENTS {
+        ALL = ${NFS_GANESHA_LOG_LEVEL};
+    }
+}
+_EOF
+
+# config libs
+echo /usr/local/lib64 > /etc/ld.so.conf.d/local_libs.conf
+ldconfig
+
+# do not ask systemd for user IDs or groups (slows down dbus-daemon start)
+sed -i s/systemd// /etc/nsswitch.conf
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+fix-permissions -u ${CTR_USER_ID} ${DBUS_RUN_DIR} ${NFS_GANESHA_RUN_DIR} ${NFS_GANESHA_HOME} ${NFS_GANESHA_CONF_DIR} ${NFS_GANESHA_EXPORT_DIR}
+
+# restore rpm permissions
+rpm-file-permissions

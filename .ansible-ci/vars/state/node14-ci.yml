@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+node14_ci_image:
+  name: "node:14-ci"
+  build: False
+  version: "14.0.2"
+  tags: "14-ci,14.0-ci,14.0.2-ci"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/node@sha256:79d318f803d748ae775ecae502aecc2c77381d7c9b8dcfb8cab575826c0b52c6"
+  relative_path: "node/node14-ci"

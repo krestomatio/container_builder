@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+postgres13_image:
+  name: "postgres:13"
+  build: False
+  version: "13.0.2"
+  tags: "13,13.0,13.0.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/postgres@sha256:f8d327b02433b58c9476dfa37151b79b9eede84d9e773a574c9e74b57e5d40f7"
+  relative_path: "postgres/postgres13"

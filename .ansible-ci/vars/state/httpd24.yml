@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+httpd24_image:
+  name: "httpd:2.4"
+  build: False
+  version: "2.4.2"
+  tags: "2.4,2.4.2"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/httpd@sha256:5ada12e51ae2b1c8dcda8ea1e703c5053e28659b0e51f295ad20b726de1f72b6"
+  relative_path: "httpd/httpd24"

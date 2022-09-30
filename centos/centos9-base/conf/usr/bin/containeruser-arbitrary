@@ -1,0 +1,20 @@
+#!/bin/bash -e
+# description: take care of arbitrary user
+
+# install dependencies
+install-pkgs nss_wrapper
+
+# file for sourcing environments for nss wrapper. This file will be sourced in entrypoint
+cat << "EOF" > ${CTR_ENTRYPOINT_OPT_PATH}/01-arbitrary-user.rc
+# description: export variables for arbitrary user
+
+CTR_NSS_PASSWD_FILE="/tmp/passwd"
+export entrypoint_user_id=$(id -u)
+export entrypoint_group_id=$(id -g)
+mkdir -p $(dirname ${CTR_NSS_PASSWD_FILE})
+cp /etc/passwd ${CTR_NSS_PASSWD_FILE}
+echo "entrypoint:x:${entrypoint_user_id}:${entrypoint_group_id}:Entrypoint default user:${HOME}:/sbin/nologin" >> ${CTR_NSS_PASSWD_FILE}
+export LD_PRELOAD=libnss_wrapper.so
+export NSS_WRAPPER_PASSWD=${CTR_NSS_PASSWD_FILE}
+export NSS_WRAPPER_GROUP=/etc/group
+EOF

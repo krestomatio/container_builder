@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+rocky9_base_image:
+  name: "rocky:9-base"
+  build: False
+  version: "9.0.2"
+  tags: "9-base,9.0-base,9.0.2-base"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/rocky@sha256:05614acdcc6c3c88d74abd2c5a6941b0fad401fa533229dec6b77fea4df63ee9"
+  relative_path: "rocky/rocky9-base"

@@ -3,9 +3,9 @@
 #
 ansible_operator_ci_image:
   name: "ansible-operator-ci"
-  build: True
-  version: "0.0.2-1447f7a-bbe1276"
+  build: False
+  version: "0.0.2"
   tags: "0,0.0,0.0.2"
   artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
-  repo_digest: "docker-registry.jx.krestomat.io/krestomatio/container_builder/ansible-operator-ci@sha256:c169b77e201bbadfafa24cf405c4676eaebd63913ea4d5bb3dd2da69d9f15047"
+  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:c169b77e201bbadfafa24cf405c4676eaebd63913ea4d5bb3dd2da69d9f15047"
   relative_path: "ci/ansible-operator-ci"

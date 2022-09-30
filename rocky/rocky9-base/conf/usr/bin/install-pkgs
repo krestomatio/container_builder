@@ -1,0 +1,65 @@
+#!/bin/bash -e
+# description: script for installing packages
+# param: list of pkgs separated by space
+
+enabled_epel=
+
+usage() {
+    cat 1>&2 <<EOF
+Script to install packages usgins
+
+ENVIRONMENT VARS:
+CTR_PKG_MGM             main package command
+
+USAGE:
+    install-pkgs [OPTIONS]
+
+OPTIONS (check moodle php container):
+  -e            use epel repo (leaves it disabled)
+
+EXAMPLES:
+    install-pkgs -e fcgi
+EOF
+}
+
+install_pkgs() {
+    # install packages
+    if ! [ -z ${@+x} ]; then
+        # update
+        ${CTR_PKG_MGM} ${enabled_epel} update
+        # install
+        ${CTR_PKG_MGM} ${enabled_epel} install ${@}
+        # clean
+        ${CTR_PKG_MGM} clean all
+    else
+        echo -e "No package as parameter  to install\n"
+        usage
+    fi
+}
+
+install_epel() {
+    # install epel release and leaves it disable
+    test -f /etc/yum.repos.d/epel.repo || install_pkgs epel-release
+    sed -i "s@^enabled=1@enabled=0@" /etc/yum.repos.d/epel*
+    enabled_epel="--enablerepo=epel"
+    install_pkgs ${@}
+}
+
+while getopts ":e" opt; do
+  case ${opt} in
+    e )
+        use_epel=true
+        ;;
+    \? )
+        usage
+        exit
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if [ -z ${use_epel+x} ]; then
+    install_pkgs ${@}
+else
+    install_epel ${@}
+fi

@@ -1,0 +1,19 @@
+#!/bin/bash -e
+# description: additional entrypoint script for moodle php-fpm
+
+# Exit if nginx is installed and php-fpm conf file not writable
+if rpm -q nginx &>/dev/null; then
+    if ! [ -w "${PHP_FPM_CONF_FILE}" ]; then
+        echo "Nginx installed and ${PHP_FPM_CONF_FILE} not writable...doing nothing here"
+        exit 0
+    fi
+fi
+
+# Copy moodle config.php if variable $MOODLE_CONFIG_DIR is set and file does not exist in $MOODLE_APP
+if ! [ -z ${MOODLE_CONFIG_DIR+x} ] && [ -f ${MOODLE_CONFIG_DIR}/config.php ] && ! [ -f ${MOODLE_APP}/config.php ] ; then
+    cp -L ${MOODLE_CONFIG_DIR}/config.php ${MOODLE_APP}/config.php
+    chmod 0400 ${MOODLE_APP}/config.php
+fi
+
+# Set max_input_vars
+test -f ${PHP_CONF_FILE} && sed -i"s@.*max_input_vars .*@max_input_vars = ${PHP_MAX_INPUT_VARS:-5000}@" ${PHP_CONF_FILE} || echo "WARNING: no file ${PHP_CONF_FILE}"

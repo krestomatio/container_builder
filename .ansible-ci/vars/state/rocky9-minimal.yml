@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+rocky9_minimal_image:
+  name: "rocky:9-minimal"
+  build: False
+  version: "9.0.2"
+  tags: "9-minimal,9.0-minimal,9.0.2-minimal"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/rocky@sha256:01c03447b9ee1773b44edd2a0d8515638c6f83ab28bab3e5377503410ebd531e"
+  relative_path: "rocky/rocky9-minimal"

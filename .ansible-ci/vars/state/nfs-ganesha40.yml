@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nfs_ganesha40_image:
+  name: "nfs-ganesha:4.0.7"
+  build: False
+  version: "4.0.7"
+  tags: "4.0.7"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha@sha256:194efd310d09db3b7c5992a6b0c867d300de4871ca4364e8cc0f86158c0d1270"
+  relative_path: "nfs-ganesha/nfs-ganesha40"

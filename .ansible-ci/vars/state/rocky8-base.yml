@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+rocky8_base_image:
+  name: "rocky:8-base"
+  build: False
+  version: "8.6.4"
+  tags: "8-base,8.6-base,8.6.4-base"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/rocky@sha256:e960dffe029449ee9c01f53b8d27e67531890d9b6d2f3eebac8c8cd1f20b8931"
+  relative_path: "rocky/rocky8-base"

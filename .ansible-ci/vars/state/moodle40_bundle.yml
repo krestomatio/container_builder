@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle40_bundle_image:
+  name: "moodle:4.0-bundle"
+  build: False
+  version: "4.0.4"
+  tags: "4.0-bundle,4.0.4-bundle"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/moodle@sha256:0b4470bc6eaa5d2f3f755ce2fffd239233d6786e35679fd9b83e95f04ab3da5a"
+  relative_path: "moodle/moodle40_bundle"

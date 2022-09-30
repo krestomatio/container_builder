@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+keydb63_image:
+  name: "keydb:6.3.1"
+  build: False
+  version: "6.3.1"
+  tags: "6.3.1"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/keydb@sha256:55b3137d3dde04d8fa926dc57d284371cc5bc9363b548ee364bcf290891d0863"
+  relative_path: "keydb/keydb63"

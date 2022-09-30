@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle40_nginx120_image:
+  name: "moodle:4.0-nginx"
+  build: False
+  version: "4.0.4"
+  tags: "4.0-nginx,4.0.4-nginx"
+  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
+  repo_digest: "quay.io/krestomatio/moodle@sha256:a32321ecc2ed491ea43a65b2be21ca06d6a1dc233f9681c586027bb1ba9733c3"
+  relative_path: "moodle/moodle40_nginx120"

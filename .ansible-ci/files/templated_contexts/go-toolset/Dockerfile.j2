@@ -9,14 +9,13 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
     IMAGE_TITLE="Go-toolset {{ go_version }} image based on {{ dockerfile_builder_image_based }}"
 
 # Component bash variables
-ENV GO_VERSION_MAJOR_MINOR="{{ go_version_major_minor }}"
+ENV GO_VERSION="{{ go_version }}"
 
 # Container variables
 ENV CTR_CMD="go version"
 
 RUN install-pkgs go-toolset git make tar which curl; \
-    v=$(go version | { read _ _ v _; echo ${v#go}; }); \
-    [ "$GO_VERSION_MAJOR_MINOR" == "${v%.*}" ] || "error: major version differs from env var"
+    [[ "$(go version | { read _ _ v _; echo ${v#go}; })" == "${GO_VERSION}".* ]] || echo "error: version differs from env var"
 
 CMD $CTR_CMD
 

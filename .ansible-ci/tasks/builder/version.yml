@@ -105,9 +105,7 @@
       {%- if (ctr_version is defined and (ctr_version | string).split('.') | length == 1) or ctr_version is not defined -%}
       {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
       {%- endif -%}
-      {%- if (ctr_version is defined and (ctr_version | string).split('.') | length <= 2) or ctr_version is not defined -%}
       {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + '.' + version_image_minor + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
-      {%- endif -%}
       {{- _version_image_derivative_tags.append(version_image_prefix | default('') + version_image_major + '.' + version_image_minor + '.' + version_image_patch + ( '-' + version_image_suffix if version_image_suffix | default('') != '' else '')) -}}
       {%- if version_image_name_commit_tag is defined -%}
       {{- _version_image_derivative_tags.append(version_image_name_commit_tag) -}}

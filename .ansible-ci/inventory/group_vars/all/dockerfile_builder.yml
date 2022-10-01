@@ -76,6 +76,12 @@ build_registry_path: "{{ build_registry_name + '/' if build_registry_name else '
 
 # container image
 container_image: "{{ registry_path }}/{{ ctr_repo_name }}"
+container_image_variant: >-
+  {%- if ctr_repo_name == ctr_name -%}
+  {{- container_image -}}
+  {%- else -%}
+  {{- container_image }}:{{ ctr_variant_name -}}
+  {%- endif -%}
 build_container_image: "{{ build_registry_path }}/{{ ctr_repo_name }}"
 
 # regex

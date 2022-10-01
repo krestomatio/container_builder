@@ -12,7 +12,7 @@ artifact_tag: "{{ pr_commit_tag }}"
 state_yml_artifact_tag: "{{ artifact_tag }}"
 state_yml_relative_path: "{{ generated_relative_path }}"
 state_yml_tags: "{{ version_image_derivative_tags | default([]) | join(',') | default('') }}"
-state_yml_name: "{{ ctr_variant_name }}"
+state_yml_variant_name: "{{ ctr_variant_name }}"
 assertion_artifact_tag: true
 artifact_generated_context_task: upload
 artifact_generated_context_path: "{{ generated_dir }}/*/"

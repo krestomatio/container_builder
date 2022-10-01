@@ -10,6 +10,9 @@ microdnf module enable nginx:${NGINX_VERSION}
 {% endif %}
 install-pkgs ${OS_INSTALL_PKGS}
 
+# test version
+[[ "$(nginx -v 2>&1 | head -n1 | cut -d'/' -f2)" == "${NGINX_VERSION}".* ]] || echo "error: version differs from env var"
+
 # persistent user id and group id
 persist-ugid
 

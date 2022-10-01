@@ -1,6 +1,6 @@
 ctr_repo_name: node
 ctr_version: "{{ node_version }}"
-dockerfile_builder_tags:
+version_image_derivative_extra_tags:
 - "{{ node_version_name[node_version|int] }}"
 
 # version tags

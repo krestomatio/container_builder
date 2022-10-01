@@ -22,7 +22,7 @@
 {% for ctr_repo_variant in groups[ctr_repo_name | replace('-', '_')] | sort %}
 {% set ctr_repo_variant_state = lookup('vars', ctr_repo_variant | replace('-', '_') | lower + '_image',default=False) %}
 {%   if ctr_repo_variant_state.tags != '' %}
-- [{{ ctr_repo_variant_state.name }}](#{{ ctr_repo_variant_state.name | replace('_','') | replace(':','') | replace('.','') }}): `{{ ctr_repo_variant_state.tags.split(',') | join(', ') + ', ' + ctr_name }}`
+- [{{ ctr_repo_variant_state.variant_name }}](#{{ ctr_repo_variant_state.variant_name | replace('_','') | replace(':','') | replace('.','') }}): `{{ ctr_repo_variant_state.tags.split(',') | join(', ') }}`
 {%   endif %}
 {% endfor %}
 

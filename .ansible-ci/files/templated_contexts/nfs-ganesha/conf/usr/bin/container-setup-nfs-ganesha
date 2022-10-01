@@ -5,7 +5,7 @@
 containeruser-create ganesha
 
 # install deps
-install-pkgs -e dbus jemalloc libattr libblkid libcap libnfsidmap libuuid nfs-utils xfsprogs userspace-rcu
+install-pkgs -e dbus-daemon jemalloc libattr libblkid libcap libnfsidmap libnsl2 libuuid nfs-utils xfsprogs userspace-rcu
 
 # create default conf
 mkdir -p ${DBUS_RUN_DIR} ${NFS_GANESHA_CONF_DIR} ${NFS_GANESHA_EXPORT_DIR}

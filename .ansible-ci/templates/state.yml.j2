@@ -2,7 +2,7 @@
 {# state name must comply with ansible variable name convention: #}
 {# Ej: state_name: "{{ ansible_host | replace('-', '_') | lower }}" #}
 {{ state_name }}_image:
-  name: "{{ state_yml_name }}"
+  variant_name: "{{ state_yml_variant_name }}"
   build: {{ state_yml_build | default('false') | bool }}
   version: "{{ state_yml_version }}"
   tags: "{{ state_yml_tags }}"

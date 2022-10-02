@@ -7,5 +7,5 @@ centos9_minimal_image:
   version: "9.0.18"
   tags: "9-minimal,9.0-minimal,9.0.18-minimal"
   artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
-  repo_digest: "quay.io/krestomatio/centos@sha256:ee69ba070dabe193498f7343c17ccc9addef8e0aabf1dabcc5a7d93c91b4e428"
+  repo_digest: "quay.io/krestomatio/centos:9-minimal@sha256:ee69ba070dabe193498f7343c17ccc9addef8e0aabf1dabcc5a7d93c91b4e428"
   relative_path: "centos/centos9-minimal"

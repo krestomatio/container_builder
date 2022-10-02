@@ -7,7 +7,7 @@ ENV IMAGE_NAME=nginx:1.20-php-fpm \
     IMAGE_SUMMARY="Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}" \
     IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION}" \
     IMAGE_TITLE="Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION}" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}' + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}" \
     IMAGE_SERVICE_PORT="9000" \
     IMAGE_SERVICE_NAME="php-fpm"
 
@@ -57,7 +57,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="1.20.2" \
+      org.opencontainers.image.version="1.20.3" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

@@ -5,8 +5,8 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [node:14](#node14): `14, 14.0, 14.0.2, node14`
-- [node:14-ci](#node14-ci): `14-ci, 14.0-ci, 14.0.2-ci, node14`
+- [node:14](#node14): `14, 14.0, 14.0.3, node14-f17b756e46952a523cbd1e4169a71b97740c36ff, fermium`
+- [node:14-ci](#node14-ci): `14-ci, 14.0-ci, 14.0.3-ci, node14-ci-f17b756e46952a523cbd1e4169a71b97740c36ff, fermium-ci`
 
 
 ## Image Variants

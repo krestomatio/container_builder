@@ -7,5 +7,5 @@ rocky8_minimal_image:
   version: "8.6.4"
   tags: "8-minimal,8.6-minimal,8.6.4-minimal"
   artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
-  repo_digest: "quay.io/krestomatio/rocky@sha256:3b8ffaea2c657bf275a356442c233cae7b7d759432647e07fd77ab2b409f5e1a"
+  repo_digest: "quay.io/krestomatio/rocky:8-minimal@sha256:3b8ffaea2c657bf275a356442c233cae7b7d759432647e07fd77ab2b409f5e1a"
   relative_path: "rocky/rocky8-minimal"

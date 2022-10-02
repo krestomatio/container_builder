@@ -1,6 +1,12 @@
 #!/bin/bash -e
 # description: base config for httpd
 
+# install pkgs
+install-pkgs httpd
+
+# test version
+[[ "$(httpd -v | head -n1 | cut -d'/' -f2)" == "${HTTPD_VERSION}".* ]] || echo "error: version differs from env var"
+
 # httpd default config
 sed -i \
     -e 's@^Listen 80.*@Listen ${HTTPD_LISTEN}@' \

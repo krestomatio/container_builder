@@ -9,14 +9,13 @@ ENV IMAGE_NAME=go:1.18-toolset \
     IMAGE_TITLE="Go-toolset 1.18 image based on CentOS 9 Stream minimal"
 
 # Component bash variables
-ENV GO_VERSION_MAJOR_MINOR="1.18"
+ENV GO_VERSION="1.18"
 
 # Container variables
 ENV CTR_CMD="go version"
 
 RUN install-pkgs go-toolset git make tar which curl; \
-    v=$(go version | { read _ _ v _; echo ${v#go}; }); \
-    [ "$GO_VERSION_MAJOR_MINOR" == "${v%.*}" ] || "error: major version differs from env var"
+    [[ "$(go version | { read _ _ v _; echo ${v#go}; })" == "${GO_VERSION}".* ]] || echo "error: version differs from env var"
 
 CMD $CTR_CMD
 
@@ -30,4 +29,4 @@ LABEL name="${IMAGE_NAME}" \
     org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
     io.k8s.description="${IMAGE_DESCRIPTION}" \
     io.k8s.display-name="${IMAGE_TITLE}" \
-    io.openshift.tags="${IMAGE_NAME},go,go-toolset,go-toolset1.18"
+    io.openshift.tags="${IMAGE_NAME},go,go-toolset,go1.18-toolset"

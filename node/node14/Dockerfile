@@ -21,7 +21,8 @@ ENV CTR_CMD="node" \
 # Frequent environment variables
 ENV HOME="${CTR_HOME}"
 
-RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs
+RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:14; install-pkgs nodejs && \
+    [[ "$(node --version | sed 's/^v//')" == "${NODE_VERSION}".* ]] || echo "error: version differs from env var"
 
 USER ${CTR_USER_ID}
 

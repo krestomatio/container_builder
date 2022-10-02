@@ -4,6 +4,9 @@
 # install pkgs
 install-pkgs ${OS_INSTALL_PKGS}
 
+# test version
+[[ "$(php -v | { read _ v _; echo ${v}; })" == "${PHP_VERSION}".* ]] || echo "error: version differs from env var"
+
 # php-fpm default config
 sed -i \
     -e 's@^error_log.*@error_log = ${PHP_FPM_ERROR_LOG}@' \

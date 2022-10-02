@@ -2,7 +2,7 @@
 # Ansible managed
 #
 rocky9_base_image:
-  name: "rocky:9-base"
+  variant_name: "rocky:9-base"
   build: False
   version: "9.0.2"
   tags: "9-base,9.0-base,9.0.2-base"

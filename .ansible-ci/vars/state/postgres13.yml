@@ -2,7 +2,7 @@
 # Ansible managed
 #
 postgres13_image:
-  name: "postgres:13"
+  variant_name: "postgres:13"
   build: False
   version: "13.0.2"
   tags: "13,13.0,13.0.2"

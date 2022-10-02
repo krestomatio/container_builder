@@ -2,7 +2,7 @@
 # Ansible managed
 #
 node14_ci_image:
-  name: "node:14-ci"
+  variant_name: "node:14-ci"
   build: False
   version: "14.0.2"
   tags: "14-ci,14.0-ci,14.0.2-ci"

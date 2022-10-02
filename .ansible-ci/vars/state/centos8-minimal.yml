@@ -2,7 +2,7 @@
 # Ansible managed
 #
 centos8_minimal_image:
-  name: "centos:8-minimal"
+  variant_name: "centos:8-minimal"
   build: False
   version: "8.6.1"
   tags: "8-minimal,8.6-minimal,8.6.1-minimal"

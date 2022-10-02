@@ -2,7 +2,7 @@
 # Ansible managed
 #
 rocky8_minimal_image:
-  name: "rocky:8-minimal"
+  variant_name: "rocky:8-minimal"
   build: False
   version: "8.6.4"
   tags: "8-minimal,8.6-minimal,8.6.4-minimal"

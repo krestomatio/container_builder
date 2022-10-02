@@ -78,9 +78,10 @@ build_registry_path: "{{ build_registry_name + '/' if build_registry_name else '
 container_image: "{{ registry_path }}/{{ ctr_repo_name }}"
 container_image_variant: >-
   {%- if ctr_repo_name == ctr_name -%}
-  {{- container_image -}}
+  {{ container_image }}
   {%- else -%}
-  {{- container_image }}:{{ ctr_variant_name -}}
+  {{ container_image }}:{{ ctr_version }}{{ '-' + version_image_suffix if
+  version_image_suffix is defined and version_image_suffix else '' }}
   {%- endif -%}
 build_container_image: "{{ build_registry_path }}/{{ ctr_repo_name }}"
 
@@ -129,6 +130,11 @@ dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
 dockerfile_builder_pull: "{{ true if dockerfile_builder_use_buildx else false }}"
 dockerfile_builder_throttle: 4
+
+# skopeo
+skopeo_src_image: "{{ lookup('vars', state_name + '_image').repo_digest }}"
+skopeo_dest_image: "{{ container_image_variant }}"
+skopeo_dest_image_tags: "{{ dockerfile_builder_tags }}"
 
 # doc
 ctr_readme_section_variant_title: "{{ ctr_variant_name }}"

@@ -2,7 +2,7 @@
 # Ansible managed
 #
 nfs_ganesha40_image:
-  name: "nfs-ganesha:4.0.7"
+  variant_name: "nfs-ganesha:4.0.7"
   build: False
   version: "4.0.7"
   tags: "4.0.7"

@@ -2,7 +2,7 @@
 # Ansible managed
 #
 go118_toolset_image:
-  name: "go:1.18-toolset"
+  variant_name: "go:1.18-toolset"
   build: False
   version: "1.18.2"
   tags: "1.18-toolset,1.18.2-toolset"

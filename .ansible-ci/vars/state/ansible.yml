@@ -2,7 +2,7 @@
 # Ansible managed
 #
 ansible_image:
-  name: "ansible"
+  variant_name: "ansible"
   build: False
   version: "0.4.0"
   tags: "0,0.4,0.4.0"

@@ -2,7 +2,7 @@
 # Ansible managed
 #
 centos8_base_image:
-  name: "centos:8-base"
+  variant_name: "centos:8-base"
   build: False
   version: "8.6.1"
   tags: "8-base,8.6-base,8.6.1-base"

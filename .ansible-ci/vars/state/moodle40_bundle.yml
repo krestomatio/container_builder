@@ -2,7 +2,7 @@
 # Ansible managed
 #
 moodle40_bundle_image:
-  name: "moodle:4.0-bundle"
+  variant_name: "moodle:4.0-bundle"
   build: False
   version: "4.0.4"
   tags: "4.0-bundle,4.0.4-bundle"

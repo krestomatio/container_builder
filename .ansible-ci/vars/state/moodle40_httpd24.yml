@@ -2,7 +2,7 @@
 # Ansible managed
 #
 moodle40_httpd24_image:
-  name: "moodle:4.0-httpd"
+  variant_name: "moodle:4.0-httpd"
   build: False
   version: "4.0.4"
   tags: "4.0-httpd,4.0.4-httpd"

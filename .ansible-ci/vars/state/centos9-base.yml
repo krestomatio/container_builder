@@ -2,7 +2,7 @@
 # Ansible managed
 #
 centos9_base_image:
-  name: "centos:9-base"
+  variant_name: "centos:9-base"
   build: False
   version: "9.0.18"
   tags: "9-base,9.0-base,9.0.18-base"

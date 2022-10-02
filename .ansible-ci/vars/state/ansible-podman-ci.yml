@@ -2,7 +2,7 @@
 # Ansible managed
 #
 ansible_podman_ci_image:
-  name: "ansible-podman-ci"
+  variant_name: "ansible-podman-ci"
   build: False
   version: "0.4.0"
   tags: "0,0.4,0.4.0"

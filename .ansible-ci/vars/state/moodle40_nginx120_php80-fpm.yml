@@ -2,7 +2,7 @@
 # Ansible managed
 #
 moodle40_nginx120_php80_fpm_image:
-  name: "moodle:4.0-nginx_php-fpm"
+  variant_name: "moodle:4.0-nginx_php-fpm"
   build: False
   version: "4.0.4"
   tags: "4.0-nginx_php-fpm,4.0.4-nginx_php-fpm"

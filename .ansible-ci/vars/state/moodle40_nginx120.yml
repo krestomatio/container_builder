@@ -2,7 +2,7 @@
 # Ansible managed
 #
 moodle40_nginx120_image:
-  name: "moodle:4.0-nginx"
+  variant_name: "moodle:4.0-nginx"
   build: False
   version: "4.0.4"
   tags: "4.0-nginx,4.0.4-nginx"

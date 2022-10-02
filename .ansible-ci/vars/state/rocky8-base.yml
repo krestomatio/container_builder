@@ -2,7 +2,7 @@
 # Ansible managed
 #
 rocky8_base_image:
-  name: "rocky:8-base"
+  variant_name: "rocky:8-base"
   build: False
   version: "8.6.4"
   tags: "8-base,8.6-base,8.6.4-base"

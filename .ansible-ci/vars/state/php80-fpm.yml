@@ -2,7 +2,7 @@
 # Ansible managed
 #
 php80_fpm_image:
-  name: "php:8.0"
+  variant_name: "php:8.0"
   build: False
   version: "8.0.2"
   tags: "8.0,8.0.2"

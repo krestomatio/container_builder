@@ -2,7 +2,7 @@
 # Ansible managed
 #
 keydb63_image:
-  name: "keydb:6.3.1"
+  variant_name: "keydb:6.3.1"
   build: False
   version: "6.3.1"
   tags: "6.3.1"

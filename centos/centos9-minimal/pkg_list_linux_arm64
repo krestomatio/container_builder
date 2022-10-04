@@ -43,7 +43,7 @@ libdnf-0.67.0-3.el9.aarch64
 libevent-2.1.12-6.el9.aarch64
 libffi-3.4.2-7.el9.aarch64
 libgcc-11.3.1-2.1.el9.aarch64
-libgcrypt-1.10.0-5.el9.aarch64
+libgcrypt-1.10.0-6.el9.aarch64
 libgpg-error-1.42-5.el9.aarch64
 libidn2-2.3.0-7.el9.aarch64
 libksba-1.5.1-4.el9.aarch64

@@ -5,7 +5,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [httpd:2.4](#httpd24): `2.4, 2.4.3, httpd24-f17b756e46952a523cbd1e4169a71b97740c36ff`
+- [httpd:2.4](#httpd24): `2.4, 2.4.4, httpd24-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
 
 
 ## Image Variants

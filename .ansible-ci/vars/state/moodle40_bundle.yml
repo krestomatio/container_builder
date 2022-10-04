@@ -5,7 +5,7 @@ moodle40_bundle_image:
   variant_name: "moodle:4.0-bundle"
   build: False
   version: "4.0.4"
-  tags: "4.0-bundle,4.0.4-bundle,moodle40_bundle-f17b756e46952a523cbd1e4169a71b97740c36ff"
-  artifact_tag: "f17b756e46952a523cbd1e4169a71b97740c36ff"
-  repo_digest: "quay.io/krestomatio/moodle:4.0-bundle@sha256:ca4b8a4afcb6e195882ddc33cb9c3596d56b45a40fcc713f3ee9d5ae25125e5c"
+  tags: "4.0-bundle,4.0.4-bundle,moodle40_bundle-ed467e8e0ed1784379e8eb6ba0aa12b422aab381"
+  artifact_tag: "ed467e8e0ed1784379e8eb6ba0aa12b422aab381"
+  repo_digest: "quay.io/krestomatio/moodle:4.0-bundle@sha256:c8802405573f258e4272c93d20ad130bc12c67e0c96f35fbf693a3e2f01bd73a"
   relative_path: "moodle/moodle40_bundle"

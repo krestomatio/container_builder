@@ -5,7 +5,7 @@ moodle40_nginx120_php80_fpm_image:
   variant_name: "moodle:4.0-nginx_php-fpm"
   build: False
   version: "4.0.4"
-  tags: "4.0-nginx_php-fpm,4.0.4-nginx_php-fpm,moodle40_nginx120_php80-fpm-f17b756e46952a523cbd1e4169a71b97740c36ff"
-  artifact_tag: "f17b756e46952a523cbd1e4169a71b97740c36ff"
-  repo_digest: "quay.io/krestomatio/moodle:4.0-nginx_php-fpm@sha256:0aa6ce9e450c231e4ce478fe88a30c6f5ee55c31851aaac2b638c57a224f9da4"
+  tags: "4.0-nginx_php-fpm,4.0.4-nginx_php-fpm,moodle40_nginx120_php80-fpm-ed467e8e0ed1784379e8eb6ba0aa12b422aab381"
+  artifact_tag: "ed467e8e0ed1784379e8eb6ba0aa12b422aab381"
+  repo_digest: "quay.io/krestomatio/moodle:4.0-nginx_php-fpm@sha256:eaebd748ec91e8d063bd2f84c2545c8ea0c380f3a059547bc2ec170dc81a4f0a"
   relative_path: "moodle/moodle40_nginx120_php80-fpm"

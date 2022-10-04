@@ -5,12 +5,12 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.0](#moodle40): `4.0, 4.0.4, moodle40-f17b756e46952a523cbd1e4169a71b97740c36ff`
-- [moodle:4.0-bundle](#moodle40-bundle): `4.0-bundle, 4.0.4-bundle, moodle40_bundle-f17b756e46952a523cbd1e4169a71b97740c36ff`
-- [moodle:4.0-httpd](#moodle40-httpd): `4.0-httpd, 4.0.4-httpd, moodle40_httpd24-f17b756e46952a523cbd1e4169a71b97740c36ff`
-- [moodle:4.0-nginx](#moodle40-nginx): `4.0-nginx, 4.0.4-nginx, moodle40_nginx120-f17b756e46952a523cbd1e4169a71b97740c36ff`
-- [moodle:4.0-nginx_php-fpm](#moodle40-nginxphp-fpm): `4.0-nginx_php-fpm, 4.0.4-nginx_php-fpm, moodle40_nginx120_php80-fpm-f17b756e46952a523cbd1e4169a71b97740c36ff`
-- [moodle:4.0-php-fpm](#moodle40-php-fpm): `4.0-php-fpm, 4.0.4-php-fpm, moodle40_php80-fpm-f17b756e46952a523cbd1e4169a71b97740c36ff`
+- [moodle:4.0](#moodle40): `4.0, 4.0.4, moodle40-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
+- [moodle:4.0-bundle](#moodle40-bundle): `4.0-bundle, 4.0.4-bundle, moodle40_bundle-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
+- [moodle:4.0-httpd](#moodle40-httpd): `4.0-httpd, 4.0.4-httpd, moodle40_httpd24-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
+- [moodle:4.0-nginx](#moodle40-nginx): `4.0-nginx, 4.0.4-nginx, moodle40_nginx120-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
+- [moodle:4.0-nginx_php-fpm](#moodle40-nginxphp-fpm): `4.0-nginx_php-fpm, 4.0.4-nginx_php-fpm, moodle40_nginx120_php80-fpm-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
+- [moodle:4.0-php-fpm](#moodle40-php-fpm): `4.0-php-fpm, 4.0.4-php-fpm, moodle40_php80-fpm-ed467e8e0ed1784379e8eb6ba0aa12b422aab381`
 
 
 ## Image Variants

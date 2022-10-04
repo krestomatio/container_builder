@@ -16,4 +16,4 @@ if ! [ -z ${MOODLE_CONFIG_DIR+x} ] && [ -f ${MOODLE_CONFIG_DIR}/config.php ] && 
 fi
 
 # Set max_input_vars
-test -f ${PHP_CONF_FILE} && sed -i"s@.*max_input_vars .*@max_input_vars = ${PHP_MAX_INPUT_VARS:-5000}@" ${PHP_CONF_FILE} || echo "WARNING: no file ${PHP_CONF_FILE}"
+test -f ${PHP_CONF_FILE} && sed -i "s@.*max_input_vars .*@max_input_vars = ${PHP_MAX_INPUT_VARS:-5000}@" ${PHP_CONF_FILE} || echo "WARNING: no file ${PHP_CONF_FILE}"

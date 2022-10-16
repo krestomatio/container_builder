@@ -17,9 +17,9 @@ file-libs-5.33-21.el8.x86_64
 filesystem-3.8-6.el8.x86_64
 gawk-4.2.1-4.el8.x86_64
 glib2-2.56.4-159.el8.x86_64
-glibc-2.28-211.el8.x86_64
-glibc-common-2.28-211.el8.x86_64
-glibc-minimal-langpack-2.28-211.el8.x86_64
+glibc-2.28-214.el8.x86_64
+glibc-common-2.28-214.el8.x86_64
+glibc-minimal-langpack-2.28-214.el8.x86_64
 gmp-6.1.2-10.el8.x86_64
 gnupg2-2.2.20-3.el8.x86_64
 gnutls-3.6.16-5.el8.x86_64
@@ -94,7 +94,7 @@ rpm-libs-4.14.3-23.el8.x86_64
 sed-4.5-5.el8.x86_64
 setup-2.12.2-7.el8.noarch
 sqlite-libs-3.26.0-16.el8.x86_64
-systemd-libs-239-67.el8.x86_64
-tzdata-2022c-1.el8.noarch
+systemd-libs-239-68.el8.x86_64
+tzdata-2022d-1.el8.noarch
 xz-libs-5.2.4-4.el8.x86_64
 zlib-1.2.11-20.el8.x86_64

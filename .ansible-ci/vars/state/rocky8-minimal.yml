@@ -5,7 +5,7 @@ rocky8_minimal_image:
   variant_name: "rocky:8-minimal"
   build: False
   version: "8.6.4"
-  tags: "8-minimal,8.6-minimal,8.6.4-minimal"
-  artifact_tag: "bbe12769544cafa1cfb9578f40fa3f64c6669dc4"
-  repo_digest: "quay.io/krestomatio/rocky:8-minimal@sha256:3b8ffaea2c657bf275a356442c233cae7b7d759432647e07fd77ab2b409f5e1a"
+  tags: "8-minimal,8.6-minimal,8.6.4-minimal,rocky8-minimal-2b8d92d37a2e78d88a46ec7702936db613ea9e3f"
+  artifact_tag: "2b8d92d37a2e78d88a46ec7702936db613ea9e3f"
+  repo_digest: "quay.io/krestomatio/rocky:8-minimal@sha256:1efac8f89a813ee27ee80fd27cbe31ff94f5247dfaa80ecc1f01221c1c0d0e1b"
   relative_path: "rocky/rocky8-minimal"

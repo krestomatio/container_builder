@@ -21,7 +21,7 @@
     loop: "{{ dockerfile_builder_platforms }}"
     register: prepare_distro_release_task
     changed_when: false
-    throttle: 2
+    throttle: 1
     environment: "{{ {'DOCKER_CONTEXT': prepare_distro_release_docker_context}
       if dockerfile_builder_use_buildx | default(false) and
       prepare_distro_release_docker_context_exists else {} }}"

@@ -85,6 +85,7 @@ ENV PHP_MAX_INPUT_VARS=5000 \
     MOODLE_VERSION_SHORT="{{ moodle_version | replace('.','') }}" \
     MOODLE_APP=${APP_DEST} \
     MOODLE_DATA=/var/moodledata \
+    MOODLE_DATA_READABLE_DIR=false \
     MOODLE_CLI_TOOLS=/usr/libexec/moodle
 
 USER 0

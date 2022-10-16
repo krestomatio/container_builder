@@ -5,7 +5,7 @@
     - name: inspect base image from
       register: prepare_inspect_base_image_from_task
       changed_when: false
-      throttle: 4
+      throttle: 1
       vars:
         skopeo_copy_src_image: "{{ dockerfile_builder_arg_image_from }}"
       command: >-

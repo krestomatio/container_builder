@@ -8,11 +8,6 @@ if rpm -q nginx &>/dev/null; then
         echo "Nginx installed and ${PHP_FPM_CONF_FILE} not writable...doing nothing here"
         exit 0
     fi
-    # Add user, group, all, read permissions to moodledata dir to be accesible by nginx running in another
-    # container using this same image. $MOODLE_DATA_READABLE_DIR must be set
-    if [ -n "${MOODLE_DATA_READABLE_DIR}" ] && ${MOODLE_DATA_READABLE_DIR,,} && [ -n "${MOODLE_DATA}" ] && [ -d "${MOODLE_DATA}" ]; then
-        chmod +r ${MOODLE_DATA}
-    fi
 fi
 
 # Copy moodle config.php if variable $MOODLE_CONFIG_DIR is set and file does not exist in $MOODLE_APP

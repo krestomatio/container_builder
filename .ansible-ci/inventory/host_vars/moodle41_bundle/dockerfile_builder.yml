@@ -1,6 +1,6 @@
 # image
 version_image_suffix: bundle
-image_from_ctr: moodle40
+image_from_ctr: moodle41
 image_tag_from_ctr: "{{ moodle_version }}"
 dockerfile_builder_image_from_repo_name: moodle
 

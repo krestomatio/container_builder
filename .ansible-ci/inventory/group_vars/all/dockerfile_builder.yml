@@ -20,10 +20,8 @@ node_versions:
 node_version_name:
   14: fermium
   16: gallium
-moodle_lts_versions:
-  39: '3.9'
 moodle_versions:
-  40: '4.0'
+  41: '4.1'
 graphql_engine_versions:
   2: '2.12.0'
 go_versions:

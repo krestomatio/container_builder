@@ -12,4 +12,9 @@ prepare_image_task: moodle
 version_release_no_bump: true
 
 # moodle
-moodle_plugin_list: mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist
+moodle_plugin_list:
+  - mod_attendance
+  - mod_checklist
+  # - mod_customcert # once it becomes avaiable for 4.1
+  - block_checklist
+  - gradeexport_checklist

@@ -38,7 +38,7 @@ COPY conf/usr/libexec /usr/libexec/
 
 # Install additional plugins (a comma separated arg), if any
 # Argument is also a mechanism to invalidate cache if changed
-ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default('') }}"
+ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default([]) | join(',') }}"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
@@ -133,7 +133,7 @@ RUN container-setup-php-moodle
 USER ${CTR_USER_ID}
 
 {% if moodle_app_src is defined %}
-ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default('') }}"
+ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default([]) | join(',') }}"
 ARG ARG_MOODLE_COMMIT=""
 ENV MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
     MOODLE_VERSION_NUMBER="{{ moodle_git_source_version_number }}" \

@@ -25,7 +25,7 @@ Extends [{{ ctr_repo_name }}:{{ moodle_version }}](#{{ ctr_repo_name }}{{ moodle
 
 #### Plugins
 The following is the list of plugins:
-{% for plugin in moodle_plugin_list.split() %}
+{% for plugin in moodle_plugin_list %}
 - [{{ plugin }}](https://moodle.org/plugins/{{ plugin }})
 {% endfor %}
 {% endif %}

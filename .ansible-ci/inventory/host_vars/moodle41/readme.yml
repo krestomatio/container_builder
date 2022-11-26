@@ -53,7 +53,7 @@ ctr_readme_section: |-
   For installing plugins while building the main Dockerfile (slower), use `ARG_MOODLE_PLUGIN_LIST`:
   ```
   docker build . -t my_moodle_image:my_tag \
-      --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist'
+      --build-arg ARG_MOODLE_PLUGIN_LIST='{{ moodle_plugin_list | default([]) | join(',') }}'
   ```
   For building only to install additional moodle plugins (faster), create a Dockerfile like the following and then build.
   Example of `Dockerfile.plugins`:
@@ -73,7 +73,7 @@ ctr_readme_section: |-
   # Build
   docker build . -t my_moodle_image:my_tag \
       -f Dockerfile.plugins \
-      --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist'
+      --build-arg ARG_MOODLE_PLUGIN_LIST='{{ moodle_plugin_list | default([]) | join(',') }}'
   ```
   {% endif %}
 

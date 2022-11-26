@@ -1,4 +1,4 @@
-updatebot_moodle_ctr_name: moodle40
+updatebot_moodle_ctr_name: moodle41
 updatebot_postgres_ctr_name: postgres13
 updatebot_nginx_ctr_name: nginx120
 updatebot_keydb_ctr_name: keydb63

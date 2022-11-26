@@ -3,6 +3,38 @@
     - moodle_git_refs_json is defined
     - moodle_git_commit is not defined
   block:
+    - name: get moodle repo commit from tag
+      when: moodle_git_branch is match('v.*')
+      block:
+        - name: get moodle repo commit from tag
+          when: moodle_git_branch is match('v.*')
+          run_once: true
+          retries: 3
+          delay: 3
+          until: moodle_git_tag_get_task.json is defined
+          register: moodle_git_tag_get_task
+          uri:
+            client_cert: "{{ moodle_git_refs_json.client_cert | default(omit) }}"
+            client_key: "{{ moodle_git_refs_json.client_key | default(omit) }}"
+            force_basic_auth: "{{ moodle_git_refs_json.force_basic_auth | default(omit) }}"
+            follow_redirects: "{{ moodle_git_refs_json.follow_redirects | default(omit) }}"
+            headers: "{{ moodle_git_refs_json.headers_json | default(omit,true) }}"
+            method: "{{ moodle_git_refs_json.method | default(omit) }}"
+            return_content: "{{ moodle_git_refs_json.return_content | default(true) }}"
+            status_code: "{{ moodle_git_refs_json.status_code | default(omit) }}"
+            timeout: "{{ moodle_git_refs_json.timeout | default(omit) }}"
+            url: "{{ moodle_git_refs_json.url }}"
+            url_password: "{{ moodle_git_refs_json.url_password | default(omit) }}"
+            url_username: "{{ moodle_git_refs_json.url_username | default(omit) }}"
+            validate_certs: "{{ moodle_git_refs_json.validate_certs | default(omit) }}"
+
+        - name: update moodle repo refs json for tag url
+          when:
+            - moodle_git_tag_get_task.json.object.type is defined
+            - moodle_git_tag_get_task.json.object.type == 'tag'
+          set_fact:
+            moodle_git_refs_json_url: "{{ moodle_git_tag_get_task.json.object.url }}"
+
     - name: get moodle repo json
       run_once: true
       retries: 3

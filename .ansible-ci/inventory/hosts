@@ -39,7 +39,7 @@ node14
 node14-ci
 
 [moodle:children]
-moodle40_grp
+moodle41_grp
 
 ## container groups
 [centos_minimal_grp]
@@ -91,13 +91,13 @@ ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
 
-[moodle40_grp]
-moodle40_nginx120
-moodle40_nginx120_php80-fpm
-moodle40_php80-fpm
-moodle40
-moodle40_httpd24
-moodle40_bundle
+[moodle41_grp]
+moodle41_nginx120
+moodle41_nginx120_php80-fpm
+moodle41_php80-fpm
+moodle41
+moodle41_httpd24
+moodle41_bundle
 
 [build_step_1:children]
 minimal_grp
@@ -130,13 +130,13 @@ ansible-operator-ci
 graphql-engine2
 
 [build_step_6]
-moodle40_nginx120
-moodle40_nginx120_php80-fpm
-moodle40_php80-fpm
-moodle40_httpd24
+moodle41_nginx120
+moodle41_nginx120_php80-fpm
+moodle41_php80-fpm
+moodle41_httpd24
 
 [build_step_7]
-moodle40
+moodle41
 
 [build_step_8]
-moodle40_bundle
+moodle41_bundle

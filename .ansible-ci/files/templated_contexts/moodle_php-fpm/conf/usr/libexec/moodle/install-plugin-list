@@ -16,13 +16,13 @@ USAGE:
     install-plugin-list [OPTIONS]
 
 OPTIONS (install moodle plugin(s)):
-  -f            force installation of latest available version despite lack of compatibility of maturity
+  -f            force installation of latest available version despite lack of compatibility from maturity
   -m            minimun plugin maturity level (ex: '200'). Default 0
-  -p            plugin list, separate by space, to be installed
+  -p            plugin list, separated by comma, to be installed
 
 EXAMPLES:
-    install-plugin-list -p 'mod_jitsi mod_customcert'
-    MOODLE_PLUGIN_LIST='mod_jitsi mod_customcert' install-plugin-list
+    install-plugin-list -p 'mod_jitsi,mod_customcert,atto_multilang2'
+    MOODLE_PLUGIN_LIST='mod_jitsi,mod_customcert,atto_multilang2' install-plugin-list
 EOF
 }
 
@@ -64,7 +64,7 @@ install_plugin() {
     fi
     # unzip plugin in destination directory
     echo "Uncompressing to: ${script_moodle_plugin_component_tmp_dest}"
-    unzip -q "${script_moodle_plugin_component_zip}" -d "${script_moodle_plugin_component_tmp_dest}"
+    unzip -qo "${script_moodle_plugin_component_zip}" -d "${script_moodle_plugin_component_tmp_dest}"
     plugin_base_dirname=$(basename "${script_moodle_plugin_component_tmp_dest}"/$(ls -d "${script_moodle_plugin_component_tmp_dest}"/* | head -n 1))
     echo "Installing to: ${script_moodle_plugin_component_dest}"
     mv "${script_moodle_plugin_component_tmp_dest}/${plugin_base_dirname}/" "${script_moodle_plugin_component_dest}"
@@ -82,7 +82,7 @@ $MOODLE_PLUGIN_COMPONENT_NAME = getenv('script_moodle_plugin_component_name');
 $MOODLE_RELEASE = getenv('MOODLE_RELEASE');
 $MOODLE_PLUGIN_FORCE = getenv("script_moodle_plugin_force");
 $MOODLE_PLUGIN_MATURITY = (int) getenv('script_moodle_plugin_maturiy') ?: 0;
-$to_be_installed = $MOODLE_PLUGIN_FORCE == "true" ? true: false;
+$to_be_installed = $MOODLE_PLUGIN_FORCE == "true" ? true : false;
 
 # not empty plugin component name
 if (empty($MOODLE_PLUGIN_COMPONENT_NAME)) {
@@ -91,15 +91,61 @@ if (empty($MOODLE_PLUGIN_COMPONENT_NAME)) {
 }
 
 # moodle major version from version.php
-if(empty($MOODLE_RELEASE)){
+if (empty($MOODLE_RELEASE)) {
     define('MOODLE_INTERNAL', true);
     define('MATURITY_STABLE',   200);
     require($MOODLE_APP . '/version.php');
-    $MOODLE_RELEASE = explode('.', $release)[0] . '.' . explode('.', $release)[1];
+    preg_match('/^([0-9]+)\.([0-9]+)/', $release, $matches);
+    $MOODLE_RELEASE = $matches[0];
 }
 
-# get component list
-$components = json_decode(file_get_contents($MOODLE_APP . '/lib/components.json'), true);
+
+# functions
+function install_path($plugin_type, $plugin_name) {
+    global $MOODLE_APP;
+
+    /**
+    * Array adapted from:
+    * moosh - Moodle Shell
+    * https://github.com/tmuras/moosh/blob/549c5fb2f6fdccbc6a961668aa873b1548a17e31/includes/functions.php
+    */
+    $install_path_directory_from_type = array(
+        'tinymce' => array('dir' => 'lib/editor/tinymce/plugins'),
+        'workshopallocation' => array('dir' => 'mod/workshop/allocation'),
+        'atto' => array('dir' => 'lib/editor/atto/plugins'), 'availability' => array('dir' => 'availability/condition'),
+        'assignsubmission' => array('dir' => 'mod/assign/submission'), 'logstore' => array('dir' => 'admin/tool/log/store'),
+        'quizaccess' => array('dir' => 'mod/quiz/accessrule'), 'assignment' => array('dir' => 'mod/assignment/type'),
+        'assignfeedback' => array('dir' => 'mod/assign/feedback'), 'gradingform' => array('dir' => 'grade/grading/form'),
+        'qbehaviour' => array('dir' => 'question/behaviour'), 'profilefield' => array('dir' => 'user/profile/field'),
+        'workshopform' => array('dir' => 'mod/workshop/form'), 'workshopeval' => array('dir' => 'mod/workshop/eval'),
+        'scormreport' => array('dir' => 'mod/scorm/report'), 'fileconverter' => array('dir' => 'files/converter'),
+        'qformat' => array('dir' => 'question/format'), 'quiz' => array('dir' => 'mod/quiz/report'),
+        'ltiservice' => array('dir' => 'mod/lti/service'), 'datapreset' => array('dir' => 'mod/data/preset'),
+        'ltisource' => array('dir' => 'mod/lti/source'), 'datafield' => array('dir' => 'mod/data/field'),
+        'message' => array('dir' => 'message/output'), 'booktool' => array('dir' => 'mod/book/tool'),
+        'calendartype' => array('dir' => 'calendar/type'), 'format' => array('dir' => 'course/format'),
+        'coursereport' => array('dir' => 'course/report'), 'mlbackend' => array('dir' => 'lib/mlbackend'),
+        'search' => array('dir' => 'search/engine'), 'antivirus' => array('dir' => 'lib/antivirus'),
+        'qtype' => array('dir' => 'question/type'), 'media' => array('dir' => 'media/player'),
+        'cachestore' => array('dir' => 'cache/stores'), 'gradereport' => array('dir' => 'grade/report'),
+        'gradeimport' => array('dir' => 'grade/import'), 'gradeexport' => array('dir' => 'grade/export'),
+        'mnetservice' => array('dir' => 'mnet/service'), 'cachelock' => array('dir' => 'cache/locks'),
+        'plagiarism' => array('dir' => 'plagiarism'), 'repository' => array('dir' => 'repository'),
+        'tool' => array('dir' => 'admin/tool'), 'editor' => array('dir' => 'lib/editor'),
+        'dataformat' => array('dir' => 'dataformat'), 'webservice' => array('dir' => 'webservice'),
+        'portfolio' => array('dir' => 'portfolio'), 'filter' => array('dir' => 'filter'),
+        'report' => array('dir' => 'report'), 'block' => array('dir' => 'blocks'), 'local' => array('dir' => 'local'),
+        'enrol' => array('dir' => 'enrol'), 'theme' => array('dir' => 'theme'), 'auth' => array('dir' => 'auth'),
+        'mod' => array('dir' => 'mod')
+    );
+
+    if (array_key_exists($plugin_type, $install_path_directory_from_type)) {
+        return $MOODLE_APP . '/' . $install_path_directory_from_type[$plugin_type]['dir'] .'/'. $plugin_name;
+    }
+
+    file_put_contents("php://stderr", "ERROR: " . $plugin_type . " is not a valid type!" . "\n");
+    exit(1);
+}
 
 #curl
 $params = array(
@@ -119,7 +165,7 @@ $defaults = array(
 $curl = curl_init();
 curl_setopt_array($curl, $defaults);
 $response = json_decode(curl_exec($curl));
-if($errno = curl_errno($curl)){
+if ($errno = curl_errno($curl)) {
     $error_message = curl_strerror($errno);
     file_put_contents("php://stderr", "ERROR: curl errno ({$errno}):\n {$error_message}");
     exit(1);
@@ -127,12 +173,12 @@ if($errno = curl_errno($curl)){
 curl_close($curl);
 if ($response) {
     $moodle_plugin_info = $response->pluginfo;
-    $moodle_plugin_type = explode('_',$MOODLE_PLUGIN_COMPONENT_NAME)[0];
-    $moodle_plugin_base_name = substr_replace($MOODLE_PLUGIN_COMPONENT_NAME, '', 0, strlen($moodle_plugin_type . '_'));
+    $moodle_plugin_type = explode('_', $MOODLE_PLUGIN_COMPONENT_NAME)[0];
+    $moodle_plugin_name = substr_replace($MOODLE_PLUGIN_COMPONENT_NAME, '', 0, strlen($moodle_plugin_type . '_'));
     $moodle_plugin_info_latest_download_url = $moodle_plugin_info->version->downloadurl;
     $moodle_plugin_info_latest_download_md5 = $moodle_plugin_info->version->downloadmd5;
     $moodle_plugin_info_maturity = (int) $moodle_plugin_info->version->maturity;
-    $moodle_plugin_info_install_path = $MOODLE_APP . '/' . $components['plugintypes'][explode('_',$MOODLE_PLUGIN_COMPONENT_NAME)[0]] . '/' . $moodle_plugin_base_name;
+    $moodle_plugin_info_install_path = install_path($moodle_plugin_type, $moodle_plugin_name);
     $supported_moodle_release = $moodle_plugin_info->version->supportedmoodles;
     if (!$to_be_installed) {
         if (in_array($MOODLE_RELEASE, array_column($supported_moodle_release, 'release'))) {
@@ -160,8 +206,10 @@ exit(1);
 CODE
 }
 
+moodle_plugin_list=${MOODLE_PLUGIN_LIST:-}
+IFS=',' read -r -a script_moodle_plugin_list <<< "${moodle_plugin_list// /}"
+export script_moodle_plugin_list
 export script_moodle_app=${MOODLE_APP:-/var/www/html}
-export script_moodle_plugin_list=(${MOODLE_PLUGIN_LIST:-})
 export script_moodle_api_plugin_list=${MOODLE_API_PLUGIN_INFO:-https://download.moodle.org/api/1.3/pluginfo.php}
 export script_moodle_plugin_force=
 export script_moodle_plugin_maturiy=0
@@ -172,7 +220,7 @@ while getopts ":fp:m:" opt; do
         script_moodle_plugin_force="true"
         ;;
     p )
-        script_moodle_plugin_list=(${OPTARG})
+        IFS=',' read -r -a script_moodle_plugin_list <<< "${OPTARG// /}"
         ;;
     m )
         script_moodle_plugin_maturiy="${OPTARG}"

@@ -36,7 +36,7 @@ FROM scratch
 
 ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 
-ENV IMAGE_VERSION=8.6.4
+ENV IMAGE_VERSION=8.7.1
 
 COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
@@ -44,4 +44,4 @@ CMD ["/bin/bash"]
 
 # Labels
 LABEL org.opencontainers.image.title="Rocky 8 Linux Minimal Image" \
-      org.opencontainers.image.version="8.6.4"
+      org.opencontainers.image.version="8.7.1"

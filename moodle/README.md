@@ -5,28 +5,28 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.0](#moodle40): `4.0, 4.0.4, moodle40-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
-- [moodle:4.0-bundle](#moodle40-bundle): `4.0-bundle, 4.0.4-bundle, moodle40_bundle-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
-- [moodle:4.0-httpd](#moodle40-httpd): `4.0-httpd, 4.0.4-httpd, moodle40_httpd24-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
-- [moodle:4.0-nginx](#moodle40-nginx): `4.0-nginx, 4.0.4-nginx, moodle40_nginx120-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
-- [moodle:4.0-nginx_php-fpm](#moodle40-nginxphp-fpm): `4.0-nginx_php-fpm, 4.0.4-nginx_php-fpm, moodle40_nginx120_php80-fpm-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
-- [moodle:4.0-php-fpm](#moodle40-php-fpm): `4.0-php-fpm, 4.0.4-php-fpm, moodle40_php80-fpm-2b8d92d37a2e78d88a46ec7702936db613ea9e3f`
+- [moodle:4.1](#moodle41): `0.0, 0.0.2, moodle41-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
+- [moodle:4.1-bundle](#moodle41-bundle): `0.0-bundle, 0.0.2-bundle, moodle41_bundle-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
+- [moodle:4.1-httpd](#moodle41-httpd): `0.0-httpd, 0.0.2-httpd, moodle41_httpd24-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
+- [moodle:4.1-nginx](#moodle41-nginx): `0.0-nginx, 0.0.2-nginx, moodle41_nginx120-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `0.0-nginx_php-fpm, 0.0.2-nginx_php-fpm, moodle41_nginx120_php80-fpm-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `0.0-php-fpm, 0.0.2-php-fpm, moodle41_php80-fpm-1d15084dd1de5a241f8ad5a4bffcc019768ebc04`
 
 
 ## Image Variants
-### moodle:4.0
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40)
+### moodle:4.1
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41)
 
-This CentOS 9 Stream minimal based container image runs PHP 8.0 (default) or NGINX 1.20 for Moodle 4.0. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
+This CentOS 9 Stream minimal based container image runs PHP 8.0 (default) or NGINX 1.20 for Moodle 4.1. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
 
 It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.0.4
-* Moodle version number: 2022041904.07
-* Moodle commit: 00ad2a14dafc3d2bc25a9797228d3baba212d842
-* Moodle remote branch: MOODLE\_400\_STABLE
+* Moodle version: 
+* Moodle version number: 2022112800.00
+* Moodle commit: 0ea3d45e04c3d54a3a472ddcb11606b30e227c50
+* Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Custom builds
 This Dockerfile allows setting OS extra packages, Moodle remote repo, Moodle repo branch and/or additional Moodle plugins. For that purpose, use build args to customize the build as you need.
@@ -49,20 +49,20 @@ docker build . -t my_moodle_image:my_tag \
 For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_GIT_BRANCH='MOODLE_400_STABLE'
+    --build-arg ARG_GIT_BRANCH='MOODLE_401_STABLE'
 ```
 
 ##### Moodle plugins
 For installing plugins while building the main Dockerfile (slower), use `ARG_MOODLE_PLUGIN_LIST`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist'
+    --build-arg ARG_MOODLE_PLUGIN_LIST=''
 ```
 For building only to install additional moodle plugins (faster), create a Dockerfile like the following and then build.
 Example of `Dockerfile.plugins`:
 ```dockerfile
 # Dockerfile.plugins
-FROM quay.io/krestomatio/moodle:4.0
+FROM quay.io/krestomatio/moodle:4.1
 
 # Install additional plugins, a space separated arg, (if any)
 # Argument is also a mechanism to invalidate cache if changed
@@ -76,7 +76,7 @@ Example of build using `Dockerfile.plugins`:
 # Build
 docker build . -t my_moodle_image:my_tag \
     -f Dockerfile.plugins \
-    --build-arg ARG_MOODLE_PLUGIN_LIST='mod_attendance mod_checklist mod_customcert block_checklist gradeexport_checklist'
+    --build-arg ARG_MOODLE_PLUGIN_LIST=''
 ```
 
 #### PHP-FPM or NGINX
@@ -87,43 +87,42 @@ For adjusting PHP-FPM or Nginx config, just place the .ini or .conf files in the
 - `/etc/php-fpm.d/`: PHP-FPM .conf extra configuration
 - `/etc/nginx/default.d/`: Nginx .conf server extra configuration
 
-### moodle:4.0-bundle
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40_bundle)
+### moodle:4.1-bundle
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_bundle)
 
-Extends [moodle:4.0](#moodle40) to add additional Moodle plugins.
+Extends [moodle:4.1](#moodle41) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.0.4
-* Moodle version number: 2022041904.07
-* Moodle commit: 00ad2a14dafc3d2bc25a9797228d3baba212d842
-* Moodle remote branch: MOODLE\_400\_STABLE
+* Moodle version: 
+* Moodle version number: 2022112800.00
+* Moodle commit: 0ea3d45e04c3d54a3a472ddcb11606b30e227c50
+* Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Plugins
 The following is the list of plugins:
 - [mod_attendance](https://moodle.org/plugins/mod_attendance)
 - [mod_checklist](https://moodle.org/plugins/mod_checklist)
-- [mod_customcert](https://moodle.org/plugins/mod_customcert)
 - [block_checklist](https://moodle.org/plugins/block_checklist)
 - [gradeexport_checklist](https://moodle.org/plugins/gradeexport_checklist)
 
-### moodle:4.0-httpd
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40_httpd24)
+### moodle:4.1-httpd
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_httpd24)
 
 Image based on CentOS 9 Stream minimal with [Apache HTTP Server](https://httpd.apache.org/) for Moodle app/source (not included)
 
-### moodle:4.0-nginx
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40_nginx120)
+### moodle:4.1-nginx
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_nginx120)
 
 Image based on CentOS 9 Stream minimal with [nginx HTTP Server](https://nginx.org/) for Moodle app/source (not included)
 
-### moodle:4.0-nginx_php-fpm
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40_nginx120_php80-fpm)
+### moodle:4.1-nginx_php-fpm
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_nginx120_php80-fpm)
 
 Image based on CentOS 9 Stream minimal with [nginx HTTP Server](https://nginx.org/) and [PHP-FPM](https://php-fpm.org/) for Moodle app/source (not included)
 
-### moodle:4.0-php-fpm
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle40_php80-fpm)
+### moodle:4.1-php-fpm
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_php80-fpm)
 
 Moodle PHP-FPM image based on CentOS 9 Stream minimal for Moodle app/source (not included)
 

@@ -15,10 +15,8 @@ spec:
             env:
               - name: HOME
                 value: /tekton/home
-              - name: TERRAFORM_WORKING_DIR
-                value: "/shared/$(params.REPO_OWNER)/$(params.REPO_NAME)/$(params.JOB_NAME)/$(params.PULL_NUMBER)/multiarch-builder"
-              - name: TF_VAR_prefix_name
-                value: "$(params.REPO_OWNER)-$(params.REPO_NAME)-$(params.JOB_NAME)-$(params.PULL_NUMBER)"
+              - name: CLOUD_PROVIDER
+                value: kio
             resources:
               limits:
                 cpu: 1000m
@@ -32,7 +30,6 @@ spec:
                 mountPath: /shared
           steps:
             - image: uses:krestomatio/jx3-pipeline-catalog/tasks/git-clone/git-clone-pr.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
-            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/multiarch-builder/deploy.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
             - image: quay.io/krestomatio/ansible-docker-ci:0.2.3
               name: build-containers
               script: |
@@ -45,7 +42,6 @@ spec:
                 requests:
                   cpu: 0.1
                   memory: 128Mi
-            - image: uses:krestomatio/jx3-pipeline-catalog/tasks/multiarch-builder/undeploy.yaml@1d617dda837673daa9fb677a31dd25fc0ff667d9
           volumes:
             - name: libdocker
               persistentVolumeClaim:

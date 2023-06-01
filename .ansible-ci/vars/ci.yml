@@ -11,3 +11,4 @@ cloud_providers:
   - aws
   - gcp
   - m6e
+  - kio

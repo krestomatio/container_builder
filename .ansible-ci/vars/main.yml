@@ -39,7 +39,7 @@ version_image_bump: "{{ next_version_bump }}"
 check_image_version_tag: true
 
 # docker
-docker_start_daemon: false
+docker_start_daemon: "{{ false if dockerfile_builder_use_buildx else true }}"
 docker_config_json: "{{ lookup('env','DOCKER_CONFIG_JSON') | default(false,true) }}"
 docker_config_json_path: /tekton/home/.docker/config.json
 docker_config_arm64_emulation: "{{ true if 'linux/arm64' in dockerfile_builder_platforms | default([])

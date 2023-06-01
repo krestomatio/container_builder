@@ -2,6 +2,8 @@
 ARG ROOTFS_IMAGE_BASE={{ rootfs_image_base }}
 FROM ${ROOTFS_IMAGE_BASE} as builder
 
+ARG TARGETOS
+ARG TARGETARCH
 ARG ARG_ROOTFS_INSTALL_DIR='{{ rootfs_install_dir }}'
 ARG ARG_ROOTFS_EXTRA_REMOVAL='{{ rootfs_extra_removal | default('false') }}'
 ARG ARG_ROOTFS_REPO_CONTENTDIR='{{ rootfs_repo_contentdir }}'
@@ -14,7 +16,9 @@ ARG ARG_ROOTFS_DNF_VARS='{{ rootfs_dnf_vars }}'
 ARG ARG_ROOTFS_EXTRA_PKGS='{{ rootfs_extra_pkgs }}'
 ARG ARG_ROOTFS_RELEASE_PKG='{{ rootfs_release_pkg }}'
 
-ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
+ENV TARGETOS=${TARGETOS} \
+    TARGETARCH=${TARGETARCH} \
+    ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
     ROOTFS_EXTRA_REMOVAL="${ARG_ROOTFS_EXTRA_REMOVAL}" \
     ROOTFS_REPO_CONTENTDIR="${ARG_ROOTFS_REPO_CONTENTDIR}" \
     ROOTFS_REPO_RELEASEVER="${ARG_ROOTFS_REPO_RELEASEVER}" \
@@ -29,6 +33,15 @@ ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
 COPY conf/usr/bin /usr/bin
 
 RUN rootfs
+
+
+# pkg list
+FROM scratch AS pkg_list
+
+ARG TARGETOS
+ARG TARGETARCH
+
+COPY --from=builder /pkg_list_${TARGETOS}_${TARGETARCH} /
 
 
 # image

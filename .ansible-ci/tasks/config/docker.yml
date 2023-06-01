@@ -4,6 +4,9 @@
     - dockerfile_builder == 'docker'
     - builder_config | default(false) | bool
   block:
+    - include_tasks: buildx/k8s.yml
+      when: dockerfile_builder_use_buildx
+
     - when:
       - docker_start_daemon | default(false) | bool
       - not ansible_check_mode

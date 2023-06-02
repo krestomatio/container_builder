@@ -36,11 +36,11 @@ FROM scratch
 
 ARG ARG_ROOTFS_INSTALL_DIR='{{ rootfs_install_dir }}'
 
-ENV IMAGE_VERSION={{ dockerfile_builder_image_version | default('0.0.1') }}
-
 COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 CMD ["/bin/bash"]
+
+ENV IMAGE_VERSION={{ dockerfile_builder_image_version | default('0.0.1') }}
 
 # Labels
 LABEL org.opencontainers.image.title="{{ dockerfile_builder_image_title | default('Rootfs container image') }}" \

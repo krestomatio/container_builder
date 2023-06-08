@@ -4,80 +4,104 @@ metadata:
   creationTimestamp: null
   name: release
 spec:
+  workspaces:
+  - name: shared-workspace
+    volumeClaimTemplate:
+      spec:
+        storageClassName: local-path
+        persistentVolum eReclaimPolicy: Delete
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
   pipelineSpec:
+    workspaces:
+    - name: shared-workspace
     tasks:
-      - name: git-clone
-        taskRef:
-          name: git-clone
-      - name: release
-        resources: {}
-        taskSpec:
-          metadata: {}
-          stepTemplate:
-            name: ''
-            env:
-              - name: HOME
-                value: /tekton/home
-              - name: CLOUD_PROVIDER
-                value: kio
-            resources:
-              limits:
-                cpu: 400m
-                memory: 512Mi
-              requests:
-                cpu: 50m
-                memory: 32Mi
-            workingDir: /workspace/source
-          steps:
-            - image: quay.io/krestomatio/ansible-docker-ci
-              name: release
-              env:
-              - name: APIKEY__QUAY_IO
-                valueFrom:
-                  secretKeyRef:
-                    key: apikey
-                    name: quay-io-api-key
-              - name: APIKEY_GITLAB
-                valueFrom:
-                  secretKeyRef:
-                    key: apikey
-                    name: gitlab-api-key
-              - name: USERNAME_GITLAB
-                valueFrom:
-                  secretKeyRef:
-                    key: username
-                    name: tekton-git
-              script: |
-                #!/bin/bash
-                ## add gitlab lfs api
-                echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
-                ## run release play
-                NEXT_VERSION=${VERSION} ansible-playbook .ansible-ci/release.yml
-              resources:
-                requests:
-                  cpu: 0.1
-                  memory: 128Mi
-              volumeMounts:
-              - name: libdocker
-                mountPath: /var/lib/docker
-            - name: promote
-              image: ghcr.io/jenkins-x/jx-updatebot:0.0.86
-              script: |
-                #!/bin/bash
-                HEAD_COMMIT=$(git rev-parse HEAD 2> /dev/null || echo)
-
-                # promote if a new commit is made during pipeline
-                if [[ ! -z ${HEAD_COMMIT} && ! -z ${PULL_BASE_SHA} && "${HEAD_COMMIT}" != "${PULL_BASE_SHA}" ]]; then
-                  jx-updatebot pr -c .lighthouse/updatebot-ansible-collection.yaml \
-                      --commit-title "chore: bump image versions in ansible collection with updatebot" \
-                      --no-version
-                else
-                  echo "not promoted"
-                fi
-          volumes:
+    - name: git-clone
+      workspaces:
+      - name: output
+        workspace: shared-workspace
+      taskRef:
+        name: git-clone
+    - name: release
+      resources: {}
+      runAfter:
+      - git-clone
+      workspaces:
+      - name: source
+        workspace: shared-workspace
+      taskSpec:
+        metadata: {}
+        workspaces:
+        - name: source
+          mountPath: /workspace
+        stepTemplate:
+          name: ''
+          env:
+          - name: HOME
+            value: /workspace
+          - name: CLOUD_PROVIDER
+            value: kio
+          resources:
+            limits:
+              cpu: 400m
+              memory: 512Mi
+            requests:
+              cpu: 50m
+              memory: 32Mi
+          workingDir: /workspace/source
+        steps:
+        - image: quay.io/krestomatio/ansible-docker-ci
+          name: release
+          env:
+          - name: APIKEY__QUAY_IO
+            valueFrom:
+              secretKeyRef:
+                key: apikey
+                name: quay-io-api-key
+          - name: APIKEY_GITLAB
+            valueFrom:
+              secretKeyRef:
+                key: apikey
+                name: gitlab-api-key
+          - name: USERNAME_GITLAB
+            valueFrom:
+              secretKeyRef:
+                key: username
+                name: tekton-git
+          script: |
+            #!/bin/bash
+            ## add gitlab lfs api
+            echo "https://${USERNAME_GITLAB}:${APIKEY_GITLAB}@gitlab.com" >> ~/.git-credentials
+            ## run release play
+            NEXT_VERSION=${VERSION} ansible-playbook .ansible-ci/release.yml
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 128Mi
+          volumeMounts:
           - name: libdocker
-            persistentVolumeClaim:
-              claimName: libdocker-0sd6j3-pvc
+            mountPath: /var/lib/docker
+        - name: promote
+          image: ghcr.io/jenkins-x/jx-updatebot:0.0.86
+          script: |
+            #!/bin/bash
+            HEAD_COMMIT=$(git rev-parse HEAD 2> /dev/null || echo)
+
+            # promote if a new commit is made during pipeline
+            if [[ ! -z ${HEAD_COMMIT} && ! -z ${PULL_BASE_SHA} && "${HEAD_COMMIT}" != "${PULL_BASE_SHA}" ]]; then
+              jx-updatebot pr -c .lighthouse/updatebot-ansible-collection.yaml \
+                  --commit-title "chore: bump image versions in ansible collection with updatebot" \
+                  --no-version
+            else
+              echo "not promoted"
+            fi
+        volumes:
+        - name: libdocker
+          persistentVolumeClaim:
+            claimName: libdocker-0sd6j3-pvc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

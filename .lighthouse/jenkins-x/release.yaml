@@ -9,7 +9,7 @@ spec:
     volumeClaimTemplate:
       spec:
         storageClassName: local-path
-        persistentVolum eReclaimPolicy: Delete
+        persistentVolumeReclaimPolicy: Delete
         accessModes:
         - ReadWriteOnce
         resources:

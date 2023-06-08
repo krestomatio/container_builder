@@ -58,6 +58,7 @@ spec:
         steps:
         - image: quay.io/krestomatio/ansible-docker-ci:0.2.3
           name: build-containers
+          timeout: "2h0m0s"
           script: |
             #!/bin/bash -eu
             ansible-playbook .ansible-ci/build.yml

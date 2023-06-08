@@ -55,6 +55,7 @@ spec:
         steps:
         - image: quay.io/krestomatio/ansible-docker-ci
           name: release
+          timeout: "2h0m0s"
           env:
           - name: APIKEY__QUAY_IO
             valueFrom:

@@ -65,6 +65,9 @@ spec:
           - name: libdocker
             mountPath: /var/lib/docker
           resources:
+            limits:
+              cpu: 1.5
+              memory: 4096Mi
             requests:
               cpu: 0.1
               memory: 128Mi

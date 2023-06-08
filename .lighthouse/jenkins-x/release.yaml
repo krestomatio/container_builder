@@ -78,6 +78,9 @@ spec:
             ## run release play
             NEXT_VERSION=${VERSION} ansible-playbook .ansible-ci/release.yml
           resources:
+            limits:
+              cpu: 1.5
+              memory: 4096Mi
             requests:
               cpu: 0.1
               memory: 128Mi

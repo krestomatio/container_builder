@@ -46,8 +46,8 @@ spec:
             value: kio
           resources:
             limits:
-              cpu: 1000m
-              memory: 2048Mi
+              cpu: 400m
+              memory: 512Mi
             requests:
               cpu: 50m
               memory: 32Mi

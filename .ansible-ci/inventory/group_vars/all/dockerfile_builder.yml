@@ -88,7 +88,7 @@ external_release_version_regex: ^([0-9]+)\.([0-9]+)\.([0-9]+)
 
 # build vars
 dockerfile_builder: docker
-dockerfile_builder_use_buildx: true
+dockerfile_builder_use_buildx: false
 dockerfile_builder_buildx_multiplatform_cache: false
 dockerfile_builder_buildx_cache_image_extra_tag: "{{ ctr_name }}"
 dockerfile_builder_platforms:
@@ -128,6 +128,12 @@ dockerfile_builder_src: "{{ template_path }}"
 dockerfile_builder_sync_checksum: true
 dockerfile_builder_pull: "{{ true if dockerfile_builder_use_buildx else false }}"
 dockerfile_builder_throttle: 4
+
+# buildx
+buildx_k8s_builder_amd64: false
+buildx_k8s_builder_amd64_driver_opt: qemu.install=true,namespace=default,requests.cpu=100m,requests.memory=500Mi
+buildx_k8s_builder_arm64: false
+buildx_k8s_builder_arm64_driver_opt: qemu.install=true,namespace=default,requests.cpu=100m,requests.memory=500Mi
 
 # skopeo
 skopeo_src_image: "{{ lookup('vars', state_name + '_image').repo_digest }}"

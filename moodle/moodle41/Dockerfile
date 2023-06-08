@@ -119,7 +119,7 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_COMMIT=""
 ENV MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
-    MOODLE_VERSION_NUMBER="2022112800.00" \
+    MOODLE_VERSION_NUMBER="2022112803.07" \
     MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 
 COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app-src /var/www/html/ /var/www/html
@@ -131,7 +131,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.0.2" \
+      org.opencontainers.image.version="4.1.3" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

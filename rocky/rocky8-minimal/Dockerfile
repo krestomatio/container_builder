@@ -1,7 +1,9 @@
 # builder
-ARG ROOTFS_IMAGE_BASE=quay.io/fedora/fedora-minimal:32
+ARG ROOTFS_IMAGE_BASE=quay.io/fedora/fedora-minimal:34
 FROM ${ROOTFS_IMAGE_BASE} as builder
 
+ARG TARGETOS
+ARG TARGETARCH
 ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 ARG ARG_ROOTFS_EXTRA_REMOVAL='True'
 ARG ARG_ROOTFS_REPO_CONTENTDIR='rocky'
@@ -14,7 +16,9 @@ ARG ARG_ROOTFS_DNF_VARS='contentdir=rocky stream=8-stream infra=container'
 ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles'
 ARG ARG_ROOTFS_RELEASE_PKG='rocky-release'
 
-ENV ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
+ENV TARGETOS=${TARGETOS} \
+    TARGETARCH=${TARGETARCH} \
+    ROOTFS_INSTALL_DIR="${ARG_ROOTFS_INSTALL_DIR}" \
     ROOTFS_EXTRA_REMOVAL="${ARG_ROOTFS_EXTRA_REMOVAL}" \
     ROOTFS_REPO_CONTENTDIR="${ARG_ROOTFS_REPO_CONTENTDIR}" \
     ROOTFS_REPO_RELEASEVER="${ARG_ROOTFS_REPO_RELEASEVER}" \
@@ -31,17 +35,26 @@ COPY conf/usr/bin /usr/bin
 RUN rootfs
 
 
+# pkg list
+FROM scratch AS pkg_list
+
+ARG TARGETOS
+ARG TARGETARCH
+
+COPY --from=builder /pkg_list_${TARGETOS}_${TARGETARCH} /
+
+
 # image
 FROM scratch
 
 ARG ARG_ROOTFS_INSTALL_DIR='/mnt/rootfs'
 
-ENV IMAGE_VERSION=8.7.1
-
 COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 CMD ["/bin/bash"]
 
+ENV IMAGE_VERSION=8.8.1
+
 # Labels
 LABEL org.opencontainers.image.title="Rocky 8 Linux Minimal Image" \
-      org.opencontainers.image.version="8.7.1"
+      org.opencontainers.image.version="8.8.1"

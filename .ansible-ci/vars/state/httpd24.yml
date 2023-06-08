@@ -4,8 +4,8 @@
 httpd24_image:
   variant_name: "httpd:2.4"
   build: False
-  version: "2.4.7"
-  tags: "2.4,2.4.7,httpd24-1d15084dd1de5a241f8ad5a4bffcc019768ebc04"
-  artifact_tag: "1d15084dd1de5a241f8ad5a4bffcc019768ebc04"
-  repo_digest: "quay.io/krestomatio/httpd:2.4@sha256:c6140cb13b3c213fd85fd1845c021299e4c94b0b4f6ea2287cc61d392b2fb29b"
+  version: "2.4.8"
+  tags: "2.4,2.4.8,httpd24-a2d838e7015804309c1d65f13724078ae8d5fcac"
+  artifact_tag: "a2d838e7015804309c1d65f13724078ae8d5fcac"
+  repo_digest: "quay.io/krestomatio/httpd:2.4@sha256:c85a7cf0899314d8c3aef38edd4d629f7d63b692a07090abed79dea5edea2bbe"
   relative_path: "httpd/httpd24"

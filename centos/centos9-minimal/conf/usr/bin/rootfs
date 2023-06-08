@@ -89,3 +89,5 @@ rm -rfv ${ROOTFS_INSTALL_DIR}/etc/udev/hwdb.bin \
     ${ROOTFS_INSTALL_DIR}/boot ${ROOTFS_INSTALL_DIR}/run/*
 mkdir -p ${ROOTFS_INSTALL_DIR}/run/lock
 popd
+## save pkg_list_linux
+chroot ${ROOTFS_INSTALL_DIR} rpm -qa > /pkg_list_${TARGETOS}_${TARGETARCH}

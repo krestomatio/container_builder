@@ -25,10 +25,17 @@ spec:
         workspace: shared-workspace
       taskRef:
         name: git-clone-pr
+    - name: multiarch-builder-config
+      workspaces:
+      - name: output
+        workspace: shared-workspace
+      taskRef:
+        name: multiarch-builder-config
     - name: pullrequest
       resources: {}
       runAfter:
       - git-clone-pr
+      - multiarch-builder-config
       workspaces:
       - name: source
         workspace: shared-workspace
@@ -62,9 +69,6 @@ spec:
           script: |
             #!/bin/bash -eu
             ansible-playbook .ansible-ci/build.yml
-          volumeMounts:
-          - name: libdocker
-            mountPath: /var/lib/docker
           resources:
             limits:
               cpu: 1.5
@@ -73,9 +77,6 @@ spec:
               cpu: 0.1
               memory: 128Mi
         volumes:
-        - name: libdocker
-          persistentVolumeClaim:
-            claimName: libdocker-0sd6j3-pvc
         - name: shared
           persistentVolumeClaim:
             claimName: shared-0sd6j3-pvc

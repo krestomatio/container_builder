@@ -2,7 +2,7 @@
   when: buildx_k8s_builder_amd64 | default(true)
   command: >-
     docker buildx create --use
-    --name=container_builder
+    --name={{ buildx_k8s_builder_name | default('multiarch-builder') }}
     --platform=linux/amd64
     --node=buildkit-amd64
     --driver=kubernetes
@@ -12,7 +12,7 @@
   when: buildx_k8s_builder_arm64 | default(true)
   command: >-
     docker buildx create --append
-      --name=container_builder
+      --name={{ buildx_k8s_builder_name | default('multiarch-builder') }}
       --platform=linux/arm64
       --node=buildkit-arm64
       --driver=kubernetes

@@ -22,14 +22,7 @@
     register: prepare_distro_release_task
     changed_when: false
     throttle: 1
-    environment: "{{ {'DOCKER_CONTEXT': prepare_distro_release_docker_context}
-      if dockerfile_builder_use_buildx | default(false) and
-      prepare_distro_release_docker_context_exists else {} }}"
     vars:
-      prepare_distro_release_docker_context: "{{ 'multiarch-builder-' + item.split('/')[1] }}"
-      prepare_distro_release_docker_context_exists: "{{ lookup('pipe','docker context inspect ' +
-        prepare_distro_release_docker_context + ' 1>/dev/null && echo True || echo False') |
-        default(false,true) | bool }}"
       prepare_distro_release_image_manifest:
         "{{ dockerfile_builder_image_info.manifest.manifests | default([])
           | selectattr('platform.os', 'equalto', item.split('/')[0])

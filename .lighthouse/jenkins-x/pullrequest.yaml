@@ -45,6 +45,10 @@ spec:
         workspaces:
         - name: source
           mountPath: /workspace
+        volumes:
+        - name: shared
+          persistentVolumeClaim:
+            claimName: shared-0sd6j3-pvc
         stepTemplate:
           name: ''
           env:
@@ -76,10 +80,6 @@ spec:
             requests:
               cpu: 0.1
               memory: 128Mi
-        volumes:
-        - name: shared
-          persistentVolumeClaim:
-            claimName: shared-0sd6j3-pvc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

@@ -9,8 +9,9 @@ postgres_versions:
   13: '13'
 postgres_prev_versions:
   13: '10'
+# https://download.keydb.dev/pkg/open_source/rpm/
 keydb_versions_pkg:
-  63: '6.3.1-1'
+  63: '6.3.3-1'
 keydb_versions:
   63: "{{ keydb_versions_pkg.63 | regex_search(external_release_version_regex) }}"
 nfs_ganesha_versions:

@@ -4,9 +4,6 @@
     - dockerfile_builder == 'docker'
     - builder_config | default(false) | bool
   block:
-    - include_tasks: buildx/k8s.yml
-      when: dockerfile_builder_use_buildx
-
     - when:
       - docker_start_daemon | default(false) | bool
       - not ansible_check_mode
@@ -32,3 +29,16 @@
           {{ docker_config_json }}
         dest: "{{ docker_config_json_path | default('~/.docker/config.json') }}"
         mode: 600
+
+    - name: set default docker context to use
+      when: docker_default_context_name | default(false)
+      command: "docker context use {{ docker_default_context_name }}"
+
+    - include_tasks: buildx/k8s.yml
+      when: dockerfile_builder_use_buildx
+
+    - name: set buildx instance
+      when:
+        - dockerfile_builder_use_buildx | default(false)
+        - dockerfile_builder_use_buildx_instance_name | default(false)
+      command: "docker buildx use {{ dockerfile_builder_use_buildx_instance_name }}"

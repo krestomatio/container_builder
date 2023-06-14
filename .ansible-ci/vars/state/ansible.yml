@@ -4,8 +4,8 @@
 ansible_image:
   variant_name: "ansible"
   build: False
-  version: "0.4.6"
-  tags: "0,0.4,0.4.6"
-  artifact_tag: "a2d838e7015804309c1d65f13724078ae8d5fcac"
-  repo_digest: "quay.io/krestomatio/ansible@sha256:f583cc53e92e245701ca71bd1528dabf6f4044da148efc933c007a6d52270655"
+  version: "0.4.7"
+  tags: "0,0.4,0.4.7"
+  artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
+  repo_digest: "quay.io/krestomatio/ansible@sha256:a50866fcefd4434818a4a807217226b339063251125172c77da1a4ce331bcbda"
   relative_path: "ci/ansible"

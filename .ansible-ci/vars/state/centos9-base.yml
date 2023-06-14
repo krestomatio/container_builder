@@ -5,7 +5,7 @@ centos9_base_image:
   variant_name: "centos:9-base"
   build: False
   version: "9.0.21"
-  tags: "9-base,9.0-base,9.0.21-base,centos9-base-a2d838e7015804309c1d65f13724078ae8d5fcac"
-  artifact_tag: "a2d838e7015804309c1d65f13724078ae8d5fcac"
-  repo_digest: "quay.io/krestomatio/centos:9-base@sha256:4edc0e2ddfc79deac1ab2f37abd557bddd5d3661faf60a753e8a59dd76f77daf"
+  tags: "9-base,9.0-base,9.0.21-base,centos9-base-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
+  artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
+  repo_digest: "quay.io/krestomatio/centos:9-base@sha256:8ef340bc96b613f906f5c8d7a9b16832ca6512cfed534fe653d1905d974123cf"
   relative_path: "centos/centos9-base"

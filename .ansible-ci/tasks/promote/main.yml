@@ -2,11 +2,9 @@
   include_tasks: copy.yml
 
 - name: update repo digest
-  when: state_yml_repo_digest is defined
-  vars:
-    same_digest: "{{ state_yml_repo_digest.split('@')[1] }}"
+  when: skopeo_dest_image_digest is defined
   set_fact:
-    state_yml_repo_digest: "{{ container_image_variant + '@' + same_digest }}"
+    state_yml_repo_digest: "{{ container_image_variant + '@' + skopeo_dest_image_digest }}"
 
 - name: push container image readme
   include_tasks: pushrm.yml

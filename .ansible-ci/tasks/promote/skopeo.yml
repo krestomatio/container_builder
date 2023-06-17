@@ -43,7 +43,7 @@
           (skopeo_src_image_inspect.stdout | from_json).Digest !=
           (skopeo_dest_image_inspect.stdout | from_json).Digest
       command: >-
-        skopeo copy --all --src-tls-verify={{ skopeo_src_tls_verify | default(true) }}
+        skopeo copy --digestfile /dev/stdout --all --src-tls-verify={{ skopeo_src_tls_verify | default(true) }}
         --dest-tls-verify={{ skopeo_dest_tls_verify | default(true)}}
         {{ skopeo_src_transport | default(skopeo_transport) | default('docker://')
         + skopeo_copy_src_image }}
@@ -54,3 +54,9 @@
       delay: 3
       register: skopeo_copy_status
       until: skopeo_copy_status.rc == 0
+
+    - name: save dest image digest fact
+      failed_when: "not (skopeo_dest_image_digest | regex_search('^sha256:.*'))"
+      set_fact:
+        skopeo_dest_image_digest: "{{ skopeo_copy_status.stdout_lines | last | regex_search('^sha256:.*')
+        if skopeo_copy_status is not skipped else (skopeo_dest_image_inspect.stdout | from_json).Digest | default('') }}"

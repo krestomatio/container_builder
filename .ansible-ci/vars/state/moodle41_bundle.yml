@@ -7,5 +7,5 @@ moodle41_bundle_image:
   version: "4.1.4"
   tags: "4.1-bundle,4.1.4-bundle,moodle41_bundle-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-bundle@sha256:347ebe226c2678389bbf1229cc45c6046553eeab6e7eb4cc35e90782c1ed5ed6"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-bundle@sha256:ed4d2556603cd282811b5a64470f631195c3d1a0afb420dd0ef5d5eb182a17df"
   relative_path: "moodle/moodle41_bundle"

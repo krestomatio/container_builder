@@ -7,5 +7,5 @@ ansible_operator_ci_image:
   version: "0.4.7"
   tags: "0,0.4,0.4.7"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:44195b7fd862a1177ea7c28f4803eab6b89d77b5078778f3c15c6532ba7c2ca1"
+  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:1aa0c0ef141b40039de8103c1cdfa9d561573311f5549e01dcf76af1a725d7ee"
   relative_path: "ci/ansible-operator-ci"

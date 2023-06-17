@@ -7,5 +7,5 @@ ansible_podman_ci_image:
   version: "0.4.7"
   tags: "0,0.4,0.4.7"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:661ce6abb9e943b98c0de5358002f189f7259e10cb81092b25fff31e70f8d38f"
+  repo_digest: "quay.io/krestomatio/ansible-podman-ci@sha256:4df1e4227b24f8e18e3073ba3b858a77341f1145d54ae44f334a56323533024c"
   relative_path: "ci/ansible-podman-ci"

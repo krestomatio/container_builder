@@ -7,5 +7,5 @@ rocky9_minimal_image:
   version: "9.2.1"
   tags: "9-minimal,9.2-minimal,9.2.1-minimal,rocky9-minimal-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/rocky:9-minimal@sha256:8dd5ed11a47a1dce05997b9e4ee59cce5081150d82d22a07eb2678a7ef6d4e4f"
+  repo_digest: "quay.io/krestomatio/rocky:9-minimal@sha256:c29efdf0f18f3ffa757cf74b74927bc5248701442c459fae9d518301b6625de8"
   relative_path: "rocky/rocky9-minimal"

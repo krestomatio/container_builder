@@ -7,5 +7,5 @@ php80_fpm_image:
   version: "8.0.9"
   tags: "8.0,8.0.9,php80-fpm-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/php:8.0@sha256:d314d40e98cc426f11a8be1a707b4238aafefc7455d79f79946e9c7021a86948"
+  repo_digest: "quay.io/krestomatio/php:8.0@sha256:cd1ed54787526401ed38f86653e48de5b07a7330c0fcaacccda4dccfca2b2e5c"
   relative_path: "php/php80-fpm"

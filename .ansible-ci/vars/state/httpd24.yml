@@ -7,5 +7,5 @@ httpd24_image:
   version: "2.4.9"
   tags: "2.4,2.4.9,httpd24-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/httpd:2.4@sha256:8e85556de949d26b125b6481036b72be1770b5126b5345861fdc438da8b5cc7f"
+  repo_digest: "quay.io/krestomatio/httpd:2.4@sha256:7b08972f21557fb45d37f80e28fae8aa3a48a50270ae33ca096564b8f458d3ec"
   relative_path: "httpd/httpd24"

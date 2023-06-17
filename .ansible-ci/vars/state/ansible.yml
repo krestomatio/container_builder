@@ -7,5 +7,5 @@ ansible_image:
   version: "0.4.7"
   tags: "0,0.4,0.4.7"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/ansible@sha256:a50866fcefd4434818a4a807217226b339063251125172c77da1a4ce331bcbda"
+  repo_digest: "quay.io/krestomatio/ansible@sha256:4ea575071d18f4a0f519faa5f2b574f868179a4138ea57b98f47cd219e1aaa0c"
   relative_path: "ci/ansible"

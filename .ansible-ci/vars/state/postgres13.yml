@@ -7,5 +7,5 @@ postgres13_image:
   version: "13.0.9"
   tags: "13,13.0,13.0.9,postgres13-26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/postgres:13@sha256:df3a7e4dca88ae9d608ace9e50733d384011c6bfb3195774873e2b33ee8028f6"
+  repo_digest: "quay.io/krestomatio/postgres:13@sha256:d46f9cf103b2d1d8b96fe6895b7aceed9c720f2bb148c7d8712074bf5821becd"
   relative_path: "postgres/postgres13"

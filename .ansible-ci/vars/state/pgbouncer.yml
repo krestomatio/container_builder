@@ -7,5 +7,5 @@ pgbouncer_image:
   version: "0.4.7"
   tags: "0,0.4,0.4.7"
   artifact_tag: "26a571f7731ce0cee1ad01b2d4732ebdb7a01009"
-  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:d7bbc01bdda7a39048ee2ecd3fc31be3fec15939b32ae1b8ad464cf4fada3b55"
+  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:d7e38c90a0bb32ea6ad1f9d9951bb93b1265bd8f1cec0bc49c0be74686ae5ced"
   relative_path: "pgbouncer"

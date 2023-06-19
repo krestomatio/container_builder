@@ -85,9 +85,6 @@ spec:
             requests:
               cpu: 0.1
               memory: 128Mi
-          volumeMounts:
-          - name: libdocker
-            mountPath: /var/lib/docker
         - name: promote
           image: ghcr.io/jenkins-x/jx-updatebot:0.0.86
           script: |
@@ -102,10 +99,6 @@ spec:
             else
               echo "not promoted"
             fi
-        volumes:
-        - name: libdocker
-          persistentVolumeClaim:
-            claimName: libdocker-0sd6j3-pvc
   podTemplate: {}
   serviceAccountName: tekton-bot
   timeout: 240h0m0s

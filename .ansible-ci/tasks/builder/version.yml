@@ -67,6 +67,7 @@
     dockerfile_builder_image_version: "{{ (version_image_major | default('0')) + '.' + (version_image_minor | default('0') ) + '.' + (version_image_patch | default('1') ) }}"
 
 - name: set container image tag based on full version
+  when: version_image_full_in_tags | default(true)
   set_fact:
     dockerfile_builder_tags: "{{ dockerfile_builder_tags | default([])
       + [version_image_full] }}"

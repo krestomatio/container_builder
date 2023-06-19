@@ -17,6 +17,7 @@ pr_commit_tag:
 artifact_tag: "{{ pr_commit_tag }}"
 dockerfile_builder_tags:
   - "{{ artifact_tag }}"
+version_image_full_in_tags: "{{ release_version_image_full_in_tags |default(true) }}"
 git_push_options: --tags
 git_tag: "v{{ release_version }}"
 release_version: "{{ next_version | default(false,true) }}"

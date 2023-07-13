@@ -125,7 +125,7 @@ RUN install-pkgs unzip ${INSTALL_MOODLE_PHP_PKGS}
 # Install extra packages (a space separated list)
 ARG ARG_INSTALL_EXTRA_PKGS="{{ moodle_install_extra_pkgs | default('') }}"
 ENV INSTALL_EXTRA_PKGS=${ARG_INSTALL_EXTRA_PKGS}
-RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs "${INSTALL_EXTRA_PKGS}"; fi
+RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs -n -e -r crb ${INSTALL_EXTRA_PKGS}; fi
 
 # Other OS moodle config
 RUN container-setup-php-moodle

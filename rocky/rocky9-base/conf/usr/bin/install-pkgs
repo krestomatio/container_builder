@@ -2,11 +2,9 @@
 # description: script for installing packages
 # param: list of pkgs separated by space
 
-enabled_epel=
-
 usage() {
     cat 1>&2 <<EOF
-Script to install packages usgins
+Script to install packages using
 
 ENVIRONMENT VARS:
 CTR_PKG_MGM             main package command
@@ -16,9 +14,11 @@ USAGE:
 
 OPTIONS (check moodle php container):
   -e            use epel repo (leaves it disabled)
+  -r            enable a repo
+  -n            no weak dependencies
 
 EXAMPLES:
-    install-pkgs -e fcgi
+    install-pkgs -n -r crb -e fcgi aspell
 EOF
 }
 
@@ -26,9 +26,9 @@ install_pkgs() {
     # install packages
     if ! [ -z ${@+x} ]; then
         # update
-        ${CTR_PKG_MGM} ${enabled_epel} update
+        ${CTR_PKG_MGM} ${no_weak_dependencies:+--setopt=install_weak_deps=0} ${enablerepos:+$enablerepos} update
         # install
-        ${CTR_PKG_MGM} ${enabled_epel} install ${@}
+        ${CTR_PKG_MGM} ${no_weak_dependencies:+--setopt=install_weak_deps=0} ${enablerepos:+$enablerepos} install ${@}
         # clean
         ${CTR_PKG_MGM} clean all
     else
@@ -41,14 +41,19 @@ install_epel() {
     # install epel release and leaves it disable
     test -f /etc/yum.repos.d/epel.repo || install_pkgs epel-release
     sed -i "s@^enabled=1@enabled=0@" /etc/yum.repos.d/epel*
-    enabled_epel="--enablerepo=epel"
-    install_pkgs ${@}
 }
 
-while getopts ":e" opt; do
+while getopts ":enr:" opt; do
   case ${opt} in
     e )
         use_epel=true
+        enablerepo+=(--enablerepo="epel")
+        ;;
+    n )
+        no_weak_dependencies="true"
+        ;;
+    r )
+        enablerepo+=(--enablerepo="${OPTARG}")
         ;;
     \? )
         usage
@@ -58,8 +63,12 @@ while getopts ":e" opt; do
 done
 shift $((OPTIND -1))
 
-if [ -z ${use_epel+x} ]; then
-    install_pkgs ${@}
-else
+if [ -n ${use_epel} ]; then
     install_epel ${@}
 fi
+
+if [ -n "${enablerepo}" ]; then
+    enablerepos+="${enablerepo[@]}"
+fi
+
+install_pkgs ${@}

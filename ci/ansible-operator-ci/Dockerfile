@@ -25,7 +25,7 @@ RUN echo "Installing kustomize version: ${KUSTOMIZE_VERSION}..."  && \
     curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzf - -C /usr/local/bin/
 
 # Container variables
-ENV KUBECTL_VERSION="1.23.6"
+ENV KUBECTL_VERSION="1.26.6"
 
 # Install kubectl.
 RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \

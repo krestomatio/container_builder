@@ -5,7 +5,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [go:1.18-toolset](#go118-toolset): `1.18-toolset, 1.18.9-toolset, go118-toolset-26a571f7731ce0cee1ad01b2d4732ebdb7a01009`
+- [go:1.18-toolset](#go118-toolset): `1.18-toolset, 1.18.10-toolset, go118-toolset-1efbb859b7efc31fd0162e2e268308c776ac729a`
 
 
 ## Image Variants

@@ -42,22 +42,6 @@ ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
 
 
-FROM ${ARG_IMAGE_FROM} AS php-exts-builder
-
-USER 0
-
-RUN install-pkgs -e php-pear php-devel make libzstd-devel libsodium-devel
-# redis
-RUN pecl install -D 'enable-redis-igbinary="yes" enable-redis-lzf="yes" enable-redis-zstd="yes"' igbinary redis
-RUN chmod 755 /usr/lib64/php/modules/{redis.so,igbinary.so}
-# sodium
-RUN pecl install libsodium
-RUN chmod 755 /usr/lib64/php/modules/sodium.so
-# xmlrpc is deprecated: https://tracker.moodle.org/browse/MDL-70889
-RUN pecl install xmlrpc-beta
-RUN chmod 755 /usr/lib64/php/modules/xmlrpc.so
-
-
 FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
@@ -82,16 +66,6 @@ USER 0
 COPY conf/usr/bin /usr/bin/
 COPY conf/usr/libexec /usr/libexec/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-COPY --from=php-exts-builder /usr/lib64/php/modules/redis.so /usr/lib64/php/modules/redis.so
-COPY --from=php-exts-builder /usr/lib64/php/modules/igbinary.so /usr/lib64/php/modules/igbinary.so
-RUN echo "extension = redis.so" > /etc/php.d/50-redis.ini && \
-    echo "extension = igbinary.so" > /etc/php.d/40-igbinary.ini
-COPY --from=php-exts-builder /usr/lib64/php/modules/sodium.so /usr/lib64/php/modules/sodium.so
-RUN install-pkgs -e libsodium && \
-    echo "extension = sodium.so" > /etc/php.d/40-sodium.ini
-# xmlrpc is deprecated: https://tracker.moodle.org/browse/MDL-70889
-COPY --from=php-exts-builder /usr/lib64/php/modules/xmlrpc.so /usr/lib64/php/modules/xmlrpc.so
-RUN echo "extension = xmlrpc.so" > /etc/php.d/40-xmlrpc.ini
 
 # Install all locales and timezones
 RUN locale-tz-all
@@ -107,9 +81,9 @@ ENV INSTALL_MOODLE_PHP_PKGS=${ARG_INSTALL_MOODLE_PHP_PKGS}
 RUN install-pkgs unzip ${INSTALL_MOODLE_PHP_PKGS}
 
 # Install extra packages (a space separated list)
-ARG ARG_INSTALL_EXTRA_PKGS=""
+ARG ARG_INSTALL_EXTRA_PKGS="php-sodium php-pecl-redis5 php-pecl-apcu poppler-utils graphviz aspell"
 ENV INSTALL_EXTRA_PKGS=${ARG_INSTALL_EXTRA_PKGS}
-RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs "${INSTALL_EXTRA_PKGS}"; fi
+RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs -n -e -r crb ${INSTALL_EXTRA_PKGS}; fi
 
 # Other OS moodle config
 RUN container-setup-php-moodle
@@ -119,7 +93,7 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_COMMIT=""
 ENV MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
-    MOODLE_VERSION_NUMBER="2022112804.00" \
+    MOODLE_VERSION_NUMBER="2022112804.06" \
     MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
 
 COPY --chown=${CTR_USER_ID}:${CTR_GROUP_ID:-0} --from=app-src /var/www/html/ /var/www/html

@@ -8,8 +8,4 @@ httpd_version: "{{ httpd_versions.24 }}"
 
 # moodle
 moodle_git_branch: "MOODLE_401_STABLE"
-
-moodle_php_pecl_exts:
-  - redis
-  - sodium
-  - xmlrpc
+moodle_install_extra_pkgs: php-sodium php-pecl-redis5 php-pecl-apcu poppler-utils graphviz aspell

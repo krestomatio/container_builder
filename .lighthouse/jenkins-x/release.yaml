@@ -72,6 +72,14 @@ spec:
               secretKeyRef:
                 key: username
                 name: tekton-git
+          - name: GIT_AUTHOR_NAME
+            value: krestomatio-cibot
+          - name: GIT_AUTHOR_EMAIL
+            value: jobcespedes@krestomatio.com
+          - name: GIT_COMMITTER_NAME
+            value: krestomatio-cibot
+          - name: GIT_COMMITTER_EMAIL
+            value: jobcespedes@krestomatio.com
           script: |
             #!/bin/bash
             ## add gitlab lfs api

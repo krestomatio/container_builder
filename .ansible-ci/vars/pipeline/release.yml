@@ -30,3 +30,4 @@ artifact_download_ignore_errors: false
 artifact_generated_context_path: "{{ generated_dir }}/"
 release_add_run_once: false
 doc_ctr_names_from_state_dir: true
+builder_config: false

@@ -3,14 +3,9 @@ version_image_suffix: bundle
 image_from_ctr: moodle41
 image_tag_from_ctr: "{{ moodle_version }}"
 dockerfile_builder_image_from_repo_name: moodle
-release_version_image_full_in_tags: false
 
 # source dir
 template_path: "{{ template_dir }}/moodle_bundle"
-
-# ci
-prepare_image_task: moodle
-version_release_no_bump: true
 
 # moodle
 moodle_plugin_list:

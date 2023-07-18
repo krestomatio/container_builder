@@ -39,8 +39,10 @@ COPY conf/usr/libexec /usr/libexec/
 # Install additional plugins (a comma separated arg), if any
 # Argument is also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default([]) | join(',') }}"
-ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST}
-RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list -p "${MOODLE_PLUGIN_LIST}"; fi
+ARG ARG_MOODLE_PLUGIN_FORCE="{{ moodle_plugin_list | default([]) | join(',') }}"
+ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
+    MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
+RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
 
 
 {% endif %}

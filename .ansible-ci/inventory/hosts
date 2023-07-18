@@ -98,6 +98,7 @@ moodle41_php80-fpm
 moodle41
 moodle41_httpd24
 moodle41_bundle
+moodle41_kio
 
 [build_step_1:children]
 minimal_grp
@@ -137,6 +138,7 @@ moodle41_httpd24
 
 [build_step_7]
 moodle41
+moodle41_kio
 
 [build_step_8]
 moodle41_bundle

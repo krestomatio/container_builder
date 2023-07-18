@@ -1,0 +1,29 @@
+# readme
+ctr_readme_section: |-
+  ### {{ ctr_repo_name }}:{{ moodle_version }}
+  > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+
+  Krestomatio [{{ ctr_repo_name }}:{{ moodle_version }}](#{{ ctr_repo_name }}{{ moodle_version | replace('.','') }})
+
+  #### Details
+  {% if dockerfile_builder_image_git_remote is defined %}
+  * Moodle remote repo: {{ dockerfile_builder_image_git_remote }}
+  {% endif %}
+  {% if hostvars[image_from_ctr].moodle_git_source_version is defined %}
+  * Moodle version: {{ hostvars[image_from_ctr].moodle_git_source_version }}
+  {% endif %}
+  {% if hostvars[image_from_ctr].moodle_git_source_version_number is defined %}
+  * Moodle version number: {{ hostvars[image_from_ctr].moodle_git_source_version_number }}
+  {% endif %}
+  {% if hostvars[image_from_ctr].moodle_git_commit is defined %}
+  * Moodle commit: {{ hostvars[image_from_ctr].moodle_git_commit }}
+  {% endif %}
+  {% if moodle_git_branch is defined %}
+  * Moodle remote branch: {{ moodle_git_branch | replace('_','\_') }}
+  {% endif %}
+
+  #### Plugins
+  The following is the list of plugins:
+  {% for plugin in moodle_plugin_list %}
+  - [{{ plugin }}](https://moodle.org/plugins/{{ plugin }})
+  {% endfor %}

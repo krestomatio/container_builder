@@ -18,8 +18,8 @@ RUN install-pkgs git rsync php-json unzip && \
 # Get source code
 # Arguments for moodle git remote, branch and commit
 # They are also a mechanism to invalidate cache if changed
-ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
-ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
+ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
+ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
 ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
@@ -37,8 +37,8 @@ COPY conf/usr/libexec /usr/libexec/
 
 # Install additional plugins (a comma separated arg), if any
 # Argument is also a mechanism to invalidate cache if changed
-ARG ARG_MOODLE_PLUGIN_LIST=""
-ARG ARG_MOODLE_PLUGIN_FORCE=""
+ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
+ARG ARG_MOODLE_PLUGIN_FORCE="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
@@ -47,7 +47,7 @@ RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-l
 FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
-ENV IMAGE_NAME=moodle:4.1 \
+ENV IMAGE_NAME=moodle:4.1-kio \
     IMAGE_SUMMARY="PHP $PHP_VERSION and NGINX ${NGINX_VERSION} for Moodle 4.1" \
     IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP ${PHP_VERSION} or NGINX ${NGINX_VERSION} for Moodle 4.1" \
     IMAGE_TITLE="PHP ${PHP_VERSION} and NGINX ${NGINX_VERSION} for Moodle 4.1" \
@@ -92,9 +92,9 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ARG ARG_MOODLE_PLUGIN_LIST=""
-ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
-ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
+ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
+ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
+ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
 ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
 ARG ARG_MOODLE_VERSION_NUMBER="2022112804.06"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \

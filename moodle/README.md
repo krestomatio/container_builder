@@ -5,12 +5,13 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-1efbb859b7efc31fd0162e2e268308c776ac729a`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-1efbb859b7efc31fd0162e2e268308c776ac729a`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-1efbb859b7efc31fd0162e2e268308c776ac729a`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-1efbb859b7efc31fd0162e2e268308c776ac729a`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-1efbb859b7efc31fd0162e2e268308c776ac729a`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-1efbb859b7efc31fd0162e2e268308c776ac729a`
+- [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 
 
 ## Image Variants
@@ -39,17 +40,17 @@ docker build . -t my_moodle_image:my_tag \
 ```
 
 ##### Moodle remote
-For building from a different Moodle remote, use `ARG_GIT_REMOTE`:
+For building from a different Moodle remote, use `ARG_MOODLE_REMOTE`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_GIT_REMOTE='https://github.com/moodle/moodle.git'
+    --build-arg ARG_MOODLE_REMOTE='https://github.com/moodle/moodle.git'
 ```
 
 ##### Moodle branch
-For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
+For building from a different Moodle branch, use `ARG_MOODLE_BRANCH`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_GIT_BRANCH='MOODLE_401_STABLE'
+    --build-arg ARG_MOODLE_BRANCH='MOODLE_401_STABLE'
 ```
 
 ##### Moodle plugins
@@ -110,6 +111,48 @@ The following is the list of plugins:
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_httpd24)
 
 Image based on CentOS 9 Stream minimal with [Apache HTTP Server](https://httpd.apache.org/) for Moodle app/source (not included)
+
+### moodle:4.1
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_kio)
+
+Krestomatio [moodle:4.1](#moodle41)
+
+#### Details
+* Moodle remote repo: https://github.com/krestomatio/moodle.git
+* Moodle version: 4.1.4
+* Moodle version number: 2022112804.06
+* Moodle commit: 272fdb321a421f72aef696a3b4a78dbf477d483b
+* Moodle remote branch: MOODLE\_401\_STABLE\_KIO
+
+#### Plugins
+The following is the list of plugins:
+- [block_checklist](https://moodle.org/plugins/block_checklist)
+- [block_completion_progress](https://moodle.org/plugins/block_completion_progress)
+- [block_xp](https://moodle.org/plugins/block_xp)
+- [format_tiles](https://moodle.org/plugins/format_tiles)
+- [format_onetopic](https://moodle.org/plugins/format_onetopic)
+- [format_grid](https://moodle.org/plugins/format_grid)
+- [format_topcoll](https://moodle.org/plugins/format_topcoll)
+- [gradeexport_checklist](https://moodle.org/plugins/gradeexport_checklist)
+- [mod_questionnaire](https://moodle.org/plugins/mod_questionnaire)
+- [mod_attendance](https://moodle.org/plugins/mod_attendance)
+- [mod_checklist](https://moodle.org/plugins/mod_checklist)
+- [mod_customcert](https://moodle.org/plugins/mod_customcert)
+- [mod_zoom](https://moodle.org/plugins/mod_zoom)
+- [mod_game](https://moodle.org/plugins/mod_game)
+- [theme_moove](https://moodle.org/plugins/theme_moove)
+- [theme_boost_union](https://moodle.org/plugins/theme_boost_union)
+- [auth_oidc](https://moodle.org/plugins/auth_oidc)
+- [block_microsoft](https://moodle.org/plugins/block_microsoft)
+- [local_o365](https://moodle.org/plugins/local_o365)
+- [local_office365](https://moodle.org/plugins/local_office365)
+- [repository_office365](https://moodle.org/plugins/repository_office365)
+- [theme_boost_o365teams](https://moodle.org/plugins/theme_boost_o365teams)
+- [local_onenote](https://moodle.org/plugins/local_onenote)
+- [assignfeedback_onenote](https://moodle.org/plugins/assignfeedback_onenote)
+- [assignsubmission_onenote](https://moodle.org/plugins/assignsubmission_onenote)
+- [plagiarism_turnitin](https://moodle.org/plugins/plagiarism_turnitin)
+- [plagiarism_turnitinsim](https://moodle.org/plugins/plagiarism_turnitinsim)
 
 ### moodle:4.1-nginx
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_nginx120)

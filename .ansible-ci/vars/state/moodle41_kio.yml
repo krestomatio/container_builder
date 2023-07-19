@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle41_kio_image:
+  variant_name: "moodle:4.1-kio"
+  build: False
+  version: "4.1.4"
+  tags: "4.1-kio,4.1.4-kio,moodle41_kio-0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
+  artifact_tag: "0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-kio@sha256:58588b21375b6f6526fa305a510ddd7cd792d3d34833ee18fac99352d519d42f"
+  relative_path: "moodle/moodle41_kio"

@@ -23,17 +23,17 @@ docker build . -t my_moodle_image:my_tag \
 ```
 
 ##### Moodle remote
-For building from a different Moodle remote, use `ARG_GIT_REMOTE`:
+For building from a different Moodle remote, use `ARG_MOODLE_REMOTE`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_GIT_REMOTE='https://github.com/moodle/moodle.git'
+    --build-arg ARG_MOODLE_REMOTE='https://github.com/moodle/moodle.git'
 ```
 
 ##### Moodle branch
-For building from a different Moodle branch, use `ARG_GIT_BRANCH`:
+For building from a different Moodle branch, use `ARG_MOODLE_BRANCH`:
 ```
 docker build . -t my_moodle_image:my_tag \
-    --build-arg ARG_GIT_BRANCH='MOODLE_401_STABLE'
+    --build-arg ARG_MOODLE_BRANCH='MOODLE_401_STABLE'
 ```
 
 ##### Moodle plugins

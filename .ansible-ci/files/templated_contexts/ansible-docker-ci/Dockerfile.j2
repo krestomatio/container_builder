@@ -19,7 +19,8 @@ RUN echo "Build tools..."  && \
     $CTR_APK py-pip openssl ca-certificates make && \
     $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
-    $CTR_PIP cffi wheel && \
+    $CTR_PIP cffi wheel "pyyaml>6" && \
+    $CTR_PIP --no-build-isolation "pyyaml>5,<6" && \
     $CTR_PIP pip && \
     $CTR_PIP ansible==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \

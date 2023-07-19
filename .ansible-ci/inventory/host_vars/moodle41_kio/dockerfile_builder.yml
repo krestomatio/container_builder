@@ -9,6 +9,44 @@ dockerfile_builder_image_ocp_tags:
   "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'
   + ',moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}' }}"
+version_image_suffix: kio
 
 # source dir
 template_path: "{{ template_dir }}/moodle_php-fpm"
+
+# ci
+prepare_image_task: "moodle-{{ version_image_suffix }}"
+
+# moodle
+moodle_git_repo_org: krestomatio
+moodle_git_branch: "MOODLE_401_STABLE_{{ version_image_suffix | upper }}"
+moodle_plugin_list:
+  - block_checklist
+  - block_completion_progress
+  - block_xp
+  - format_tiles
+  - format_onetopic
+  - format_grid
+  - format_topcoll
+  - gradeexport_checklist
+  - mod_questionnaire
+  - mod_attendance
+  - mod_checklist
+  - mod_customcert
+  - mod_zoom
+  - mod_game
+  - theme_moove
+  - theme_boost_union
+  # microsoft
+  - auth_oidc
+  - block_microsoft
+  - local_o365
+  - local_office365
+  - repository_office365
+  - theme_boost_o365teams
+  - local_onenote
+  - assignfeedback_onenote
+  - assignsubmission_onenote
+  # turnitin
+  - plagiarism_turnitin
+  - plagiarism_turnitinsim

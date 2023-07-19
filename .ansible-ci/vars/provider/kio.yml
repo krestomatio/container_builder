@@ -1,7 +1,7 @@
 # registry
 build_registry_name: "{{ lookup('env','BUILD_REGISTRY_NAME') | default('harbor.krestomat.io',true) }}"
 build_project_registry_path: "{{ lookup('env','BUILD_PROJECT_REGISTRY_PATH') | default('kio-builds',true) }}"
-docker_default_context_name: multiarch-builder-amd64
+docker_default_context_name: "{{ lookup('env','DOCKER_DEFAULT_CONTEXT_NAME') | default('multiarch-builder-amd64',true) }}"
 dockerfile_builder_use_buildx_instance_name: multiarch-builder
 dockerfile_builder_use_buildx: true
 dockerfile_builder_buildx_multiplatform_cache: false

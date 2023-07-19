@@ -1,16 +1,16 @@
 ctr_repo_name: moodle
 ctr_version: "{{ moodle_version }}"
 
-dockerfile_builder_image_git_remote: "https://github.com/moodle/moodle.git"
+dockerfile_builder_image_git_remote: "https://github.com/{{ moodle_git_repo_org }}/moodle.git"
+moodle_git_repo_org: moodle
 moodle_git_refs_json:
   url: "{{ moodle_git_refs_json_url |
-    default('https://api.github.com/repos/moodle/moodle/git/refs/' +
-              ('tags/' if moodle_git_branch is match('v.*') else 'heads/') +
-            moodle_git_branch) }}"
+    default('https://api.github.com/repos/' + moodle_git_repo_org + '/moodle/git/refs/' +
+    ('tags/' if moodle_git_branch is match('v.*') else 'heads/') + moodle_git_branch) }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
 moodle_git_repo_version:
-  url: "{{ 'https://raw.githubusercontent.com/moodle/moodle/' +
-  moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
+  url: "{{ 'https://raw.githubusercontent.com/' + moodle_git_repo_org + '/moodle/' +
+    moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
   regex: '(?<=\$release)(.*)(?=\s\(Build:)'
   regex_group: '([0-9]+)\.([0-9]+)\.([0-9]+)'

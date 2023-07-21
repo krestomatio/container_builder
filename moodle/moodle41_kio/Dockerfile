@@ -12,7 +12,7 @@ WORKDIR ${GIT_DEST}
 # Install deps
 COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-RUN install-pkgs git rsync php-json unzip && \
+RUN install-pkgs git rsync php-json unzip tar && \
     mkdir -p ${GIT_DEST} ${APP_DEST}
 
 # Get source code
@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
+ARG ARG_MOODLE_COMMIT="66aad41b1b70effa8b2f6b09299bdfdf5fb75226"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -42,7 +42,8 @@ ARG ARG_MOODLE_PLUGIN_FORCE="block_checklist,block_completion_progress,block_xp,
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
-
+RUN mkdir -p "${APP_DEST}/local/tier" && \
+    curl -sL "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/MOODLE_401_STABLE.tar.gz" | tar xz --strip-components=1 -C "${APP_DEST}/local/tier"
 
 FROM ${ARG_IMAGE_FROM}
 
@@ -95,8 +96,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112804.06"
+ARG ARG_MOODLE_COMMIT="66aad41b1b70effa8b2f6b09299bdfdf5fb75226"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112804.07"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \

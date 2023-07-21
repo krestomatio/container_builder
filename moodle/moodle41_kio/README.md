@@ -1,13 +1,13 @@
-### moodle:4.1
+### moodle:4.1-kio
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_kio)
 
-Krestomatio [moodle:4.1](#moodle41)
+Krestomatio Moodle variant
 
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.1.4
-* Moodle version number: 2022112804.06
-* Moodle commit: 272fdb321a421f72aef696a3b4a78dbf477d483b
+* Moodle version number: 2022112804.07
+* Moodle commit: 66aad41b1b70effa8b2f6b09299bdfdf5fb75226
 * Moodle remote branch: MOODLE\_401\_STABLE\_KIO
 
 #### Plugins

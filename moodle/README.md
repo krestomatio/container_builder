@@ -8,7 +8,7 @@
 - [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-fe49fa502d00adb1666ca20f3737c840bd606a0e`
 - [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
@@ -112,16 +112,16 @@ The following is the list of plugins:
 
 Image based on CentOS 9 Stream minimal with [Apache HTTP Server](https://httpd.apache.org/) for Moodle app/source (not included)
 
-### moodle:4.1
+### moodle:4.1-kio
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_kio)
 
-Krestomatio [moodle:4.1](#moodle41)
+Krestomatio Moodle variant
 
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.1.4
-* Moodle version number: 2022112804.06
-* Moodle commit: 272fdb321a421f72aef696a3b4a78dbf477d483b
+* Moodle version number: 2022112804.07
+* Moodle commit: 66aad41b1b70effa8b2f6b09299bdfdf5fb75226
 * Moodle remote branch: MOODLE\_401\_STABLE\_KIO
 
 #### Plugins

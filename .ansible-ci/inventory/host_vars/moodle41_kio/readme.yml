@@ -1,9 +1,9 @@
 # readme
 ctr_readme_section: |-
-  ### {{ ctr_repo_name }}:{{ moodle_version }}
+  ### {{ ctr_variant_name }}
   > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
 
-  Krestomatio [{{ ctr_repo_name }}:{{ moodle_version }}](#{{ ctr_repo_name }}{{ moodle_version | replace('.','') }})
+  Krestomatio Moodle variant
 
   #### Details
   {% if dockerfile_builder_image_git_remote is defined %}

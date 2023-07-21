@@ -18,8 +18,12 @@ template_path: "{{ template_dir }}/moodle_php-fpm"
 prepare_image_task: "moodle-{{ version_image_suffix }}"
 
 # moodle
+moodle_git_branch_upstream: "MOODLE_401_STABLE"
 moodle_git_repo_org: krestomatio
-moodle_git_branch: "MOODLE_401_STABLE_{{ version_image_suffix | upper }}"
+moodle_git_branch: "{{ moodle_git_branch_upstream }}_{{ version_image_suffix | upper }}"
+moodle_plugin_tar_gz_url_list:
+  - url: "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+    relpath: local/tier
 moodle_plugin_list:
   - block_checklist
   - block_completion_progress

@@ -13,7 +13,7 @@ WORKDIR ${GIT_DEST}
 # Install deps
 COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-RUN install-pkgs git rsync php-json unzip && \
+RUN install-pkgs git rsync php-json unzip tar && \
     mkdir -p ${GIT_DEST} ${APP_DEST}
 
 # Get source code
@@ -43,7 +43,10 @@ ARG ARG_MOODLE_PLUGIN_FORCE="{{ moodle_plugin_list | default([]) | join(',') }}"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
-
+{% for plugin in moodle_plugin_tar_gz_url_list  %}
+RUN mkdir -p "${APP_DEST}/{{ plugin.relpath }}" && \
+    curl -sL "{{ plugin.url }}" | tar xz --strip-components=1 -C "${APP_DEST}/{{ plugin.relpath }}"
+{% endfor %}
 
 {% endif %}
 {% if moodle_php_pecl_exts is defined %}

@@ -42,8 +42,9 @@ ARG ARG_MOODLE_PLUGIN_FORCE="block_checklist,block_completion_progress,block_xp,
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
+ADD "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/MOODLE_401_STABLE.tar.gz" /tmp/plugin-1.tar.gz
 RUN mkdir -p "${APP_DEST}/local/tier" && \
-    curl -sL "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/MOODLE_401_STABLE.tar.gz" | tar xz --strip-components=1 -C "${APP_DEST}/local/tier"
+    tar xz --strip-components=1 -C "${APP_DEST}/local/tier" -f /tmp/plugin-1.tar.gz
 
 FROM ${ARG_IMAGE_FROM}
 

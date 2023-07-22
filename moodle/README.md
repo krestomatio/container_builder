@@ -8,7 +8,7 @@
 - [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-fe49fa502d00adb1666ca20f3737c840bd606a0e`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-5483f57ad7ab61b5da383cd6469cec8705c8391e`
 - [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
 - [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`

@@ -4,7 +4,7 @@
 rocky8_base_image:
   variant_name: "rocky:8-base"
   build: False
-  version: "8.8.3"
+  version: "8.8.4"
   tags: "8-base,8.8-base,8.8.1-base,rocky8-base-0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
   artifact_tag: "0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
   repo_digest: "quay.io/krestomatio/rocky:8-base@sha256:79550ce9ab22ef83ea65328f97d40967e4b3cb0214aab20e284c3e6bdccb6775"

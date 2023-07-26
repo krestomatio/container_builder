@@ -1,4 +1,4 @@
-#! /bin/bash -eu
+#!/bin/bash -eu
 # description: install moodle plugin(s) by component name
 
 usage() {

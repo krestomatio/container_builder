@@ -1,4 +1,4 @@
-#! /bin/bash -ue
+#!/bin/bash -ue
 # description: check keydb container
 
 usage() {

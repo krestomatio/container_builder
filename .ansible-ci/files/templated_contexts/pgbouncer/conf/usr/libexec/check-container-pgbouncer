@@ -1,4 +1,4 @@
-#! /bin/sh
+#!/bin/sh
 # description: check pgbouncer
 # From https://github.com/sclorg/postgresql-container
 

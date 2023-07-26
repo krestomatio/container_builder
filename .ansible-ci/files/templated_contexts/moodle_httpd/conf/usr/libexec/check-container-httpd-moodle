@@ -1,4 +1,4 @@
-#! /bin/bash -u
+#!/bin/bash -u
 # description: check moodle httpd container
 
 usage() {

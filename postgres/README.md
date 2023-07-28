@@ -5,7 +5,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [postgres:13](#postgres13): `13, 13.0, 13.0.11, postgres13-0adf4683ed93d35b90562c5c8e11aa42a4dc000e`
+- [postgres:13](#postgres13): `13, 13.0, 13.0.15, postgres13-d01dee74483498a371765dc71ec9a201869bb597`
 
 
 ## Image Variants

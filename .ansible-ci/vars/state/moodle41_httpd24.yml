@@ -5,7 +5,7 @@ moodle41_httpd24_image:
   variant_name: "moodle:4.1-httpd"
   build: False
   version: "4.1.4"
-  tags: "4.1-httpd,4.1.4-httpd,moodle41_httpd24-0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
-  artifact_tag: "0adf4683ed93d35b90562c5c8e11aa42a4dc000e"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-httpd@sha256:0cb45ad30bc6e836849da1c331fc42bfb956eee0d39f3d9ee71ac3f97603b7d6"
+  tags: "4.1-httpd,4.1.4-httpd,moodle41_httpd24-d01dee74483498a371765dc71ec9a201869bb597"
+  artifact_tag: "d01dee74483498a371765dc71ec9a201869bb597"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-httpd@sha256:e5acac019ccffc3d3692933b67bb67085e53a761012cb4b1020e99038f4d7a99"
   relative_path: "moodle/moodle41_httpd24"

@@ -12,7 +12,7 @@ WORKDIR ${GIT_DEST}
 # Install deps
 COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-RUN install-pkgs git rsync php-json unzip && \
+RUN install-pkgs git rsync php-json unzip tar && \
     mkdir -p ${GIT_DEST} ${APP_DEST}
 
 # Get source code
@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
+ARG ARG_MOODLE_COMMIT="533ce567437c9a86fb3286d58deee07ca1cebcaa"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -42,7 +42,6 @@ ARG ARG_MOODLE_PLUGIN_FORCE=""
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
-
 
 FROM ${ARG_IMAGE_FROM}
 
@@ -95,8 +94,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="272fdb321a421f72aef696a3b4a78dbf477d483b"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112804.06"
+ARG ARG_MOODLE_COMMIT="533ce567437c9a86fb3286d58deee07ca1cebcaa"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112804.07"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \

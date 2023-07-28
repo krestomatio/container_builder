@@ -1,6 +1,12 @@
+- name: whether prepare or just build based on image available
+  command: "{{ dockerfile_builder }} pull {{ dockerfile_builder_image }}"
+  ignore_errors: true
+  register: check_image_exists_cmd
+
 - when:
     - not ansible_check_mode
     - ansible_host | regex_search('(centos|rocky)*.*-minimal')
+    - check_image_exists_cmd.rc == 0
   vars:
     dockerfile_builder_image: "{{ build_container_image }}:build-cache-{{ ctr_name }}"
     dockerfile_builder_tags: []

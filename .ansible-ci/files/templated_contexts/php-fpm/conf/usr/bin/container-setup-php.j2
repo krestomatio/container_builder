@@ -10,26 +10,6 @@ install-pkgs ${OS_INSTALL_PKGS}
 # test version
 [[ "$(php -v | { read _ v _; echo ${v}; })" == "${PHP_VERSION}".* ]] || echo "error: version differs from env var"
 
-# php-fpm default config
-sed -i \
-    -e 's@^error_log.*@error_log = ${PHP_FPM_ERROR_LOG}@' \
-    -e 's@^daemonize.*@daemonize = no@' \
-    -e 's@;process_control_timeout.*@process_control_timeout = ${PHP_FPM_PROCESS_CONTROL_TIMEOUT}@' \
-    ${PHP_FPM_CONF_FILE}
-
-sed -i \
-    -e 's@^user =.*@user = ${PHP_FPM_USER}@' \
-    -e 's@^group =.*@group = ${PHP_FPM_GROUP}@' \
-    -e 's@^slowlog =.*@slowlog = ${PHP_FPM_ACCESS_LOG}@' \
-    -e 's@^;access.log =.*@access.log = ${PHP_FPM_SLOWLOG}@' \
-    -e 's@^;clear_env.*@clear_env = no@' \
-    -e 's@^;catch_workers_output.*@catch_workers_output = yes@' \
-    -e 's@^listen =.*@listen = ${PHP_FPM_LISTEN}@' \
-    -e 's@^listen.owner =.*@listen.owner = ${PHP_FPM_LISTEN_OWNER}@' \
-    -e 's@^listen.group =.*@listen.group = ${PHP_FPM_LISTEN_GROUP}@' \
-    -e 's@^php_admin_value\[error_log\].*@;php_admin_value\[error_log\] = ${PHP_FPM_ERROR_LOG}@' \
-    ${PHP_FPM_POOL_FILE}
-
 # add nginx to apache group (if install)
 if command -v nginx &> /dev/null
 then

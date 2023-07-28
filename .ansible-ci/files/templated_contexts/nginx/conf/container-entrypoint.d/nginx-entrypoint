@@ -9,7 +9,6 @@ if rpm -q php-fpm &>/dev/null; then
     fi
 fi
 
-
 # nginx default config
 sed -i \
     -e "s@__worker_processes__@${NGINX_WORKER_PROCESSES}@" \

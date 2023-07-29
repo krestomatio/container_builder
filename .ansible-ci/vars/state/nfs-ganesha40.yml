@@ -5,7 +5,7 @@ nfs_ganesha40_image:
   variant_name: "nfs-ganesha:4.0.7"
   build: False
   version: "4.0.7"
-  tags: "4.0,4.0.7,nfs-ganesha40-e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  artifact_tag: "e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  repo_digest: "quay.io/krestomatio/nfs-ganesha:4.0.7@sha256:63863d8fe5d917855db19ad33591bc5d0e74991e0c0a3563d856a4a23f85e7f6"
+  tags: "4.0,4.0.7,nfs-ganesha40-402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  artifact_tag: "402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha:4.0.7@sha256:75613e0def1646899f03d883557343e6a2d82e40d33552ed9fcdbc973a8d6399"
   relative_path: "nfs-ganesha/nfs-ganesha40"

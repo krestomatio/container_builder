@@ -4,8 +4,8 @@
 node14_image:
   variant_name: "node:14"
   build: False
-  version: "14.0.16"
-  tags: "14,14.0,14.0.16,node14-e020b5c2206002f76ad5c48f9ae0f7041e484c74,fermium"
-  artifact_tag: "e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  repo_digest: "quay.io/krestomatio/node:14@sha256:2e4055f8896cc3730f2560fd1a82d9946d4207f88317e80ec92ba071454fd399"
+  version: "14.0.17"
+  tags: "14,14.0,14.0.17,node14-402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc,fermium"
+  artifact_tag: "402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  repo_digest: "quay.io/krestomatio/node:14@sha256:e59478b82c166f55763c447eba0cb727bc8391e8d0c2ba495386e0291e8df492"
   relative_path: "node/node14"

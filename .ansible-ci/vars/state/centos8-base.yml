@@ -5,7 +5,7 @@ centos8_base_image:
   variant_name: "centos:8-base"
   build: False
   version: "8.6.2"
-  tags: "8-base,8.6-base,8.6.2-base,centos8-base-e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  artifact_tag: "e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  repo_digest: "quay.io/krestomatio/centos:8-base@sha256:4337cceb0d42841ca151713ac2b2000d6bda66bdf2906275733295d7cebedc64"
+  tags: "8-base,8.6-base,8.6.2-base,centos8-base-402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  artifact_tag: "402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  repo_digest: "quay.io/krestomatio/centos:8-base@sha256:b647ce0588a8caa5f343822d047e45ef8f1e026409b27fa002bb9b1d61f667f6"
   relative_path: "centos/centos8-base"

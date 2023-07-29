@@ -5,7 +5,7 @@ rocky9_base_image:
   variant_name: "rocky:9-base"
   build: False
   version: "9.2.2"
-  tags: "9-base,9.2-base,9.2.2-base,rocky9-base-e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  artifact_tag: "e020b5c2206002f76ad5c48f9ae0f7041e484c74"
-  repo_digest: "quay.io/krestomatio/rocky:9-base@sha256:f043c8dc7b1c10b36040abf23966a1c3ac8591bdadb89b7b26b11485c810f968"
+  tags: "9-base,9.2-base,9.2.2-base,rocky9-base-402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  artifact_tag: "402e1e42b4ef32d24d4fbc2f66ccb8bb4340dcfc"
+  repo_digest: "quay.io/krestomatio/rocky:9-base@sha256:4c5222b800b404fbc2a2f35b5fc7174d478d8205e9e763f222e06ed8019fe991"
   relative_path: "rocky/rocky9-base"

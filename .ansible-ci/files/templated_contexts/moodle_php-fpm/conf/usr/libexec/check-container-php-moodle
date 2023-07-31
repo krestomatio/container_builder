@@ -33,7 +33,7 @@ check_php_fpm_socket() {
     # check php-fpm tcp port
     PHP_FPM_CHECK_SOCKET=${PHP_FPM_CHECK_SOCKET:-$PHP_FPM_STATUS_LISTEN}
     # if not using unix socket
-    if [[ ${PHP_FPM_CHECK_SOCKET} =~ ^[0-9] ]]; then
+    if [[ ${PHP_FPM_CHECK_SOCKET} != /* ]]; then
         # extra host and port from var
         # default host to 127.0.0.1 if no ":"
         php_fpm_host="127.0.0.1"

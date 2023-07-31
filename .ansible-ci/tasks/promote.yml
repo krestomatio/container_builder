@@ -1,6 +1,10 @@
 - name: load image state
   include_tasks: tasks/state/load.yml
 
+- name: format release version as semver
+  set_fact:
+    state_yml_version: "{{ state_yml_version | release_version }}"
+
 - name: promote image
   include_tasks: tasks/promote/main.yml
 

@@ -6,7 +6,7 @@ usage() {
 Script to check moodle php container.
 
 ENVIRONMENT VARS:
-PHP_FPM_STATUS_LISTEN   tcp socket php-fpm listen to
+PHP_FPM_CHECK_SOCKET    socket php-fpm listen to
 MOODLE_APP              path to moodle code
 MOODLE_DATA             moodledata path
 
@@ -19,7 +19,7 @@ OPTIONS (check moodle php container):
   -l            check liveness (-d -m) (Default)
   -m            check if moodledata is writable
   -r            check readiness (-c -d -m)
-  -t            check php-fpm tcp port (if not using unix socket)
+  -s            check socket php-fpm listen to
   -u            check if upgrade not needed
 
 EXAMPLES:
@@ -29,16 +29,17 @@ EXAMPLES:
 EOF
 }
 
-check_tcp_port() {
+check_php_fpm_socket() {
     # check php-fpm tcp port
+    PHP_FPM_CHECK_SOCKET=${PHP_FPM_CHECK_SOCKET:-$PHP_FPM_STATUS_LISTEN}
     # if not using unix socket
-    if [[ ${PHP_FPM_STATUS_LISTEN} != /* ]]; then
+    if [[ ${PHP_FPM_CHECK_SOCKET} =~ ^[0-9] ]]; then
         # extra host and port from var
         # default host to 127.0.0.1 if no ":"
         php_fpm_host="127.0.0.1"
-        [[ $PHP_FPM_STATUS_LISTEN == *":"* ]] && php_fpm_host="${PHP_FPM_STATUS_LISTEN%%:*}"
-        php_fpm_port="${PHP_FPM_STATUS_LISTEN#*:}"
-        timeout ${PHP_FPM_CHECK_PORT_TIMEOUT:-3} bash -c "cat < /dev/null > /dev/tcp/${php_fpm_host}/${php_fpm_port}"
+        [[ $PHP_FPM_CHECK_SOCKET == *":"* ]] && php_fpm_host="${PHP_FPM_CHECK_SOCKET%%:*}"
+        php_fpm_port="${PHP_FPM_CHECK_SOCKET#*:}"
+        timeout ${PHP_FPM_CHECK_SOCKET_TIMEOUT:-2.8} bash -c "cat < /dev/null > /dev/tcp/${php_fpm_host}/${php_fpm_port}"
         if [ $? -ne 0 ]; then
             echo "$0: CHECK: timeout checking tcp socket '${php_fpm_host}:${php_fpm_port}'"
             exit 1
@@ -118,7 +119,7 @@ check_moodledata() {
     rm $TMPFILE
 }
 
-while getopts ":cdlmrtu" opt; do
+while getopts ":cdlmrsu" opt; do
   case ${opt} in
     c )
         check_config_file
@@ -138,8 +139,8 @@ while getopts ":cdlmrtu" opt; do
         check_database_installed
         check_moodledata
         ;;
-    t )
-        check_tcp_port
+    s )
+        check_php_fpm_socket
         ;;
     u )
         check_upgrade_not_pending

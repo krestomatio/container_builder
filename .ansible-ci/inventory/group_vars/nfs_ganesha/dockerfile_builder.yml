@@ -1,9 +1,6 @@
 ctr_repo_name: nfs-ganesha
 ctr_version: "{{ nfs_ganesha_version }}"
 
-# ci
-version_release_no_bump: true
-
 # version tags
 version_image_major: "{{ nfs_ganesha_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ nfs_ganesha_version.split('.')[1] | default(false) }}"

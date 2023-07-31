@@ -3,9 +3,6 @@ ctr_version: "{{ graphql_engine_version }}"
 graphql_engine_version: "{{ graphql_engine_versions.2 }}"
 postgres_version: 13
 
-# ci
-version_release_no_bump: true
-
 # version tags
 version_image_major: "{{ graphql_engine_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ graphql_engine_version.split('.')[1] | default(false) }}"

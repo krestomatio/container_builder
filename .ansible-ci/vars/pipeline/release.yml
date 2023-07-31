@@ -15,14 +15,12 @@ git_commit_msgs:
 pr_commit_tag:
   "{{ lookup('pipe', 'git rev-parse HEAD^2 &>/dev/null && git rev-parse HEAD^2 || echo') |  default(false,true)}}"
 artifact_tag: "{{ pr_commit_tag }}"
-dockerfile_builder_tags:
-  - "{{ artifact_tag }}"
+dockerfile_builder_tags: "{{ state_yml_tags.split(',') }}"
 version_image_full_in_tags: "{{ false if version_image_suffix is defined and version_image_suffix else true  }}"
 git_push_options: --tags
 git_tag: "v{{ release_version }}"
 release_version: "{{ next_version | default(false,true) }}"
 assertion_release_version: true
-state_image_match_artifact_tag: false
 promote_copy_throttle: 1
 artifact_generated_context_task: download
 artifact_state_task: download

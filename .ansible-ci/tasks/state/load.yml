@@ -57,10 +57,3 @@
         - load_state_yml.variant_name is defined
       set_fact:
         state_yml_variant_name: "{{ load_state_yml.variant_name }}"
-
-- name: set fact when artifact matches pipeline's
-  when:
-    - artifact_tag | default(false)
-    - artifact_tag == state_yml_artifact_tag
-  set_fact:
-    state_image_match_artifact_tag: true

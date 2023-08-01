@@ -5,7 +5,7 @@ moodle41_kio_image:
   variant_name: "moodle:4.1-kio"
   build: False
   version: "4.1.4"
-  tags: "4.1-kio,4.1.4-kio,moodle41_kio-b009e33587a89538f1178f9cb65699a18a7e46bc"
-  artifact_tag: "b009e33587a89538f1178f9cb65699a18a7e46bc"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-kio@sha256:3f922e388ae27789a0269f4bcc17dfa746e02bf08da0950afa6e321789c3f963"
+  tags: "4.1-kio,4.1.4-kio,moodle41_kio-f9c4476b318b1ebb0eb553c1df968183541de018"
+  artifact_tag: "f9c4476b318b1ebb0eb553c1df968183541de018"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-kio@sha256:bbf4b7f81201ae8cfea202974683d62e7495d7bfc05c92fbfcdb8eddb721d1be"
   relative_path: "moodle/moodle41_kio"

@@ -30,14 +30,12 @@ EXAMPLES:
 EOF
 }
 
-check_moodledata() {
-    # check moodledata is writable
-    TMPFILE=`mktemp -q -p ${MOODLE_DATA}/`
-    if [ $? -ne 0 ]; then
-        echo "$0: CHECK: Can't create file in '${MOODLE_DATA}'"
+check_moodledata_readable() {
+    # check moodledata is readable
+    if ! [ -r "${MOODLE_DATA}" ]; then
+        echo "CHECK: Can't read dir '${MOODLE_DATA}'"
         exit 1
     fi
-    rm $TMPFILE
 }
 
 check_maintenance() {
@@ -71,7 +69,7 @@ check_php_fpm_socket() {
     # check php-fpm host and port
     PHP_FPM_CHECK_SOCKET=${PHP_FPM_CHECK_SOCKET:-$NGINX_FASTCGI_PASS}
     # if not using unix socket
-    if [[ ${PHP_FPM_CHECK_SOCKET} =~ ^[0-9] ]]; then
+    if [[ ${PHP_FPM_CHECK_SOCKET} != unix:* ]]; then
         # extract host and port from var
         php_fpm_host="${PHP_FPM_CHECK_SOCKET%%:*}"
         php_fpm_port="${PHP_FPM_CHECK_SOCKET#*:}"
@@ -88,17 +86,17 @@ check_php_fpm_socket() {
 while getopts ":mulrs" opt; do
   case ${opt} in
     m )
-        check_moodledata
+        check_moodledata_readable
         ;;
     u )
         check_url
         ;;
     l )
-        check_moodledata
+        check_moodledata_readable
         check_url
         ;;
     r )
-        check_moodledata
+        check_moodledata_readable
         check_url
         ;;
     s )

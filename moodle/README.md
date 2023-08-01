@@ -5,13 +5,13 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-b009e33587a89538f1178f9cb65699a18a7e46bc`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-b009e33587a89538f1178f9cb65699a18a7e46bc`
+- [moodle:4.1](#moodle41): `4.1, 4.1.4, moodle41-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.4-bundle, moodle41_bundle-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.4-httpd, moodle41_httpd24-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.4-kio, moodle41_kio-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.4-nginx, moodle41_nginx120-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.4-nginx_php-fpm, moodle41_nginx120_php80-fpm-f9c4476b318b1ebb0eb553c1df968183541de018`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.4-php-fpm, moodle41_php80-fpm-f9c4476b318b1ebb0eb553c1df968183541de018`
 
 
 ## Image Variants

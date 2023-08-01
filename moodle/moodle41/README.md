@@ -64,7 +64,7 @@ docker build . -t my_moodle_image:my_tag \
 ```
 
 #### PHP-FPM or NGINX
-The image packs both programs: PHP-FPM and Nginx. However, it only runs one, with a non-root user. This design is for those programs to run in different containers, using one image. By default, in a Kubernetes cluster, it runs php-fpm with user 48. For nginx, set pod args to 'nginx' and run it as user 999. For a OKD cluster, setting args to `nginx` will suffice.
+The image packs both programs: PHP-FPM and Nginx. However, it only runs one, with a non-root user. This design is for those programs to run in different containers, using one image. By default, in a Kubernetes cluster, it runs php-fpm with user 48. For nginx, set pod args to 'nginx' and run it as user 1001. For a OKD cluster, setting args to `nginx` will suffice.
 ##### Configuration files
 For adjusting PHP-FPM or Nginx config, just place the .ini or .conf files in the respective folders.
 - `/etc/php.d/`: PHP .ini extra configuration

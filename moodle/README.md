@@ -81,7 +81,7 @@ docker build . -t my_moodle_image:my_tag \
 ```
 
 #### PHP-FPM or NGINX
-The image packs both programs: PHP-FPM and Nginx. However, it only runs one, with a non-root user. This design is for those programs to run in different containers, using one image. By default, in a Kubernetes cluster, it runs php-fpm with user 48. For nginx, set pod args to 'nginx' and run it as user 999. For a OKD cluster, setting args to `nginx` will suffice.
+The image packs both programs: PHP-FPM and Nginx. However, it only runs one, with a non-root user. This design is for those programs to run in different containers, using one image. By default, in a Kubernetes cluster, it runs php-fpm with user 48. For nginx, set pod args to 'nginx' and run it as user 1001. For a OKD cluster, setting args to `nginx` will suffice.
 ##### Configuration files
 For adjusting PHP-FPM or Nginx config, just place the .ini or .conf files in the respective folders.
 - `/etc/php.d/`: PHP .ini extra configuration
@@ -168,4 +168,3 @@ Image based on CentOS 9 Stream minimal with [nginx HTTP Server](https://nginx.or
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle41_php80-fpm)
 
 Moodle PHP-FPM image based on CentOS 9 Stream minimal for Moodle app/source (not included)
-

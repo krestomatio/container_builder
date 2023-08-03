@@ -10,7 +10,7 @@ ENV IMAGE_NAME=node:18-ci \
 
 USER 0
 
-RUN install-pkgs make git curl tar xz
+RUN install-pkgs make git curl tar xz unzip
 
 # Labels
 LABEL name="${IMAGE_NAME}" \

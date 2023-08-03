@@ -17,10 +17,11 @@ keydb_versions:
 nfs_ganesha_versions:
   40: '4.0.7'
 node_versions:
-  14: '14'
+  18: '18'
 node_version_name:
   14: fermium
   16: gallium
+  18: hydrogen
 moodle_versions:
   41: '4.1'
 graphql_engine_versions:

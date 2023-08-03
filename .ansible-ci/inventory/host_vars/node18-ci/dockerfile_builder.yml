@@ -1,4 +1,4 @@
-node_version: "{{ node_versions.14 }}"
+node_version: "{{ node_versions.18 }}"
 version_image_suffix: ci
 image_from_ctr: "node{{ node_version }}"
 image_tag_from_ctr: "{{ node_version }}"
@@ -7,7 +7,7 @@ version_image_derivative_extra_tags:
 - "{{ node_version_name[node_version|int] }}-ci"
 
 dockerfile_builder_image_ocp_tags: "node,node{{ node_version }},node-{{ node_version_name[node_version|int] }},node-ci,ci"
-dockerfile_builder_image_based: "CentOS 8 Stream minimal"
+dockerfile_builder_image_based: "CentOS 9 Stream minimal"
 
 # containers generated build dir
 template_path: "{{ template_dir }}/node-ci"

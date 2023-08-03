@@ -35,8 +35,8 @@ graphql-engine2-base
 graphql-engine2-build
 
 [node]
-node14
-node14-ci
+node18
+node18-ci
 
 [moodle:children]
 moodle41_grp
@@ -67,7 +67,6 @@ centos_base_grp
 rocky_base_grp
 
 [centos8_based_grp]
-node14
 graphql-engine2-base
 ansible
 
@@ -81,6 +80,7 @@ postgres13
 pgbouncer
 go118-toolset
 keydb63
+node18
 
 [rootfs_grp:children]
 minimal_grp
@@ -115,7 +115,7 @@ php80-fpm
 postgres13
 pgbouncer
 go118-toolset
-node14
+node18
 graphql-engine2-base
 keydb63
 
@@ -124,7 +124,7 @@ nginx120_php80-fpm
 ansible-docker-ci
 ansible-podman-ci
 graphql-engine2-build
-node14-ci
+node18-ci
 
 [build_step_5]
 ansible-operator-ci

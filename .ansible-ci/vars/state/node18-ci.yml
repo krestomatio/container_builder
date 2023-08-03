@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+node18_ci_image:
+  variant_name: "node:18-ci"
+  build: False
+  version: "18.0.2"
+  tags: "18-ci,18.0-ci,18.0.2-ci,node18-ci-fb631e6081699cf5d4af03f24b741bc13bb822eb,hydrogen-ci"
+  artifact_tag: "fb631e6081699cf5d4af03f24b741bc13bb822eb"
+  repo_digest: "quay.io/krestomatio/node:18-ci@sha256:349959019c6bf3b50f8eade74cdafaa778ed9cacefc6b1735f090a32c581b733"
+  relative_path: "node/node18-ci"

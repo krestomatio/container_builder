@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+node18_image:
+  variant_name: "node:18"
+  build: False
+  version: "18.0.2"
+  tags: "18,18.0,18.0.2,node18-fb631e6081699cf5d4af03f24b741bc13bb822eb,hydrogen"
+  artifact_tag: "fb631e6081699cf5d4af03f24b741bc13bb822eb"
+  repo_digest: "quay.io/krestomatio/node:18@sha256:faa2fce53527169bb47be7c1ba4e999fd2cdec11b1a268f5ba2a592f8cdff76d"
+  relative_path: "node/node18"

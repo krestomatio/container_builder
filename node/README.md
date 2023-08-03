@@ -5,18 +5,18 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [node:14](#node14): `14, 14.0, 14.0.19, node14-f9c4476b318b1ebb0eb553c1df968183541de018, fermium`
-- [node:14-ci](#node14-ci): `14-ci, 14.0-ci, 14.0.19-ci, node14-ci-f9c4476b318b1ebb0eb553c1df968183541de018, fermium-ci`
+- [node:18](#node18): `18, 18.0, 18.0.2, node18-fb631e6081699cf5d4af03f24b741bc13bb822eb, hydrogen`
+- [node:18-ci](#node18-ci): `18-ci, 18.0-ci, 18.0.2-ci, node18-ci-fb631e6081699cf5d4af03f24b741bc13bb822eb, hydrogen-ci`
 
 
 ## Image Variants
-### node:14
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/node/node14)
+### node:18
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/node/node18)
 
-Node image based on CentOS 8 Stream minimal. It contains node javascript runtime.
+Node image based on CentOS 9 Stream minimal. It contains node javascript runtime.
 
-### node:14-ci
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/node/node14-ci)
+### node:18-ci
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/node/node18-ci)
 
-Node image based on CentOS 8 Stream minimal for Continuous Integration (CI). It contains node javascript runtime and other tools for build node apps in CI.
+Node image based on CentOS 9 Stream minimal for Continuous Integration (CI). It contains node javascript runtime and other tools for build node apps in CI.
 

@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="e29e9d99a7fa388a51279b49dcd6e7eb127acb62"
+ARG ARG_MOODLE_COMMIT="327a25077556e08133787ab937b99c810feeeb21"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -97,8 +97,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="e29e9d99a7fa388a51279b49dcd6e7eb127acb62"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112804.08"
+ARG ARG_MOODLE_COMMIT="327a25077556e08133787ab937b99c810feeeb21"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112804.10"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \

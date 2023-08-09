@@ -15,38 +15,53 @@ USAGE:
 
 OPTIONS (check moodle php container):
   -c            check if config.php exists
-  -d            check if database is installed
-  -l            check liveness (-d -m) (Default)
+  -d            check socket database listen to
+  -i            check if database is installed
+  -l            check liveness (-s -d -c -m) (Default)
   -m            check if moodledata is writable
-  -r            check readiness (-c -d -m)
+  -r            check readiness (-s -d -c -m -i)
   -s            check socket php-fpm listen to
   -u            check if upgrade not needed
 
 EXAMPLES:
-    check-container -i
-    check-container -u
-    check-container -r
+    /usr/libexec/check-container-php-moodle -i
+    /usr/libexec/check-container-php-moodle -u
+    /usr/libexec/check-container-php-moodle -r
 EOF
 }
 
-check_php_fpm_socket() {
-    # check php-fpm tcp port
-    PHP_FPM_CHECK_SOCKET=${PHP_FPM_CHECK_SOCKET:-$PHP_FPM_STATUS_LISTEN}
+
+check_socket() {
+    # check tcp socket
+    CHECK_SOCKET=${1}
+    CHECK_SOCKET_NAME=${2}
+    CHECK_SOCKET_TIMEOUT=${3:-2.8}
     # if not using unix socket
-    if [[ ${PHP_FPM_CHECK_SOCKET} != /* ]]; then
+    if [[ ${CHECK_SOCKET} != /* ]]; then
         # extra host and port from var
         # default host to 127.0.0.1 if no ":"
-        php_fpm_host="127.0.0.1"
-        [[ $PHP_FPM_CHECK_SOCKET == *":"* ]] && php_fpm_host="${PHP_FPM_CHECK_SOCKET%%:*}"
-        php_fpm_port="${PHP_FPM_CHECK_SOCKET#*:}"
-        timeout ${PHP_FPM_CHECK_SOCKET_TIMEOUT:-2.8} bash -c "cat < /dev/null > /dev/tcp/${php_fpm_host}/${php_fpm_port}"
+        socket_host="127.0.0.1"
+        [[ $CHECK_SOCKET == *":"* ]] && socket_host="${CHECK_SOCKET%%:*}"
+        socket_port="${CHECK_SOCKET#*:}"
+        timeout ${CHECK_SOCKET_TIMEOUT} bash -c "cat < /dev/null > /dev/tcp/${socket_host}/${socket_port}"
         if [ $? -ne 0 ]; then
-            echo "$0: CHECK: timeout checking tcp socket '${php_fpm_host}:${php_fpm_port}'"
+            echo "$0: CHECK: timeout checking ${CHECK_SOCKET_NAME} tcp socket '${socket_host}:${socket_port}'"
             exit 1
         fi
     else
-        echo "$0: CHECK: php-fpm is using unix socket"
+        echo "$0: CHECK: ${CHECK_SOCKET_NAME} is using unix socket"
     fi
+}
+
+check_php_fpm_socket() {
+    # check php-fpm tcp socket
+    PHP_FPM_CHECK_SOCKET=${PHP_FPM_CHECK_SOCKET:-$PHP_FPM_STATUS_LISTEN}
+    check_socket "${PHP_FPM_CHECK_SOCKET}" "php-fpm"
+}
+
+check_database_socket() {
+    # check database tcp socket
+    check_socket "$DATABASE_CHECK_SOCKET" "database"
 }
 
 check_config_file() {
@@ -56,7 +71,7 @@ check_config_file() {
         echo "$0: CHECK: config.php does not exist"
         exit 1
     fi
-    php -l ${MOODLE_APP}/config.php
+    php -l ${MOODLE_APP}/config.php > /dev/null
     if [ $? -ne 0 ]; then
         echo "$0: CHECK: config.php sintax error"
         exit 1
@@ -119,25 +134,32 @@ check_moodledata() {
     rm $TMPFILE
 }
 
-while getopts ":cdlmrsu" opt; do
+while getopts ":cdlimrsu" opt; do
   case ${opt} in
     c )
         check_config_file
         ;;
     d )
-        check_database_installed
+        check_database_socket
         ;;
     l )
-        check_database_installed
+        check_php_fpm_socket
+        check_database_socket
+        check_config_file
         check_moodledata
+        ;;
+    i )
+        check_database_installed
         ;;
     m )
         check_moodledata
         ;;
     r )
+        check_php_fpm_socket
+        check_database_socket
         check_config_file
-        check_database_installed
         check_moodledata
+        check_database_installed
         ;;
     s )
         check_php_fpm_socket

@@ -5,10 +5,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [rocky:8-base](#rocky8-base): `8-base, 8.8-base, 8.8.2-base, rocky8-base-f9c4476b318b1ebb0eb553c1df968183541de018`
-- [rocky:8-minimal](#rocky8-minimal): `8-minimal, 8.8-minimal, 8.8.2-minimal, rocky8-minimal-e020b5c2206002f76ad5c48f9ae0f7041e484c74`
-- [rocky:9-base](#rocky9-base): `9-base, 9.2-base, 9.2.2-base, rocky9-base-f9c4476b318b1ebb0eb553c1df968183541de018`
-- [rocky:9-minimal](#rocky9-minimal): `9-minimal, 9.2-minimal, 9.2.2-minimal, rocky9-minimal-e020b5c2206002f76ad5c48f9ae0f7041e484c74`
+- [rocky:8-base](#rocky8-base): `8-base, 8.8-base, 8.8.1-base, rocky8-base-da102fff86599b5e0fec4e0b3e05112c9870dff0`
+- [rocky:8-minimal](#rocky8-minimal): `8-minimal, 8.8-minimal, 8.8.1-minimal, rocky8-minimal-da102fff86599b5e0fec4e0b3e05112c9870dff0`
+- [rocky:9-base](#rocky9-base): `9-base, 9.2-base, 9.2.1-base, rocky9-base-da102fff86599b5e0fec4e0b3e05112c9870dff0`
+- [rocky:9-minimal](#rocky9-minimal): `9-minimal, 9.2-minimal, 9.2.1-minimal, rocky9-minimal-da102fff86599b5e0fec4e0b3e05112c9870dff0`
 
 
 ## Image Variants

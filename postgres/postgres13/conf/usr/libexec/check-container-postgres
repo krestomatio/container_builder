@@ -24,4 +24,4 @@ pg_isready -q \
     -h 127.0.0.1 \
     ${POSTGRESQL_USER+-U "$POSTGRESQL_USER"} \
     ${POSTGRESQL_DATABASE+-d "$POSTGRESQL_DATABASE"} \
-    --timeout ${PG_ISREADY_TIMEOUT:-3}
+    --timeout ${PG_ISREADY_TIMEOUT:-2.8}

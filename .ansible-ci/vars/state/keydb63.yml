@@ -5,7 +5,7 @@ keydb63_image:
   variant_name: "keydb:6.3.3"
   build: False
   version: "6.3.3"
-  tags: "6.3,6.3.3,keydb63-da102fff86599b5e0fec4e0b3e05112c9870dff0"
-  artifact_tag: "da102fff86599b5e0fec4e0b3e05112c9870dff0"
-  repo_digest: "quay.io/krestomatio/keydb:6.3.3@sha256:b0b1be86fdf8ef80c298feb9643a4f67cbd26982f26f207ee426b712d0e59b89"
+  tags: "6.3,6.3.3,keydb63-30d25afebb95a38832816363baa0904724fc7bb6"
+  artifact_tag: "30d25afebb95a38832816363baa0904724fc7bb6"
+  repo_digest: "quay.io/krestomatio/keydb:6.3.3@sha256:e1839f0b05b54fd5df8322556c16b291d71f3c60517639408253ce5c72069525"
   relative_path: "keydb/keydb63"

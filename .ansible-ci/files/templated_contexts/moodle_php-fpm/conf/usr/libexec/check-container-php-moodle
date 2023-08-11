@@ -11,25 +11,25 @@ MOODLE_APP              path to moodle code
 MOODLE_DATA             moodledata path
 
 USAGE:
-    check-container [OPTIONS]
+    check-container-php-moodle [OPTIONS]
 
 OPTIONS (check moodle php container):
   -c            check if config.php exists
   -d            check socket database listen to
   -i            check if database is installed
-  -l            check liveness (-s -d -c -m) (Default)
+  -l            check liveness (-p) (Default)
   -m            check if moodledata is writable
-  -r            check readiness (-s -d -c -m -i)
-  -s            check socket php-fpm listen to
+  -p            check socket php-fpm listen to
+  -r            check readiness (-p -d -c -m)
+  -s            check startup (-p -d -c -m -i)
   -u            check if upgrade not needed
 
 EXAMPLES:
-    /usr/libexec/check-container-php-moodle -i
-    /usr/libexec/check-container-php-moodle -u
+    /usr/libexec/check-container-php-moodle -s
     /usr/libexec/check-container-php-moodle -r
+    /usr/libexec/check-container-php-moodle -l
 EOF
 }
-
 
 check_socket() {
     # check tcp socket
@@ -134,7 +134,7 @@ check_moodledata() {
     rm $TMPFILE
 }
 
-while getopts ":cdlimrsu" opt; do
+while getopts ":cdilmprsu" opt; do
   case ${opt} in
     c )
         check_config_file
@@ -142,27 +142,30 @@ while getopts ":cdlimrsu" opt; do
     d )
         check_database_socket
         ;;
-    l )
-        check_php_fpm_socket
-        check_database_socket
-        check_config_file
-        check_moodledata
-        ;;
     i )
         check_database_installed
         ;;
+    l )
+        check_php_fpm_socket
+        ;;
     m )
         check_moodledata
+        ;;
+    p )
+        check_php_fpm_socket
         ;;
     r )
         check_php_fpm_socket
         check_database_socket
         check_config_file
         check_moodledata
-        check_database_installed
         ;;
     s )
         check_php_fpm_socket
+        check_database_socket
+        check_config_file
+        check_moodledata
+        check_database_installed
         ;;
     u )
         check_upgrade_not_pending

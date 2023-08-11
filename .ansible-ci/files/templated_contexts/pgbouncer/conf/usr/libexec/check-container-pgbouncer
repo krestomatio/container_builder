@@ -25,4 +25,4 @@ pg_isready -q \
     ${POSTGRESQL_USER+-U "$POSTGRESQL_USER"} \
     ${POSTGRESQL_DATABASE+-d "$POSTGRESQL_DATABASE"} \
     ${PGBOUNCER_PORT+-p "$PGBOUNCER_PORT"} \
-    --timeout ${PG_ISREADY_TIMEOUT:-3}
+    --timeout ${PG_ISREADY_TIMEOUT:-2.8}

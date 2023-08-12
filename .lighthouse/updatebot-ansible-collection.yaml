@@ -51,7 +51,7 @@ spec:
         args:
         - -c
         - |
-          pgbouncer_image='quay.io/krestomatio/pgbouncer@sha256:b2b24e04a6592f2ae18d49f89371c7099fe383bf42639b2d7117ba858203a2ca'
+          pgbouncer_image='quay.io/krestomatio/pgbouncer@sha256:118b55c8666d326334a1c921445d15b88e1d37d355f39df2110f6ab2d21d56cf'
           sed -i \
             "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml

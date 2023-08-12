@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='quay.io/krestomatio/postgres:13@sha256:33b9c058f98407b7d098be69bf86f874aad28e589fe322ebdff6888d78f839dc'
+          postgres_image='quay.io/krestomatio/postgres:13@sha256:6c619ba6962b60f9c23d8d66f7a8fe881a30b71cc8fc4f98959d19e3d7f892f1'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/postgres.yml

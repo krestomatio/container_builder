@@ -53,8 +53,8 @@ COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 CMD ["/bin/bash"]
 
-ENV IMAGE_VERSION=8.6.1
+ENV IMAGE_VERSION=8.6.3
 
 # Labels
 LABEL org.opencontainers.image.title="CentOS 8 Stream Minimal Image" \
-      org.opencontainers.image.version="8.6.1"
+      org.opencontainers.image.version="8.6.3"

@@ -4,8 +4,8 @@
 go118_toolset_image:
   variant_name: "go:1.18-toolset"
   build: False
-  version: "1.18.21"
-  tags: "1.18-toolset,1.18.21-toolset,go118-toolset-30d25afebb95a38832816363baa0904724fc7bb6"
-  artifact_tag: "30d25afebb95a38832816363baa0904724fc7bb6"
-  repo_digest: "quay.io/krestomatio/go:1.18-toolset@sha256:25af586de6853be3ae1d6872cc67008e0e25710a05de9804ef366722395bd8f5"
+  version: "1.18.22"
+  tags: "1.18-toolset,1.18.22-toolset,go118-toolset-485a70f613d6cdd5ae905e2581989ae866ce6b61"
+  artifact_tag: "485a70f613d6cdd5ae905e2581989ae866ce6b61"
+  repo_digest: "quay.io/krestomatio/go:1.18-toolset@sha256:fdb2738974ab0c0ca21dbc667af0d88336ee860cede7f54e8cee95a150e5879a"
   relative_path: "go/go118-toolset"

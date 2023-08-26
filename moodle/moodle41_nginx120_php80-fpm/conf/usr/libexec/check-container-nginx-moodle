@@ -9,7 +9,7 @@ ENVIRONMENT VARS:
 PHP_FPM_CHECK_SOCKET    socket php-fpm listen to
 MOODLE_DATA             moodledata path
 MOODLE_CHECK_PATH       path from url to check ex. "/index.php"
-MOODLE_check_moodle_url        optionally use a complete url instead of path
+MOODLE_CHECK_URL        optionally use a complete url instead of path
 MOODLE_CHECK_CODE       http status code to expect
 MOODLE_CHECK_HOST       set a host header
 

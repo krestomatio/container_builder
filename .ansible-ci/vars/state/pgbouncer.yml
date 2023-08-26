@@ -4,8 +4,8 @@
 pgbouncer_image:
   variant_name: "pgbouncer"
   build: False
-  version: "0.4.20"
-  tags: "0,0.4,0.4.20"
-  artifact_tag: "ef10cbc7f192d52cc8093d2e639d9fffc655f000"
-  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:118b55c8666d326334a1c921445d15b88e1d37d355f39df2110f6ab2d21d56cf"
+  version: "0.4.21"
+  tags: "0,0.4,0.4.21"
+  artifact_tag: "485a70f613d6cdd5ae905e2581989ae866ce6b61"
+  repo_digest: "quay.io/krestomatio/pgbouncer@sha256:59655a813620207e329cec7842a6e03eecfc502e532779128f6daad2605f5d3d"
   relative_path: "pgbouncer"

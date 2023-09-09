@@ -45,7 +45,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="1.0.1"
+ENV ORAS_VERSION="1.1.0"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -65,7 +65,7 @@ RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.5.6"
+ENV TERRAFORM_VERSION="1.5.7"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \

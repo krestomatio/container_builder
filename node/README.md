@@ -5,8 +5,8 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [node:18](#node18): `18, 18.0, 18.0.5, node18-485a70f613d6cdd5ae905e2581989ae866ce6b61, hydrogen`
-- [node:18-ci](#node18-ci): `18-ci, 18.0-ci, 18.0.6-ci, node18-ci-485a70f613d6cdd5ae905e2581989ae866ce6b61, hydrogen-ci`
+- [node:18](#node18): `18, 18.0, 18.0.6, node18-12b272c3406445b114ed50446cfd8c3f54487993, hydrogen`
+- [node:18-ci](#node18-ci): `18-ci, 18.0-ci, 18.0.7-ci, node18-ci-12b272c3406445b114ed50446cfd8c3f54487993, hydrogen-ci`
 
 
 ## Image Variants

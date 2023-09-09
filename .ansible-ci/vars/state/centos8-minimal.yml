@@ -4,8 +4,8 @@
 centos8_minimal_image:
   variant_name: "centos:8-minimal"
   build: False
-  version: "8.6.3"
-  tags: "8-minimal,8.6-minimal,8.6.3-minimal,centos8-minimal-485a70f613d6cdd5ae905e2581989ae866ce6b61"
-  artifact_tag: "485a70f613d6cdd5ae905e2581989ae866ce6b61"
-  repo_digest: "quay.io/krestomatio/centos:8-minimal@sha256:da56b8e4a7e9f9d37f727cb41a152794c6473d656008a79c5206cfbce5ef68e4"
+  version: "8.6.1"
+  tags: "8-minimal,8.6-minimal,8.6.1-minimal,centos8-minimal-12b272c3406445b114ed50446cfd8c3f54487993"
+  artifact_tag: "12b272c3406445b114ed50446cfd8c3f54487993"
+  repo_digest: "quay.io/krestomatio/centos:8-minimal@sha256:a2e746062caa95b9e993e45089ef0b3ca4352832a6883e1e3d56dc24ea184399"
   relative_path: "centos/centos8-minimal"

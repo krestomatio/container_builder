@@ -5,7 +5,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [php:8.0](#php80): `8.0, 8.0.22, php80-fpm-485a70f613d6cdd5ae905e2581989ae866ce6b61`
+- [php:8.0](#php80): `8.0, 8.0.23, php80-fpm-12b272c3406445b114ed50446cfd8c3f54487993`
 
 
 ## Image Variants

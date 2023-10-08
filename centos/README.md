@@ -1,6 +1,6 @@
 ## Quick reference
 - **Maintained by**:
-[Krestomatio](https://github.com/krestomatio)
+[Krestomatio](https://krestomatio.com)
 - **Where to get help**:
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
@@ -41,4 +41,3 @@ This is a CentOS 9 Stream Minimal Image, similar to Fedora-minimal or UBI.
 ```bash
 docker build . -t "quay.io/krestomatio/centos"
 ```
-

@@ -58,3 +58,6 @@ ansible-playbook .ansible-ci/build.yml
 ├── .lighthouse             # jenkins-x pipelines
 └── */                      # directories where generated container contexts are saved
 ```
+
+## [About Krestomatio](https://krestomatio.com/about)
+[Krestomatio is a managed service for Moodle™ e-learning platforms](https://krestomatio.com/). It allows you to have open-source instances managed by a service optimized for Moodle™, complete with an additional plugin pack and customization options.

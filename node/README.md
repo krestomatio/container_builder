@@ -1,6 +1,6 @@
 ## Quick reference
 - **Maintained by**:
-[Krestomatio](https://github.com/krestomatio)
+[Krestomatio](https://krestomatio.com)
 - **Where to get help**:
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
@@ -19,4 +19,3 @@ Node image based on CentOS 9 Stream minimal. It contains node javascript runtime
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/node/node18-ci)
 
 Node image based on CentOS 9 Stream minimal for Continuous Integration (CI). It contains node javascript runtime and other tools for build node apps in CI.
-

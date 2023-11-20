@@ -5,10 +5,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [rocky:8-base](#rocky8-base): `8-base, 8.8-base, 8.8.2-base, rocky8-base-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [rocky:8-minimal](#rocky8-minimal): `8-minimal, 8.8-minimal, 8.8.2-minimal, rocky8-minimal-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [rocky:9-base](#rocky9-base): `9-base, 9.2-base, 9.2.2-base, rocky9-base-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [rocky:9-minimal](#rocky9-minimal): `9-minimal, 9.2-minimal, 9.2.2-minimal, rocky9-minimal-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
+- [rocky:8-base](#rocky8-base): `8-base, 8.8-base, 8.8.3-base, rocky8-base-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [rocky:8-minimal](#rocky8-minimal): `8-minimal, 8.8-minimal, 8.8.3-minimal, rocky8-minimal-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [rocky:9-base](#rocky9-base): `9-base, 9.2-base, 9.2.3-base, rocky9-base-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [rocky:9-minimal](#rocky9-minimal): `9-minimal, 9.2-minimal, 9.2.3-minimal, rocky9-minimal-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
 
 
 ## Image Variants
@@ -41,3 +41,4 @@ This is a Rocky 9 Linux Minimal Image, similar to Fedora-minimal or UBI.
 ```bash
 docker build . -t "quay.io/krestomatio/rocky"
 ```
+

@@ -5,10 +5,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.1-base, centos8-base-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.1-minimal, centos8-minimal-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.23-base, centos9-base-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
-- [centos:9-minimal](#centos9-minimal): `9-minimal, 9.0-minimal, 9.0.23-minimal, centos9-minimal-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a`
+- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.2-base, centos8-base-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.2-minimal, centos8-minimal-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.24-base, centos9-base-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [centos:9-minimal](#centos9-minimal): `9-minimal, 9.0-minimal, 9.0.24-minimal, centos9-minimal-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
 
 
 ## Image Variants
@@ -41,3 +41,4 @@ This is a CentOS 9 Stream Minimal Image, similar to Fedora-minimal or UBI.
 ```bash
 docker build . -t "quay.io/krestomatio/centos"
 ```
+

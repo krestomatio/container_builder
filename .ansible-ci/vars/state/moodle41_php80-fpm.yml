@@ -4,8 +4,8 @@
 moodle41_php80_fpm_image:
   variant_name: "moodle:4.1-php-fpm"
   build: False
-  version: "4.1.5"
-  tags: "4.1-php-fpm,4.1.5-php-fpm,moodle41_php80-fpm-47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a"
-  artifact_tag: "47ceefa8b3b6c942747da3b18bb8d5a7bdfdba8a"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-php-fpm@sha256:22cfeb9eb3885e9f0a1da52254d77f213414c4c2e7d5dbe2b6577c6101049825"
+  version: "4.1.6"
+  tags: "4.1-php-fpm,4.1.6-php-fpm,moodle41_php80-fpm-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f"
+  artifact_tag: "42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-php-fpm@sha256:66acde038ecf1653b725ac791d420a61eba4dfc8c0b17d5e79e770055ccab370"
   relative_path: "moodle/moodle41_php80-fpm"

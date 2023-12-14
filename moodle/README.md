@@ -5,13 +5,13 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.6, moodle41-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.6-bundle, moodle41_bundle-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.6-httpd, moodle41_httpd24-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.6-kio, moodle41_kio-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.6-nginx, moodle41_nginx120-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.6-nginx_php-fpm, moodle41_nginx120_php80-fpm-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.6-php-fpm, moodle41_php80-fpm-42dcda0a74f43e89c4870c3ab9c998f0f62fdd2f`
+- [moodle:4.1](#moodle41): `4.1, 4.1.7, moodle41-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.7-bundle, moodle41_bundle-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.7-httpd, moodle41_httpd24-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.6-kio, moodle41_kio-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.7-nginx, moodle41_nginx120-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.7-nginx_php-fpm, moodle41_nginx120_php80-fpm-2250d9d17d410837907f46969719f3803f8d6caf`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.7-php-fpm, moodle41_php80-fpm-2250d9d17d410837907f46969719f3803f8d6caf`
 
 
 ## Image Variants
@@ -24,9 +24,9 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.1.6
-* Moodle version number: 2022112806.06
-* Moodle commit: 94ad185d09030a7b0096acd79c66af52a2b16e26
+* Moodle version: 4.1.7
+* Moodle version number: 2022112807.00
+* Moodle commit: 86716dc12019fa6a8613a58c340cb6ba6da72623
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Custom builds
@@ -95,9 +95,9 @@ Extends [moodle:4.1](#moodle41) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.1.6
-* Moodle version number: 2022112806.06
-* Moodle commit: 94ad185d09030a7b0096acd79c66af52a2b16e26
+* Moodle version: 4.1.7
+* Moodle version number: 2022112807.00
+* Moodle commit: 86716dc12019fa6a8613a58c340cb6ba6da72623
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Plugins

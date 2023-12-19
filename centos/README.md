@@ -5,9 +5,9 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.1-base, centos8-base-2250d9d17d410837907f46969719f3803f8d6caf`
-- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.1-minimal, centos8-minimal-2250d9d17d410837907f46969719f3803f8d6caf`
-- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.23-base, centos9-base-2250d9d17d410837907f46969719f3803f8d6caf`
+- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.1-base, centos8-base-7ca2aba79bd6847c7498c733c91aafe531abf34c`
+- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.1-minimal, centos8-minimal-7ca2aba79bd6847c7498c733c91aafe531abf34c`
+- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.23-base, centos9-base-7ca2aba79bd6847c7498c733c91aafe531abf34c`
 - [centos:9-minimal](#centos9-minimal): `9-minimal, 9.0-minimal, 9.0.23-minimal, centos9-minimal-2250d9d17d410837907f46969719f3803f8d6caf`
 
 

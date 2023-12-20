@@ -5,7 +5,7 @@ moodle41_nginx120_image:
   variant_name: "moodle:4.1-nginx"
   build: False
   version: "4.1.7"
-  tags: "4.1-nginx,4.1.7-nginx,moodle41_nginx120-7ca2aba79bd6847c7498c733c91aafe531abf34c"
-  artifact_tag: "7ca2aba79bd6847c7498c733c91aafe531abf34c"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-nginx@sha256:c68425769800fdaaf367f18e135a131e4bf5068525dcb47198dba3b77470570e"
+  tags: "4.1-nginx,4.1.7-nginx,moodle41_nginx120-c4faa91d52eabbf101b6e722205f34d5f3f95f08"
+  artifact_tag: "c4faa91d52eabbf101b6e722205f34d5f3f95f08"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-nginx@sha256:e023783c4a6f86829204eb07ed983117e6951e5de60d4d8783c4216f79d5f3d3"
   relative_path: "moodle/moodle41_nginx120"

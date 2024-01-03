@@ -85,9 +85,9 @@ pcre2-10.32-3.el8_6.x86_64
 popt-1.18-1.el8.x86_64
 publicsuffix-list-dafsa-20180723-1.el8.noarch
 readline-7.0-10.el8.x86_64
-rocky-gpg-keys-8.9-1.6.el8.noarch
-rocky-release-8.9-1.6.el8.noarch
-rocky-repos-8.9-1.6.el8.noarch
+rocky-gpg-keys-8.9-1.8.el8.noarch
+rocky-release-8.9-1.8.el8.noarch
+rocky-repos-8.9-1.8.el8.noarch
 rootfiles-8.1-22.el8.noarch
 rpm-4.14.3-26.el8.x86_64
 rpm-libs-4.14.3-26.el8.x86_64

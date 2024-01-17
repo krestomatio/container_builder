@@ -5,10 +5,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.1-base, centos8-base-8aaae560e21943ffa3f864d4838791ea1b0e7b83`
-- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.1-minimal, centos8-minimal-8aaae560e21943ffa3f864d4838791ea1b0e7b83`
-- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.23-base, centos9-base-8aaae560e21943ffa3f864d4838791ea1b0e7b83`
-- [centos:9-minimal](#centos9-minimal): `9-minimal, 9.0-minimal, 9.0.23-minimal, centos9-minimal-8aaae560e21943ffa3f864d4838791ea1b0e7b83`
+- [centos:8-base](#centos8-base): `8-base, 8.6-base, 8.6.1-base, centos8-base-bd546ac363d24fe540a4bc98be4c049108db6144`
+- [centos:8-minimal](#centos8-minimal): `8-minimal, 8.6-minimal, 8.6.1-minimal, centos8-minimal-bd546ac363d24fe540a4bc98be4c049108db6144`
+- [centos:9-base](#centos9-base): `9-base, 9.0-base, 9.0.23-base, centos9-base-bd546ac363d24fe540a4bc98be4c049108db6144`
+- [centos:9-minimal](#centos9-minimal): `9-minimal, 9.0-minimal, 9.0.23-minimal, centos9-minimal-bd546ac363d24fe540a4bc98be4c049108db6144`
 
 
 ## Image Variants

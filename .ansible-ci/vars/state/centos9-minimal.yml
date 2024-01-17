@@ -5,7 +5,7 @@ centos9_minimal_image:
   variant_name: "centos:9-minimal"
   build: False
   version: "9.0.23"
-  tags: "9-minimal,9.0-minimal,9.0.23-minimal,centos9-minimal-8aaae560e21943ffa3f864d4838791ea1b0e7b83"
-  artifact_tag: "8aaae560e21943ffa3f864d4838791ea1b0e7b83"
-  repo_digest: "quay.io/krestomatio/centos:9-minimal@sha256:9858d6f55506d6eef0131e80808a93280047a6b5a933ac746adb924b0ab13574"
+  tags: "9-minimal,9.0-minimal,9.0.23-minimal,centos9-minimal-bd546ac363d24fe540a4bc98be4c049108db6144"
+  artifact_tag: "bd546ac363d24fe540a4bc98be4c049108db6144"
+  repo_digest: "quay.io/krestomatio/centos:9-minimal@sha256:dcc3bfdde1b90f1d7c92407295ec98b4612a998bb4c0eda5d44fc02be6b1757b"
   relative_path: "centos/centos9-minimal"

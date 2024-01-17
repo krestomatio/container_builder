@@ -59,7 +59,7 @@ RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
 
-ENV BUILDX_VERSION="0.12.0"
+ENV BUILDX_VERSION="0.12.1"
 RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     mkdir -p /usr/local/lib/docker/cli-plugins && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \

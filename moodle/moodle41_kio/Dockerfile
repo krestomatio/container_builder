@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="f2b5518647ec38440c2a6ecb9dabca495eeed106"
+ARG ARG_MOODLE_COMMIT="22b041890b50b6f899a20bab8586a1f9156c54ae"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -97,8 +97,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_questionnaire,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="f2b5518647ec38440c2a6ecb9dabca495eeed106"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112808.01"
+ARG ARG_MOODLE_COMMIT="22b041890b50b6f899a20bab8586a1f9156c54ae"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112809.02"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
@@ -114,7 +114,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="4.1.8" \
+      org.opencontainers.image.version="4.1.9" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

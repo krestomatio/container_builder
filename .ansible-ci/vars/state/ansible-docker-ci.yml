@@ -4,8 +4,8 @@
 ansible_docker_ci_image:
   variant_name: "ansible-docker-ci"
   build: False
-  version: "0.4.29"
-  tags: "0,0.4,0.4.29"
-  artifact_tag: "aa7c0a8422ca2ab10672865665ea8025677451a1"
-  repo_digest: "quay.io/krestomatio/ansible-docker-ci@sha256:8df1da3c808a7873ab7a9fd2c8bef5dc0991c36bd596a3aca4f0f4f518df65dc"
+  version: "0.4.30"
+  tags: "0,0.4,0.4.30"
+  artifact_tag: "27a644dab1d57434e88641193e1af8791de3bc7f"
+  repo_digest: "quay.io/krestomatio/ansible-docker-ci@sha256:79c732e90e7201f2e8a5812fa8306caa4db65212ac423bd7265964466de786a0"
   relative_path: "ci/ansible-docker-ci"

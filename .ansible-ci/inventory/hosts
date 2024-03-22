@@ -68,7 +68,6 @@ rocky_base_grp
 
 [centos8_based_grp]
 graphql-engine2-base
-ansible
 
 [centos9_based_grp]
 httpd24
@@ -81,6 +80,7 @@ pgbouncer
 go118-toolset
 keydb63
 node18
+ansible
 
 [rootfs_grp:children]
 minimal_grp

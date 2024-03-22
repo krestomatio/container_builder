@@ -1,7 +1,7 @@
 # platform vars
-image_ansible_version: '2.9.*'
-molecule_version: '3.1.*'
-docker_version: '20-dind'
+image_ansible_version: '2.15.*'
+molecule_version: '5.1.*'
+docker_version: '26-dind'
 
 # ci
 prepare_image_task: ansible-ci

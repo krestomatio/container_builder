@@ -1,6 +1,6 @@
 # platform vars
-operator_version: 1.21.0
-kustomize_version: 4.1.3
+operator_version: 1.33.0
+kustomize_version: 5.0.1
 kubectl_version: 1.26.6
 
 image_from_ctr: ansible-podman-ci

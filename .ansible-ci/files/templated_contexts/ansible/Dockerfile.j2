@@ -19,7 +19,7 @@ RUN echo "Build tools..."  && \
     echo "Installing pkgs..."  && \
     python3 -m ensurepip && \
     $CTR_PIP cffi pip && \
-    $CTR_PIP ansible==$ANSIBLE_VERSION && \
+    $CTR_PIP ansible-core==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing other pip tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \

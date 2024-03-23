@@ -53,8 +53,8 @@ COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 CMD ["/bin/bash"]
 
-ENV IMAGE_VERSION=8.9.3
+ENV IMAGE_VERSION=8.9.1
 
 # Labels
 LABEL org.opencontainers.image.title="Rocky 8 Linux Minimal Image" \
-      org.opencontainers.image.version="8.9.3"
+      org.opencontainers.image.version="8.9.1"

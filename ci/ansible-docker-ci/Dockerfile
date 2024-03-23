@@ -1,16 +1,16 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=docker:20-dind
+ARG ARG_IMAGE_FROM=docker:26-dind
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-docker-ci \
-    IMAGE_SUMMARY="Ansible image based on Docker 20-dind for Continuous Integration" \
-    IMAGE_DESCRIPTION="Docker 20-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
-    IMAGE_TITLE="Ansible CI image based on Docker 20-dind"
+    IMAGE_SUMMARY="Ansible image based on Docker 26-dind for Continuous Integration" \
+    IMAGE_DESCRIPTION="Docker 26-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_TITLE="Ansible CI image based on Docker 26-dind"
 
 # Container variables
-ENV ANSIBLE_VERSION="2.9.*" \
-    MOLECULE_VERSION="3.1.*" \
+ENV ANSIBLE_VERSION="2.15.*" \
+    MOLECULE_VERSION="5.1.*" \
     CTR_APK="apk add --update --no-cache" \
     CTR_PIP="pip install --no-cache --upgrade" \
     CONTAINER_BUILDER=docker
@@ -19,10 +19,9 @@ RUN echo "Build tools..."  && \
     $CTR_APK py-pip openssl ca-certificates make && \
     $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
-    $CTR_PIP cffi wheel "pyyaml>6" && \
-    $CTR_PIP --no-build-isolation "pyyaml>5,<6" && \
+    $CTR_PIP cffi wheel && \
     $CTR_PIP pip && \
-    $CTR_PIP ansible==$ANSIBLE_VERSION && \
+    $CTR_PIP ansible-core==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
     $CTR_PIP yamllint ansible-lint'<6' pycrypto pywinrm docker git-semver commitizen jmespath && \
@@ -88,4 +87,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.9.*,docker,docker20-dind"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.15.*,docker,docker26-dind"

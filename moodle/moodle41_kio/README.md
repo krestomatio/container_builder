@@ -6,8 +6,8 @@ Krestomatio Moodle variant
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.1.9
-* Moodle version number: 2022112809.07
-* Moodle commit: cbde2a8d7f3383c9899afacf08c03f289829525b
+* Moodle version number: 2022112809.09
+* Moodle commit: f8158a375d6b752b557cff9a6765726d10dd4ec1
 * Moodle remote branch: MOODLE\_401\_STABLE\_KIO
 
 #### Plugins

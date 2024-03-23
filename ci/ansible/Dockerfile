@@ -1,16 +1,16 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:8-base
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible \
-    IMAGE_SUMMARY="Ansible image based on CentOS 8 Stream minimal for Continuous Integration" \
-    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based image with Ansible and Molecule" \
-    IMAGE_TITLE="Ansible image based on CentOS 8 Stream minimal"
+    IMAGE_SUMMARY="Ansible image based on CentOS 9 Stream minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 9 Stream minimal based image with Ansible and Molecule" \
+    IMAGE_TITLE="Ansible image based on CentOS 9 Stream minimal"
 
 # Container variables
-ENV ANSIBLE_VERSION="2.9.*" \
-    MOLECULE_VERSION="3.1.*" \
+ENV ANSIBLE_VERSION="2.15.*" \
+    MOLECULE_VERSION="5.1.*" \
     CTR_PIP="pip3 install --no-cache --upgrade" \
     CTR_PIP_EXTRA="yamllint ansible-lint flake8 pycrypto git-semver openshift"
 
@@ -19,7 +19,7 @@ RUN echo "Build tools..."  && \
     echo "Installing pkgs..."  && \
     python3 -m ensurepip && \
     $CTR_PIP cffi pip && \
-    $CTR_PIP ansible==$ANSIBLE_VERSION && \
+    $CTR_PIP ansible-core==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing other pip tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \

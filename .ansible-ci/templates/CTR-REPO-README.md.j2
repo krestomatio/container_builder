@@ -4,6 +4,7 @@
 {{- ctr_repo_variant_readmes.append(doc_generate_ctr_repo_readme_dest | dirname | realpath + '/' + ctr_repo_variant + '/README.md') -}}
 {%-   endfor -%}
 {%- endif -%}
+# {{ ctr_repo_name | capitalize }}
 ## Quick reference
 {% if ctr_repo_readme_mantained_by is defined %}
 {{ ctr_repo_readme_mantained_by}}

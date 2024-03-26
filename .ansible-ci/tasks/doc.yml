@@ -11,19 +11,47 @@
   set_fact:
     doc_ctr_names: "{{ doc_get_ctr_names }}"
 
-- name: generate ctr repo readme
+- name: generate ctr repo folder file
   when:
     - doc_generate_ctr_repo_readme | default(false)
     - ansible_host in groups[ctr_repo_name | replace('-', '_')]
-  template:
-    src: "{{ doc_generate_ctr_repo_readme_src }}"
-    dest: "{{ doc_generate_ctr_repo_readme_dest }}"
-    mode: '0644'
+  block:
+    - name: generate ctr repo folder readme
+      template:
+        src: "{{ doc_generate_ctr_repo_readme_src }}"
+        dest: "{{ doc_generate_ctr_repo_readme_dest }}"
+        mode: '0644'
+
+    - name: create docs ctr repo folder
+      file:
+        path: "{{ doc_generate_repo_dest | dirname }}"
+        state: directory
+        mode: '0755'
+
+    - name: generate docs ctr repo folder file
+      template:
+        src: "{{ doc_generate_ctr_repo_readme_src }}"
+        dest: "{{ doc_generate_repo_dest }}"
+        mode: '0644'
+
+- name: copy readme to docs
+  when: doc_generate_ctr_readme_src is file
+  block:
+    - name: create docs ctr dir
+      file:
+        path: "{{ doc_generate_ctr_dest | dirname }}"
+        state: directory
+        mode: '0755'
+
+    - name: copy readme to docs
+      copy:
+        src: "{{ doc_generate_ctr_readme_src }}"
+        dest: "{{ doc_generate_ctr_dest }}"
 
 - name: generate project readme
   run_once: true
   when: doc_generate_project_readme | default(false)
   template:
     src: "{{ doc_generate_project_readme_src }}"
-    dest: "{{ doc_generate_project_readme_dest }}"
+    dest: "{{ doc_generate_project_dest }}"
     mode: '0644'

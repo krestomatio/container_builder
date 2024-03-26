@@ -146,10 +146,14 @@ skopeo_dest_image_tags: "{{ dockerfile_builder_tags }}"
 ctr_readme_section_variant_title: "{{ ctr_variant_name }}"
 doc_generate_project_readme: true
 doc_generate_project_readme_src: README.md.j2
-doc_generate_project_readme_dest: "{{ git_repo_dir }}/README.md"
 doc_generate_ctr_repo_readme: "{{ true if ctr_repo_name != ctr_name else false }}"
 doc_generate_ctr_repo_readme_src: CTR-REPO-README.md.j2
 doc_generate_ctr_repo_readme_dest: "{{ generated_path }}/../README.md"
+doc_generate_docs_path: "{{ git_repo_dir }}/docs"
+doc_generate_ctr_readme_src: "{{ generated_path }}/README.md"
+doc_generate_ctr_dest: "{{ doc_generate_docs_path }}/{{ generated_relative_path }}/{{ ctr_name }}.md"
+doc_generate_repo_dest: "{{ doc_generate_docs_path }}/{{ generated_relative_path }}/../{{ ctr_repo_name }}.md"
+doc_generate_project_dest: "{{ doc_generate_docs_path }}/container_builder.md"
 
 # pushrm
 promote_pushrm_bin: docker-pushrm

@@ -18,4 +18,4 @@ For a comprehensive overview of the project, including build instructions, requi
 
 **Krestomatio Managed Service:**
 
-This project supports Krestomatio, a managed service for Moodle™ e-learning platforms. Learn more about Krestomatio at [Krestomatio website](https://krestomatio.com).
+This project is used by Krestomatio, a service offering managed Moodle™ e-learning platform. Visit the [Krestomatio: Managed E-learning Platforms](https://krestomatio.com) to learn more.

@@ -34,7 +34,7 @@ RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
 
 # Install requirements.
 RUN echo "Installing operator sdk version: ${OPERATOR_VERSION}..."  && \
-    curl -L https://raw.githubusercontent.com/operator-framework/operator-sdk/v${OPERATOR_VERSION}/testdata/ansible/memcached-operator/requirements.yml -o /tmp/requirements.yml && \
+    curl -L https://raw.githubusercontent.com/operator-framework/ansible-operator-plugins/v${OPERATOR_VERSION}/testdata/memcached-molecule-operator/requirements.yml -o /tmp/requirements.yml && \
     ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
     rm -f /tmp/requirements.yml
 

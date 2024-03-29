@@ -6,7 +6,9 @@
   - name: "check for [skip.ci.{{ ansible_play_name }}] in commit message"
     changed_when: false
     register: skip_ci_playbook_check
-    shell: git log -1 --pretty=%B | cat
+    shell: |
+      set -eu
+      git log -1 --pretty=%B | cat
 
   - name: set skip fact based on environment variable
     when: lookup('env','SKIP_CI_'+ ansible_play_name | upper ) | default(lookup('env','SKIP_CI'),true)

@@ -5,6 +5,7 @@
   ignore_errors: true
   changed_when: false
   shell: |
+    set -eu
     tags=( "{{ dockerfile_builder_tags | join('" "')}}" )
     add_tags () {
       echo "TAGGING: '$1'"

@@ -42,6 +42,7 @@
               ignore_errors: true
               changed_when: false
               shell: |
+                set -eu
                 images=( "{{ dockerfile_builder_cache_from | join('" "')}}" )
                 for image in "${images[@]}"
                 do

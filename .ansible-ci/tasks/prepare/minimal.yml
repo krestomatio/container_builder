@@ -42,10 +42,13 @@
       prepare_distro_release_pkg_list_file: pkg_list_{{ item | replace('/','_') }}
     args:
       chdir: "{{ dockerfile_builder_path }}"
-    shell: >-
-      {{ dockerfile_builder + (' buildx' if dockerfile_builder_use_buildx else '') }} build
-      --target=pkg_list --platform="{{ item }}" --cache-from={{ prepare_distro_release_image }}
-      --output /tmp/pkg_list . 2>/dev/null && cat /tmp/pkg_list/{{ prepare_distro_release_pkg_list_file }}
+    shell: |
+      set -eu
+      {{ dockerfile_builder + (' buildx' if dockerfile_builder_use_buildx else '') }} build \
+        --target=pkg_list --platform="{{ item }}" \
+        --cache-from={{ prepare_distro_release_image }} \
+        --output /tmp/pkg_list . 2>/dev/null
+      cat /tmp/pkg_list/{{ prepare_distro_release_pkg_list_file }}
 
   - name: assert distro release packages info
     when: prepare_distro_release_task.results is defined and prepare_distro_release_task.results

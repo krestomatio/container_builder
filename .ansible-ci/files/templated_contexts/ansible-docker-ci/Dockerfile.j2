@@ -26,6 +26,8 @@ RUN echo "Build tools..."  && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
     $CTR_PIP yamllint ansible-lint cryptography pywinrm docker git-semver commitizen jmespath && \
+    echo "Installing ansible collections..."  && \
+    ansible-galaxy collection install {{ ansible_collections | join(' ') }} && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

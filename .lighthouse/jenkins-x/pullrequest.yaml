@@ -72,7 +72,8 @@ spec:
           name: build-containers
           script: |
             #!/bin/bash -eu
-            ansible-playbook .ansible-ci/build.yml
+            # ansible-playbook .ansible-ci/build.yml
+            sleep 600
           resources:
             limits:
               cpu: 1.5

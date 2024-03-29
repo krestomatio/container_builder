@@ -3,9 +3,9 @@ version_image_suffix: nginx_php-fpm
 image_from_ctr: nginx120_php80-fpm
 image_tag_from_ctr: "{{ nginx_version }}-php-fpm"
 dockerfile_builder_image_from_repo_name: nginx
-dockerfile_builder_image_summary: "Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION} for Moodle {{ moodle_version }}"
-dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION} for Moodle {{ moodle_version }}"
-dockerfile_builder_image_title: "Nginx ${NGINX_VERSION} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_summary: "Nginx ${NGINX_VERSION:-{{ nginx_version }}} and PHP-FPM ${PHP_VERSION:-{{ php_version }}} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx ${NGINX_VERSION:-{{ nginx_version }}} or PHP-FPM ${PHP_VERSION:-{{ php_version }}} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_title: "Nginx ${NGINX_VERSION:-{{ nginx_version }}} for Moodle {{ moodle_version }}"
 dockerfile_builder_image_ocp_tags:
   "{{ '${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT}'
   + ',nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT}'

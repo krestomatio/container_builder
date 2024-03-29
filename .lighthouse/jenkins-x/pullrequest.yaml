@@ -68,7 +68,7 @@ spec:
           - name: shared
             mountPath: /shared
         steps:
-        - image: quay.io/krestomatio/ansible-docker-ci:0.2.3
+        - image: quay.io/krestomatio/ansible-docker-ci
           name: build-containers
           script: |
             #!/bin/bash -eu

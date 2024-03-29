@@ -27,7 +27,8 @@ RUN echo "Build tools..."  && \
     echo "Installing aditional python tools..."  && \
     $CTR_PIP yamllint ansible-lint cryptography pywinrm docker git-semver commitizen jmespath && \
     echo "Installing ansible collections..."  && \
-    ansible-galaxy collection install {{ ansible_collections | join(' ') }} && \
+    mkdir -p /usr/share/ansible/collections && \
+    ansible-galaxy collection install -p /usr/share/ansible/collections {{ ansible_collections | join(' ') }} && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

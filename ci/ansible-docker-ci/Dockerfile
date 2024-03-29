@@ -16,7 +16,8 @@ ENV ANSIBLE_VERSION="2.15.*" \
     CONTAINER_BUILDER=docker
 
 RUN echo "Build tools..."  && \
-    $CTR_APK py-pip openssl ca-certificates make && \
+    $CTR_APK bash python3 py-pip openssl ca-certificates make && \
+    rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
     $CTR_PIP cffi wheel && \
@@ -24,7 +25,7 @@ RUN echo "Build tools..."  && \
     $CTR_PIP ansible-core==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing aditional python tools..."  && \
-    $CTR_PIP yamllint ansible-lint'<6' pycrypto pywinrm docker git-semver commitizen jmespath && \
+    $CTR_PIP yamllint ansible-lint cryptography pywinrm docker git-semver commitizen jmespath && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

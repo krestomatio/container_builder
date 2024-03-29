@@ -4,9 +4,9 @@ FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=moodle:4.1-nginx_php-fpm \
-    IMAGE_SUMMARY="Nginx ${NGINX_VERSION} and PHP-FPM ${PHP_VERSION} for Moodle 4.1" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs Nginx ${NGINX_VERSION} or PHP-FPM ${PHP_VERSION} for Moodle 4.1" \
-    IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle 4.1" \
+    IMAGE_SUMMARY="Nginx ${NGINX_VERSION:-1.20} and PHP-FPM ${PHP_VERSION:-8.0} for Moodle 4.1" \
+    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs Nginx ${NGINX_VERSION:-1.20} or PHP-FPM ${PHP_VERSION:-8.0} for Moodle 4.1" \
+    IMAGE_TITLE="Nginx ${NGINX_VERSION:-1.20} for Moodle 4.1" \
     IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
     TZ="UTC"
 

@@ -4,8 +4,8 @@
 php80_fpm_image:
   variant_name: "php:8.0"
   build: False
-  version: "8.0.34"
-  tags: "8.0,8.0.34,php80-fpm-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0"
-  artifact_tag: "8ccfd455c09e6c0eb953cfa8ae506feefebd34f0"
-  repo_digest: "quay.io/krestomatio/php:8.0@sha256:31df85dbf4ef5111cba34e5fab89b5192224c84612cf1fa848c76a4b05b6908a"
+  version: "8.0.35"
+  tags: "8.0,8.0.35,php80-fpm-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b"
+  artifact_tag: "6f9d90ade0e5b9ecf356976a4be1f1fe747f818b"
+  repo_digest: "quay.io/krestomatio/php:8.0@sha256:a50324802049675e8e23f307c91544cf34495057f1976a9201c6a543f3ccf8f0"
   relative_path: "php/php80-fpm"

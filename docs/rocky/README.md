@@ -6,9 +6,9 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [rocky:8-base](#rocky8-base): `8-base, 8.9-base, 8.9.1-base, rocky8-base-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
+- [rocky:8-base](#rocky8-base): `8-base, 8.9-base, 8.9.1-base, rocky8-base-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
 - [rocky:8-minimal](#rocky8-minimal): `8-minimal, 8.9-minimal, 8.9.1-minimal, rocky8-minimal-6da427fc1b509e4879e9ddfc9ab65c3f0b14f63c`
-- [rocky:9-base](#rocky9-base): `9-base, 9.3-base, 9.3.1-base, rocky9-base-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
+- [rocky:9-base](#rocky9-base): `9-base, 9.3-base, 9.3.1-base, rocky9-base-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
 - [rocky:9-minimal](#rocky9-minimal): `9-minimal, 9.3-minimal, 9.3.1-minimal, rocky9-minimal-6da427fc1b509e4879e9ddfc9ab65c3f0b14f63c`
 
 

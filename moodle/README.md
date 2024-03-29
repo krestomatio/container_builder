@@ -6,13 +6,13 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.9, moodle41-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.9-bundle, moodle41_bundle-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.9-httpd, moodle41_httpd24-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.9-kio, moodle41_kio-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.9-nginx, moodle41_nginx120-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.9-nginx_php-fpm, moodle41_nginx120_php80-fpm-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.9-php-fpm, moodle41_php80-fpm-8ccfd455c09e6c0eb953cfa8ae506feefebd34f0`
+- [moodle:4.1](#moodle41): `4.1, 4.1.9, moodle41-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.9-bundle, moodle41_bundle-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.9-httpd, moodle41_httpd24-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.9-kio, moodle41_kio-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.9-nginx, moodle41_nginx120-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginxphp-fpm): `4.1-nginx_php-fpm, 4.1.9-nginx_php-fpm, moodle41_nginx120_php80-fpm-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.9-php-fpm, moodle41_php80-fpm-6f9d90ade0e5b9ecf356976a4be1f1fe747f818b`
 
 
 ## Image Variants
@@ -121,8 +121,8 @@ Krestomatio Moodle variant
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.1.9
-* Moodle version number: 2022112809.09
-* Moodle commit: f8158a375d6b752b557cff9a6765726d10dd4ec1
+* Moodle version number: 2022112809.10
+* Moodle commit: 0caaf4386a5a0485091720707a0b96cfc8a2b58e
 * Moodle remote branch: MOODLE\_401\_STABLE\_KIO
 
 #### Plugins

@@ -23,6 +23,9 @@ RUN echo "Build tools..."  && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
     echo "Installing other pip tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \
+    echo "Installing ansible collections..."  && \
+    mkdir -p /usr/share/ansible/collections && \
+    ansible-galaxy collection install -p /usr/share/ansible/collections ansible.posix community.general community.docker && \
     echo "Cleaning..."  && \
     $CTR_PKG_MGM remove -y python3-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \

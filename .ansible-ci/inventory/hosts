@@ -21,7 +21,7 @@ php80-fpm
 postgres13
 
 [nfs_ganesha]
-nfs-ganesha4
+nfs-ganesha5
 
 [keydb]
 keydb63
@@ -74,7 +74,7 @@ httpd24
 nginx120
 php80-fpm
 nginx120_php80-fpm
-nfs-ganesha4
+nfs-ganesha5
 postgres13
 pgbouncer
 go118-toolset
@@ -110,7 +110,7 @@ base_grp
 ansible
 httpd24
 nginx120
-nfs-ganesha4
+nfs-ganesha5
 php80-fpm
 postgres13
 pgbouncer

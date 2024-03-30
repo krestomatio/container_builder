@@ -17,9 +17,6 @@ NFS_CORE_PARAM {
     Rquota_Port = ${NFS_GANESHA_RQUOTA_PORT};
     fsid_device = true;
 }
-NFS_KRB5 {
-    Active_krb5 = false;
-}
 EXPORT_DEFAULTS {
     SecType = sys;
 }

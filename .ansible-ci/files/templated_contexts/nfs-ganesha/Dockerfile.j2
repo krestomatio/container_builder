@@ -7,7 +7,7 @@ USER 0
 RUN install-pkgs epel-release
 
 # Container variables
-ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs --enablerepo={{ 'powertools' if 'base8' in dockerfile_builder_image_from else 'crb' }} --enablerepo=epel -y" \
+ENV CTR_PKG_MGM="microdnf --setopt=tsflags=nodocs --enablerepo=crb --enablerepo=epel -y" \
     CTR_USER_ID="1001"
 
 # Component bash variables
@@ -18,6 +18,7 @@ RUN install-pkgs \
         bison \
         cmake \
         dbus-devel \
+        doxygen \
         flex \
         gcc \
         gcc-c++ \
@@ -25,24 +26,15 @@ RUN install-pkgs \
         jemalloc-devel \
         krb5-devel \
         libacl-devel \
+        libasan \
         libblkid-devel \
         libcap-devel \
         libnfsidmap-devel \
         libnsl2-devel \
         libuuid-devel \
-        ninja-build \
         userspace-rcu-devel \
+        ninja-build \
         xfsprogs-devel
-
-# Other req
-RUN install-pkgs \
-        graphviz \
-{% if 'base8' in dockerfile_builder_image_from %}
-        doxygen \
-        redhat-lsb-core
-{% else %}
-        doxygen
-{% endif %}
 
 ENV NFS_GANESHA_VERSION="{{ nfs_ganesha_version }}" \
     DESTDIR=/build
@@ -61,41 +53,42 @@ RUN git clone --branch "${GIT_BRANCH}" --depth 1 --recursive \
 
 WORKDIR /nfs-ganesha
 
-RUN mkdir -p ${DESTDIR} \
-    && cmake -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_INSTALL_PREFIX=/usr/local \
-          -DCEPHFS_POSIX_ACL=OFF \
-          -DRADOS_URLS=OFF \
-          -DRPCBIND=OFF \
-          -DUSE_DBUS=ON \
-          -DUSE_NFS3=OFF \
-          -DUSE_NLM=OFF \
-          -DUSE_9P=OFF \
-          -DUSE_9P_RDMA=OFF \
-          -DUSE_RQUOTA=ON \
-          -DUSE_FSAL_CEPH=OFF \
-          -DUSE_FSAL_GLUSTER=OFF \
-          -DUSE_FSAL_GPFS=OFF \
-          -DUSE_FSAL_KVSFS=OFF \
-          -DUSE_FSAL_LIZARDFS=OFF \
-          -DUSE_FSAL_LUSTRE=OFF \
-          -DUSE_FSAL_PROXY_V3=OFF \
-          -DUSE_FSAL_PROXY_V4=OFF \
-          -DUSE_FSAL_RGW=OFF \
-          -DUSE_FSAL_VFS=ON \
-          -DUSE_FSAL_XFS=ON \
-          -DUSE_GSS=OFF \
-          -DUSE_RADOS_RECOV=OFF \
-          -DUSE_SYSTEM_NTIRPC=OFF \
-          -D_MSPAC_SUPPORT=OFF \
-          -G Ninja src/ \
-          src/ \
-    && ninja \
-	&& ninja install \
-    && mkdir -p ${DESTDIR}/usr/local/var/lib/nfs/ganesha \
-    && mkdir -p ${DESTDIR}/usr/local/opt/ganesha \
-    && /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha \
-    && fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
+RUN mkdir -p ${DESTDIR} && \
+    cmake -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DUSE_DBUS=ON \
+        -DUSE_FSAL_VFS=ON \
+        -DUSE_FSAL_XFS=ON \
+        -DUSE_RQUOTA=ON \
+        -DENABLE_VFS_POSIX_ACL=ON \
+        -DUSE_ADMIN_TOOLS=ON \
+        -DCEPHFS_POSIX_ACL=OFF \
+        -DRADOS_URLS=OFF \
+        -DRPCBIND=OFF \
+        -DUSE_NFS3=OFF \
+        -DUSE_NLM=OFF \
+        -DUSE_9P=OFF \
+        -DUSE_9P_RDMA=OFF \
+        -DUSE_FSAL_CEPH=OFF \
+        -DUSE_FSAL_GLUSTER=OFF \
+        -DUSE_FSAL_GPFS=OFF \
+        -DUSE_FSAL_KVSFS=OFF \
+        -DUSE_FSAL_LIZARDFS=OFF \
+        -DUSE_FSAL_LUSTRE=OFF \
+        -DUSE_FSAL_PROXY_V3=OFF \
+        -DUSE_FSAL_PROXY_V4=OFF \
+        -DUSE_FSAL_RGW=OFF \
+        -DUSE_GSS=OFF \
+        -DUSE_RADOS_RECOV=OFF \
+        -DUSE_SYSTEM_NTIRPC=OFF \
+        -D_MSPAC_SUPPORT=OFF \
+        -G Ninja src/ && \
+    ninja && \
+	ninja install && \
+    mkdir -p ${DESTDIR}/usr/local/var/lib/nfs/ganesha && \
+    mkdir -p ${DESTDIR}/usr/local/opt/ganesha && \
+    /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha && \
+    fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
 
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}

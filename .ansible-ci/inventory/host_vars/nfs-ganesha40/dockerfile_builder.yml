@@ -1,2 +1,0 @@
-# image
-nfs_ganesha_version: "{{ nfs_ganesha_versions.40 }}"

@@ -47,11 +47,17 @@ RUN install-pkgs \
 ENV NFS_GANESHA_VERSION="{{ nfs_ganesha_version }}" \
     DESTDIR=/build
 
-# invalidate cache if new version
-ADD https://api.github.com/repos/nfs-ganesha/nfs-ganesha/git/refs/tags/V${NFS_GANESHA_VERSION} /tmp/version.json
-
-RUN git clone --branch V${NFS_GANESHA_VERSION} --depth 1 --recursive \
-    https://github.com/nfs-ganesha/nfs-ganesha /nfs-ganesha
+# Get source code
+# Arguments for moodle git remote, branch and commit
+# They are also a mechanism to invalidate cache if changed
+ARG ARG_NFS_GANESHA_REMOTE="{{ dockerfile_builder_image_git_remote }}"
+ARG ARG_NFS_GANESHA_BRANCH="{{ nfs_ganesha_git_branch }}"
+ARG ARG_NFS_GANESHA_COMMIT="{{ nfs_ganesha_git_commit }}"
+ENV GIT_REMOTE=${ARG_NFS_GANESHA_REMOTE} \
+    GIT_BRANCH=${ARG_NFS_GANESHA_BRANCH} \
+    GIT_COMMIT=${ARG_NFS_GANESHA_COMMIT}
+RUN git clone --branch "${GIT_BRANCH}" --depth 1 --recursive \
+    "${GIT_REMOTE}" /nfs-ganesha
 
 WORKDIR /nfs-ganesha
 
@@ -96,9 +102,9 @@ FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME={{ dockerfile_builder_image_name }} \
-    IMAGE_SUMMARY="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \
+    IMAGE_SUMMARY="NFSv4 Ganesha Server V{{ nfs_ganesha_major_version }}" \
     IMAGE_DESCRIPTION="This {{ dockerfile_builder_image_based }} based container image runs a NFSv4 Ganesha server." \
-    IMAGE_TITLE="NFSv4 Ganesha server {{ nfs_ganesha_version }}" \
+    IMAGE_TITLE="NFSv4 Ganesha Server V{{ nfs_ganesha_major_version }}" \
     IMAGE_SERVICE_PORT="2049" \
     IMAGE_SERVICE_NAME="nfs" \
     TZ="{{ dockerfile_builder_image_timezone }}"

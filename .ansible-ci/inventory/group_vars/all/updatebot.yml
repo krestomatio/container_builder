@@ -3,4 +3,4 @@ updatebot_postgres_ctr_name: postgres13
 updatebot_nginx_ctr_name: nginx120
 updatebot_keydb_ctr_name: keydb63
 updatebot_pgbouncer_ctr_name: pgbouncer
-updatebot_nfs_ganesha_ctr_name: nfs-ganesha40
+updatebot_nfs_ganesha_ctr_name: nfs-ganesha4

@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nfs_ganesha5_image:
+  variant_name: "nfs-ganesha:5.5.3"
+  build: False
+  version: "5.5.3"
+  tags: "5.5,5.5.3,nfs-ganesha5-22badcad272764b2dbc38df19047fd934e8f93c6"
+  artifact_tag: "22badcad272764b2dbc38df19047fd934e8f93c6"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha:5.5.3@sha256:9462d1c559d3dae0dd2854c4b7b06768cc103046ddc06879fb15fe13c66f550e"
+  relative_path: "nfs-ganesha/nfs-ganesha5"

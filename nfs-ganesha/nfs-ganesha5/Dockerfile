@@ -18,6 +18,7 @@ RUN install-pkgs \
         bison \
         cmake \
         dbus-devel \
+        doxygen \
         flex \
         gcc \
         gcc-c++ \
@@ -25,75 +26,78 @@ RUN install-pkgs \
         jemalloc-devel \
         krb5-devel \
         libacl-devel \
+        libasan \
         libblkid-devel \
         libcap-devel \
         libnfsidmap-devel \
         libnsl2-devel \
         libuuid-devel \
-        ninja-build \
         userspace-rcu-devel \
+        ninja-build \
         xfsprogs-devel
 
-# Other req
-RUN install-pkgs \
-        graphviz \
-        doxygen
-
-ENV NFS_GANESHA_VERSION="4.0.7" \
+ENV NFS_GANESHA_VERSION="5.5.3" \
     DESTDIR=/build
 
-# invalidate cache if new version
-ADD https://api.github.com/repos/nfs-ganesha/nfs-ganesha/git/refs/tags/V${NFS_GANESHA_VERSION} /tmp/version.json
-
-RUN git clone --branch V${NFS_GANESHA_VERSION} --depth 1 --recursive \
-    https://github.com/nfs-ganesha/nfs-ganesha /nfs-ganesha
+# Get source code
+# Arguments for moodle git remote, branch and commit
+# They are also a mechanism to invalidate cache if changed
+ARG ARG_NFS_GANESHA_REMOTE="https://github.com/nfs-ganesha/nfs-ganesha.git"
+ARG ARG_NFS_GANESHA_BRANCH="V5.5.3"
+ARG ARG_NFS_GANESHA_COMMIT="0ef42cf5a427b7bc0ba3e22f2de88831a7690111"
+ENV GIT_REMOTE=${ARG_NFS_GANESHA_REMOTE} \
+    GIT_BRANCH=${ARG_NFS_GANESHA_BRANCH} \
+    GIT_COMMIT=${ARG_NFS_GANESHA_COMMIT}
+RUN git clone --branch "${GIT_BRANCH}" --depth 1 --recursive \
+    "${GIT_REMOTE}" /nfs-ganesha
 
 WORKDIR /nfs-ganesha
 
-RUN mkdir -p ${DESTDIR} \
-    && cmake -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_INSTALL_PREFIX=/usr/local \
-          -DCEPHFS_POSIX_ACL=OFF \
-          -DRADOS_URLS=OFF \
-          -DRPCBIND=OFF \
-          -DUSE_DBUS=ON \
-          -DUSE_NFS3=OFF \
-          -DUSE_NLM=OFF \
-          -DUSE_9P=OFF \
-          -DUSE_9P_RDMA=OFF \
-          -DUSE_RQUOTA=ON \
-          -DUSE_FSAL_CEPH=OFF \
-          -DUSE_FSAL_GLUSTER=OFF \
-          -DUSE_FSAL_GPFS=OFF \
-          -DUSE_FSAL_KVSFS=OFF \
-          -DUSE_FSAL_LIZARDFS=OFF \
-          -DUSE_FSAL_LUSTRE=OFF \
-          -DUSE_FSAL_PROXY_V3=OFF \
-          -DUSE_FSAL_PROXY_V4=OFF \
-          -DUSE_FSAL_RGW=OFF \
-          -DUSE_FSAL_VFS=ON \
-          -DUSE_FSAL_XFS=ON \
-          -DUSE_GSS=OFF \
-          -DUSE_RADOS_RECOV=OFF \
-          -DUSE_SYSTEM_NTIRPC=OFF \
-          -D_MSPAC_SUPPORT=OFF \
-          -G Ninja src/ \
-          src/ \
-    && ninja \
-	&& ninja install \
-    && mkdir -p ${DESTDIR}/usr/local/var/lib/nfs/ganesha \
-    && mkdir -p ${DESTDIR}/usr/local/opt/ganesha \
-    && /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha \
-    && fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
+RUN mkdir -p ${DESTDIR} && \
+    cmake -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr/local \
+        -DUSE_DBUS=ON \
+        -DUSE_FSAL_VFS=ON \
+        -DUSE_FSAL_XFS=ON \
+        -DUSE_RQUOTA=ON \
+        -DENABLE_VFS_POSIX_ACL=ON \
+        -DUSE_ADMIN_TOOLS=ON \
+        -DCEPHFS_POSIX_ACL=OFF \
+        -DRADOS_URLS=OFF \
+        -DRPCBIND=OFF \
+        -DUSE_NFS3=OFF \
+        -DUSE_NLM=OFF \
+        -DUSE_9P=OFF \
+        -DUSE_9P_RDMA=OFF \
+        -DUSE_FSAL_CEPH=OFF \
+        -DUSE_FSAL_GLUSTER=OFF \
+        -DUSE_FSAL_GPFS=OFF \
+        -DUSE_FSAL_KVSFS=OFF \
+        -DUSE_FSAL_LIZARDFS=OFF \
+        -DUSE_FSAL_LUSTRE=OFF \
+        -DUSE_FSAL_PROXY_V3=OFF \
+        -DUSE_FSAL_PROXY_V4=OFF \
+        -DUSE_FSAL_RGW=OFF \
+        -DUSE_GSS=OFF \
+        -DUSE_RADOS_RECOV=OFF \
+        -DUSE_SYSTEM_NTIRPC=OFF \
+        -D_MSPAC_SUPPORT=OFF \
+        -G Ninja src/ && \
+    ninja && \
+	ninja install && \
+    mkdir -p ${DESTDIR}/usr/local/var/lib/nfs/ganesha && \
+    mkdir -p ${DESTDIR}/usr/local/opt/ganesha && \
+    /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha && \
+    fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
 
 ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=nfs-ganesha:4.0.7 \
-    IMAGE_SUMMARY="NFSv4 Ganesha server 4.0.7" \
+ENV IMAGE_NAME=nfs-ganesha:5.5.3 \
+    IMAGE_SUMMARY="NFSv4 Ganesha Server V5" \
     IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs a NFSv4 Ganesha server." \
-    IMAGE_TITLE="NFSv4 Ganesha server 4.0.7" \
+    IMAGE_TITLE="NFSv4 Ganesha Server V5" \
     IMAGE_SERVICE_PORT="2049" \
     IMAGE_SERVICE_NAME="nfs" \
     TZ="UTC"
@@ -108,7 +112,7 @@ ENV CTR_USER=ganesha \
 # Component bash variables
 ENV DBUS_RUN_DIR=/var/run/dbus \
     DBUS_RUN_WAIT=false \
-    NFS_GANESHA_VERSION="4.0.7" \
+    NFS_GANESHA_VERSION="5.5.3" \
     NFS_GANESHA_PORT=${IMAGE_SERVICE_PORT} \
     NFS_GANESHA_RQUOTA_PORT=875 \
     NFS_GANESHA_CONF_FILE=/usr/local/etc/ganesha/ganesha.conf \
@@ -155,7 +159,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="4.0.7" \
+      org.opencontainers.image.version="5.5.3" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

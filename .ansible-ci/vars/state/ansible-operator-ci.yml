@@ -4,8 +4,8 @@
 ansible_operator_ci_image:
   variant_name: "ansible-operator-ci"
   build: False
-  version: "0.5.0"
-  tags: "0,0.5,0.5.0"
-  artifact_tag: "6f9d90ade0e5b9ecf356976a4be1f1fe747f818b"
-  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:b8970075b3caf965e719bc701ebfb27a73592cb958e8cc94afcbf22bfbf66683"
+  version: "0.5.1"
+  tags: "0,0.5,0.5.1"
+  artifact_tag: "22badcad272764b2dbc38df19047fd934e8f93c6"
+  repo_digest: "quay.io/krestomatio/ansible-operator-ci@sha256:0e58844a2736be0783fa3db2807cc325438b31db1740adc02b8f5c9bb28efe11"
   relative_path: "ci/ansible-operator-ci"

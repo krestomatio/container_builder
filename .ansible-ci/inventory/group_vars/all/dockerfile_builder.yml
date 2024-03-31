@@ -29,6 +29,9 @@ go_versions:
 
 working_dir: "{{ playbook_dir }}"
 
+# version
+version_git_based: false
+
 # container
 ctr_name: "{{ inventory_hostname }}"
 ctr_repo_name: "{{ ctr_name }}"

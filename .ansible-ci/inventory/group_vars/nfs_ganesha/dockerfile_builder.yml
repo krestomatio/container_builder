@@ -1,6 +1,18 @@
 ctr_repo_name: nfs-ganesha
 ctr_version: "{{ nfs_ganesha_version }}"
 
+nfs_ganesha_version: "{{ nfs_ganesha_git_source_version }}"
+nfs_ganesha_git_branch: "V{{ nfs_ganesha_version }}"
+dockerfile_builder_image_git_remote: "https://github.com/{{ nfs_ganesha_git_repo_org }}/nfs-ganesha.git"
+nfs_ganesha_git_repo_org: nfs-ganesha
+nfs_ganesha_git_refs_tags:
+  url: "{{ 'https://api.github.com/repos/' + nfs_ganesha_git_repo_org + '/nfs-ganesha/git/refs/tags/V' + nfs_ganesha_major_version | string }}"
+  headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
+  regex: '(?<=refs/tags/V)([0-9]+)\.([0-9]+)\.([0-9]+)'
+
+# ci
+prepare_image_task: nfs-ganesha
+
 # version tags
 version_image_major: "{{ nfs_ganesha_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ nfs_ganesha_version.split('.')[1] | default(false) }}"

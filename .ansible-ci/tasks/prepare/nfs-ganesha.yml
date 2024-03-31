@@ -1,0 +1,39 @@
+- name: get nfs_ganesha version from latest tag matching major version
+  when:
+    - nfs_ganesha_git_refs_tags is defined
+    - nfs_ganesha_git_source_version is not defined
+  block:
+    - name: get nfs_ganesha repo tags json
+      run_once: true
+      retries: 3
+      delay: 3
+      until: nfs_ganesha_git_refs_tags_task.content is defined
+      register: nfs_ganesha_git_refs_tags_task
+      uri:
+        client_cert: "{{ nfs_ganesha_git_refs_tags.client_cert | default(omit) }}"
+        client_key: "{{ nfs_ganesha_git_refs_tags.client_key | default(omit) }}"
+        force_basic_auth: "{{ nfs_ganesha_git_refs_tags.force_basic_auth | default(omit) }}"
+        follow_redirects: "{{ nfs_ganesha_git_refs_tags.follow_redirects | default(omit) }}"
+        headers: "{{ nfs_ganesha_git_refs_tags.headers_json | default(omit,true) }}"
+        method: "{{ nfs_ganesha_git_refs_tags.method | default(omit) }}"
+        return_content: "{{ nfs_ganesha_git_refs_tags.return_content | default(true) }}"
+        status_code: "{{ nfs_ganesha_git_refs_tags.status_code | default(omit) }}"
+        timeout: "{{ nfs_ganesha_git_refs_tags.timeout | default(omit) }}"
+        url: "{{ nfs_ganesha_git_refs_tags.url }}"
+        url_password: "{{ nfs_ganesha_git_refs_tags.url_password | default(omit) }}"
+        url_username: "{{ nfs_ganesha_git_refs_tags.url_username | default(omit) }}"
+        validate_certs: "{{ nfs_ganesha_git_refs_tags.validate_certs | default(omit) }}"
+
+    - name: set nfs_ganesha version facts
+      vars:
+        nfs_ganesha_git_latest_tag_item: "{{ nfs_ganesha_git_refs_tags_task.content | default('[]', true) | from_json | selectattr('ref', 'regex', nfs_ganesha_git_refs_tags.regex) | sort(attribute='ref', reverse=true) | first }}"
+      set_fact:
+        nfs_ganesha_git_source_version: "{{ nfs_ganesha_git_latest_tag_item.ref | regex_search(nfs_ganesha_git_refs_tags.regex) }}"
+        nfs_ganesha_git_commit: "{{ nfs_ganesha_git_latest_tag_item.object.sha }}"
+
+- name: set nfs_ganesha version from remote source
+  when: nfs_ganesha_git_source_version is defined
+  set_fact:
+    version_image_major: "{{ nfs_ganesha_git_source_version.split('.')[0] | default(false) }}"
+    version_image_minor: "{{ nfs_ganesha_git_source_version.split('.')[1] | default(false) }}"
+    version_image_patch: "{{ nfs_ganesha_git_source_version.split('.')[2] | default(false) }}"

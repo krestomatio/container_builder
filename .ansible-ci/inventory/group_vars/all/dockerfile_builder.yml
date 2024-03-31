@@ -14,8 +14,6 @@ keydb_versions_pkg:
   63: '6.3.4-1'
 keydb_versions:
   63: "{{ keydb_versions_pkg.63 | regex_search(external_release_version_regex) }}"
-nfs_ganesha_versions:
-  40: '4.0.7'
 node_versions:
   18: '18'
 node_version_name:
@@ -30,6 +28,9 @@ go_versions:
   118: '1.18'
 
 working_dir: "{{ playbook_dir }}"
+
+# version
+version_git_based: false
 
 # container
 ctr_name: "{{ inventory_hostname }}"

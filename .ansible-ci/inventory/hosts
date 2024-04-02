@@ -66,10 +66,8 @@ rocky_minimal_grp
 centos_base_grp
 rocky_base_grp
 
-[centos8_based_grp]
-graphql-engine2-base
-
 [centos9_based_grp]
+graphql-engine2-base
 httpd24
 nginx120
 php80-fpm

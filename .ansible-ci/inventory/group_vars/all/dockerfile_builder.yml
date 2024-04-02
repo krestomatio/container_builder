@@ -22,8 +22,6 @@ node_version_name:
   18: hydrogen
 moodle_versions:
   41: '4.1'
-graphql_engine_versions:
-  2: '2.38.1'
 go_versions:
   118: '1.18'
 

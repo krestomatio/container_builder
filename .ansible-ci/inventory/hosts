@@ -27,7 +27,7 @@ nfs-ganesha5
 keydb63
 
 [go]
-go118-toolset
+go121-toolset
 
 [node]
 node18
@@ -67,7 +67,7 @@ nginx120_php80-fpm
 nfs-ganesha5
 postgres13
 pgbouncer
-go118-toolset
+go121-toolset
 keydb63
 node18
 ansible
@@ -104,7 +104,7 @@ nfs-ganesha5
 php80-fpm
 postgres13
 pgbouncer
-go118-toolset
+go121-toolset
 node18
 keydb63
 

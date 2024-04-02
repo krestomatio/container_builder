@@ -38,11 +38,9 @@ moodle41_grp
 
 ## container groups
 [centos_minimal_grp]
-centos8-minimal
 centos9-minimal
 
 [centos_base_grp]
-centos8-base
 centos9-base
 
 [rocky_base_grp]

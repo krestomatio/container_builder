@@ -1,8 +1,8 @@
 # platform vars
 operator_version: 1.33.0
 kustomize_version: 5.0.1
-kubectl_version: 1.26.6
+kubectl_version: 1.29.3
 
 image_from_ctr: ansible-podman-ci
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ operator_version }}"
-dockerfile_builder_image_based: "CentOS 8 Stream minimal"
+dockerfile_builder_image_based: "CentOS 9 Stream minimal"

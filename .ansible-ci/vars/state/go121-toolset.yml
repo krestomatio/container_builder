@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+go121_toolset_image:
+  variant_name: "go:1.21-toolset"
+  build: False
+  version: "1.21.2"
+  tags: "1.21-toolset,1.21.2-toolset,go121-toolset-245ea2845eff70007c8031365cc1de1fd5d3df02"
+  artifact_tag: "245ea2845eff70007c8031365cc1de1fd5d3df02"
+  repo_digest: "quay.io/krestomatio/go:1.21-toolset@sha256:157556251e4567a75ec7699a7cd685f093a175eefadc90527d7f762ac69d6820"
+  relative_path: "go/go121-toolset"

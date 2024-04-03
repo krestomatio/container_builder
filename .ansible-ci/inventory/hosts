@@ -27,12 +27,7 @@ nfs-ganesha5
 keydb63
 
 [go]
-go118-toolset
-
-[graphql_engine]
-graphql-engine2
-graphql-engine2-base
-graphql-engine2-build
+go121-toolset
 
 [node]
 node18
@@ -43,11 +38,9 @@ moodle41_grp
 
 ## container groups
 [centos_minimal_grp]
-centos8-minimal
 centos9-minimal
 
 [centos_base_grp]
-centos8-base
 centos9-base
 
 [rocky_base_grp]
@@ -66,9 +59,6 @@ rocky_minimal_grp
 centos_base_grp
 rocky_base_grp
 
-[centos8_based_grp]
-graphql-engine2-base
-
 [centos9_based_grp]
 httpd24
 nginx120
@@ -77,7 +67,7 @@ nginx120_php80-fpm
 nfs-ganesha5
 postgres13
 pgbouncer
-go118-toolset
+go121-toolset
 keydb63
 node18
 ansible
@@ -114,21 +104,18 @@ nfs-ganesha5
 php80-fpm
 postgres13
 pgbouncer
-go118-toolset
+go121-toolset
 node18
-graphql-engine2-base
 keydb63
 
 [build_step_4]
 nginx120_php80-fpm
 ansible-docker-ci
 ansible-podman-ci
-graphql-engine2-build
 node18-ci
 
 [build_step_5]
 ansible-operator-ci
-graphql-engine2
 
 [build_step_6]
 moodle41_nginx120

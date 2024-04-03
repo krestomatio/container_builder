@@ -4,9 +4,9 @@ FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-podman-ci \
-    IMAGE_SUMMARY="Podman image based on CentOS 8 Stream minimal for Continuous Integration" \
-    IMAGE_DESCRIPTION="CentOS 8 Stream minimal based image with tools like Buildah and Skopeo, for CI" \
-    IMAGE_TITLE="Ansible CI image based on CentOS 8 Stream minimal"
+    IMAGE_SUMMARY="Podman image based on CentOS 9 Stream minimal for Continuous Integration" \
+    IMAGE_DESCRIPTION="CentOS 9 Stream minimal based image with tools like Buildah and Skopeo, for CI" \
+    IMAGE_TITLE="Ansible CI image based on CentOS 9 Stream minimal"
 
 ENV BUILDAH_ISOLATION=chroot \
     BUILDAH_LAYERS=true \

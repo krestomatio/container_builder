@@ -11,7 +11,7 @@ spec:
         args:
         - -c
         - |
-          moodle_image='quay.io/krestomatio/moodle:4.1@sha256:9b9fdb3eec35dd04ec99df1c49fa06a0090591ca13645738641c1427e5a764d6'
+          moodle_image='quay.io/krestomatio/moodle:4.1@sha256:d05dd98d03a3824f66c6e58847825d79a8fe980b53edd6ff0de6d6da7058930b'
           sed -i \
             "s#^moodle_image:.*#moodle_image: ${moodle_image//@/\\@}#" \
             roles/v1alpha1/m4e/moodle/defaults/main/moodle.yml
@@ -21,7 +21,7 @@ spec:
         args:
         - -c
         - |
-          postgres_image='quay.io/krestomatio/postgres:13@sha256:194ae9cb00115e2f67103fb544e67cfbd803b5b55a1d69e2772dbc284de3bef5'
+          postgres_image='quay.io/krestomatio/postgres:13@sha256:74a72380b1f76d2ac102dde39662ed2ad51b6260b9604a637803f9dc72b68a35'
           sed -i \
             "s#^postgres_image:.*#postgres_image: ${postgres_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/postgres.yml
@@ -31,7 +31,7 @@ spec:
         args:
         - -c
         - |
-          nginx_image='quay.io/krestomatio/nginx:1.20@sha256:b35b4fddb0c136fd9029a4084edba07f66f50c386299e1d5ba7c89074da3e6eb'
+          nginx_image='quay.io/krestomatio/nginx:1.20@sha256:e47243b07d09eba1af5a274653197e5c0e03a8d41c98b346aa321ab576962229'
           sed -i \
             "s#^nginx_image:.*#nginx_image: ${nginx_image//@/\\@}#" \
             roles/v1alpha1/web/nginx/defaults/main/nginx.yml
@@ -41,7 +41,7 @@ spec:
         args:
         - -c
         - |
-          keydb_image='quay.io/krestomatio/keydb:6.3.4@sha256:5b6a17e6c8d65864c2f6b5c022922b0733d6445318abe85d801aea67a2309ea4'
+          keydb_image='quay.io/krestomatio/keydb:6.3.4@sha256:340ce032269fcd50ca5781bf834ecf4d0ce57947cc6298a3fc01c44bff956a06'
           sed -i \
             "s#^keydb_image:.*#keydb_image: ${keydb_image//@/\\@}#" \
             roles/v1alpha1/database/keydb/defaults/main/keydb.yml
@@ -51,7 +51,7 @@ spec:
         args:
         - -c
         - |
-          pgbouncer_image='quay.io/krestomatio/pgbouncer@sha256:93d1d0aab41641ac67a2b74c1a882eda0db93417a62d6326e338d2335def67cb'
+          pgbouncer_image='quay.io/krestomatio/pgbouncer@sha256:dbca2abe59a81f6935c06e6c5c01574ac848ee71172f29efc4b326d9c8cd7428'
           sed -i \
             "s#^pgbouncer_image:.*#pgbouncer_image: ${pgbouncer_image//@/\\@}#" \
             roles/v1alpha1/database/postgres/defaults/main/pgbouncer.yml
@@ -61,7 +61,7 @@ spec:
         args:
         - -c
         - |
-          nfs_ganesha_image='quay.io/krestomatio/nfs-ganesha:5.5.3@sha256:7753dd09b0dc7cbf5992ee30e3614e5b9f88313d13157d05f42ac19004149e40'
+          nfs_ganesha_image='quay.io/krestomatio/nfs-ganesha:5.5.3@sha256:312a587bfa7709470af564af9d037ef9d58038bd6ee1f8857a860009fb01db93'
           sed -i \
             "s#^ganesha_image:.*#ganesha_image: ${nfs_ganesha_image//@/\\@}#" \
             roles/v1alpha1/nfs/ganesha/defaults/main/ganesha.yml

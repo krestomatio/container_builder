@@ -1,3 +1,3 @@
 image_from_ctr: ansible
 dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},podman"
-dockerfile_builder_image_based: "CentOS 8 Stream minimal"
+dockerfile_builder_image_based: "CentOS 9 Stream minimal"

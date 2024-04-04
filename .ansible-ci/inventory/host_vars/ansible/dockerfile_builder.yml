@@ -2,3 +2,6 @@ dockerfile_builder_image_ocp_tags:
   "ansible,ansible{{ image_ansible_version.split('.')[0] + '.' + image_ansible_version.split('.')[0] }}"
 dockerfile_builder_image_pip_extra: yamllint ansible-lint flake8 cryptography git-semver openshift makejinja
 dockerfile_builder_image_pck_extra: "git git-lfs rsync jq openssh-clients sudo sshpass curl sudo make which procps-ng ncurses"
+
+# python
+python_version: "3.11"

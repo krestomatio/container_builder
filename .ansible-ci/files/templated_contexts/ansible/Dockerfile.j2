@@ -11,13 +11,14 @@ ENV IMAGE_NAME=ansible \
 # Container variables
 ENV ANSIBLE_VERSION="{{ image_ansible_version }}" \
     MOLECULE_VERSION="{{ molecule_version }}" \
-    CTR_PIP="pip3 install --no-cache --upgrade" \
+    PYTHON_VERSION="{{ python_version }}" \
+    CTR_PIP="pip${PYTHON_VERSION:-3} install --no-cache --upgrade" \
     CTR_PIP_EXTRA="{{ dockerfile_builder_image_pip_extra }}"
 
 RUN echo "Build tools..."  && \
-    $CTR_PKG_MGM install python3-devel gcc libffi-devel && \
+    $CTR_PKG_MGM install python${PYTHON_VERSION:-3}-devel gcc libffi-devel && \
     echo "Installing pkgs..."  && \
-    python3 -m ensurepip && \
+    python${PYTHON_VERSION:-3} -m ensurepip && \
     $CTR_PIP cffi pip && \
     $CTR_PIP ansible-core==$ANSIBLE_VERSION && \
     $CTR_PIP molecule==$MOLECULE_VERSION && \
@@ -27,7 +28,7 @@ RUN echo "Build tools..."  && \
     mkdir -p /usr/share/ansible/collections && \
     ansible-galaxy collection install -p /usr/share/ansible/collections {{ ansible_collections | join(' ') }} && \
     echo "Cleaning..."  && \
-    $CTR_PKG_MGM remove -y python3-devel gcc libffi-devel && \
+    $CTR_PKG_MGM remove -y python${PYTHON_VERSION:-3}-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.* && \
     echo "Minimal ansible config" && \

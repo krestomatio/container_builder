@@ -6,8 +6,8 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [nginx:1.20](#nginx120): `1.20, 1.20.38, nginx120-dfef45f8af9c7c8ff9c6898351f3490ea841e57e`
-- [nginx:1.20-php-fpm](#nginx120-php-fpm): `1.20-php-fpm, 1.20.38-php-fpm, nginx120_php80-fpm-dfef45f8af9c7c8ff9c6898351f3490ea841e57e`
+- [nginx:1.20](#nginx120): `1.20, 1.20.39, nginx120-ee3eb2353276c4a7fe7a147d3c887db7701779c2`
+- [nginx:1.20-php-fpm](#nginx120-php-fpm): `1.20-php-fpm, 1.20.39-php-fpm, nginx120_php80-fpm-ee3eb2353276c4a7fe7a147d3c887db7701779c2`
 
 
 ## Image Variants

@@ -9,28 +9,56 @@ ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_TITLE="Ansible Operator SDK CI image based on CentOS 9 Stream minimal"
 
 # Container variables
-ENV OPERATOR_VERSION="1.33.0"
+ENV LOCALBIN=/usr/local/bin \
+    GOBIN=/usr/local/bin \
+    GO_VERSION="1.21" \
+    OPERATOR_VERSION="1.33.0" \
+    SETUP_ENVTEST_VERSION="0.16" \
+    CONTROLLER_TOOLS_VERSION="0.12.0" \
+    GO_LINT_VERSION="1.57.2" \
+    CRD_REF_DOCS_VERSION="0.0.12"
+
+# Install Go
+RUN install-pkgs go-toolset git make tar which curl; \
+    [[ "$(go version | { read _ _ v _; echo ${v#go}; })" == "${GO_VERSION}".* ]] || echo "error: version differs from env var"; \
+    go install sigs.k8s.io/controller-runtime/tools/setup-envtest@release-${SETUP_ENVTEST_VERSION}; \
+    go install sigs.k8s.io/controller-tools/cmd/controller-gen@v${CONTROLLER_TOOLS_VERSION}; \
+    go install github.com/golangci/golangci-lint/cmd/golangci-lint@v${GO_LINT_VERSION}; \
+    go install github.com/elastic/crd-ref-docs@v${CRD_REF_DOCS_VERSION}
+
+# Container variables
+ENV OPM_VERSION="1.23.0"
+
+# Install opm
+RUN echo "Installing opm version: ${OPM_VERSION}..."; \
+    curl -sSLo ${LOCALBIN}/opm https://github.com/operator-framework/operator-registry/releases/download/v${OPM_VERSION}/linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')-opm; \
+    chmod +x ${LOCALBIN}/opm
+
+# Install docker cli
+RUN echo "Installing docker repo..."  && \
+    curl -o /etc/yum.repos.d/docker-ce.repo https://download.docker.com/linux/centos/docker-ce.repo && \
+    $CTR_PKG_MGM install docker-ce-cli docker-buildx-plugin docker-compose-plugin
 
 # Install Operator SDK
-COPY --from=quay.io/operator-framework/operator-sdk:v1.33.0 /usr/local/bin/operator-sdk /usr/local/bin/operator-sdk
+COPY --from=quay.io/operator-framework/operator-sdk:v1.33.0 ${LOCALBIN}/operator-sdk ${LOCALBIN}/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v1.33.0 /usr/local/bin/ansible-operator /usr/local/bin/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.33.0 ${LOCALBIN}/ansible-operator ${LOCALBIN}/ansible-operator
 
 # Container variables
 ENV KUSTOMIZE_VERSION="5.0.1"
 
 # Install kustomize
 RUN echo "Installing kustomize version: ${KUSTOMIZE_VERSION}..."  && \
-    curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzf - -C /usr/local/bin/
+    curl -sSLo - https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize/v${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzf - -C ${LOCALBIN}/
 
 # Container variables
 ENV KUBECTL_VERSION="1.29.3"
 
 # Install kubectl.
 RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
-    curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')/kubectl -o /usr/local/bin/kubectl && \
-    chmod +x /usr/local/bin/kubectl
+    curl -L https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')/kubectl -o ${LOCALBIN}/kubectl && \
+    chmod +x ${LOCALBIN}/kubectl
 
 # Install requirements.
 RUN echo "Installing operator sdk version: ${OPERATOR_VERSION}..."  && \

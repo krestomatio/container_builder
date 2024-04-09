@@ -7,7 +7,7 @@ ca-certificates-2023.2.60_v7.0.306-80.0.el8_8.noarch
 chkconfig-1.19.2-1.el8.x86_64
 coreutils-single-8.30-15.el8.x86_64
 crypto-policies-20230731-1.git3177e06.el8.noarch
-curl-7.61.1-33.el8.x86_64
+curl-7.61.1-33.el8_9.5.x86_64
 cyrus-sasl-lib-2.1.27-6.el8_5.x86_64
 elfutils-libelf-0.189-3.el8.x86_64
 file-libs-5.33-25.el8.x86_64
@@ -31,11 +31,11 @@ libacl-2.2.53-1.el8.1.x86_64
 libarchive-3.3.3-5.el8.x86_64
 libassuan-2.5.1-3.el8.x86_64
 libattr-2.4.48-3.el8.x86_64
-libblkid-2.32.1-43.el8.x86_64
+libblkid-2.32.1-44.el8_9.1.x86_64
 libcap-2.48-6.el8_9.x86_64
 libcap-ng-0.7.11-1.el8.x86_64
 libcom_err-1.45.6-5.el8.x86_64
-libcurl-7.61.1-33.el8.x86_64
+libcurl-7.61.1-33.el8_9.5.x86_64
 libdb-5.3.28-42.el8_4.x86_64
 libdb-utils-5.3.28-42.el8_4.x86_64
 libdnf-0.63.0-17.el8_9.x86_64
@@ -46,7 +46,7 @@ libgpg-error-1.31-1.el8.x86_64
 libidn2-2.2.0-1.el8.x86_64
 libksba-1.3.5-9.el8_7.x86_64
 libmodulemd-2.13.0-1.el8.x86_64
-libmount-2.32.1-43.el8.x86_64
+libmount-2.32.1-44.el8_9.1.x86_64
 libnghttp2-1.33.0-5.el8_8.x86_64
 libpeas-1.22.0-6.el8.x86_64
 libpsl-0.20.2-6.el8.x86_64
@@ -54,7 +54,7 @@ librepo-1.14.2-4.el8.x86_64
 libselinux-2.9-8.el8.x86_64
 libsepol-2.9-3.el8.x86_64
 libsigsegv-2.11-5.el8.x86_64
-libsmartcols-2.32.1-43.el8.x86_64
+libsmartcols-2.32.1-44.el8_9.1.x86_64
 libsolv-0.7.20-6.el8.x86_64
 libssh-0.9.6-13.el8_9.x86_64
 libssh-config-0.9.6-13.el8_9.noarch
@@ -62,7 +62,7 @@ libstdc++-8.5.0-20.el8.x86_64
 libtasn1-4.13-4.el8_7.x86_64
 libunistring-0.9.9-3.el8.x86_64
 libusbx-1.0.23-4.el8.x86_64
-libuuid-2.32.1-43.el8.x86_64
+libuuid-2.32.1-44.el8_9.1.x86_64
 libverto-0.3.2-2.el8.x86_64
 libxcrypt-4.1.1-6.el8.x86_64
 libxml2-2.9.7-18.el8_9.x86_64
@@ -85,9 +85,9 @@ pcre2-10.32-3.el8_6.x86_64
 popt-1.18-1.el8.x86_64
 publicsuffix-list-dafsa-20180723-1.el8.noarch
 readline-7.0-10.el8.x86_64
-rocky-gpg-keys-8.9-1.8.el8.noarch
-rocky-release-8.9-1.8.el8.noarch
-rocky-repos-8.9-1.8.el8.noarch
+rocky-gpg-keys-8.9-1.9.el8.noarch
+rocky-release-8.9-1.9.el8.noarch
+rocky-repos-8.9-1.9.el8.noarch
 rootfiles-8.1-22.el8.noarch
 rpm-4.14.3-28.el8_9.x86_64
 rpm-libs-4.14.3-28.el8_9.x86_64

@@ -1,3 +1,4 @@
+{% set repo_version = 'v' + lookup('env', 'VERSION') if lookup('env', 'VERSION') | default(false, true) else 'master' %}
 # Container Image Builder
 This project builds containers using Ansible. The containers are defined as hosts in the Ansible inventory. They are generated using host and group variables, templates and local connection.
 
@@ -14,8 +15,8 @@ This project builds containers using Ansible. The containers are defined as host
 * docker or podman
 * python docker
 * [buildx](https://github.com/docker/buildx)
-* see [requirements.txt](.ansible-ci/requirements.txt)
-* see [requirements.yml](.ansible-ci/requirements.yml)
+* see [requirements.txt](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/requirements.txt)
+* see [requirements.yml](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/requirements.yml)
 
 ## Building Containers with Ansible Playbook
 ```bash
@@ -30,6 +31,6 @@ ansible-playbook .ansible-ci/build.yml
 ```
 
 ## Contributing to the Project
-* Context and dockerfile templates are inside each container's [directory](https://github.com/krestomatio/container_builder/tree/master/.ansible-ci/files/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory
-* Variables can be changed inside [the inventory](https://github.com/krestomatio/container_builder/tree/master/.ansible-ci/inventory/) dir
-* Please modify or update only [templated context](https://github.com/krestomatio/container_builder/tree/master/.ansible-ci/files/templated_contexts/) or [the inventory](https://github.com/krestomatio/container_builder/tree/master/.ansible-ci/inventory/)
+* Context and dockerfile templates are inside each container's [directory](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/files/templated_contexts/). Some contexts and templates are reused by more than one container. Their respective variables generate different contexts in each container generated directory
+* Variables can be changed inside [the inventory](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/inventory/) dir
+* Please modify or update only [templated context](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/files/templated_contexts/) or [the inventory](https://github.com/krestomatio/container_builder/tree/{{ repo_version }}/.ansible-ci/inventory/)

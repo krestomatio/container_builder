@@ -1,4 +1,13 @@
+ctr_repo_name: pgbouncer
+
 # image
 dockerfile_builder_image_lang: en_US.UTF-8
 
 postgres_version: "{{ postgres_versions.13 }}"
+
+# other
+ctr_readme_section: |-
+  # {{ ctr_readme_section_variant_title }}
+  > [Repo source](https://github.com/krestomatio/container_builder/tree/master/{{ generated_relative_path }})
+
+  PgBouncer image based on {{ dockerfile_builder_image_based }}

@@ -1,4 +1,4 @@
-## CONTAINER_BUILDER: Build containers images with Ansible
+# Container Image Builder
 
 This project provides an automated way to build container images using Ansible. The containers are defined as hosts within the Ansible inventory and leverage host and group variables, templates, and local connections for generation.
 

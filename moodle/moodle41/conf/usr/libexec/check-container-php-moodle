@@ -43,9 +43,9 @@ check_socket() {
         socket_host="127.0.0.1"
         [[ $CHECK_SOCKET == *":"* ]] && socket_host="${CHECK_SOCKET%%:*}"
         socket_port="${CHECK_SOCKET#*:}"
-        timeout ${CHECK_SOCKET_TIMEOUT} bash -c "cat < /dev/null > /dev/tcp/${socket_host}/${socket_port}"
+        nc -z -w ${CHECK_SOCKET_TIMEOUT} ${socket_host} ${socket_port}
         if [ $? -ne 0 ]; then
-            echo "$0: CHECK: timeout checking ${CHECK_SOCKET_NAME} tcp socket '${socket_host}:${socket_port}'"
+            echo "$0: CHECK: error checking ${CHECK_SOCKET_NAME} tcp socket '${socket_host}:${socket_port}'"
             exit 1
         fi
     else

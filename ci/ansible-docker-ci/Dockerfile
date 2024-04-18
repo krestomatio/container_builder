@@ -68,7 +68,7 @@ RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.7.5"
+ENV TERRAFORM_VERSION="1.8.1"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \

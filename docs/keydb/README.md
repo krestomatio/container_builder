@@ -6,7 +6,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [keydb:6.3.4](#keydb634): `6.3, 6.3.4, keydb63-ee3eb2353276c4a7fe7a147d3c887db7701779c2`
+- [keydb:6.3.4](#keydb634): `6.3, 6.3.4, keydb63-640087a23e7db38d8a27c2b04c408e564397d961`
 
 
 ## Image Variants

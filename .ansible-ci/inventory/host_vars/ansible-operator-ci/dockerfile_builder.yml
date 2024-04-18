@@ -5,7 +5,7 @@ kubectl_version: 1.29.3
 go_version: "{{ go_versions.121 }}"
 opm_version: 1.23.0
 setup_envtest_version: 0.16
-controller_tools_version: 0.12.0
+controller_tools_version: 0.14.0
 go_lint_version: 1.57.2
 crd_ref_docs_version: 0.0.12
 

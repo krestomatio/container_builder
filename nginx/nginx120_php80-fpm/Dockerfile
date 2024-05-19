@@ -28,7 +28,7 @@ ENV PHP_VERSION="8.0" \
     PHP_FPM_CONF_FILE=/etc/php-fpm.conf \
     PHP_FPM_POOL_FILE=/etc/php-fpm.d/www.conf \
     PHP_FPM_PORT=${IMAGE_SERVICE_PORT} \
-    PHP_FPM_LISTEN=0.0.0.0:${IMAGE_SERVICE_PORT} \
+    PHP_FPM_LISTEN=${IMAGE_SERVICE_PORT} \
     PHP_FPM_STATUS_LISTEN=127.0.0.1:9001 \
     APP_DEST=/var/www/html
 
@@ -59,7 +59,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="1.20.41" \
+      org.opencontainers.image.version="1.20.42" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

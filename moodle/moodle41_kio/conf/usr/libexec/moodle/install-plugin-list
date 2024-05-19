@@ -111,7 +111,6 @@ function install_path($plugin_type, $plugin_name) {
     */
     $install_path_directory_from_type = array(
         'tinymce' => array('dir' => 'lib/editor/tinymce/plugins'),
-        'tiny' => array('dir' => 'lib/editor/tiny/plugins'),
         'workshopallocation' => array('dir' => 'mod/workshop/allocation'),
         'atto' => array('dir' => 'lib/editor/atto/plugins'), 'availability' => array('dir' => 'availability/condition'),
         'assignsubmission' => array('dir' => 'mod/assign/submission'), 'logstore' => array('dir' => 'admin/tool/log/store'),

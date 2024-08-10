@@ -1,7 +1,7 @@
 - name: deploy multiarch-builder
   hosts: localhost
   connection: local
-  diff: "{{ play_diff | default(omit) }}"
+  diff: "{{ play_diff | default(omit) | bool }}"
   tasks:
     - name: build
       block:

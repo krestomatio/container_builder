@@ -2,7 +2,7 @@
   hosts: "{{ play_containers | default('all') }}"
   connection: local
   any_errors_fatal: "{{ play_any_errors_fatal }}"
-  diff: "{{ play_diff | default(omit) }}"
+  diff: "{{ play_diff | default(omit) | bool }}"
   vars_files: "vars/ci.yml"
   run_once: true
   environment:

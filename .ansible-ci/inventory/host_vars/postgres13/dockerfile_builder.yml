@@ -1,5 +1,5 @@
 # image
 postgres_version: "{{ postgres_versions.13 }}"
 postgres_prev_version: "{{ postgres_prev_versions.13 }}"
-postgres_prev_version_old_pg_bin_image_from: quay.io/krestomatio/base8-stream
+postgres_prev_version_old_pg_bin_image_from: quay.io/krestomatio/rocky:8-base
 dockerfile_builder_image_lang: en_US.UTF-8

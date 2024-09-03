@@ -1,6 +1,6 @@
 # Ansible managed
 ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
-FROM quay.io/krestomatio/base8-stream AS old_pg_bin
+FROM quay.io/krestomatio/rocky:8-base AS old_pg_bin
 
 # Component bash variables
 ENV POSTGRES_PREV_VERSION="10"
@@ -73,7 +73,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="13.0.43" \
+      org.opencontainers.image.version="13.0.44" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

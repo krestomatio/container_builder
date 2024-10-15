@@ -1,0 +1,6 @@
+- name: build images by moodle version
+  when: moodle_version == moodle_version_group
+  loop_control:
+    loop_var: moodle_version_group
+  loop: "{{ moodle_versions.values() | sort }}"
+  include_tasks: moodle.yml

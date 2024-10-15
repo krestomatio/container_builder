@@ -3,6 +3,7 @@ ctr_version: "{{ moodle_version }}"
 
 dockerfile_builder_image_git_remote: "https://github.com/{{ moodle_git_repo_org }}/moodle.git"
 moodle_git_repo_org: moodle
+moodle_git_branch: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}_STABLE"
 moodle_git_refs_json:
   url: "{{ moodle_git_refs_json_url |
     default('https://api.github.com/repos/' + moodle_git_repo_org + '/moodle/git/refs/' +
@@ -13,11 +14,11 @@ moodle_git_repo_version:
     moodle_git_commit | default(moodle_git_branch) + '/version.php' }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
   regex: '(?<=\$release)(.*)(?=\s\(Build:)'
-  regex_group: '([0-9]+)\.([0-9]+)\.([0-9]+)'
+  regex_group: '([0-9]+)\.([0-9]+)\.?([0-9]+)?'
   number_regex: '(?<=\=\s)\d+\.\d+(?=\;)'
 
 # ci
-prepare_image_task: moodle
+prepare_image_task: moodle-by-version
 
 # dockerfile
 moodle_app_src: true

@@ -1,0 +1,18 @@
+# image
+version_image_suffix: php-fpm
+image_from_ctr: "php{{ php_version | replace('.','') }}-fpm"
+image_tag_from_ctr: "{{ php_version }}-fpm"
+dockerfile_builder_image_from_repo_name: php
+dockerfile_builder_image_ocp_tags_list:
+  - ${IMAGE_NAME}
+  - php
+  - php-fpm
+  - php{{ php_version | replace('.','') }}
+  - php-{{ php_version | replace('.','') }}
+  - moodle
+  - moodle{{ moodle_version | replace('.','') }}
+  - moodle-{{ moodle_version | replace('.','') }}
+dockerfile_builder_image_ocp_tags: "{{ dockerfile_builder_image_ocp_tags_list | join(',') }}"
+
+# source dir
+template_path: "{{ template_dir }}/moodle_php-fpm"

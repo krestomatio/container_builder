@@ -7,3 +7,6 @@ version_image_derivative_extra_tags:
 version_image_major: "{{ node_version.split('.')[0] | default(false) }}"
 version_image_minor: "{{ node_version.split('.')[1] | default(false) }}"
 version_image_patch: "{{ node_version.split('.')[2] | default(false) }}"
+
+# image
+dockerfile_builder_image_ocp_tags: "node,node{{ node_version }},node-{{ node_version_name[node_version|int] }}"

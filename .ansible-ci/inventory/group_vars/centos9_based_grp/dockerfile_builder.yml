@@ -2,3 +2,5 @@ image_from_ctr: centos9-base
 image_tag_from_ctr: 9-base
 dockerfile_builder_image_from_repo_name: centos
 dockerfile_builder_image_based: "CentOS 9 Stream minimal"
+nginx_version_by_module: "{{ true if nginx_version is defined and nginx_version != nginx_versions.120 else false }}"
+remi_repo: "{{ true if php_version is defined and php_version != php_versions.80 else false }}"

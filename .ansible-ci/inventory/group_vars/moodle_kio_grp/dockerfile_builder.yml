@@ -1,0 +1,99 @@
+# image
+image_from_ctr: "moodle{{ moodle_version | replace('.','') }}_nginx{{ nginx_version | replace('.','') }}_php{{ php_version | replace('.','') }}-fpm"
+image_tag_from_ctr: "{{ moodle_version }}-nginx_php-fpm"
+dockerfile_builder_image_from_repo_name: moodle
+dockerfile_builder_image_summary: "PHP {{ php_version }} and NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }} or NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_title: "PHP {{ php_version }} and NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_ocp_tags_list:
+  - ${IMAGE_NAME}
+  - php
+  - php-fpm
+  - php{{ php_version | replace('.','') }}
+  - php-{{ php_version | replace('.','') }}
+  - nginx
+  - nginx-{{ nginx_version | replace('.','') }}
+  - nginx{{ nginx_version | replace('.','') }}
+  - moodle
+  - moodle{{ moodle_version | replace('.','') }}
+  - moodle-{{ moodle_version | replace('.','') }}
+dockerfile_builder_image_ocp_tags: "{{ dockerfile_builder_image_ocp_tags_list | join(',') }}"
+version_image_suffix: kio
+
+# source dir
+template_path: "{{ template_dir }}/moodle_php-fpm"
+
+# ci
+prepare_image_task: "moodle-{{ version_image_suffix }}"
+
+# moodle
+# using ansible, moodle_git_branch_upstream as variable moodle_version to string, if moodle_version has one digit after first dot, replace it with 0, otherwise remove dot.
+moodle_git_branch_upstream: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}_STABLE"
+moodle_git_repo_org: krestomatio
+moodle_git_branch: "{{ moodle_git_branch_upstream }}_{{ version_image_suffix | upper }}"
+moodle_plugin_tar_gz_url_list:
+  - url: "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+    relpath: local/tier
+moodle_version_plugin_list:
+  "4.1":
+    - block_checklist
+    - block_completion_progress
+    - block_xp
+    - format_tiles
+    - format_onetopic
+    - format_grid
+    - format_topcoll
+    - gradeexport_checklist
+    - mod_questionnaire
+    - mod_attendance
+    - mod_checklist
+    - mod_customcert
+    - mod_zoom
+    - mod_game
+    - theme_moove
+    - theme_boost_union
+    # microsoft
+    - auth_oidc
+    - block_microsoft
+    - local_o365
+    - local_office365
+    - repository_office365
+    - theme_boost_o365teams
+    - local_onenote
+    - assignfeedback_onenote
+    - assignsubmission_onenote
+    # turnitin
+    - plagiarism_turnitin
+    - plagiarism_turnitinsim
+  "4.5":
+    # - block_checklist
+    - block_completion_progress
+    - block_xp
+    - format_tiles
+    # - format_onetopic
+    # - format_grid
+    # - format_topcoll
+    # - gradeexport_checklist
+    # - mod_questionnaire
+    # - mod_attendance
+    # - mod_checklist
+    - mod_customcert
+    # - mod_zoom
+    - mod_game
+    - theme_moove
+    # - theme_boost_union
+    # microsoft
+    # - auth_oidc
+    # - block_microsoft
+    # - local_o365
+    # - local_office365
+    # - repository_office365
+    # - theme_boost_o365teams
+    # - local_onenote
+    # - assignfeedback_onenote
+    # - assignsubmission_onenote
+    # turnitin
+    # - plagiarism_turnitin
+    # - plagiarism_turnitinsim
+
+moodle_plugin_list: "{{ moodle_version_plugin_list[moodle_version] }}"

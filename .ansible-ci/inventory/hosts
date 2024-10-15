@@ -10,15 +10,43 @@ rocky_base_grp
 [httpd]
 httpd24
 
-[nginx]
+[nginx:children]
+nginx120_grp
+nginx124_grp
+
+[nginx120_grp]
 nginx120
 nginx120_php80-fpm
 
+[nginx124_grp]
+nginx124
+nginx124_php83-fpm
+
 [php]
 php80-fpm
+php83-fpm
 
-[postgres]
+[php_fpm80_grp]
+php80-fpm
+nginx120_php80-fpm
+
+[php_fpm83_grp]
+php83-fpm
+nginx124_php83-fpm
+
+[nginx_php_fpm_grp]
+nginx120_php80-fpm
+nginx124_php83-fpm
+
+[postgres:children]
+postgres13_grp
+postgres16_grp
+
+[postgres13_grp]
 postgres13
+
+[postgres16_grp]
+postgres16
 
 [nfs_ganesha]
 nfs-ganesha5
@@ -29,12 +57,22 @@ keydb63
 [go]
 go121-toolset
 
-[node]
+[node:children]
+node18_grp
+node22_grp
+node_ci_grp
+
+[node18_grp]
 node18
 node18-ci
 
-[moodle:children]
-moodle41_grp
+[node22_grp]
+node22
+node22-ci
+
+[node_ci_grp]
+node18-ci
+node22-ci
 
 ## container groups
 [centos_minimal_grp]
@@ -62,14 +100,21 @@ rocky_base_grp
 [centos9_based_grp]
 httpd24
 nginx120
+nginx124
 php80-fpm
+php83-fpm
 nginx120_php80-fpm
+nginx124_php83-fpm
 nfs-ganesha5
 postgres13
+postgres16
 pgbouncer
 go121-toolset
 keydb63
 node18
+node18-ci
+node22
+node22-ci
 ansible
 
 [rootfs_grp:children]
@@ -81,14 +126,55 @@ ansible-operator-ci
 ansible-docker-ci
 ansible-podman-ci
 
+[moodle:children]
+moodle41_grp
+moodle45_grp
+
 [moodle41_grp]
+moodle41
+moodle41_bundle
+moodle41_httpd24
+moodle41_kio
 moodle41_nginx120
 moodle41_nginx120_php80-fpm
 moodle41_php80-fpm
+
+[moodle45_grp]
+moodle45
+moodle45_bundle
+moodle45_httpd24
+moodle45_kio
+moodle45_nginx124
+moodle45_nginx124_php83-fpm
+moodle45_php83-fpm
+
+[moodle_web_grp]
 moodle41
-moodle41_httpd24
+moodle45
+
+[moodle_bundle_grp]
 moodle41_bundle
+moodle45_bundle
+
+[moodle_httpd_grp]
+moodle41_httpd24
+moodle45_httpd24
+
+[moodle_kio_grp]
 moodle41_kio
+moodle45_kio
+
+[moodle_nginx_grp]
+moodle41_nginx120
+moodle45_nginx124
+
+[moodle_nginx_php_fpm_grp]
+moodle41_nginx120_php80-fpm
+moodle45_nginx124_php83-fpm
+
+[moodle_php_fpm_grp]
+moodle41_php80-fpm
+moodle45_php83-fpm
 
 [build_step_1:children]
 minimal_grp
@@ -100,19 +186,25 @@ base_grp
 ansible
 httpd24
 nginx120
+nginx124
 nfs-ganesha5
 php80-fpm
+php83-fpm
 postgres13
+postgres16
 pgbouncer
 go121-toolset
 node18
+node22
 keydb63
 
 [build_step_4]
 nginx120_php80-fpm
+nginx124_php83-fpm
 ansible-docker-ci
 ansible-podman-ci
 node18-ci
+node22-ci
 
 [build_step_5]
 ansible-operator-ci
@@ -122,10 +214,17 @@ moodle41_nginx120
 moodle41_nginx120_php80-fpm
 moodle41_php80-fpm
 moodle41_httpd24
+moodle45_nginx124
+moodle45_nginx124_php83-fpm
+moodle45_php83-fpm
+moodle45_httpd24
 
 [build_step_7]
 moodle41
 moodle41_kio
+moodle45
+moodle45_kio
 
 [build_step_8]
 moodle41_bundle
+moodle45_bundle

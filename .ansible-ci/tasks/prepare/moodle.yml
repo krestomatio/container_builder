@@ -1,7 +1,10 @@
+- name: show moodle major version
+  debug:
+    msg: "moodle major version: {{ moodle_version }}"
+
 - name: get moodle repo refs info
   when:
     - moodle_git_refs_json is defined
-    - moodle_git_commit is not defined
   block:
     - name: get moodle repo commit from tag
       when: moodle_git_branch is match('v.*')
@@ -65,13 +68,13 @@
 
     - name: set moodle repo commmit fact
       set_fact:
-        moodle_git_commit: "{{ moodle_git_commit_get_task.json.object.sha }}"
+        moodle_git_commit: "{{ (moodle_git_commit_get_task.json | first).object.sha if
+          moodle_git_commit_get_task.json | type_debug == 'list' else
+          moodle_git_commit_get_task.json.object.sha }}"
 
 - name: get moodle version from remote source (version.php)
   when:
     - moodle_git_repo_version is defined
-    - moodle_git_source_version is not defined
-    - moodle_git_source_version_number is not defined
   block:
     - name: get moodle repo json
       run_once: true
@@ -105,6 +108,6 @@
 - name: set moodle version from remote source
   when: moodle_git_source_version is defined
   set_fact:
-    version_image_major: "{{ moodle_git_source_version.split('.')[0] | default(false) }}"
-    version_image_minor: "{{ moodle_git_source_version.split('.')[1] | default(false) }}"
-    version_image_patch: "{{ moodle_git_source_version.split('.')[2] | default(false) }}"
+    version_image_major: "{{ moodle_git_source_version.split('.')[0] }}"
+    version_image_minor: "{{ moodle_git_source_version.split('.')[1] }}"
+    version_image_patch: "{{ moodle_git_source_version.split('.')[2] | default('0') }}"

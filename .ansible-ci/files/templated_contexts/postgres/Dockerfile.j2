@@ -10,7 +10,7 @@ FROM ${ARG_IMAGE_FROM} AS old_pg_bin
 ENV POSTGRES_PREV_VERSION="{{ postgres_prev_version }}"
 
 {% if postgres_prev_version_by_module | default(true) %}
-RUN microdnf module enable postgresql:${POSTGRES_PREV_VERSION} && \
+RUN microdnf module enable -y postgresql:${POSTGRES_PREV_VERSION} && \
     install-pkgs postgresql-server && \
 {% else %}
 RUN install-pkgs postgresql-server && \

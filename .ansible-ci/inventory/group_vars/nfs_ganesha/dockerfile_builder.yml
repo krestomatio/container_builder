@@ -8,7 +8,7 @@ nfs_ganesha_git_repo_org: nfs-ganesha
 nfs_ganesha_git_refs_tags:
   url: "{{ 'https://api.github.com/repos/' + nfs_ganesha_git_repo_org + '/nfs-ganesha/git/refs/tags/V' + nfs_ganesha_major_version | string }}"
   headers_json: "{{ '{\"Authorization\": \"token ' + dockerfile_builder_image_git_token + '\"}' if dockerfile_builder_image_git_token is defined else '' }}"
-  regex: '(?<=refs/tags/V)([0-9]+)\.([0-9]+)\.([0-9]+)'
+  regex: '(?<=refs/tags/V)([0-9]+)\.([0-9]+)'
 
 # ci
 prepare_image_task: nfs-ganesha

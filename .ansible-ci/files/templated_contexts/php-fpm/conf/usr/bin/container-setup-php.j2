@@ -2,10 +2,17 @@
 # description: base config for php-fpm
 
 # install pkgs
-{% if php_version_by_module | default(false) %}
-microdnf module enable php:${PHP_VERSION}
+{% if remi_repo | default(false) %}
+## remi repo
+source /etc/os-release
+rpm --install https://rpms.remirepo.net/enterprise/remi-release-${VERSION_ID}.rpm
+microdnf module enable -y php:remi-${PHP_VERSION}
+{% elif php_version_by_module | default(false) %}
+## set module
+microdnf module enable -y php:${PHP_VERSION}
 {% endif %}
-install-pkgs ${OS_INSTALL_PKGS}
+## install pkgs
+install-pkgs -n ${OS_INSTALL_PKGS}
 
 # test version
 [[ "$(php -v | { read _ v _; echo ${v}; })" == "${PHP_VERSION}".* ]] || echo "error: version differs from env var"

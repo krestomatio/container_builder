@@ -1,1 +1,1 @@
-- include_tasks: moodle.yml
+- include_tasks: moodle-by-version.yml

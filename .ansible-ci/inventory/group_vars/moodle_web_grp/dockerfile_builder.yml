@@ -1,0 +1,23 @@
+# image
+image_from_ctr: "moodle{{ moodle_version | replace('.','') }}_nginx{{ nginx_version | replace('.','') }}_php{{ php_version | replace('.','') }}-fpm"
+image_tag_from_ctr: "{{ moodle_version }}-nginx_php-fpm"
+dockerfile_builder_image_from_repo_name: moodle
+dockerfile_builder_image_summary: "PHP {{ php_version }} and NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs PHP {{ php_version }} or NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_title: "PHP {{ php_version }} and NGINX {{ nginx_version }} for Moodle {{ moodle_version }}"
+dockerfile_builder_image_ocp_tags_list:
+  - ${IMAGE_NAME}
+  - php
+  - php-fpm
+  - php{{ php_version | replace('.','') }}
+  - php-{{ php_version | replace('.','') }}
+  - nginx
+  - nginx-{{ nginx_version | replace('.','') }}
+  - nginx{{ nginx_version | replace('.','') }}
+  - moodle
+  - moodle{{ moodle_version | replace('.','') }}
+  - moodle-{{ moodle_version | replace('.','') }}
+dockerfile_builder_image_ocp_tags: "{{ dockerfile_builder_image_ocp_tags_list | join(',') }}"
+
+# source dir
+template_path: "{{ template_dir }}/moodle_php-fpm"

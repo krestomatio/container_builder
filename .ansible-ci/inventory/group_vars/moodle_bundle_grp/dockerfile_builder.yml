@@ -1,0 +1,25 @@
+# image
+image_from_ctr: "moodle{{ moodle_version | replace('.','') }}"
+version_image_suffix: bundle
+image_tag_from_ctr: "{{ moodle_version }}"
+dockerfile_builder_image_from_repo_name: moodle
+
+# source dir
+template_path: "{{ template_dir }}/moodle_bundle"
+
+# moodle
+moodle_version_plugin_list:
+  "4.1":
+    - mod_attendance
+    - mod_checklist
+    - mod_customcert
+    - block_checklist
+    - gradeexport_checklist
+  "4.5":
+    # - mod_attendance
+    # - mod_checklist
+    - mod_customcert
+    # - block_checklist
+    # - gradeexport_checklist
+
+moodle_plugin_list: "{{ moodle_version_plugin_list[moodle_version] }}"

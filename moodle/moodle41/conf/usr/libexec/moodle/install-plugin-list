@@ -191,7 +191,7 @@ if ($response) {
         if ($moodle_plugin_info_maturity >= $MOODLE_PLUGIN_MATURITY) {
             $to_be_installed = true;
         } else {
-            file_put_contents("php://stderr", "ERROR: Maturity level of version avaiable is below: " . $MOODLE_PLUGIN_MATURITY . "\n");
+            file_put_contents("php://stderr", "ERROR: Maturity level of version available is below: " . $MOODLE_PLUGIN_MATURITY . "\n");
             exit(1);
         }
     }

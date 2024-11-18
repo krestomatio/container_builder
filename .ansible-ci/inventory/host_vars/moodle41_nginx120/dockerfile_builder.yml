@@ -1,8 +1,0 @@
-# image
-version_image_suffix: nginx
-image_from_ctr: nginx120
-image_tag_from_ctr: "{{ nginx_version }}"
-dockerfile_builder_image_from_repo_name: nginx
-
-# source dir
-template_path: "{{ template_dir }}/moodle_nginx"

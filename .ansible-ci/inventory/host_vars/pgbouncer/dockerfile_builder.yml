@@ -3,7 +3,7 @@ ctr_repo_name: pgbouncer
 # image
 dockerfile_builder_image_lang: en_US.UTF-8
 
-postgres_version: "{{ postgres_versions.13 }}"
+postgres_version: "{{ postgres_versions.16 }}"
 
 # other
 ctr_readme_section: |-

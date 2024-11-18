@@ -39,7 +39,7 @@ COPY conf/usr/libexec /usr/libexec/
 # Install additional plugins (a comma separated arg), if any
 # Argument is also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_PLUGIN_LIST="{{ moodle_plugin_list | default([]) | join(',') }}"
-ARG ARG_MOODLE_PLUGIN_FORCE="{{ moodle_plugin_list | default([]) | join(',') }}"
+ARG ARG_MOODLE_PLUGIN_FORCE="{{ 'true' if moodle_plugin_list | default([], true) else '' }}"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
@@ -81,7 +81,7 @@ ENV IMAGE_NAME={{ dockerfile_builder_image_name | default('moodle_php-fpm') }} \
     IMAGE_SUMMARY="{{ dockerfile_builder_image_summary | default('PHP ' + php_version + ' for Moodle ' + moodle_version) }}" \
     IMAGE_DESCRIPTION="{{ dockerfile_builder_image_description | default('This ' + dockerfile_builder_image_based + ' based container image runs PHP ' + php_version + ' for Moodle ' + moodle_version) }}" \
     IMAGE_TITLE="{{ dockerfile_builder_image_title | default('PHP ' + php_version + ' for Moodle ' + moodle_version) }}" \
-    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags | default('${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}') }}" \
+    IMAGE_OC_TAGS="{{ dockerfile_builder_image_ocp_tags | default('${IMAGE_NAME},php,php-fpm,php,moodle,moodle') }}" \
     TZ="{{ dockerfile_builder_image_timezone }}" \
     LANG="en_AU.UTF-8"
 
@@ -123,10 +123,10 @@ RUN locale-tz-all
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-# php-xmlrpc available in pecl after php8.0
+# php-pecl-xmlrpc is not required after moodle 4.1
 ARG ARG_INSTALL_MOODLE_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xml php-pecl-zip php-mbstring php-json"
 ENV INSTALL_MOODLE_PHP_PKGS=${ARG_INSTALL_MOODLE_PHP_PKGS}
-RUN install-pkgs unzip ${INSTALL_MOODLE_PHP_PKGS}
+RUN install-pkgs -n -e unzip ${INSTALL_MOODLE_PHP_PKGS}
 
 # Install extra packages (a space separated list)
 ARG ARG_INSTALL_EXTRA_PKGS="{{ moodle_install_extra_pkgs | default('') }}"

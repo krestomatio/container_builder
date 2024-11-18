@@ -1,0 +1,21 @@
+# image
+version_image_suffix: php-fpm
+image_from_ctr: "nginx{{ nginx_version | replace('.','') }}"
+image_tag_from_ctr: "{{ nginx_version }}"
+dockerfile_builder_image_from_repo_name: nginx
+dockerfile_builder_image_summary: "Nginx {{ nginx_version }} and PHP-FPM {{ php_version }}"
+dockerfile_builder_image_description: "This {{ dockerfile_builder_image_based }} based container image runs Nginx {{ nginx_version }} or PHP-FPM {{ php_version }}"
+dockerfile_builder_image_title: "Nginx {{ nginx_version }} and PHP-FPM {{ php_version }}"
+dockerfile_builder_image_ocp_tags_list:
+  - ${IMAGE_NAME}
+  - php
+  - php-fpm
+  - php{{ php_version | replace('.','') }}
+  - php-{{ php_version | replace('.','') }}
+  - nginx
+  - nginx-{{ nginx_version | replace('.','') }}
+  - nginx{{ nginx_version | replace('.','') }}
+dockerfile_builder_image_ocp_tags: "{{ dockerfile_builder_image_ocp_tags_list | join(',') }}"
+
+# source dir
+template_path: "{{ template_dir }}/php-fpm"

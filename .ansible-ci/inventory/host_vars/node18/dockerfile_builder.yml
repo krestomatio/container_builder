@@ -1,3 +1,0 @@
-# image
-node_version: "{{ node_versions.18 }}"
-dockerfile_builder_image_ocp_tags: "node,node{{ node_version }},node-{{ node_version_name[node_version|int] }}"

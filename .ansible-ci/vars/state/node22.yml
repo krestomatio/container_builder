@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+node22_image:
+  variant_name: "node:22"
+  build: False
+  version: "22.0.2"
+  tags: "22,22.0,22.0.2,node22-95836d24df3d554e76a65aaeac72bcf49bc09b8d,jod"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/node:22@sha256:e97745851b9b9d2924fbc5d9d22166445fec868e1f386963f8982b0f85722408"
+  relative_path: "node/node22"

@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="d4f5e92ee156002b95db1ab6f76e25870563e2f6"
+ARG ARG_MOODLE_COMMIT="eaa25cf51be3a8c502638930a697c10633150a99"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -47,10 +47,10 @@ FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
 ENV IMAGE_NAME=moodle:4.1 \
-    IMAGE_SUMMARY="PHP ${PHP_VERSION:-8.0} and NGINX ${NGINX_VERSION:-1.20} for Moodle 4.1" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP ${PHP_VERSION:-8.0} or NGINX ${NGINX_VERSION:-1.20} for Moodle 4.1" \
-    IMAGE_TITLE="PHP ${PHP_VERSION:-8.0} and NGINX ${NGINX_VERSION:-1.20} for Moodle 4.1" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php${PHP_VER_SHORT},php-${PHP_VER_SHORT},nginx,nginx-${NGINX_VER_SHORT},nginx${NGINX_VER_SHORT},moodle,moodle${MOODLE_VER_SHORT},moodle-${MOODLE_VER_SHORT}" \
+    IMAGE_SUMMARY="PHP 8.0 and NGINX 1.20 for Moodle 4.1" \
+    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP 8.0 or NGINX 1.20 for Moodle 4.1" \
+    IMAGE_TITLE="PHP 8.0 and NGINX 1.20 for Moodle 4.1" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php80,php-80,nginx,nginx-120,nginx120,moodle,moodle41,moodle-41" \
     TZ="UTC" \
     LANG="en_AU.UTF-8"
 
@@ -76,13 +76,13 @@ RUN locale-tz-all
 # php-zip as php-pecl-zip
 # php-xsl as php-xml
 # php-fpm php-cli php-opcache already installed in base image
-# php-xmlrpc available in pecl after php8.0
+# php-pecl-xmlrpc is not required after moodle 4.1
 ARG ARG_INSTALL_MOODLE_PHP_PKGS="php-gd php-intl php-ldap php-pgsql php-soap php-xml php-pecl-zip php-mbstring php-json"
 ENV INSTALL_MOODLE_PHP_PKGS=${ARG_INSTALL_MOODLE_PHP_PKGS}
-RUN install-pkgs unzip ${INSTALL_MOODLE_PHP_PKGS}
+RUN install-pkgs -n -e unzip ${INSTALL_MOODLE_PHP_PKGS}
 
 # Install extra packages (a space separated list)
-ARG ARG_INSTALL_EXTRA_PKGS="php-sodium php-pecl-redis5 php-pecl-apcu poppler-utils graphviz aspell"
+ARG ARG_INSTALL_EXTRA_PKGS="php-sodium php-pecl-redis6 php-pecl-apcu poppler-utils graphviz aspell"
 ENV INSTALL_EXTRA_PKGS=${ARG_INSTALL_EXTRA_PKGS}
 RUN if [ -n "${INSTALL_EXTRA_PKGS}" ]; then install-pkgs -n -e -r crb ${INSTALL_EXTRA_PKGS}; fi
 
@@ -94,8 +94,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="d4f5e92ee156002b95db1ab6f76e25870563e2f6"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112813.00"
+ARG ARG_MOODLE_COMMIT="eaa25cf51be3a8c502638930a697c10633150a99"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112814.05"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
@@ -111,7 +111,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="4.1.13" \
+      org.opencontainers.image.version="4.1.14" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

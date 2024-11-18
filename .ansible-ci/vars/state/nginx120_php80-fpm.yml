@@ -4,8 +4,8 @@
 nginx120_php80_fpm_image:
   variant_name: "nginx:1.20-php-fpm"
   build: False
-  version: "1.20.43"
-  tags: "1.20-php-fpm,1.20.43-php-fpm,nginx120_php80-fpm-c4c66bfc546dc4494d069fe61ceefe8d6fc728a3"
-  artifact_tag: "c4c66bfc546dc4494d069fe61ceefe8d6fc728a3"
-  repo_digest: "quay.io/krestomatio/nginx:1.20-php-fpm@sha256:d7df44e07ff3642f4b2553ebd206254675304aafd73dfda9f8f8baf687d9eb09"
+  version: "1.20.44"
+  tags: "1.20-php-fpm,1.20.44-php-fpm,nginx120_php80-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/nginx:1.20-php-fpm@sha256:73b0b6013bc990beb7f0c12276a4b07d6e48d6ad35fd5c79ef1406dc8d1e9c4a"
   relative_path: "nginx/nginx120_php80-fpm"

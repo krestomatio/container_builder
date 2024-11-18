@@ -21,7 +21,7 @@ ENV CTR_USER=pgbouncer \
     CTR_STOPSIGNAL=SIGINT
 
 # Component bash variables
-ENV POSTGRES_VERSION="13" \
+ENV POSTGRES_VERSION="16" \
     POSTGRES_PORT=${IMAGE_SERVICE_PORT} \
     PGBOUNCER_PORT=${IMAGE_SERVICE_PORT} \
     PGBOUNCER_ADMIN_USER=pgbouncer \
@@ -68,7 +68,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="0.5.8" \
+      org.opencontainers.image.version="0.5.9" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

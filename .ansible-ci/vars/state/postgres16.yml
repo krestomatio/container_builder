@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+postgres16_image:
+  variant_name: "postgres:16"
+  build: False
+  version: "16.0.2"
+  tags: "16,16.0,16.0.2,postgres16-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/postgres:16@sha256:634882dd922f7895efa64076070da88703a339c0d20060f0f9ba568fc7e33549"
+  relative_path: "postgres/postgres16"

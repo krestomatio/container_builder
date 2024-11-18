@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nginx124_image:
+  variant_name: "nginx:1.24"
+  build: False
+  version: "1.24.2"
+  tags: "1.24,1.24.2,nginx124-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/nginx:1.24@sha256:dcf218d244c84e938502700cc9807b6e634585f1e2822f084bbbcadc3bcf4a56"
+  relative_path: "nginx/nginx124"

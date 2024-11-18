@@ -6,12 +6,18 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [php:8.0](#php80): `8.0, 8.0.43, php80-fpm-c4c66bfc546dc4494d069fe61ceefe8d6fc728a3`
+- [php:8.0](#php80): `8.0, 8.0.44, php80-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
+- [php:8.3](#php83): `8.3, 8.3.2, php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
 
 
 ## Image Variants
 ### php:8.0
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/php/php80-fpm)
+
+PHP-FPM image based on CentOS 9 Stream minimal
+
+### php:8.3
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/php/php83-fpm)
 
 PHP-FPM image based on CentOS 9 Stream minimal
 

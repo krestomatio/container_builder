@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nginx124_php83_fpm_image:
+  variant_name: "nginx:1.24-php-fpm"
+  build: False
+  version: "1.24.2"
+  tags: "1.24-php-fpm,1.24.2-php-fpm,nginx124_php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/nginx:1.24-php-fpm@sha256:1f68cd205061ae50e787a280ffa69f19af66b54aee85f77879ab4d6cb08bfbbf"
+  relative_path: "nginx/nginx124_php83-fpm"

@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+php83_fpm_image:
+  variant_name: "php:8.3"
+  build: False
+  version: "8.3.2"
+  tags: "8.3,8.3.2,php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/php:8.3@sha256:020661c86119e84cc95dbcc0a1dc3a838cd7d446ed798e850fd25d1821423c87"
+  relative_path: "php/php83-fpm"

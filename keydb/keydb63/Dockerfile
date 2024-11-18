@@ -33,7 +33,7 @@ USER 0
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-RUN install-pkgs ${OS_INSTALL_PKGS}
+RUN install-pkgs -n ${OS_INSTALL_PKGS}
 RUN container-setup && container-setup-keydb
 
 VOLUME ${KEYDB_DATA}

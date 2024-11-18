@@ -7,7 +7,7 @@ ENV IMAGE_NAME=moodle:4.1-nginx \
     IMAGE_SUMMARY="Nginx ${NGINX_VERSION} for Moodle 4.1" \
     IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs Nginx ${NGINX_VERSION} for Moodle 4.1" \
     IMAGE_TITLE="Nginx ${NGINX_VERSION} for Moodle 4.1" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},nginx,nginx${NGINX_VER_SHORT},nginx-${NGINX_VER_SHORT},moodle,moodle${MOODLE_VERSION_SHORT},moodle-${MOODLE_VERSION_SHORT}" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},nginx,nginx-120,nginx120,moodle,moodle41,moodle-41" \
     TZ="UTC"
 
 # Component bash variables
@@ -40,7 +40,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="4.1.13" \
+      org.opencontainers.image.version="4.1.14" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

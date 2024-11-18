@@ -24,7 +24,7 @@ COPY conf/usr/bin /usr/bin/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
 RUN container-setup
-RUN install-pkgs ${OS_INSTALL_PKGS}
+RUN install-pkgs -n ${OS_INSTALL_PKGS}
 
 ENTRYPOINT ["container-entrypoint"]
 

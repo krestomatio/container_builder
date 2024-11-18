@@ -1,0 +1,102 @@
+#!/bin/bash -u
+# description: check moodle httpd container
+
+usage() {
+    cat 1>&2 <<EOF
+Script to check moodle httpd container.
+
+ENVIRONMENT VARS:
+MOODLE_DATA             moodledata path
+MOODLE_CHECK_PATH       path from url to check ex. "/index.php"
+MOODLE_CHECK_URL        optionally use a complete url instead of path
+MOODLE_CHECK_CODE       http status code to expect
+MOODLE_CHECK_HOST       set a host header
+
+USAGE:
+    check-container [OPTIONS]
+
+OPTIONS (check moodle httpd container):
+  -u            check url
+  -m            check if moodledata is writable
+  -l            check liveness (-u)
+  -r            check readiness (-u -m)
+  -t            check tcp port of php-fpm host
+
+EXAMPLES:
+    check-container -u
+    check-container -l
+    check-container -r
+EOF
+}
+
+check_moodledata() {
+    # check moodledata is writable
+    TMPFILE=`mktemp -q -p ${MOODLE_DATA}/`
+    if [ $? -ne 0 ]; then
+        echo "$0: CHECK: Can't create file in '${MOODLE_DATA}'"
+        exit 1
+    fi
+    rm $TMPFILE
+}
+
+check_maintenance() {
+    # check if moodle is in maintenance
+    if ! [ -z ${MOODLE_DATA} ] ; then
+        moodle_maintenance=$(test -f "${MOODLE_DATA}/climaintenance.html" && echo true || echo false)
+        if [ "${moodle_maintenance}" == "true" ]; then
+            echo "$0: CHECK: moodle maintenance detected"
+        fi
+    fi
+}
+
+check_url() {
+    # check url for http status code
+    check_url="${MOODLE_CHECK_URL:-localhost:${HTTPD_PORT}${MOODLE_CHECK_PATH}}"
+    ## check if moodle is in maintenance
+    check_maintenance
+    ## if moodle is in maintenance, allow 503 http status code
+    if [ "${moodle_maintenance}" == "true" ]; then
+        MOODLE_CHECK_CODE="${MOODLE_CHECK_CODE}\|503"
+    fi
+    ## check http code
+    status_code=$(curl -s -o /dev/null -w %{http_code} -H "Host: ${MOODLE_CHECK_HOST}" "${check_url}")
+    if [ $? -ne 0 ] && [[ ! "${MOODLE_CHECK_CODE}" =~ ${status_code} ]] ; then
+        echo "$0: CHECK: http status code is ${status_code} and not ${MOODLE_CHECK_CODE//\\|/ or }"
+        exit 1
+    fi
+}
+
+while getopts ":mulr" opt; do
+  case ${opt} in
+    m )
+        check_moodledata
+        ;;
+    u )
+        check_url
+        ;;
+    l )
+        check_moodledata
+        check_php_fpm_host
+        check_url
+        ;;
+    r )
+        check_moodledata
+        check_php_fpm_host
+        check_url
+        ;;
+    t )
+        check_php_fpm_host
+        ;;
+    \? )
+        usage
+        exit
+        ;;
+  esac
+done
+shift $((OPTIND -1))
+
+if (( $OPTIND == 1 )); then
+    echo -e "No check. Use an option:\n"
+    usage
+    exit
+fi

@@ -36,15 +36,15 @@ RUN install-pkgs \
         ninja-build \
         xfsprogs-devel
 
-ENV NFS_GANESHA_VERSION="5.5.3" \
+ENV NFS_GANESHA_VERSION="5.9" \
     DESTDIR=/build
 
 # Get source code
 # Arguments for moodle git remote, branch and commit
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_NFS_GANESHA_REMOTE="https://github.com/nfs-ganesha/nfs-ganesha.git"
-ARG ARG_NFS_GANESHA_BRANCH="V5.5.3"
-ARG ARG_NFS_GANESHA_COMMIT="0ef42cf5a427b7bc0ba3e22f2de88831a7690111"
+ARG ARG_NFS_GANESHA_BRANCH="V5.9"
+ARG ARG_NFS_GANESHA_COMMIT="7b55c02a384c80477984539d28a94110e578aed5"
 ENV GIT_REMOTE=${ARG_NFS_GANESHA_REMOTE} \
     GIT_BRANCH=${ARG_NFS_GANESHA_BRANCH} \
     GIT_COMMIT=${ARG_NFS_GANESHA_COMMIT}
@@ -94,7 +94,7 @@ ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
-ENV IMAGE_NAME=nfs-ganesha:5.5.3 \
+ENV IMAGE_NAME=nfs-ganesha:5.9 \
     IMAGE_SUMMARY="NFSv4 Ganesha Server V5" \
     IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs a NFSv4 Ganesha server." \
     IMAGE_TITLE="NFSv4 Ganesha Server V5" \
@@ -112,7 +112,7 @@ ENV CTR_USER=ganesha \
 # Component bash variables
 ENV DBUS_RUN_DIR=/var/run/dbus \
     DBUS_RUN_WAIT=false \
-    NFS_GANESHA_VERSION="5.5.3" \
+    NFS_GANESHA_VERSION="5.9" \
     NFS_GANESHA_PORT=${IMAGE_SERVICE_PORT} \
     NFS_GANESHA_RQUOTA_PORT=875 \
     NFS_GANESHA_CONF_FILE=/usr/local/etc/ganesha/ganesha.conf \
@@ -159,7 +159,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="5.5.3" \
+      org.opencontainers.image.version="5.9.4" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

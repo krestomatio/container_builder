@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle45_bundle_image:
+  variant_name: "moodle:4.5-bundle"
+  build: False
+  version: "4.5.0"
+  tags: "4.5-bundle,4.5.0-bundle,moodle45_bundle-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-bundle@sha256:9d289b1d1abe9246a3c50cfa59eaaa248eb6cc73439b13e7d32a13ee2e7bcd96"
+  relative_path: "moodle/moodle45_bundle"

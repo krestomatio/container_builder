@@ -1,0 +1,16 @@
+#!/bin/bash -e
+# description: base config for moodle
+
+# install deps
+install-pkgs nc
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${MOODLE_APP} ${MOODLE_DATA} ${MOODLE_CLI_TOOLS}
+
+# dir for optional entrypoint scripts
+mkdir -p ${CTR_ENTRYPOINT_OPT_PATH}
+
+fix-permissions -u ${CTR_USER_ID} ${MOODLE_APP} ${MOODLE_DATA} ${MOODLE_CLI_TOOLS}

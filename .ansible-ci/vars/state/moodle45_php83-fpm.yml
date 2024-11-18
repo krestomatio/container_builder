@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle45_php83_fpm_image:
+  variant_name: "moodle:4.5-php-fpm"
+  build: False
+  version: "4.5.0"
+  tags: "4.5-php-fpm,4.5.0-php-fpm,moodle45_php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-php-fpm@sha256:363b46111c24859aa9d91537eca641aa30d2cf1864ab31a129345874247d3a48"
+  relative_path: "moodle/moodle45_php83-fpm"

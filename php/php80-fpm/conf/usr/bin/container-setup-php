@@ -2,7 +2,8 @@
 # description: base config for php-fpm
 
 # install pkgs
-install-pkgs ${OS_INSTALL_PKGS}
+## install pkgs
+install-pkgs -n ${OS_INSTALL_PKGS}
 
 # test version
 [[ "$(php -v | { read _ v _; echo ${v}; })" == "${PHP_VERSION}".* ]] || echo "error: version differs from env var"

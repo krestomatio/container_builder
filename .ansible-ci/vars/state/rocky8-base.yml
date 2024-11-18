@@ -5,7 +5,7 @@ rocky8_base_image:
   variant_name: "rocky:8-base"
   build: False
   version: "8.10.1"
-  tags: "8-base,8.10-base,8.10.1-base,rocky8-base-c4c66bfc546dc4494d069fe61ceefe8d6fc728a3"
-  artifact_tag: "c4c66bfc546dc4494d069fe61ceefe8d6fc728a3"
-  repo_digest: "quay.io/krestomatio/rocky:8-base@sha256:38b6376fd5232b8f80afcf2f6ec90dd114c70b333dc88ba873a41b9be8f7f2cd"
+  tags: "8-base,8.10-base,8.10.1-base,rocky8-base-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
+  repo_digest: "quay.io/krestomatio/rocky:8-base@sha256:aa37636fc79b82d1889f1860992a7bbc4b77505d5ebe6204fb2d92af4e7245df"
   relative_path: "rocky/rocky8-base"

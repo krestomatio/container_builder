@@ -2,7 +2,8 @@
 # description: base config for php-fpm
 
 # install pkgs
-install-pkgs ${OS_INSTALL_PKGS}
+## install pkgs
+install-pkgs -n ${OS_INSTALL_PKGS}
 
 # install pgbouncer
 install-pkgs -e pgbouncer

@@ -55,7 +55,7 @@ nfs-ganesha5
 keydb63
 
 [go]
-go121-toolset
+go122-toolset
 
 [node:children]
 node18_grp
@@ -109,7 +109,7 @@ nfs-ganesha5
 postgres13
 postgres16
 pgbouncer
-go121-toolset
+go122-toolset
 keydb63
 node18
 node18-ci
@@ -193,7 +193,7 @@ php83-fpm
 postgres13
 postgres16
 pgbouncer
-go121-toolset
+go122-toolset
 node18
 node22
 keydb63

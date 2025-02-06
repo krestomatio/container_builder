@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+go122_toolset_image:
+  variant_name: "go:1.22-toolset"
+  build: False
+  version: "1.22.2"
+  tags: "1.22-toolset,1.22.2-toolset,go122-toolset-07aae8f95e3d0deba8e3f94e1ac576245ae97384"
+  artifact_tag: "07aae8f95e3d0deba8e3f94e1ac576245ae97384"
+  repo_digest: "quay.io/krestomatio/go:1.22-toolset@sha256:2ce636d3b01af67ca99f3875ddd7ba2a8cac04e87a2f79583b9f35dcdce2352f"
+  relative_path: "go/go122-toolset"

@@ -6,12 +6,12 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [go:1.21-toolset](#go121-toolset): `1.21-toolset, 1.21.9-toolset, go121-toolset-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
+- [go:1.22-toolset](#go122-toolset): `1.22-toolset, 1.22.2-toolset, go122-toolset-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
 
 
 ## Image Variants
-### go:1.21-toolset
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/go/go121-toolset)
+### go:1.22-toolset
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/go/go122-toolset)
 
 Go-toolset image based on CentOS 9 Stream minimal. It contains go-toolset.
 

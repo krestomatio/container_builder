@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="eaa25cf51be3a8c502638930a697c10633150a99"
+ARG ARG_MOODLE_COMMIT="ddf5aa14c0b0bf41a5ce441d3d4b16ee1912b418"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -94,8 +94,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_401_STABLE"
-ARG ARG_MOODLE_COMMIT="eaa25cf51be3a8c502638930a697c10633150a99"
-ARG ARG_MOODLE_VERSION_NUMBER="2022112814.05"
+ARG ARG_MOODLE_COMMIT="ddf5aa14c0b0bf41a5ce441d3d4b16ee1912b418"
+ARG ARG_MOODLE_VERSION_NUMBER="2022112815.06"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \
@@ -111,7 +111,7 @@ LABEL name="${IMAGE_NAME}" \
       maintainer="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="4.1.14" \
+      org.opencontainers.image.version="4.1.15" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.tags="${IMAGE_OC_TAGS}"

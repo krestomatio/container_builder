@@ -11,10 +11,11 @@ ENV IMAGE_NAME=ansible-operator-ci \
 # Container variables
 ENV LOCALBIN=/usr/local/bin \
     GOBIN=/usr/local/bin \
-    GO_VERSION="1.21" \
-    OPERATOR_VERSION="1.33.0" \
-    SETUP_ENVTEST_VERSION="0.16" \
-    CONTROLLER_TOOLS_VERSION="0.14.0" \
+    GO_VERSION="1.22" \
+    OPERATOR_VERSION="1.39.1" \
+    ANSIBLE_OPERATOR_VERSION="1.37.1" \
+    SETUP_ENVTEST_VERSION="0.19" \
+    CONTROLLER_TOOLS_VERSION="0.16.1" \
     GO_LINT_VERSION="1.57.2" \
     CRD_REF_DOCS_VERSION="0.0.12"
 
@@ -40,13 +41,13 @@ RUN echo "Installing docker repo..."  && \
     $CTR_PKG_MGM install docker-ce-cli docker-buildx-plugin docker-compose-plugin
 
 # Install Operator SDK
-COPY --from=quay.io/operator-framework/operator-sdk:v1.33.0 ${LOCALBIN}/operator-sdk ${LOCALBIN}/operator-sdk
+COPY --from=quay.io/operator-framework/operator-sdk:v1.39.1 ${LOCALBIN}/operator-sdk ${LOCALBIN}/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v1.33.0 ${LOCALBIN}/ansible-operator ${LOCALBIN}/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v1.37.1 ${LOCALBIN}/ansible-operator ${LOCALBIN}/ansible-operator
 
 # Container variables
-ENV KUSTOMIZE_VERSION="5.0.1"
+ENV KUSTOMIZE_VERSION="5.4.3"
 
 # Install kustomize
 RUN echo "Installing kustomize version: ${KUSTOMIZE_VERSION}..."  && \
@@ -61,8 +62,8 @@ RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
     chmod +x ${LOCALBIN}/kubectl
 
 # Install requirements.
-RUN echo "Installing operator sdk version: ${OPERATOR_VERSION}..."  && \
-    curl -L https://raw.githubusercontent.com/operator-framework/ansible-operator-plugins/v${OPERATOR_VERSION}/testdata/memcached-molecule-operator/requirements.yml -o /tmp/requirements.yml && \
+RUN echo "Installing ansible operator plugin version: ${ANSIBLE_OPERATOR_VERSION} requirements..."  && \
+    curl -L https://raw.githubusercontent.com/operator-framework/ansible-operator-plugins/v${ANSIBLE_OPERATOR_VERSION}/testdata/memcached-molecule-operator/requirements.yml -o /tmp/requirements.yml && \
     ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
     rm -f /tmp/requirements.yml
 
@@ -78,4 +79,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.15.*,ansible-operator,ansible-operator1.33.0"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.15.*,ansible-operator,ansible-operator1.37.1,operator-version1.39.1"

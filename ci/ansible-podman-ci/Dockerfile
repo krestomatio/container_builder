@@ -14,14 +14,14 @@ ENV BUILDAH_ISOLATION=chroot \
 
 RUN echo "Installing podman..."  && \
     $CTR_PKG_MGM install xz gzip tar podman skopeo buildah && \
-    rpm -e --nodeps container-selinux && \
+    rpm -e --nodeps container-selinux || true && \
     echo "Cleaning..."  && \
     $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*
 
 COPY conf/etc/containers/containers.conf /etc/containers/containers.conf
 
-ENV ORAS_VERSION="1.2.0"
+ENV ORAS_VERSION="1.2.2"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     pushd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \

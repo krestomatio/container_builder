@@ -48,7 +48,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="1.2.0"
+ENV ORAS_VERSION="1.2.2"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -62,13 +62,13 @@ RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
 
-ENV BUILDX_VERSION="0.18.0"
+ENV BUILDX_VERSION="0.20.1"
 RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     mkdir -p /usr/local/lib/docker/cli-plugins && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.9.8"
+ENV TERRAFORM_VERSION="1.10.5"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \

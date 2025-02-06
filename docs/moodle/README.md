@@ -6,20 +6,20 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.14, moodle41-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.14-bundle, moodle41_bundle-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.14-httpd, moodle41_httpd24-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.14-kio, moodle41_kio-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.14-nginx, moodle41_nginx120-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.14-nginx_php-fpm, moodle41_nginx120_php80-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.14-php-fpm, moodle41_php80-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5](#moodle45): `4.5, 4.5.0, moodle45-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.0-bundle, moodle45_bundle-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.0-httpd, moodle45_httpd24-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.0-kio, moodle45_kio-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.0-nginx, moodle45_nginx124-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.0-nginx_php-fpm, moodle45_nginx124_php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
-- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.0-php-fpm, moodle45_php83-fpm-95836d24df3d554e76a65aaeac72bcf49bc09b8d`
+- [moodle:4.1](#moodle41): `4.1, 4.1.15, moodle41-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.15-bundle, moodle41_bundle-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.15-httpd, moodle41_httpd24-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.14-kio, moodle41_kio-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.15-nginx, moodle41_nginx120-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.15-nginx_php-fpm, moodle41_nginx120_php80-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.15-php-fpm, moodle41_php80-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5](#moodle45): `4.5, 4.5.1, moodle45-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.1-bundle, moodle45_bundle-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.1-httpd, moodle45_httpd24-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.0-kio, moodle45_kio-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.1-nginx, moodle45_nginx124-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.1-nginx_php-fpm, moodle45_nginx124_php83-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
+- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.1-php-fpm, moodle45_php83-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384`
 
 
 ## Image Variants
@@ -32,9 +32,9 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.1.14
-* Moodle version number: 2022112814.05
-* Moodle commit: eaa25cf51be3a8c502638930a697c10633150a99
+* Moodle version: 4.1.15
+* Moodle version number: 2022112815.06
+* Moodle commit: ddf5aa14c0b0bf41a5ce441d3d4b16ee1912b418
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Custom builds
@@ -103,9 +103,9 @@ Extends [moodle:4.1](#moodle41) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.1.14
-* Moodle version number: 2022112814.05
-* Moodle commit: eaa25cf51be3a8c502638930a697c10633150a99
+* Moodle version: 4.1.15
+* Moodle version number: 2022112815.06
+* Moodle commit: ddf5aa14c0b0bf41a5ce441d3d4b16ee1912b418
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Plugins
@@ -187,9 +187,9 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.5
-* Moodle version number: 2024100700.06
-* Moodle commit: e1d05182a60ab7df055dab9eca3ddd48e47bd60a
+* Moodle version: 4.5.1
+* Moodle version number: 2024100701.08
+* Moodle commit: 89e6f737ccc2a426d28fe8a73ec7c3d3feeaf604
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds
@@ -258,9 +258,9 @@ Extends [moodle:4.5](#moodle45) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.5
-* Moodle version number: 2024100700.06
-* Moodle commit: e1d05182a60ab7df055dab9eca3ddd48e47bd60a
+* Moodle version: 4.5.1
+* Moodle version number: 2024100701.08
+* Moodle commit: 89e6f737ccc2a426d28fe8a73ec7c3d3feeaf604
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Plugins

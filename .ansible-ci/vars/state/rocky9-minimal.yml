@@ -4,8 +4,8 @@
 rocky9_minimal_image:
   variant_name: "rocky:9-minimal"
   build: False
-  version: "9.4.1"
-  tags: "9-minimal,9.4-minimal,9.4.1-minimal,rocky9-minimal-95836d24df3d554e76a65aaeac72bcf49bc09b8d"
-  artifact_tag: "95836d24df3d554e76a65aaeac72bcf49bc09b8d"
-  repo_digest: "quay.io/krestomatio/rocky:9-minimal@sha256:89fd140345d606a25eb4653330401790d0cf5c5fc3df9ed22dc37dcc634510e3"
+  version: "9.5.1"
+  tags: "9-minimal,9.5-minimal,9.5.1-minimal,rocky9-minimal-07aae8f95e3d0deba8e3f94e1ac576245ae97384"
+  artifact_tag: "07aae8f95e3d0deba8e3f94e1ac576245ae97384"
+  repo_digest: "quay.io/krestomatio/rocky:9-minimal@sha256:466eb310b1db808e13c1a0650ec3044e3360d1c1315eacfcbf916b2209eea4af"
   relative_path: "rocky/rocky9-minimal"

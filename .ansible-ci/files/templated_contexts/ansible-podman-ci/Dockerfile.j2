@@ -14,7 +14,7 @@ ENV BUILDAH_ISOLATION=chroot \
 
 RUN echo "Installing podman..."  && \
     $CTR_PKG_MGM install xz gzip tar podman skopeo buildah && \
-    rpm -e --nodeps container-selinux && \
+    rpm -e --nodeps container-selinux || true && \
     echo "Cleaning..."  && \
     $CTR_PKG_MGM clean all && \
     rm -rf /var/cache /var/log/dnf* /var/log/yum.*

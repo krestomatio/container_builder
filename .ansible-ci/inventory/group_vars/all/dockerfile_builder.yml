@@ -31,7 +31,7 @@ moodle_versions:
   41: '4.1'
   45: '4.5'
 go_versions:
-  121: '1.21'
+  122: '1.22'
 
 working_dir: "{{ playbook_dir }}"
 

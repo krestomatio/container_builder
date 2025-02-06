@@ -1,5 +1,5 @@
 # platform vars
-go_version: "{{ go_versions.121 }}"
+go_version: "{{ go_versions.122 }}"
 
 version_image_suffix: toolset
 template_path: "{{ template_dir }}/go-toolset"

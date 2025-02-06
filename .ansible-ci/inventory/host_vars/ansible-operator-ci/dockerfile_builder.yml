@@ -1,14 +1,15 @@
 # platform vars
-operator_version: 1.33.0
-kustomize_version: 5.0.1
+operator_version: 1.39.1
+ansible_operator_version: 1.37.1
+kustomize_version: 5.4.3
 kubectl_version: 1.29.3
-go_version: "{{ go_versions.121 }}"
+go_version: "{{ go_versions.122 }}"
 opm_version: 1.23.0
-setup_envtest_version: 0.16
-controller_tools_version: 0.14.0
+setup_envtest_version: 0.19
+controller_tools_version: 0.16.1
 go_lint_version: 1.57.2
 crd_ref_docs_version: 0.0.12
 
 image_from_ctr: ansible-podman-ci
-dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ operator_version }}"
+dockerfile_builder_image_ocp_tags: "ansible,ansible{{ image_ansible_version }},ansible-operator,ansible-operator{{ ansible_operator_version }},operator-version{{ operator_version }}"
 dockerfile_builder_image_based: "CentOS 9 Stream minimal"

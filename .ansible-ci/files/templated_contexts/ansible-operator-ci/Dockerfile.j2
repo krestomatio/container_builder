@@ -13,6 +13,7 @@ ENV LOCALBIN=/usr/local/bin \
     GOBIN=/usr/local/bin \
     GO_VERSION="{{ go_version }}" \
     OPERATOR_VERSION="{{ operator_version }}" \
+    ANSIBLE_OPERATOR_VERSION="{{ ansible_operator_version }}" \
     SETUP_ENVTEST_VERSION="{{ setup_envtest_version }}" \
     CONTROLLER_TOOLS_VERSION="{{ controller_tools_version }}" \
     GO_LINT_VERSION="{{ go_lint_version }}" \
@@ -43,7 +44,7 @@ RUN echo "Installing docker repo..."  && \
 COPY --from=quay.io/operator-framework/operator-sdk:v{{ operator_version }} ${LOCALBIN}/operator-sdk ${LOCALBIN}/operator-sdk
 
 # Install Ansible Operator
-COPY --from=quay.io/operator-framework/ansible-operator:v{{ operator_version }} ${LOCALBIN}/ansible-operator ${LOCALBIN}/ansible-operator
+COPY --from=quay.io/operator-framework/ansible-operator:v{{ ansible_operator_version }} ${LOCALBIN}/ansible-operator ${LOCALBIN}/ansible-operator
 
 # Container variables
 ENV KUSTOMIZE_VERSION="{{ kustomize_version }}"
@@ -61,8 +62,8 @@ RUN echo "Installing kubectl version: ${KUBECTL_VERSION}..."  && \
     chmod +x ${LOCALBIN}/kubectl
 
 # Install requirements.
-RUN echo "Installing operator sdk version: ${OPERATOR_VERSION}..."  && \
-    curl -L https://raw.githubusercontent.com/operator-framework/ansible-operator-plugins/v${OPERATOR_VERSION}/testdata/memcached-molecule-operator/requirements.yml -o /tmp/requirements.yml && \
+RUN echo "Installing ansible operator plugin version: ${ANSIBLE_OPERATOR_VERSION} requirements..."  && \
+    curl -L https://raw.githubusercontent.com/operator-framework/ansible-operator-plugins/v${ANSIBLE_OPERATOR_VERSION}/testdata/memcached-molecule-operator/requirements.yml -o /tmp/requirements.yml && \
     ansible-galaxy collection install -r /tmp/requirements.yml -p /usr/share/ansible/collections && \
     rm -f /tmp/requirements.yml
 

@@ -22,10 +22,10 @@ ENV CTR_CMD="node" \
 ENV HOME="${CTR_HOME}"
 
 {% if node_version_by_module | default(true) %}
-RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:{{ node_version }}; install-pkgs nodejs && \
+RUN containeruser-create; ${CTR_PKG_MGM} module enable nodejs:{{ node_version }}; install-pkgs nodejs npm && \
     [[ "$(node --version | sed 's/^v//')" == "${NODE_VERSION}".* ]] || echo "error: version differs from env var"
 {% else %}
-RUN containeruser-create; install-pkgs nodejs && \
+RUN containeruser-create; install-pkgs nodejs npm && \
     [[ "$(node --version | sed 's/^v//')" == "${NODE_VERSION}"* ]] || echo "error: version differs from env var"
 {% endif %}
 

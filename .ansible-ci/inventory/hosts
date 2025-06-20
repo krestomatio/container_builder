@@ -12,15 +12,15 @@ httpd24
 
 [nginx:children]
 nginx120_grp
-nginx124_grp
+nginx126_grp
 
 [nginx120_grp]
 nginx120
 nginx120_php80-fpm
 
-[nginx124_grp]
-nginx124
-nginx124_php83-fpm
+[nginx126_grp]
+nginx126
+nginx126_php83-fpm
 
 [php]
 php80-fpm
@@ -32,11 +32,11 @@ nginx120_php80-fpm
 
 [php_fpm83_grp]
 php83-fpm
-nginx124_php83-fpm
+nginx126_php83-fpm
 
 [nginx_php_fpm_grp]
 nginx120_php80-fpm
-nginx124_php83-fpm
+nginx126_php83-fpm
 
 [postgres:children]
 postgres13_grp
@@ -77,9 +77,11 @@ node22-ci
 ## container groups
 [centos_minimal_grp]
 centos9-minimal
+centos10-minimal
 
 [centos_base_grp]
 centos9-base
+centos10-base
 
 [rocky_base_grp]
 rocky8-base
@@ -98,24 +100,26 @@ centos_base_grp
 rocky_base_grp
 
 [centos9_based_grp]
+ansible
+keydb63
+go122-toolset
 httpd24
 nginx120
-nginx124
-php80-fpm
-php83-fpm
 nginx120_php80-fpm
-nginx124_php83-fpm
-nfs-ganesha5
-postgres13
-postgres16
-pgbouncer
-go122-toolset
-keydb63
 node18
 node18-ci
 node22
 node22-ci
-ansible
+php80-fpm
+postgres13
+
+[centos10_based_grp]
+nfs-ganesha5
+nginx126
+nginx126_php83-fpm
+pgbouncer
+php83-fpm
+postgres16
 
 [rootfs_grp:children]
 minimal_grp
@@ -144,8 +148,8 @@ moodle45
 moodle45_bundle
 moodle45_httpd24
 moodle45_kio
-moodle45_nginx124
-moodle45_nginx124_php83-fpm
+moodle45_nginx126
+moodle45_nginx126_php83-fpm
 moodle45_php83-fpm
 
 [moodle_web_grp]
@@ -166,11 +170,11 @@ moodle45_kio
 
 [moodle_nginx_grp]
 moodle41_nginx120
-moodle45_nginx124
+moodle45_nginx126
 
 [moodle_nginx_php_fpm_grp]
 moodle41_nginx120_php80-fpm
-moodle45_nginx124_php83-fpm
+moodle45_nginx126_php83-fpm
 
 [moodle_php_fpm_grp]
 moodle41_php80-fpm
@@ -186,7 +190,7 @@ base_grp
 ansible
 httpd24
 nginx120
-nginx124
+nginx126
 nfs-ganesha5
 php80-fpm
 php83-fpm
@@ -200,7 +204,7 @@ keydb63
 
 [build_step_4]
 nginx120_php80-fpm
-nginx124_php83-fpm
+nginx126_php83-fpm
 ansible-docker-ci
 ansible-podman-ci
 node18-ci
@@ -214,8 +218,8 @@ moodle41_nginx120
 moodle41_nginx120_php80-fpm
 moodle41_php80-fpm
 moodle41_httpd24
-moodle45_nginx124
-moodle45_nginx124_php83-fpm
+moodle45_nginx126
+moodle45_nginx126_php83-fpm
 moodle45_php83-fpm
 moodle45_httpd24
 

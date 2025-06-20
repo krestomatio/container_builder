@@ -4,6 +4,7 @@ dockerfile_builder_image_title: CentOS {{ centos_version }} Stream Minimal Image
 # rootfs
 rootfs_repo_contentdir: centos
 rootfs_repo_baseos_name: 'CentOS Stream $releasever - BaseOS'
-rootfs_repo_baseos_mirrorlist: 'http://mirrorlist.centos.org/?release=$stream&arch=$basearch&repo=BaseOS&infra=$infra'
-rootfs_repo_baseos_gpgkey: 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official'
+rootfs_repo_baseos_mirrorlist: ''
+rootfs_repo_baseos_metalink: 'https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http'
+rootfs_repo_baseos_gpgkey: 'https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official-SHA256'
 rootfs_release_pkg: centos-stream-release

@@ -9,7 +9,7 @@ ENV IMAGE_NAME=ansible-docker-ci \
     IMAGE_TITLE="Ansible CI image based on Docker 26-dind"
 
 # Container variables
-ENV ANSIBLE_VERSION="2.15.*" \
+ENV ANSIBLE_VERSION="2.18.*" \
     MOLECULE_VERSION="5.1.*" \
     CTR_APK="apk add --update --no-cache" \
     CTR_PIP="pip install --no-cache --upgrade" \
@@ -48,7 +48,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="1.2.2"
+ENV ORAS_VERSION="1.2.3"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -62,13 +62,13 @@ RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
 
-ENV BUILDX_VERSION="0.20.1"
+ENV BUILDX_VERSION="0.25.0"
 RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     mkdir -p /usr/local/lib/docker/cli-plugins && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.10.5"
+ENV TERRAFORM_VERSION="1.12.2"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \
@@ -91,4 +91,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.15.*,docker,docker26-dind"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.18.*,docker,docker26-dind"

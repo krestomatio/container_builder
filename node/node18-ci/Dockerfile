@@ -11,7 +11,9 @@ ENV IMAGE_NAME=node:18-ci \
 USER 0
 
 RUN install-pkgs make git curl tar xz unzip procps-ng
-RUN npm i -g @nestjs/cli@10 npm-check depcheck; npm cache clean --force; rm -rf ~/.npm
+RUN npm i -g @nestjs/cli@10 npm-check depcheck && \
+    npm cache clean --force && \
+    rm -rf ~/.npm
 
 # Labels
 LABEL name="${IMAGE_NAME}" \

@@ -4,8 +4,8 @@
 postgres16_image:
   variant_name: "postgres:16"
   build: False
-  version: "16.0.3"
-  tags: "16,16.0,16.0.3,postgres16-07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  artifact_tag: "07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  repo_digest: "quay.io/krestomatio/postgres:16@sha256:6b73a643e1b7539e52cc9f5951ba13aa957ccdb035b3277510720455c4395276"
+  version: "16.0.4"
+  tags: "16,16.0,16.0.4,postgres16-b33b0b1135bff46ec84534fccab021d244edf76c"
+  artifact_tag: "b33b0b1135bff46ec84534fccab021d244edf76c"
+  repo_digest: "quay.io/krestomatio/postgres:16@sha256:fcc0dd5fffe9d9c1549504e6ade275cb72393582512e000f2445ba7e0be79aa4"
   relative_path: "postgres/postgres16"

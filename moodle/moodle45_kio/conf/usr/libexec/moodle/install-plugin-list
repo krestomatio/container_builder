@@ -161,6 +161,10 @@ $defaults = array(
     CURLOPT_SSL_VERIFYHOST => 2,
     CURLOPT_SSL_VERIFYPEER => true,
     CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_HTTPHEADER => array(
+        'Accept: application/json',
+        'User-Agent: Mozilla/5.0 (compatible; GenericBot/1.0;)'
+    ),
 );
 
 $curl = curl_init();

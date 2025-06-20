@@ -5,9 +5,9 @@ Extends [moodle:4.1](#moodle41) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.1.15
-* Moodle version number: 2022112815.06
-* Moodle commit: ddf5aa14c0b0bf41a5ce441d3d4b16ee1912b418
+* Moodle version: 4.1.19
+* Moodle version number: 2022112819.01
+* Moodle commit: 4f61b2974b97f1c9a31022e750446fc52a6f416b
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Plugins

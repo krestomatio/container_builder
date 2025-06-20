@@ -9,9 +9,9 @@ ENV IMAGE_NAME=ansible \
     IMAGE_TITLE="Ansible image based on CentOS 9 Stream minimal"
 
 # Container variables
-ENV ANSIBLE_VERSION="2.15.*" \
+ENV ANSIBLE_VERSION="2.18.*" \
     MOLECULE_VERSION="5.1.*" \
-    PYTHON_VERSION="3.11" \
+    PYTHON_VERSION="3.12" \
     CTR_PIP="pip${PYTHON_VERSION:-3} install --no-cache --upgrade" \
     CTR_PIP_EXTRA="yamllint ansible-lint flake8 cryptography git-semver openshift makejinja"
 

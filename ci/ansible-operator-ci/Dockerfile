@@ -79,4 +79,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.15.*,ansible-operator,ansible-operator1.37.1,operator-version1.39.1"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.18.*,ansible-operator,ansible-operator1.37.1,operator-version1.39.1"

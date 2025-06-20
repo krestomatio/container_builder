@@ -4,8 +4,8 @@
 moodle45_nginx124_php83_fpm_image:
   variant_name: "moodle:4.5-nginx_php-fpm"
   build: False
-  version: "4.5.1"
-  tags: "4.5-nginx_php-fpm,4.5.1-nginx_php-fpm,moodle45_nginx124_php83-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  artifact_tag: "07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx_php-fpm@sha256:e83b3c853597b1c4309afb3a48fb098e8188376afbbd58444fa540b51fb0fc02"
+  version: "4.5.5"
+  tags: "4.5-nginx_php-fpm,4.5.5-nginx_php-fpm,moodle45_nginx124_php83-fpm-b33b0b1135bff46ec84534fccab021d244edf76c"
+  artifact_tag: "b33b0b1135bff46ec84534fccab021d244edf76c"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx_php-fpm@sha256:3e7ea4abae162ba0eea0e299e8528e78e03adc38e0533c2d156bb7a3bfe7f429"
   relative_path: "moodle/moodle45_nginx124_php83-fpm"

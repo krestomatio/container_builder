@@ -4,8 +4,8 @@
 nginx124_php83_fpm_image:
   variant_name: "nginx:1.24-php-fpm"
   build: False
-  version: "1.24.3"
-  tags: "1.24-php-fpm,1.24.3-php-fpm,nginx124_php83-fpm-07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  artifact_tag: "07aae8f95e3d0deba8e3f94e1ac576245ae97384"
-  repo_digest: "quay.io/krestomatio/nginx:1.24-php-fpm@sha256:6424ed07d1029c70c1765f7aad2cf91d458f94d07c48e2558515a7b3ceb123a0"
+  version: "1.24.4"
+  tags: "1.24-php-fpm,1.24.4-php-fpm,nginx124_php83-fpm-b33b0b1135bff46ec84534fccab021d244edf76c"
+  artifact_tag: "b33b0b1135bff46ec84534fccab021d244edf76c"
+  repo_digest: "quay.io/krestomatio/nginx:1.24-php-fpm@sha256:957b529251bf44356eef5e038c1f3b0db442bf8e7ca0ff873f473d9b50de55fa"
   relative_path: "nginx/nginx124_php83-fpm"

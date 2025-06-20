@@ -66,34 +66,34 @@ moodle_version_plugin_list:
     - plagiarism_turnitin
     - plagiarism_turnitinsim
   "4.5":
-    # - block_checklist
+    - block_checklist
     - block_completion_progress
     - block_xp
     - format_tiles
-    # - format_onetopic
-    # - format_grid
-    # - format_topcoll
-    # - gradeexport_checklist
+    - format_onetopic
+    - format_grid
+    - format_topcoll
+    - gradeexport_checklist
     # - mod_questionnaire
-    # - mod_attendance
-    # - mod_checklist
+    - mod_attendance
+    - mod_checklist
     - mod_customcert
-    # - mod_zoom
+    - mod_zoom
     - mod_game
     - theme_moove
-    # - theme_boost_union
+    - theme_boost_union
     # microsoft
-    # - auth_oidc
-    # - block_microsoft
-    # - local_o365
-    # - local_office365
-    # - repository_office365
-    # - theme_boost_o365teams
-    # - local_onenote
-    # - assignfeedback_onenote
-    # - assignsubmission_onenote
+    - auth_oidc
+    - block_microsoft
+    - local_o365
+    - local_office365
+    - repository_office365
+    - theme_boost_o365teams
+    - local_onenote
+    - assignfeedback_onenote
+    - assignsubmission_onenote
     # turnitin
-    # - plagiarism_turnitin
-    # - plagiarism_turnitinsim
+    - plagiarism_turnitin
+    - plagiarism_turnitinsim
 
 moodle_plugin_list: "{{ moodle_version_plugin_list[moodle_version] }}"

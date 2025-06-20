@@ -107,7 +107,9 @@ spec:
             else
               echo "not promoted"
             fi
-  podTemplate: {}
+  podTemplate:
+    nodeSelector:
+      kubernetes.io/arch: amd64
   serviceAccountName: tekton-bot
   timeout: 240h0m0s
 status: {}

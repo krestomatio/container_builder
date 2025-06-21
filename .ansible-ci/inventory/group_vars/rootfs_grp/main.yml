@@ -16,6 +16,6 @@ rootfs_dnf_vars: "contentdir={{ rootfs_repo_contentdir }} stream={{ rootfs_repo_
 rootfs_extra_pkgs: ""
 
 # prepare
-distro_version_regex: '(?<=release\-).*(?=\.el\d\.noarch)'
+distro_version_regex: '(?<=release\-).*(?=\.el\d+\.noarch)'
 pkgs_list_file: "pkg_list"
 pkgs_list_dest: "{{ generated_path }}/{{ pkgs_list_file }}"

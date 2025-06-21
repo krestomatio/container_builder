@@ -1,2 +1,0 @@
-# image
-nginx_version: "{{ nginx_versions.124 }}"

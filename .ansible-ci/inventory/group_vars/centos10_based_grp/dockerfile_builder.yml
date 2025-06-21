@@ -1,0 +1,4 @@
+image_from_ctr: centos10-base
+image_tag_from_ctr: 10-base
+dockerfile_builder_image_from_repo_name: centos
+dockerfile_builder_image_based: "CentOS 10 Stream minimal"

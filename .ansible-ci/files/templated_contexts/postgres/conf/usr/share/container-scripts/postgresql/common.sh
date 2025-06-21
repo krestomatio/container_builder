@@ -181,6 +181,8 @@ function generate_postgresql_config() {
     echo "log_filename = '$(basename "${POSTGRESQL_LOG_DESTINATION}")'" >>"${POSTGRESQL_CONFIG_FILE}"
   fi
 
+  echo "password_encryption = '${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}'" >>"${POSTGRESQL_CONFIG_FILE}"
+
   generate_postgresql_libraries_config
   (
   shopt -s nullglob
@@ -235,10 +237,10 @@ EOF
 #
 
 # Allow connections from all hosts.
-host all all all md5
+host all all all ${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}
 
 # Allow replication connections from all hosts.
-host replication all all md5
+host replication all all ${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}
 EOF
 }
 

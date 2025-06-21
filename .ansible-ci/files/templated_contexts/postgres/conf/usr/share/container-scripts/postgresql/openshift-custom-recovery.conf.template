@@ -4,7 +4,7 @@
 #
 # Custom OpenShift configuration.
 #
-# NOTE: This file is rewritten every time the container is started!
+# NOTE: This file is rewritten every time the container is started!
 #       Changes to this file will be overwritten.
 #
 

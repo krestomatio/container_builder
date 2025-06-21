@@ -59,7 +59,7 @@ USER 0
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-COPY --from=old_pg_bin /opt/pg_bin/ ${HOME}/old_pg_bin_${POSTGRES_PREV_VERSION}
+COPY --from=old_pg_bin /opt/pg_bin/ /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION}/bin
 
 RUN container-setup && container-setup-postgres
 

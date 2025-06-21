@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle45_nginx126_image:
+  variant_name: "moodle:4.5-nginx"
+  build: False
+  version: "4.5.5"
+  tags: "4.5-nginx,4.5.5-nginx,moodle45_nginx126-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx@sha256:47a59ef7347edbe8e7250580933d1ce6d2ea8978ae63ea8323c39b40cb953bf9"
+  relative_path: "moodle/moodle45_nginx126"

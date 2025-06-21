@@ -37,11 +37,12 @@ microdnf --config /etc/dnf/dnf.conf --refresh --noplugins --nodocs \
 cp -rp ${ROOTFS_INSTALL_DIR}/etc/pki/rpm-gpg/* /etc/pki/rpm-gpg/
 
 # install other packages
-## TODO: varsdir seems to be looking inside installroot, even though ${ROOTFS_INSTALL_DIR} is not prepended when setting its value
+source /etc/os-release
+ROOTFS_EXTRA_PKGS_VARS_DIR="$([[ "${VERSION_ID}" -ge 40 ]] && echo "${ROOTFS_INSTALL_DIR}/etc/dnf/vars" || echo "/etc/dnf/vars")"
 if ! [ -z "${ROOTFS_EXTRA_PKGS}" ]; then
     microdnf --config /etc/dnf/dnf.conf --noplugins --nodocs \
         --setopt=cachedir=/tmp_dnf/cache \
-        --setopt=varsdir=/etc/dnf/vars \
+        --setopt=varsdir=${ROOTFS_EXTRA_PKGS_VARS_DIR} \
         --setopt=reposdir=${ROOTFS_INSTALL_DIR}/etc/yum.repos.d \
         --installroot=${ROOTFS_INSTALL_DIR} \
         --releasever=${ROOTFS_REPO_RELEASEVER} \
@@ -72,7 +73,7 @@ if [ ! -z ${ROOTFS_EXTRA_REMOVAL} ] && [ "${ROOTFS_EXTRA_REMOVAL,,}" != "false" 
     rm -rfv ${ROOTFS_INSTALL_DIR}/usr/share/icons/*
     ## remove systemd
     rm -rfv ${ROOTFS_INSTALL_DIR}/usr/lib/systemd
-    # reinstall tzdata if to change timezone
+    # reinstall tzdata to change timezone
     rm -fv ${ROOTFS_INSTALL_DIR}/etc/localtime
     mv ${ROOTFS_INSTALL_DIR}/usr/share/zoneinfo/UTC ${ROOTFS_INSTALL_DIR}/etc/localtime
     rm -rfv  ${ROOTFS_INSTALL_DIR}/usr/share/zoneinfo/*

@@ -6,20 +6,20 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx124-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx124_php83-fpm-b33b0b1135bff46ec84534fccab021d244edf76c`
-- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-b33b0b1135bff46ec84534fccab021d244edf76c`
+- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx126-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx126_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
 
 
 ## Image Variants
@@ -181,15 +181,15 @@ Moodle PHP-FPM image based on CentOS 9 Stream minimal for Moodle app/source (not
 ### moodle:4.5
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45)
 
-This CentOS 9 Stream minimal based container image runs PHP 8.3 (default) or NGINX 1.24 for Moodle 4.5. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
+This CentOS 9 Stream minimal based container image runs PHP 8.3 (default) or NGINX 1.26 for Moodle 4.5. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
 
 It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.01
-* Moodle commit: 95518023c6216c1284b05377d673f8a5ebddeeb7
+* Moodle version number: 2024100705.02
+* Moodle commit: 97ed6b7083cfb547c14ae3a2dcaf759079d48f66
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds
@@ -259,8 +259,8 @@ Extends [moodle:4.5](#moodle45) to add additional Moodle plugins.
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.01
-* Moodle commit: 95518023c6216c1284b05377d673f8a5ebddeeb7
+* Moodle version number: 2024100705.02
+* Moodle commit: 97ed6b7083cfb547c14ae3a2dcaf759079d48f66
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Plugins
@@ -314,12 +314,12 @@ The following is the list of plugins:
 - [plagiarism_turnitinsim](https://moodle.org/plugins/plagiarism_turnitinsim)
 
 ### moodle:4.5-nginx
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45_nginx124)
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45_nginx126)
 
 Image based on CentOS 9 Stream minimal with [nginx HTTP Server](https://nginx.org/) for Moodle app/source (not included)
 
 ### moodle:4.5-nginx_php-fpm
-> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45_nginx124_php83-fpm)
+> [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45_nginx126_php83-fpm)
 
 Image based on CentOS 9 Stream minimal with [nginx HTTP Server](https://nginx.org/) and [PHP-FPM](https://php-fpm.org/) for Moodle app/source (not included)
 

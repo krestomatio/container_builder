@@ -13,7 +13,7 @@ ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST='https://mirrors.rockylinux.org/mirrorlist
 ARG ARG_ROOTFS_REPO_BASEOS_METALINK=''
 ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='https://download.rockylinux.org/pub/rocky/RPM-GPG-KEY-Rocky-8'
 ARG ARG_ROOTFS_DNF_VARS='contentdir=rocky stream=8-stream infra=container'
-ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles'
+ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles tzdata'
 ARG ARG_ROOTFS_RELEASE_PKG='rocky-release'
 
 ENV TARGETOS=${TARGETOS} \

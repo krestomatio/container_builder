@@ -1,15 +1,15 @@
 ### moodle:4.5
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45)
 
-This CentOS 9 Stream minimal based container image runs PHP 8.3 (default) or NGINX 1.24 for Moodle 4.5. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
+This CentOS 9 Stream minimal based container image runs PHP 8.3 (default) or NGINX 1.26 for Moodle 4.5. Use it as an inmutable image packing Moodle source, (optionally) moodle plugins, and executables for php-fpm and nginx.
 
 It includes a copy of Moodle source code, ready in the image public folder. A specific git commit is used to get the Moodle source version. That commit is fetch every build from remote repo to keep it up to date.  It is build from the latest available Moodle version (depending on the remote repo and branch set).
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.01
-* Moodle commit: 95518023c6216c1284b05377d673f8a5ebddeeb7
+* Moodle version number: 2024100705.02
+* Moodle commit: 97ed6b7083cfb547c14ae3a2dcaf759079d48f66
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds

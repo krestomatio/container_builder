@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+centos10_minimal_image:
+  variant_name: "centos:10-minimal"
+  build: False
+  version: "10.0.8"
+  tags: "10-minimal,10.0-minimal,10.0.8-minimal,centos10-minimal-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/centos:10-minimal@sha256:2cfcb62e76efe48a17e383bf55748c599d2739a949e04eab2ce27cd0ed13b720"
+  relative_path: "centos/centos10-minimal"

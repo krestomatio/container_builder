@@ -1,0 +1,45 @@
+#!/bin/bash -eux
+# description: set user and group id
+
+# REQUIRED ENVIRONMENT VARS:
+# CTR_USER              Desire user and group name
+# CTR_USER_ID           Desire user id and group id
+# CTR_USER_GECOS        Desire GECOS field value
+
+# vars
+user_id=$(id -u ${CTR_USER} || true)
+user_id_used_by_user_name=$(id -un ${CTR_USER_ID} || true)
+group_id=$(id -g ${CTR_USER} || true)
+group_id_used_by_group_name=$(getent group ${CTR_USER_ID} | cut -d: -f1 || true)
+
+# error when user id or group id are not available
+if [ "${user_id_used_by_user_name:-${CTR_USER}}" != "${CTR_USER}" ]; then
+    echo "Error: cannot assing user id ${CTR_USER_ID} to user ${CTR_USER}. It is being used by ${user_id_used_by_user_name}"
+    exit 1
+fi
+if [ "${group_id_used_by_group_name:-${CTR_USER}}" != "${CTR_USER}" ]; then
+    echo "Error: cannot assing group id ${CTR_USER_ID} to group ${CTR_USER}. It is being used by ${group_id_used_by_group_name}"
+    exit 1
+fi
+
+# set group id
+if [ -z $group_id ]; then
+    # add group id
+    echo "${CTR_USER}:x:${CTR_USER_ID}:" >> /etc/group
+else
+    if [ "${group_id}" != ${CTR_USER_ID} ]; then
+        # update group id
+        sed -i "s@^${CTR_USER}:.*@${CTR_USER}:x:${CTR_USER_ID}:@" /etc/group
+    fi
+fi
+
+# set user id
+if [ -z $user_id ]; then
+    # add user id
+    echo "${CTR_USER}:x:${CTR_USER_ID}:${CTR_USER_ID}:${CTR_USER_GECOS}:${CTR_USER_HOME:-$CTR_HOME}:${CTR_USER_SHELL:-/sbin/nologin}" >> /etc/passwd
+else
+    if [ "${user_id}" != ${CTR_USER_ID} ] || [ "${group_id}" != ${CTR_USER_ID} ]; then
+        # update user id
+        sed -i "s@^${CTR_USER}:.*@${CTR_USER}:x:${CTR_USER_ID}:${CTR_USER_ID}:${CTR_USER_GECOS}:${CTR_USER_HOME:-$CTR_HOME}:${CTR_USER_SHELL:-/sbin/nologin}@" /etc/passwd
+    fi
+fi

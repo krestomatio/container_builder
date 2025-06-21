@@ -1,0 +1,21 @@
+#!/bin/bash -e
+# description: additional entrypoint script for nginx
+
+# Exit if php-fpm is installed and nginx conf file not writable
+if rpm -q php-fpm &>/dev/null; then
+    if ! [ -w "${NGINX_MAIN_CONF_FILE}" ]; then
+        echo "PHP-FPM installed and ${NGINX_MAIN_CONF_FILE} not writable...doing nothing here"
+        exit 0
+    fi
+fi
+
+# nginx default config
+sed -i \
+    -e "s@__worker_processes__@${NGINX_WORKER_PROCESSES}@" \
+    -e "s@__pid_file__@${NGINX_VAR_RUN_PATH}/nginx.pid@" \
+    -e "s@__worker_connections__@${NGINX_WORKER_CONNECTIONS}@" \
+    -e "s@__listen__@${NGINX_LISTEN}@" \
+    -e "s@__server_name__@${NGINX_SERVER_NAME}@" \
+    -e "s@__rootdocument__@${NGINX_DOCUMENTROOT}@" \
+    -e "s@__listen_option__@${NGINX_LISTEN_OPTIONS}@" \
+    ${NGINX_MAIN_CONF_FILE}

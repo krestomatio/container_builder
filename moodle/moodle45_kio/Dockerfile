@@ -50,10 +50,10 @@ FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
 ENV IMAGE_NAME=moodle:4.5-kio \
-    IMAGE_SUMMARY="PHP 8.3 and NGINX 1.24 for Moodle 4.5" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP 8.3 or NGINX 1.24 for Moodle 4.5" \
-    IMAGE_TITLE="PHP 8.3 and NGINX 1.24 for Moodle 4.5" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php83,php-83,nginx,nginx-124,nginx124,moodle,moodle45,moodle-45" \
+    IMAGE_SUMMARY="PHP 8.3 and NGINX 1.26 for Moodle 4.5" \
+    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP 8.3 or NGINX 1.26 for Moodle 4.5" \
+    IMAGE_TITLE="PHP 8.3 and NGINX 1.26 for Moodle 4.5" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php83,php-83,nginx,nginx-126,nginx126,moodle,moodle45,moodle-45" \
     TZ="UTC" \
     LANG="en_AU.UTF-8"
 

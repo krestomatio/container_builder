@@ -1,5 +1,5 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:10-base
 FROM ${ARG_IMAGE_FROM} AS nfs-ganesha-builder
 
 USER 0
@@ -32,8 +32,10 @@ RUN install-pkgs \
         libnfsidmap-devel \
         libnsl2-devel \
         libuuid-devel \
-        userspace-rcu-devel \
         ninja-build \
+        python3-devel \
+        python3-setuptools \
+        userspace-rcu-devel \
         xfsprogs-devel
 
 ENV NFS_GANESHA_VERSION="5.9" \
@@ -90,13 +92,13 @@ RUN mkdir -p ${DESTDIR} && \
     /bin/cp CMakeCache.txt install_manifest.txt ${DESTDIR}/usr/local/opt/ganesha && \
     fix-permissions -u ${CTR_USER_ID} ${DESTDIR}
 
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:10-base
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=nfs-ganesha:5.9 \
     IMAGE_SUMMARY="NFSv4 Ganesha Server V5" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs a NFSv4 Ganesha server." \
+    IMAGE_DESCRIPTION="This CentOS 10 Stream minimal based container image runs a NFSv4 Ganesha server." \
     IMAGE_TITLE="NFSv4 Ganesha Server V5" \
     IMAGE_SERVICE_PORT="2049" \
     IMAGE_SERVICE_NAME="nfs" \
@@ -159,7 +161,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="5.9.6" \
+      org.opencontainers.image.version="5.9.7" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

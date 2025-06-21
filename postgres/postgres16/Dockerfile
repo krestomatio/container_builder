@@ -1,5 +1,5 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:9-base
+ARG ARG_IMAGE_FROM=quay.io/krestomatio/centos:10-base
 FROM quay.io/krestomatio/rocky:9-base AS old_pg_bin
 
 # Component bash variables
@@ -15,7 +15,7 @@ FROM ${ARG_IMAGE_FROM}
 # General variables
 ENV IMAGE_NAME=postgres:16 \
     IMAGE_SUMMARY="Postgres 16" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs Postgres 16. \
+    IMAGE_DESCRIPTION="This CentOS 10 Stream minimal based container image runs Postgres 16. \
 It follows https://github.com/sclorg/postgresql-container" \
     IMAGE_TITLE="Postgres 16" \
     IMAGE_SERVICE_PORT="5432" \
@@ -72,7 +72,7 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.title="${IMAGE_TITLE}" \
       org.opencontainers.image.authors="Job Céspedes Ortiz <jobcespedes@krestomatio.com>" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
-      org.opencontainers.image.version="16.0.4" \
+      org.opencontainers.image.version="16.0.5" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
       io.openshift.expose-services="${IMAGE_SERVICE_PORT}:${IMAGE_SERVICE_NAME}" \

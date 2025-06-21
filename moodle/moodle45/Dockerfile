@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_405_STABLE"
-ARG ARG_MOODLE_COMMIT="95518023c6216c1284b05377d673f8a5ebddeeb7"
+ARG ARG_MOODLE_COMMIT="97ed6b7083cfb547c14ae3a2dcaf759079d48f66"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -47,10 +47,10 @@ FROM ${ARG_IMAGE_FROM}
 
 # General ansible variables
 ENV IMAGE_NAME=moodle:4.5 \
-    IMAGE_SUMMARY="PHP 8.3 and NGINX 1.24 for Moodle 4.5" \
-    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP 8.3 or NGINX 1.24 for Moodle 4.5" \
-    IMAGE_TITLE="PHP 8.3 and NGINX 1.24 for Moodle 4.5" \
-    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php83,php-83,nginx,nginx-124,nginx124,moodle,moodle45,moodle-45" \
+    IMAGE_SUMMARY="PHP 8.3 and NGINX 1.26 for Moodle 4.5" \
+    IMAGE_DESCRIPTION="This CentOS 9 Stream minimal based container image runs PHP 8.3 or NGINX 1.26 for Moodle 4.5" \
+    IMAGE_TITLE="PHP 8.3 and NGINX 1.26 for Moodle 4.5" \
+    IMAGE_OC_TAGS="${IMAGE_NAME},php,php-fpm,php83,php-83,nginx,nginx-126,nginx126,moodle,moodle45,moodle-45" \
     TZ="UTC" \
     LANG="en_AU.UTF-8"
 
@@ -94,8 +94,8 @@ USER ${CTR_USER_ID}
 ARG ARG_MOODLE_PLUGIN_LIST=""
 ARG ARG_MOODLE_REMOTE="https://github.com/moodle/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_405_STABLE"
-ARG ARG_MOODLE_COMMIT="95518023c6216c1284b05377d673f8a5ebddeeb7"
-ARG ARG_MOODLE_VERSION_NUMBER="2024100705.01"
+ARG ARG_MOODLE_COMMIT="97ed6b7083cfb547c14ae3a2dcaf759079d48f66"
+ARG ARG_MOODLE_VERSION_NUMBER="2024100705.02"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \

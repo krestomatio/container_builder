@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+centos10_base_image:
+  variant_name: "centos:10-base"
+  build: False
+  version: "10.0.8"
+  tags: "10-base,10.0-base,10.0.8-base,centos10-base-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/centos:10-base@sha256:7336d0cdf30ad7d97a4372605a59881166a2ecebf3a2418c47099848c36d689d"
+  relative_path: "centos/centos10-base"

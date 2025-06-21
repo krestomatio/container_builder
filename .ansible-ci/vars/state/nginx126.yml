@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nginx126_image:
+  variant_name: "nginx:1.26"
+  build: False
+  version: "1.26.2"
+  tags: "1.26,1.26.2,nginx126-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/nginx:1.26@sha256:fc5ca002a264cea52144641dae9b2876f2bd650b275a632c07fe3ea1c63450ce"
+  relative_path: "nginx/nginx126"

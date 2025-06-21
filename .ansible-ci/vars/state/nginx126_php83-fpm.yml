@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+nginx126_php83_fpm_image:
+  variant_name: "nginx:1.26-php-fpm"
+  build: False
+  version: "1.26.2"
+  tags: "1.26-php-fpm,1.26.2-php-fpm,nginx126_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/nginx:1.26-php-fpm@sha256:170678de5cdd9d87e87587df96d2b6b4f54eb8f7609e06a0c71fa47e01a041eb"
+  relative_path: "nginx/nginx126_php83-fpm"

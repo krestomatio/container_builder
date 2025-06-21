@@ -1,0 +1,22 @@
+#!/bin/bash -e
+# description: base config for container
+
+# dir for optional entrypoint scripts
+mkdir -p ${CTR_ENTRYPOINT_OPT_PATH}
+
+if ! [ -z ${TZ+x} ]; then
+    # install only specific timezones
+    timezone-set ${TZ}
+else
+    # install all timezones
+    timezone-set
+fi
+
+# specify lang
+if ! [ -z ${LANG+x} ]; then
+    install-pkgs glibc-locale-source
+    localedef -f UTF-8 -i "${LANG%.*}" "${LANG}"
+fi
+
+# default user
+# containeruser-create

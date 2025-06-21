@@ -13,7 +13,7 @@ ARG ARG_ROOTFS_REPO_BASEOS_MIRRORLIST=''
 ARG ARG_ROOTFS_REPO_BASEOS_METALINK='https://mirrors.centos.org/metalink?repo=centos-baseos-$stream&arch=$basearch&protocol=https,http'
 ARG ARG_ROOTFS_REPO_BASEOS_GPGKEY='https://www.centos.org/keys/RPM-GPG-KEY-CentOS-Official'
 ARG ARG_ROOTFS_DNF_VARS='contentdir=centos stream=9-stream infra=container'
-ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles'
+ARG ARG_ROOTFS_EXTRA_PKGS='bash coreutils-single glibc-minimal-langpack microdnf rootfiles tzdata'
 ARG ARG_ROOTFS_RELEASE_PKG='centos-stream-release'
 
 ENV TARGETOS=${TARGETOS} \

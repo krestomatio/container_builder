@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+moodle45_nginx126_php83_fpm_image:
+  variant_name: "moodle:4.5-nginx_php-fpm"
+  build: False
+  version: "4.5.5"
+  tags: "4.5-nginx_php-fpm,4.5.5-nginx_php-fpm,moodle45_nginx126_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b"
+  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx_php-fpm@sha256:29cb5356d291653df6af7ab5f3ee108a15f6a9212adb7e8c0c170b97dd8f5a76"
+  relative_path: "moodle/moodle45_nginx126_php83-fpm"

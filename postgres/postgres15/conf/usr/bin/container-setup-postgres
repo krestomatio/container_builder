@@ -1,0 +1,22 @@
+#!/bin/bash -e
+# description: base config for php-fpm
+
+# install pkgs
+## set module
+microdnf module enable -y postgresql:${POSTGRES_VERSION}
+## install pkgs
+install-pkgs -n ${OS_INSTALL_PKGS}
+
+# test version
+[[ "$(postgres --version | head -n1 | { read _ _ v; echo ${v}; })" == "${POSTGRES_VERSION}".* ]] || { echo "error: version differs from env var"; exit 1; }
+
+# In order to drop the root user, make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
+
+mkdir -p ${POSTGRES_RUN} ${POSTGRES_HOME} ${POSTGRES_DATA}
+
+fix-permissions -u ${CTR_USER_ID} ${POSTGRES_RUN} ${POSTGRES_HOME} ${POSTGRES_DATA}
+
+# restore rpm permissions
+rpm-file-permissions

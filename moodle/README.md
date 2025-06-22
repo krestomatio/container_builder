@@ -6,20 +6,20 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx126-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx126_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
-- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx126-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx126_php83-fpm-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-e27d033856df93b51733282c18c62afafb986687`
 
 
 ## Image Variants

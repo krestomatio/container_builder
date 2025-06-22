@@ -5,7 +5,7 @@ moodle41_bundle_image:
   variant_name: "moodle:4.1-bundle"
   build: False
   version: "4.1.19"
-  tags: "4.1-bundle,4.1.19-bundle,moodle41_bundle-62f9cdca283987b077d0663c8430260985b2ad1b"
-  artifact_tag: "62f9cdca283987b077d0663c8430260985b2ad1b"
-  repo_digest: "quay.io/krestomatio/moodle:4.1-bundle@sha256:d28e7fc9842b344b9209e64cc5bbb46fffee6516e11d0b41ee25903ce012b1b5"
+  tags: "4.1-bundle,4.1.19-bundle,moodle41_bundle-e27d033856df93b51733282c18c62afafb986687"
+  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
+  repo_digest: "quay.io/krestomatio/moodle:4.1-bundle@sha256:5e50324a44a5444d8a7caf7ecff3f02e8c0ae7182d5387cc9c06b4b72f0c2302"
   relative_path: "moodle/moodle41_bundle"

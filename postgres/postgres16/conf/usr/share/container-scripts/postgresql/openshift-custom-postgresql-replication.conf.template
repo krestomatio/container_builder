@@ -3,8 +3,8 @@
 
 # required on master for replication
 wal_level = hot_standby         # minimal, archive, hot_standby, or logical
-max_wal_senders = ${POSTGRESQL_MAX_WAL_SENDERS}             # max number of walsender processes
-wal_keep_size = ${POSTGRESQL_WAL_KEEP_SIZE}         # min size of past log file segments kept in the pg_wal directory; 0 disables
+max_wal_senders = ${POSTGRESQL_MAX_WAL_SENDERS}              # max number of walsender processes
+wal_keep_size = ${POSTGRESQL_WAL_KEEP_SIZE}            # number of segments (400) * size of segments (16MB each); 0 disables
 
 # required on replicas for replication
 hot_standby = on

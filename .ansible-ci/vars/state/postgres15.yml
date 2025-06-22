@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+postgres15_image:
+  variant_name: "postgres:15"
+  build: False
+  version: "15.0.2"
+  tags: "15,15.0,15.0.2,postgres15-e27d033856df93b51733282c18c62afafb986687"
+  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
+  repo_digest: "quay.io/krestomatio/postgres:15@sha256:98ad5675e38a5b64dd9dc54f659ca46039111017f5c94d5b0f9d1200c7b3a252"
+  relative_path: "postgres/postgres15"

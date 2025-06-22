@@ -6,7 +6,7 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [nfs-ganesha:5.9](#nfs-ganesha59): `5.9, 5.9.7, nfs-ganesha5-62f9cdca283987b077d0663c8430260985b2ad1b`
+- [nfs-ganesha:5.9](#nfs-ganesha59): `5.9, 5.9.8, nfs-ganesha5-e27d033856df93b51733282c18c62afafb986687`
 
 
 ## Image Variants

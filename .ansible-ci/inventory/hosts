@@ -112,6 +112,7 @@ node22
 node22-ci
 php80-fpm
 postgres13
+postgres16
 
 [centos10_based_grp]
 nfs-ganesha5
@@ -119,7 +120,6 @@ nginx126
 nginx126_php83-fpm
 pgbouncer
 php83-fpm
-postgres16
 
 [rootfs_grp:children]
 minimal_grp

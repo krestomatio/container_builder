@@ -1,5 +1,5 @@
 updatebot_moodle_ctr_name: moodle45
-updatebot_postgres_ctr_name: postgres16
+updatebot_postgres_ctr_name: postgres15
 updatebot_nginx_ctr_name: nginx126
 updatebot_keydb_ctr_name: keydb63
 updatebot_pgbouncer_ctr_name: pgbouncer

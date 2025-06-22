@@ -1,7 +1,7 @@
 # image
 postgres_version: "{{ postgres_versions.16 }}"
-postgres_prev_version: "{{ postgres_prev_versions.16 }}"
-postgres_prev_version_old_pg_bin_image_from: quay.io/krestomatio/rocky:9-base
+postgres_prev_version: "{{ postgres_prev_versions[postgres_version | int] }}"
+postgres_prev_version_old_pg_bin_image_from: "quay.io/sclorg/postgresql-15-c9s"
 postgres_prev_version_by_module: false
-postgres_version_by_module: "{{ true if postgres_version is defined and (postgres_version != postgres_versions.16 and image_tag_from_ctr == '9-base') else false }}"
+postgres_version_by_module: "{{ true if postgres_version is defined and (image_tag_from_ctr == '9-base' and postgres_version >= postgres_versions.16) else false }}"
 dockerfile_builder_image_lang: en_US.UTF-8

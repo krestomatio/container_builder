@@ -1,24 +1,5 @@
 # {{ ansible_managed  }}
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
-{% if postgres_prev_version_old_pg_bin_image_from is defined and postgres_prev_version_old_pg_bin_image_from %}
-FROM {{ postgres_prev_version_old_pg_bin_image_from }} AS old_pg_bin
-{% else %}
-FROM ${ARG_IMAGE_FROM} AS old_pg_bin
-{% endif %}
-
-# Component bash variables
-ENV POSTGRES_PREV_VERSION="{{ postgres_prev_version }}"
-
-{% if postgres_prev_version_by_module | default(true) %}
-RUN microdnf module enable -y postgresql:${POSTGRES_PREV_VERSION} && \
-    install-pkgs postgresql-server && \
-{% else %}
-RUN install-pkgs postgresql-server && \
-{% endif %}
-    mkdir -p /opt/pg_bin && \
-    cp -rp /usr/bin/{postgres,pg_*} /opt/pg_bin/
-
-
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
@@ -59,7 +40,7 @@ USER 0
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
 
-COPY --from=old_pg_bin /opt/pg_bin/ /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION}/bin
+COPY --from={{ postgres_prev_version_old_pg_bin_image_from }} --chown=${CTR_USER_ID}:0 /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION} /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION}
 
 RUN container-setup && container-setup-postgres
 

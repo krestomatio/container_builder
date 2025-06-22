@@ -1,5 +1,4 @@
 # image
 postgres_version: "{{ postgres_versions.13 }}"
 postgres_prev_version: "{{ postgres_prev_versions[postgres_version | int] }}"
-postgres_prev_version_old_pg_bin_image_from: "quay.io/sclorg/postgresql-12-c8s"
 dockerfile_builder_image_lang: en_US.UTF-8

@@ -33,14 +33,12 @@ ENV HOME="${CTR_HOME}" \
     PGUSER="$CTR_USER" \
     LANG="{{ dockerfile_builder_image_lang }}"
 
-ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib gettext nss_wrapper bind-utils procps-ng psmisc"
+ENV OS_INSTALL_PKGS="postgresql-server postgresql-contrib postgresql-upgrade pgaudit gettext nss_wrapper bind-utils procps-ng psmisc"
 
 USER 0
 
 COPY conf/usr /usr/
 COPY conf/container-entrypoint.d ${CTR_ENTRYPOINT_OPT_PATH}/
-
-COPY --from={{ postgres_prev_version_old_pg_bin_image_from }} --chown=${CTR_USER_ID}:0 /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION} /usr/lib64/pgsql/postgresql-${POSTGRES_PREV_VERSION}
 
 RUN container-setup && container-setup-postgres
 

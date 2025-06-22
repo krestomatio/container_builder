@@ -2,7 +2,6 @@
 # From https://github.com/sclorg/postgresql-container
 
 # Configuration settings.
-export POSTGRESQL_LOG_STDERR=${POSTGRESQL_LOG_STDERR:-}
 export POSTGRESQL_MAX_CONNECTIONS=${POSTGRESQL_MAX_CONNECTIONS:-100}
 export POSTGRESQL_MAX_PREPARED_TRANSACTIONS=${POSTGRESQL_MAX_PREPARED_TRANSACTIONS:-0}
 
@@ -22,6 +21,7 @@ else
     export POSTGRESQL_EFFECTIVE_CACHE_SIZE=${POSTGRESQL_EFFECTIVE_CACHE_SIZE:-$effective_cache}
 fi
 
+export POSTGRESQL_LOG_DESTINATION=${POSTGRESQL_LOG_DESTINATION:-}
 
 export POSTGRESQL_RECOVERY_FILE=$HOME/openshift-custom-recovery.conf
 export POSTGRESQL_CONFIG_FILE=$HOME/openshift-custom-postgresql.conf
@@ -110,6 +110,50 @@ function postgresql_master_addr() {
   echo -n "$(echo $endpoints | cut -d ' ' -f 1)"
 }
 
+# Converts the version in format x.y or x.y.z to a number.
+version2number ()
+{
+    local old_IFS=$IFS
+    local to_print= depth=${2-3} width=${3-2} sum=0 one_part
+    IFS='.'
+    set -- $1
+    while test $depth -ge 1; do
+        depth=$(( depth - 1 ))
+        part=${1-0} ; shift || :
+        printf "%0${width}d" "$part"
+    done
+    IFS=$old_IFS
+}
+
+# On non-intel arches, data_sync_retry = off does not work
+# Upstream discussion: https://www.postgresql.org/message-id/CA+mCpegfOUph2U4ZADtQT16dfbkjjYNJL1bSTWErsazaFjQW9A@mail.gmail.com
+# Upstream changes that caused this issue:
+# https://github.com/postgres/postgres/commit/483520eca426fb1b428e8416d1d014ac5ad80ef4
+# https://github.com/postgres/postgres/commit/9ccdd7f66e3324d2b6d3dec282cfa9ff084083f1
+# RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=1779150
+# Special handle of data_sync_retry should handle only in some cases.
+# These cases are: non-intel architectures, and version higher or equal 12.0, 10.7, 9.6.12
+# Return value 0 means the hack is needed.
+function should_hack_data_sync_retry() {
+  [ "$(uname -m)" == 'x86_64' ] && return 1
+  local version_number=$(version2number "$(pg_ctl -V | sed -e 's/^pg_ctl (PostgreSQL) //')")
+  # this matches all 12.x and versions of 10.x where we need the hack
+  [ "$version_number" -ge 100700 ] && return 0
+  # this matches all 10.x that were not matched above
+  [ "$version_number" -ge 100000 ] && return 1
+  # this matches all 9.x where need the hack
+  [ "$version_number" -ge 090612 ] && return 0
+  # all rest should be older 9.x releases
+  return 1
+}
+
+function generate_postgresql_libraries_config() {
+  if [ -v POSTGRESQL_LIBRARIES ]; then
+    echo "shared_preload_libraries='${POSTGRESQL_LIBRARIES}'" >> "${POSTGRESQL_CONFIG_FILE}"
+  fi
+}
+
+
 # New config is generated every time a container is created. It only contains
 # additional custom settings and is included from $PGDATA/postgresql.conf.
 function generate_postgresql_config() {
@@ -123,24 +167,23 @@ function generate_postgresql_config() {
         >> "${POSTGRESQL_CONFIG_FILE}"
   fi
 
-  if [ "$(uname -p)" != 'x86_64' ]; then
-    # On non-intel arches, data_sync_retry = off does not work
-    # Upstream discussion: https://www.postgresql.org/message-id/CA+mCpegfOUph2U4ZADtQT16dfbkjjYNJL1bSTWErsazaFjQW9A@mail.gmail.com
-    # Upstream changes that caused this issue:
-    # https://github.com/postgres/postgres/commit/483520eca426fb1b428e8416d1d014ac5ad80ef4
-    # https://github.com/postgres/postgres/commit/9ccdd7f66e3324d2b6d3dec282cfa9ff084083f1
-    # RHBZ: https://bugzilla.redhat.com/show_bug.cgi?id=1779150
+  if should_hack_data_sync_retry ; then
     echo "data_sync_retry = on" >>"${POSTGRESQL_CONFIG_FILE}"
   fi
 
   # For easier debugging, allow users to log to stderr (will be visible
   # in the pod logs) using a single variable
   # https://github.com/sclorg/postgresql-container/issues/353
-  if [ -n "${POSTGRESQL_LOG_STDERR:-}" ] ; then
+  if [ -n "${POSTGRESQL_LOG_DESTINATION:-}" ] ; then
     echo "log_destination = 'stderr'" >>"${POSTGRESQL_CONFIG_FILE}"
-    echo "logging_collector = off" >>"${POSTGRESQL_CONFIG_FILE}"
+    echo "logging_collector = on" >>"${POSTGRESQL_CONFIG_FILE}"
+    echo "log_directory = '$(dirname "${POSTGRESQL_LOG_DESTINATION}")'" >>"${POSTGRESQL_CONFIG_FILE}"
+    echo "log_filename = '$(basename "${POSTGRESQL_LOG_DESTINATION}")'" >>"${POSTGRESQL_CONFIG_FILE}"
   fi
 
+  echo "password_encryption = '${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}'" >>"${POSTGRESQL_CONFIG_FILE}"
+
+  generate_postgresql_libraries_config
   (
   shopt -s nullglob
   for conf in "${APP_DATA}"/src/postgresql-cfg/*.conf; do
@@ -159,7 +202,7 @@ function generate_postgresql_recovery_config() {
 function generate_passwd_file() {
   export USER_ID=$(id -u)
   export GROUP_ID=$(id -g)
-  grep -v -e ^postgres -e ^$USER_ID /etc/passwd > "$HOME/passwd"
+  grep -v -e ^postgres -e ^$USER_ID -e ^$(id -un) /etc/passwd > "$HOME/passwd"
   echo "postgres:x:${USER_ID}:${GROUP_ID}:PostgreSQL Server:${HOME}:/bin/bash" >> "$HOME/passwd"
   export LD_PRELOAD=libnss_wrapper.so
   export NSS_WRAPPER_PASSWD=${HOME}/passwd
@@ -170,7 +213,7 @@ initdb_wrapper ()
 {
   # Initialize the database cluster with utf8 support enabled by default.
   # This might affect performance, see:
-  # http://www.postgresql.org/docs/13/static/locale.html
+  # http://www.postgresql.org/docs/16/static/locale.html
   LANG=${LANG:-en_US.utf8} "$@"
 }
 
@@ -194,10 +237,10 @@ EOF
 #
 
 # Allow connections from all hosts.
-host all all all md5
+host all all all ${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}
 
 # Allow replication connections from all hosts.
-host replication all all md5
+host replication all all ${POSTGRESQL_PASSWORD_ENCRYPTION:-md5}
 EOF
 }
 
@@ -209,6 +252,8 @@ function create_users() {
 
   if [ -v POSTGRESQL_MASTER_USER ]; then
     createuser "$POSTGRESQL_MASTER_USER"
+    echo "ALTER DATABASE postgres OWNER TO $POSTGRESQL_MASTER_USER;" | psql
+    echo "GRANT ALL PRIVILEGES on DATABASE postgres TO $POSTGRESQL_MASTER_USER;" | psql
   fi
 }
 
@@ -216,6 +261,7 @@ migrate_db ()
 {
     test "$postinitdb_actions" = ",migration" || return 0
 
+    set -o pipefail
     # Migration path.
     (
         if [ ${POSTGRESQL_MIGRATION_IGNORE_ERRORS-no} = no ]; then
@@ -227,6 +273,7 @@ migrate_db ()
         pg_dumpall -h "$POSTGRESQL_MIGRATION_REMOTE_HOST" \
             | grep -v '^CREATE ROLE postgres;'
     ) | psql
+    set +o pipefail
 }
 
 function set_pgdata ()
@@ -262,12 +309,18 @@ function wait_for_postgresql_master() {
 
 run_pgupgrade ()
 (
+  # Remove .pid file if the file persists after ugly shut down
+  if [ -f "$PGDATA/postmaster.pid" ] && ! pg_isready > /dev/null; then
+    rm -rf "$PGDATA/postmaster.pid"
+  fi
+
   optimized=false
   old_raw_version=${POSTGRESQL_PREV_VERSION//\./}
   new_raw_version=${POSTGRESQL_VERSION//\./}
 
-  old_pgengine=${HOME}/old_pg_bin_${POSTGRESQL_PREV_VERSION}/
+  old_pgengine=/usr/lib64/pgsql/postgresql-$old_raw_version/bin
   new_pgengine=/usr/bin
+
   PGDATA_new="${PGDATA}-new"
 
   printf >&2 "\n==========  \$PGDATA upgrade: %s -> %s  ==========\n\n" \
@@ -278,6 +331,10 @@ run_pgupgrade ()
 
   # pg_upgrade writes logs to cwd, so go to the persistent storage first
   cd "$HOME"/data
+
+  # disable this because of scl_source, 'set +u' just makes the code ugly
+  # anyways
+  set +u
 
   case $POSTGRESQL_UPGRADE in
     copy) # we accept this
@@ -290,6 +347,15 @@ run_pgupgrade ()
       false
       ;;
   esac
+
+  # boot up data directory with old postgres once again to make sure
+  # it was shut down properly, otherwise the upgrade process fails
+  info_msg "Starting old postgresql once again for a clean shutdown..."
+  "${old_pgengine}/pg_ctl" start -w --timeout 86400 -o "-h 127.0.0.1''"
+  info_msg "Waiting for postgresql to be ready for shutdown again..."
+  "${old_pgengine}/pg_isready" -h 127.0.0.1
+  info_msg "Shutting down old postgresql cleanly..."
+  "${old_pgengine}/pg_ctl" stop
 
   # Ensure $PGDATA_new doesn't exist yet, so we can immediately remove it if
   # there's some problem.
@@ -441,4 +507,13 @@ process_extending_files()
       fi
     done
   done <<<"$(get_matched_files '*.sh' "$@" | sort -u)"
+}
+
+create_extensions()
+{
+  if [ -v POSTGRESQL_EXTENSIONS ]; then
+    for EXT in $POSTGRESQL_EXTENSIONS; do
+      psql -c "CREATE EXTENSION IF NOT EXISTS ${EXT};"
+    done
+  fi
 }

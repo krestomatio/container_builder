@@ -1,4 +1,5 @@
-image_from_ctr: rocky8-base
-image_tag_from_ctr: 8-base
+rocky_version: 8
+image_from_ctr: "rocky{{ rocky_version }}-base"
+image_tag_from_ctr: "{{ rocky_version }}-base"
 dockerfile_builder_image_from_repo_name: rocky
-dockerfile_builder_image_based: "Rocky Linux 8 minimal"
+dockerfile_builder_image_based: "Rocky Linux {{ rocky_version }} minimal"

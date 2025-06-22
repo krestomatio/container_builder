@@ -40,10 +40,14 @@ nginx126_php83-fpm
 
 [postgres:children]
 postgres13_grp
+postgres15_grp
 postgres16_grp
 
 [postgres13_grp]
 postgres13
+
+[postgres15_grp]
+postgres15
 
 [postgres16_grp]
 postgres16
@@ -112,7 +116,7 @@ node22
 node22-ci
 php80-fpm
 postgres13
-postgres16
+postgres15
 
 [centos10_based_grp]
 nfs-ganesha5
@@ -120,6 +124,7 @@ nginx126
 nginx126_php83-fpm
 pgbouncer
 php83-fpm
+postgres16
 
 [rootfs_grp:children]
 minimal_grp
@@ -195,6 +200,7 @@ nfs-ganesha5
 php80-fpm
 php83-fpm
 postgres13
+postgres15
 postgres16
 pgbouncer
 go122-toolset

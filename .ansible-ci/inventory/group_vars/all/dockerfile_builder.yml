@@ -9,10 +9,12 @@ nginx_versions:
   126: '1.26'
 postgres_versions:
   13: '13'
+  15: '15'
   16: '16'
 postgres_prev_versions:
-  13: '10'
-  16: '13'
+  13: '12'
+  15: '13'
+  16: '15'
 # https://download.keydb.dev/pkg/open_source/rpm/
 keydb_versions_pkg:
   63: '6.3.4-1'

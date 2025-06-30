@@ -31,9 +31,10 @@ prepare_image_task: "moodle-{{ version_image_suffix }}"
 moodle_git_branch_upstream: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}_STABLE"
 moodle_git_repo_org: krestomatio
 moodle_git_branch: "{{ moodle_git_branch_upstream }}_{{ version_image_suffix | upper }}"
-moodle_plugin_tar_gz_url_list:
-  - url: "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
-    relpath: local/tier
+moodle_plugin_tar_gz_url_local_tier:
+  url: "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+  relpath: local/tier
+moodle_plugin_tar_gz_url_list: "{{ [moodle_plugin_tar_gz_url_local_tier] if moodle_version == '4.1' else [] }}"
 moodle_version_plugin_list:
   "4.1":
     - block_checklist
@@ -95,5 +96,7 @@ moodle_version_plugin_list:
     # turnitin
     - plagiarism_turnitin
     - plagiarism_turnitinsim
+    # tier
+    - local_tier
 
 moodle_plugin_list: "{{ moodle_version_plugin_list[moodle_version] }}"

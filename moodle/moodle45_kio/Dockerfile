@@ -20,7 +20,7 @@ RUN install-pkgs git rsync php-json unzip tar && \
 # They are also a mechanism to invalidate cache if changed
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_405_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="95518023c6216c1284b05377d673f8a5ebddeeb7"
+ARG ARG_MOODLE_COMMIT="5146b929493b52e7e7d8b245ebcbc223ff537de6"
 ENV GIT_REMOTE=${ARG_MOODLE_REMOTE} \
     GIT_BRANCH=${ARG_MOODLE_BRANCH} \
     GIT_COMMIT=${ARG_MOODLE_COMMIT}
@@ -37,14 +37,11 @@ COPY conf/usr/libexec /usr/libexec/
 
 # Install additional plugins (a comma separated arg), if any
 # Argument is also a mechanism to invalidate cache if changed
-ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
+ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim,local_tier"
 ARG ARG_MOODLE_PLUGIN_FORCE="true"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
-ADD "https://github.com/krestomatio/moodle-local_tier/archive/refs/heads/MOODLE_405_STABLE.tar.gz" /tmp/plugin-1.tar.gz
-RUN mkdir -p "${APP_DEST}/local/tier" && \
-    tar xz --strip-components=1 -C "${APP_DEST}/local/tier" -f /tmp/plugin-1.tar.gz
 
 FROM ${ARG_IMAGE_FROM}
 
@@ -94,11 +91,11 @@ RUN container-setup-php-moodle
 
 USER ${CTR_USER_ID}
 
-ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim"
+ARG ARG_MOODLE_PLUGIN_LIST="block_checklist,block_completion_progress,block_xp,format_tiles,format_onetopic,format_grid,format_topcoll,gradeexport_checklist,mod_attendance,mod_checklist,mod_customcert,mod_zoom,mod_game,theme_moove,theme_boost_union,auth_oidc,block_microsoft,local_o365,local_office365,repository_office365,theme_boost_o365teams,local_onenote,assignfeedback_onenote,assignsubmission_onenote,plagiarism_turnitin,plagiarism_turnitinsim,local_tier"
 ARG ARG_MOODLE_REMOTE="https://github.com/krestomatio/moodle.git"
 ARG ARG_MOODLE_BRANCH="MOODLE_405_STABLE_KIO"
-ARG ARG_MOODLE_COMMIT="95518023c6216c1284b05377d673f8a5ebddeeb7"
-ARG ARG_MOODLE_VERSION_NUMBER="2024100705.01"
+ARG ARG_MOODLE_COMMIT="5146b929493b52e7e7d8b245ebcbc223ff537de6"
+ARG ARG_MOODLE_VERSION_NUMBER="2024100705.03"
 ENV MOODLE_REMOTE=${ARG_MOODLE_REMOTE} \
     MOODLE_BRANCH=${ARG_MOODLE_BRANCH} \
     MOODLE_COMMIT=${ARG_MOODLE_COMMIT} \

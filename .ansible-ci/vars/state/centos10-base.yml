@@ -5,7 +5,7 @@ centos10_base_image:
   variant_name: "centos:10-base"
   build: False
   version: "10.0.8"
-  tags: "10-base,10.0-base,10.0.8-base,centos10-base-e27d033856df93b51733282c18c62afafb986687"
-  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
-  repo_digest: "quay.io/krestomatio/centos:10-base@sha256:7cc27b01ef7b39fd10ffcaf69103bc47ca3c7f1b5d58b08db333d69c97959eb8"
+  tags: "10-base,10.0-base,10.0.8-base,centos10-base-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  repo_digest: "quay.io/krestomatio/centos:10-base@sha256:d204e5ea801ff40ff753544b42c4266c75ca4e61a9885e420f72f83214d5186a"
   relative_path: "centos/centos10-base"

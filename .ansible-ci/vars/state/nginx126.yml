@@ -4,8 +4,8 @@
 nginx126_image:
   variant_name: "nginx:1.26"
   build: False
-  version: "1.26.3"
-  tags: "1.26,1.26.3,nginx126-e27d033856df93b51733282c18c62afafb986687"
-  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
-  repo_digest: "quay.io/krestomatio/nginx:1.26@sha256:9980b0d28899bdea5ba00d6021e3d7fccaa22bc1bcdbc32b38294d1a86d6ae26"
+  version: "1.26.4"
+  tags: "1.26,1.26.4,nginx126-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  repo_digest: "quay.io/krestomatio/nginx:1.26@sha256:dfa1f5bbbe8f34009e762e9eb1946061ad48e96a07a57b76d30efc53eaa73047"
   relative_path: "nginx/nginx126"

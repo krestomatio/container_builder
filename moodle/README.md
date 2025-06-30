@@ -6,20 +6,20 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx126-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx126_php83-fpm-e27d033856df93b51733282c18c62afafb986687`
-- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-e27d033856df93b51733282c18c62afafb986687`
+- [moodle:4.1](#moodle41): `4.1, 4.1.19, moodle41-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-bundle](#moodle41-bundle): `4.1-bundle, 4.1.19-bundle, moodle41_bundle-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-httpd](#moodle41-httpd): `4.1-httpd, 4.1.19-httpd, moodle41_httpd24-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-kio](#moodle41-kio): `4.1-kio, 4.1.19-kio, moodle41_kio-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-nginx](#moodle41-nginx): `4.1-nginx, 4.1.19-nginx, moodle41_nginx120-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-nginx_php-fpm](#moodle41-nginx_php-fpm): `4.1-nginx_php-fpm, 4.1.19-nginx_php-fpm, moodle41_nginx120_php80-fpm-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.1-php-fpm](#moodle41-php-fpm): `4.1-php-fpm, 4.1.19-php-fpm, moodle41_php80-fpm-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5](#moodle45): `4.5, 4.5.5, moodle45-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.5-bundle, moodle45_bundle-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.5-httpd, moodle45_httpd24-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.5-kio, moodle45_kio-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.5-nginx, moodle45_nginx126-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.5-nginx_php-fpm, moodle45_nginx126_php83-fpm-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
+- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.5-php-fpm, moodle45_php83-fpm-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478`
 
 
 ## Image Variants
@@ -33,8 +33,8 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.1.19
-* Moodle version number: 2022112819.01
-* Moodle commit: 4f61b2974b97f1c9a31022e750446fc52a6f416b
+* Moodle version number: 2022112819.02
+* Moodle commit: 27396dc9546ef794518e335fecf13452eb60b93c
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Custom builds
@@ -104,8 +104,8 @@ Extends [moodle:4.1](#moodle41) to add additional Moodle plugins.
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.1.19
-* Moodle version number: 2022112819.01
-* Moodle commit: 4f61b2974b97f1c9a31022e750446fc52a6f416b
+* Moodle version number: 2022112819.02
+* Moodle commit: 27396dc9546ef794518e335fecf13452eb60b93c
 * Moodle remote branch: MOODLE\_401\_STABLE
 
 #### Plugins
@@ -188,8 +188,8 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.02
-* Moodle commit: 97ed6b7083cfb547c14ae3a2dcaf759079d48f66
+* Moodle version number: 2024100705.03
+* Moodle commit: c36274a15aea78f9521509afd2d638bb8a9e8fdf
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds
@@ -259,8 +259,8 @@ Extends [moodle:4.5](#moodle45) to add additional Moodle plugins.
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.02
-* Moodle commit: 97ed6b7083cfb547c14ae3a2dcaf759079d48f66
+* Moodle version number: 2024100705.03
+* Moodle commit: c36274a15aea78f9521509afd2d638bb8a9e8fdf
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Plugins
@@ -280,8 +280,8 @@ Krestomatio Moodle variant
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.01
-* Moodle commit: 95518023c6216c1284b05377d673f8a5ebddeeb7
+* Moodle version number: 2024100705.03
+* Moodle commit: 5146b929493b52e7e7d8b245ebcbc223ff537de6
 * Moodle remote branch: MOODLE\_405\_STABLE\_KIO
 
 #### Plugins
@@ -312,6 +312,7 @@ The following is the list of plugins:
 - [assignsubmission_onenote](https://moodle.org/plugins/assignsubmission_onenote)
 - [plagiarism_turnitin](https://moodle.org/plugins/plagiarism_turnitin)
 - [plagiarism_turnitinsim](https://moodle.org/plugins/plagiarism_turnitinsim)
+- [local_tier](https://moodle.org/plugins/local_tier)
 
 ### moodle:4.5-nginx
 > [Repo source](https://github.com/krestomatio/container_builder/tree/master/moodle/moodle45_nginx126)

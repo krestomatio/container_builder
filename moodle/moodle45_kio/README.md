@@ -6,8 +6,8 @@ Krestomatio Moodle variant
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
 * Moodle version: 4.5.5
-* Moodle version number: 2024100705.01
-* Moodle commit: 95518023c6216c1284b05377d673f8a5ebddeeb7
+* Moodle version number: 2024100705.03
+* Moodle commit: 5146b929493b52e7e7d8b245ebcbc223ff537de6
 * Moodle remote branch: MOODLE\_405\_STABLE\_KIO
 
 #### Plugins
@@ -38,4 +38,5 @@ The following is the list of plugins:
 - [assignsubmission_onenote](https://moodle.org/plugins/assignsubmission_onenote)
 - [plagiarism_turnitin](https://moodle.org/plugins/plagiarism_turnitin)
 - [plagiarism_turnitinsim](https://moodle.org/plugins/plagiarism_turnitinsim)
+- [local_tier](https://moodle.org/plugins/local_tier)
 

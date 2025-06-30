@@ -4,8 +4,8 @@
 go122_toolset_image:
   variant_name: "go:1.22-toolset"
   build: False
-  version: "1.22.5"
-  tags: "1.22-toolset,1.22.5-toolset,go122-toolset-e27d033856df93b51733282c18c62afafb986687"
-  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
-  repo_digest: "quay.io/krestomatio/go:1.22-toolset@sha256:a9a7fbc6c4c56b7d46d3668d76e40c35e0dee38a190009cc40b680af6f26fad2"
+  version: "1.22.6"
+  tags: "1.22-toolset,1.22.6-toolset,go122-toolset-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  repo_digest: "quay.io/krestomatio/go:1.22-toolset@sha256:1c29cdf41a389d8f592a47b95348b922f2548e833defdc82b3f3e68806337547"
   relative_path: "go/go122-toolset"

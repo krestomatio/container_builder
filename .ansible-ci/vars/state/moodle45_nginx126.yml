@@ -5,7 +5,7 @@ moodle45_nginx126_image:
   variant_name: "moodle:4.5-nginx"
   build: False
   version: "4.5.5"
-  tags: "4.5-nginx,4.5.5-nginx,moodle45_nginx126-e27d033856df93b51733282c18c62afafb986687"
-  artifact_tag: "e27d033856df93b51733282c18c62afafb986687"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx@sha256:20a594ede36e927427abc42b726b29e27288cb5468fdf9045106c373ec33db0c"
+  tags: "4.5-nginx,4.5.5-nginx,moodle45_nginx126-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-nginx@sha256:9006fd5bba8f0896c95d926a0037eef756ba73184b7326d4e0a4215c08a5f9ab"
   relative_path: "moodle/moodle45_nginx126"

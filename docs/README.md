@@ -17,13 +17,6 @@ This project builds containers using Ansible. The containers are defined as host
 | [go:1.22-toolset](go/go126-toolset/)                            | [quay.io/krestomatio/go:1.22-toolset](https://quay.io/krestomatio/go)                      | 1.22.6  |
 | [httpd:2.4](httpd/httpd24/)                                     | [quay.io/krestomatio/httpd:2.4](https://quay.io/krestomatio/httpd)                         | 2.4.49  |
 | [keydb:6.3.4](keydb/keydb63/)                                   | [quay.io/krestomatio/keydb:6.3.4](https://quay.io/krestomatio/keydb)                       | 6.3.4   |
-| [moodle:4.1](moodle/moodle41/)                                  | [quay.io/krestomatio/moodle:4.1](https://quay.io/krestomatio/moodle)                       | 4.1.19  |
-| [moodle:4.1-bundle](moodle/moodle41_bundle/)                    | [quay.io/krestomatio/moodle:4.1-bundle](https://quay.io/krestomatio/moodle)                | 4.1.19  |
-| [moodle:4.1-httpd](moodle/moodle41_httpd24/)                    | [quay.io/krestomatio/moodle:4.1-httpd](https://quay.io/krestomatio/moodle)                 | 4.1.19  |
-| [moodle:4.1-kio](moodle/moodle41_kio/)                          | [quay.io/krestomatio/moodle:4.1-kio](https://quay.io/krestomatio/moodle)                   | 4.1.19  |
-| [moodle:4.1-nginx](moodle/moodle41_nginx120/)                   | [quay.io/krestomatio/moodle:4.1-nginx](https://quay.io/krestomatio/moodle)                 | 4.1.19  |
-| [moodle:4.1-nginx_php-fpm](moodle/moodle41_nginx120_php80-fpm/) | [quay.io/krestomatio/moodle:4.1-nginx_php-fpm](https://quay.io/krestomatio/moodle)         | 4.1.19  |
-| [moodle:4.1-php-fpm](moodle/moodle41_php80-fpm/)                | [quay.io/krestomatio/moodle:4.1-php-fpm](https://quay.io/krestomatio/moodle)               | 4.1.19  |
 | [moodle:4.5](moodle/moodle45/)                                  | [quay.io/krestomatio/moodle:4.5](https://quay.io/krestomatio/moodle)                       | 4.5.5   |
 | [moodle:4.5-bundle](moodle/moodle45_bundle/)                    | [quay.io/krestomatio/moodle:4.5-bundle](https://quay.io/krestomatio/moodle)                | 4.5.5   |
 | [moodle:4.5-httpd](moodle/moodle45_httpd24/)                    | [quay.io/krestomatio/moodle:4.5-httpd](https://quay.io/krestomatio/moodle)                 | 4.5.5   |

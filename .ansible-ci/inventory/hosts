@@ -139,17 +139,7 @@ ansible-docker-ci
 ansible-podman-ci
 
 [moodle:children]
-moodle41_grp
 moodle45_grp
-
-[moodle41_grp]
-moodle41
-moodle41_bundle
-moodle41_httpd24
-moodle41_kio
-moodle41_nginx120
-moodle41_nginx120_php80-fpm
-moodle41_php80-fpm
 
 [moodle45_grp]
 moodle45
@@ -161,31 +151,24 @@ moodle45_nginx126_php83-fpm
 moodle45_php83-fpm
 
 [moodle_web_grp]
-moodle41
 moodle45
 
 [moodle_bundle_grp]
-moodle41_bundle
 moodle45_bundle
 
 [moodle_httpd_grp]
-moodle41_httpd24
 moodle45_httpd24
 
 [moodle_kio_grp]
-moodle41_kio
 moodle45_kio
 
 [moodle_nginx_grp]
-moodle41_nginx120
 moodle45_nginx126
 
 [moodle_nginx_php_fpm_grp]
-moodle41_nginx120_php80-fpm
 moodle45_nginx126_php83-fpm
 
 [moodle_php_fpm_grp]
-moodle41_php80-fpm
 moodle45_php83-fpm
 
 [build_step_1:children]
@@ -223,21 +206,14 @@ node22-ci
 ansible-operator-ci
 
 [build_step_6]
-moodle41_nginx120
-moodle41_nginx120_php80-fpm
-moodle41_php80-fpm
-moodle41_httpd24
 moodle45_nginx126
 moodle45_nginx126_php83-fpm
 moodle45_php83-fpm
 moodle45_httpd24
 
 [build_step_7]
-moodle41
-moodle41_kio
 moodle45
 moodle45_kio
 
 [build_step_8]
-moodle41_bundle
 moodle45_bundle

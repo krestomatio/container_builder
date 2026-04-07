@@ -3,7 +3,7 @@ operator_version: 1.39.1
 ansible_operator_version: 1.37.1
 kustomize_version: 5.4.3
 kubectl_version: 1.29.3
-go_version: "{{ go_versions.126 }}"
+go_version: "{{ go_versions.122 }}"
 opm_version: 1.23.0
 setup_envtest_version: 0.19
 controller_tools_version: 0.16.1

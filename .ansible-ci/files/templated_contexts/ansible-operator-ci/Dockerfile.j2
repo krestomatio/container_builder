@@ -20,7 +20,13 @@ ENV LOCALBIN=/usr/local/bin \
     CRD_REF_DOCS_VERSION="{{ crd_ref_docs_version }}"
 
 # Install Go
-RUN install-pkgs go-toolset git make tar which curl; \
+RUN install-pkgs git make tar which curl; \
+    curl -fsSLo /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz; \
+    rm -rf /usr/local/go; \
+    tar -C /usr/local -xzf /tmp/go.tar.gz; \
+    ln -sf /usr/local/go/bin/go ${LOCALBIN}/go; \
+    ln -sf /usr/local/go/bin/gofmt ${LOCALBIN}/gofmt; \
+    rm -f /tmp/go.tar.gz; \
     [[ "$(go version | { read _ _ v _; echo ${v#go}; })" == "${GO_VERSION}".* ]] || echo "error: version differs from env var"; \
     go install sigs.k8s.io/controller-runtime/tools/setup-envtest@release-${SETUP_ENVTEST_VERSION}; \
     go install sigs.k8s.io/controller-tools/cmd/controller-gen@v${CONTROLLER_TOOLS_VERSION}; \

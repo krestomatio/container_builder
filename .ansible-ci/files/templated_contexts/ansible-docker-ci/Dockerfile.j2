@@ -28,7 +28,7 @@ RUN echo "Build tools..."  && \
     $CTR_PIP yamllint ansible-lint cryptography pywinrm docker git-semver commitizen jmespath makejinja && \
     echo "Installing ansible collections..."  && \
     mkdir -p /usr/share/ansible/collections && \
-    ansible-galaxy collection install -p /usr/share/ansible/collections {{ ansible_collections | join(' ') }} && \
+    ansible-galaxy collection install --timeout 180 -p /usr/share/ansible/collections {{ ansible_collections | map('quote') | join(' ') }} && \
     echo "Cleaning..."  && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \

@@ -2,6 +2,9 @@
 ARG ARG_IMAGE_FROM=quay.io/krestomatio/ansible-podman-ci
 FROM ${ARG_IMAGE_FROM}
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # General variables
 ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_SUMMARY="Ansible Operator SDK image based on CentOS 9 Stream minimal for Continuous Integration" \
@@ -20,7 +23,15 @@ ENV LOCALBIN=/usr/local/bin \
     CRD_REF_DOCS_VERSION="0.0.12"
 
 # Install Go
-RUN install-pkgs go-toolset git make tar which curl; \
+RUN install-pkgs git make tar which curl; \
+    GO_DOWNLOAD_VERSION="$(curl -fsSL 'https://go.dev/dl/?mode=json&include=all' | GO_VERSION="${GO_VERSION}" python3 -c 'import json, os, sys; want = os.environ["GO_VERSION"] + "."; data = json.load(sys.stdin); print(next(release["version"][2:] for release in data if release.get("version", "")[2:].startswith(want)))')"; \
+    echo "Installing Go version: ${GO_DOWNLOAD_VERSION}..."; \
+    curl -fsSLo /tmp/go.tar.gz "https://go.dev/dl/go${GO_DOWNLOAD_VERSION}.${TARGETOS}-${TARGETARCH}.tar.gz"; \
+    rm -rf /usr/local/go; \
+    tar -C /usr/local -xzf /tmp/go.tar.gz; \
+    ln -sf /usr/local/go/bin/go ${LOCALBIN}/go; \
+    ln -sf /usr/local/go/bin/gofmt ${LOCALBIN}/gofmt; \
+    rm -f /tmp/go.tar.gz; \
     [[ "$(go version | { read _ _ v _; echo ${v#go}; })" == "${GO_VERSION}".* ]] || echo "error: version differs from env var"; \
     go install sigs.k8s.io/controller-runtime/tools/setup-envtest@release-${SETUP_ENVTEST_VERSION}; \
     go install sigs.k8s.io/controller-tools/cmd/controller-gen@v${CONTROLLER_TOOLS_VERSION}; \

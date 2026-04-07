@@ -30,10 +30,10 @@ node_version_name:
   20: iron
   22: jod
 moodle_versions:
-  41: '4.1'
   45: '4.5'
 go_versions:
   122: '1.22'
+  126: '1.26'
 
 working_dir: "{{ playbook_dir }}"
 

@@ -26,7 +26,7 @@ RUN echo "Build tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \
     echo "Installing ansible collections..."  && \
     mkdir -p /usr/share/ansible/collections && \
-    ansible-galaxy collection install -p /usr/share/ansible/collections {{ ansible_collections | join(' ') }} && \
+    ansible-galaxy collection install --timeout 180 -p /usr/share/ansible/collections {{ ansible_collections | map('quote') | join(' ') }} && \
     echo "Cleaning..."  && \
     $CTR_PKG_MGM remove -y python${PYTHON_VERSION:-3}-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \

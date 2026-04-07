@@ -2,6 +2,9 @@
 ARG ARG_IMAGE_FROM={{ dockerfile_builder_image_from }}
 FROM ${ARG_IMAGE_FROM}
 
+ARG TARGETOS
+ARG TARGETARCH
+
 # General variables
 ENV IMAGE_NAME=ansible-operator-ci \
     IMAGE_SUMMARY="Ansible Operator SDK image based on {{ dockerfile_builder_image_based }} for Continuous Integration" \
@@ -12,6 +15,8 @@ ENV IMAGE_NAME=ansible-operator-ci \
 ENV LOCALBIN=/usr/local/bin \
     GOBIN=/usr/local/bin \
     GO_VERSION="{{ go_version }}" \
+    GO_DOWNLOAD_VERSION="{{ go_download_version }}" \
+    GO_DOWNLOAD_URL="https://go.dev/dl/go{{ go_download_version }}.${TARGETOS}-${TARGETARCH}.tar.gz" \
     OPERATOR_VERSION="{{ operator_version }}" \
     ANSIBLE_OPERATOR_VERSION="{{ ansible_operator_version }}" \
     SETUP_ENVTEST_VERSION="{{ setup_envtest_version }}" \
@@ -19,9 +24,12 @@ ENV LOCALBIN=/usr/local/bin \
     GO_LINT_VERSION="{{ go_lint_version }}" \
     CRD_REF_DOCS_VERSION="{{ crd_ref_docs_version }}"
 
+# Install tools
+RUN install-pkgs git make tar which curl
+
 # Install Go
-RUN install-pkgs git make tar which curl; \
-    curl -fsSLo /tmp/go.tar.gz https://go.dev/dl/go${GO_VERSION}.$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz; \
+RUN echo "Installing Go version: ${GO_DOWNLOAD_VERSION} from ${GO_DOWNLOAD_URL}..."; \
+    curl -fsSLo /tmp/go.tar.gz "${GO_DOWNLOAD_URL}"; \
     rm -rf /usr/local/go; \
     tar -C /usr/local -xzf /tmp/go.tar.gz; \
     ln -sf /usr/local/go/bin/go ${LOCALBIN}/go; \

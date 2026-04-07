@@ -58,8 +58,11 @@ nfs-ganesha5
 [keydb]
 keydb63
 
-[go]
-go122-toolset
+[go:children]
+go-toolset
+
+[go-toolset]
+go126-toolset
 
 [node:children]
 node18_grp
@@ -106,7 +109,7 @@ rocky_base_grp
 [centos9_based_grp]
 ansible
 keydb63
-go122-toolset
+go126-toolset
 httpd24
 nginx120
 nginx120_php80-fpm
@@ -203,7 +206,7 @@ postgres13
 postgres15
 postgres16
 pgbouncer
-go122-toolset
+go126-toolset
 node18
 node22
 keydb63

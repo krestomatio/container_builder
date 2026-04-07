@@ -6,10 +6,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [node:18](#node18): `18, 18.0, 18.0.32, node18-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478, hydrogen`
-- [node:18-ci](#node18-ci): `18-ci, 18.0-ci, 18.0.33-ci, node18-ci-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478, hydrogen-ci`
-- [node:22](#node22): `22, 22.0, 22.0.7, node22-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478, jod`
-- [node:22-ci](#node22-ci): `22-ci, 22.0-ci, 22.0.7-ci, node22-ci-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478, jod-ci`
+- [node:18](#node18): `18, 18.0, 18.0.33, node18-0dc932119c2355f7237bc07be799bbbd610fd537, hydrogen`
+- [node:18-ci](#node18-ci): `18-ci, 18.0-ci, 18.0.34-ci, node18-ci-0dc932119c2355f7237bc07be799bbbd610fd537, hydrogen-ci`
+- [node:22](#node22): `22, 22.0, 22.0.8, node22-0dc932119c2355f7237bc07be799bbbd610fd537, jod`
+- [node:22-ci](#node22-ci): `22-ci, 22.0-ci, 22.0.8-ci, node22-ci-0dc932119c2355f7237bc07be799bbbd610fd537, jod-ci`
 
 
 ## Image Variants

@@ -1,0 +1,11 @@
+#
+# Ansible managed
+#
+go126_toolset_image:
+  variant_name: "go:1.26-toolset"
+  build: False
+  version: "1.26.2"
+  tags: "1.26-toolset,1.26.2-toolset,go126-toolset-0dc932119c2355f7237bc07be799bbbd610fd537"
+  artifact_tag: "0dc932119c2355f7237bc07be799bbbd610fd537"
+  repo_digest: "quay.io/krestomatio/go:1.26-toolset@sha256:1db5715cb66ba310d378f6e282c5c3b8624075ccafdcd251bc5a0f200a41c7c2"
+  relative_path: "go/go126-toolset"

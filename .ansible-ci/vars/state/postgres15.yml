@@ -4,8 +4,8 @@
 postgres15_image:
   variant_name: "postgres:15"
   build: False
-  version: "15.0.3"
-  tags: "15,15.0,15.0.3,postgres15-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
-  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
-  repo_digest: "quay.io/krestomatio/postgres:15@sha256:051a45211d7fe2bf6d05e85910683c7a1f7009c3cb3e177000b9c34afcfadf55"
+  version: "15.0.4"
+  tags: "15,15.0,15.0.4,postgres15-0dc932119c2355f7237bc07be799bbbd610fd537"
+  artifact_tag: "0dc932119c2355f7237bc07be799bbbd610fd537"
+  repo_digest: "quay.io/krestomatio/postgres:15@sha256:cc3d880525619d1efd418a6742bd54abd74a43e2513adb5093e2c4af21cdffcd"
   relative_path: "postgres/postgres15"

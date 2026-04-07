@@ -4,8 +4,8 @@
 nfs_ganesha5_image:
   variant_name: "nfs-ganesha:5.9"
   build: False
-  version: "5.9.9"
-  tags: "5.9,5.9.9,nfs-ganesha5-dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
-  artifact_tag: "dbfbd9cc3066b3d9fd7fd4a97c1a1aae60a33478"
-  repo_digest: "quay.io/krestomatio/nfs-ganesha:5.9.9@sha256:68c9749bdaa932199ddbce6ff84baf2b6ff16b6cab02614a7e244b033a0b87fa"
+  version: "5.9.10"
+  tags: "5.9,5.9.10,nfs-ganesha5-0dc932119c2355f7237bc07be799bbbd610fd537"
+  artifact_tag: "0dc932119c2355f7237bc07be799bbbd610fd537"
+  repo_digest: "quay.io/krestomatio/nfs-ganesha:5.9.10@sha256:eb76dc1aebef21b56ec72ca76d0c4a00c610f57a1cde45dd423d7c6ac90538f1"
   relative_path: "nfs-ganesha/nfs-ganesha5"

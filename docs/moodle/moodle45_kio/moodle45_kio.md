@@ -5,9 +5,9 @@ Krestomatio Moodle variant
 
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
-* Moodle version: 4.5.5
-* Moodle version number: 2024100705.03
-* Moodle commit: 5146b929493b52e7e7d8b245ebcbc223ff537de6
+* Moodle version: 4.5.10
+* Moodle version number: 2024100710.08
+* Moodle commit: 3f592a515b3ce1b59a382f226c629d47f6c97ddd
 * Moodle remote branch: MOODLE\_405\_STABLE\_KIO
 
 #### Plugins
@@ -20,6 +20,7 @@ The following is the list of plugins:
 - [format_grid](https://moodle.org/plugins/format_grid)
 - [format_topcoll](https://moodle.org/plugins/format_topcoll)
 - [gradeexport_checklist](https://moodle.org/plugins/gradeexport_checklist)
+- [mod_questionnaire](https://moodle.org/plugins/mod_questionnaire)
 - [mod_attendance](https://moodle.org/plugins/mod_attendance)
 - [mod_checklist](https://moodle.org/plugins/mod_checklist)
 - [mod_customcert](https://moodle.org/plugins/mod_customcert)

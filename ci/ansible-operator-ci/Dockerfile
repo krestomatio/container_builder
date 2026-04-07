@@ -15,6 +15,8 @@ ENV IMAGE_NAME=ansible-operator-ci \
 ENV LOCALBIN=/usr/local/bin \
     GOBIN=/usr/local/bin \
     GO_VERSION="1.22" \
+    GO_DOWNLOAD_VERSION="1.22.12" \
+    GO_DOWNLOAD_URL="https://go.dev/dl/go1.22.12.${TARGETOS}-${TARGETARCH}.tar.gz" \
     OPERATOR_VERSION="1.39.1" \
     ANSIBLE_OPERATOR_VERSION="1.37.1" \
     SETUP_ENVTEST_VERSION="0.19" \
@@ -22,11 +24,12 @@ ENV LOCALBIN=/usr/local/bin \
     GO_LINT_VERSION="1.57.2" \
     CRD_REF_DOCS_VERSION="0.0.12"
 
+# Install tools
+RUN install-pkgs git make tar which curl
+
 # Install Go
-RUN install-pkgs git make tar which curl; \
-    GO_DOWNLOAD_VERSION="$(curl -fsSL 'https://go.dev/dl/?mode=json&include=all' | GO_VERSION="${GO_VERSION}" python3 -c 'import json, os, sys; want = os.environ["GO_VERSION"] + "."; data = json.load(sys.stdin); print(next(release["version"][2:] for release in data if release.get("version", "")[2:].startswith(want)))')"; \
-    echo "Installing Go version: ${GO_DOWNLOAD_VERSION}..."; \
-    curl -fsSLo /tmp/go.tar.gz "https://go.dev/dl/go${GO_DOWNLOAD_VERSION}.${TARGETOS}-${TARGETARCH}.tar.gz"; \
+RUN echo "Installing Go version: ${GO_DOWNLOAD_VERSION} from ${GO_DOWNLOAD_URL}..."; \
+    curl -fsSLo /tmp/go.tar.gz "${GO_DOWNLOAD_URL}"; \
     rm -rf /usr/local/go; \
     tar -C /usr/local -xzf /tmp/go.tar.gz; \
     ln -sf /usr/local/go/bin/go ${LOCALBIN}/go; \

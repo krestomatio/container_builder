@@ -26,7 +26,7 @@ RUN echo "Build tools..."  && \
     $CTR_PIP $CTR_PIP_EXTRA && \
     echo "Installing ansible collections..."  && \
     mkdir -p /usr/share/ansible/collections && \
-    ansible-galaxy collection install -p /usr/share/ansible/collections ansible.posix community.general community.docker && \
+    ansible-galaxy collection install --timeout 180 -p /usr/share/ansible/collections 'ansible.posix:>=2.0.0,<3.0.0' 'community.general:>=11.0.0,<12.0.0' 'community.docker:>=4.0.0,<5.0.0' && \
     echo "Cleaning..."  && \
     $CTR_PKG_MGM remove -y python${PYTHON_VERSION:-3}-devel gcc libffi-devel && \
     $CTR_PKG_MGM clean all && \

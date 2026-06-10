@@ -4,8 +4,8 @@
 moodle45_httpd24_image:
   variant_name: "moodle:4.5-httpd"
   build: False
-  version: "4.5.10"
-  tags: "4.5-httpd,4.5.10-httpd,moodle45_httpd24-0dc932119c2355f7237bc07be799bbbd610fd537"
-  artifact_tag: "0dc932119c2355f7237bc07be799bbbd610fd537"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-httpd@sha256:2550cea1cd3f5133501597167122b7b130360a6eb525bdb2075955e405cf8f7d"
+  version: "4.5.12"
+  tags: "4.5-httpd,4.5.12-httpd,moodle45_httpd24-6103eaa9015314c63f5e59a8b8677ab575f2352e"
+  artifact_tag: "6103eaa9015314c63f5e59a8b8677ab575f2352e"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-httpd@sha256:76477fb01b37c260d1385efdd6ac54ca025f492b587c48e8b798ff00e0553dfd"
   relative_path: "moodle/moodle45_httpd24"

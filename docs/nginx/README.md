@@ -6,10 +6,10 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [nginx:1.20](#nginx120): `1.20, 1.20.50, nginx120-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [nginx:1.20-php-fpm](#nginx120-php-fpm): `1.20-php-fpm, 1.20.50-php-fpm, nginx120_php80-fpm-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [nginx:1.26](#nginx126): `1.26, 1.26.5, nginx126-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [nginx:1.26-php-fpm](#nginx126-php-fpm): `1.26-php-fpm, 1.26.5-php-fpm, nginx126_php83-fpm-0dc932119c2355f7237bc07be799bbbd610fd537`
+- [nginx:1.20](#nginx120): `1.20, 1.20.51, nginx120-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [nginx:1.20-php-fpm](#nginx120-php-fpm): `1.20-php-fpm, 1.20.51-php-fpm, nginx120_php80-fpm-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [nginx:1.26](#nginx126): `1.26, 1.26.6, nginx126-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [nginx:1.26-php-fpm](#nginx126-php-fpm): `1.26-php-fpm, 1.26.6-php-fpm, nginx126_php83-fpm-6103eaa9015314c63f5e59a8b8677ab575f2352e`
 
 
 ## Image Variants

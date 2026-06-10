@@ -1,12 +1,12 @@
 # Ansible managed
-ARG ARG_IMAGE_FROM=docker:26-dind
+ARG ARG_IMAGE_FROM=docker:29-dind
 FROM ${ARG_IMAGE_FROM}
 
 # General variables
 ENV IMAGE_NAME=ansible-docker-ci \
-    IMAGE_SUMMARY="Ansible image based on Docker 26-dind for Continuous Integration" \
-    IMAGE_DESCRIPTION="Docker 26-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
-    IMAGE_TITLE="Ansible CI image based on Docker 26-dind"
+    IMAGE_SUMMARY="Ansible image based on Docker 29-dind for Continuous Integration" \
+    IMAGE_DESCRIPTION="Docker 29-dind based image with Ansible and tools like Docker, Skopeo and Molecule, for CI" \
+    IMAGE_TITLE="Ansible CI image based on Docker 29-dind"
 
 # Container variables
 ENV ANSIBLE_VERSION="2.18.*" \
@@ -16,7 +16,7 @@ ENV ANSIBLE_VERSION="2.18.*" \
     CONTAINER_BUILDER=docker
 
 RUN echo "Build tools..."  && \
-    $CTR_APK bash python3 py-pip openssl ca-certificates make && \
+    $CTR_APK bash python3 py-pip openssl ca-certificates make expat && \
     rm -f /usr/lib/python*/EXTERNALLY-MANAGED && \
     $CTR_APK --virtual build-dependencies python3-dev \
         libffi-dev openssl-dev build-base gcc musl-dev cargo rust && \
@@ -48,7 +48,7 @@ RUN echo "Installing other tools..."  && \
 RUN sed -i "s@bin/ash@bin/bash@" /etc/passwd && \
     ln -svf bash /bin/sh
 
-ENV ORAS_VERSION="1.3.1"
+ENV ORAS_VERSION="1.3.2"
 RUN echo "Installing oras version: ${ORAS_VERSION}..."  && \
     cd /tmp && \
     curl -L https://github.com/deislabs/oras/releases/download/v${ORAS_VERSION}/oras_${ORAS_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').tar.gz | tar xzv && \
@@ -62,13 +62,13 @@ RUN echo "Installing pushrm version: ${PUSHRM_VERSION}..."  && \
     curl -L "https://github.com/christian-korneck/docker-pushrm/releases/download/v${PUSHRM_VERSION}/docker-pushrm_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/bin/docker-pushrm && \
     chmod +x /usr/local/bin/docker-pushrm
 
-ENV BUILDX_VERSION="0.33.0"
+ENV BUILDX_VERSION="0.34.1"
 RUN echo "Installing buildx version: ${BUILDX_VERSION}..."  && \
     mkdir -p /usr/local/lib/docker/cli-plugins && \
     curl -L "https://github.com/docker/buildx/releases/download/v${BUILDX_VERSION}/buildx-v${BUILDX_VERSION}.linux-$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/')" -o /usr/local/lib/docker/cli-plugins/docker-buildx && \
     chmod +x /usr/local/lib/docker/cli-plugins/docker-buildx
 
-ENV TERRAFORM_VERSION="1.14.8"
+ENV TERRAFORM_VERSION="1.15.5"
 RUN echo "Installing terraform version: ${TERRAFORM_VERSION}..."  && \
     cd /tmp && \
     curl -L "https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_$(uname -m | sed 's/x86_64/amd64/' | sed 's/aarch64/arm64/').zip" -o /tmp/terraform.zip && \
@@ -91,4 +91,4 @@ LABEL name="${IMAGE_NAME}" \
       org.opencontainers.image.description="${IMAGE_DESCRIPTION}" \
       io.k8s.description="${IMAGE_DESCRIPTION}" \
       io.k8s.display-name="${IMAGE_TITLE}" \
-      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.18.*,docker,docker26-dind"
+      io.openshift.tags="${IMAGE_NAME},ansible,ansible2.18.*,docker,docker29-dind"

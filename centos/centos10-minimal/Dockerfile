@@ -53,8 +53,8 @@ COPY --from=builder "${ARG_ROOTFS_INSTALL_DIR}" /
 
 CMD ["/bin/bash"]
 
-ENV IMAGE_VERSION=10.0.20
+ENV IMAGE_VERSION=10.0.21
 
 # Labels
 LABEL org.opencontainers.image.title="CentOS 10 Stream Minimal Image" \
-      org.opencontainers.image.version="10.0.20"
+      org.opencontainers.image.version="10.0.21"

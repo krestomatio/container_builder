@@ -4,8 +4,8 @@
 nginx126_php83_fpm_image:
   variant_name: "nginx:1.26-php-fpm"
   build: False
-  version: "1.26.5"
-  tags: "1.26-php-fpm,1.26.5-php-fpm,nginx126_php83-fpm-0dc932119c2355f7237bc07be799bbbd610fd537"
-  artifact_tag: "0dc932119c2355f7237bc07be799bbbd610fd537"
-  repo_digest: "quay.io/krestomatio/nginx:1.26-php-fpm@sha256:fb0b3f1783094356fcaa5b23cde28f69e303cb4aebcf3bb577db0336329927a8"
+  version: "1.26.6"
+  tags: "1.26-php-fpm,1.26.6-php-fpm,nginx126_php83-fpm-6103eaa9015314c63f5e59a8b8677ab575f2352e"
+  artifact_tag: "6103eaa9015314c63f5e59a8b8677ab575f2352e"
+  repo_digest: "quay.io/krestomatio/nginx:1.26-php-fpm@sha256:c16c8d66e568cdb0d0b14bfd25beb274005bc33042dfe9cc661f822c46b8f9e1"
   relative_path: "nginx/nginx126_php83-fpm"

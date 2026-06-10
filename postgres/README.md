@@ -6,9 +6,9 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [postgres:13](#postgres13): `13, 13.0, 13.0.51, postgres13-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [postgres:15](#postgres15): `15, 15.0, 15.0.4, postgres15-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [postgres:16](#postgres16): `16, 16.0, 16.0.8, postgres16-0dc932119c2355f7237bc07be799bbbd610fd537`
+- [postgres:13](#postgres13): `13, 13.0, 13.0.52, postgres13-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [postgres:15](#postgres15): `15, 15.0, 15.0.5, postgres15-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [postgres:16](#postgres16): `16, 16.0, 16.0.9, postgres16-6103eaa9015314c63f5e59a8b8677ab575f2352e`
 
 
 ## Image Variants

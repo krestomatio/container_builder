@@ -6,13 +6,13 @@
 [Mono repo issue tracker](https://github.com/krestomatio/container_builder/issues)
 
 ## Variants and tags
-- [moodle:4.5](#moodle45): `4.5, 4.5.10, moodle45-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.10-bundle, moodle45_bundle-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.10-httpd, moodle45_httpd24-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.10-kio, moodle45_kio-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.10-nginx, moodle45_nginx126-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.10-nginx_php-fpm, moodle45_nginx126_php83-fpm-0dc932119c2355f7237bc07be799bbbd610fd537`
-- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.10-php-fpm, moodle45_php83-fpm-0dc932119c2355f7237bc07be799bbbd610fd537`
+- [moodle:4.5](#moodle45): `4.5, 4.5.12, moodle45-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.12-bundle, moodle45_bundle-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.12-httpd, moodle45_httpd24-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.12-kio, moodle45_kio-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.12-nginx, moodle45_nginx126-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.12-nginx_php-fpm, moodle45_nginx126_php83-fpm-6103eaa9015314c63f5e59a8b8677ab575f2352e`
+- [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.12-php-fpm, moodle45_php83-fpm-6103eaa9015314c63f5e59a8b8677ab575f2352e`
 
 
 ## Image Variants
@@ -25,9 +25,9 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.5.10
-* Moodle version number: 2024100710.08
-* Moodle commit: 0668964c5b67e5b51948e6e7ac975b6fbf3321e7
+* Moodle version: 4.5.12
+* Moodle version number: 2024100712.00
+* Moodle commit: b9315ff5cb42e11b40c972f3f7194ba8b0c0bbf8
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds
@@ -96,9 +96,9 @@ Extends [moodle:4.5](#moodle45) to add additional Moodle plugins.
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.5.10
-* Moodle version number: 2024100710.08
-* Moodle commit: 0668964c5b67e5b51948e6e7ac975b6fbf3321e7
+* Moodle version: 4.5.12
+* Moodle version number: 2024100712.00
+* Moodle commit: b9315ff5cb42e11b40c972f3f7194ba8b0c0bbf8
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Plugins
@@ -121,9 +121,9 @@ Krestomatio Moodle variant
 
 #### Details
 * Moodle remote repo: https://github.com/krestomatio/moodle.git
-* Moodle version: 4.5.10
-* Moodle version number: 2024100710.08
-* Moodle commit: 3f592a515b3ce1b59a382f226c629d47f6c97ddd
+* Moodle version: 4.5.12
+* Moodle version number: 2024100712.00
+* Moodle commit: df867c392a4252159a53a69cf61206dfdc1e1cbb
 * Moodle remote branch: MOODLE\_405\_STABLE\_KIO
 
 #### Plugins

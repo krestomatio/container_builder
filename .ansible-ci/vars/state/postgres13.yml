@@ -4,8 +4,8 @@
 postgres13_image:
   variant_name: "postgres:13"
   build: False
-  version: "13.0.52"
-  tags: "13,13.0,13.0.52,postgres13-6103eaa9015314c63f5e59a8b8677ab575f2352e"
-  artifact_tag: "6103eaa9015314c63f5e59a8b8677ab575f2352e"
-  repo_digest: "quay.io/krestomatio/postgres:13@sha256:f8c17b65e65fba358e8998f1b769268f611e1b29a474111ecf76ff088c2f6ceb"
+  version: "13.0.53"
+  tags: "13,13.0,13.0.53,postgres13-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
+  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
+  repo_digest: "quay.io/krestomatio/postgres:13@sha256:9b2dba2308801eaa28c7688c882a3bb3c4f9ab54c6d72d0a0ed8c260e090829b"
   relative_path: "postgres/postgres13"

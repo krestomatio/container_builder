@@ -7,9 +7,9 @@ It includes a copy of Moodle source code, ready in the image public folder. A sp
 
 #### Details
 * Moodle remote repo: https://github.com/moodle/moodle.git
-* Moodle version: 4.5.12
-* Moodle version number: 2024100712.00
-* Moodle commit: b9315ff5cb42e11b40c972f3f7194ba8b0c0bbf8
+* Moodle version: 4.5.13
+* Moodle version number: 2024100713.03
+* Moodle commit: 11b691cecc36341f3ed074647cff5768d65b0262
 * Moodle remote branch: MOODLE\_405\_STABLE
 
 #### Custom builds

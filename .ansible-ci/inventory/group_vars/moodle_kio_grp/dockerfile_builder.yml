@@ -31,6 +31,17 @@ prepare_image_task: "moodle-{{ version_image_suffix }}"
 moodle_git_branch_upstream: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}_STABLE"
 moodle_git_repo_org: krestomatio
 moodle_git_branch: "{{ moodle_git_branch_upstream }}_{{ version_image_suffix | upper }}"
+moodle_plugin_tar_gz_url_format_grid:
+  url: "https://github.com/gjbarnard/moodle-format_grid/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+  relpath: course/format/grid
+moodle_plugin_tar_gz_url_format_topcoll:
+  url: "https://github.com/gjbarnard/moodle-format_topcoll/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+  relpath: course/format/topcoll
+moodle_version_tar_gz_url_list:
+  "4.5":
+    - "{{ moodle_plugin_tar_gz_url_format_grid }}"
+    - "{{ moodle_plugin_tar_gz_url_format_topcoll }}"
+moodle_plugin_tar_gz_url_list: "{{ moodle_plugin_tar_gz_url_local_tier[moodle_version] }}"
 moodle_version_plugin_list:
   "4.5":
     - block_checklist
@@ -38,8 +49,8 @@ moodle_version_plugin_list:
     - block_xp
     - format_tiles
     - format_onetopic
-    - format_grid
-    - format_topcoll
+    # - format_grid
+    # - format_topcoll
     - gradeexport_checklist
     - mod_questionnaire
     - mod_attendance

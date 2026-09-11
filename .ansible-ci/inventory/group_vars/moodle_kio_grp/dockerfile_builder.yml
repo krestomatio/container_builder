@@ -41,7 +41,7 @@ moodle_version_tar_gz_url_list:
   "4.5":
     - "{{ moodle_plugin_tar_gz_url_format_grid }}"
     - "{{ moodle_plugin_tar_gz_url_format_topcoll }}"
-moodle_plugin_tar_gz_url_list: "{{ moodle_plugin_tar_gz_url_local_tier[moodle_version] }}"
+moodle_plugin_tar_gz_url_list: "{{ moodle_version_tar_gz_url_list[moodle_version] }}"
 moodle_version_plugin_list:
   "4.5":
     - block_checklist

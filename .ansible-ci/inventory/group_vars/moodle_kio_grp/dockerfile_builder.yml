@@ -27,15 +27,16 @@ template_path: "{{ template_dir }}/moodle_php-fpm"
 prepare_image_task: "moodle-{{ version_image_suffix }}"
 
 # moodle
-# using ansible, moodle_git_branch_upstream as variable moodle_version to string, if moodle_version has one digit after first dot, replace it with 0, otherwise remove dot.
-moodle_git_branch_upstream: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}_STABLE"
+# using ansible, moodle_git_branch_base as variable moodle_version to string, if moodle_version has one digit after first dot, replace it with 0, otherwise remove dot.
+moodle_git_branch_base: "MOODLE_{{ moodle_version | replace('.','0') if moodle_version | regex_search('\\.[0-9]$') else moodle_version | replace('.','') }}"
+moodle_git_branch_upstream: "{{ moodle_git_branch_base }}_STABLE"
 moodle_git_repo_org: krestomatio
 moodle_git_branch: "{{ moodle_git_branch_upstream }}_{{ version_image_suffix | upper }}"
 moodle_plugin_tar_gz_url_format_grid:
-  url: "https://github.com/gjbarnard/moodle-format_grid/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+  url: "https://github.com/gjbarnard/moodle-format_grid/archive/refs/heads/{{ moodle_git_branch_base }}.tar.gz"
   relpath: course/format/grid
 moodle_plugin_tar_gz_url_format_topcoll:
-  url: "https://github.com/gjbarnard/moodle-format_topcoll/archive/refs/heads/{{ moodle_git_branch_upstream }}.tar.gz"
+  url: "https://github.com/gjbarnard/moodle-format_topcoll/archive/refs/heads/{{ moodle_git_branch_base }}.tar.gz"
   relpath: course/format/topcoll
 moodle_version_tar_gz_url_list:
   "4.5":

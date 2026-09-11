@@ -5,7 +5,7 @@ moodle45_kio_image:
   variant_name: "moodle:4.5-kio"
   build: False
   version: "4.5.13"
-  tags: "4.5-kio,4.5.13-kio,moodle45_kio-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-kio@sha256:4a577452336e6e590f47dae940fbddfe5a5a848b849b9a14b0198ae3e1317d7f"
+  tags: "4.5-kio,4.5.13-kio,moodle45_kio-8899cc8bf31613378568c90dd9f876d5f4190bab"
+  artifact_tag: "8899cc8bf31613378568c90dd9f876d5f4190bab"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-kio@sha256:a98348252c998107336d80bf6aaf3ee73d1273c98ee2c69572274ac8b8d6ae3a"
   relative_path: "moodle/moodle45_kio"

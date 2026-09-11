@@ -9,7 +9,7 @@
 - [moodle:4.5](#moodle45): `4.5, 4.5.13, moodle45-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
 - [moodle:4.5-bundle](#moodle45-bundle): `4.5-bundle, 4.5.13-bundle, moodle45_bundle-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
 - [moodle:4.5-httpd](#moodle45-httpd): `4.5-httpd, 4.5.13-httpd, moodle45_httpd24-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
-- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.13-kio, moodle45_kio-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
+- [moodle:4.5-kio](#moodle45-kio): `4.5-kio, 4.5.13-kio, moodle45_kio-8899cc8bf31613378568c90dd9f876d5f4190bab`
 - [moodle:4.5-nginx](#moodle45-nginx): `4.5-nginx, 4.5.13-nginx, moodle45_nginx126-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
 - [moodle:4.5-nginx_php-fpm](#moodle45-nginx_php-fpm): `4.5-nginx_php-fpm, 4.5.13-nginx_php-fpm, moodle45_nginx126_php83-fpm-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`
 - [moodle:4.5-php-fpm](#moodle45-php-fpm): `4.5-php-fpm, 4.5.13-php-fpm, moodle45_php83-fpm-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0`

@@ -42,6 +42,12 @@ ARG ARG_MOODLE_PLUGIN_FORCE="true"
 ENV MOODLE_PLUGIN_LIST=${ARG_MOODLE_PLUGIN_LIST} \
     MOODLE_PLUGIN_FORCE=${ARG_MOODLE_PLUGIN_FORCE}
 RUN if [ -n "${MOODLE_PLUGIN_LIST}" ]; then /usr/libexec/moodle/install-plugin-list ${MOODLE_PLUGIN_FORCE:+-f} -p "${MOODLE_PLUGIN_LIST}"; fi
+ADD "https://github.com/gjbarnard/moodle-format_grid/archive/refs/heads/MOODLE_405.tar.gz" /tmp/plugin-1.tar.gz
+RUN mkdir -p "${APP_DEST}/course/format/grid" && \
+    tar xz --strip-components=1 -C "${APP_DEST}/course/format/grid" -f /tmp/plugin-1.tar.gz
+ADD "https://github.com/gjbarnard/moodle-format_topcoll/archive/refs/heads/MOODLE_405.tar.gz" /tmp/plugin-2.tar.gz
+RUN mkdir -p "${APP_DEST}/course/format/topcoll" && \
+    tar xz --strip-components=1 -C "${APP_DEST}/course/format/topcoll" -f /tmp/plugin-2.tar.gz
 
 FROM ${ARG_IMAGE_FROM}
 

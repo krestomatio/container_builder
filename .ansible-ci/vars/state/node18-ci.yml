@@ -4,8 +4,8 @@
 node18_ci_image:
   variant_name: "node:18-ci"
   build: False
-  version: "18.0.36"
-  tags: "18-ci,18.0-ci,18.0.36-ci,node18-ci-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0,hydrogen-ci"
-  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  repo_digest: "quay.io/krestomatio/node:18-ci@sha256:0878148258a6d9d89cc97e8c4e7deb7a05ab706eacf8da579329fdbc614f516e"
+  version: "18.0.37"
+  tags: "18-ci,18.0-ci,18.0.37-ci,node18-ci-8c4bf66011ac2e34822a33c070545e83134c7bf7,hydrogen-ci"
+  artifact_tag: "8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  repo_digest: "quay.io/krestomatio/node:18-ci@sha256:017477d639a2b67016f8b583344eeb850bf4c2fc1a3633ae18389234b877034f"
   relative_path: "node/node18-ci"

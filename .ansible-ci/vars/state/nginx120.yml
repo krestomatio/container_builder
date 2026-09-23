@@ -4,8 +4,8 @@
 nginx120_image:
   variant_name: "nginx:1.20"
   build: False
-  version: "1.20.52"
-  tags: "1.20,1.20.52,nginx120-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  repo_digest: "quay.io/krestomatio/nginx:1.20@sha256:d48ec75fca6f697b2206e6b291458bb2c721fd4e37539634864ab1165c1a9047"
+  version: "1.20.53"
+  tags: "1.20,1.20.53,nginx120-8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  artifact_tag: "8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  repo_digest: "quay.io/krestomatio/nginx:1.20@sha256:bdf3a065aac3e38819d72f6c6c07c0d0c573a7af72a5db74cb8e24b66d44545b"
   relative_path: "nginx/nginx120"

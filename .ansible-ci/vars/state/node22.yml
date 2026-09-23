@@ -4,8 +4,8 @@
 node22_image:
   variant_name: "node:22"
   build: False
-  version: "22.0.10"
-  tags: "22,22.0,22.0.10,node22-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0,jod"
-  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  repo_digest: "quay.io/krestomatio/node:22@sha256:432e4083deb277f440ad413dd76f0a1e8d255949bdffc3ab9da0bd62f7f49f36"
+  version: "22.0.11"
+  tags: "22,22.0,22.0.11,node22-8c4bf66011ac2e34822a33c070545e83134c7bf7,jod"
+  artifact_tag: "8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  repo_digest: "quay.io/krestomatio/node:22@sha256:3c449c76ec8e141ce18684473dcbee1edd72f13af4705edf766d4e8de4a52bd6"
   relative_path: "node/node22"

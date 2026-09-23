@@ -4,8 +4,8 @@
 moodle45_php83_fpm_image:
   variant_name: "moodle:4.5-php-fpm"
   build: False
-  version: "4.5.13"
-  tags: "4.5-php-fpm,4.5.13-php-fpm,moodle45_php83-fpm-42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  artifact_tag: "42cb2fe905464ebed1cfb79cff33d7a2a48e9fa0"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-php-fpm@sha256:2e3759bbd9b0e52e426ae95e6fedfb1ea25e5025bab6db5569dfa319ec8e87fd"
+  version: "4.5.14"
+  tags: "4.5-php-fpm,4.5.14-php-fpm,moodle45_php83-fpm-8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  artifact_tag: "8c4bf66011ac2e34822a33c070545e83134c7bf7"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-php-fpm@sha256:bd9c1ef96d8abbf70471e83b3f1583325ca617a2489950868eeeed9c867034c7"
   relative_path: "moodle/moodle45_php83-fpm"

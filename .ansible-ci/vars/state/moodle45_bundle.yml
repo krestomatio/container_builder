@@ -4,8 +4,8 @@
 moodle45_bundle_image:
   variant_name: "moodle:4.5-bundle"
   build: False
-  version: "4.5.14"
-  tags: "4.5-bundle,4.5.14-bundle,moodle45_bundle-8c4bf66011ac2e34822a33c070545e83134c7bf7"
-  artifact_tag: "8c4bf66011ac2e34822a33c070545e83134c7bf7"
-  repo_digest: "quay.io/krestomatio/moodle:4.5-bundle@sha256:f262056b1f0870e094a865163e0f5d9bca624af3489b89c7e165720a70bfe729"
+  version: "4.5.15"
+  tags: "4.5-bundle,4.5.15-bundle,moodle45_bundle-3ff32a5264d815c1fd0ab945a27e12bae974afd1"
+  artifact_tag: "3ff32a5264d815c1fd0ab945a27e12bae974afd1"
+  repo_digest: "quay.io/krestomatio/moodle:4.5-bundle@sha256:0afe43d0c97258094cc658b1f71ed3935a0aab8bec69ef83f502e6e44deb2d03"
   relative_path: "moodle/moodle45_bundle"
